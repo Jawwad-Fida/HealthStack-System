@@ -1,0 +1,5 @@
+images
+js
+styles
+uikit
+in static folder
