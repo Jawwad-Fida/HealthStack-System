@@ -8,4 +8,4 @@ from .models import Doctor_Information
 
 
 def hospital_home(request):
-    return render(request, 'index.html')
+    return render(request, 'index-2.html')

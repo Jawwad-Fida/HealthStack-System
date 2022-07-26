@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 # from . --> same directory
 # Views functions and urls must be linked. # of views == # of urls
@@ -7,8 +9,10 @@ from . import views
 
 
 urlpatterns = [
-    path('hospital-home/', views.hospital_home, name="hospital-url"),
+    path('', views.hospital_home),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 # urlpatterns = [
