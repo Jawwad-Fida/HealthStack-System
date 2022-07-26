@@ -2,8 +2,10 @@ from django.contrib import admin
 
 # Register your models here.
 # # we are in same file path --> .models
-# from .models import Project, Review, Tag
 
-# admin.site.register(Project)
-# admin.site.register(Review)
+from .models import Hospital_Information, Doctor_Information
+
+admin.site.register(Hospital_Information)
+admin.site.register(Doctor_Information)
+
 # admin.site.register(Tag)

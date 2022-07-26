@@ -7,10 +7,8 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.hospital_home, name="hospital-url"),
+    path('hospital-home/', views.hospital_home, name="hospital-url"),
 ]
-
-
 
 
 # urlpatterns = [
