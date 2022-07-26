@@ -1,18 +1,14 @@
 # Mac
 .DS_Store
 
-.vscode
-
 # Byte-compiled / optimized / DLL files
-__pycache__/
+**/__pycache__
+*.pyc
+
 
 # Django stuff:
 #local_settings.py
 #db.sqlite3
-
-# Flask stuff:
-instance/
-.webassets-cache
 
 # Environments
 .env
@@ -20,5 +16,4 @@ instance/
 env/
 env_dir/
 venv/
-
-
+ENV/
