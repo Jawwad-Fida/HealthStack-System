@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', include('hospital.urls')), # go to hospital folder and look for urls.py
+
+    path('doctor-dashboard/', include('hospital.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

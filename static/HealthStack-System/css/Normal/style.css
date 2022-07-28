@@ -2242,13 +2242,18 @@ html.menu-opened body {
 	15. Home
 -----------------------*/
 
+
 .section-search { 
-	background: #f9f9f9 url(../img/search-bg.png) no-repeat bottom center;
+	background: #f9f9f9 url(..search-bg.png)no-repeat bottom center; static/HealthStack-System/css/Normal/search-bg.png
     min-height: 450px;
     background-size: 100% auto;
     position: relative;
     background-blend-mode: Darken;
     padding: 80px 0;
+}
+
+home-image{
+	border: 3px solid red;
 }
 .section-header {
     margin-bottom: 60px;

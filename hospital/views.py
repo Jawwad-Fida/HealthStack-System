@@ -9,3 +9,6 @@ from .models import Doctor_Information
 
 def hospital_home(request):
     return render(request, 'index-2.html')
+
+def doctor_dashboard(request):
+    return render(request, 'doctor-dashboard.html')

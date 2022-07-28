@@ -1,24 +1,26 @@
+{% load static %}
 <!DOCTYPE html> 
 <html lang="en">
 	
 <!-- doccure/doctor-dashboard.html  30 Nov 2019 04:12:03 GMT -->
 <head>
-		<meta charset="utf-8">
-		<title>Doccure</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-		
-		<!-- Favicons -->
-		<link href="assets/img/favicon.png" rel="icon">
-		
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- Fontawesome CSS -->
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-		
-		<!-- Main CSS -->
-		<link rel="stylesheet" href="assets/css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>HealthStack</title>
+	
+	<!-- Favicons -->
+	<link type="image/x-icon" href=" {% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}">
+	
+	<!-- Fontawesome CSS -->
+
+	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
+	
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -44,13 +46,14 @@
 							</span>
 						</a>
 						<a href="index-2.html" class="navbar-brand logo">
-							<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+							
+							<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"  class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
 							<a href="index-2.html" class="menu-logo">
-								<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+								<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
 								<i class="fas fa-times"></i>
@@ -134,13 +137,14 @@
 						<li class="nav-item dropdown has-arrow logged-item">
 							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 								<span class="user-img">
-									<img class="rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" width="31" alt="Darren Elder">
+									
+									<img class="rounded-circle" src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" width="31" alt="Darren Elder">
 								</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<div class="user-header">
 									<div class="avatar avatar-sm">
-										<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+										<img src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 									</div>
 									<div class="user-text">
 										<h6>Darren Elder</h6>
@@ -189,7 +193,7 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+											<img src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" alt="User Image">
 										</a>
 										<div class="profile-det-info">
 											<h3>Dr. Darren Elder</h3>
@@ -289,7 +293,7 @@
 													<div class="dash-widget dct-border-rht">
 														<div class="circle-bar circle-bar1">
 															<div class="circle-graph1" data-percent="75">
-																<img src="assets/img/icon-01.png" class="img-fluid" alt="patient">
+																<img src="{% static 'HealthStack-System/images/Normal/icon-01.png' %}" class="img-fluid" alt="patient">
 															</div>
 														</div>
 														<div class="dash-widget-info">
@@ -304,7 +308,7 @@
 													<div class="dash-widget dct-border-rht">
 														<div class="circle-bar circle-bar2">
 															<div class="circle-graph2" data-percent="65">
-																<img src="assets/img/icon-02.png" class="img-fluid" alt="Patient">
+																<img src="{% static 'HealthStack-System/images/Normal/icon-02.png' %}" class="img-fluid" alt="Patient">
 															</div>
 														</div>
 														<div class="dash-widget-info">
@@ -319,7 +323,7 @@
 													<div class="dash-widget">
 														<div class="circle-bar circle-bar3">
 															<div class="circle-graph3" data-percent="50">
-																<img src="assets/img/icon-03.png" class="img-fluid" alt="Patient">
+																<img src="{% static 'HealthStack-System/images/Normal/icon-03.png' %}" class="img-fluid" alt="Patient">
 															</div>
 														</div>
 														<div class="dash-widget-info">
@@ -373,7 +377,8 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a>
+																				
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Richard Wilson <span>#PT0016</span></a>
 																			</h2>
 																		</td>
@@ -399,7 +404,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient1.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Charlene Reed <span>#PT0001</span></a>
 																			</h2>
 																		</td>
@@ -425,7 +430,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient2.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Travis Trimble  <span>#PT0002</span></a>
 																			</h2>
 																		</td>
@@ -451,7 +456,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient3.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Carl Kelly <span>#PT0003</span></a>
 																			</h2>
 																		</td>
@@ -477,7 +482,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient4.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Michelle Fairfax <span>#PT0004</span></a>
 																			</h2>
 																		</td>
@@ -503,7 +508,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient5.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Gina Moore <span>#PT0005</span></a>
 																			</h2>
 																		</td>
@@ -554,7 +559,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient6.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient6.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Elsie Gilley <span>#PT0006</span></a>
 																			</h2>
 																		</td>
@@ -580,7 +585,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient7.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient7.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Joan Gardner <span>#PT0006</span></a>
 																			</h2>
 																		</td>
@@ -606,7 +611,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient8.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient8.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Daniel Griffing <span>#PT0007</span></a>
 																			</h2>
 																		</td>
@@ -632,7 +637,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient9.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient9.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Walter Roberson <span>#PT0008</span></a>
 																			</h2>
 																		</td>
@@ -658,7 +663,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient10.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient10.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Robert Rhodes <span>#PT0010</span></a>
 																			</h2>
 																		</td>
@@ -684,7 +689,7 @@
 																	<tr>
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient11.jpg" alt="User Image"></a>
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient11.jpg' %}" alt="User Image"></a>
 																				<a href="patient-profile.html">Harry Williams <span>#PT0011</span></a>
 																			</h2>
 																		</td>
@@ -740,7 +745,8 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-										<img src="assets/img/footer-logo.png" alt="logo">
+										
+										<img src="{% static 'HealthStack-System/images/Normal/footer_logo.png' %}" alt="logo">
 									</div>
 									<div class="footer-about-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -871,21 +877,22 @@
 		<!-- /Main Wrapper -->
 	  
 		<!-- jQuery -->
-		<script src="assets/js/jquery.min.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 		
 		<!-- Bootstrap Core JS -->
-		<script src="assets/js/popper.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
 		
 		<!-- Sticky Sidebar JS -->
         <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 		
 		<!-- Circle Progress JS -->
-		<script src="assets/js/circle-progress.min.js"></script>
+		<!-- <script src="assets/js/circle-progress.min.js"></script> -->
+		<script src="{% static 'HealthStack-System/js/Normal/circle-progress.min.j' %}"></script>
 		
 		<!-- Custom JS -->
-		<script src="assets/js/script.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		
 	</body>
 
