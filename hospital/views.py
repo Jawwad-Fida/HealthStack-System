@@ -15,3 +15,23 @@ def doctor_dashboard(request):
 
 def doctor_profile(request):
     return render(request, 'doctor-profile.html')
+
+def doctor_change_password(request):
+    return render(request, 'doctor-change-password.html')
+
+def change_password(request):
+    return render(request, 'change-password.html')
+
+def search(request):
+    return render(request, 'search.html')    
+
+def doctor_register(request):
+    return render(request, 'doctor-register.html')
+
+def doctor_profile_settings(request):
+    return render(request, 'doctor-profile-settings.html')
+
+def my_patients(request):
+    return render(request, 'my-patients.html')
+
+

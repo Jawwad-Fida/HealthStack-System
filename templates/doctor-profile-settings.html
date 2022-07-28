@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html> 
 <html lang="en">
 	
@@ -8,26 +9,29 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 		
 		<!-- Favicons -->
-		<link href="assets/img/favicon.png" rel="icon">
-		
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- Fontawesome CSS -->
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+		<link type="image/x-icon" href=" {% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon">
 		
 		<!-- Select2 CSS -->
-		<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/select2/css/select2.min.css' %}">
 		
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}">
 		
-		<link rel="stylesheet" href="assets/plugins/dropzone/dropzone.min.css">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/dropzone/dropzone.min.css' %}">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
+	
+		<!-- Fancybox CSS -->
+		<link rel="stylesheet" href="% static 'HealthStack-System/plugins/fancybox/jquery.fancybox.min.css' %">
 		
 		<!-- Main CSS -->
-		<link rel="stylesheet" href="assets/css/style.css">
-		
+		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
+
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -52,13 +56,13 @@
 							</span>
 						</a>
 						<a href="index-2.html" class="navbar-brand logo">
-							<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+							<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
 							<a href="index-2.html" class="menu-logo">
-								<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+								<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
 								<i class="fas fa-times"></i>
@@ -142,13 +146,13 @@
 						<li class="nav-item dropdown has-arrow logged-item">
 							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 								<span class="user-img">
-									<img class="rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" width="31" alt="Darren Elder">
+									<img class="rounded-circle" src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" width="31" alt="Darren Elder">
 								</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<div class="user-header">
 									<div class="avatar avatar-sm">
-										<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+										<img src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 									</div>
 									<div class="user-text">
 										<h6>Darren Elder</h6>
@@ -197,7 +201,7 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+											<img src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" alt="User Image">
 										</a>
 										<div class="profile-det-info">
 											<h3>Dr. Darren Elder</h3>
@@ -296,7 +300,7 @@
 											<div class="form-group">
 												<div class="change-avatar">
 													<div class="profile-img">
-														<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+														<img src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" alt="User Image">
 													</div>
 													<div class="upload-img">
 														<div class="change-photo-btn">
@@ -395,11 +399,11 @@
 											</div>
 											<div class="upload-wrap">
 												<div class="upload-images">
-													<img src="assets/img/features/feature-01.jpg" alt="Upload Image">
+													<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Upload Image">
 													<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
 												</div>
 												<div class="upload-images">
-													<img src="assets/img/features/feature-02.jpg" alt="Upload Image">
+													<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Upload Image">
 													<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
 												</div>
 											</div>
@@ -683,7 +687,7 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-										<img src="assets/img/footer-logo.png" alt="logo">
+										<img src="{% static 'HealthStack-System/images/Normal/footer_logo.png' %}" alt="logo">
 									</div>
 									<div class="footer-about-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -814,30 +818,30 @@
 		<!-- /Main Wrapper -->
 	  
 		<!-- jQuery -->
-		<script src="assets/js/jquery.min.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 		
 		<!-- Bootstrap Core JS -->
-		<script src="assets/js/popper.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
 		
 		<!-- Sticky Sidebar JS -->
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+		<script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+        <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
 		
 		<!-- Select2 JS -->
-		<script src="assets/plugins/select2/js/select2.min.js"></script>
+		<script src="{% static 'HealthStack-System/plugins/Normal/select2/js/select2.min.js' %}"></script>
 		
 		<!-- Dropzone JS -->
-		<script src="assets/plugins/dropzone/dropzone.min.js"></script>
+		<script src="{% static 'HealthStack-System/plugins/Normal/dropzone/dropzone.min.js' %}"></script>
 		
 		<!-- Bootstrap Tagsinput JS -->
-		<script src="assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
+		<script src="{% static 'HealthStack-System/plugins/Normal/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
 		
 		<!-- Profile Settings JS -->
-		<script src="assets/js/profile-settings.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/js/profile-settings.js' %}"></script>
 		
 		<!-- Custom JS -->
-		<script src="assets/js/script.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		
 	</body>
 
