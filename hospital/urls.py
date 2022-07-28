@@ -13,6 +13,9 @@ urlpatterns = [
     path('', views.hospital_home),
     path('doctor-dashboard/', views.doctor_dashboard),
     path('doctor-profile/', views.doctor_profile),
+    path('doctor-change-password/', views.doctor_change_password),
+    path('change-password/', views.change_password),
+    path('search/', views.search),
 
 ]
 
