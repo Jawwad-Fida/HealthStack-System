@@ -10,7 +10,7 @@ admin.site.register(Doctor_Information)
 admin.site.register(Admin_Information)
 admin.site.register(Patient)
 admin.site.register(Appointment)
-admin.site.register(Payment_Details, verbose_name="Payment_Details")
+admin.site.register(Payment_Details)
 admin.site.register(Report_Information)
 admin.site.register(Test_information)
 

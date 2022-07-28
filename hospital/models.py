@@ -98,6 +98,11 @@ class Patient(models.Model):
 
 
 class Appointment(models.Model):
+    APPOINTMENT_TYPE = (
+        ('Report', 'Report'),
+        ('Checkup', 'Checkup'),
+    )
+
     appointment_id = models.AutoField(primary_key=True, editable=False)
     appointment_date = models.DateField(null=True, blank=True)
     appointment_time = models.TimeField(null=True, blank=True)
@@ -107,12 +112,14 @@ class Appointment(models.Model):
         Patient, on_delete=models.CASCADE, null=True, blank=True)
     Hospital_name = models.ForeignKey(
         Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
-    appointment_type = models.CharField(max_length=200)
+    appointment_type = models.CharField(
+        max_length=200, choices=APPOINTMENT_TYPE)
     serial_number = models.IntegerField(default=0)
-    appointment_fee_status = models.CharField(max_length=200)
+    appointment_fee_status = models.CharField(
+        max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return self.appointment_id
+        return self.appointment_type
 
 
 # class Appointment(models.Model):
@@ -160,7 +167,7 @@ class Payment_Details(models.Model):
     fee_type = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.payment_id
+        return self.patient_name
 
 
 class Admin_Information(models.Model):
@@ -183,9 +190,17 @@ class Admin_Information(models.Model):
 
 
 class Report_Information(models.Model):
+
+    REPORT_TYPE = (
+        ('Urgent', 'Urgent'),
+        ('Normal', 'Normal'),
+    )
+
     report_id = models.AutoField(primary_key=True, editable=False)
     report_date = models.DateField(null=True, blank=True)
     report_time = models.TimeField(null=True, blank=True)
+    report_type = models.CharField(
+        max_length=200, null=True, blank=True, choices=REPORT_TYPE)
     delivery_date = models.TimeField(null=True, blank=True)
     report_doctor = models.ForeignKey(
         Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
@@ -199,7 +214,7 @@ class Report_Information(models.Model):
     total_report_fee = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.report_id
+        return self.report_type
 
 
 class Test_information(models.Model):
