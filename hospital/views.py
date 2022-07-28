@@ -12,3 +12,6 @@ def hospital_home(request):
 
 def doctor_dashboard(request):
     return render(request, 'doctor-dashboard.html')
+
+def doctor_profile(request):
+    return render(request, 'doctor-profile.html')

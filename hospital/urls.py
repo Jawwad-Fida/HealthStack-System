@@ -12,6 +12,7 @@ from django.contrib import admin
 urlpatterns = [
     path('', views.hospital_home),
     path('doctor-dashboard/', views.doctor_dashboard),
+    path('doctor-profile/', views.doctor_profile),
 
 ]
 

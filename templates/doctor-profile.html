@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html> 
 <html lang="en">
 	
@@ -8,20 +9,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 		
 		<!-- Favicons -->
-		<link href="assets/img/favicon.png" rel="icon">
+		<link type="image/x-icon" href=" {% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon">
 		
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}">
 		
 		<!-- Fontawesome CSS -->
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-		
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
+	
 		<!-- Fancybox CSS -->
-		<link rel="stylesheet" href="assets/plugins/fancybox/jquery.fancybox.min.css">
+		<link rel="stylesheet" href="% static 'HealthStack-System/plugins/fancybox/jquery.fancybox.min.css' %">
 		
 		<!-- Main CSS -->
-		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -47,13 +48,13 @@
 							</span>
 						</a>
 						<a href="index-2.html" class="navbar-brand logo">
-							<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+							<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
 							<a href="index-2.html" class="menu-logo">
-								<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+								<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
 								<i class="fas fa-times"></i>
@@ -168,12 +169,12 @@
 							<div class="doctor-widget">
 								<div class="doc-info-left">
 									<div class="doctor-img">
-										<img src="assets/img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
+										<img src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" class="img-fluid" alt="User Image">
 									</div>
 									<div class="doc-info-cont">
 										<h4 class="doc-name">Dr. Darren Elder</h4>
 										<p class="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
-										<p class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</p>
+										<p class="doc-department"><img src="{% static 'HealthStack-System/images/Normal/specialities/specialities-05.png' %}" class="img-fluid" alt="Speciality">Dentist</p>
 										<div class="rating">
 											<i class="fas fa-star filled"></i>
 											<i class="fas fa-star filled"></i>
@@ -186,23 +187,23 @@
 											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA - <a href="javascript:void(0);">Get Directions</a></p>
 											<ul class="clinic-gallery">
 												<li>
-													<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
-														<img src="assets/img/features/feature-01.jpg" alt="Feature">
+													<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" alt="Feature">
 													</a>
 												</li>
 												<li>
-													<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">
-														<img  src="assets/img/features/feature-02.jpg" alt="Feature Image">
+													<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" data-fancybox="gallery">
+														<img  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Feature Image">
 													</a>
 												</li>
 												<li>
-													<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery">
-														<img src="assets/img/features/feature-03.jpg" alt="Feature">
+													<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" alt="Feature">
 													</a>
 												</li>
 												<li>
-													<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery">
-														<img src="assets/img/features/feature-04.jpg" alt="Feature">
+													<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature">
 													</a>
 												</li>
 											</ul>
@@ -463,23 +464,23 @@
 														<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2286  Sundown Lane, Austin, Texas 78749, USA <br><a href="javascript:void(0);">Get Directions</a></h5>
 														<ul>
 															<li>
-																<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-01.jpg" alt="Feature Image">
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" alt="Feature Image">
 																</a>
 															</li>
 															<li>
-																<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-02.jpg" alt="Feature Image">
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Feature Image">
 																</a>
 															</li>
 															<li>
-																<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-03.jpg" alt="Feature Image">
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" alt="Feature Image">
 																</a>
 															</li>
 															<li>
-																<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-04.jpg" alt="Feature Image">
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature Image">
 																</a>
 															</li>
 														</ul>
@@ -542,23 +543,23 @@
 														<p class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2883  University Street, Seattle, Texas Washington, 98155 <br><a href="javascript:void(0);">Get Directions</a></p>
 														<ul>
 															<li>
-																<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-01.jpg" alt="Feature Image">
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" alt="Feature Image">
 																</a>
 															</li>
 															<li>
-																<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-02.jpg" alt="Feature Image">
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Feature Image">
 																</a>
 															</li>
 															<li>
-																<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-03.jpg" alt="Feature Image">
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" alt="Feature Image">
 																</a>
 															</li>
 															<li>
-																<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-04.jpg" alt="Feature Image">
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature Image">
 																</a>
 															</li>
 														</ul>
@@ -615,7 +616,7 @@
 											<!-- Comment List -->
 											<li>
 												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient.jpg">
+													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}">
 													<div class="comment-body">
 														<div class="meta-data">
 															<span class="comment-author">Richard Wilson</span>
@@ -656,7 +657,7 @@
 												<ul class="comments-reply">
 													<li>
 														<div class="comment">
-															<img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient1.jpg">
+															<img class="avatar avatar-sm rounded-circle" alt="User Image" src="{% static 'HealthStack-System/images/Normal/patients/patient1.jpg' %}">
 															<div class="comment-body">
 																<div class="meta-data">
 																	<span class="comment-author">Charlene Reed</span>
@@ -701,7 +702,7 @@
 											<!-- Comment List -->
 											<li>
 												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient2.jpg">
+													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="{% static 'HealthStack-System/images/Normal/patients/patient2.jpg' %}">
 													<div class="comment-body">
 														<div class="meta-data">
 															<span class="comment-author">Travis Trimble</span>
@@ -903,7 +904,7 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-										<img src="assets/img/footer-logo.png" alt="logo">
+										<img src="{% static 'HealthStack-System/images/Normal/footer_logo.png' %}" alt="logo">
 									</div>
 									<div class="footer-about-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -1093,17 +1094,17 @@
 		<!-- Video Call Modal -->
 		
 		<!-- jQuery -->
-		<script src="assets/js/jquery.min.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 		
 		<!-- Bootstrap Core JS -->
-		<script src="assets/js/popper.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
 		
 		<!-- Fancybox JS -->
-		<script src="assets/plugins/fancybox/jquery.fancybox.min.js"></script>
+		<script src="{% static 'HealthStack-System/plugins/Normal/fancybox/jquery.fancybox.min.js' %}"></script>
 		
 		<!-- Custom JS -->
-		<script src="assets/js/script.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		
 	</body>
 
