@@ -16,7 +16,10 @@ urlpatterns = [
     path('doctor-change-password/', views.doctor_change_password),
     path('change-password/', views.change_password),
     path('search/', views.search),
-
+    path('doctor-register/', views.doctor_register),
+    path('doctor-profile-settings/', views.doctor_profile_settings),\
+    path('my-patients/', views.my_patients),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
