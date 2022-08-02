@@ -32,7 +32,7 @@
 	
 	</head>
 	<body>
-
+		{% if user.is_authenticated %}
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
 		
@@ -110,7 +110,7 @@
 										</ul>
 									</li>
 									<li><a href="blank-page.html">Starter Page</a></li>
-									<li><a href="login.html">Login</a></li>
+									<li><a href="{%url 'login'%}">Login</a></li>
 									<li><a href="register.html">Register</a></li>
 									<li><a href="forgot-password.html">Forgot Password</a></li>
 								</ul>
@@ -119,7 +119,7 @@
 								<a href="admin/index.html" target="_blank">Admin</a>
 							</li>
 							<li class="login-link">
-								<a href="login.html">Login / Signup</a>
+								<a href="{%url 'login'%}">Login / Signup</a>
 							</li>
 						</ul>	 
 					</div>		 
@@ -134,7 +134,7 @@
 							</div>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link header-login" href="login.html">login / Signup </a>
+							<a class="nav-link header-login" href="{%url 'login'%}">login / Signup </a>
 						</li>
 					</ul>
 				</nav>
@@ -1092,7 +1092,11 @@
 			</div>
 		</div>
 		<!-- Video Call Modal -->
+		{%else%}
+		<p>You are not logged in</p>
 		
+		
+		{% endif %}
 		<!-- jQuery -->
 		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 		

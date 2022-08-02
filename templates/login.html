@@ -28,8 +28,9 @@
 	
 	</head>
 	<body class="account-page">
-
+		
 		<!-- Main Wrapper -->
+		
 		<div class="main-wrapper">
 		
 			<!-- Header -->
@@ -154,13 +155,14 @@
 										<div class="login-header">
 											<h3>Login <span>Doccure</span></h3>
 										</div>
-										<form action="https://dreamguys.co.in/demo/doccure/index.html">
+										<form method="POST" action="{% url 'login'%}">
+											{% csrf_token %}
 											<div class="form-group form-focus">
-												<input type="email" class="form-control floating">
+												<input type="text" class="form-control floating" name="user">
 												<label class="focus-label">Email</label>
 											</div>
 											<div class="form-group form-focus">
-												<input type="password" class="form-control floating">
+												<input type="password" class="form-control floating" name="pass">
 												<label class="focus-label">Password</label>
 											</div>
 											<div class="text-right">

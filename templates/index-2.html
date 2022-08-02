@@ -30,7 +30,7 @@
 	
 	</head>
 	<body>
-
+	{% if user.is_authenticated %}
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
 		
@@ -818,6 +818,9 @@
 			<!-- /Footer -->
 		   
 	   </div>
+	{%else%}
+	<p>You are not logged in</p>
+	{% endif %}   
 	   <!-- /Main Wrapper -->
 	  
 		<!-- jQuery -->

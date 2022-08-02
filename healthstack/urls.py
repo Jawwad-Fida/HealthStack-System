@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from hospital import views
 
 # ROOT url file
 
@@ -25,27 +25,29 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path('', include('hospital.urls')), # go to hospital folder and look for urls.py
-
-    path('doctor-dashboard/', include('hospital.urls')),
-
-    path('doctor-profile/', include('hospital.urls')),
-
-    path('doctor-change-password/', include('hospital.urls')),
-
-    path('change-password/', include('hospital.urls')),
-
-    path('search/', include('hospital.urls')),
-
-    path('doctor-register/', include('hospital.urls')),
-
-    path('doctor-profile-settings/', include('hospital.urls')),
-
-    path('my-patients/', include('hospital.urls')),
-
-
+    path('', include('hospital.urls')),
+    path('login/', views.signin,name='login'), # go to hospital folder and look for urls.py
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+
+
+ # path('login/', include('hospital.urls'),name='login'),
+    # path('doctor-dashboard/', include('hospital.urls')),
+
+    # path('doctor-profile/', include('hospital.urls')),
+
+    # path('doctor-change-password/', include('hospital.urls')),
+
+    # path('change-password/', include('hospital.urls')),
+
+    # path('search/', include('hospital.urls')),
+
+    # path('doctor-register/', include('hospital.urls')),
+
+    # path('doctor-profile-settings/', include('hospital.urls')),
+
+    # path('my-patients/', include('hospital.urls')),
