@@ -34,4 +34,7 @@ def doctor_profile_settings(request):
 def my_patients(request):
     return render(request, 'my-patients.html')
 
+def login(request):
+    return render(request, 'login.html')
+
 
