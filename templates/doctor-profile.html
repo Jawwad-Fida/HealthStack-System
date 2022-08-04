@@ -32,7 +32,7 @@
 	
 	</head>
 	<body>
-		{% if user.is_authenticated %}
+	{% if user.is_authenticated %}
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
 		
@@ -1092,11 +1092,11 @@
 			</div>
 		</div>
 		<!-- Video Call Modal -->
-		{%else%}
-		<p>You are not logged in</p>
+	{%else%}
+	 	<p>You are not logged in</p>
 		
 		
-		{% endif %}
+	{% endif %}
 		<!-- jQuery -->
 		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 		
