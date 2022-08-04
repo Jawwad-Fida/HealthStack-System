@@ -174,7 +174,7 @@
 										</ul>
 									</li>
 									<li><a href="blank-page.html">Starter Page</a></li>
-									<li><a href="login.html">Login</a></li>
+									<li><a href="{% url 'login'%}">Login</a></li>
 									<li><a href="register.html">Register</a></li>
 									<li><a href="forgot-password.html">Forgot Password</a></li>
 								</ul>
@@ -183,7 +183,7 @@
 								<a href="admin/index.html" target="_blank">Admin</a>
 							</li>
 							<li class="login-link">
-								<a href="login.html">Login / Signup</a>
+								<a href="{% url 'login'%}">Login / Signup</a>
 							</li>
 						</ul>	 
 					</div>		 
@@ -198,7 +198,7 @@
 							</div>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link header-login" href="login.html">login / Signup </a>
+							<a class="nav-link header-login" href="{% url 'login'%}">login / Signup </a>
 						</li>
 					</ul>
 				</nav>
@@ -828,7 +828,7 @@
 									<h2 class="footer-title">For Patients</h2>
 									<ul>
 										<li><a href="search.html"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-										<li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
+										<li><a href="{% url 'login'%}"><i class="fas fa-angle-double-right"></i> Login</a></li>
 										<li><a href="register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
 										<li><a href="booking.html"><i class="fas fa-angle-double-right"></i> Booking</a></li>
 										<li><a href="patient-dashboard.html"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
@@ -846,7 +846,7 @@
 									<ul>
 										<li><a href="appointments.html"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
 										<li><a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-										<li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
+										<li><a href="{% url 'login'%}"><i class="fas fa-angle-double-right"></i> Login</a></li>
 										<li><a href="doctor-register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
 										<li><a href="doctor-dashboard.html"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
 									</ul>
@@ -921,7 +921,7 @@
 		   
 	   </div>
 	{%else%}
-	<p>You are not logged in</p>
+		<p>You are not logged in</p>
 	{% endif %}   
 	   <!-- /Main Wrapper -->
 	  
