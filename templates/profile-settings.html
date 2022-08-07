@@ -1,38 +1,39 @@
+{% load static %}
 <!DOCTYPE html> 
 <html lang="en">
 	
 <!-- doccure/profile-settings.html  30 Nov 2019 04:12:18 GMT -->
 <head>
-		<meta charset="utf-8">
-		<title>Doccure</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>HealthStack</title>
+
+	<!-- Favicons -->
+	<link type="image/x-icon" href="{% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
+
+	<!-- Datetimepicker CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap-datetimepicker.min.css' %}">
 		
-		<!-- Favicons -->
-		<link href="assets/img/favicon.png" rel="icon">
-		
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- Fontawesome CSS -->
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-		<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-		
-		<!-- Datetimepicker CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-		
-		<!-- Select2 CSS -->
-		<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
-		
-		<!-- Main CSS -->
-		<link rel="stylesheet" href="assets/css/style.css">
-		
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-			<script src="assets/js/html5shiv.min.js"></script>
-			<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/select2/css/select2.min.css' %}">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
 	
-	</head>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
 	<body>
 
 		<!-- Main Wrapper -->
@@ -50,13 +51,14 @@
 							</span>
 						</a>
 						<a href="index-2.html" class="navbar-brand logo">
-							<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+							
+							<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"  class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
 							<a href="index-2.html" class="menu-logo">
-								<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+								<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
 								<i class="fas fa-times"></i>
@@ -66,10 +68,10 @@
 							<li>
 								<a href="index-2.html">Home</a>
 							</li>
-							<li class="has-submenu">
+							<li class="has-submenu active">
 								<a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
-									<li><a href="doctor-dashboard.html">Doctor Dashboard</a></li>
+									<li class="active"><a href="doctor-dashboard.html">Doctor Dashboard</a></li>
 									<li><a href="appointments.html">Appointments</a></li>
 									<li><a href="schedule-timings.html">Schedule Timing</a></li>
 									<li><a href="my-patients.html">Patients List</a></li>
@@ -81,7 +83,7 @@
 									<li><a href="doctor-register.html">Doctor Register</a></li>
 								</ul>
 							</li>	
-							<li class="has-submenu active">
+							<li class="has-submenu">
 								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
 									<li><a href="search.html">Search Doctor</a></li>
@@ -92,7 +94,7 @@
 									<li><a href="patient-dashboard.html">Patient Dashboard</a></li>
 									<li><a href="favourites.html">Favourites</a></li>
 									<li><a href="chat.html">Chat</a></li>
-									<li class="active"><a href="profile-settings.html">Profile Settings</a></li>
+									<li><a href="profile-settings.html">Profile Settings</a></li>
 									<li><a href="change-password.html">Change Password</a></li>
 								</ul>
 							</li>	
@@ -123,7 +125,7 @@
 							<li class="login-link">
 								<a href="login.html">Login / Signup</a>
 							</li>
-						</ul>
+						</ul>	 
 					</div>		 
 					<ul class="nav header-navbar-rht">
 						<li class="nav-item contact-item">
@@ -140,21 +142,22 @@
 						<li class="nav-item dropdown has-arrow logged-item">
 							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 								<span class="user-img">
-									<img class="rounded-circle" src="assets/img/patients/patient.jpg" width="31" alt="Ryan Taylor">
+									
+									<img class="rounded-circle" src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" width="31" alt="Darren Elder">
 								</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<div class="user-header">
 									<div class="avatar avatar-sm">
-										<img src="assets/img/patients/patient.jpg" alt="User Image" class="avatar-img rounded-circle">
+										<img src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 									</div>
 									<div class="user-text">
-										<h6>Richard Wilson</h6>
-										<p class="text-muted mb-0">Patient</p>
+										<h6>Darren Elder</h6>
+										<p class="text-muted mb-0">Doctor</p>
 									</div>
 								</div>
-								<a class="dropdown-item" href="patient-dashboard.html">Dashboard</a>
-								<a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
+								<a class="dropdown-item" href="doctor-dashboard.html">Dashboard</a>
+								<a class="dropdown-item" href="doctor-profile-settings.html">Profile Settings</a>
 								<a class="dropdown-item" href="login.html">Logout</a>
 							</div>
 						</li>
@@ -194,7 +197,7 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="assets/img/patients/patient.jpg" alt="User Image">
+											<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image">
 										</a>
 										<div class="profile-det-info">
 											<h3>Richard Wilson</h3>
@@ -264,7 +267,7 @@
 												<div class="form-group">
 													<div class="change-avatar">
 														<div class="profile-img">
-															<img src="assets/img/patients/patient.jpg" alt="User Image">
+															<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image">
 														</div>
 														<div class="upload-img">
 															<div class="change-photo-btn">
@@ -381,7 +384,7 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-										<img src="assets/img/footer-logo.png" alt="logo">
+										<img src="{% static 'HealthStack-System/images/Normal/footer_logo.png' %}" alt="logo">
 									</div>
 									<div class="footer-about-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -510,27 +513,26 @@
 		   
 		</div>
 		<!-- /Main Wrapper -->
-	  
 		<!-- jQuery -->
-		<script src="assets/js/jquery.min.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 		
 		<!-- Bootstrap Core JS -->
-		<script src="assets/js/popper.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		
+		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+
 		<!-- Select2 JS -->
-		<script src="assets/plugins/select2/js/select2.min.js"></script>
+		<script src="{% static 'HealthStack-System/plugins/Normal/select2/js/select2.min.js' %}"></script>
 		
 		<!-- Datetimepicker JS -->
-		<script src="assets/js/moment.min.js"></script>
-		<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/moment.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/bootstrap-datetimepicker.min.js' %}"></script>
 		
 		<!-- Sticky Sidebar JS -->
-        <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-        <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+        <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+        <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
 		
 		<!-- Custom JS -->
-		<script src="assets/js/script.js"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		
 	</body>
 
