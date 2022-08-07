@@ -3,6 +3,11 @@ import uuid
 
 # Create your models here.
 
+"""
+We will create 2 apps. Another will be user app as we have different types of users.
+"""
+
+
 # django automatically creates an id field for each model (int)
 # null=True --> don't require a value when inserting into the database
 # blank=True --> allow blank value when submitting a form
