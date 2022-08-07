@@ -37,6 +37,47 @@ def my_patients(request):
 def login(request):
     return render(request, 'login.html')
 
+def add_billing(request):
+	return render(request, 'add-billing.html')
+
+def add_prescription(request):
+	return render(request, 'add-prescription.html')
+
+def appointments(request):
+	return render(request, 'appointments.html')
+
+def booking_success(request):
+	return render(request, 'booking-success.html')
+
+def booking(request):
+	return render(request, 'booking.html')
+
+def edit_billing(request):
+	return render(request, 'edit-billing.html')
+
+def edit_prescription(request):
+	return render(request, 'edit-prescription.html')
+
+def forgot_password(request):
+	return render(request, 'forgot-password.html')
+
+def patient_dashboard(request):
+	return render(request, 'patient-dashboard.html')
+
+def patient_profile(request):
+	return render(request, 'patient-profile.html')
+
+def privacy_policy(request):
+	return render(request, 'privacy-policy.html')
+
+def profile_settings(request):
+	return render(request, 'profile-settings.html')
+
+def register(request):
+	return render(request, 'register.html')
+
+def schedule_timings(request):
+	return render(request, 'schedule-timings.html')
 
 def signin(request):
 	if request.method == 'GET':

@@ -22,6 +22,20 @@ urlpatterns = [
     path('doctor-profile-settings/', views.doctor_profile_settings),
     path('my-patients/', views.my_patients),
     path('login/', views.login),
+    path('add-billing/', views.add_billing),
+    path('add-prescription/', views.add_prescription),
+    path('appointments/', views.appointments),
+    path('booking-success/', views.booking_success),
+    path('booking/', views.booking),
+    path('edit-billing/', views.edit_billing),
+    path('edit-prescription/', views.edit_prescription),
+    path('forgot-password/', views.forgot_password),
+    path('patient-dashboard/', views.patient_dashboard),
+    path('patient-profile/', views.patient_profile),
+    path('privacy-policy/', views.privacy_policy),
+    path('profile-settings/', views.profile_settings),
+    path('register/', views.register),
+    path('schedule-timings/', views.schedule_timings),
     
 ]
 
