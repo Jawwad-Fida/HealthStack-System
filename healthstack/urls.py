@@ -25,8 +25,10 @@ from hospital import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('hospital.urls')),
-    path('login/', views.signin,name='login'), # go to hospital folder and look for urls.py
+    path('hospital/', include('hospital.urls')),
+    path('login/', views.signin,name='login'), 
+    path('', views.hospital_home,name="hospital_home")# go to hospital folder and look for urls.py
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
