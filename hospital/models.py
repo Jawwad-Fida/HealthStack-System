@@ -29,11 +29,12 @@ class Hospital_Information(models.Model):
     hospital_id = models.AutoField(primary_key=True)
     hospital_name = models.CharField(max_length=200, null=True, blank=True)
     hospital_address = models.TextField(null=True, blank=True)
-    
+
     # hospital_image = models.ImageField(null=True, blank=True, default="default.jpg")
-    
-    hospital_image = models.ImageField(upload_to='hospitals/', default='hospitals/default.png', null=True, blank=True)
-    
+
+    hospital_image = models.ImageField(
+        upload_to='hospitals/', default='hospitals/default.png', null=True, blank=True)
+
     hospital_email = models.EmailField(max_length=200, null=True, blank=True)
     hospital_phone_number = models.IntegerField(default=0)
     hospital_type = models.CharField(max_length=200, choices=HOSPITAL_TYPE)
@@ -57,16 +58,19 @@ class Doctor_Information(models.Model):
         ('Dermatologists', 'Dermatologists'),
     )
     doctor_id = models.AutoField(primary_key=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    
-    doctor_name = models.CharField(max_length=200, null=True, blank=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    username = models.CharField(max_length=200, null=True, blank=True)
 
     doctor_degree = models.TextField(null=True, blank=True)
-    doctor_department = models.CharField(max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
-    
-    doctor_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
-    
-    doctor_email = models.EmailField(max_length=200, null=True, blank=True)
+    doctor_department = models.CharField(
+        max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
+
+    doctor_image = models.ImageField(
+        upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
+
+    email = models.EmailField(max_length=200, null=True, blank=True)
     doctor_phone_number = models.IntegerField(null=True, blank=True)
     doctor_visiting_hour = models.TextField(null=True, blank=True)
     doctor_consultation_fee = models.IntegerField(null=True, blank=True)
@@ -75,26 +79,31 @@ class Doctor_Information(models.Model):
     doctor_dob = models.DateField(null=True, blank=True)
 
     # ForeignKey --> one to one relationship with Hospital_Information model.
-    Hospital_Name = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
+    Hospital_Name = models.ForeignKey(
+        Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.doctor_name
+        return str(self.user.username)
 
 
 # Patient, Hospital Admin , Appointment, Payment Details,
 
 class Patient(models.Model):
     patient_id = models.AutoField(primary_key=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    patient_name = models.CharField(max_length=200, null=True, blank=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    username = models.CharField(max_length=200, null=True, blank=True)
     patient_age = models.IntegerField(null=True, blank=True)
-    patient_email = models.EmailField(max_length=200, null=True, blank=True)
+    email = models.EmailField(max_length=200, null=True, blank=True)
     patient_phone_number = models.IntegerField(null=True, blank=True)
     patient_address = models.TextField(null=True, blank=True)
-    
-    patient_image = models.ImageField(upload_to='patients/', default='patients/user-default.png', null=True, blank=True)
-    
-    patient_blood_group = models.CharField(max_length=200, null=True, blank=True)
+
+    patient_image = models.ImageField(
+        upload_to='patients/', default='patients/user-default.png', null=True, blank=True)
+
+    patient_blood_group = models.CharField(
+        max_length=200, null=True, blank=True)
     # patient_allergy = models.TextField(null=True, blank=True)
     patient_history = models.TextField(null=True, blank=True)
     # patient_password = models.CharField(max_length=200, null=True, blank=True)
@@ -102,12 +111,14 @@ class Patient(models.Model):
     patient_nid = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.patient_name
+        return str(self.user.username)
+
 
 """
 FINISH WORK ON THE THREE TABLES ABOVE FIRST----------------------------
 
 """
+
 
 class Appointment(models.Model):
     APPOINTMENT_TYPE = (

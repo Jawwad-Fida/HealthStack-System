@@ -1,0 +1,14 @@
+# Completed:
+
+Template - CSS, JS, Images
+
+# Remaining:
+Template - Linkup (href)
+
+---------------------------------------------------
+
+# Task:
+
+Register --> patient, and doctor (both are input at the same time, change the signals)
+Linkup (href)
+Admin Files

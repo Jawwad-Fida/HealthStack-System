@@ -10,8 +10,7 @@ from django.contrib import admin
 # App URL file - urls related to hospital
 
 
-urlpatterns = [
-    
+urlpatterns = [    
     path('', views.hospital_home,name='hospital_home'),
     # path('login/', views.signin,name='login'),
     path('doctor-dashboard/', views.doctor_dashboard,name='doctor_dashboard'),
@@ -39,26 +38,9 @@ urlpatterns = [
     path('schedule-timings/', views.schedule_timings,name='schedule_timings'),
     path('about-us/', views.about_us, name='about_us'),
 
-    
+
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# urlpatterns = [
-
-#     # make default homepage by using - path('')
-
-#     path('', views.projects, name="projects"),
-
-#     #path('projects/', views.return_projects, name='projects'),
-
-#     # pass in a parameter to url
-#     path('project/<str:pk>/', views.project, name="project"),
-
-#     path('create-project/', views.createProject, name="create-project"),
-
-#     path('update-project/<str:pk>/', views.updateProject, name="update-project"),
-
-#     path('delete-project/<str:pk>/', views.deleteProject, name="delete-project"),
-# ]
