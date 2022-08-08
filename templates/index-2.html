@@ -125,7 +125,7 @@
 							</a>
 						</div>
 						<ul class="main-nav">
-							<li>
+							<!-- <li>
 								<a href="index-2.html">Home</a>
 							</li>
 							<li class="has-submenu">
@@ -142,8 +142,8 @@
 									<li><a href="reviews.html">Reviews</a></li>
 									<li><a href="doctor-register.html">Doctor Register</a></li>
 								</ul>
-							</li>	
-							<li class="has-submenu active">
+							</li>	 -->
+							<!-- <li class="has-submenu active">
 								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
 									<li><a href="search.html">Search Doctor</a></li>
@@ -178,13 +178,21 @@
 									<li><a href="register.html">Register</a></li>
 									<li><a href="forgot-password.html">Forgot Password</a></li>
 								</ul>
+							</li> -->
+							<li>
+								<a href="{%url 'about_us'%}">About Us</a>
+							</li>
+							
+							<li>
+								<a href="{%url 'search'%}">Search Doctor</a>
 							</li>
 							<li>
 								<a href="admin/index.html" target="_blank">Admin</a>
 							</li>
 							<li class="login-link">
-								<a href="#">Login / Signup</a>
+								<a href="{%url 'login'%}">Login / Signup</a>
 							</li>
+
 						</ul>	 
 					</div>		 
 					<ul class="nav header-navbar-rht">
@@ -198,7 +206,7 @@
 							</div>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link header-login" href="#">login / Signup </a>
+							<a class="nav-link header-login" href="{%url 'login'%}">login / Signup </a>
 						</li>
 					</ul>
 				</nav>

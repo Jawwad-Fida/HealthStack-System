@@ -80,6 +80,10 @@ def schedule_timings(request):
 def login_user(request):
 	return render(request, 'login.html')
 
+def about_us(request):
+	return render(request, 'about-us.html')
+
+
 # def login(request):
 #     return render(request, 'login.html')
 # def authenticate_user(email, password):
