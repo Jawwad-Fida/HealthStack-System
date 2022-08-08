@@ -10,15 +10,15 @@ from django.contrib import admin
 
 
 urlpatterns = [
-    
-    # path('', views.hospital_home,name='hospital_home'),
+
+    path('', views.hospital_home, name='hospital_home'),
     # path('login/', views.signin,name='login'),
-    path('doctor-dashboard/', views.doctor_dashboard,name='doctor_dashboard'),
-    path('doctor-profile/', views.doctor_profile,name='doctor_profile'),
+    path('doctor-dashboard/', views.doctor_dashboard, name='doctor_dashboard'),
+    path('doctor-profile/', views.doctor_profile, name='doctor_profile'),
     path('doctor-change-password/', views.doctor_change_password),
     path('change-password/', views.change_password),
     path('search/', views.search),
-    path('doctor-register/', views.doctor_register),
+    path('doctor-register/', views.doctor_register, name='doctor-register'),
     path('doctor-profile-settings/', views.doctor_profile_settings),
     path('my-patients/', views.my_patients),
     # path('login/', views.login_user),
@@ -34,29 +34,11 @@ urlpatterns = [
     path('patient-profile/', views.patient_profile),
     path('privacy-policy/', views.privacy_policy),
     path('profile-settings/', views.profile_settings),
-    path('register/', views.register),
+    path('register/', views.registerPatient, name='patient-register'),
     path('schedule-timings/', views.schedule_timings),
 
-    
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# urlpatterns = [
-
-#     # make default homepage by using - path('')
-
-#     path('', views.projects, name="projects"),
-
-#     #path('projects/', views.return_projects, name='projects'),
-
-#     # pass in a parameter to url
-#     path('project/<str:pk>/', views.project, name="project"),
-
-#     path('create-project/', views.createProject, name="create-project"),
-
-#     path('update-project/<str:pk>/', views.updateProject, name="update-project"),
-
-#     path('delete-project/<str:pk>/', views.deleteProject, name="delete-project"),
-# ]
