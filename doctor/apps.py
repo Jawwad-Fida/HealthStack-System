@@ -1,10 +1,10 @@
 from django.apps import AppConfig
 
 
-class HospitalConfig(AppConfig):
+class DoctorConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'hospital'
+    name = 'doctor'
 
     # register signals
     def ready(self):
-        import hospital.signals
+        import doctor.signals
