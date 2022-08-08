@@ -79,25 +79,25 @@ def schedule_timings(request):
 
 # def login(request):
 #     return render(request, 'login.html')
-def authenticate_user(email, password):
-    try:
-        user = User.objects.get(email=email)
-    except User.DoesNotExist:
-        return None
-    else:
-        if user.check_password(password):
-            return user
+# def authenticate_user(email, password):
+#     try:
+#         user = User.objects.get(email=email)
+#     except User.DoesNotExist:
+#         return None
+#     else:
+#         if user.check_password(password):
+#             return user
 
-def signin(request):
-	if request.method == 'GET':
-		return render(request, 'login.html')
-	elif request.method == 'POST':
-		email = request.POST.get('email')
-		password= request.POST.get('pass')
-		user = authenticate_user(email, password)
-		if user is None:
-			return render(request, 'login.html', {'error': 'Invalid username or password'})
-		else:
-			auth_login(request, user)
-			return redirect( 'hospital_home')
+# def signin(request):
+# 	if request.method == 'GET':
+# 		return render(request, 'login.html')
+# 	elif request.method == 'POST':
+# 		email = request.POST.get('email')
+# 		password= request.POST.get('pass')
+# 		user = authenticate_user(email, password)
+# 		if user is None:
+# 			return render(request, 'login.html', {'error': 'Invalid username or password'})
+# 		else:
+# 			auth_login(request, user)
+# 			return redirect( 'hospital_home')
 	
