@@ -77,6 +77,9 @@ def register(request):
 def schedule_timings(request):
 	return render(request, 'schedule-timings.html')
 
+def login_user(request):
+	return render(request, 'login.html')
+
 # def login(request):
 #     return render(request, 'login.html')
 # def authenticate_user(email, password):
