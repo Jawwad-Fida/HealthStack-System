@@ -17,7 +17,7 @@ urlpatterns = [
     path('doctor-profile-settings/', views.doctor_profile_settings,
          name='doctor_profile_settings'),
     path('doctor-register/', views.doctor_register, name='doctor-register'),
-    path('logout/', views.logoutUser, name='logout'),
+    path('logout/', views.logoutUser, name='logout')
 ]
 
 
