@@ -10,21 +10,22 @@
         <title>HealthStack - Dashboard</title>
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png' %}">  <!--change to fit your needs-->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
 		
 		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css' %}"> 
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"> 
 		
 		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css' %}"> 
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">   
 		
 		<!-- Feathericon CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/feathericon.min.css' %}"> 
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/feathericon.min.css'%}">  
 		
-		<link rel="stylesheet" href="assets/plugins/morris/morris.css">   
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/morris/morris.css'%}"> 
 		
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css' %}">  
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
+
 		
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -42,10 +43,10 @@
 				<!-- Logo -->
                 <div class="header-left">
                     <a href="index.html" class="logo">
-						<img src="assets/img/logo.png" alt="Logo">
+						<img src="{%static 'HealthStack-System/images/admin/logo.png'%}" alt="Logo"> 
 					</a>
 					<a href="index.html" class="logo logo-small">
-						<img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+						<img src="{%static 'HealthStack-System/images/admin/logo-small.png'%}" alt="Logo" width="30" height="30"> 
 					</a>
                 </div>
 				<!-- /Logo -->
@@ -85,8 +86,8 @@
 									<li class="notification-message">
 										<a href="#">
 											<div class="media">
-												<span class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" alt="User Image" src="assets/img/doctors/doctor-thumb-01.jpg">
+												<span class="avatar avatar-sm">                                   
+													<img class="avatar-img rounded-circle" alt="User Image" src=" {%static 'HealthStack-System/images/admin/doctors/doctor-thumb-01.jpg'%}">
 												</span>
 												<div class="media-body">
 													<p class="noti-details"><span class="noti-title">Dr. Ruby Perrin</span> Schedule <span class="noti-title">her appointment</span></p>
@@ -99,7 +100,7 @@
 										<a href="#">
 											<div class="media">
 												<span class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" alt="User Image" src="assets/img/patients/patient1.jpg">
+													<img class="avatar-img rounded-circle" alt="User Image" src="{%static 'HealthStack-System/images/admin/patients/patient1.jpg'%}"> 
 												</span>
 												<div class="media-body">
 													<p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
@@ -112,7 +113,7 @@
 										<a href="#">
 											<div class="media">
 												<span class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" alt="User Image" src="assets/img/patients/patient2.jpg">
+													<img class="avatar-img rounded-circle" alt="User Image" src="{%static 'HealthStack-System/images/admin/patients/patient2.jpg'%}">
 												</span>
 												<div class="media-body">
 												<p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $210 for his <span class="noti-title">appointment</span></p>
@@ -125,7 +126,7 @@
 										<a href="#">
 											<div class="media">
 												<span class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" alt="User Image" src="assets/img/patients/patient3.jpg">
+													<img class="avatar-img rounded-circle" alt="User Image" src="{%static 'HealthStack-System/images/admin/patients/patient3.jpg'%}">
 												</span>
 												<div class="media-body">
 													<p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
@@ -145,13 +146,13 @@
 					
 					<!-- User Menu -->
 					<li class="nav-item dropdown has-arrow">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> 
+							<span class="user-img"><img class="rounded-circle" src="{%static 'HealthStack-System/images/admin/profiles/avatar-01.jpg'%}" width="31" alt="Ryan Taylor"></span>
 						</a>
 						<div class="dropdown-menu">
 							<div class="user-header">
 								<div class="avatar avatar-sm">
-									<img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+									<img src="{%static 'HealthStack-System/images/admin/profiles/avatar-01.jpg'%}" alt="User Image" class="avatar-img rounded-circle">
 								</div>
 								<div class="user-text">
 									<h6>Ryan Taylor</h6>
@@ -441,8 +442,8 @@
 											<tbody>
 												<tr>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
+														<h2 class="table-avatar">              
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-01.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Ruby Perrin</a>
 														</h2>
 													</td>
@@ -459,7 +460,7 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-02.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Darren Elder</a>
 														</h2>
 													</td>
@@ -476,7 +477,7 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-03.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-03.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Deborah Angel</a>
 														</h2>
 													</td>
@@ -493,7 +494,7 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-04.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-04.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Sofia Brient</a>
 														</h2>
 													</td>
@@ -510,7 +511,7 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-05.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-05.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Marvin Campbell</a>
 														</h2>
 													</td>
@@ -553,8 +554,8 @@
 											<tbody>
 												<tr>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
+														<h2 class="table-avatar">																			
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient1.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Charlene Reed </a>
 														</h2>
 													</td>
@@ -565,7 +566,7 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient2.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Travis Trimble </a>
 														</h2>
 													</td>
@@ -576,7 +577,7 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient3.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Carl Kelly</a>
 														</h2>
 													</td>
@@ -587,7 +588,7 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient4.jpg'%}" alt="User Image"></a>
 															<a href="profile.html"> Michelle Fairfax</a>
 														</h2>
 													</td>
@@ -598,7 +599,7 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient5.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Gina Moore</a>
 														</h2>
 													</td>
@@ -639,15 +640,15 @@
 											<tbody>
 												<tr>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
+														<h2 class="table-avatar">				
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-01.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Ruby Perrin</a>
 														</h2>
 													</td>
 													<td>Dental</td>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
+														<h2 class="table-avatar">    
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient1.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Charlene Reed </a>
 														</h2>
 													</td>
@@ -664,15 +665,15 @@
 												</tr>
 												<tr>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image"></a>
+														<h2 class="table-avatar"> 
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-02.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Darren Elder</a>
 														</h2>
 													</td>
 													<td>Dental</td>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
+														<h2 class="table-avatar">     
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient2.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Travis Trimble </a>
 														</h2>
 													</td>
@@ -690,15 +691,15 @@
 												</tr>
 												<tr>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-03.jpg" alt="User Image"></a>
+														<h2 class="table-avatar"> 
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-03.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Deborah Angel</a>
 														</h2>
 													</td>
 													<td>Cardiology</td>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
+														<h2 class="table-avatar">                    
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient3.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Carl Kelly</a>
 														</h2>
 													</td>
@@ -715,15 +716,15 @@
 												</tr>
 												<tr>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-04.jpg" alt="User Image"></a>
+														<h2 class="table-avatar"> 
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-04.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Sofia Brient</a>
 														</h2>
 													</td>
 													<td>Urology</td>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient4.jpg'%}" alt="User Image"></a>
 															<a href="profile.html"> Michelle Fairfax</a>
 														</h2>
 													</td>
@@ -740,15 +741,15 @@
 												</tr>
 												<tr>
 													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-05.jpg" alt="User Image"></a>
+														<h2 class="table-avatar"> 
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-05.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Dr. Marvin Campbell</a>
 														</h2>
 													</td>
 													<td>Orthopaedics</td>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{%static 'HealthStack-System/images/admin/patients/patient5.jpg'%}" alt="User Image"></a>
 															<a href="profile.html">Gina Moore</a>
 														</h2>
 													</td>
@@ -789,14 +790,20 @@
         <script src="{% static 'HealthStack-System/js/admin/bootstrap.min.js'%}"></script> 
 		
 		<!-- Slimscroll JS -->
+    
+
         <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js'%}"></script> 
 		
 		<script src="{% static 'HealthStack-System/plugins/admin/raphael/raphael.min.js'%}"></script>   
+
 		<script src=" {% static 'HealthStack-System/plugins/admin/morris/morris.min.js'%}"></script>  
 		<script src="{% static 'HealthStack-System/js/admin/chart.morris.js'%}"></script> 
 		
 		<!-- Custom JS -->
 		<script  src="{% static 'HealthStack-System/js/admin/script.js'%}"></script> 
+
+		
+
     </body>
 
 <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:34 GMT -->
