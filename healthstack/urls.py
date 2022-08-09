@@ -26,9 +26,13 @@ from hospital import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('hospital/', include('hospital.urls')),
-    path('login/', views.login_user,name='login'), 
+    path('login/', views.login_user, name='login'),
     path('', include('hospital.urls')),
+<<<<<<< HEAD
     path('hospital_admin/', include('hospital_admin.urls')),
+=======
+    #path('doctor/', include('doctor.urls')),
+>>>>>>> 604656a23dc4c1b07dc1761e994638414054c65f
     # path('', views.hospital_home,name="hospital_home")# go to hospital folder and look for urls.py
 
 ]
@@ -37,21 +41,19 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
+# path('login/', include('hospital.urls'),name='login'),
+# path('doctor-dashboard/', include('hospital.urls')),
 
+# path('doctor-profile/', include('hospital.urls')),
 
- # path('login/', include('hospital.urls'),name='login'),
-    # path('doctor-dashboard/', include('hospital.urls')),
+# path('doctor-change-password/', include('hospital.urls')),
 
-    # path('doctor-profile/', include('hospital.urls')),
+# path('change-password/', include('hospital.urls')),
 
-    # path('doctor-change-password/', include('hospital.urls')),
+# path('search/', include('hospital.urls')),
 
-    # path('change-password/', include('hospital.urls')),
+# path('doctor-register/', include('hospital.urls')),
 
-    # path('search/', include('hospital.urls')),
+# path('doctor-profile-settings/', include('hospital.urls')),
 
-    # path('doctor-register/', include('hospital.urls')),
-
-    # path('doctor-profile-settings/', include('hospital.urls')),
-
-    # path('my-patients/', include('hospital.urls')),
+# path('my-patients/', include('hospital.urls')),
