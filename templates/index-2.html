@@ -59,7 +59,7 @@
                 <span></span>
               </span>
             </a>
-            <a href="index-2.html" class="navbar-brand logo">
+            <a href="{% url 'hospital_home'%}" class="navbar-brand logo">
               <img
                 src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
                 class="img-fluid"
@@ -69,7 +69,7 @@
           </div>
           <div class="main-menu-wrapper">
             <div class="menu-header">
-              <a href="index-2.html" class="menu-logo">
+              <a href="{% url 'hospital_home'%}" class="menu-logo">
                 <img
                   src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
                   class="img-fluid"
@@ -82,7 +82,7 @@
             </div>
             <ul class="main-nav">
               <li>
-                <a href="index-2.html">Home</a>
+                <a href="{% url 'hospital_home'%}">Home</a>
               </li>
               <li class="has-submenu active">
                 <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
@@ -120,6 +120,9 @@
                   <li><a href="{% url 'change-password'%}">Change Password</a></li>
                 </ul>
               </li>
+              <li>
+                <a href="{% url 'about-us'%}">About Us</a>
+              </li>
               <!-- <li class="has-submenu">
                 <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
@@ -142,7 +145,7 @@
                 </ul>
               </li> -->
               <li>
-                <a href="admin/index.html" target="_blank">Admin</a>
+                <a href="{% url 'admin_login' %}" target="_blank">Admin</a>
               </li>
               <li class="login-link">
                 <a href="{% url 'login' %}">Login / Signup</a>
@@ -156,7 +159,7 @@
               </div>
               <div class="header-contact-detail">
                 <p class="contact-header">Contact</p>
-                <p class="contact-info-header">+1 315 369 5943</p>
+                <p class="contact-info-header">+880 1795087285</p>
               </div>
             </li>
             <li class="nav-item">
@@ -166,6 +169,7 @@
             </li>
           </ul>
         </nav>
+      </header>
       <!-- header -->
 
       <!-- Home Banner -->
