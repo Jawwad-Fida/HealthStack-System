@@ -1,14 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <!-- doccure/register.html  30 Nov 2019 04:12:20 GMT -->
+  <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->
   <head>
     <meta charset="utf-8" />
+    <title>HealthStack</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
     />
-    <title>HealthStack</title>
 
     <!-- Favicons -->
     <link
@@ -47,6 +47,7 @@
   </head>
   <body class="account-page">
     <!-- Main Wrapper -->
+
     <div class="main-wrapper">
       <!-- Header -->
       <header class="header">
@@ -84,12 +85,10 @@
               <li>
                 <a href="index-2.html">Home</a>
               </li>
-              <li class="has-submenu active">
+              <li class="has-submenu">
                 <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                  <li class="active">
-                    <a href="doctor-dashboard.html">Doctor Dashboard</a>
-                  </li>
+                  <li><a href="doctor-dashboard.html">Doctor Dashboard</a></li>
                   <li><a href="appointments.html">Appointments</a></li>
                   <li><a href="schedule-timings.html">Schedule Timing</a></li>
                   <li><a href="my-patients.html">Patients List</a></li>
@@ -103,11 +102,13 @@
                   <li><a href="doctor-register.html">Doctor Register</a></li>
                 </ul>
               </li>
-              <li class="has-submenu">
+              <li class="has-submenu active">
                 <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
                   <li><a href="search.html">Search Doctor</a></li>
-                  <li><a href="doctor-profile.html">Doctor Profile</a></li>
+                  <li class="active">
+                    <a href="doctor-profile.html">Doctor Profile</a>
+                  </li>
                   <li><a href="booking.html">Booking</a></li>
                   <li><a href="checkout.html">Checkout</a></li>
                   <li><a href="booking-success.html">Booking Success</a></li>
@@ -159,47 +160,11 @@
                 <p class="contact-info-header">+1 315 369 5943</p>
               </div>
             </li>
-
-            <!-- User Menu -->
-            <li class="nav-item dropdown has-arrow logged-item">
-              <a
-                href="#"
-                class="dropdown-toggle nav-link"
-                data-toggle="dropdown"
-              >
-                <span class="user-img">
-                  <img
-                    class="rounded-circle"
-                    src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}"
-                    width="31"
-                    alt="Darren Elder"
-                  />
-                </span>
+            <li class="nav-item">
+              <a class="nav-link header-login" href="login.html"
+                >login / Signup
               </a>
-              <div class="dropdown-menu dropdown-menu-right">
-                <div class="user-header">
-                  <div class="avatar avatar-sm">
-                    <img
-                      src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}"
-                      alt="User Image"
-                      class="avatar-img rounded-circle"
-                    />
-                  </div>
-                  <div class="user-text">
-                    <h6>Darren Elder</h6>
-                    <p class="text-muted mb-0">Doctor</p>
-                  </div>
-                </div>
-                <a class="dropdown-item" href="doctor-dashboard.html"
-                  >Dashboard</a
-                >
-                <a class="dropdown-item" href="doctor-profile-settings.html"
-                  >Profile Settings</a
-                >
-                <a class="dropdown-item" href="login.html">Logout</a>
-              </div>
             </li>
-            <!-- /User Menu -->
           </ul>
         </nav>
       </header>
@@ -210,49 +175,58 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8 offset-md-2">
-              <!-- Register Content -->
+              <!-- Login Tab Content -->
               <div class="account-content">
                 <div class="row align-items-center justify-content-center">
                   <div class="col-md-7 col-lg-6 login-left">
                     <img
                       src="{% static 'HealthStack-System/images/Normal/login-banner.png' %}"
                       class="img-fluid"
-                      alt="Doccure Register"
+                      alt="HealthStack Login"
                     />
                   </div>
                   <div class="col-md-12 col-lg-6 login-right">
                     <div class="login-header">
-                      <h3>
-                        Patient Register
-                        <a href="doctor-register.html">Are you a Doctor?</a>
-                      </h3>
+                      <h3>Login <span>Patient</span>
+                        <a href="#">Are you a Doctor?</a>
+                    </h3>
                     </div>
 
-                    <!-- Register Form -->
-                    <form action="{% url 'patient-register' %}" method="POST">
-                      {% csrf_token %} {% for field in form %}
-                      <div class="form-group form-focus">
-                        {{field}}
-                        <label class="focus-label">{{ field.label }}</label>
-                      </div>
-                      {% endfor %}
+                    <form method="POST" action="{% url 'login' %}">
+                      {% csrf_token %}
 
+                      <div class="form-group form-focus">
+                        <input
+                          type="text"
+                          class="form-control floating"
+                          name="username"
+                        />
+                        <label class="focus-label">Username</label>
+                      </div>
+                      <div class="form-group form-focus">
+                        <input
+                          type="password"
+                          class="form-control floating"
+                          name="password"
+                        />
+                        <label class="focus-label">Password</label>
+                      </div>
                       <div class="text-right">
-                        <a class="forgot-link" href=""
-                          >Already have an account?</a
+                        <a class="forgot-link" href="forgot-password.html"
+                          >Forgot Password ?</a
                         >
                       </div>
                       <button
                         class="btn btn-primary btn-block btn-lg login-btn"
                         type="submit"
                       >
-                        Signup
+                        Login
                       </button>
-                      <div class="login-or">
+                      <!-- <div class="login-or">
                         <span class="or-line"></span>
                         <span class="span-or">or</span>
-                      </div>
-                      <div class="row form-row social-login">
+                      </div> -->
+                      <!-- <div class="row form-row social-login">
                         <div class="col-6">
                           <a href="#" class="btn btn-facebook btn-block"
                             ><i class="fab fa-facebook-f mr-1"></i> Login</a
@@ -263,13 +237,16 @@
                             ><i class="fab fa-google mr-1"></i> Login</a
                           >
                         </div>
+                      </div> -->
+                      <div class="text-center dont-have">
+                        Don't have an account?
+                        <a href="{% url 'patient-register' %}">Register</a>
                       </div>
                     </form>
-                    <!-- /Register Form -->
                   </div>
                 </div>
               </div>
-              <!-- /Register Content -->
+              <!-- /Login Tab Content -->
             </div>
           </div>
         </div>
@@ -471,6 +448,7 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
+    <!-- jQuery -->
     <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 
     <!-- Bootstrap Core JS -->
@@ -480,4 +458,6 @@
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
   </body>
+
+  <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->
 </html>

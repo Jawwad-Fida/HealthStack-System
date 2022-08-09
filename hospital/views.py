@@ -109,6 +109,8 @@ def about_us(request):
 	return render(request, 'about-us.html')
 
 
+
+
 # def login(request):
 #     return render(request, 'login.html')
 
@@ -123,9 +125,9 @@ def about_us(request):
 
 
 def login_user(request):
-    page = 'login'
+    page = 'patient_login'
     if request.method == 'GET':
-        return render(request, 'login.html')
+        return render(request, 'patient-login.html')
     elif request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -143,7 +145,7 @@ def login_user(request):
         else:
             messages.error(request, 'Invalid username or password')
 
-    return render(request, 'login.html')
+    return render(request, 'patient-login.html')
 
 
 def logoutUser(request):
@@ -156,7 +158,7 @@ def logoutUser(request):
 #     return render(request, 'register.html')
 
 
-def registerPatient(request):
+def patient_register(request):
     page = 'patient-register'
     form = CustomUserCreationForm()
 

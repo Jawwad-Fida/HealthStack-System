@@ -37,7 +37,7 @@ urlpatterns = [
 
     path('schedule-timings/', views.schedule_timings,name='schedule_timings'),
     path('about-us/', views.about_us, name='about_us'),
-    path('registerPatient/', views.registerPatient, name='registerPatient'),
+    path('patient-register/', views.patient_register, name='patient-register'),
 
 
 
