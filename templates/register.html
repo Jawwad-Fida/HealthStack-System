@@ -224,7 +224,9 @@
                     <div class="login-header">
                       <h3>
                         Patient Register
-                        <a href="doctor-register.html">Are you a Doctor?</a>
+                        <a href="{% url 'doctor-register' %}"
+                          >Are you a Doctor?</a
+                        >
                       </h3>
                     </div>
 
@@ -238,7 +240,7 @@
                       {% endfor %}
 
                       <div class="text-right">
-                        <a class="forgot-link" href=""
+                        <a class="forgot-link" href="#"
                           >Already have an account?</a
                         >
                       </div>
