@@ -8,30 +8,24 @@ urlpatterns = [
     
     path('',views.admin_home,name='admin_home'),
     # path('appointment-list'),
-    # path('components/', ),
-    # path('data-tables/',),
-    # path('doctor-list/', ),
-    # path('error-404/', ),
-    # path('error-500/', ),
-    # path('forgot-password/', ),
-    # path('form-basic-input/', ),
     
-    # path('form-horizontal/', ),
-    # path('form-input-groups/', ),
-    # path('form-masks/', ),
-    # path('form-validation/', ),
-    # path('form-vertical/', ),
+    path('doctor-list/', views.doctor_list,name='doctor_list'),
+    
+    path('forgot-password/', views.admin_forgot_password,name='admin_forgot_password'),
+    
+    
+   
     # path('invoice/', ),
     # path('invoice-report/', ),
     # path('lock-screen/', ),
-    # path('login/', ),
+    path('login/',views.admin_login,name='admin_login'),
     # path('patient-list/', ),
-    # path('reviews/', ),
-    # path('profile/', ),
-    # path('register/', ),
-    # path('settings/', ),
+   
+    path('profile/', views.admin_profile,name='admin_profile'),
+    path('register/', views.admin_register,name='admin_register')
+    
     # path('specialitites',),
-    # path('table-basic/', ),
+   
     # path('transactions-list/', ),
 ]
 
