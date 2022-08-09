@@ -5,8 +5,8 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    
-    path('',views.admin_home,name='admin_home'),
+
+    path('', views.admin_home, name='admin-home'),
     # path('appointment-list'),
     # path('components/', ),
     # path('data-tables/',),
@@ -15,7 +15,7 @@ urlpatterns = [
     # path('error-500/', ),
     # path('forgot-password/', ),
     # path('form-basic-input/', ),
-    
+
     # path('form-horizontal/', ),
     # path('form-input-groups/', ),
     # path('form-masks/', ),
@@ -34,11 +34,6 @@ urlpatterns = [
     # path('table-basic/', ),
     # path('transactions-list/', ),
 ]
-
-
-
-
-
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

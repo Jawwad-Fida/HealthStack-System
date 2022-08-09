@@ -11,6 +11,9 @@ from django.contrib import messages
 
 # Create your views here.
 
+def doctor_login(request):
+    return render(request, 'doctor-login.html')
+
 
 def doctor_dashboard(request):
     return render(request, 'doctor-dashboard.html')
