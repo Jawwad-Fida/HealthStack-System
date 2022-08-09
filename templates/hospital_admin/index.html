@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     
@@ -5,24 +7,24 @@
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Doccure - Dashboard</title>
+        <title>HealthStack - Dashboard</title>
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png' %}">  <!--change to fit your needs-->
 		
 		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css' %}"> 
 		
 		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css' %}"> 
 		
 		<!-- Feathericon CSS -->
-        <link rel="stylesheet" href="assets/css/feathericon.min.css">
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/feathericon.min.css' %}"> 
 		
-		<link rel="stylesheet" href="assets/plugins/morris/morris.css">
+		<link rel="stylesheet" href="assets/plugins/morris/morris.css">   
 		
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css' %}">  
 		
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -780,22 +782,21 @@
 		<!-- /Main Wrapper -->
 		
 		<!-- jQuery -->
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
+        <script src="{% static 'HealthStack-System/js/admin/jquery-3.2.1.min.js'%}"></script> 
 		
 		<!-- Bootstrap Core JS -->
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="{% static 'HealthStack-System/js/admin/popper.min.js'%}"></script> 
+        <script src="{% static 'HealthStack-System/js/admin/bootstrap.min.js'%}"></script> 
 		
 		<!-- Slimscroll JS -->
-        <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js'%}"></script> 
 		
-		<script src="assets/plugins/raphael/raphael.min.js"></script>    
-		<script src="assets/plugins/morris/morris.min.js"></script>  
-		<script src="assets/js/chart.morris.js"></script>
+		<script src="{% static 'HealthStack-System/plugins/admin/raphael/raphael.min.js'%}"></script>   
+		<script src=" {% static 'HealthStack-System/plugins/admin/morris/morris.min.js'%}"></script>  
+		<script src="{% static 'HealthStack-System/js/admin/chart.morris.js'%}"></script> 
 		
 		<!-- Custom JS -->
-		<script  src="assets/js/script.js"></script>
-		
+		<script  src="{% static 'HealthStack-System/js/admin/script.js'%}"></script> 
     </body>
 
 <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:34 GMT -->
