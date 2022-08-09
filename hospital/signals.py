@@ -11,10 +11,18 @@ from .models import Patient
 # error here --> two signals are working at the same time
 
 
+# @receiver(post_save, sender=User)
+# def createPatient(sender, instance, created, **kwargs):
+#     if created:
+#         Patient.objects.create(user=instance)
+
+
 @receiver(post_save, sender=User)
 def createPatient(sender, instance, created, **kwargs):
     if created:
-        Patient.objects.create(user=instance)
+        user = instance
+        Patient.objects.create(
+            user=user, username=user.username, email=user.email)
 
 
 # @receiver(post_save, sender=User)
