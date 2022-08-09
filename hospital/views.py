@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm, DoctorUserCreationForm
+from .forms import CustomUserCreationForm
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -13,7 +13,7 @@ from django.contrib import messages
 # from django.db.models.signals import post_save, post_delete
 # from django.dispatch import receiver
 
-from .models import Patient, Doctor_Information
+from .models import Patient
 
 
 # Create your views here.
@@ -25,28 +25,12 @@ def hospital_home(request):
     return render(request, 'index-2.html')
 
 
-def doctor_dashboard(request):
-    return render(request, 'doctor-dashboard.html')
-
-
-def doctor_profile(request):
-    return render(request, 'doctor-profile.html')
-
-
-def doctor_change_password(request):
-    return render(request, 'doctor-change-password.html')
-
-
 def change_password(request):
     return render(request, 'change-password.html')
 
 
 def search(request):
     return render(request, 'search.html')
-
-
-def doctor_profile_settings(request):
-    return render(request, 'doctor-profile-settings.html')
 
 
 def my_patients(request):
@@ -106,7 +90,7 @@ def schedule_timings(request):
 
 
 def about_us(request):
-	return render(request, 'about-us.html')
+    return render(request, 'about-us.html')
 
 
 # def login(request):
@@ -123,9 +107,9 @@ def about_us(request):
 
 
 def login_user(request):
-    page = 'login'
+    page = 'patient_login'
     if request.method == 'GET':
-        return render(request, 'login.html')
+        return render(request, 'patient-login.html')
     elif request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -143,7 +127,7 @@ def login_user(request):
         else:
             messages.error(request, 'Invalid username or password')
 
-    return render(request, 'login.html')
+    return render(request, 'patient-login.html')
 
 
 def logoutUser(request):
@@ -152,11 +136,7 @@ def logoutUser(request):
     return redirect('login')
 
 
-# def register(request):
-#     return render(request, 'register.html')
-
-
-def registerPatient(request):
+def patient_register(request):
     page = 'patient-register'
     form = CustomUserCreationForm()
 
@@ -181,39 +161,3 @@ def registerPatient(request):
 
     context = {'page': page, 'form': form}
     return render(request, 'register.html', context)
-
-
-# @receiver(post_save, sender=Patient)
-# def deleteUser(sender, instance, **kwargs):
-#     try:
-#         user = instance.user
-#         user.delete()
-#     except:
-#         pass
-
-
-def doctor_register(request):
-    page = 'doctor-register'
-    form = DoctorUserCreationForm()
-
-    if request.method == 'POST':
-        form = DoctorUserCreationForm(request.POST)
-        if form.is_valid():
-            # form.save()
-            # commit=False --> don't save to database yet (we have a chance to modify object)
-            user = form.save(commit=False)
-            # user.username = user.username.lower()  # lowercase username
-            user.save()
-
-            messages.success(request, 'Doctor account was created!')
-
-            # After user is created, we can log them in
-            #login(request, user)
-            return redirect('login')
-
-        else:
-            messages.error(
-                request, 'An error has occurred during registration')
-
-    context = {'page': page, 'form': form}
-    return render(request, 'doctor-register.html', context)

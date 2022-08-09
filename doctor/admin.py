@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-# from .models import Doctor_Information
+# # we are in same file path --> .models
 
-# admin.site.register(Doctor_Information)
+from .models import Doctor_Information
+
+admin.site.register(Doctor_Information)

@@ -182,12 +182,15 @@
                     <img
                       src="{% static 'HealthStack-System/images/Normal/login-banner.png' %}"
                       class="img-fluid"
-                      alt="Doccure Login"
+                      alt="HealthStack Login"
                     />
                   </div>
                   <div class="col-md-12 col-lg-6 login-right">
                     <div class="login-header">
-                      <h3>Login <span>Patient</span></h3>
+                      <h3>
+                        Login <span>Patient</span>
+                        <a href="{% url 'doctor-login' %}">Are you a Doctor?</a>
+                      </h3>
                     </div>
 
                     <form method="POST" action="{% url 'login' %}">
@@ -210,7 +213,9 @@
                         <label class="focus-label">Password</label>
                       </div>
                       <div class="text-right">
-                        <a class="forgot-link" href="forgot-password.html"
+                        <a
+                          class="forgot-link"
+                          href="{% url 'forgot-password' %}"
                           >Forgot Password ?</a
                         >
                       </div>
@@ -238,7 +243,7 @@
                       </div> -->
                       <div class="text-center dont-have">
                         Don't have an account?
-                        <a href="register.html">Register</a>
+                        <a href="{% url 'patient-register' %}">Register</a>
                       </div>
                     </form>
                   </div>

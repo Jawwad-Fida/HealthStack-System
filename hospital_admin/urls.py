@@ -5,8 +5,8 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    
-    path('',views.admin_home,name='admin_home'),
+
+    path('', views.admin_home, name='admin-home'),
     # path('appointment-list'),
     
     path('doctor-list/', views.doctor_list,name='doctor_list'),
@@ -15,6 +15,7 @@ urlpatterns = [
     
     
    
+
     # path('invoice/', ),
     # path('invoice-report/', ),
     # path('lock-screen/', ),
@@ -28,11 +29,6 @@ urlpatterns = [
    
     # path('transactions-list/', ),
 ]
-
-
-
-
-
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
