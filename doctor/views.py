@@ -12,10 +12,6 @@ from django.contrib import messages
 # Create your views here.
 
 
-def doctor_login(request):
-    return render(request, 'doctor-login.html')
-
-
 def doctor_dashboard(request):
     return render(request, 'doctor-dashboard.html')
 
@@ -95,7 +91,7 @@ def doctor_profile_settings(request):
 def logoutUser(request):
     logout(request)
     messages.info(request, 'User Logged out')
-    return redirect('login')
+    return redirect('doctor-login')
 
 
 def doctor_register(request):
@@ -123,3 +119,31 @@ def doctor_register(request):
 
     context = {'page': page, 'form': form}
     return render(request, 'doctor-register.html', context)
+
+
+def doctor_login(request):
+    return render(request, 'doctor-login.html')
+
+
+def doctor_login(request):
+    # page = 'patient_login'
+    if request.method == 'GET':
+        return render(request, 'doctor-login.html')
+    elif request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'Username does not exist')
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('hospital_home')
+        else:
+            messages.error(request, 'Invalid username or password')
+
+    return render(request, 'doctor-login.html')
