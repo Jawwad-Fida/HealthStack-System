@@ -73,10 +73,6 @@ def patient_dashboard(request):
     return render(request, 'patient-dashboard.html')
 
 
-def patient_profile(request):
-    return render(request, 'patient-profile.html')
-
-
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
@@ -161,3 +157,14 @@ def patient_register(request):
 
     context = {'page': page, 'form': form}
     return render(request, 'register.html', context)
+
+
+# def patient_profile(request):
+#     return render(request, 'patient-profile.html')
+
+
+def patient_profile(request, pk):
+    patient = Patient.objects.get(patient_id=pk)
+    context = {'patient': patient}
+
+    return render(request, 'patient-profile.html', context)
