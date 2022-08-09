@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'hospital.apps.HospitalConfig',
     'hospital_admin.apps.HospitalAdminConfig',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    'doctor.apps.DoctorConfig',
+>>>>>>> main
 =======
     'doctor.apps.DoctorConfig',
 >>>>>>> main

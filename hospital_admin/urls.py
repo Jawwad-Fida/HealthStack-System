@@ -3,13 +3,17 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.contrib import admin
+=======
+>>>>>>> main
 =======
 >>>>>>> main
 
 
 urlpatterns = [
     
+<<<<<<< HEAD
 <<<<<<< HEAD
     # path('', views.hospital_home,name='hospital_home'),
     # path('login/', views.signin,name='login'),
@@ -26,6 +30,8 @@ urlpatterns = [
 ]
 
 =======
+=======
+>>>>>>> main
     path('',views.admin_home,name='admin_home'),
     # path('appointment-list'),
     # path('components/', ),
@@ -61,6 +67,9 @@ urlpatterns = [
 
 
 
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

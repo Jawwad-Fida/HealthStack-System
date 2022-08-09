@@ -3,8 +3,13 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login, authenticate
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # Create your views here.
+=======
+# Create your views here.
+
+>>>>>>> main
 =======
 # Create your views here.
 

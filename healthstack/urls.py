@@ -26,11 +26,14 @@ from hospital import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('hospital/', include('hospital.urls')),
     path('login/', views.signin,name='login'), 
     path('', views.hospital_home,name="hospital_home"),
     path('hospital_admin/', include('hospital_admin.urls'))# go to hospital folder and look for urls.py
 =======
+=======
+>>>>>>> main
     # path('hospital/', include('hospital.urls')),
     path('login/', views.login_user, name='login'),
     path('', include('hospital.urls')),
@@ -38,6 +41,9 @@ urlpatterns = [
     #path('doctor/', include('doctor.urls')),
     # path('', views.hospital_home,name="hospital_home")# go to hospital folder and look for urls.py
 
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
 ]
 
