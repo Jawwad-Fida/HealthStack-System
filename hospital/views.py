@@ -156,7 +156,7 @@ def patient_register(request):
                 request, 'An error has occurred during registration')
 
     context = {'page': page, 'form': form}
-    return render(request, 'register.html', context)
+    return render(request, 'patient-register.html', context)
 
 
 # def patient_profile(request):
