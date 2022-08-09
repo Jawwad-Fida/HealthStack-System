@@ -28,11 +28,8 @@ urlpatterns = [
     # path('hospital/', include('hospital.urls')),
     path('login/', views.login_user, name='login'),
     path('', include('hospital.urls')),
-<<<<<<< HEAD
     path('hospital_admin/', include('hospital_admin.urls')),
-=======
     #path('doctor/', include('doctor.urls')),
->>>>>>> 604656a23dc4c1b07dc1761e994638414054c65f
     # path('', views.hospital_home,name="hospital_home")# go to hospital folder and look for urls.py
 
 ]
