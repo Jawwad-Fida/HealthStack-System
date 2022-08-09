@@ -11,7 +11,7 @@
 		
 		<!-- Favicon -->
 
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/Normal/favicon.png' %}"> 
 		
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"> 
@@ -20,13 +20,14 @@
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">   
 		
 		<!-- Feathericon CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/feathericon.min.css'%}">  
+        <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">  
 		
 		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/morris/morris.css'%}"> 
 		
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
 
+		
 
 		
 		<!--[if lt IE 9]>
@@ -45,10 +46,10 @@
 				<!-- Logo -->
                 <div class="header-left">
                     <a href="index.html" class="logo">
-						<img src="{%static 'HealthStack-System/images/admin/logo.png'%}" alt="Logo"> 
+						<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" alt="Logo"> 
 					</a>
 					<a href="index.html" class="logo logo-small">
-						<img src="{%static 'HealthStack-System/images/admin/logo-small.png'%}" alt="Logo" width="30" height="30"> 
+						<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" alt="Logo" width="30" height="30"> 
 					</a>
                 </div>
 				<!-- /Logo -->
@@ -76,7 +77,7 @@
 					<!-- Notifications -->
 					<li class="nav-item dropdown noti-dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
+							<i class="fa fa-bell"></i> <span class="badge badge-pill">3</span>
 						</a>
 						<div class="dropdown-menu notifications">
 							<div class="topnav-dropdown-header">
@@ -805,6 +806,9 @@
 		
 		<!-- Custom JS -->
 		<script  src="{% static 'HealthStack-System/js/admin/script.js'%}"></script> 
+
+		<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
 
 
 		
