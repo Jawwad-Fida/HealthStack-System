@@ -12,8 +12,8 @@ from django.contrib import admin
 
 urlpatterns = [
     path('', views.hospital_home, name='hospital_home'),
-    path('search/', views.search, name='search'),   path('change-password/',
-                                                          views.change_password, name='change-password'),
+    path('search/', views.search, name='search'),   
+    path('change-password/',views.change_password, name='change-password'),
     path('my-patients/', views.my_patients, name='my-patients'),
     path('add-billing/', views.add_billing, name='add-billing'),
     path('add-prescription/', views.add_prescription, name='add-prescription'),
