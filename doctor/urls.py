@@ -10,12 +10,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.doctor_login, name='doctor-login'),
-    path('doctor-dashboard/', views.doctor_dashboard, name='doctor_dashboard'),
-    path('doctor-profile/', views.doctor_profile, name='doctor_profile'),
+    path('doctor-dashboard/', views.doctor_dashboard, name='doctor-dashboard'),
+    path('doctor-profile/', views.doctor_profile, name='doctor-profile'),
     path('doctor-change-password/', views.doctor_change_password,
          name='doctor_change_password'),
     path('doctor-profile-settings/', views.doctor_profile_settings,
-         name='doctor_profile_settings'),
+         name='doctor-profile-settings'),
     path('doctor-register/', views.doctor_register, name='doctor-register'),
     path('logout/', views.logoutUser, name='logout')
 ]
