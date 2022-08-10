@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import login as auth_login, authenticate
+from django.contrib.auth import login as auth_login, authenticate, logout
+from django.contrib import messages
 # Create your views here.
 
 
@@ -9,8 +10,42 @@ def admin_home(request):
     return render(request, 'hospital_admin/index.html')
 
 
+def logoutAdmin(request):
+    logout(request)
+    messages.info(request, 'User Logged out')
+    return redirect('admin_login')
+
+
+
+
 def admin_login(request):
     return render(request, 'hospital_admin/login.html')
+def admin_login(request):
+    # page = 'patient_login'
+    if request.method == 'GET':
+        return render(request, 'hospital_admin/login.html')
+    elif request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'Username does not exist')
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('hospital_home')
+        else:
+            messages.error(request, 'Invalid username or password')
+
+    return render(request, 'doctor-login.html')
+
+
+
+
 
 
 def admin_register(request):
