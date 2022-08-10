@@ -34,3 +34,7 @@ def add_hospital(request):
     return render(request, 'hospital_admin/add-hospital.html')
 def edit_hospital(request):
     return render(request, 'hospital_admin/edit-hospital.html')
+def emergency_details(request):
+    return render(request, 'hospital_admin/emergency.html')
+def add_emergency_information(request):
+    return render(request, 'hospital_admin/add-emergency-information.html')
