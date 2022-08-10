@@ -13,7 +13,7 @@ urlpatterns = [
     path('doctor-dashboard/', views.doctor_dashboard, name='doctor-dashboard'),
     path('doctor-profile/', views.doctor_profile, name='doctor-profile'),
     path('doctor-change-password/', views.doctor_change_password,
-         name='doctor_change_password'),
+         name='doctor-change-password'),
     path('doctor-profile-settings/', views.doctor_profile_settings,
          name='doctor-profile-settings'),
     path('doctor-register/', views.doctor_register, name='doctor-register'),

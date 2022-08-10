@@ -1,7 +1,7 @@
 import email
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
 
@@ -13,7 +13,7 @@ from django.contrib import messages
 # from django.db.models.signals import post_save, post_delete
 # from django.dispatch import receiver
 
-from .models import Patient
+from .models import Patient, User
 
 
 # Create your views here.
@@ -65,12 +65,8 @@ def edit_prescription(request):
     return render(request, 'edit-prescription.html')
 
 
-def forgot_password(request):
-    return render(request, 'forgot-password.html')
-
-
-def patient_dashboard(request):
-    return render(request, 'patient-dashboard.html')
+def forgot_password_patient(request):
+    return render(request, 'forgot-password-patient.html')
 
 
 def privacy_policy(request):
@@ -88,6 +84,12 @@ def schedule_timings(request):
 def about_us(request):
     return render(request, 'about-us.html')
 
+
+def forgot_password_doctor(request):
+    return render(request, 'forgot-password-doctor.html')
+
+def multiple_hospital(request):
+    return render(request, 'multiple-hospital.html')
 
 # def login(request):
 #     return render(request, 'login.html')
@@ -119,7 +121,7 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            return redirect('hospital_home')
+            return redirect('patient-dashboard', pk=user.id)
         else:
             messages.error(request, 'Invalid username or password')
 
@@ -142,6 +144,7 @@ def patient_register(request):
             # form.save()
             # commit=False --> don't save to database yet (we have a chance to modify object)
             user = form.save(commit=False)
+            user.is_patient = True
             # user.username = user.username.lower()  # lowercase username
             user.save()
 
@@ -168,3 +171,18 @@ def patient_profile(request, pk):
     context = {'patient': patient}
 
     return render(request, 'patient-profile.html', context)
+
+# http://127.0.0.1:8000/patient-profile/1/
+
+
+# def patient_dashboard(request):
+#     return render(request, 'patient-dashboard.html')
+
+# http://127.0.0.1:8000/patient-dashboard/1/
+
+
+def patient_dashboard(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+    context = {'patient': patient}
+
+    return render(request, 'patient-dashboard.html', context)
