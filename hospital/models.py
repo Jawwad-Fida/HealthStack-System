@@ -65,7 +65,7 @@ class Patient(models.Model):
     age = models.IntegerField(null=True, blank=True)
     email = models.EmailField(max_length=200, null=True, blank=True)
     phone_number = models.IntegerField(null=True, blank=True)
-    address = models.TextField(null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
 
     featured_image = models.ImageField(
         upload_to='patients/', default='patients/user-default.png', null=True, blank=True)
@@ -73,10 +73,10 @@ class Patient(models.Model):
     blood_group = models.CharField(
         max_length=200, null=True, blank=True)
     # patient_allergy = models.TextField(null=True, blank=True)
-    history = models.TextField(null=True, blank=True)
+    history = models.CharField(max_length=200, null=True, blank=True)
 
     dob = models.DateField(null=True, blank=True)
-    nid = models.TextField(null=True, blank=True)
+    nid = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return str(self.user.username)
