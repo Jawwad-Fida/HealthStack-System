@@ -40,6 +40,7 @@ urlpatterns = [
     path('forgot-password-doctor/', views.forgot_password_doctor,
          name='forgot-password-doctor'),
     path('multiple-hospital/', views.multiple_hospital, name='multiple-hospital'),
+    path('chat/', views.chat, name='chat'),
 
 
 ]
