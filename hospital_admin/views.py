@@ -106,3 +106,9 @@ def add_emergency_information(request):
 
 def hospital_list(request):
     return render(request, 'hospital_admin/hospital-list.html')
+
+def appointment_list(request):
+    return render(request, 'hospital_admin/appointment-list.html')
+    
+def transactions_list(request):
+    return render(request, 'hospital_admin/transactions-list.html')
