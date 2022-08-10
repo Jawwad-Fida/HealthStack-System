@@ -1,0 +1,865 @@
+{% load static %}
+<!DOCTYPE html> 
+<html lang="en">
+	
+<!-- doccure/doctor-profile.html  30 Nov 2019 04:12:16 GMT -->
+<head>
+		<meta charset="utf-8">
+		<title>HealthStack</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		
+		<!-- Favicons -->
+		<link type="image/x-icon" href=" {% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
+	
+		<!-- Fancybox CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fancybox/jquery.fancybox.min.css'%}">
+		
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body>
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+		
+			<!-- Header -->
+			<header class="header">
+				<nav class="navbar navbar-expand-lg header-nav">
+				  <div class="navbar-header">
+					<a id="mobile_btn" href="javascript:void(0);">
+					  <span class="bar-icon">
+						<span></span>
+						<span></span>
+						<span></span>
+					  </span>
+					</a>
+					<a href="{% url 'hospital_home'%}" class="navbar-brand logo">
+					  <img
+						src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
+						class="img-fluid"
+						alt="Logo"
+					  />
+					</a>
+				  </div>
+				  <div class="main-menu-wrapper">
+					<div class="menu-header">
+					  <a href="{% url 'hospital_home'%}" class="menu-logo">
+						<img
+						  src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
+						  class="img-fluid"
+						  alt="Logo"
+						/>
+					  </a>
+					  <a id="menu_close" class="menu-close" href="javascript:void(0);">
+						<i class="fas fa-times"></i>
+					  </a>
+					</div>
+					<ul class="main-nav">
+					  <li>
+						<a href="{% url 'hospital_home'%}">Home</a>
+					  </li>
+					  <li class="has-submenu active">
+						<a href="#">Hospital <i class="fas fa-chevron-down"></i></a>
+						<ul class="submenu">
+						  <li><a href="{% url 'doctor-dashboard'%}">Doctor Dashboard</a></li>
+						  <li><a href="{% url 'appointments'%}">Appointments</a></li>
+						  <li><a href="{% url 'schedule-timings'%}">Schedule Timing</a></li>
+						  <li><a href="{% url 'my-patients'%}">Patients List</a></li>
+						  <li><a href="#">Patients Profile</a></li>
+						  <!-- <li><a href="#">Chat</a></li>
+						  <li><a href="#">Invoices</a></li> -->
+						  <li>
+							<a href="{% url 'doctor-profile-settings'%}">Profile Settings</a>
+						  </li>
+						  <!-- <li><a href="reviews.html">Reviews</a></li> -->
+						  <!-- <li class="active">
+							<a href="doctor-register.html">Doctor Register</a>
+						  </li> -->
+						</ul>
+					  </li>
+					  <li class="has-submenu">
+						<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+						<ul class="submenu">
+						  <li><a href="{% url 'search'%}">Search Doctor</a></li>
+						  <li><a href="{% url 'doctor-profile'%}">Doctor Profile</a></li>
+						  <li><a href="{% url 'booking'%}">Booking</a></li>
+						  <!-- <li><a href="#">Checkout</a></li> -->
+						  <li><a href="{% url 'booking-success'%}">Booking Success</a></li>
+						  
+						  <!-- <li><a href="#">Favourites</a></li> -->
+						  <!-- <li><a href="#">Chat</a></li> -->
+						  
+						  <li><a href="{% url 'change-password'%}">Change Password</a></li>
+						</ul>
+					  </li>
+					  <li>
+						<a href="{% url 'about-us'%}">About Us</a>
+					  </li>
+					  <!-- <li class="has-submenu">
+						<a href="#">Pages <i class="fas fa-chevron-down"></i></a>
+						<ul class="submenu">
+						  <li><a href="voice-call.html">Voice Call</a></li>
+						  <li><a href="video-call.html">Video Call</a></li>
+						  <li><a href="search.html">Search Doctors</a></li>
+						  <li><a href="calendar.html">Calendar</a></li>
+						  <li><a href="components.html">Components</a></li>
+						  <li class="has-submenu">
+							<a href="invoices.html">Invoices</a>
+							<ul class="submenu">
+							  <li><a href="invoices.html">Invoices</a></li>
+							  <li><a href="invoice-view.html">Invoice View</a></li>
+							</ul>
+						  </li>
+						  <li><a href="blank-page.html">Starter Page</a></li>
+						  <li><a href="login.html">Login</a></li>
+						  <li><a href="register.html">Register</a></li>
+						  <li><a href="forgot-password.html">Forgot Password</a></li>
+						</ul>
+					  </li> -->
+					  <li>
+						<a href="{% url 'admin_login' %}" target="_blank">Admin</a>
+					  </li>
+					  <li class="login-link">
+						<a href="{% url 'login' %}">Login / Signup</a>
+					  </li>
+					</ul>
+				  </div>
+				  <ul class="nav header-navbar-rht">
+					<li class="nav-item contact-item">
+					  <div class="header-contact-img">
+						<i class="far fa-hospital"></i>
+					  </div>
+					  <div class="header-contact-detail">
+						<p class="contact-header">Contact</p>
+						<p class="contact-info-header">+880 1795087285</p>
+					  </div>
+					</li>
+					<!-- User Menu -->
+					<li class="nav-item dropdown has-arrow logged-item">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+							<span class="user-img">
+								
+								<img class="rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" width="31" alt="Richard Wilson">
+							</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right">
+							<div class="user-header">
+								<div class="avatar avatar-sm">
+									<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
+								</div>
+								<div class="user-text">
+									<h6>Richard Wilson</h6>
+									<p class="text-muted mb-0">Patient</p>
+								</div>
+							</div>
+							
+							
+							<a class="dropdown-item" href="{% url 'hospital_home'%}">Logout</a>
+						</div>
+					</li>
+					<!-- /User Menu -->
+				  </ul>
+				</nav>
+			  </header>
+			<!-- /Header -->
+			
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Hospital Profile</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Hospital Profile</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container">
+
+					<!-- Doctor Widget -->
+					<div class="card">
+						<div class="card-body">
+							<div class="doctor-widget">
+								<div class="doc-info-left">
+									<div class="doctor-img">
+										<img src="{% static 'images/hospitals/hospital1.png' %}" class="img-fluid" alt="User Image">
+									</div>
+									<div class="doc-info-cont">
+										<h4 class="doc-name">Baby's Care childrens Hospital</h4>
+										<p class="doc-speciality">Childrens Hospital</p>
+										
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star"></i>
+											<span class="d-inline-block average-rating">(35)</span>
+										</div>
+										<div class="clinic-details">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</p>
+											<ul class="clinic-gallery">
+												<li>
+													<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" alt="Feature">
+													</a>
+												</li>
+												<li>
+													<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}" data-fancybox="gallery">
+														<img  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}" alt="Feature">
+													</a>
+												</li>
+												<li>
+													<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}" alt="Feature">
+													</a>
+												</li>
+												<li>
+													<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" alt="Feature">
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="clinic-services">
+											<span>24/7 NICU specialist</span>
+											<span>Always available emergency doctors</span>
+                                            
+										</div>
+									</div>
+								</div>
+								<div class="doc-info-right">
+									<div class="clini-infos">
+										<ul>
+											<li><i class="far fa-thumbs-up"></i> 99%</li>
+											<li><i class="far fa-comment"></i> 35 Feedback</li>
+											<li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+										
+										</ul>
+									</div>
+									<div class="doctor-action">
+										<a href="javascript:void(0)" class="btn btn-white fav-btn">
+											<i class="far fa-bookmark"></i>
+										</a>
+										<a href="chat.html" class="btn btn-white msg-btn">
+											<i class="far fa-comment-alt"></i>
+										</a>
+										<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
+											<i class="fas fa-phone"></i>
+										</a>
+										<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
+											<i class="fas fa-video"></i>
+										</a>
+									</div>
+									<div class="clinic-booking">
+										<a class="apt-btn" href="{% url 'booking'%}">Doctor List</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Doctor Widget -->
+					
+					<!-- Doctor Details Tab -->
+					<div class="card">
+						<div class="card-body pt-0">
+						
+							<!-- Tab Menu -->
+							<nav class="user-tabs mb-4">
+								<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+									<li class="nav-item">
+										<a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#doc_locations" data-toggle="tab">Locations and Contact</a>
+									</li>
+									
+								</ul>
+							</nav>
+							<!-- /Tab Menu -->
+							
+							<!-- Tab Content -->
+							<div class="tab-content pt-0">
+							
+								<!-- Overview Content -->
+								<div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
+									<div class="row">
+										<div class="col-md-12 col-lg-9">
+										
+											<!-- About Details -->
+											<div class="widget about-widget">
+												<h4 class="widget-title">About Our Hospital</h4>
+												<p>Our hospital is one of the largest and most recognized private healthcare brands in Bangladesh. Known for its pioneering works in setting-up the first super-specialty Cardiac hospital within country. It is also widely acknowledged for bringing high quality diagnostic & specialized consultation facilities under a single roof through its now ubiquitous centers in all corners of Bangladesh. Around 2.1 million annual patient interactions, more than 5,000 employees, and upward of 800 consultant physicians countrywide.</p>
+											</div>
+											<!-- /About Details -->
+										
+											
+									
+											
+								
+											<!-- Awards Details -->
+											<div class="widget awards-widget">
+												<h4 class="widget-title">Departments</h4>
+												<div class="experience-box">
+													<ul class="experience-list">
+														<li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">Allergy and Immunology</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">Anesthesiology</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">ARCH (At Risk Children) Center</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+                                                        <li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">Autism and Developmental Disabilities (CADD)</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+                                                        <li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">Cancer and Blood Disorders (CCBD)</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+                                                        <li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">Cardiology and Cardiothoracic Surgery (Heart Center)</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+                                                        <li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">Center for Cerebrovascular Disorders</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+                                                        <li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">Dentistry and Orthodontics</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+                                                        <li>
+															<div class="experience-user">
+																<div class="before-circle"></div>
+															</div>
+															<div class="experience-content">
+																<div class="timeline-content">
+																	
+																	<h4 class="exp-title">Ear Nose and Throat (ENT)</h4>
+																	<p></p>
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+											<!-- /Awards Details -->
+											
+											<!-- Services List -->
+											<div class="service-list">
+												<h4>Services</h4>
+												<ul class="clearfix">
+													<li>Pediatrician</li>
+                                                    <li>Pediatric dentist</li>
+                                                    <li>ophthalmologist</li>
+                                                    <li>Surgical Extractions</li>
+                                                    <li>Allergist</li>
+												</ul>
+											</div>
+											<!-- /Services List -->
+											
+											<!-- Specializations List -->
+											<div class="service-list">
+												<h4>Specializations</h4>
+												<ul class="clearfix">
+													<li>Children Care</li>	
+													<li>Periodontist</li>	
+													<li>Prosthodontics</li>	
+												</ul>
+											</div>
+											<!-- /Specializations List -->
+
+										</div>
+									</div>
+								</div>
+								<!-- /Overview Content -->
+								
+								<!-- Locations Content -->
+								<div role="tabpanel" id="doc_locations" class="tab-pane fade">
+								
+									<!-- Location List -->
+									<div class="location-list">
+										<div class="row">
+										
+											<!-- Clinic Content -->
+											<div class="col-md-6">
+												<div class="clinic-content">
+													<h4 class="clinic-name"><a href="#">Baby's Care childrens Hospital</a></h4>
+													<p class="doc-speciality">Pediatric Care</p>
+													
+													<div class="clinic-details mb-0">
+														<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> Dhanmondi 15, Dhaka, Dangladesh <br><a href="javascript:void(0);">Get Directions</a></h5>
+														<ul>
+															<li>
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" alt="Feature Image">
+																</a>
+															</li>
+															<li>
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Feature Image">
+																</a>
+															</li>
+															<li>
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" alt="Feature Image">
+																</a>
+															</li>
+															<li>
+																<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" data-fancybox="gallery2">
+																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature Image">
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+											<!-- /Clinic Content -->
+											
+											<!-- Clinic Timing -->
+											<div class="col-md-4">
+												<div class="clinic-timing">
+													<div>
+														<p class="timings-days">
+															<span> Emails </span>
+														</p>
+														<p class="timings-times">
+															<span>baby@gmail.com</span>
+															<span>care@gmail.com</span>
+														</p>
+													</div>
+													<div>
+													<p class="timings-days">
+														<span>Contact</span>
+													</p>
+													<p class="timings-times">
+														<span>+8801812174323</span>
+													</p>
+													</div>
+												</div>
+											</div>
+											<!-- /Clinic Timing -->
+											
+											
+										</div>
+									</div>
+									<!-- /Location List -->
+									
+									
+
+								</div>
+								<!-- /Locations Content -->
+								
+								<!-- Reviews Content -->
+								<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
+								
+									<!-- Review Listing -->
+									<div class="widget review-listing">
+										<ul class="comments-list">
+										
+										
+												
+											
+										
+										<!-- Show All -->
+										<div class="all-feedback text-center">
+											<a href="#" class="btn btn-primary btn-sm">
+												Show all feedback <strong>(167)</strong>
+											</a>
+										</div>
+										<!-- /Show All -->
+										
+								
+								
+								
+						
+								
+								<!-- Business Hours Content -->
+								<div role="tabpanel" id="doc_business_hours" class="tab-pane fade">
+									<div class="row">
+										<div class="col-md-6 offset-md-3">
+										
+											<!-- Business Hours Widget -->
+											<div class="widget business-widget">
+												<div class="widget-content">
+													<div class="listing-hours">
+														<div class="listing-day current">
+															<div class="day">Today <span>5 Nov 2019</span></div>
+															<div class="time-items">
+																<span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
+																<span class="time">07:00 AM - 09:00 PM</span>
+															</div>
+														</div>
+														<div class="listing-day">
+															<div class="day">Monday</div>
+															<div class="time-items">
+																<span class="time">07:00 AM - 09:00 PM</span>
+															</div>
+														</div>
+														<div class="listing-day">
+															<div class="day">Tuesday</div>
+															<div class="time-items">
+																<span class="time">07:00 AM - 09:00 PM</span>
+															</div>
+														</div>
+														<div class="listing-day">
+															<div class="day">Wednesday</div>
+															<div class="time-items">
+																<span class="time">07:00 AM - 09:00 PM</span>
+															</div>
+														</div>
+														<div class="listing-day">
+															<div class="day">Thursday</div>
+															<div class="time-items">
+																<span class="time">07:00 AM - 09:00 PM</span>
+															</div>
+														</div>
+														<div class="listing-day">
+															<div class="day">Friday</div>
+															<div class="time-items">
+																<span class="time">07:00 AM - 09:00 PM</span>
+															</div>
+														</div>
+														<div class="listing-day">
+															<div class="day">Saturday</div>
+															<div class="time-items">
+																<span class="time">07:00 AM - 09:00 PM</span>
+															</div>
+														</div>
+														<div class="listing-day closed">
+															<div class="day">Sunday</div>
+															<div class="time-items">
+																<span class="time"><span class="badge bg-danger-light">Closed</span></span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /Business Hours Widget -->
+									
+										</div>
+									</div>
+								</div>
+								<!-- /Business Hours Content -->
+								
+							</div>
+						</div>
+					</div>
+					<!-- /Doctor Details Tab -->
+
+				</div>
+			</div>		
+			<!-- /Page Content -->
+   
+			<!-- Footer -->
+			<footer class="footer">
+				
+				<!-- Footer Top -->
+				<div class="footer-top">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-3 col-md-6">
+							
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-about">
+									<div class="footer-logo">
+										<img src="{% static 'HealthStack-System/images/Normal/footer_logo.png' %}" alt="logo">
+									</div>
+									<div class="footer-about-content">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+										<div class="social-icon">
+											<ul>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+								
+							</div>
+							
+							<div class="col-lg-3 col-md-6">
+							
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<h2 class="footer-title">For Patients</h2>
+									<ul>
+										<li><a href="search.html"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
+										<li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
+										<li><a href="register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
+										<li><a href="booking.html"><i class="fas fa-angle-double-right"></i> Booking</a></li>
+										<li><a href="patient-dashboard.html"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
+									</ul>
+								</div>
+								<!-- /Footer Widget -->
+								
+							</div>
+							
+							<div class="col-lg-3 col-md-6">
+							
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<h2 class="footer-title">For Doctors</h2>
+									<ul>
+										<li><a href="appointments.html"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
+										<li><a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a></li>
+										<li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
+										<li><a href="doctor-register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
+										<li><a href="doctor-dashboard.html"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
+									</ul>
+								</div>
+								<!-- /Footer Widget -->
+								
+							</div>
+							
+							<div class="col-lg-3 col-md-6">
+							
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-contact">
+									<h2 class="footer-title">Contact Us</h2>
+									<div class="footer-contact-info">
+										<div class="footer-address">
+											<span><i class="fas fa-map-marker-alt"></i></span>
+											<p> 3556  Beech Street, San Francisco,<br> California, CA 94108 </p>
+										</div>
+										<p>
+											<i class="fas fa-phone-alt"></i>
+											+1 315 369 5943
+										</p>
+										<p class="mb-0">
+											<i class="fas fa-envelope"></i>
+											doccure@example.com
+										</p>
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<!-- /Footer Top -->
+				
+				<!-- Footer Bottom -->
+                <div class="footer-bottom">
+					<div class="container-fluid">
+					
+						<!-- Copyright -->
+						<div class="copyright">
+							<div class="row">
+								<div class="col-md-6 col-lg-6">
+									<div class="copyright-text">
+										<p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-6">
+								
+									<!-- Copyright Menu -->
+									<div class="copyright-menu">
+										<ul class="policy-menu">
+											<li><a href="term-condition.html">Terms and Conditions</a></li>
+											<li><a href="privacy-policy.html">Policy</a></li>
+										</ul>
+									</div>
+									<!-- /Copyright Menu -->
+									
+								</div>
+							</div>
+						</div>
+						<!-- /Copyright -->
+						
+					</div>
+				</div>
+				<!-- /Footer Bottom -->
+				
+			</footer>
+			<!-- /Footer -->
+		   
+		</div>
+		<!-- /Main Wrapper -->
+		
+		<!-- Voice Call Modal -->
+		<div class="modal fade call-modal" id="voice_call">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<!-- Outgoing Call -->
+						<div class="call-box incoming-box">
+							<div class="call-wrapper">
+								<div class="call-inner">
+									<div class="call-user">
+										<img alt="User Image" src="assets/img/doctors/doctor-thumb-02.jpg" class="call-avatar">
+										<h4>Dr. Darren Elder</h4>
+										<span>Connecting...</span>
+									</div>							
+									<div class="call-items">
+										<a href="javascript:void(0);" class="btn call-item call-end" data-dismiss="modal" aria-label="Close"><i class="material-icons">call_end</i></a>
+										<a href="voice-call.html" class="btn call-item call-start"><i class="material-icons">call</i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Outgoing Call -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Voice Call Modal -->
+		
+		<!-- Video Call Modal -->
+		<div class="modal fade call-modal" id="video_call">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+					
+						<!-- Incoming Call -->
+						<div class="call-box incoming-box">
+							<div class="call-wrapper">
+								<div class="call-inner">
+									<div class="call-user">
+										<img class="call-avatar" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+										<h4>Dr. Darren Elder</h4>
+										<span>Calling ...</span>
+									</div>							
+									<div class="call-items">
+										<a href="javascript:void(0);" class="btn call-item call-end" data-dismiss="modal" aria-label="Close"><i class="material-icons">call_end</i></a>
+										<a href="video-call.html" class="btn call-item call-start"><i class="material-icons">videocam</i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Incoming Call -->
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Video Call Modal -->
+		
+	
+		<!-- jQuery -->
+		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+		
+		<!-- Bootstrap Core JS -->
+		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+		
+		<!-- Fancybox JS -->
+		<script src="{% static 'HealthStack-System/plugins/Normal/fancybox/jquery.fancybox.min.js'%}"></script>
+		
+
+		<!-- Custom JS -->
+		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+		
+	</body>
+
+<!-- doccure/doctor-profile.html  30 Nov 2019 04:12:16 GMT -->
+</html>
