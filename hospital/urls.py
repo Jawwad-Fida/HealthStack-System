@@ -30,13 +30,17 @@ urlpatterns = [
     path('patient-profile/<str:pk>/',
          views.patient_profile, name='patient-profile'),
     path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
-    path('profile-settings/', views.profile_settings, name='profile-settings'),
+    # path('profile-settings/', views.profile_settings, name='profile-settings'),
+    path('profile-settings/<str:pk>/',
+         views.profile_settings, name='profile-settings'),
     path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
     path('about-us/', views.about_us, name='about-us'),
     path('patient-register/', views.patient_register, name='patient-register'),
     path('logout/', views.logoutUser, name='logout'),
     path('forgot-password-doctor/', views.forgot_password_doctor,
          name='forgot-password-doctor'),
+    path('multiple-hospital/', views.multiple_hospital, name='multiple-hospital'),
+
 
 ]
 

@@ -73,10 +73,6 @@ def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
 
-def profile_settings(request):
-    return render(request, 'profile-settings.html')
-
-
 def schedule_timings(request):
     return render(request, 'schedule-timings.html')
 
@@ -87,6 +83,10 @@ def about_us(request):
 
 def forgot_password_doctor(request):
     return render(request, 'forgot-password-doctor.html')
+
+
+def multiple_hospital(request):
+    return render(request, 'multiple-hospital.html')
 
 # def login(request):
 #     return render(request, 'login.html')
@@ -159,21 +159,11 @@ def patient_register(request):
     return render(request, 'patient-register.html', context)
 
 
-# def patient_profile(request):
-#     return render(request, 'patient-profile.html')
-
-
 def patient_profile(request, pk):
     patient = Patient.objects.get(patient_id=pk)
     context = {'patient': patient}
 
     return render(request, 'patient-profile.html', context)
-
-# http://127.0.0.1:8000/patient-profile/1/
-
-
-# def patient_dashboard(request):
-#     return render(request, 'patient-dashboard.html')
 
 # http://127.0.0.1:8000/patient-dashboard/1/
 
@@ -183,3 +173,14 @@ def patient_dashboard(request, pk):
     context = {'patient': patient}
 
     return render(request, 'patient-dashboard.html', context)
+
+
+# def profile_settings(request):
+#     return render(request, 'profile-settings.html')
+
+
+def profile_settings(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+    context = {'patient': patient}
+
+    return render(request, 'profile-settings.html', context)

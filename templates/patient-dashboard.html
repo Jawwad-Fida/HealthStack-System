@@ -93,8 +93,7 @@
                       <h3>{{patient.name}}</h3>
                       <div class="patient-details">
                         <h5>
-                          <i class="fas fa-birthday-cake"></i> {{ patient.age }}
-                          years old
+                          <i class="fas fa-birthday-cake"></i> {{ patient.dob }}
                         </h5>
                         <h5 class="mb-0">
                           <i class="fas fa-map-marker-alt"></i>
@@ -107,12 +106,6 @@
                 <div class="dashboard-widget">
                   <nav class="dashboard-menu">
                     <ul>
-                      <li class="active">
-                        <a href="#">
-                          <i class="fas fa-columns"></i>
-                          <span>Dashboard</span>
-                        </a>
-                      </li>
                       <!-- <li>
 												<a href="favourites.html">
 													<i class="fas fa-bookmark"></i>
@@ -133,7 +126,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="{% url 'profile-settings'%}">
+                        <a href="{% url 'profile-settings' pk=user.id %}">
                           <i class="fas fa-user-cog"></i>
                           <span>Profile Settings</span>
                         </a>
@@ -145,7 +138,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="{% url 'hospital_home'%}">
+                        <a href="{% url 'logout' %}">
                           <i class="fas fa-sign-out-alt"></i>
                           <span>Logout</span>
                         </a>
