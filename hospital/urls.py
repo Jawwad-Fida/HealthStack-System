@@ -14,7 +14,7 @@ urlpatterns = [
     path('', views.hospital_home, name='hospital_home'),
     path('search/', views.search, name='search'),
     path('change-password/', views.change_password, name='change-password'),
-    path('my-patients/', views.my_patients, name='my-patients'),
+    
     path('add-billing/', views.add_billing, name='add-billing'),
     path('add-prescription/', views.add_prescription, name='add-prescription'),
     path('appointments/', views.appointments, name='appointments'),
@@ -33,7 +33,7 @@ urlpatterns = [
     # path('profile-settings/', views.profile_settings, name='profile-settings'),
     path('profile-settings/<str:pk>/',
          views.profile_settings, name='profile-settings'),
-    path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
+    
     path('about-us/', views.about_us, name='about-us'),
     path('patient-register/', views.patient_register, name='patient-register'),
     path('logout/', views.logoutUser, name='logout'),
@@ -41,7 +41,6 @@ urlpatterns = [
          name='forgot-password-doctor'),
     path('multiple-hospital/', views.multiple_hospital, name='multiple-hospital'),
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
-
 
 ]
 
