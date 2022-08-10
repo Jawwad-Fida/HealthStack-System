@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, PatientForm
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -33,8 +33,7 @@ def search(request):
     return render(request, 'search.html')
 
 
-def my_patients(request):
-    return render(request, 'my-patients.html')
+
 
 
 def add_billing(request):
@@ -73,8 +72,7 @@ def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
 
-def schedule_timings(request):
-    return render(request, 'schedule-timings.html')
+
 
 
 def about_us(request):
@@ -182,8 +180,25 @@ def patient_dashboard(request, pk):
 #     return render(request, 'profile-settings.html')
 
 
-def profile_settings(request, pk):
-    patient = Patient.objects.get(user_id=pk)
-    context = {'patient': patient}
+# def profile_settings(request, pk):
+#     patient = Patient.objects.get(user_id=pk)
+#     context = {'patient': patient}
 
+#     return render(request, 'profile-settings.html', context)
+
+
+def profile_settings(request, pk):
+
+    # profile = request.user.profile
+    patient = Patient.objects.get(user_id=pk)
+    form = PatientForm(instance=patient)  # instance=patient
+
+    if request.method == 'POST':
+        form = PatientForm(request.POST, request.FILES,
+                           instance=patient)  # instance=patient
+        if form.is_valid():
+            form.save()
+            return redirect('patient-dashboard', pk=pk)
+
+    context = {'patient': patient, 'form': form}
     return render(request, 'profile-settings.html', context)
