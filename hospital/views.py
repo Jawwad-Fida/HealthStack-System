@@ -33,8 +33,7 @@ def search(request):
     return render(request, 'search.html')
 
 
-def my_patients(request):
-    return render(request, 'my-patients.html')
+
 
 
 def add_billing(request):
@@ -73,8 +72,7 @@ def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
 
-def schedule_timings(request):
-    return render(request, 'schedule-timings.html')
+
 
 
 def about_us(request):
@@ -87,6 +85,9 @@ def forgot_password_doctor(request):
 
 def multiple_hospital(request):
     return render(request, 'multiple-hospital.html')
+
+def hospital_profile(request):
+    return render(request, 'hospital-profile.html')
 
 # def login(request):
 #     return render(request, 'login.html')
