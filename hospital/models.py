@@ -2,7 +2,8 @@ from django.db import models
 import uuid
 
 # import django user model
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
 
@@ -17,6 +18,12 @@ editable=False --> prevent the user from editing this field
 django field types --> google it  # every field types has field options
 Django automatically creates id field for each model class which will be a PK # primary_key=True --> if u want to set manual
 """
+
+
+class User(AbstractUser):
+    is_patient = models.BooleanField(default=False)
+    is_doctor = models.BooleanField(default=False)
+    is_hospital_admin = models.BooleanField(default=False)
 
 
 class Hospital_Information(models.Model):
@@ -52,7 +59,7 @@ class Hospital_Information(models.Model):
 class Patient(models.Model):
     patient_id = models.AutoField(primary_key=True)
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, null=True, blank=True)
+        User, on_delete=models.CASCADE, null=True, blank=True, related_name='patient')
     name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)

@@ -3,8 +3,7 @@ from django.db import models
 import uuid
 
 # import django user model
-from django.contrib.auth.models import User
-from hospital.models import Hospital_Information
+from hospital.models import Hospital_Information, User
 
 # # Create your models here.
 
@@ -32,7 +31,7 @@ class Doctor_Information(models.Model):
     )
     doctor_id = models.AutoField(primary_key=True)
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, null=True, blank=True)
+        User, on_delete=models.CASCADE, null=True, blank=True, related_name='profile')
     name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
 

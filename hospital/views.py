@@ -1,7 +1,7 @@
 import email
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
 
@@ -13,7 +13,7 @@ from django.contrib import messages
 # from django.db.models.signals import post_save, post_delete
 # from django.dispatch import receiver
 
-from .models import Patient
+from .models import Patient, User
 
 
 # Create your views here.
@@ -88,6 +88,7 @@ def schedule_timings(request):
 def about_us(request):
     return render(request, 'about-us.html')
 
+
 def forgot_password_doctor(request):
     return render(request, 'forgot-password-doctor.html')
 
@@ -144,6 +145,7 @@ def patient_register(request):
             # form.save()
             # commit=False --> don't save to database yet (we have a chance to modify object)
             user = form.save(commit=False)
+            user.is_patient = True
             # user.username = user.username.lower()  # lowercase username
             user.save()
 

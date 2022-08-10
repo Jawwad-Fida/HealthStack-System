@@ -87,15 +87,21 @@
               <li class="has-submenu active">
                 <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                  <li><a href="{% url 'doctor-dashboard'%}">Doctor Dashboard</a></li>
+                  <li>
+                    <a href="{% url 'doctor-dashboard'%}">Doctor Dashboard</a>
+                  </li>
                   <li><a href="{% url 'appointments'%}">Appointments</a></li>
-                  <li><a href="{% url 'schedule-timings'%}">Schedule Timing</a></li>
+                  <li>
+                    <a href="{% url 'schedule-timings'%}">Schedule Timing</a>
+                  </li>
                   <li><a href="{% url 'my-patients'%}">Patients List</a></li>
                   <li><a href="#">Patients Profile</a></li>
                   <!-- <li><a href="#">Chat</a></li>
                   <li><a href="#">Invoices</a></li> -->
                   <li>
-                    <a href="{% url 'doctor-profile-settings'%}">Profile Settings</a>
+                    <a href="{% url 'doctor-profile-settings'%}"
+                      >Profile Settings</a
+                    >
                   </li>
                   <!-- <li><a href="reviews.html">Reviews</a></li> -->
                   <!-- <li class="active">
@@ -107,17 +113,25 @@
                 <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
                   <li><a href="{% url 'search'%}">Search Doctor</a></li>
-                  <li><a href="{% url 'doctor-profile'%}">Doctor Profile</a></li>
+                  <li>
+                    <a href="{% url 'doctor-profile'%}">Doctor Profile</a>
+                  </li>
                   <li><a href="{% url 'booking'%}">Booking</a></li>
                   <!-- <li><a href="#">Checkout</a></li> -->
-                  <li><a href="{% url 'booking-success'%}">Booking Success</a></li>
+                  <li>
+                    <a href="{% url 'booking-success'%}">Booking Success</a>
+                  </li>
                   <li>
                     <a href="{% url 'patient-dashboard'%}">Patient Dashboard</a>
                   </li>
                   <!-- <li><a href="#">Favourites</a></li> -->
                   <!-- <li><a href="#">Chat</a></li> -->
-                  <li><a href="{% url 'profile-settings'%}">Profile Settings</a></li>
-                  <li><a href="{% url 'change-password'%}">Change Password</a></li>
+                  <li>
+                    <a href="{% url 'profile-settings'%}">Profile Settings</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'change-password'%}">Change Password</a>
+                  </li>
                 </ul>
               </li>
               <li>
@@ -162,11 +176,20 @@
                 <p class="contact-info-header">+880 1795087285</p>
               </div>
             </li>
+
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link header-login" href="{% url 'login' %}"
-                >login / Signup
+              <a class="nav-link header-login" href="{% url 'logout' %}"
+                >Logout
               </a>
             </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link header-login" href="{% url 'login' %}"
+                >Login / Signup
+              </a>
+            </li>
+            {% endif %}
           </ul>
         </nav>
       </header>
