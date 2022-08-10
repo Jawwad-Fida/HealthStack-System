@@ -12,7 +12,8 @@ urlpatterns = [
     path('doctor-list/', views.doctor_list,name='doctor_list'),
     
     path('forgot-password/', views.admin_forgot_password,name='admin_forgot_password'),
-    
+    path('hospital-list/', views.hospital_list,name='hospital-list'),
+    path('add-hospital/', views.add_hospital,name='add-hospital'),
     
    
 
@@ -25,7 +26,7 @@ urlpatterns = [
     path('profile/', views.admin_profile,name='admin_profile'),
     path('register/', views.admin_register,name='admin_register'),
     
-    path('specialitites',views.specialitites, name='specialitites'),
+    
    
     path('transactions-list/',views.transactions_list, name='transactions_list'),
 ]
