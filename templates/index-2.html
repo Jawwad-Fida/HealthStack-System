@@ -121,14 +121,21 @@
                   <li>
                     <a href="{% url 'booking-success'%}">Booking Success</a>
                   </li>
+
+                  {% if user.is_authenticated and user.is_patient %}
                   <li>
-                    <a href="{% url 'patient-dashboard'%}">Patient Dashboard</a>
+                    <a href="{% url 'patient-dashboard' pk=user.id %}"
+                      >Patient Dashboard</a
+                    >
                   </li>
-                  <!-- <li><a href="#">Favourites</a></li> -->
-                  <!-- <li><a href="#">Chat</a></li> -->
+                  {% endif %}
+
                   <li>
                     <a href="{% url 'profile-settings'%}">Profile Settings</a>
                   </li>
+                  <!-- <li><a href="#">Favourites</a></li> -->
+                  <!-- <li><a href="#">Chat</a></li> -->
+
                   <li>
                     <a href="{% url 'change-password'%}">Change Password</a>
                   </li>

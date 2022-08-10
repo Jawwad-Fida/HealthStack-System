@@ -93,7 +93,7 @@ def doctor_profile_settings(request):
 def logoutUser(request):
     logout(request)
     messages.info(request, 'User Logged out')
-    return redirect('doctor-login')
+    return redirect('login')
 
 
 def doctor_register(request):
