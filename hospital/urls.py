@@ -22,19 +22,25 @@ urlpatterns = [
     path('booking/', views.booking, name='booking'),
     path('edit-billing/', views.edit_billing, name='edit-billing'),
     path('edit-prescription/', views.edit_prescription, name='edit-prescription'),
-    path('forgot-password-patient/', views.forgot_password_patient,name='forgot-password-patient'),
-    path('patient-dashboard/<int:pk>/',views.patient_dashboard, name='patient-dashboard'),
+    path('forgot-password-patient/', views.forgot_password_patient,
+         name='forgot-password-patient'),
+    path('patient-dashboard/<int:pk>/',
+         views.patient_dashboard, name='patient-dashboard'),
     # path('patient-profile', views.patient_profile, name='patient-profile'),
-    path('patient-profile/<str:pk>/',views.patient_profile, name='patient-profile'),
+    path('patient-profile/<str:pk>/',
+         views.patient_profile, name='patient-profile'),
     path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
-    path('profile-settings/', views.profile_settings, name='profile-settings'),
+    # path('profile-settings/', views.profile_settings, name='profile-settings'),
+    path('profile-settings/<str:pk>/',
+         views.profile_settings, name='profile-settings'),
     path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
     path('about-us/', views.about_us, name='about-us'),
     path('patient-register/', views.patient_register, name='patient-register'),
     path('logout/', views.logoutUser, name='logout'),
-    path('forgot-password-doctor/', views.forgot_password_doctor,name='forgot-password-doctor'),
-    path('multiple-hospital/',views.multiple_hospital,name='multiple-hospital'),
-     
+    path('forgot-password-doctor/', views.forgot_password_doctor,
+         name='forgot-password-doctor'),
+    path('multiple-hospital/', views.multiple_hospital, name='multiple-hospital'),
+
 
 ]
 

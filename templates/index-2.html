@@ -128,11 +128,13 @@
                       >Patient Dashboard</a
                     >
                   </li>
+                  <li>
+                    <a href="{% url 'profile-settings' pk=user.id %}"
+                      >Profile Settings</a
+                    >
+                  </li>
                   {% endif %}
 
-                  <li>
-                    <a href="{% url 'profile-settings'%}">Profile Settings</a>
-                  </li>
                   <!-- <li><a href="#">Favourites</a></li> -->
                   <!-- <li><a href="#">Chat</a></li> -->
 
