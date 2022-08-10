@@ -25,9 +25,16 @@ def doctor_profile(request):
 def doctor_change_password(request):
     return render(request, 'doctor-change-password.html')
 
-
 def doctor_profile_settings(request):
     return render(request, 'doctor-profile-settings.html')
+
+def my_patients(request):
+    return render(request, 'my-patients.html')
+
+
+
+def schedule_timings(request):
+    return render(request, 'schedule-timings.html')
 
 
 # def login_user(request):
