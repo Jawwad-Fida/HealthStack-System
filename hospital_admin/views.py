@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import login as auth_login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 # Create your views here.
 
@@ -16,10 +16,10 @@ def logoutAdmin(request):
     return redirect('admin_login')
 
 
-
-
 def admin_login(request):
     return render(request, 'hospital_admin/login.html')
+
+
 def admin_login(request):
     # page = 'patient_login'
     if request.method == 'GET':
@@ -42,10 +42,6 @@ def admin_login(request):
             messages.error(request, 'Invalid username or password')
 
     return render(request, 'doctor-login.html')
-
-
-
-
 
 
 def admin_register(request):
@@ -82,25 +78,31 @@ def patient_list(request):
 
 def specialitites(request):
     return render(request, 'hospital_admin/specialities.html')
-    
+
+
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
+
 
 def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
 
+
 def add_hospital(request):
     return render(request, 'hospital_admin/add-hospital.html')
+
 
 def edit_hospital(request):
     return render(request, 'hospital_admin/edit-hospital.html')
 
+
 def emergency_details(request):
     return render(request, 'hospital_admin/emergency.html')
+
+
 def add_emergency_information(request):
     return render(request, 'hospital_admin/add-emergency-information.html')
 
 
 def hospital_list(request):
     return render(request, 'hospital_admin/hospital-list.html')
-

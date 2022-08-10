@@ -127,7 +127,7 @@
                   <!-- <li><a href="#">Favourites</a></li> -->
                   <!-- <li><a href="#">Chat</a></li> -->
                   <li>
-                    <a href="{% url 'profile-settings'%}">Profile Settings</a>
+                    <a href="#">Profile Settings</a>
                   </li>
                   <li>
                     <a href="{% url 'change-password'%}">Change Password</a>
@@ -213,7 +213,9 @@
 
                     <!-- Register Form -->
                     <form action="{% url 'patient-register' %}" method="POST">
-                      {% csrf_token %} {% for field in form %}
+                      {% csrf_token %} 
+                      
+                      {% for field in form %}
                       <div class="form-group form-focus">
                         {{field}}
                         <label class="focus-label">{{ field.label }}</label>
