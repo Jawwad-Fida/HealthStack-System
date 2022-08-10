@@ -35,7 +35,7 @@ class Doctor_Information(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
 
-    degree = models.TextField(null=True, blank=True)
+    degree = models.CharField(max_length=200, null=True, blank=True)
     department = models.CharField(
         max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
 
@@ -44,7 +44,7 @@ class Doctor_Information(models.Model):
 
     email = models.EmailField(max_length=200, null=True, blank=True)
     phone_number = models.IntegerField(null=True, blank=True)
-    visiting_hour = models.TextField(null=True, blank=True)
+    visiting_hour = models.CharField(max_length=200, null=True, blank=True)
     consultation_fee = models.IntegerField(null=True, blank=True)
     report_fee = models.IntegerField(null=True, blank=True)
     #doctor_password = models.CharField(max_length=200, null=True, blank=True)
