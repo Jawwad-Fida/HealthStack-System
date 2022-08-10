@@ -141,7 +141,7 @@
 							</div>
 						</div>
 						<div class="col-sm-5 col">
-							<a href="{% url 'add-hospital' %}"  class="btn btn-primary float-right mt-2">Add</a>
+							<a href="{% url 'add-emergency-information' %}"  class="btn btn-primary float-right mt-2">Add</a>
 						</div>
 					</li>
 					<!-- /Notifications -->
@@ -188,7 +188,7 @@
 							<li> 
 								<a href="appointment-list.html"><i class="fe fe-layout"></i> <span>Appointments</span></a>
 							</li>
-							<li class="active"> 
+							<li> 
 								<a href="{% url 'hospital-list' %}"><i class="fe fe-users"></i> <span>Hospital</span></a>
 							</li>
 							<li> 
@@ -197,7 +197,7 @@
 							<li> 
 								<a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
 							</li>
-							<li> 
+                            <li class="active"> 
 								<a href="{% url 'emergency' %}"><i class="fe fe-moon"></i> <span>Emergency Information</span></a>
 							</li>
 							<li> 
@@ -300,7 +300,7 @@
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="page-title">List of Hospital</h3>
+								<h3 class="page-title">Emergency information of Hospitals</h3>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
 									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
@@ -320,29 +320,67 @@
 											<thead>
 												<tr>
 													<th>Hospital Name</th>
-													<th>Address</th>
-													<th>Email</th>
-													<th>Phone Number</th>
-													<th>Hospital Type</th>
-													<th>Edit</th>
-													<th>Delete</th>
+													<th>General Bed </th>
+													<th>ICU</th>
+													<th>Regular Cabin </th>
+													<th>Emergency Cabin </th>
+													<th>Vip Room</th>
+                                                  
 													
 												</tr>
 											</thead>
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'images/hospitals/hospital1.png' %}" alt="User Image"></a>															<a href="profile.html">Square Hospital</a>
+															<a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'images/hospitals/hospital1.png' %}" alt="User Image"></a><a href="profile.html">Square Hospital</a>
 														</h2>
 													</td>
-													<td>Dhanmondi</td>
-													
-													<td>square@gmail.com <br>
-													
-													<td>01234567788</td>
-													
-													<td>private</td>
-													<td><a href="{% url 'edit-hospital' %}" class="btn btn-primary btn-m">Edit </a></td>
+                                                    
+													<td>10</td>
+													<td>10</td>
+                                                    <td>10</td>
+												    <td>10</td>
+													<td>10</td>
+                                                    
+													<td><a class="btn btn-primary btn-m" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Update </a></td>
+                                    
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Update Emergency Information</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form>
+                                                            <div class="form-group">
+                                                                <div class="col-12 col-md-6"><label for="general-bed-no" class="col-form-label">General Bed:</label><input type="text" class="form-control" id="recipient-name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-12 col-md-6"><label for="icu-no" class="col-form-label">ICU:</label><input type="text" class="form-control" id="recipient-name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-12 col-md-6"><label for="regular-cabin-no" class="col-form-label">Regular Cabin:</label><input type="text" class="form-control" id="recipient-name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-12 col-md-6"><label for="emergency-cabin-no" class="col-form-label">Emergency Cabin:</label><input type="text" class="form-control" id="recipient-name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-12 col-md-6"><label for="vip-cabin-no" class="col-form-label">VIP Cabin:</label><input type="text" class="form-control" id="recipient-name">
+                                                            </div>
+
+                                                            </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Update</button>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
 													<td><a href="javascript:(0);" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
 												</tr>
 													
@@ -379,7 +417,6 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
-		
     </body>
 
 <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->

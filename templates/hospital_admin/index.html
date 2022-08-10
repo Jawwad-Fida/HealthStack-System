@@ -164,7 +164,7 @@
 							</div>
 							<a class="dropdown-item" href="profile.html">My Profile</a>
 							<a class="dropdown-item" href="settings.html">Settings</a>
-							<a class="dropdown-item" href="login.html">Logout</a>
+							<a class="dropdown-item" href="{%url 'logout'%}">Logout</a>
 						</div>
 					</li>
 					<!-- /User Menu -->
@@ -197,6 +197,9 @@
 							</li>
 							<li> 
 								<a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
+							</li>
+							<li> 
+								<a href="{% url 'emergency' %}"><i class="fe fe-moon"></i> <span>Emergency Information</span></a>
 							</li>
 							<li> 
 								<a href="reviews.html"><i class="fe fe-star-o"></i> <span>Reviews</span></a>
