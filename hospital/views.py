@@ -88,6 +88,9 @@ def forgot_password_doctor(request):
 def multiple_hospital(request):
     return render(request, 'multiple-hospital.html')
 
+def hospital_profile(request):
+    return render(request, 'hospital-profile.html')
+
 # def login(request):
 #     return render(request, 'login.html')
 
