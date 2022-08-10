@@ -14,6 +14,7 @@ urlpatterns = [
     path('forgot-password/', views.admin_forgot_password,name='admin_forgot_password'),
     path('hospital-list/', views.hospital_list,name='hospital-list'),
     path('add-hospital/', views.add_hospital,name='add-hospital'),
+    path('edit-hospital/', views.edit_hospital,name='edit-hospital'),
     
    
 

@@ -32,3 +32,5 @@ def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
 def add_hospital(request): 
     return render(request, 'hospital_admin/add-hospital.html')
+def edit_hospital(request):
+    return render(request, 'hospital_admin/edit-hospital.html')
