@@ -96,12 +96,10 @@
 						  <li><a href="{% url 'booking'%}">Booking</a></li>
 						  <!-- <li><a href="#">Checkout</a></li> -->
 						  <li><a href="{% url 'booking-success'%}">Booking Success</a></li>
-						  <li>
-							<a href="{% url 'patient-dashboard'%}">Patient Dashboard</a>
-						  </li>
+						  
 						  <!-- <li><a href="#">Favourites</a></li> -->
 						  <!-- <li><a href="#">Chat</a></li> -->
-						  <li><a href="{% url 'profile-settings'%}">Profile Settings</a></li>
+						  
 						  <li><a href="{% url 'change-password'%}">Change Password</a></li>
 						</ul>
 					  </li>
@@ -165,8 +163,8 @@
 									<p class="text-muted mb-0">Patient</p>
 								</div>
 							</div>
-							<a class="dropdown-item" href="{% url 'patient-dashboard'%}">Dashboard</a>
-							<a class="dropdown-item" href="{% url 'profile-settings'%}">Profile Settings</a>
+							
+							
 							<a class="dropdown-item" href="{% url 'hospital_home'%}">Logout</a>
 						</div>
 					</li>
@@ -219,12 +217,7 @@
 								<div class="dashboard-widget">
 									<nav class="dashboard-menu">
 										<ul>
-											<li class="active">
-												<a href="{% url 'patient-dashboard'%}">
-													<i class="fas fa-columns"></i>
-													<span>Dashboard</span>
-												</a>
-											</li>
+											
 											<!-- <li>
 												<a href="favourites.html">
 													<i class="fas fa-bookmark"></i>
@@ -238,18 +231,8 @@
 													<small class="unread-msg">23</small>
 												</a>
 											</li> -->
-											<li>
-												<a href="{% url 'search'%}">
-													<i class="fas fa-user-md"></i>
-													<span>Search Doctor</span>
-												</a>
-											</li>
-											<li>
-												<a href="{% url 'profile-settings'%}">
-													<i class="fas fa-user-cog"></i>
-													<span>Profile Settings</span>
-												</a>
-											</li>
+											
+											
 											<li>
 												<a href="{% url 'change-password'%}">
 													<i class="fas fa-lock"></i>
