@@ -69,10 +69,6 @@ def forgot_password_patient(request):
     return render(request, 'forgot-password-patient.html')
 
 
-def patient_dashboard(request):
-    return render(request, 'patient-dashboard.html')
-
-
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
@@ -122,7 +118,7 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            return redirect('hospital_home')
+            return redirect('patient-dashboard', pk=user.id)
         else:
             messages.error(request, 'Invalid username or password')
 
@@ -172,3 +168,18 @@ def patient_profile(request, pk):
     context = {'patient': patient}
 
     return render(request, 'patient-profile.html', context)
+
+# http://127.0.0.1:8000/patient-profile/1/
+
+
+# def patient_dashboard(request):
+#     return render(request, 'patient-dashboard.html')
+
+# http://127.0.0.1:8000/patient-dashboard/1/
+
+
+def patient_dashboard(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+    context = {'patient': patient}
+
+    return render(request, 'patient-dashboard.html', context)
