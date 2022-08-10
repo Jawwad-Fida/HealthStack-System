@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-
+# from django.contrib.auth.models import User
+from hospital.models import User
 from .models import Doctor_Information
 
 # # Create a custom form that inherits from user form (reason --> for modify and customize)

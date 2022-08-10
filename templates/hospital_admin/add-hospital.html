@@ -2,32 +2,38 @@
 <!DOCTYPE html> 
 <html lang="en">
 	
-<!-- doccure/change-password.html  30 Nov 2019 04:12:18 GMT -->
+<!-- doccure/profile-settings.html  30 Nov 2019 04:12:18 GMT -->
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 	<title>HealthStack</title>
-	
+
 	<!-- Favicons -->
 	<link type="image/x-icon" href="{% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon">
-	
+
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}">
-	
+
 	<!-- Fontawesome CSS -->
 	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
 
+	<!-- Datetimepicker CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap-datetimepicker.min.css' %}">
+		
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/select2/css/select2.min.css' %}">
+
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
-		
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-			<script src="assets/js/html5shiv.min.js"></script>
-			<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
 	
-	</head>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
 	<body>
 
 		<!-- Main Wrapper -->
@@ -65,111 +71,15 @@
 						<i class="fas fa-times"></i>
 					  </a>
 					</div>
-					<ul class="main-nav">
-					  <li>
-						<a href="{% url 'hospital_home'%}">Home</a>
-					  </li>
-					  <li class="has-submenu active">
-						<a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
-						<ul class="submenu">
-						  <li><a href="{% url 'doctor-dashboard'%}">Doctor Dashboard</a></li>
-						  <li><a href="{% url 'appointments'%}">Appointments</a></li>
-						  <li><a href="{% url 'schedule-timings'%}">Schedule Timing</a></li>
-						  <li><a href="{% url 'my-patients'%}">Patients List</a></li>
-						  <li><a href="#">Patients Profile</a></li>
-						  <!-- <li><a href="#">Chat</a></li>
-						  <li><a href="#">Invoices</a></li> -->
-						  <li>
-							<a href="{% url 'doctor-profile-settings'%}">Profile Settings</a>
-						  </li>
-						  <!-- <li><a href="reviews.html">Reviews</a></li> -->
-						  <!-- <li class="active">
-							<a href="doctor-register.html">Doctor Register</a>
-						  </li> -->
-						</ul>
-					  </li>
-					  <li class="has-submenu">
-						<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
-						<ul class="submenu">
-						  <li><a href="{% url 'search'%}">Search Doctor</a></li>
-						  <li><a href="{% url 'doctor-profile'%}">Doctor Profile</a></li>
-						  <li><a href="{% url 'booking'%}">Booking</a></li>
-						  <!-- <li><a href="#">Checkout</a></li> -->
-						  <li><a href="{% url 'booking-success'%}">Booking Success</a></li>
-						  <li>
-							<a href="{% url 'patient-dashboard'%}">Patient Dashboard</a>
-						  </li>
-						  <!-- <li><a href="#">Favourites</a></li> -->
-						  <!-- <li><a href="#">Chat</a></li> -->
-						  <li><a href="{% url 'profile-settings'%}">Profile Settings</a></li>
-						  <li><a href="{% url 'change-password'%}">Change Password</a></li>
-						</ul>
-					  </li>
-					  <li>
-						<a href="{% url 'about-us'%}">About Us</a>
-					  </li>
-					  <!-- <li class="has-submenu">
-						<a href="#">Pages <i class="fas fa-chevron-down"></i></a>
-						<ul class="submenu">
-						  <li><a href="voice-call.html">Voice Call</a></li>
-						  <li><a href="video-call.html">Video Call</a></li>
-						  <li><a href="search.html">Search Doctors</a></li>
-						  <li><a href="calendar.html">Calendar</a></li>
-						  <li><a href="components.html">Components</a></li>
-						  <li class="has-submenu">
-							<a href="invoices.html">Invoices</a>
-							<ul class="submenu">
-							  <li><a href="invoices.html">Invoices</a></li>
-							  <li><a href="invoice-view.html">Invoice View</a></li>
-							</ul>
-						  </li>
-						  <li><a href="blank-page.html">Starter Page</a></li>
-						  <li><a href="login.html">Login</a></li>
-						  <li><a href="register.html">Register</a></li>
-						  <li><a href="forgot-password.html">Forgot Password</a></li>
-						</ul>
-					  </li> -->
-					  <li>
-						<a href="{% url 'admin_login' %}" target="_blank">Admin</a>
-					  </li>
-					  <li class="login-link">
-						<a href="{% url 'login' %}">Login / Signup</a>
-					  </li>
-					</ul>
 				  </div>
 				  <ul class="nav header-navbar-rht">
 					<li class="nav-item contact-item">
 					  <div class="header-contact-img">
 						<i class="far fa-hospital"></i>
 					  </div>
-					  <div class="header-contact-detail">
-						<p class="contact-header">Contact</p>
-						<p class="contact-info-header">+880 1795087285</p>
-					  </div>
 					</li>
 					<!-- User Menu -->
-					<li class="nav-item dropdown has-arrow logged-item">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<span class="user-img">
-								
-								<img class="rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" width="31" alt="Richard Wilson">
-							</span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right">
-							<div class="user-header">
-								<div class="avatar avatar-sm">
-									<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
-								</div>
-								<div class="user-text">
-									<h6>Richard Wilson</h6>
-									<p class="text-muted mb-0">Patient</p>
-								</div>
-							</div>
-							<a class="dropdown-item" href="{% url 'patient-dashboard'%}">Dashboard</a>
-							<a class="dropdown-item" href="{% url 'profile-settings'%}">Profile Settings</a>
-							<a class="dropdown-item" href="{% url 'hospital_home'%}">Logout</a>
-						</div>
-					</li>
+
 					<!-- /User Menu -->
 				  </ul>
 				</nav>
@@ -184,10 +94,10 @@
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Change Password</li>
+									<li class="breadcrumb-item active" aria-current="page">Add hopital information</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Change Password</h2>
+							<h2 class="breadcrumb-title">Adding Hospital Information</h2>
 						</div>
 					</div>
 				</div>
@@ -195,110 +105,74 @@
 			<!-- /Breadcrumb -->
 			
 			<!-- Page Content -->
-			<div class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-						
-							<!-- Profile Sidebar -->
-							<div class="profile-sidebar">
-								<div class="widget-profile pro-widget-content">
-									<div class="profile-info-widget">
-										<a href="#" class="booking-doc-img">
-											<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image">
-										</a>
-										<div class="profile-det-info">
-											<h3>Richard Wilson</h3>
-											<div class="patient-details">
-												<h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
-												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="dashboard-widget">
-									<nav class="dashboard-menu">
-										<ul>
-											<li class="active">
-												<a href="{% url 'patient-dashboard'%}">
-													<i class="fas fa-columns"></i>
-													<span>Dashboard</span>
-												</a>
-											</li>
-											<!-- <li>
-												<a href="favourites.html">
-													<i class="fas fa-bookmark"></i>
-													<span>Favourites</span>
-												</a>
-											</li> -->
-											<!-- <li>
-												<a href="chat.html">
-													<i class="fas fa-comments"></i>
-													<span>Message</span>
-													<small class="unread-msg">23</small>
-												</a>
-											</li> -->
-											<li>
-												<a href="{% url 'search'%}">
-													<i class="fas fa-user-md"></i>
-													<span>Search Doctor</span>
-												</a>
-											</li>
-											<li>
-												<a href="{% url 'profile-settings'%}">
-													<i class="fas fa-user-cog"></i>
-													<span>Profile Settings</span>
-												</a>
-											</li>
-											<li>
-												<a href="{% url 'change-password'%}">
-													<i class="fas fa-lock"></i>
-													<span>Change Password</span>
-												</a>
-											</li>
-											<li>
-												<a href="{% url 'hospital_home'%}">
-													<i class="fas fa-sign-out-alt"></i>
-													<span>Logout</span>
-												</a>
-											</li>
-										</ul>
-									</nav>
-								</div>
-
-							</div>
-							<!-- /Profile Sidebar -->
-							
-						</div>
-						
-						<div class="col-md-7 col-lg-8 col-xl-9">
+			<div class="call-content-full">
+				<div class="container-lg">
+					<div class="row-cols-6">
+						<div class="col-md-7 col-lg-8 col-xl-20">
 							<div class="card">
 								<div class="card-body">
-									<div class="row">
-										<div class="col-md-12 col-lg-6">
-										
-											<!-- Change Password Form -->
-											<form>
+									
+									<!-- Profile Settings Form -->
+									<form>
+										<div class="row form-row">
+											<div class="col-12 col-md-12">
 												<div class="form-group">
-													<label>Old Password</label>
-													<input type="password" class="form-control">
+													<div class="change-avatar">
+														<div class="profile-img">
+															<img src="{% static 'images/hospitals/hospital1.png' %}" alt="User Image">
+														</div>
+														<div class="upload-img">
+															<div class="change-photo-btn">
+																<span><i class="fa fa-upload"></i> Upload Photo</span>
+																<input type="file" class="upload">
+															</div>
+															<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+														</div>
+													</div>
 												</div>
+											</div>
+											<div class="col-12 col-md-6">
 												<div class="form-group">
-													<label>New Password</label>
-													<input type="password" class="form-control">
+													<label>Hospital Name</label>
+													<input type="text" class="form-control" value="Square">
 												</div>
+											</div>
+											<div class="col-12">
 												<div class="form-group">
-													<label>Confirm Password</label>
-													<input type="password" class="form-control">
+												<label>Address</label>
+													<input type="text" class="form-control" value="806 Twin Willow Lane">
 												</div>
-												<div class="submit-section">
-													<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Email ID</label>
+													<input type="email" class="form-control" value="square@example.com">
 												</div>
-											</form>
-											<!-- /Change Password Form -->
-											
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Mobile</label>
+													<input type="text" value="+1 202-555-0125" class="form-control">
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Hospital Type</label>
+													<select class="form-control select">
+														<option>Private</option>
+														<option>Public</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+											</div>
 										</div>
-									</div>
+										<div class="submit-section">
+											<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+										</div>
+									</form>
+									<!-- /Profile Settings Form -->
+									
 								</div>
 							</div>
 						</div>
@@ -449,13 +323,19 @@
 		   
 		</div>
 		<!-- /Main Wrapper -->
-	  
 		<!-- jQuery -->
 		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 		
 		<!-- Bootstrap Core JS -->
 		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
 		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+
+		<!-- Select2 JS -->
+		<script src="{% static 'HealthStack-System/plugins/Normal/select2/js/select2.min.js' %}"></script>
+		
+		<!-- Datetimepicker JS -->
+		<script src="{% static 'HealthStack-System/js/Normal/moment.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/bootstrap-datetimepicker.min.js' %}"></script>
 		
 		<!-- Sticky Sidebar JS -->
         <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
@@ -466,5 +346,5 @@
 		
 	</body>
 
-<!-- doccure/change-password.html  30 Nov 2019 04:12:18 GMT -->
+<!-- doccure/profile-settings.html  30 Nov 2019 04:12:18 GMT -->
 </html>

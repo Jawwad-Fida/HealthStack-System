@@ -1,13 +1,15 @@
 import email
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import DoctorUserCreationForm
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+from hospital.models import User
 
 # Create your views here.
 
@@ -91,7 +93,7 @@ def doctor_profile_settings(request):
 def logoutUser(request):
     logout(request)
     messages.info(request, 'User Logged out')
-    return redirect('doctor-login')
+    return redirect('login')
 
 
 def doctor_register(request):
@@ -104,6 +106,7 @@ def doctor_register(request):
             # form.save()
             # commit=False --> don't save to database yet (we have a chance to modify object)
             user = form.save(commit=False)
+            user.is_doctor = True
             # user.username = user.username.lower()  # lowercase username
             user.save()
 

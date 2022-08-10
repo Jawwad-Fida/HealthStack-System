@@ -60,7 +60,7 @@
                 <span></span>
               </span>
             </a>
-            <a href="index-2.html" class="navbar-brand logo">
+            <a href="{% url 'hospital_home'%}" class="navbar-brand logo">
               <img
                 src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
                 class="img-fluid"
@@ -70,7 +70,7 @@
           </div>
           <div class="main-menu-wrapper">
             <div class="menu-header">
-              <a href="index-2.html" class="menu-logo">
+              <a href="{% url 'hospital_home'%}" class="menu-logo">
                 <img
                   src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
                   class="img-fluid"
@@ -83,45 +83,62 @@
             </div>
             <ul class="main-nav">
               <li>
-                <a href="index-2.html">Home</a>
-              </li>
-              <li class="has-submenu">
-                <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
-                <ul class="submenu">
-                  <li><a href="doctor-dashboard.html">Doctor Dashboard</a></li>
-                  <li><a href="appointments.html">Appointments</a></li>
-                  <li><a href="schedule-timings.html">Schedule Timing</a></li>
-                  <li><a href="my-patients.html">Patients List</a></li>
-                  <li><a href="patient-profile.html">Patients Profile</a></li>
-                  <li><a href="chat-doctor.html">Chat</a></li>
-                  <li><a href="invoices.html">Invoices</a></li>
-                  <li>
-                    <a href="doctor-profile-settings.html">Profile Settings</a>
-                  </li>
-                  <li><a href="reviews.html">Reviews</a></li>
-                  <li><a href="doctor-register.html">Doctor Register</a></li>
-                </ul>
+                <a href="{% url 'hospital_home'%}">Home</a>
               </li>
               <li class="has-submenu active">
-                <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+                <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                  <li><a href="search.html">Search Doctor</a></li>
-                  <li class="active">
-                    <a href="doctor-profile.html">Doctor Profile</a>
-                  </li>
-                  <li><a href="booking.html">Booking</a></li>
-                  <li><a href="checkout.html">Checkout</a></li>
-                  <li><a href="booking-success.html">Booking Success</a></li>
                   <li>
-                    <a href="patient-dashboard.html">Patient Dashboard</a>
+                    <a href="{% url 'doctor-dashboard'%}">Doctor Dashboard</a>
                   </li>
-                  <li><a href="favourites.html">Favourites</a></li>
-                  <li><a href="chat.html">Chat</a></li>
-                  <li><a href="profile-settings.html">Profile Settings</a></li>
-                  <li><a href="change-password.html">Change Password</a></li>
+                  <li><a href="{% url 'appointments'%}">Appointments</a></li>
+                  <li>
+                    <a href="{% url 'schedule-timings'%}">Schedule Timing</a>
+                  </li>
+                  <li><a href="{% url 'my-patients'%}">Patients List</a></li>
+                  <li><a href="#">Patients Profile</a></li>
+                  <!-- <li><a href="#">Chat</a></li>
+                  <li><a href="#">Invoices</a></li> -->
+                  <li>
+                    <a href="{% url 'doctor-profile-settings'%}"
+                      >Profile Settings</a
+                    >
+                  </li>
+                  <!-- <li><a href="reviews.html">Reviews</a></li> -->
+                  <!-- <li class="active">
+                    <a href="doctor-register.html">Doctor Register</a>
+                  </li> -->
                 </ul>
               </li>
               <li class="has-submenu">
+                <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+                <ul class="submenu">
+                  <li><a href="{% url 'search'%}">Search Doctor</a></li>
+                  <li>
+                    <a href="{% url 'doctor-profile'%}">Doctor Profile</a>
+                  </li>
+                  <li><a href="{% url 'booking'%}">Booking</a></li>
+                  <!-- <li><a href="#">Checkout</a></li> -->
+                  <li>
+                    <a href="{% url 'booking-success'%}">Booking Success</a>
+                  </li>
+                  <li>
+                    <a href="#">Patient Dashboard</a>
+                  </li>
+                  <!-- <li><a href="#">Favourites</a></li> -->
+                  <!-- <li><a href="#">Chat</a></li> -->
+                  <li>
+                    <a href="{% url 'profile-settings'%}">Profile Settings</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'change-password'%}">Change Password</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="{% url 'about-us'%}">About Us</a>
+              </li>
+              <!-- <li class="has-submenu">
                 <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
                   <li><a href="voice-call.html">Voice Call</a></li>
@@ -141,12 +158,12 @@
                   <li><a href="register.html">Register</a></li>
                   <li><a href="forgot-password.html">Forgot Password</a></li>
                 </ul>
-              </li>
+              </li> -->
               <li>
-                <a href="admin/index.html" target="_blank">Admin</a>
+                <a href="{% url 'admin_login' %}" target="_blank">Admin</a>
               </li>
               <li class="login-link">
-                <a href="login.html">Login / Signup</a>
+                <a href="{% url 'login' %}">Login / Signup</a>
               </li>
             </ul>
           </div>
@@ -157,11 +174,11 @@
               </div>
               <div class="header-contact-detail">
                 <p class="contact-header">Contact</p>
-                <p class="contact-info-header">+1 315 369 5943</p>
+                <p class="contact-info-header">+880 1795087285</p>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link header-login" href="login.html"
+              <a class="nav-link header-login" href="{% url 'login' %}"
                 >login / Signup
               </a>
             </li>
@@ -215,7 +232,7 @@
                       <div class="text-right">
                         <a
                           class="forgot-link"
-                          href="{% url 'forgot-password' %}"
+                          href="{% url 'forgot-password-doctor' %}"
                           >Forgot Password ?</a
                         >
                       </div>

@@ -24,9 +24,13 @@ def lock_screen(request):
     return render(request, 'hospital_admin/lock-screen.html')
 def patient_list(request):
     return render(request, 'hospital_admin/patient-list.html')
-def specialitites(request):
-    return render(request, 'hospital_admin/specialitites.html')
+def hospital_list(request): 
+    return render(request, 'hospital_admin/hospital-list.html')
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
 def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
+def add_hospital(request): 
+    return render(request, 'hospital_admin/add-hospital.html')
+def edit_hospital(request):
+    return render(request, 'hospital_admin/edit-hospital.html')
