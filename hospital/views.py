@@ -88,6 +88,9 @@ def about_us(request):
 def forgot_password_doctor(request):
     return render(request, 'forgot-password-doctor.html')
 
+def multiple_hospital(request):
+    return render(request, 'multiple-hospital.html')
+
 # def login(request):
 #     return render(request, 'login.html')
 
