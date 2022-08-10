@@ -65,8 +65,8 @@ def edit_prescription(request):
     return render(request, 'edit-prescription.html')
 
 
-def forgot_password(request):
-    return render(request, 'forgot-password.html')
+def forgot_password_patient(request):
+    return render(request, 'forgot-password-patient.html')
 
 
 def patient_dashboard(request):
@@ -88,6 +88,8 @@ def schedule_timings(request):
 def about_us(request):
     return render(request, 'about-us.html')
 
+def forgot_password_doctor(request):
+    return render(request, 'forgot-password-doctor.html')
 
 # def login(request):
 #     return render(request, 'login.html')

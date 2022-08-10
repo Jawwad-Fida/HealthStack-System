@@ -225,39 +225,45 @@
 								<div class="dashboard-widget">
 									<nav class="dashboard-menu">
 										<ul>
-											<li>
-												<a href="#">
+											<li class="active">
+												<a href="{% url 'patient-dashboard'%}">
 													<i class="fas fa-columns"></i>
 													<span>Dashboard</span>
 												</a>
 											</li>
-											<li>
+											<!-- <li>
 												<a href="favourites.html">
 													<i class="fas fa-bookmark"></i>
 													<span>Favourites</span>
 												</a>
-											</li>
-											<li>
+											</li> -->
+											<!-- <li>
 												<a href="chat.html">
 													<i class="fas fa-comments"></i>
 													<span>Message</span>
 													<small class="unread-msg">23</small>
 												</a>
+											</li> -->
+											<li>
+												<a href="{% url 'search'%}">
+													<i class="fas fa-user-md"></i>
+													<span>Search Doctor</span>
+												</a>
 											</li>
-											<li class="active">
-												<a href="profile-settings.html">
+											<li>
+												<a href="{% url 'profile-settings'%}">
 													<i class="fas fa-user-cog"></i>
 													<span>Profile Settings</span>
 												</a>
 											</li>
 											<li>
-												<a href="change-password.html">
+												<a href="{% url 'change-password'%}">
 													<i class="fas fa-lock"></i>
 													<span>Change Password</span>
 												</a>
 											</li>
 											<li>
-												<a href="index-2.html">
+												<a href="{% url 'hospital_home'%}">
 													<i class="fas fa-sign-out-alt"></i>
 													<span>Logout</span>
 												</a>
