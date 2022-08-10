@@ -31,6 +31,19 @@ def createPatient(sender, instance, created, **kwargs):
                 user=user, username=user.username, email=user.email)
 
 
+@receiver(post_save, sender=Patient)
+def updateUser(sender, instance, created, **kwargs):
+    # user.profile or below (1-1 relationship goes both ways)
+    patient = instance
+    user = patient.user
+
+    if created == False:
+        user.first_name = patient.name
+        user.username = patient.username
+        user.email = patient.email
+        user.save()
+
+
 # @receiver(post_save, sender=User)
 # def createDoctor(sender, instance, created, **kwargs):
 #     if created:

@@ -28,7 +28,7 @@ class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ['name', 'age', 'phone_number', 'blood_group',
-                  'featured_image', 'history', 'nid', 'dob']
+                  'featured_image', 'history', 'nid', 'dob', 'address']
 
         # widgets = {
         #     'name': forms.TextInput(attrs={'class': 'form-control'}),
