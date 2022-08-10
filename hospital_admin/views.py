@@ -47,23 +47,18 @@ def patient_list(request):
 
 def specialitites(request):
     return render(request, 'hospital_admin/specialities.html')
-
-
+    
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
-
 
 def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
 
-
 def add_hospital(request):
     return render(request, 'hospital_admin/add-hospital.html')
 
-
 def edit_hospital(request):
     return render(request, 'hospital_admin/edit-hospital.html')
-
 
 def hospital_list(request):
     return render(request, 'hospital_admin/hospital-list.html')

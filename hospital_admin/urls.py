@@ -26,7 +26,6 @@ urlpatterns = [
     path('register/', views.admin_register, name='admin_register'),
 
     path('transactions-list/', views.transactions_list, name='transactions_list'),
-
 ]
 
 
