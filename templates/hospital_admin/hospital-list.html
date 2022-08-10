@@ -1,12 +1,12 @@
-{%laod static%}
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/specialities.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:49 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Doccure - Specialities Page</title>
+        <title>Doccure - Hospital List Page</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
@@ -24,7 +24,7 @@
 		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}"> 
 		
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}">
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
 		
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -69,7 +69,7 @@
 				
 				<!-- Header Right Menu -->
 				<ul class="nav user-menu">
-					
+
 					<!-- Notifications -->
 					<li class="nav-item dropdown noti-dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -140,6 +140,9 @@
 								<a href="#">View all Notifications</a>
 							</div>
 						</div>
+						<div class="col-sm-5 col">
+							<a href="{% url 'add-hospital' %}"  class="btn btn-primary float-right mt-2">Add</a>
+						</div>
 					</li>
 					<!-- /Notifications -->
 					
@@ -186,7 +189,7 @@
 								<a href="appointment-list.html"><i class="fe fe-layout"></i> <span>Appointments</span></a>
 							</li>
 							<li class="active"> 
-								<a href="specialities.html"><i class="fe fe-users"></i> <span>Specialities</span></a>
+								<a href="{% url 'hospital-list' %}"><i class="fe fe-users"></i> <span>Hospital</span></a>
 							</li>
 							<li> 
 								<a href="doctor-list.html"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
@@ -293,19 +296,18 @@
 					<!-- Page Header -->
 					<div class="page-header">
 						<div class="row">
-							<div class="col-sm-7 col-auto">
-								<h3 class="page-title">Specialities</h3>
+							<div class="col-sm-12">
+								<h3 class="page-title">List of Hospital</h3>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-									<li class="breadcrumb-item active">Specialities</li>
+									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
+									<li class="breadcrumb-item active">Hospital</li>
 								</ul>
-							</div>
-							<div class="col-sm-5 col">
-								<a href="#Add_Specialities_details" data-toggle="modal" class="btn btn-primary float-right mt-2">Add</a>
 							</div>
 						</div>
 					</div>
 					<!-- /Page Header -->
+					
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="card">
@@ -314,125 +316,28 @@
 										<table class="datatable table table-hover table-center mb-0">
 											<thead>
 												<tr>
-													<th>#</th>
-													<th>Specialities</th>
-													<th class="text-right">Actions</th>
+													<th>Hospital Name</th>
+													<th>Address</th>
+													<th>Email</th>
+													<th>Phone Number</th>
+													<th>Hospital Type</th>
+													
 												</tr>
 											</thead>
-											<tbody>
 												<tr>
-													<td>#SP001</td>
-													
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2">
-																<img class="avatar-img" src="assets/img/specialities/specialities-01.png" alt="Speciality">
-															</a>
-															<a href="profile.html">Urology</a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'images/hospitals/hospital1.png' %}" alt="User Image"></a>															<a href="profile.html">Square Hospital</a>
 														</h2>
 													</td>
-												
-													<td class="text-right">
-														<div class="actions">
-															<a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
-																<i class="fe fe-pencil"></i> Edit
-															</a>
-															<a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
-																<i class="fe fe-trash"></i> Delete
-															</a>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>#SP002</td>
+													<td>Dhanmondi</td>
 													
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2">
-																<img class="avatar-img" src="assets/img/specialities/specialities-02.png" alt="Speciality">
-															</a>
-															<a href="profile.html">Neurology</a>
-														</h2>
-													</td>
-												
-													<td class="text-right">
-														<div class="actions">
-															<a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
-																<i class="fe fe-pencil"></i> Edit
-															</a>
-															<a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
-																<i class="fe fe-trash"></i> Delete
-															</a>
-														</div>
-													</td>
-												</tr>	
-												<tr>
-													<td>#SP003</td>
+													<td>square@gmail.com <br>
 													
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2">
-																<img class="avatar-img" src="assets/img/specialities/specialities-03.png" alt="Speciality">
-															</a>
-															<a href="profile.html">Orthopedic</a>
-														</h2>
-													</td>
-												
-													<td class="text-right">
-														<div class="actions">
-															<a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
-																<i class="fe fe-pencil"></i> Edit
-															</a>
-															<a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
-																<i class="fe fe-trash"></i> Delete
-															</a>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>#SP004</td>
+													<td>01234567788</td>
 													
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2">
-																<img class="avatar-img" src="assets/img/specialities/specialities-04.png" alt="Speciality">
-															</a>
-															<a href="profile.html">Cardiologist</a>
-														</h2>
-													</td>
-												
-													<td class="text-right">
-														<div class="actions">
-															<a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
-																<i class="fe fe-pencil"></i> Edit
-															</a>
-															<a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
-																<i class="fe fe-trash"></i> Delete
-															</a>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>#SP005</td>
+													<td>private</td>
 													
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2">
-																<img class="avatar-img" src="assets/img/specialities/specialities-05.png" alt="Speciality">
-															</a>
-															<a href="profile.html">Dentist</a>
-														</h2>
-													</td>
-												
-													<td class="text-right">
-														<div class="actions">
-															<a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
-																<i class="fe fe-pencil"></i> Edit
-															</a>
-															<a class="btn btn-sm bg-danger-light" data-toggle="modal" href="#delete_modal">
-																<i class="fe fe-trash"></i> Delete
-															</a>
-														</div>
 													</td>
 												</tr>
 											</tbody>
@@ -442,103 +347,11 @@
 							</div>
 						</div>			
 					</div>
+					
 				</div>			
 			</div>
 			<!-- /Page Wrapper -->
-			
-			
-			<!-- Add Modal -->
-			<div class="modal fade" id="Add_Specialities_details" aria-hidden="true" role="dialog">
-				<div class="modal-dialog modal-dialog-centered" role="document" >
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Add Specialities</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="row form-row">
-									<div class="col-12 col-sm-6">
-										<div class="form-group">
-											<label>Specialities</label>
-											<input type="text" class="form-control">
-										</div>
-									</div>
-									<div class="col-12 col-sm-6">
-										<div class="form-group">
-											<label>Image</label>
-											<input type="file"  class="form-control">
-										</div>
-									</div>
-									
-								</div>
-								<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /ADD Modal -->
-			
-			<!-- Edit Details Modal -->
-			<div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
-				<div class="modal-dialog modal-dialog-centered" role="document" >
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Edit Specialities</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="row form-row">
-									<div class="col-12 col-sm-6">
-										<div class="form-group">
-											<label>Specialities</label>
-											<input type="text" class="form-control" value="Cardiology">
-										</div>
-									</div>
-									<div class="col-12 col-sm-6">
-										<div class="form-group">
-											<label>Image</label>
-											<input type="file"  class="form-control">
-										</div>
-									</div>
-									
-								</div>
-								<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /Edit Details Modal -->
-			
-			<!-- Delete Modal -->
-			<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
-				<div class="modal-dialog modal-dialog-centered" role="document" >
-					<div class="modal-content">
-					<!--	<div class="modal-header">
-							<h5 class="modal-title">Delete</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>-->
-						<div class="modal-body">
-							<div class="form-content p-2">
-								<h4 class="modal-title">Delete</h4>
-								<p class="mb-4">Are you sure want to delete?</p>
-								<button type="button" class="btn btn-primary">Save </button>
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /Delete Modal -->
+		
         </div>
 		<!-- /Main Wrapper -->
 		
@@ -561,5 +374,5 @@
 		
     </body>
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/specialities.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 </html>
