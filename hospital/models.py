@@ -35,7 +35,7 @@ class Hospital_Information(models.Model):
 
     hospital_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, null=True, blank=True)
-    address = models.TextField(null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
 
     # hospital_image = models.ImageField(null=True, blank=True, default="default.jpg")
 
@@ -53,7 +53,7 @@ class Hospital_Information(models.Model):
 
     # String representation of object
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Patient(models.Model):
