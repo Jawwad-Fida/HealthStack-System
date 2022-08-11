@@ -211,6 +211,14 @@
                     <form method="POST" action="{% url 'login' %}">
                       {% csrf_token %}
 
+                      {% if messages %}
+                      <ul class="messages">
+                          {% for message in messages %}
+                          <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                              {% endfor %}
+                      </ul>
+                      {% endif %}
+
                       <div class="form-group form-focus">
                         <input
                           type="text"
@@ -227,6 +235,7 @@
                         />
                         <label class="focus-label">Password</label>
                       </div>
+
                       <div class="text-right">
                         <a
                           class="forgot-link"

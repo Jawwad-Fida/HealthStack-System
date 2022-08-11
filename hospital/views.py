@@ -33,9 +33,6 @@ def search(request):
     return render(request, 'search.html')
 
 
-
-
-
 def add_billing(request):
     return render(request, 'add-billing.html')
 
@@ -72,7 +69,6 @@ def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
 
-
 def about_us(request):
     return render(request, 'about-us.html')
 
@@ -87,6 +83,7 @@ def multiple_hospital(request):
 
 def chat(request):
     return render(request, 'chat.html')
+
 
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
