@@ -74,16 +74,14 @@
 					  <li class="has-submenu active">
 						<a href="#">Hospital <i class="fas fa-chevron-down"></i></a>
 						<ul class="submenu">
-						  <li><a href="{% url 'doctor-dashboard'%}">Doctor Dashboard</a></li>
+						 
 						  <li><a href="{% url 'appointments'%}">Appointments</a></li>
 						  <li><a href="{% url 'schedule-timings'%}">Schedule Timing</a></li>
 						  <li><a href="{% url 'my-patients'%}">Patients List</a></li>
 						  <li><a href="#">Patients Profile</a></li>
 						  <!-- <li><a href="#">Chat</a></li>
 						  <li><a href="#">Invoices</a></li> -->
-						  <li>
-							<a href="{% url 'doctor-profile-settings'%}">Profile Settings</a>
-						  </li>
+						  
 						  <!-- <li><a href="reviews.html">Reviews</a></li> -->
 						  <!-- <li class="active">
 							<a href="doctor-register.html">Doctor Register</a>
@@ -295,6 +293,10 @@
 									<li class="nav-item">
 										<a class="nav-link" href="#doc_locations" data-toggle="tab">Locations and Contact</a>
 									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#doc_emergency" data-toggle="tab">Emergency Info</a>
+									</li>
+									
 									
 								</ul>
 							</nav>
@@ -533,6 +535,7 @@
 											<!-- /Clinic Timing -->
 											
 											
+											
 										</div>
 									</div>
 									<!-- /Location List -->
@@ -542,27 +545,74 @@
 								</div>
 								<!-- /Locations Content -->
 								
-								<!-- Reviews Content -->
-								<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
+							
+										
 								
-									<!-- Review Listing -->
-									<div class="widget review-listing">
-										<ul class="comments-list">
+								<!-- Overview Content -->
+								<div role="tabpanel" id="doc_emergency" class="tab-pane fade show active">
+									<div class="row">
+										<div class="col-md-12 col-lg-9">
 										
+											<!-- Clinic Timing -->
+											<div class="col-md-4">
+												<div class="clinic-timing">
+													
+													
+													<div>
+													<p class="timings-days">
+														<span>General Bed</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+													</p>
+													</div>
+													<div>
+													<p class="timings-days">
+														<span>ICU</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+													</p>
+													</div>
+													<div>
+													<p class="timings-days">
+														<span>Regular Cabin</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+													</p>
+													</div>
+													<div>
+													<p class="timings-days">
+														<span>Emergency cabin</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+										        	</p>
+													</div>
+													<div>
+													<p class="timings-days">
+														<span>VIP Room</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+													</p>
+													<div>
+
+												</div>
+											</div>
+											<!-- /Clinic Timing -->
 										
-												
 											
-										
-										<!-- Show All -->
-										<div class="all-feedback text-center">
-											<a href="#" class="btn btn-primary btn-sm">
-												Show all feedback <strong>(167)</strong>
-											</a>
+									
+											
+								
+											
+
 										</div>
-										<!-- /Show All -->
-										
-								
-								
+									</div>
+								</div>
+								<!-- /Overview Content -->
 								
 					
 								
