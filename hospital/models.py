@@ -82,37 +82,6 @@ class Patient(models.Model):
         return str(self.user.username)
 
 
-"""
-Decide later whether the tables below will go to which app
-
-"""
-
-
-# class Appointment(models.Model):
-#     APPOINTMENT_TYPE = (
-#         ('Report', 'Report'),
-#         ('Checkup', 'Checkup'),
-#     )
-
-#     appointment_id = models.AutoField(primary_key=True)
-#     appointment_date = models.DateField(null=True, blank=True)
-#     appointment_time = models.TimeField(null=True, blank=True)
-#     doctor_name = models.ForeignKey(
-#         Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
-#     Patient_name = models.ForeignKey(
-#         Patient, on_delete=models.CASCADE, null=True, blank=True)
-#     Hospital_name = models.ForeignKey(
-#         Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
-#     appointment_type = models.CharField(
-#         max_length=200, choices=APPOINTMENT_TYPE)
-#     serial_number = models.IntegerField(default=0)
-#     appointment_fee_status = models.CharField(
-#         max_length=200, null=True, blank=True)
-
-#     def __str__(self):
-#         return self.appointment_type
-
-
 # class Payment_Details(models.Model):
 #     payment_id = models.AutoField(primary_key=True, editable=False)
 #     patient_name = models.CharField(max_length=200)

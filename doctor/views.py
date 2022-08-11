@@ -9,7 +9,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from hospital.models import User
+from hospital.models import User, Patient
 from .models import Doctor_Information
 
 # Create your views here.
@@ -193,3 +193,20 @@ def doctor_profile_settings(request, pk):
 
     context = {'doctor': doctor, 'form': form}
     return render(request, 'doctor-profile-settings.html', context)
+
+
+def booking_success(request):
+    return render(request, 'booking-success.html')
+
+
+# def booking(request):
+#     return render(request, 'booking.html')
+
+
+def booking(request, pk):
+    patient = request.user.patient
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+
+    context = {'patient': patient, 'doctor': doctor}
+
+    return render(request, 'booking.html', context)

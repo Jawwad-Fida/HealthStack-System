@@ -18,8 +18,7 @@ urlpatterns = [
     path('add-billing/', views.add_billing, name='add-billing'),
     path('add-prescription/', views.add_prescription, name='add-prescription'),
     path('appointments/', views.appointments, name='appointments'),
-    path('booking-success/', views.booking_success, name='booking-success'),
-    path('booking/', views.booking, name='booking'),
+
     path('edit-billing/', views.edit_billing, name='edit-billing'),
     path('edit-prescription/', views.edit_prescription, name='edit-prescription'),
     path('forgot-password-patient/', views.forgot_password_patient,
