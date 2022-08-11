@@ -12,3 +12,5 @@ Template - Linkup (href)
 Register --> patient, and doctor (both are input at the same time, change the signals)
 Linkup (href)
 Admin Files
+
+aysha siddika
