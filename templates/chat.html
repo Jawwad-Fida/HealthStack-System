@@ -76,14 +76,11 @@
 							<li class="has-submenu">
 								<a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
-									<li><a href="{% url 'doctor-dashboard'%}">Doctor Dashboard</a></li>
 						            <li><a href="{% url 'appointments'%}">Appointments</a></li>
 						            <li><a href="{% url 'schedule-timings'%}">Schedule Timing</a></li>
 						            <li><a href="{% url 'my-patients'%}">Patients List</a></li>
 						            <li><a href="#">Patients Profile</a></li>
-									<li>
-										<a href="{% url 'doctor-profile-settings'%}">Profile Settings</a>
-									</li>
+									
 								</ul>
 							</li>	
 							<li class="has-submenu active">
@@ -441,14 +438,14 @@
 															<div>
 																<div class="chat-msg-attachments">
 																	<div class="chat-attachment">
-																		<img src="assets/img/img-02.jpg" alt="Attachment">
+																		<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 																		<div class="chat-attach-caption">placeholder.jpg</div>
 																		<a href="#" class="chat-attach-download">
 																			<i class="fas fa-download"></i>
 																		</a>
 																	</div>
 																	<div class="chat-attachment">
-																		<img src="assets/img/img-03.jpg" alt="Attachment">
+																		<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 																		<div class="chat-attach-caption">placeholder.jpg</div>
 																		<a href="#" class="chat-attach-download">
 																			<i class="fas fa-download"></i>
@@ -496,7 +493,7 @@
 															<div>
 																<div class="chat-msg-attachments">
 																	<div class="chat-attachment">
-																		<img src="assets/img/img-04.jpg" alt="Attachment">
+																		<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 																		<div class="chat-attach-caption">placeholder.jpg</div>
 																		<a href="#" class="chat-attach-download">
 																			<i class="fas fa-download"></i>
@@ -516,7 +513,7 @@
 												</li>
 												<li class="media received">
 													<div class="avatar">
-														<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
 													<div class="media-body">
 														<div class="msg-box">
@@ -538,7 +535,7 @@
 												<li class="chat-date">Today</li>
 												<li class="media received">
 													<div class="avatar">
-														<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
 													<div class="media-body">
 														<div class="msg-box">
@@ -583,7 +580,7 @@
 												</li>
 												<li class="media received">
 													<div class="avatar">
-														<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
 													<div class="media-body">
 														<div class="msg-box">
