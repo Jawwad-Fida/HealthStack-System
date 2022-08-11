@@ -85,6 +85,10 @@ def chat(request):
     return render(request, 'chat.html')
 
 
+def chat_doctor(request):
+    return render(request, 'chat-doctor.html')
+
+
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 

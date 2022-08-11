@@ -36,7 +36,7 @@
       </li>
 
       <li class="has-submenu">
-        <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+        <a href="#">Appointments <i class="fas fa-chevron-down"></i></a>
         <ul class="submenu">
           <li><a href="{% url 'search'%}">Search Doctor</a></li>
           <li>
@@ -47,21 +47,8 @@
           <li>
             <a href="{% url 'booking-success'%}">Booking Success</a>
           </li>
-          <li>
-            <a href="{% url 'patient-dashboard' pk=user.id %}"
-              >Patient Dashboard</a
-            >
-          </li>
           <!-- <li><a href="#">Favourites</a></li> -->
           <!-- <li><a href="#">Chat</a></li> -->
-          <li>
-            <a href="{% url 'profile-settings' pk=user.id %}"
-              >Profile Settings</a
-            >
-          </li>
-          <li>
-            <a href="{% url 'change-password'%}">Change Password</a>
-          </li>
         </ul>
       </li>
       <!-- <li class="has-submenu">
