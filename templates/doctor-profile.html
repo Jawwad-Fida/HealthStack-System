@@ -67,12 +67,13 @@
 							<div class="doctor-widget">
 								<div class="doc-info-left">
 									<div class="doctor-img">
-										<img src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}" class="img-fluid" alt="User Image">
+										<img src="{% static 'images/doctors/Rafi.png' %}" class="img-fluid" alt="User Image">
 									</div>
 									<div class="doc-info-cont">
-										<h4 class="doc-name">Dr. Darren Elder</h4>
-										<p class="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
-										<p class="doc-department"><img src="{% static 'HealthStack-System/images/Normal/specialities/specialities-05.png' %}" class="img-fluid" alt="Speciality">Dentist</p>
+										<h4 class="doc-name">Dr. Fahad Al Rafi</h4>
+										<p class="doc-speciality">Gynaecologist, Obstetrician & Infertility Specialist Sr. Consultant</p>
+										<h4 class="doc-hospital">Labaid Hospital LTD</h4>
+										<p class="doc-department"><img src="{% static 'HealthStack-System/images/Normal/obgyn.png' %}" class="img-fluid" alt="Speciality">OBGYN</p>
 										<div class="rating">
 											<i class="fas fa-star filled"></i>
 											<i class="fas fa-star filled"></i>
@@ -82,33 +83,33 @@
 											<span class="d-inline-block average-rating">(35)</span>
 										</div>
 										<div class="clinic-details">
-											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Florida, USA</p>
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Dhaka,Bangladesh</p>
 											<ul class="clinic-gallery">
 												<li>
-													<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" data-fancybox="gallery">
-														<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" alt="Feature">
+													<a href="{% static 'HealthStack-System/images/Normal/gyno1.jpg'%}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/gyno1.jpg'%}" alt="Feature">
 													</a>
 												</li>
 												<li>
-													<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}" data-fancybox="gallery">
-														<img  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}" alt="Feature">
+													<a href="{% static 'HealthStack-System/images/Normal/gyno2.jpg'%}" data-fancybox="gallery">
+														<img  src="{% static 'HealthStack-System/images/Normal/gyno2.jpg'%}" alt="Feature">
 													</a>
 												</li>
 												<li>
-													<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}" data-fancybox="gallery">
-														<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}" alt="Feature">
+													<a href="{% static 'HealthStack-System/images/Normal/gyno3.jpg'%}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/gyno3.jpg'%}" alt="Feature">
 													</a>
 												</li>
 												<li>
-													<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" data-fancybox="gallery">
-														<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" alt="Feature">
+													<a href="{% static 'HealthStack-System/images/Normal/gyno4.jpg'%}" data-fancybox="gallery">
+														<img src="{% static 'HealthStack-System/images/Normal/gyno4.jpg'%}" alt="Feature">
 													</a>
 												</li>
 											</ul>
 										</div>
 										<div class="clinic-services">
-											<span>Dental Fillings</span>
-											<span>Teeth Whitneing</span>
+											<span>obgyn specialist</span>
+											<span>ultra sonogram</span>
 										</div>
 									</div>
 								</div>
@@ -117,8 +118,8 @@
 										<ul>
 											<li><i class="far fa-thumbs-up"></i> 99%</li>
 											<li><i class="far fa-comment"></i> 35 Feedback</li>
-											<li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-											<li><i class="far fa-money-bill-alt"></i> $100 per hour </li>
+											<li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+											<li><i class="far fa-money-bill-alt"></i> 5tk per hour </li>
 										</ul>
 									</div>
 									<div class="doctor-action">
@@ -136,7 +137,7 @@
 										</a>
 									</div>
 									<div class="clinic-booking">
-										<a class="apt-btn" href="{% url 'booking'%}">Book Appointment</a>
+										<a class="apt-btn" href="{% url 'booking'%}">Book Your Appointment</a>
 									</div>
 								</div>
 							</div>
@@ -154,9 +155,7 @@
 									<li class="nav-item">
 										<a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#doc_locations" data-toggle="tab">Locations</a>
-									</li>
+									
 									<li class="nav-item">
 										<a class="nav-link" href="#doc_reviews" data-toggle="tab">Reviews</a>
 									</li>
@@ -178,7 +177,13 @@
 											<!-- About Details -->
 											<div class="widget about-widget">
 												<h4 class="widget-title">About Me</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+												<p>Gynaecologist, Obstetrician & Infertility Specialist
+
+													Sr. Consultant, Dept. of Gynae & Obs and
+													
+													Labaid Fertility Center
+													
+													Labaid Specialized Hospital, Dhaka.</p>
 											</div>
 											<!-- /About Details -->
 										
@@ -259,76 +264,19 @@
 											</div>
 											<!-- /Experience Details -->
 								
-											<!-- Awards Details -->
-											<div class="widget awards-widget">
-												<h4 class="widget-title">Awards</h4>
-												<div class="experience-box">
-													<ul class="experience-list">
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">July 2019</p>
-																	<h4 class="exp-title">Humanitarian Award</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">March 2011</p>
-																	<h4 class="exp-title">Certificate for International Volunteer Service</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">May 2008</p>
-																	<h4 class="exp-title">The Dental Professional of The Year Award</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-											<!-- /Awards Details -->
 											
-											<!-- Services List -->
-											<div class="service-list">
-												<h4>Services</h4>
-												<ul class="clearfix">
-													<li>Tooth cleaning </li>
-													<li>Root Canal Therapy</li>
-													<li>Implants</li>
-													<li>Composite Bonding</li>
-													<li>Fissure Sealants</li>
-													<li>Surgical Extractions</li>
-												</ul>
-											</div>
-											<!-- /Services List -->
+											
 											
 											<!-- Specializations List -->
 											<div class="service-list">
 												<h4>Specializations</h4>
 												<ul class="clearfix">
-													<li>Children Care</li>
-													<li>Dental Care</li>	
-													<li>Oral and Maxillofacial Surgery </li>	
-													<li>Orthodontist</li>	
-													<li>Periodontist</li>	
-													<li>Prosthodontics</li>	
+													<li>MBBS (DU), DGO (DU), MCPS (Gynae),
+
+														MS (Gynae), FCPS (Gynae)
+														
+														Trained in Infertility & IVF (Korea & India)</li>
+													
 												</ul>
 											</div>
 											<!-- /Specializations List -->
@@ -338,171 +286,7 @@
 								</div>
 								<!-- /Overview Content -->
 								
-								<!-- Locations Content -->
-								<div role="tabpanel" id="doc_locations" class="tab-pane fade">
 								
-									<!-- Location List -->
-									<div class="location-list">
-										<div class="row">
-										
-											<!-- Clinic Content -->
-											<div class="col-md-6">
-												<div class="clinic-content">
-													<h4 class="clinic-name"><a href="#">Smile Cute Dental Care Center</a></h4>
-													<p class="doc-speciality">MDS - Periodontology and Oral Implantology, BDS</p>
-													<div class="rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star"></i>
-														<span class="d-inline-block average-rating">(4)</span>
-													</div>
-													<div class="clinic-details mb-0">
-														<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2286  Sundown Lane, Austin, Texas 78749, USA <br><a href="javascript:void(0);">Get Directions</a></h5>
-														<ul>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Content -->
-											
-											<!-- Clinic Timing -->
-											<div class="col-md-4">
-												<div class="clinic-timing">
-													<div>
-														<p class="timings-days">
-															<span> Mon - Sat </span>
-														</p>
-														<p class="timings-times">
-															<span>10:00 AM - 2:00 PM</span>
-															<span>4:00 PM - 9:00 PM</span>
-														</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>Sun</span>
-													</p>
-													<p class="timings-times">
-														<span>10:00 AM - 2:00 PM</span>
-													</p>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Timing -->
-											
-											<div class="col-md-2">
-												<div class="consult-price">
-													$250
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- /Location List -->
-									
-									<!-- Location List -->
-									<div class="location-list">
-										<div class="row">
-										
-											<!-- Clinic Content -->
-											<div class="col-md-6">
-												<div class="clinic-content">
-													<h4 class="clinic-name"><a href="#">The Family Dentistry Clinic</a></h4>
-													<p class="doc-speciality">MDS - Periodontology and Oral Implantology, BDS</p>
-													<div class="rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star"></i>
-														<span class="d-inline-block average-rating">(4)</span>
-													</div>
-													<div class="clinic-details mb-0">
-														<p class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2883  University Street, Seattle, Texas Washington, 98155 <br><a href="javascript:void(0);">Get Directions</a></p>
-														<ul>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-														</ul>
-													</div>
-
-												</div>
-											</div>
-											<!-- /Clinic Content -->
-											
-											<!-- Clinic Timing -->
-											<div class="col-md-4">
-												<div class="clinic-timing">
-													<div>
-														<p class="timings-days">
-															<span> Tue - Fri </span>
-														</p>
-														<p class="timings-times">
-															<span>11:00 AM - 1:00 PM</span>
-															<span>6:00 PM - 11:00 PM</span>
-														</p>
-													</div>
-													<div>
-														<p class="timings-days">
-															<span>Sat - Sun</span>
-														</p>
-														<p class="timings-times">
-															<span>8:00 AM - 10:00 AM</span>
-															<span>3:00 PM - 7:00 PM</span>
-														</p>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Timing -->
-											
-											<div class="col-md-2">
-												<div class="consult-price">
-													$350
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- /Location List -->
-
-								</div>
-								<!-- /Locations Content -->
 								
 								<!-- Reviews Content -->
 								<div role="tabpanel" id="doc_reviews" class="tab-pane fade">

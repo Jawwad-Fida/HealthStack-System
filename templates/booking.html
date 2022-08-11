@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <!-- doccure/booking.html  30 Nov 2019 04:12:16 GMT -->
+  <!-- HealthStack/booking.html  30 Nov 2019 04:12:16 GMT -->
   <head>
     <meta charset="utf-8" />
     <meta
@@ -272,174 +272,136 @@
               </div>
 
               <!-- Schedule Widget -->
-              <div class="card booking-schedule schedule-widget">
-                <!-- Schedule Header -->
-                <div class="schedule-header">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <!-- Day Slot -->
-                      <div class="day-slot">
-                        <ul>
-                          <li class="left-arrow">
-                            <a href="#">
-                              <i class="fa fa-chevron-left"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <span>Mon</span>
-                            <span class="slot-date"
-                              >11 Nov
-                              <small class="slot-year">2019</small></span
-                            >
-                          </li>
-                          <li>
-                            <span>Tue</span>
-                            <span class="slot-date"
-                              >12 Nov
-                              <small class="slot-year">2019</small></span
-                            >
-                          </li>
-                          <li>
-                            <span>Wed</span>
-                            <span class="slot-date"
-                              >13 Nov
-                              <small class="slot-year">2019</small></span
-                            >
-                          </li>
-                          <li>
-                            <span>Thu</span>
-                            <span class="slot-date"
-                              >14 Nov
-                              <small class="slot-year">2019</small></span
-                            >
-                          </li>
-                          <li>
-                            <span>Fri</span>
-                            <span class="slot-date"
-                              >15 Nov
-                              <small class="slot-year">2019</small></span
-                            >
-                          </li>
-                          <li>
-                            <span>Sat</span>
-                            <span class="slot-date"
-                              >16 Nov
-                              <small class="slot-year">2019</small></span
-                            >
-                          </li>
-                          <li>
-                            <span>Sun</span>
-                            <span class="slot-date"
-                              >17 Nov
-                              <small class="slot-year">2019</small></span
-                            >
-                          </li>
-                          <li class="right-arrow">
-                            <a href="#">
-                              <i class="fa fa-chevron-right"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <!-- /Day Slot -->
-                    </div>
-                  </div>
-                </div>
-                <!-- /Schedule Header -->
+              <div class="card">
+                <div class="card-body">
+                  <div class="booking-doc-info">
+                      <!-- Schedule Header -->
+                      <form action="#" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
 
-                <!-- Schedule Content -->
-                <div class="schedule-cont">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <!-- Time Slot -->
-                      <div class="time-slot">
-                        <ul class="clearfix">
-                          <li>
-                            <a class="timing" href="#">
-                              <span>9:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>10:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>11:00</span> <span>AM</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a class="timing" href="#">
-                              <span>9:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>10:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>11:00</span> <span>AM</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a class="timing" href="#">
-                              <span>9:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>10:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>11:00</span> <span>AM</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a class="timing" href="#">
-                              <span>9:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>10:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>11:00</span> <span>AM</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a class="timing" href="#">
-                              <span>9:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing selected" href="#">
-                              <span>10:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>11:00</span> <span>AM</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a class="timing" href="#">
-                              <span>9:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>10:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>11:00</span> <span>AM</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a class="timing" href="#">
-                              <span>9:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>10:00</span> <span>AM</span>
-                            </a>
-                            <a class="timing" href="#">
-                              <span>11:00</span> <span>AM</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <!-- /Time Slot -->
+                        <div class="row form-row">
+                          <div class="col-12 col-md-12">
+                            <div class="form-group">
+                              <div class="change-avatar">                  
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-8">
+                            <div class="form-group">
+                              <label>Patient Name</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                value="Richard"
+                              />
+                            </div>
+                          </div>
+                        
+                          <div class="col-8 col-md-4">
+                            <div class="form-group">
+                              <label>Date of Birth</label>
+                              <div class="">
+                                <input
+                                  type="date"
+                                  class="form-control datetimepicker"
+                                  value="24-07-1983"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-8 col-md-4">
+                            <div class="form-group">
+                              <label>Blood Group</label>
+                              <select class="form-control select">
+                                <option>A-</option>
+                                <option>A+</option>
+                                <option>B-</option>
+                                <option>B+</option>
+                                <option>AB-</option>
+                                <option>AB+</option>
+                                <option>O-</option>
+                                <option>O+</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-8 col-md-4">
+                            <div class="form-group">
+                              <label>Email ID</label>
+                              <input
+                                type="email"
+                                class="form-control"
+                                value="richard@example.com"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-8 col-md-4">
+                            <div class="form-group">
+                              <label>Mobile</label>
+                              <input
+                                type="text"
+                                value="+1 202-555-0125"
+                                class="form-control"
+                              />
+                            </div>
+                          </div>
+                          
+                         
+                          <div class="col-8 col-md-4">
+                            <div class="form-group">
+                              <label>Doctor Name</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                value="Bla BLa Bla"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-8 col-md-4">
+                            <div class="form-group">
+                              <label>Appointment Time</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                value="Bla BLa Bla"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-8 col-md-4">
+                            <div class="form-group">
+                              <label>Hospital Name</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                value="Bla BLa Bla"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-8 col-md-4">
+                            <div class="form-group">
+                              <label>Chamber address</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                value="Bla BLa Bla"
+                              />
+                            </div>
+                          </div>
+                
+                        </div>
+                        <div class="submit-section">
+                          <button type="submit" class="btn btn-primary submit-btn">
+                            Save Changes
+                          </button>
+                        </div>
+                      </form>
+                      <!-- /Schedule Header -->
                     </div>
                   </div>
-                </div>
-                <!-- /Schedule Content -->
-              </div>
+               </div>
+                    
               <!-- /Schedule Widget -->
+             
+
 
               <!-- Submit Section -->
               <div class="submit-section proceed-btn text-right">
@@ -612,37 +574,6 @@
         </div>
         <!-- /Footer Top -->
 
-        <!-- Footer Bottom -->
-        <div class="footer-bottom">
-          <div class="container-fluid">
-            <!-- Copyright -->
-            <div class="copyright">
-              <div class="row">
-                <div class="col-md-6 col-lg-6">
-                  <div class="copyright-text">
-                    <p class="mb-0">
-                      <a href="templateshub.net">Templates Hub</a>
-                    </p>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-6">
-                  <!-- Copyright Menu -->
-                  <div class="copyright-menu">
-                    <ul class="policy-menu">
-                      <li>
-                        <a href="term-condition.html">Terms and Conditions</a>
-                      </li>
-                      <li><a href="privacy-policy.html">Policy</a></li>
-                    </ul>
-                  </div>
-                  <!-- /Copyright Menu -->
-                </div>
-              </div>
-            </div>
-            <!-- /Copyright -->
-          </div>
-        </div>
-        <!-- /Footer Bottom -->
       </footer>
       <!-- /Footer -->
     </div>
