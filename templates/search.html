@@ -67,166 +67,7 @@
     <!-- Main Wrapper -->
     <div class="main-wrapper">
       <!-- Header -->
-      <header class="header">
-        <nav class="navbar navbar-expand-lg header-nav">
-          <div class="navbar-header">
-            <a id="mobile_btn" href="javascript:void(0);">
-              <span class="bar-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </a>
-            <a href="{% url 'hospital_home'%}" class="navbar-brand logo">
-              <img
-                src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
-                class="img-fluid"
-                alt="Logo"
-              />
-            </a>
-          </div>
-          <div class="main-menu-wrapper">
-            <div class="menu-header">
-              <a href="{% url 'hospital_home'%}" class="menu-logo">
-                <img
-                  src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
-                  class="img-fluid"
-                  alt="Logo"
-                />
-              </a>
-              <a id="menu_close" class="menu-close" href="javascript:void(0);">
-                <i class="fas fa-times"></i>
-              </a>
-            </div>
-            <ul class="main-nav">
-              <li>
-                <a href="{% url 'hospital_home'%}">Home</a>
-              </li>
-              <li class="has-submenu active">
-                <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
-                <ul class="submenu">
-                  <li><a href="#">Doctor Dashboard</a></li>
-                  <li><a href="{% url 'appointments'%}">Appointments</a></li>
-                  <li>
-                    <a href="{% url 'schedule-timings'%}">Schedule Timing</a>
-                  </li>
-                  <li><a href="{% url 'my-patients'%}">Patients List</a></li>
-                  <li><a href="#">Patients Profile</a></li>
-                  <!-- <li><a href="#">Chat</a></li>
-						  <li><a href="#">Invoices</a></li> -->
-                  <li>
-                    <a href="#">Profile Settings</a>
-                  </li>
-                  <!-- <li><a href="reviews.html">Reviews</a></li> -->
-                  <!-- <li class="active">
-							<a href="doctor-register.html">Doctor Register</a>
-						  </li> -->
-                </ul>
-              </li>
-              <li class="has-submenu">
-                <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
-                <ul class="submenu">
-                  <li><a href="{% url 'search'%}">Search Doctor</a></li>
-                  <li><a href="#">Doctor Profile</a></li>
-                  <li><a href="{% url 'booking'%}">Booking</a></li>
-                  <!-- <li><a href="#">Checkout</a></li> -->
-                  <li>
-                    <a href="{% url 'booking-success'%}">Booking Success</a>
-                  </li>
-                  <li>
-                    <a href="#">Patient Dashboard</a>
-                  </li>
-                  <!-- <li><a href="#">Favourites</a></li> -->
-                  <!-- <li><a href="#">Chat</a></li> -->
-                  <li><a href="#">Profile Settings</a></li>
-                  <li>
-                    <a href="{% url 'change-password'%}">Change Password</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="{% url 'about-us'%}">About Us</a>
-              </li>
-              <!-- <li class="has-submenu">
-						<a href="#">Pages <i class="fas fa-chevron-down"></i></a>
-						<ul class="submenu">
-						  <li><a href="voice-call.html">Voice Call</a></li>
-						  <li><a href="video-call.html">Video Call</a></li>
-						  <li><a href="search.html">Search Doctors</a></li>
-						  <li><a href="calendar.html">Calendar</a></li>
-						  <li><a href="components.html">Components</a></li>
-						  <li class="has-submenu">
-							<a href="invoices.html">Invoices</a>
-							<ul class="submenu">
-							  <li><a href="invoices.html">Invoices</a></li>
-							  <li><a href="invoice-view.html">Invoice View</a></li>
-							</ul>
-						  </li>
-						  <li><a href="blank-page.html">Starter Page</a></li>
-						  <li><a href="login.html">Login</a></li>
-						  <li><a href="register.html">Register</a></li>
-						  <li><a href="forgot-password.html">Forgot Password</a></li>
-						</ul>
-					  </li> -->
-              <li>
-                <a href="{% url 'admin_login' %}" target="_blank">Admin</a>
-              </li>
-              <li class="login-link">
-                <a href="{% url 'login' %}">Login / Signup</a>
-              </li>
-            </ul>
-          </div>
-          <ul class="nav header-navbar-rht">
-            <li class="nav-item contact-item">
-              <div class="header-contact-img">
-                <i class="far fa-hospital"></i>
-              </div>
-              <div class="header-contact-detail">
-                <p class="contact-header">Contact</p>
-                <p class="contact-info-header">+880 1795087285</p>
-              </div>
-            </li>
-            <!-- User Menu -->
-            <li class="nav-item dropdown has-arrow logged-item">
-              <a
-                href="#"
-                class="dropdown-toggle nav-link"
-                data-toggle="dropdown"
-              >
-                <span class="user-img">
-                  <img
-                    class="rounded-circle"
-                    src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}"
-                    width="31"
-                    alt="Richard Wilson"
-                  />
-                </span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right">
-                <div class="user-header">
-                  <div class="avatar avatar-sm">
-                    <img
-                      src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}"
-                      alt="User Image"
-                      class="avatar-img rounded-circle"
-                    />
-                  </div>
-                  <div class="user-text">
-                    <h6>Richard Wilson</h6>
-                    <p class="text-muted mb-0">Patient</p>
-                  </div>
-                </div>
-                <a class="dropdown-item" href="#">Dashboard</a>
-                <a class="dropdown-item" href="#">Profile Settings</a>
-                <a class="dropdown-item" href="{% url 'hospital_home'%}"
-                  >Logout</a
-                >
-              </div>
-            </li>
-            <!-- /User Menu -->
-          </ul>
-        </nav>
-      </header>
+      <header class="header">{% include 'patient_navbar.html' %}</header>
       <!-- /Header -->
 
       <!-- Breadcrumb -->
@@ -375,13 +216,13 @@
 										</a>
 									</li> -->
                   <li>
-                    <a href="{% url 'search'%}">
+                    <a href="{% url 'search' pk=user.id %}">
                       <i class="fas fa-user-md"></i>
                       <span>Search Doctor</span>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="{% url 'profile-settings' pk=user.id %}">
                       <i class="fas fa-user-cog"></i>
                       <span>Profile Settings</span>
                     </a>
@@ -393,7 +234,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="{% url 'hospital_home'%}">
+                    <a href="{% url 'logout' %}">
                       <i class="fas fa-sign-out-alt"></i>
                       <span>Logout</span>
                     </a>
@@ -403,6 +244,7 @@
             </div>
 
             <div class="col-md-12 col-lg-8 col-xl-9">
+              {% for doctor in doctors %}
               <!-- Doctor Widget -->
               <div class="card">
                 <div class="card-body">
@@ -411,7 +253,7 @@
                       <div class="doctor-img">
                         <a href="doctor-profile.html">
                           <img
-                            src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-01.jpg' %}"
+                            src="{{ doctor.featured_image.url }}"
                             class="img-fluid"
                             alt="User Image"
                           />
@@ -419,17 +261,15 @@
                       </div>
                       <div class="doc-info-cont">
                         <h4 class="doc-name">
-                          <a href="doctor-profile.html">Dr. Ruby Perrin</a>
+                          <a href="doctor-profile.html">Dr. {{doctor.name}}</a>
                         </h4>
-                        <p class="doc-speciality">
-                          MDS - Periodontology and Oral Implantology, BDS
-                        </p>
+                        <p class="doc-speciality">{{ doctor.degree }}</p>
                         <h5 class="doc-department">
                           <img
                             src="{% static 'HealthStack-System/images/Normal/specialities/specialities-05.png'%}"
                             class="img-fluid"
                             alt="Speciality"
-                          />Dentist
+                          />{{ doctor.department }}
                         </h5>
                         <div class="rating">
                           <i class="fas fa-star filled"></i>
@@ -443,7 +283,8 @@
                         </div>
                         <div class="clinic-details">
                           <p class="doc-location">
-                            <i class="fas fa-map-marker-alt"></i> Florida, USA
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{doctor.hospital_name}}
                           </p>
                           <ul class="clinic-gallery">
                             <li>
@@ -468,28 +309,6 @@
                                 />
                               </a>
                             </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
                           </ul>
                         </div>
                         <div class="clinic-services">
@@ -498,16 +317,19 @@
                         </div>
                       </div>
                     </div>
+
                     <div class="doc-info-right">
                       <div class="clini-infos">
                         <ul>
                           <li><i class="far fa-thumbs-up"></i> 98%</li>
                           <li><i class="far fa-comment"></i> 17 Feedback</li>
                           <li>
-                            <i class="fas fa-map-marker-alt"></i> Florida, USA
+                            <i class="fas fa-map-marker-alt"></i> Dhaka,
+                            Bangladesh
                           </li>
                           <li>
-                            <i class="far fa-money-bill-alt"></i> $300 - $1000
+                            <i class="far fa-money-bill-alt"></i>
+                            {{doctor.consultation_fee}} BDT
                             <i
                               class="fas fa-info-circle"
                               data-toggle="tooltip"
@@ -529,514 +351,7 @@
                 </div>
               </div>
               <!-- /Doctor Widget -->
-
-              <!-- Doctor Widget -->
-              <div class="card">
-                <div class="card-body">
-                  <div class="doctor-widget">
-                    <div class="doc-info-left">
-                      <div class="doctor-img">
-                        <a href="doctor-profile.html">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg'%}"
-                            class="img-fluid"
-                            alt="User Image"
-                          />
-                        </a>
-                      </div>
-                      <div class="doc-info-cont">
-                        <h4 class="doc-name">
-                          <a href="doctor-profile.html">Dr. Darren Elder</a>
-                        </h4>
-                        <p class="doc-speciality">
-                          BDS, MDS - Oral & Maxillofacial Surgery
-                        </p>
-                        <h5 class="doc-department">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/specialities/specialities-05.png'%}"
-                            class="img-fluid"
-                            alt="Speciality"
-                          />Dentist
-                        </h5>
-                        <div class="rating">
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star"></i>
-                          <span class="d-inline-block average-rating"
-                            >(35)</span
-                          >
-                        </div>
-                        <div class="clinic-details">
-                          <p class="doc-location">
-                            <i class="fas fa-map-marker-alt"></i> Newyork, USA
-                          </p>
-                          <ul class="clinic-gallery">
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="clinic-services">
-                          <span>Dental Fillings</span>
-                          <span> Whitneing</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="doc-info-right">
-                      <div class="clini-infos">
-                        <ul>
-                          <li><i class="far fa-thumbs-up"></i> 100%</li>
-                          <li><i class="far fa-comment"></i> 35 Feedback</li>
-                          <li>
-                            <i class="fas fa-map-marker-alt"></i> Newyork, USA
-                          </li>
-                          <li>
-                            <i class="far fa-money-bill-alt"></i> $50 - $300
-                            <i
-                              class="fas fa-info-circle"
-                              data-toggle="tooltip"
-                              title="Lorem Ipsum"
-                            ></i>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="clinic-booking">
-                        <a class="view-pro-btn" href="{% url 'doctor-profile'%}"
-                          >View Profile</a
-                        >
-                        <a class="apt-btn" href="{% url 'booking'%}"
-                          >Book Appointment</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /Doctor Widget -->
-
-              <!-- Doctor Widget -->
-              <div class="card">
-                <div class="card-body">
-                  <div class="doctor-widget">
-                    <div class="doc-info-left">
-                      <div class="doctor-img">
-                        <a href="doctor-profile.html">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-03.jpg'%}"
-                            class="img-fluid"
-                            alt="User Image"
-                          />
-                        </a>
-                      </div>
-                      <div class="doc-info-cont">
-                        <h4 class="doc-name">
-                          <a href="doctor-profile.html">Dr. Deborah Angel</a>
-                        </h4>
-                        <p class="doc-speciality">
-                          MBBS, MD - General Medicine, DNB - Cardiology
-                        </p>
-                        <p class="doc-department">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/specialities/specialities-04.png'%}"
-                            class="img-fluid"
-                            alt="Speciality"
-                          />Cardiology
-                        </p>
-                        <div class="rating">
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star"></i>
-                          <span class="d-inline-block average-rating"
-                            >(27)</span
-                          >
-                        </div>
-                        <div class="clinic-details">
-                          <p class="doc-location">
-                            <i class="fas fa-map-marker-alt"></i> Georgia, USA
-                          </p>
-                          <ul class="clinic-gallery">
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="clinic-services">
-                          <span>Dental Fillings</span>
-                          <span> Whitneing</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="doc-info-right">
-                      <div class="clini-infos">
-                        <ul>
-                          <li><i class="far fa-thumbs-up"></i> 99%</li>
-                          <li><i class="far fa-comment"></i> 35 Feedback</li>
-                          <li>
-                            <i class="fas fa-map-marker-alt"></i> Newyork, USA
-                          </li>
-                          <li>
-                            <i class="far fa-money-bill-alt"></i> $100 - $400
-                            <i
-                              class="fas fa-info-circle"
-                              data-toggle="tooltip"
-                              title="Lorem Ipsum"
-                            ></i>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="clinic-booking">
-                        <a class="view-pro-btn" href="{% url 'doctor-profile'%}"
-                          >View Profile</a
-                        >
-                        <a class="apt-btn" href="{% url 'booking'%}"
-                          >Book Appointment</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /Doctor Widget -->
-
-              <!-- Doctor Widget -->
-              <div class="card">
-                <div class="card-body">
-                  <div class="doctor-widget">
-                    <div class="doc-info-left">
-                      <div class="doctor-img">
-                        <a href="doctor-profile.html">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-04.jpg'%}"
-                            class="img-fluid"
-                            alt="User Image"
-                          />
-                        </a>
-                      </div>
-                      <div class="doc-info-cont">
-                        <h4 class="doc-name">
-                          <a href="doctor-profile.html">Dr. Sofia Brient</a>
-                        </h4>
-                        <p class="doc-speciality">
-                          MBBS, MS - General Surgery, MCh - Urology
-                        </p>
-                        <p class="doc-department">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/specialities/specialities-01.png'%}"
-                            class="img-fluid"
-                            alt="Speciality"
-                          />Urology
-                        </p>
-                        <div class="rating">
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star"></i>
-                          <span class="d-inline-block average-rating">(4)</span>
-                        </div>
-                        <div class="clinic-details">
-                          <p class="doc-location">
-                            <i class="fas fa-map-marker-alt"></i> Louisiana, USA
-                          </p>
-                          <ul class="clinic-gallery">
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="clinic-services">
-                          <span>Dental Fillings</span>
-                          <span> Whitneing</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="doc-info-right">
-                      <div class="clini-infos">
-                        <ul>
-                          <li><i class="far fa-thumbs-up"></i> 97%</li>
-                          <li><i class="far fa-comment"></i> 4 Feedback</li>
-                          <li>
-                            <i class="fas fa-map-marker-alt"></i> Newyork, USA
-                          </li>
-                          <li>
-                            <i class="far fa-money-bill-alt"></i> $150 - $250
-                            <i
-                              class="fas fa-info-circle"
-                              data-toggle="tooltip"
-                              title="Lorem Ipsum"
-                            ></i>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="clinic-booking">
-                        <a class="view-pro-btn" href="{% url 'doctor-profile'%}"
-                          >View Profile</a
-                        >
-                        <a class="apt-btn" href="{% url 'booking'%}"
-                          >Book Appointment</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /Doctor Widget -->
-
-              <!-- Doctor Widget -->
-              <div class="card">
-                <div class="card-body">
-                  <div class="doctor-widget">
-                    <div class="doc-info-left">
-                      <div class="doctor-img">
-                        <a href="doctor-profile.html">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-06.jpg'%}"
-                            class="img-fluid"
-                            alt="User Image"
-                          />
-                        </a>
-                      </div>
-                      <div class="doc-info-cont">
-                        <h4 class="doc-name">
-                          <a href="doctor-profile.html"
-                            >Dr. Katharine Berthold</a
-                          >
-                        </h4>
-                        <p class="doc-speciality">
-                          MS - Orthopaedics, MBBS, M.Ch - Orthopaedics
-                        </p>
-                        <p class="doc-department">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/specialities/specialities-03.png'%}"
-                            class="img-fluid"
-                            alt="Speciality"
-                          />Orthopaedics
-                        </p>
-                        <div class="rating">
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star"></i>
-                          <span class="d-inline-block average-rating"
-                            >(52)</span
-                          >
-                        </div>
-                        <div class="clinic-details">
-                          <p class="doc-location">
-                            <i class="fas fa-map-marker-alt"></i> Texas, USA
-                          </p>
-                          <ul class="clinic-gallery">
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="clinic-services">
-                          <span>Dental Fillings</span>
-                          <span> Whitneing</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="doc-info-right">
-                      <div class="clini-infos">
-                        <ul>
-                          <li><i class="far fa-thumbs-up"></i> 100%</li>
-                          <li><i class="far fa-comment"></i> 52 Feedback</li>
-                          <li>
-                            <i class="fas fa-map-marker-alt"></i> Texas, USA
-                          </li>
-                          <li>
-                            <i class="far fa-money-bill-alt"></i> $100 - $500
-                            <i
-                              class="fas fa-info-circle"
-                              data-toggle="tooltip"
-                              title="Lorem Ipsum"
-                            ></i>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="clinic-booking">
-                        <a class="view-pro-btn" href="{% url 'doctor-profile'%}"
-                          >View Profile</a
-                        >
-                        <a class="apt-btn" href="{% url 'booking'%}"
-                          >Book Appointment</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /Doctor Widget -->
+              {% endfor %}
 
               <div class="load-more text-center">
                 <a class="btn btn-primary btn-sm" href="javascript:void(0);"

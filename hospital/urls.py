@@ -12,7 +12,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path('', views.hospital_home, name='hospital_home'),
-    path('search/', views.search, name='search'),
+    path('search/<int:pk>/', views.search, name='search'),
     path('change-password/', views.change_password, name='change-password'),
 
     path('add-billing/', views.add_billing, name='add-billing'),
