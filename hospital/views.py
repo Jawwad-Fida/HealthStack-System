@@ -42,14 +42,6 @@ def appointments(request):
     return render(request, 'appointments.html')
 
 
-def booking_success(request):
-    return render(request, 'booking-success.html')
-
-
-def booking(request):
-    return render(request, 'booking.html')
-
-
 def edit_billing(request):
     return render(request, 'edit-billing.html')
 

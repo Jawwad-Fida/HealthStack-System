@@ -342,7 +342,9 @@
                         <a class="view-pro-btn" href="{% url 'doctor-profile'%}"
                           >View Profile</a
                         >
-                        <a class="apt-btn" href="{% url 'booking'%}"
+                        <a
+                          class="apt-btn"
+                          href="{% url 'booking' pk=doctor.doctor_id %}"
                           >Book Appointment</a
                         >
                       </div>
