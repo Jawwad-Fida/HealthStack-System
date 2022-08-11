@@ -106,7 +106,7 @@ def admin_profile(request):
 
 def doctor_list(request):
     doctors = Doctor_Information.objects.all()
-    return render(request, 'hospital_admin/doctor-list.html')
+    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors})
 
 
 def invoice(request):
@@ -122,7 +122,8 @@ def lock_screen(request):
 
 
 def patient_list(request):
-    return render(request, 'hospital_admin/patient-list.html')
+    patients = Patient.objects.all()
+    return render(request, 'hospital_admin/patient-list.html', {'all': patients})
 
 
 def specialitites(request):

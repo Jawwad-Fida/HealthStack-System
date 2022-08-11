@@ -77,8 +77,31 @@
 													<th>Consultation Fee</th>
 													<th>Degree</th>
 													<th>Account Status</th>
-													
-												</tr>
+													</tr>
+													<tbody>
+														{% for doctor in all%}
+														<tr>
+															<td>
+																<h2 class="table-avatar">
+																	<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
+																	<a href="profile.html">{{doctor.name}}</a>
+																</h2>
+															</td>
+															<td>{{doctor.department}}</td>
+															
+															<td>{{doctor.consultation_fee}}</td>
+															
+															<td>{{doctor.degree}}</td>
+															
+															<td>
+																<div class="status-toggle">
+																	<input type="checkbox" id="status_1" class="check" checked>
+																	<label for="status_1" class="checktoggle">checkbox</label>
+																</div>
+															</td>
+														</tr>
+														{% endfor %}
+													</tbody>
 											</thead>
 					
 			<!-- /Page Wrapper -->
