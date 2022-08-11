@@ -33,9 +33,6 @@ def search(request):
     return render(request, 'search.html')
 
 
-
-
-
 def add_billing(request):
     return render(request, 'add-billing.html')
 
@@ -72,7 +69,6 @@ def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
 
-
 def about_us(request):
     return render(request, 'about-us.html')
 
@@ -87,6 +83,11 @@ def multiple_hospital(request):
 
 def chat(request):
     return render(request, 'chat.html')
+
+
+def chat_doctor(request):
+    return render(request, 'chat-doctor.html')
+
 
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
@@ -158,8 +159,8 @@ def patient_register(request):
         else:
             messages.error(
                 request, 'An error has occurred during registration')
-    else:
-        form = CustomUserCreationForm()
+    # else:
+    #     form = CustomUserCreationForm()
 
     context = {'page': page, 'form': form}
     return render(request, 'patient-register.html', context)
@@ -204,8 +205,8 @@ def profile_settings(request, pk):
         if form.is_valid():
             form.save()
             return redirect('patient-dashboard', pk=pk)
-    else:
-        form = PatientForm()
+        else:
+            form = PatientForm()
 
     context = {'patient': patient, 'form': form}
     return render(request, 'profile-settings.html', context)

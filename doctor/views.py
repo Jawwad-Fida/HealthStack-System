@@ -120,8 +120,8 @@ def doctor_register(request):
         else:
             messages.error(
                 request, 'An error has occurred during registration')
-    else:
-        form = DoctorUserCreationForm()
+    # else:
+    #     form = DoctorUserCreationForm()
 
     context = {'page': page, 'form': form}
     return render(request, 'doctor-register.html', context)
@@ -188,8 +188,8 @@ def doctor_profile_settings(request, pk):
         if form.is_valid():
             form.save()
             return redirect('doctor-dashboard', pk=pk)
-    else:
-        form = DoctorForm()
+        else:
+            form = DoctorForm()
 
     context = {'doctor': doctor, 'form': form}
     return render(request, 'doctor-profile-settings.html', context)
