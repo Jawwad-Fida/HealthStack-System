@@ -3,11 +3,11 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from hospital.models import User   
+from hospital.models import User
 
 from .forms import AdminUserCreationForm
 from .models import Admin_Information
-# Create your views here. 
+# Create your views here.
 
 
 def admin_home(request):
@@ -52,7 +52,6 @@ def admin_login(request):
 #     return render(request, 'hospital_admin/register.html')
 
 
-    
 # def admin_register(request):
 #     username = request.POST.get('username')
 #     email = request.POST.get('email')
@@ -89,16 +88,11 @@ def admin_register(request):
         else:
             messages.error(
                 request, 'An error has occurred during registration')
-    else:
-        form = AdminUserCreationForm()
+    # else:
+    #     form = AdminUserCreationForm()
 
     context = {'page': page, 'form': form}
     return render(request, 'hospital_admin/register.html', context)
-
-
-
-
-
 
 
 def admin_forgot_password(request):
