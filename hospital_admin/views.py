@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import User
-
+from doctor.models import Doctor_Information
+from hospital.models import Patient
 from .forms import AdminUserCreationForm
 from .models import Admin_Information
 # Create your views here.
@@ -104,7 +105,8 @@ def admin_profile(request):
 
 
 def doctor_list(request):
-    return render(request, 'hospital_admin/doctor-list.html')
+    doctors = Doctor_Information.objects.all()
+    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors})
 
 
 def invoice(request):
@@ -120,7 +122,8 @@ def lock_screen(request):
 
 
 def patient_list(request):
-    return render(request, 'hospital_admin/patient-list.html')
+    patients = Patient.objects.all()
+    return render(request, 'hospital_admin/patient-list.html', {'all': patients})
 
 
 def specialitites(request):
