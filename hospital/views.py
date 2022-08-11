@@ -14,6 +14,7 @@ from django.contrib import messages
 # from django.dispatch import receiver
 
 from .models import Patient, User
+from doctor.models import Doctor_Information
 
 
 # Create your views here.
@@ -27,10 +28,6 @@ def hospital_home(request):
 
 def change_password(request):
     return render(request, 'change-password.html')
-
-
-def search(request):
-    return render(request, 'search.html')
 
 
 def add_billing(request):
@@ -210,3 +207,17 @@ def profile_settings(request, pk):
 
     context = {'patient': patient, 'form': form}
     return render(request, 'profile-settings.html', context)
+
+
+# def search(request):
+#     return render(request, 'search.html')
+
+
+def search(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+
+    doctors = Doctor_Information.objects.all()
+
+    context = {'patient': patient, 'doctors': doctors}
+
+    return render(request, 'search.html', context)
