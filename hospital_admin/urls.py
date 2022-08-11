@@ -27,9 +27,10 @@ urlpatterns = [
     path('login/',views.admin_login,name='admin_login'),
     path('patient-list/',views.patient_list, name='patient_list'),
     path('profile/', views.admin_profile,name='admin_profile'),
-    path('register/', views.admin_register,name='admin_register'),
+    # path('register/', views.register,name='register'),
+    path('admin_register/',views.admin_register,name='admin_register'),
     path('transactions-list/',views.transactions_list, name='transactions_list'),
-    path('logout/', views.logoutAdmin, name='logout'),
+    path('admin-logout/', views.logoutAdmin, name='admin-logout'),
 
     path('emergency/', views.emergency_details,name='emergency'),
     path('add-emergency-information/', views.add_emergency_information,name='add-emergency-information'),

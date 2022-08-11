@@ -3,7 +3,11 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-# Create your views here.
+from hospital.models import User   
+
+from .forms import AdminUserCreationForm
+from .models import Admin_Information
+# Create your views here. 
 
 
 def admin_home(request):
@@ -44,8 +48,57 @@ def admin_login(request):
     return render(request, 'doctor-login.html')
 
 
+# def register(request):
+#     return render(request, 'hospital_admin/register.html')
+
+
+    
+# def admin_register(request):
+#     username = request.POST.get('username')
+#     email = request.POST.get('email')
+#     password = request.POST.get('password')
+#     password1 = request.POST.get('password1')
+#     if password == password1:
+#         user = User(username=username, email=email, password=password)
+#         user.save()
+#         return redirect('admin_login')
+#     else:
+#         messages.error(request, 'Password does not match')
+#         return render(request, 'hospital_admin/register.html')
+
+
 def admin_register(request):
-    return render(request, 'hospital_admin/register.html')
+    page = 'hospital_admin/register'
+    form = AdminUserCreationForm()
+
+    if request.method == 'POST':
+        form = AdminUserCreationForm(request.POST)
+        if form.is_valid():
+            # form.save()
+            # commit=False --> don't save to database yet (we have a chance to modify object)
+            user = form.save(commit=False)
+            user.is_hospital_admin = True
+            user.save()
+
+            messages.success(request, 'User account was created!')
+
+            # After user is created, we can log them in
+            #login(request, user)
+            return redirect('admin_login')
+
+        else:
+            messages.error(
+                request, 'An error has occurred during registration')
+    else:
+        form = AdminUserCreationForm()
+
+    context = {'page': page, 'form': form}
+    return render(request, 'hospital_admin/register.html', context)
+
+
+
+
+
 
 
 def admin_forgot_password(request):
