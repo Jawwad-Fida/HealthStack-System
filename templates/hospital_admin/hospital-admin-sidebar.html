@@ -6,7 +6,7 @@
                     <span>Main</span>
                 </li>
                 <li class="active"> 
-                    <a href="index.html"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+                    <a href="{%url "admin-home"%}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
                 </li>
                 <li> 
                     <a href="{% url 'appointment-list' %}"><i class="fe fe-layout"></i> <span>Appointments</span></a>
@@ -15,10 +15,10 @@
                     <a href="{% url 'hospital-list' %}"><i class="fe fe-users"></i> <span>Hospital</span></a>
                 </li>
                 <li> 
-                    <a href="doctor-list.html"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
+                    <a href="{%url 'doctor-list'%}"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
                 </li>
                 <li> 
-                    <a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
+                    <a href="{% url 'patient-list'%}"><i class="fe fe-user"></i> <span>Patients</span></a>
                 </li>
                 <li> 
                     <a href="{% url 'emergency' %}"><i class="fe fe-moon"></i> <span>Emergency Information</span></a>
@@ -33,7 +33,7 @@
                     </ul>
                 </li>
                 <li> 
-                    <a href="profile.html"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
+                    <a href="{%url 'admin_profile'%}"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
                 </li>
             </ul>
         </div>

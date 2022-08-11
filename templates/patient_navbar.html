@@ -38,7 +38,7 @@
       <li class="has-submenu">
         <a href="#">Appointments <i class="fas fa-chevron-down"></i></a>
         <ul class="submenu">
-          <li><a href="{% url 'search'%}">Search Doctor</a></li>
+          <li><a href="{% url 'search' pk=user.id %}">Search Doctor</a></li>
           <li>
             <a href="{% url 'doctor-profile'%}">Doctor Profile</a>
           </li>
