@@ -73,8 +73,6 @@ def privacy_policy(request):
 
 
 
-
-
 def about_us(request):
     return render(request, 'about-us.html')
 
@@ -160,6 +158,8 @@ def patient_register(request):
         else:
             messages.error(
                 request, 'An error has occurred during registration')
+    else:
+        form = CustomUserCreationForm()
 
     context = {'page': page, 'form': form}
     return render(request, 'patient-register.html', context)
@@ -204,6 +204,8 @@ def profile_settings(request, pk):
         if form.is_valid():
             form.save()
             return redirect('patient-dashboard', pk=pk)
+    else:
+        form = PatientForm()
 
     context = {'patient': patient, 'form': form}
     return render(request, 'profile-settings.html', context)
