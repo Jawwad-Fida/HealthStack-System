@@ -36,6 +36,7 @@ urlpatterns = [
     path('add-emergency-information/', views.add_emergency_information,name='add-emergency-information'),
     
     path('hospital-profile/', views.hospital_profile ,name='hospital-profile'),
+    path('admin-profile/', views.admin_profile ,name='admin-profile'),
 
 ]
 

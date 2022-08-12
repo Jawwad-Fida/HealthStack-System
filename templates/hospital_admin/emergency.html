@@ -72,6 +72,7 @@
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="datatable table table-hover table-center mb-0">
+											{% for hospitals in all%}
 											<thead>
 												<tr>
 													<th>Hospital Name</th>
@@ -87,15 +88,16 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'images/hospitals/hospital1.png' %}" alt="User Image"></a><a href="profile.html">Square Hospital</a>
+															<a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospitals.featured_image.url}}" alt="User Image"></a>
+															<a>{{hospitals.name}}</a>
 														</h2>
 													</td>
                                                     
-													<td>10</td>
-													<td>10</td>
-                                                    <td>10</td>
-												    <td>10</td>
-													<td>10</td>
+													<td>{{hospitals.general_bed_no}}</td>
+													<td>{{hospitals.available_icu_no}}</td>
+                                                    <td>{{hospitals.regular_cabin_no}}</td>
+												    <td>{{hospitals.emergency_cabin_no}}</td>
+													<td>{{hospitals.vip_cabin_no}}</td>
                                                     
 													<td><a class="btn btn-primary btn-m" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Update </a></td>
                                     
@@ -142,6 +144,7 @@
 													</td>
 												</tr>
 											</tbody>
+											{% endfor %}
 										</table>
 									</div>
 								</div>

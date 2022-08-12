@@ -72,12 +72,14 @@
 					<!-- /Page Header -->
 					
 					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-body">
-									<div class="table-responsive">
+						 <div class="col-sm-12">
+							 <div class="card">
+								 <div class="card-body">
+									 <div class="table-responsive">
 										<table class="datatable table table-hover table-center mb-0">
-											<thead>
+										
+											 {% for hospitals in all%}
+											 <thead>
 												<tr>
 													<th>Hospital Name</th>
 													<th>Address</th>
@@ -88,27 +90,33 @@
 													<th>Delete</th>
 													
 												</tr>
-											</thead>
+											 </thead>
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'images/hospitals/hospital1.png' %}" alt="User Image"></a>															<a href="profile.html">Square Hospital</a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospitals.featured_image.url}}" alt="User Image"></a>															
+															<a href="profile.html">{{hospitals.name}}</a>
 														</h2>
 													</td>
-													<td>Dhanmondi</td>
+													<td>{{hospitals.address}}</td>
 													
-													<td>square@gmail.com <br>
+													<td>{{hospitals.email}}<br>
 													
-													<td>01234567788</td>
+													<td>{{hospitals.phone_number}}</td>
 													
-													<td>private</td>
-													<td><a href="{% url 'edit-hospital' %}" class="btn btn-primary btn-m">Edit </a></td>
+													<td>{{hospitals.hospital_type}}</td>
+													<td><a href="{% url 'edit-hospital' %}" class="btn btn-primary">Edit</a></td>
+													<td><a href="{% url 'edit-hospital' %}" class="btn btn-primary">Edit</a></td>
+
+
+
 													<td><a href="javascript:(0);" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
 												</tr>
 													
 													</td>
 												</tr>
-											</tbody>
+												{% endfor %}
+											
 										</table>
 									</div>
 								</div>
