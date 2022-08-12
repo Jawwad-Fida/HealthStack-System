@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from hospital.models import User
+from hospital.models import User, Hospital_Information
 from .models import Admin_Information
 
 class AdminUserCreationForm(UserCreationForm):
@@ -15,6 +15,30 @@ class AdminUserCreationForm(UserCreationForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
+
+
+class AddHospitalForm(ModelForm):
+    class Meta:
+        model = Hospital_Information
+        fields = ['name','address','featured_image','phone_number','email','hospital_type']
+
+    def __init__(self, *args, **kwargs):
+        super(AddHospitalForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
+class EditHospitalForm(forms.ModelForm):
+    class Meta:
+        model = Hospital_Information
+        fields = ['name','address','featured_image','phone_number','email','hospital_type']
+
+    def __init__(self, *args, **kwargs):
+        super(EditHospitalForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
 
 
 # class AdminForm(ModelForm):

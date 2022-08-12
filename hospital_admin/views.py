@@ -6,7 +6,7 @@ from django.contrib import messages
 from hospital.models import Hospital_Information, User
 from doctor.models import Doctor_Information
 from hospital.models import Patient
-from .forms import AdminUserCreationForm
+from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm
 from .models import Admin_Information
 
 
@@ -140,16 +140,6 @@ def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
 
 
-def add_hospital(request):
-    return render(request, 'hospital_admin/add-hospital.html')
-
-
-
-def edit_hospital(request):
-    return render(request, 'hospital_admin/edit-hospital.html')
-
-
-
 def emergency_details(request):
     hospitals = Hospital_Information.objects.all()
     return render(request, 'hospital_admin/emergency.html', {'all': hospitals})
@@ -162,7 +152,7 @@ def add_emergency_information(request):
 
 def hospital_list(request):
     hospitals = Hospital_Information.objects.all()
-    return render(request, 'hospital_admin/hospital-list.html', {'all': hospitals})
+    return render(request, 'hospital_admin/hospital-list.html', {'hospitals': hospitals})
 
 
 def appointment_list(request):
@@ -180,3 +170,54 @@ def admin_profile(request, pk):
     context = {'admin': admin}
 
     return render(request, 'hospital_admin/admin-profile.html', context)
+
+
+# def add_hospital(request):
+#     return render(request, 'hospital_admin/add-hospital.html')
+
+
+def add_hospital(request):
+    page = 'hospital-list'
+    form = AddHospitalForm()
+
+    if request.method == 'POST':
+        form = AddHospitalForm(request.POST, request.FILES)
+        if form.is_valid():
+            # form.save()
+            hospital = form.save(commit=False)
+            hospital.save()
+
+            messages.success(request, 'Hospital was created!')
+
+            return redirect('hospital-list')
+
+        else:
+            messages.error(
+                request, 'An error has occurred during input')
+    # else:
+    #     form = AddHospitalForm()
+
+    context = {'page': page, 'form': form}
+    return render(request, 'hospital_admin/add-hospital.html', context)
+
+
+# def edit_hospital(request, pk):
+#     hospital = Hospital_Information.objects.get(hospital_id=pk)
+#     return render(request, 'hospital_admin/edit-hospital.html')
+
+def edit_hospital(request, pk):
+
+    hospital = Hospital_Information.objects.get(hospital_id=pk)
+    form = EditHospitalForm(instance=hospital)  
+
+    if request.method == 'POST':
+        form = EditHospitalForm(request.POST, request.FILES,
+                           instance=hospital)  
+        if form.is_valid():
+            form.save()
+            return redirect('hospital-list')
+        else:
+            form = EditHospitalForm()
+
+    context = {'hospital': hospital, 'form': form}
+    return render(request, 'hospital_admin/edit-hospital.html', context)
