@@ -40,6 +40,29 @@ class EditHospitalForm(forms.ModelForm):
             field.widget.attrs.update({'class': 'form-control'})
 
 
+class EditEmergencyForm(forms.ModelForm):
+    class Meta:
+        model = Hospital_Information
+        fields = ['general_bed_no','available_icu_no','regular_cabin_no','emergency_cabin_no','vip_cabin_no']
+
+    def __init__(self, *args, **kwargs):
+        super(EditEmergencyForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
+class AddEmergencyForm(ModelForm):
+    class Meta:
+        model = Hospital_Information
+        fields = ['name','general_bed_no','available_icu_no','regular_cabin_no','emergency_cabin_no','vip_cabin_no']
+
+    def __init__(self, *args, **kwargs):
+        super(AddEmergencyForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
+
 
 # class AdminForm(ModelForm):
 #     class Meta:

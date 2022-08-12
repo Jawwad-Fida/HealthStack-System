@@ -52,67 +52,78 @@
             <div class="page-wrapper">
 
                 <div class="content container-fluid">
-					<!-- Page Header -->
-					<div class="page-header">
-						<div class="row">
-							<div class="col-sm-12">
-								<h3 class="page-title">Emergency Hospital</h3>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
-									<li class="breadcrumb-item active">Hospital</li>
-								</ul>
+
+<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Edit hopital information</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Edit Hospital Information</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="call-content-full">
+				<div class="container-lg">
+					<div class="row-cols-6">
+						<div class="col-md-7 col-lg-8 col-xl-20">
+							<div class="card">
+								<div class="card-body">
+
+								<div class="col-12 col-md-12">
+												<div class="form-group">
+													<div class="change-avatar">
+														<div class="profile-img">
+															<img src="{% static 'images/hospitals/hospital1.png' %}" width="225 px" alt="User Image">
+														</div>
+													</div>
+												</div>
+											</div>
+									
+									<!-- Profile Settings Form -->
+									<form action="{% url 'edit-emergency-information' pk=hospital.hospital_id  %}" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<div class="row form-row">
+
+											{% for field in form %}
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>{{field.label}}</label>
+													{{field}}{{field.errors}}
+												</div>
+											</div>
+											{% endfor %}
+
+		
+										</div>
+										<div class="submit-section">
+											<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+										</div>
+									</form>
+									<!-- /Profile Settings Form -->
+									
+								</div>
 							</div>
 						</div>
 					</div>
-					<!-- /Page Header -->
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+
 					
-					<div class="row">
-						 <div class="col-sm-12">
-							 <div class="card">
-								 <div class="card-body">
-									 <div class="table-responsive">
-										<table class="datatable table table-hover table-center mb-0">
-										
-											 
-											 <thead>
-												<tr>
-													<th>Hospital Name</th>
-													<th>General Bed </th>
-													<th>ICU</th>
-													<th>Regular Cabin </th>
-													<th>Emergency Cabin </th>
-													<th>Vip Room</th>
-													<th>Update</th>
-													<th>Delete</th>
-												</tr>
-											 </thead>
-											 {% for hospital in all %}
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospital.featured_image.url}}" alt="User Image"></a>															
-															<a href="profile.html">{{hospital.name}}</a>
-														</h2>
-													</td>
-													<td>{{hospital.hospital_id_id}}</td>
-													<td>{{hospital.available_icu_no}}</td>
-                                                    <td>{{hospital.regular_cabin_no}}</td>
-												    <td>{{hospital.emergency_cabin_no}}</td>
-													<td>{{hospital.vip_cabin_no}}</td>
-													<td><a href="{% url 'edit-emergency-information' pk=hospital.hospital_id %}" class="btn btn-primary">Edit</a></td>
-													<td><a href="#" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
-												</tr>
-													
-													</td>
-												</tr>
-												{% endfor %}
-											
-										</table>
-									</div>
-								</div>
-							</div>	
-					</div>
+
+
+
 					
 				</div>			
 			</div>

@@ -6,7 +6,7 @@ from django.contrib import messages
 from hospital.models import Hospital_Information, User
 from doctor.models import Doctor_Information
 from hospital.models import Patient
-from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm
+from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm,AddEmergencyForm, EditEmergencyForm
 from .models import Admin_Information
 
 
@@ -145,11 +145,6 @@ def emergency_details(request):
     return render(request, 'hospital_admin/emergency.html', {'all': hospitals})
 
 
-def add_emergency_information(request):
-    return render(request, 'hospital_admin/add-emergency-information.html')
-
-
-
 def hospital_list(request):
     hospitals = Hospital_Information.objects.all()
     return render(request, 'hospital_admin/hospital-list.html', {'hospitals': hospitals})
@@ -221,6 +216,23 @@ def edit_hospital(request, pk):
 
     context = {'hospital': hospital, 'form': form}
     return render(request, 'hospital_admin/edit-hospital.html', context)
+
+def edit_emergency_information(request, pk):
+
+    hospital = Hospital_Information.objects.get(hospital_id=pk)
+    form = EditEmergencyForm(instance=hospital)  
+
+    if request.method == 'POST':
+        form = EditEmergencyForm(request.POST, request.FILES,
+                           instance=hospital)  
+        if form.is_valid():
+            form.save()
+            return redirect('emergency')
+        else:
+            form = EditEmergencyForm()
+
+    context = {'hospital': hospital, 'form': form}
+    return render(request, 'hospital_admin/edit-emergency-information.html', context)
 
 
 def delete_hospital(request, pk):
