@@ -52,11 +52,10 @@
             <div class="page-wrapper">
 
                 <div class="content container-fluid">
-				
-					<!-- Page Header -->
-					<div class="col-sm-5 col">
-						<a href="{% url 'add-hospital' %}"  class="btn btn-primary float-right mt-2">Add</a>
+					<div class="">
+						<a href="{% url 'add-hospital' %}"  class="fe fe-plus btn btn-primary float-right mt-2 ">Add hospital</a>
 					</div>
+					<!-- Page Header -->
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
@@ -86,8 +85,6 @@
 													<th>Email</th>
 													<th>Phone Number</th>
 													<th>Hospital Type</th>
-													<th>Edit</th>
-													<th>Delete</th>
 													
 												</tr>
 											 </thead>
@@ -104,6 +101,9 @@
 													
 													<td>{{hospitals.phone_number}}</td>
 													
+
+
+
 													<td>{{hospitals.hospital_type}}</td>
 													<td><a href="{% url 'edit-hospital' %}" class="btn btn-primary">Edit</a></td>
 													<td><a href="{% url 'edit-hospital' %}" class="btn btn-primary">Edit</a></td>
@@ -111,6 +111,7 @@
 
 
 													<td><a href="javascript:(0);" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
+
 												</tr>
 													
 													</td>
@@ -120,8 +121,7 @@
 										</table>
 									</div>
 								</div>
-							</div>
-						</div>			
+							</div>	
 					</div>
 					
 				</div>			
