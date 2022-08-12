@@ -74,7 +74,7 @@
 					  <li class="has-submenu active">
 						<a href="#">Hospital <i class="fas fa-chevron-down"></i></a>
 						<ul class="submenu">
-						  
+						 
 						  <li><a href="{% url 'appointments'%}">Appointments</a></li>
 						  <li><a href="{% url 'schedule-timings'%}">Schedule Timing</a></li>
 						  <li><a href="{% url 'my-patients'%}">Patients List</a></li>
@@ -293,6 +293,10 @@
 									<li class="nav-item">
 										<a class="nav-link" href="#doc_locations" data-toggle="tab">Locations and Contact</a>
 									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#doc_emergency" data-toggle="tab">Emergency Info</a>
+									</li>
+									
 									
 								</ul>
 							</nav>
@@ -472,7 +476,7 @@
 										<div class="row">
 										
 											<!-- Clinic Content -->
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<div class="clinic-content">
 													<h4 class="clinic-name"><a href="#">Baby's Care childrens Hospital</a></h4>
 													<p class="doc-speciality">Pediatric Care</p>
@@ -507,7 +511,7 @@
 											<!-- /Clinic Content -->
 											
 											<!-- Clinic Timing -->
-											<div class="col-md-4">
+											<div class="col-md-2">
 												<div class="clinic-timing">
 													<div>
 														<p class="timings-days">
@@ -531,6 +535,7 @@
 											<!-- /Clinic Timing -->
 											
 											
+											
 										</div>
 									</div>
 									<!-- /Location List -->
@@ -540,97 +545,76 @@
 								</div>
 								<!-- /Locations Content -->
 								
-								<!-- Reviews Content -->
-								<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
-								
-									<!-- Review Listing -->
-									<div class="widget review-listing">
-										<ul class="comments-list">
-										
-										
-												
-											
-										
-										<!-- Show All -->
-										<div class="all-feedback text-center">
-											<a href="#" class="btn btn-primary btn-sm">
-												Show all feedback <strong>(167)</strong>
-											</a>
-										</div>
-										<!-- /Show All -->
+							
 										
 								
-								
-								
-						
-								
-								<!-- Business Hours Content -->
-								<div role="tabpanel" id="doc_business_hours" class="tab-pane fade">
+								<!-- Overview Content -->
+								<div role="tabpanel" id="doc_emergency" class="tab-pane fade show">
 									<div class="row">
-										<div class="col-md-6 offset-md-3">
+										<div class="col-md-12 col-lg-9">
 										
-											<!-- Business Hours Widget -->
-											<div class="widget business-widget">
-												<div class="widget-content">
-													<div class="listing-hours">
-														<div class="listing-day current">
-															<div class="day">Today <span>5 Nov 2019</span></div>
-															<div class="time-items">
-																<span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
-																<span class="time">07:00 AM - 09:00 PM</span>
-															</div>
-														</div>
-														<div class="listing-day">
-															<div class="day">Monday</div>
-															<div class="time-items">
-																<span class="time">07:00 AM - 09:00 PM</span>
-															</div>
-														</div>
-														<div class="listing-day">
-															<div class="day">Tuesday</div>
-															<div class="time-items">
-																<span class="time">07:00 AM - 09:00 PM</span>
-															</div>
-														</div>
-														<div class="listing-day">
-															<div class="day">Wednesday</div>
-															<div class="time-items">
-																<span class="time">07:00 AM - 09:00 PM</span>
-															</div>
-														</div>
-														<div class="listing-day">
-															<div class="day">Thursday</div>
-															<div class="time-items">
-																<span class="time">07:00 AM - 09:00 PM</span>
-															</div>
-														</div>
-														<div class="listing-day">
-															<div class="day">Friday</div>
-															<div class="time-items">
-																<span class="time">07:00 AM - 09:00 PM</span>
-															</div>
-														</div>
-														<div class="listing-day">
-															<div class="day">Saturday</div>
-															<div class="time-items">
-																<span class="time">07:00 AM - 09:00 PM</span>
-															</div>
-														</div>
-														<div class="listing-day closed">
-															<div class="day">Sunday</div>
-															<div class="time-items">
-																<span class="time"><span class="badge bg-danger-light">Closed</span></span>
-															</div>
-														</div>
+											<!-- Clinic Timing -->
+											<div class="col-md-6">
+												<div class="clinic-timing">
+													
+													
+													<div>
+													<p class="timings-days">
+														<span>General Bed</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+													</p>
 													</div>
+													<div>
+													<p class="timings-days">
+														<span>ICU</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+													</p>
+													</div>
+													<div>
+													<p class="timings-days">
+														<span>Regular Cabin</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+													</p>
+													</div>
+													<div>
+													<p class="timings-days">
+														<span>Emergency cabin</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+										        	</p>
+													</div>
+													<div>
+													<p class="timings-days">
+														<span>VIP Room</span>
+													</p>
+													<p class="timings-times">
+														<span>10</span>
+													</p>
+													<div>
+
 												</div>
 											</div>
-											<!-- /Business Hours Widget -->
+											<!-- /Clinic Timing -->
+										
+											
 									
+											
+								
+											
+
 										</div>
 									</div>
 								</div>
-								<!-- /Business Hours Content -->
+								<!-- /Overview Content -->
+								
+					
 								
 							</div>
 						</div>

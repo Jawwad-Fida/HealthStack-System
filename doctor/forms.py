@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.models import User
 from hospital.models import User
 from .models import Doctor_Information
-
 # # Create a custom form that inherits from user form (reason --> for modify and customize)
 
 
@@ -29,7 +28,7 @@ class DoctorForm(ModelForm):
     class Meta:
         model = Doctor_Information
         fields = ['name', 'email', 'phone_number', 'degree', 'department',
-                  'featured_image', 'visiting_hour', 'consultation_fee', 'report_fee', 'dob']
+                  'featured_image', 'visiting_hour', 'consultation_fee', 'report_fee', 'dob', 'hospital_name']
 
     def __init__(self, *args, **kwargs):
         super(DoctorForm, self).__init__(*args, **kwargs)

@@ -14,6 +14,7 @@ from django.contrib import messages
 # from django.dispatch import receiver
 
 from .models import Patient, User
+from doctor.models import Doctor_Information
 
 
 # Create your views here.
@@ -29,13 +30,6 @@ def change_password(request):
     return render(request, 'change-password.html')
 
 
-def search(request):
-    return render(request, 'search.html')
-
-
-
-
-
 def add_billing(request):
     return render(request, 'add-billing.html')
 
@@ -46,14 +40,6 @@ def add_prescription(request):
 
 def appointments(request):
     return render(request, 'appointments.html')
-
-
-def booking_success(request):
-    return render(request, 'booking-success.html')
-
-
-def booking(request):
-    return render(request, 'booking.html')
 
 
 def edit_billing(request):
@@ -72,9 +58,6 @@ def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
 
-
-
-
 def about_us(request):
     return render(request, 'about-us.html')
 
@@ -86,8 +69,18 @@ def forgot_password_doctor(request):
 def multiple_hospital(request):
     return render(request, 'multiple-hospital.html')
 
+
+def chat(request):
+    return render(request, 'chat.html')
+
+
+def chat_doctor(request):
+    return render(request, 'chat-doctor.html')
+
+
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
+
 
 # def login(request):
 #     return render(request, 'login.html')
@@ -155,6 +148,8 @@ def patient_register(request):
         else:
             messages.error(
                 request, 'An error has occurred during registration')
+    # else:
+    #     form = CustomUserCreationForm()
 
     context = {'page': page, 'form': form}
     return render(request, 'patient-register.html', context)
@@ -199,6 +194,22 @@ def profile_settings(request, pk):
         if form.is_valid():
             form.save()
             return redirect('patient-dashboard', pk=pk)
+        else:
+            form = PatientForm()
 
     context = {'patient': patient, 'form': form}
     return render(request, 'profile-settings.html', context)
+
+
+# def search(request):
+#     return render(request, 'search.html')
+
+
+def search(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+
+    doctors = Doctor_Information.objects.all()
+
+    context = {'patient': patient, 'doctors': doctors}
+
+    return render(request, 'search.html', context)

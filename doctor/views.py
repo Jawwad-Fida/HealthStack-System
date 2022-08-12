@@ -9,7 +9,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from hospital.models import User
+from hospital.models import User, Patient
 from .models import Doctor_Information
 
 # Create your views here.
@@ -91,10 +91,10 @@ def schedule_timings(request):
 #     return render(request, 'doctor-register.html')
 
 
-def logoutUser(request):
+def logoutDoctor(request):
     logout(request)
     messages.info(request, 'User Logged out')
-    return redirect('login')
+    return redirect('doctor-login')
 
 
 def doctor_register(request):
@@ -120,6 +120,8 @@ def doctor_register(request):
         else:
             messages.error(
                 request, 'An error has occurred during registration')
+    # else:
+    #     form = DoctorUserCreationForm()
 
     context = {'page': page, 'form': form}
     return render(request, 'doctor-register.html', context)
@@ -186,6 +188,25 @@ def doctor_profile_settings(request, pk):
         if form.is_valid():
             form.save()
             return redirect('doctor-dashboard', pk=pk)
+        else:
+            form = DoctorForm()
 
     context = {'doctor': doctor, 'form': form}
     return render(request, 'doctor-profile-settings.html', context)
+
+
+def booking_success(request):
+    return render(request, 'booking-success.html')
+
+
+# def booking(request):
+#     return render(request, 'booking.html')
+
+
+def booking(request, pk):
+    patient = request.user.patient
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+
+    context = {'patient': patient, 'doctor': doctor}
+
+    return render(request, 'booking.html', context)

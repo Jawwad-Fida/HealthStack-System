@@ -3,6 +3,7 @@ from django.dispatch import receiver
 # from django.contrib.auth.models import User
 from .models import Patient, User
 from doctor.models import Doctor_Information
+from hospital_admin.models import Admin_Information
 
 
 # # from django.core.mail import send_mail
@@ -29,6 +30,11 @@ def createPatient(sender, instance, created, **kwargs):
             user = instance
             Doctor_Information.objects.create(
                 user=user, username=user.username, email=user.email)
+        elif instance.is_hospital_admin:
+            user = instance
+            Admin_Information.objects.create(
+                user=user, username=user.username, email=user.email)
+        
 
 
 @receiver(post_save, sender=Patient)

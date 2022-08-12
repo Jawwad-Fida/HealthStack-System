@@ -18,9 +18,10 @@ urlpatterns = [
     path('doctor-profile-settings/<int:pk>/', views.doctor_profile_settings,
          name='doctor-profile-settings'),
     path('doctor-register/', views.doctor_register, name='doctor-register'),
-    path('logout/', views.logoutUser, name='logout'),
+    path('doctor-logout/', views.logoutDoctor, name='doctor-logout'),
     path('my-patients/', views.my_patients, name='my-patients'),
-
+    path('booking/<int:pk>/', views.booking, name='booking'),
+    path('booking-success/', views.booking_success, name='booking-success'),
     path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
 ]
 

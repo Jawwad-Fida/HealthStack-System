@@ -41,19 +41,16 @@
 								<p class="account-subtitle">Access to our dashboard</p>
 								
 								<!-- Form -->
-								<form action="https://dreamguys.co.in/demo/doccure/admin/login.html">
+								<form action="{%url 'admin_register'%}" method="POST">
+									{%	csrf_token%} {% for field in form %}
+
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Name">
+										<label class="focus-label">{{ field.label }}</label>
+										{{field}}
+									
 									</div>
-									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Email">
-									</div>
-									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Password">
-									</div>
-									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Confirm Password">
-									</div>
+
+									{% endfor %}
 									<div class="form-group mb-0">
 										<button class="btn btn-primary btn-block" type="submit">Register</button>
 									</div>

@@ -3,7 +3,7 @@ from django.db import models
 import uuid
 
 # import django user model
-from hospital.models import Hospital_Information, User
+from hospital.models import Hospital_Information, User, Patient
 
 # # Create your models here.
 
@@ -56,3 +56,42 @@ class Doctor_Information(models.Model):
 
     def __str__(self):
         return str(self.user.username)
+
+
+"""
+ amount, followup, status
+
+
+appointment_type,payment_status  # appointment_status --> pending, confirmed, cancelled
+
+"""
+
+
+class Appointment(models.Model):
+    # ('database value', 'display_name')
+    APPOINTMENT_TYPE = (
+        ('report', 'Report'),
+        ('checkup', 'Checkup'),
+    )
+    APPOINTMENT_STATUS = (
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('cancelled', 'Cancelled'),
+    )
+
+    id = models.AutoField(primary_key=True)
+    date = models.DateField(null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
+    doctor_name = models.ForeignKey(
+        Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    patient_name = models.ForeignKey(
+        Patient, on_delete=models.CASCADE, null=True, blank=True)
+    appointment_type = models.CharField(
+        max_length=200, choices=APPOINTMENT_TYPE)
+    appointment_status = models.CharField(
+        max_length=200, choices=APPOINTMENT_STATUS)
+    serial_number = models.UUIDField(default=uuid.uuid4, unique=True)
+    # payment_status = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.patient_name.username)
