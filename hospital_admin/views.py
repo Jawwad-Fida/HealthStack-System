@@ -221,3 +221,9 @@ def edit_hospital(request, pk):
 
     context = {'hospital': hospital, 'form': form}
     return render(request, 'hospital_admin/edit-hospital.html', context)
+
+
+def delete_hospital(request, pk):
+	hospital = Hospital_Information.objects.get(hospital_id=pk)
+	hospital.delete()
+	return redirect('hospital-list')
