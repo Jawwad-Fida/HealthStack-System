@@ -3,11 +3,13 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from hospital.models import User
+from hospital.models import Hospital_Information, User
 from doctor.models import Doctor_Information
 from hospital.models import Patient
 from .forms import AdminUserCreationForm
 from .models import Admin_Information
+
+
 # Create your views here.
 
 
@@ -142,20 +144,25 @@ def add_hospital(request):
     return render(request, 'hospital_admin/add-hospital.html')
 
 
+
 def edit_hospital(request):
     return render(request, 'hospital_admin/edit-hospital.html')
 
 
+
 def emergency_details(request):
-    return render(request, 'hospital_admin/emergency.html')
+    hospitals = Hospital_Information.objects.all()
+    return render(request, 'hospital_admin/emergency.html', {'all': hospitals})
 
 
 def add_emergency_information(request):
     return render(request, 'hospital_admin/add-emergency-information.html')
 
 
+
 def hospital_list(request):
-    return render(request, 'hospital_admin/hospital-list.html')
+    hospitals = Hospital_Information.objects.all()
+    return render(request, 'hospital_admin/hospital-list.html', {'all': hospitals})
 
 
 def appointment_list(request):
@@ -165,3 +172,11 @@ def appointment_list(request):
 
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
+
+
+
+def admin_profile(request, pk):
+    admin = Admin_Information.objects.get(user_id=pk)
+    context = {'admin': admin}
+
+    return render(request, 'hospital_admin/admin-profile.html', context)
