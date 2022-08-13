@@ -45,9 +45,9 @@ urlpatterns = [
 
     path('prescription-view/', views.prescription_view, name='prescription-view'),
     path('add-prescription/', views.add_prescription, name='add-prescription'),
-    #     path('ssl-payment-fail/', views.ssl_payment_fail, name='ssl-payment-fail'),
+    path('payment/', views.payment, name='payment')
+
     path('payment/', views.payment, name='payment'),
-    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
