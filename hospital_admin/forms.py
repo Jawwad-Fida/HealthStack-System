@@ -64,13 +64,14 @@ class AddEmergencyForm(ModelForm):
 
 
 
-# class AdminForm(ModelForm):
-#     class Meta:
-#         model = Admin_Information
-#         fields = ['name', 'email', 'phone_number', 'role']
+class AdminForm(ModelForm):
+    class Meta:
+        model = Admin_Information
+        fields = ['name', 'email', 'phone_number', 'role']
 
-#     def __init__(self, *args, **kwargs):
-#         super(AdminForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+         super(AdminForm, self).__init__(*args, **kwargs)
 
-#         for name, field in self.fields.items():
-#             field.widget.attrs.update({'class': 'form-control'})
+         for name, field in self.fields.items():
+             field.widget.attrs.update({'class': 'form-control'})
+

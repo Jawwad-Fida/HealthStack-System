@@ -2886,8 +2886,8 @@ home-image{
 }
 .doc-info-right {
     margin-left: auto;
-    -ms-flex: 0 0 200px;
-    flex: 0 0 200px;
+    -ms-flex: 0 0 205px;
+    flex: 0 0 205px;
     max-width: 200px;
 }
 .doctor-img {
@@ -6739,3 +6739,4 @@ home-image{
 		margin-bottom: 10px;
 	}
 }
+

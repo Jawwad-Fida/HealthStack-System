@@ -42,7 +42,7 @@ urlpatterns = [
     path('chat/', views.chat, name='chat'),
     path('chat-doctor/', views.chat_doctor, name='chat-doctor'),
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
-    
+    path('payment/', views.payment, name='payment')
 
 
 ]
