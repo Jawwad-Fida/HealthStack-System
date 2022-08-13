@@ -218,10 +218,8 @@ def search(request, pk):
 
     return render(request, 'search.html', context)
 
-
 def payment(request):
     return render(request, 'checkout.html')
-
 
 # def ssl_payment_fail(request):
 #     return render(request, 'fail.html')

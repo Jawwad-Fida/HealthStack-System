@@ -23,6 +23,21 @@
 		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
+
+		<style>
+			th, td {
+			border: 1px solid white;
+	 		border-radius: 10px;
+			 /* #96D4D4 */
+	 		background-color: #0DB9F2;
+	 		height: 50px;
+	 		color: black;
+			width: 1000px;
+			text-align: center;
+
+
+		}
+		</style>
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -201,10 +216,13 @@
 						<div class="card-body">
 							<div class="doctor-widget">
 								<div class="doc-info-left">
+									<div class="row">
+									<div class="col-lg-6 col-md-6" style=" display: flex;justify-content: left;width: 65%;">
 									<div class="doctor-img">
-										<img src="{% static 'images/hospitals/hospital1.png' %}" class="img-fluid" alt="User Image">
+										<img src="{% static 'images/hospitals/hospital3.png' %}" style="height: 250px; width: 280px; margin: auto; " alt="User Image">
 									</div>
-									<div class="doc-info-cont">
+									</div>
+									<div class="doc-info-cont col-md-6">
 										<h4 class="doc-name">Baby's Care childrens Hospital</h4>
 										<p class="doc-speciality">Childrens Hospital</p>
 										
@@ -247,8 +265,9 @@
                                             
 										</div>
 									</div>
+									</div>
 								</div>
-								<div class="doc-info-right">
+								<div class="doc-info-right col-md-6" >
 									<div class="clini-infos">
 										<ul>
 											<li><i class="far fa-thumbs-up"></i> 99%</li>
@@ -511,7 +530,7 @@
 											<!-- /Clinic Content -->
 											
 											<!-- Clinic Timing -->
-											<div class="col-md-2">
+											<div class="col-md-4">
 												<div class="clinic-timing">
 													<div>
 														<p class="timings-days">
@@ -544,77 +563,38 @@
 
 								</div>
 								<!-- /Locations Content -->
-								
-							
-										
-								
+									
 								<!-- Overview Content -->
 								<div role="tabpanel" id="doc_emergency" class="tab-pane fade show">
 									<div class="row">
-										<div class="col-md-12 col-lg-9">
-										
-											<!-- Clinic Timing -->
-											<div class="col-md-6">
-												<div class="clinic-timing">
-													
-													
-													<div>
-													<p class="timings-days">
-														<span>General Bed</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-													</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>ICU</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-													</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>Regular Cabin</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-													</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>Emergency cabin</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-										        	</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>VIP Room</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-													</p>
-													<div>
-
-												</div>
-											</div>
-											<!-- /Clinic Timing -->
-										
-											
-									
-											
-								
-											
-
+										<div class="col-md-12 col-lg-12">
+											<Table>
+												<tr>
+													<td><b>General Bed</b></td>
+													<td>10</td>
+												</tr>
+												<tr>
+													<td><b>Regular Cabin</b></td>
+													<td>9</td>
+												</tr>
+												<tr>
+													<td><b>ICU</b></td>
+													<td>8</td>
+												</tr>
+												<tr>
+													<td><b>Emergency Cabin</b></td>
+													<td>7</td>
+												</tr>
+												<tr>
+													<td><b>VIP room</b></td>
+													<td>-</td>
+												</tr>
+												
+											</Table>
 										</div>
 									</div>
 								</div>
 								<!-- /Overview Content -->
-								
-					
 								
 							</div>
 						</div>
