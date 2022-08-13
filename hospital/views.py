@@ -82,6 +82,8 @@ def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 
 
+
+
 # def login(request):
 #     return render(request, 'login.html')
 
