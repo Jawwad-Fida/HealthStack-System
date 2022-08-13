@@ -6,7 +6,7 @@
                     <span>Main</span>
                 </li>
                 <li class="active"> 
-                    <a href="{%url "admin-home"%}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+                    <a href="{%url 'admin-dashboard' pk=user.id %}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
                 </li>
                 <li> 
                     <a href="{% url 'appointment-list' %}"><i class="fe fe-layout"></i> <span>Appointments</span></a>
@@ -33,7 +33,7 @@
                     </ul>
                 </li>
                 <li> 
-                    <a href="{%url 'admin_profile'%}"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
+                    <a href="{%url 'hospital-admin-profile' pk=user.id %}"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
                 </li>
             </ul>
         </div>
