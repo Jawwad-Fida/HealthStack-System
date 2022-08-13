@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'hospital.apps.HospitalConfig',
     'hospital_admin.apps.HospitalAdminConfig',
     'doctor.apps.DoctorConfig',
-    'ChatSystem.apps.ChatsystemConfig',
     'sslcommerz.apps.SslcommerzConfig',
+    'ChatSystem.apps.ChatsystemConfig',
     'widget_tweaks',
     'rest_framework'
 ]
