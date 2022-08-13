@@ -34,8 +34,7 @@ def add_billing(request):
     return render(request, 'add-billing.html')
 
 
-def add_prescription(request):
-    return render(request, 'add-prescription.html')
+
 
 
 def appointments(request):
@@ -80,6 +79,12 @@ def chat_doctor(request):
 
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
+
+def prescription_view(request):
+    return render(request, 'prescription-view.html')
+
+def add_prescription(request):
+    return render(request, 'add-prescription.html')
 
 
 
