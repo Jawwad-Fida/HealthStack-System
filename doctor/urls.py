@@ -23,8 +23,8 @@ urlpatterns = [
     path('booking/<int:pk>/', views.booking, name='booking'),
     path('booking-success/', views.booking_success, name='booking-success'),
     path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
+    path('patient-id/', views.patient_id, name='patient-id'),
+
 ]
-
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -30,6 +30,9 @@ def my_patients(request):
 def schedule_timings(request):
     return render(request, 'schedule-timings.html')
 
+def patient_id(request):
+    return render(request, 'patient-id.html')
+
 
 # def login_user(request):
 #     page = 'patient_login'
