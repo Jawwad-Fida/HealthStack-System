@@ -205,10 +205,6 @@ def profile_settings(request, pk):
     return render(request, 'profile-settings.html', context)
 
 
-# def search(request):
-#     return render(request, 'search.html')
-
-
 def search(request, pk):
     patient = Patient.objects.get(user_id=pk)
 
@@ -221,7 +217,3 @@ def search(request, pk):
 
 def payment(request):
     return render(request, 'checkout.html')
-
-
-# def ssl_payment_fail(request):
-#     return render(request, 'fail.html')
