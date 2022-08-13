@@ -41,7 +41,7 @@
 								<p class="account-subtitle">Access to our dashboard</p>
 								
 								<!-- Form -->
-								<form action="{% url 'admin-home'%}" method="POST">
+								<form action="{% url 'admin-login'%}" method="POST">
 									{% csrf_token %}
 									<div class="form-group">
 										<input class="form-control" type="text" placeholder="Username" name="username">

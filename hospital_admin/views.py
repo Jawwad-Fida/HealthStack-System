@@ -6,29 +6,25 @@ from django.contrib import messages
 from hospital.models import Hospital_Information, User
 from doctor.models import Doctor_Information
 from hospital.models import Patient
-from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm,AddEmergencyForm, EditEmergencyForm
+from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information
 
 
 # Create your views here.
 
 
-def admin_home(request):
-    return render(request, 'hospital_admin/index.html')
-
+def admin_dashboard(request, pk):
+    admin = Admin_Information.objects.get(user_id=pk)
+    context = {'admin': admin}
+    return render(request, 'hospital_admin/admin-dashboard.html', context)
 
 def logoutAdmin(request):
     logout(request)
     messages.info(request, 'User Logged out')
     return redirect('admin_login')
-
-
-def admin_login(request):
-    return render(request, 'hospital_admin/login.html')
-
+            
 
 def admin_login(request):
-    # page = 'patient_login'
     if request.method == 'GET':
         return render(request, 'hospital_admin/login.html')
     elif request.method == 'POST':
@@ -44,30 +40,11 @@ def admin_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('hospital_home')
+            return redirect('admin-dashboard', pk=user.id)
         else:
             messages.error(request, 'Invalid username or password')
 
-    return render(request, 'doctor-login.html')
-
-
-# def register(request):
-#     return render(request, 'hospital_admin/register.html')
-
-
-# def admin_register(request):
-#     username = request.POST.get('username')
-#     email = request.POST.get('email')
-#     password = request.POST.get('password')
-#     password1 = request.POST.get('password1')
-#     if password == password1:
-#         user = User(username=username, email=email, password=password)
-#         user.save()
-#         return redirect('admin_login')
-#     else:
-#         messages.error(request, 'Password does not match')
-#         return render(request, 'hospital_admin/register.html')
-
+    return render(request, 'hospital_admin/login.html')
 
 def admin_register(request):
     page = 'hospital_admin/register'
@@ -101,9 +78,6 @@ def admin_register(request):
 def admin_forgot_password(request):
     return render(request, 'hospital_admin/forgot-password.html')
 
-
-def admin_profile(request):
-    return render(request, 'hospital_admin/profile.html')
 
 
 def doctor_list(request):
@@ -160,11 +134,24 @@ def hospital_profile(request):
 
 
 
-def admin_profile(request, pk):
-    admin = Admin_Information.objects.get(user_id=pk)
-    context = {'admin': admin}
+def hospital_admin_profile(request, pk):
 
-    return render(request, 'hospital_admin/admin-profile.html', context)
+    # profile = request.user.profile
+    # get user id of logged in user, and get all info from table
+    admin = Admin_Information.objects.get(user_id=pk)
+    form = AdminForm(instance=admin)
+
+    if request.method == 'POST':
+        form = AdminForm(request.POST, request.FILES,
+                          instance=admin)
+        if form.is_valid():
+            form.save()
+            return redirect('admin-dashboard', pk=pk)
+        else:
+            form = AdminForm()
+
+    context = {'admin': admin, 'form': form}
+    return render(request, 'hospital-admin-profile', context)
 
 
 # def add_hospital(request):

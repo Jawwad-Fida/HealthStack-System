@@ -5,9 +5,10 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-
-    path('', views.admin_home, name='admin-home'),
-
+    path('', views.admin_login, name='admin-login'),
+    
+    path('admin-dashboard/<int:pk>/',
+         views.admin_dashboard, name='admin-dashboard'),
 
     path('appointment-list',views.appointment_list, name='appointment-list'),
     
@@ -27,7 +28,6 @@ urlpatterns = [
     path('lock-screen/', views.lock_screen,name='lock_screen'),
     path('login/',views.admin_login,name='admin_login'),
     path('patient-list/',views.patient_list, name='patient-list'),
-    path('profile/', views.admin_profile,name='admin_profile'),
     # path('register/', views.register,name='register'),
     path('admin_register/',views.admin_register,name='admin_register'),
     path('transactions-list/',views.transactions_list, name='transactions_list'),
@@ -37,9 +37,10 @@ urlpatterns = [
     path('edit-emergency-information/<int:pk>/', views.edit_emergency_information,name='edit-emergency-information'),
     
     path('hospital-profile/', views.hospital_profile ,name='hospital-profile'),
-    path('admin-profile/', views.admin_profile ,name='admin-profile'),
+    path('hospital-admin-profile/<int:pk>/', views.hospital_admin_profile,
+         name='hospital-admin-profile'),
 
-]
+]  
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
