@@ -34,9 +34,6 @@ def add_billing(request):
     return render(request, 'add-billing.html')
 
 
-
-
-
 def appointments(request):
     return render(request, 'appointments.html')
 
@@ -80,13 +77,13 @@ def chat_doctor(request):
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 
+
 def prescription_view(request):
     return render(request, 'prescription-view.html')
 
+
 def add_prescription(request):
     return render(request, 'add-prescription.html')
-
-
 
 
 # def login(request):
@@ -222,6 +219,9 @@ def search(request, pk):
     return render(request, 'search.html', context)
 
 
-
 def payment(request):
     return render(request, 'checkout.html')
+
+
+# def ssl_payment_fail(request):
+#     return render(request, 'fail.html')
