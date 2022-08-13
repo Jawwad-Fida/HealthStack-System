@@ -1,0 +1,78 @@
+{% load static %}
+
+
+    <div class="profile-sidebar">
+      <div class="widget-profile pro-widget-content">
+        <div class="profile-info-widget">
+          <a href="#" class="booking-doc-img">
+            <img
+              src="{{ patient.featured_image.url }}"
+              alt="User Image"
+            />
+          </a>
+          <div class="profile-det-info">
+            <h3>{{patient.name}}</h3>
+            <div class="patient-details">
+              <h5>
+                <i class="fas fa-birthday-cake"></i> {{ patient.dob }}
+              </h5>
+              <h5 class="mb-0">
+                <i class="fas fa-map-marker-alt"></i>
+                {{ patient.address }}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-widget">
+        <nav class="dashboard-menu">
+          <ul>
+            <!-- <li>
+                                      <a href="favourites.html">
+                                          <i class="fas fa-bookmark"></i>
+                                          <span>Favourites</span>
+                                      </a>
+                                  </li> -->
+            <!-- <li>
+                                      <a href="chat.html">
+                                          <i class="fas fa-comments"></i>
+                                          <span>Message</span>
+                                          <small class="unread-msg">23</small>
+                                      </a>
+                                  </li> -->
+            <li>
+              <a href="{% url 'search' pk=user.id %}">
+                <i class="fas fa-user-md"></i>
+                <span>Search Doctor</span>
+              </a>
+            </li>
+            <li>
+            <li>
+                <a href="{% url 'multiple-hospital' %}">
+                  <i class="fas fa-user-md"></i>
+                  <span>Multiple Hospital</span>
+                </a>
+              </li>
+            <li>
+              <a href="{% url 'profile-settings' pk=user.id %}">
+                <i class="fas fa-user-cog"></i>
+                <span>Profile Settings</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'change-password'%}">
+                <i class="fas fa-lock"></i>
+                <span>Change Password</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
