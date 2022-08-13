@@ -6,7 +6,7 @@ from hospital.models import User
 
 class Admin_Information(models.Model):
     ADMIN_TYPE = (
-        ('Hospital', 'Hospital Admin'),
+        ('Hospital Admin', 'Hospital Admin'),
         ('Laboratory', 'Laboratory Admin'),
         ('Pharmacy', 'Pharmacy Admin'),
     )
@@ -16,6 +16,8 @@ class Admin_Information(models.Model):
         User, on_delete=models.CASCADE, null=True, blank=True, related_name='hospital_admin')
     username = models.CharField(max_length=200)
     name = models.CharField(max_length=200, null=True, blank=True)
+    featured_image = models.ImageField(
+        upload_to='admin/', default='admin/user-default.png', null=True, blank=True)
     phone_number = models.IntegerField(null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
     role = models.CharField(

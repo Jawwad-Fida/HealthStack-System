@@ -67,7 +67,7 @@ class AddEmergencyForm(ModelForm):
 class AdminForm(ModelForm):
     class Meta:
         model = Admin_Information
-        fields = ['name', 'email', 'phone_number', 'role']
+        fields = ['name', 'email', 'phone_number', 'role','featured_image']
 
     def __init__(self, *args, **kwargs):
          super(AdminForm, self).__init__(*args, **kwargs)
