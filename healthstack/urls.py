@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('hospital.urls')),
     path('doctor/', include('doctor.urls')),
     path('hospital_admin/', include('hospital_admin.urls')),
+    path('sslcommerz/', include('sslcommerz.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

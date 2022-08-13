@@ -63,11 +63,11 @@
                     <a href="index-2.html">Home</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Dashboard
+                    Patient Dashboard
                   </li>
                 </ol>
               </nav>
-              <h2 class="breadcrumb-title">Dashboard</h2>
+              <h2 class="breadcrumb-title">Patient Dashboard</h2>
             </div>
           </div>
         </div>
@@ -180,6 +180,11 @@
                         >
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="tab"
+                          ><span class="med-records">Reports</span></a
+                        >
+                      </li>
+                      <li class="nav-item">
                         <a
                           class="nav-link"
                           href="#pat_medical_records"
@@ -258,113 +263,19 @@
                                   <td class="text-right">
                                     <div class="table-action">
                                       <a
-                                        href="javascript:void(0);"
+                                        href="{% url 'ssl-payment-request' %}"
+                                        class="btn btn-sm bg-success-light"
+                                      >
+                                        <i class="fas fa-dollar-sign"></i> Pay
+                                        Now
+                                      </a>
+                                      <a
+                                        href="#"
                                         class="btn btn-sm bg-primary-light"
                                       >
                                         <i class="fas fa-print"></i> Print
                                       </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-03.jpg' %}"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Deborah Angel
-                                        <span>Cardiology</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td>
-                                    11 Nov 2019
-                                    <span class="d-block text-info"
-                                      >11.00 AM</span
-                                    >
-                                  </td>
-                                  <td>10 Nov 2019</td>
-                                  <td>$400</td>
-                                  <td>13 Nov 2019</td>
-                                  <td>
-                                    <span
-                                      class="badge badge-pill bg-danger-light"
-                                      >Cancelled</span
-                                    >
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-04.jpg' %}"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Sofia Brient
-                                        <span>Urology</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td>
-                                    10 Nov 2019
-                                    <span class="d-block text-info"
-                                      >3.00 PM</span
-                                    >
-                                  </td>
-                                  <td>10 Nov 2019</td>
-                                  <td>$350</td>
-                                  <td>12 Nov 2019</td>
-                                  <td>
-                                    <span
-                                      class="badge badge-pill bg-warning-light"
-                                      >Pending</span
-                                    >
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
+
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
@@ -442,7 +353,7 @@
                     </div>
                     <!-- /Prescription Tab -->
 
-                    <!-- Medical Records Tab -->
+                    <!-- -->
                     <div id="pat_medical_records" class="tab-pane fade">
                       <div class="card card-table mb-0">
                         <div class="card-body">
@@ -490,6 +401,78 @@
                                         class="btn btn-sm bg-info-light"
                                       >
                                         <i class="far fa-eye"></i> View
+                                      </a>
+                                      <a
+                                        href="javascript:void(0);"
+                                        class="btn btn-sm bg-primary-light"
+                                      >
+                                        <i class="fas fa-print"></i> Print
+                                      </a>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /Medical Records Tab -->
+
+                    <!-- medical record -->
+                    <div id="pat_medical_records" class="tab-pane fade">
+                      <div class="card card-table mb-0">
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-hover table-center mb-0">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Date</th>
+                                  <th>Description</th>
+                                  <th>Attachment</th>
+                                  <th>Created</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <a href="javascript:void(0);">#MR-0010</a>
+                                  </td>
+                                  <td>14 Nov 2019</td>
+                                  <td>Dental Filling</td>
+                                  <td><a href="#">dental-test.pdf</a></td>
+                                  <td>
+                                    <h2 class="table-avatar">
+                                      <a
+                                        href="doctor-profile.html"
+                                        class="avatar avatar-sm mr-2"
+                                      >
+                                        <img
+                                          class="avatar-img rounded-circle"
+                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-01.jpg' %}"
+                                          alt="User Image"
+                                        />
+                                      </a>
+                                      <a href="doctor-profile.html"
+                                        >Dr. Ruby Perrin <span>Dental</span></a
+                                      >
+                                    </h2>
+                                  </td>
+                                  <td class="text-right">
+                                    <div class="table-action">
+                                      <a
+                                        href="javascript:void(0);"
+                                        class="btn btn-sm bg-info-light"
+                                      >
+                                        <i class="far fa-eye"></i> View
+                                      </a>
+                                      <a
+                                        href="javascript:void(0);"
+                                        class="btn btn-sm bg-info-light"
+                                      >
+                                        <i class="far fa-paypal"></i> Pay Now
                                       </a>
                                       <a
                                         href="javascript:void(0);"

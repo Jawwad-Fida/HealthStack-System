@@ -66,6 +66,7 @@
 								<div class="row align-items-center">
 									<div class="col-auto profile-image">
 										<a href="#">
+
 											<img class="rounded-circle" alt="User Image" src="{{ doctor.featured_image.url }}">
 										</a>
 									</div>
@@ -92,6 +93,15 @@
 										<a class="nav-link" data-toggle="tab" href="#password_tab">Password</a>
 									</li>
 								</ul>
+
+											<img class="rounded-circle" alt="User Image" src="{{ admin.featured_image.url }}">
+										</a>
+									</div>
+									<div class="col ml-md-n2 profile-user-info">
+										<h4 class="user-name mb-0">{{ admin.name }}</h4>
+									</div>
+								</div>
+
 							</div>	
 							<div class="tab-content profile-tab-cont">
 								
@@ -105,6 +115,7 @@
 												<div class="card-body">
 													<h5 class="card-title d-flex justify-content-between">
 														<span>Personal Details</span> 
+
 														<a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Edit</a>
 													</h5>
 													<div class="row">
@@ -129,6 +140,24 @@
 														Miami,<br>
 														Florida - 33165,<br>
 														United States.</p>
+
+													</h5>
+													<div class="row">
+														<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+														<p class="col-sm-10">J{{ admin.name }}</p>
+													</div>
+													<div class="row">
+														<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Email ID</p>
+														<p class="col-sm-10">{{ admin.email}}</p>
+													</div>
+													<div class="row">
+														<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Mobile</p>
+														<p class="col-sm-10">{{ admin.phone_number }}</p>
+													</div>
+													<div class="row">
+														<p class="col-sm-2 text-muted text-sm-right mb-0">Address</p>
+														<p class="col-sm-10 mb-0">{{ admin.role }}<br>
+
 													</div>
 												</div>
 											</div>

@@ -9,6 +9,8 @@ urlpatterns = [
     
     path('admin-dashboard/<int:pk>/',
          views.admin_dashboard, name='admin-dashboard'),
+    path('hospital-admin-profile/<int:pk>/', views.hospital_admin_profile,
+         name='hospital-admin-profile'),
 
     path('appointment-list',views.appointment_list, name='appointment-list'),
     

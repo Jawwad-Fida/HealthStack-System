@@ -46,6 +46,24 @@ def admin_login(request):
 
     return render(request, 'hospital_admin/login.html')
 
+def hospital_admin_profile(request, pk):
+
+    admin = Admin_Information.objects.get(user_id=pk)
+    form = AdminForm(instance=admin)
+
+    if request.method == 'POST':
+        form = AdminForm(request.POST, request.FILES,
+                          instance=admin)
+        if form.is_valid():
+            form.save()
+            return redirect('hospital_admin/admin-dashboard', pk=pk)
+        else:
+            form = AdminForm()
+
+    context = {'admin': admin, 'form': form}
+    return render(request, 'hospital_admin/hospital-admin-profile.html', context)
+
+
 def admin_register(request):
     page = 'hospital_admin/register'
     form = AdminUserCreationForm()
@@ -133,7 +151,6 @@ def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 
 
-
 def hospital_admin_profile(request, pk):
 
     # profile = request.user.profile
@@ -152,6 +169,7 @@ def hospital_admin_profile(request, pk):
 
     context = {'admin': admin, 'form': form}
     return render(request, 'hospital-admin-profile', context)
+
 
 
 # def add_hospital(request):

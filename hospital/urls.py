@@ -16,7 +16,7 @@ urlpatterns = [
     path('change-password/', views.change_password, name='change-password'),
 
     path('add-billing/', views.add_billing, name='add-billing'),
-    path('add-prescription/', views.add_prescription, name='add-prescription'),
+
     path('appointments/', views.appointments, name='appointments'),
 
     path('edit-billing/', views.edit_billing, name='edit-billing'),
@@ -42,9 +42,12 @@ urlpatterns = [
     path('chat/', views.chat, name='chat'),
     path('chat-doctor/', views.chat_doctor, name='chat-doctor'),
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
-    path('payment/', views.payment, name='payment')
 
-
+    path('prescription-view/', views.prescription_view, name='prescription-view'),
+    path('add-prescription/', views.add_prescription, name='add-prescription'),
+    #     path('ssl-payment-fail/', views.ssl_payment_fail, name='ssl-payment-fail'),
+    path('payment/', views.payment, name='payment'),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
