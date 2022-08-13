@@ -42,9 +42,13 @@ urlpatterns = [
     path('chat/', views.chat, name='chat'),
     path('chat-doctor/', views.chat_doctor, name='chat-doctor'),
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
+<<<<<<< HEAD
     path('prescription-view/', views.prescription_view, name='prescription-view'),
     path('add-prescription/', views.add_prescription, name='add-prescription'),
     
+=======
+    path('payment/', views.payment, name='payment')
+>>>>>>> 1e8b566973cc701788e91fe88c6577eaba9910c5
 
 
 ]

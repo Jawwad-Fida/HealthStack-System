@@ -220,3 +220,8 @@ def search(request, pk):
     context = {'patient': patient, 'doctors': doctors}
 
     return render(request, 'search.html', context)
+
+
+
+def payment(request):
+    return render(request, 'checkout.html')
