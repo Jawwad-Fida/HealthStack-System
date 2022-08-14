@@ -25,9 +25,7 @@ urlpatterns = [
          name='forgot-password-patient'),
     path('patient-dashboard/<int:pk>/',
          views.patient_dashboard, name='patient-dashboard'),
-    # path('patient-profile', views.patient_profile, name='patient-profile'),
-    path('patient-profile/<str:pk>/',
-         views.patient_profile, name='patient-profile'),
+    
     path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
     # path('profile-settings/', views.profile_settings, name='profile-settings'),
     path('profile-settings/<str:pk>/',

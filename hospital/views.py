@@ -153,13 +153,6 @@ def patient_register(request):
     return render(request, 'patient-register.html', context)
 
 
-def patient_profile(request, pk):
-    patient = Patient.objects.get(patient_id=pk)
-    context = {'patient': patient}
-
-    return render(request, 'patient-profile.html', context)
-
-
 def patient_dashboard(request, pk):
     patient = Patient.objects.get(user_id=pk)
     #appointments = Appointment.objects.all()
