@@ -37,7 +37,7 @@ urlpatterns = [
     path('forgot-password-doctor/', views.forgot_password_doctor,
          name='forgot-password-doctor'),
     path('multiple-hospital/', views.multiple_hospital, name='multiple-hospital'),
-    path('chat/', views.chat, name='chat'),
+    path('chat/<int:pk>/', views.chat, name='chat'),
     path('chat-doctor/', views.chat_doctor, name='chat-doctor'),
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
     path('payment/', views.payment, name='payment'),
