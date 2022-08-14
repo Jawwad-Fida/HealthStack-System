@@ -257,7 +257,11 @@
                                   </td>
                                   <td>{{appointment.appointment_type}}</td>
                                   
+                                  {% if appointment.appointment_type == 'checkup' %}
                                   <td>{{appointment.doctor.consultation_fee}} BDT</td>
+                                  {% else %}
+                                  <td>{{appointment.doctor.report_fee}} BDT</td>
+                                  {% endif %}
                                   <td>
                                     {% if appointment.appointment_status == 'pending' %}
                                     <span class="badge badge-pill bg-warning-light">Pending</span>
@@ -534,7 +538,7 @@
                                 {% for payment in payments %}
                                 <tr>
                                   <td>
-                                    <a href="invoice-view.html">#INV-0010</a>
+                                    <a href="invoice-view.html">{{payment.invoice_number}}</a>
                                   </td>
                                   <td>
                                     <h2 class="table-avatar">

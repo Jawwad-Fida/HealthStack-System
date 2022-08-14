@@ -10,6 +10,9 @@ class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
     # patient_id = models.IntegerField(null=True, blank=True)
     # appointment_id = models.IntegerField(null=True, blank=True)
+    
+    invoice_number = models.CharField(max_length=255, null=True, blank=True)
+    
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
     appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE, null=True, blank=True)
     payment_type = models.CharField(max_length=200, null=True, blank=True)
@@ -23,7 +26,12 @@ class Payment(models.Model):
     transaction_id = models.CharField(max_length=255, null=True, blank=True)
     val_transaction_id = models.CharField(
         max_length=255, null=True, blank=True)
+    
+    
     currency_amount = models.CharField(max_length=255, null=True, blank=True)
+    consulation_fee = models.CharField(max_length=255, null=True, blank=True)
+    report_fee = models.CharField(max_length=255, null=True, blank=True)
+    
     card_type = models.CharField(max_length=255, null=True, blank=True)
     card_no = models.CharField(max_length=255, null=True, blank=True)
     bank_transaction_id = models.CharField(
