@@ -106,24 +106,12 @@ def doctor_login(request):
     return render(request, 'doctor-login.html')
 
 
-# def doctor_dashboard(request):
-#     return render(request, 'doctor-dashboard.html')
-
 def doctor_dashboard(request, pk):
     doctor = Doctor_Information.objects.get(user_id=pk)
     context = {'doctor': doctor}
 
     return render(request, 'doctor-dashboard.html', context)
 
-
-# def doctor_profile_settings(request):
-#     return render(request, 'doctor-profile-settings.html')
-
-# def doctor_profile_settings(request, pk):
-#     doctor = Doctor_Information.objects.get(user_id=pk)
-#     context = {'doctor': doctor}
-
-#     return render(request, 'doctor-profile-settings.html', context)
 
 
 def doctor_profile_settings(request, pk):
@@ -150,13 +138,6 @@ def booking_success(request):
     return render(request, 'booking-success.html')
 
 
-
-
-
-# def booking(request):
-#     return render(request, 'booking.html')
-
-
 def booking(request, pk):
     patient = request.user.patient
     doctor = Doctor_Information.objects.get(doctor_id=pk)
@@ -177,3 +158,16 @@ def booking(request, pk):
 
     context = {'patient': patient, 'doctor': doctor}
     return render(request, 'booking.html', context)
+
+
+def prescription_view(request):
+    return render(request, 'prescription-view.html')
+
+def add_prescription(request):
+    return render(request, 'add-prescription.html')
+
+def view_report(request):
+    return render(request, 'view-report.html')
+
+def add_report(request):
+    return render(request, 'add-report.html')
