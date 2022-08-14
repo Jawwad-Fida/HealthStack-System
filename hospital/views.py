@@ -14,7 +14,9 @@ from django.contrib import messages
 # from django.dispatch import receiver
 
 from .models import Patient, User
-from doctor.models import Doctor_Information
+from doctor.models import Doctor_Information, Appointment
+
+from sslcommerz.models import Payment
 
 
 # Create your views here.
@@ -165,25 +167,15 @@ def patient_profile(request, pk):
 
     return render(request, 'patient-profile.html', context)
 
-# http://127.0.0.1:8000/patient-dashboard/1/
-
 
 def patient_dashboard(request, pk):
     patient = Patient.objects.get(user_id=pk)
-    context = {'patient': patient}
+    #appointments = Appointment.objects.all()
+    appointments = Appointment.objects.filter(patient=patient)
+    payment = Payment.objects.all()
+    context = {'patient': patient, 'appointments': appointments}
 
     return render(request, 'patient-dashboard.html', context)
-
-
-# def profile_settings(request):
-#     return render(request, 'profile-settings.html')
-
-
-# def profile_settings(request, pk):
-#     patient = Patient.objects.get(user_id=pk)
-#     context = {'patient': patient}
-
-#     return render(request, 'profile-settings.html', context)
 
 
 def profile_settings(request, pk):
@@ -214,6 +206,6 @@ def search(request, pk):
 
     return render(request, 'search.html', context)
 
+
 def payment(request):
     return render(request, 'checkout.html')
-

@@ -10,9 +10,20 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from hospital.models import User, Patient
-from .models import Doctor_Information
+from .models import Doctor_Information, Appointment
+
+import random
+import string
 
 # Create your views here.
+
+
+def generate_random_string():
+    N = 8
+    string_var = ""
+    string_var = ''.join(random.choices(
+        string.ascii_uppercase + string.digits, k=N))
+    return string_var
 
 
 def doctor_profile(request):
@@ -30,68 +41,9 @@ def my_patients(request):
 def schedule_timings(request):
     return render(request, 'schedule-timings.html')
 
+
 def patient_id(request):
     return render(request, 'patient-id.html')
-
-
-# def login_user(request):
-#     page = 'patient_login'
-#     if request.method == 'GET':
-#         return render(request, 'patient-login.html')
-#     elif request.method == 'POST':
-#         username = request.POST['username']
-#         password = request.POST['password']
-
-#         try:
-#             user = User.objects.get(username=username)
-#         except:
-#             messages.error(request, 'Username does not exist')
-
-#         user = authenticate(username=username, password=password)
-
-#         if user is not None:
-#             login(request, user)
-#             return redirect('hospital_home')
-#         else:
-#             messages.error(request, 'Invalid username or password')
-
-#     return render(request, 'patient-login.html')
-
-
-# def logoutUser(request):
-#     logout(request)
-#     messages.info(request, 'User Logged out')
-#     return redirect('login')
-
-# def doctor_register(request):
-#     page = 'doctor-register'
-#     form = DoctorUserCreationForm()
-
-#     if request.method == 'POST':
-#         form = DoctorUserCreationForm(request.POST)
-#         if form.is_valid():
-#             # form.save()
-#             # commit=False --> don't save to database yet (we have a chance to modify object)
-#             user = form.save(commit=False)
-#             # user.username = user.username.lower()  # lowercase username
-#             user.save()
-
-#             messages.success(request, 'Doctor account was created!')
-
-#             # After user is created, we can log them in
-#             #login(request, user)
-#             return redirect('login')
-
-#         else:
-#             messages.error(
-#                 request, 'An error has occurred during registration')
-
-#     context = {'page': page, 'form': form}
-#     return render(request, 'doctor-register.html', context)
-
-
-# def doctor_register(request):
-#     return render(request, 'doctor-register.html')
 
 
 def logoutDoctor(request):
@@ -128,10 +80,6 @@ def doctor_register(request):
 
     context = {'page': page, 'form': form}
     return render(request, 'doctor-register.html', context)
-
-
-# def doctor_login(request):
-#     return render(request, 'doctor-login.html')
 
 
 def doctor_login(request):
@@ -210,6 +158,19 @@ def booking(request, pk):
     patient = request.user.patient
     doctor = Doctor_Information.objects.get(doctor_id=pk)
 
-    context = {'patient': patient, 'doctor': doctor}
+    if request.method == 'POST':
+        appointment = Appointment(patient=patient, doctor=doctor)
+        date = request.POST['date']
+        time = request.POST['time']
+        appointment_type = request.POST['appointment_type']
 
+        appointment.date = date
+        appointment.time = time
+        appointment.appointment_status = 'pending'
+        appointment.serial_number = generate_random_string()
+        appointment.appointment_type = appointment_type
+        appointment.save()
+        return redirect('patient-dashboard', pk=patient.user_id)
+
+    context = {'patient': patient, 'doctor': doctor}
     return render(request, 'booking.html', context)

@@ -70,28 +70,29 @@ appointment_type,payment_status  # appointment_status --> pending, confirmed, ca
 class Appointment(models.Model):
     # ('database value', 'display_name')
     APPOINTMENT_TYPE = (
-        ('report', 'Report'),
-        ('checkup', 'Checkup'),
+        ('report', 'report'),
+        ('checkup', 'checkup'),
     )
     APPOINTMENT_STATUS = (
-        ('pending', 'Pending'),
-        ('confirmed', 'Confirmed'),
-        ('cancelled', 'Cancelled'),
+        ('pending', 'pending'),
+        ('confirmed', 'confirmed'),
+        ('cancelled', 'cancelled'),
     )
 
     id = models.AutoField(primary_key=True)
     date = models.DateField(null=True, blank=True)
     time = models.TimeField(null=True, blank=True)
-    doctor_name = models.ForeignKey(
+    doctor = models.ForeignKey(
         Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
-    patient_name = models.ForeignKey(
+    patient = models.ForeignKey(
         Patient, on_delete=models.CASCADE, null=True, blank=True)
     appointment_type = models.CharField(
         max_length=200, choices=APPOINTMENT_TYPE)
     appointment_status = models.CharField(
         max_length=200, choices=APPOINTMENT_STATUS)
-    serial_number = models.UUIDField(default=uuid.uuid4, unique=True)
-    # payment_status = models.CharField(max_length=200, null=True, blank=True)
+    serial_number = models.CharField(max_length=200, null=True, blank=True)
+    payment_status = models.CharField(
+        max_length=200, null=True, blank=True, default='pending')
 
     def __str__(self):
-        return str(self.patient_name.username)
+        return str(self.patient.username)

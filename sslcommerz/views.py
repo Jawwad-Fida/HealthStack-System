@@ -45,8 +45,8 @@ def generate_random_val_id():
     return string_var
 
 
-# def payment_home(request):
-#     return render(request, 'payment_index.html')
+def payment_home(request):
+    return render(request, 'index.html')
 
 # @login_required
 
