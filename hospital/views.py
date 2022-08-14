@@ -177,8 +177,12 @@ def patient_dashboard(request, pk):
     patient = Patient.objects.get(user_id=pk)
     #appointments = Appointment.objects.all()
     appointments = Appointment.objects.filter(patient=patient)
-    payment = Payment.objects.all()
-    context = {'patient': patient, 'appointments': appointments}
+    #payments = Payment.objects.filter(patient_id=patient.patient_id).filter(payment_type='appointment')
+    
+    # payments = Payment.objects.filter(patient=patient).filter(payment_type='appointment')
+    payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
+
+    context = {'patient': patient, 'appointments': appointments, 'payments': payments}
 
     return render(request, 'patient-dashboard.html', context)
 
