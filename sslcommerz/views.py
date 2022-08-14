@@ -37,6 +37,13 @@ def generate_random_string():
     string_var = "SSLCZ_TEST_" + string_var
     return string_var
 
+def generate_random_invoice():
+    N = 4
+    string_var = ""
+    string_var = ''.join(random.choices(string.digits, k=N))
+    string_var = "#INV-" + string_var
+    return string_var
+
 
 def generate_random_val_id():
     N = 12
@@ -70,8 +77,10 @@ def ssl_payment_request(request, pk, id):
     appointment = Appointment.objects.get(id=id)
     payment_type = "appointment"
     
+    invoice_number = generate_random_invoice()
+    
     post_body = {}
-    post_body['total_amount'] = appointment.doctor.consultation_fee
+    post_body['total_amount'] = appointment.doctor.consultation_fee + appointment.doctor.report_fee
     post_body['currency'] = "BDT"
     post_body['tran_id'] = generate_random_string()
 
@@ -114,6 +123,10 @@ def ssl_payment_request(request, pk, id):
     payment.city = post_body['cus_city']
     payment.country = post_body['cus_country']
     payment.transaction_id = post_body['tran_id']
+    
+    payment.consulation_fee = appointment.doctor.consultation_fee
+    payment.report_fee = appointment.doctor.report_fee
+    payment.invoice_number = invoice_number
     payment.save()
     
     
