@@ -19,7 +19,12 @@ from django.contrib import messages
 # function to return views for the urls
 
 
-# def hospital_home(request):
-#     return render(request, 'index-2.html')
+def pharmacy_homepage(request):
+    return render(request, 'pharmacy/index.html')
+
+def cart(request):
+    return render(request, 'pharmacy/cart.html')
+
+
 
 # Create your views here.
