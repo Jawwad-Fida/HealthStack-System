@@ -12,6 +12,8 @@ from django.contrib import admin
 
 urlpatterns = [
     # path('', views.hospital_home, name='hospital_home'),
+    path('',views.pharmacy_homepage, name='pharmacy_homepage'),
+    path('cart/', views.cart, name='cart'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
