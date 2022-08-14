@@ -28,7 +28,7 @@ urlpatterns = [
     path('prescription-view/', views.prescription_view, name='prescription-view'),
     path('view-report/', views.view_report, name='view-report'),
     path('add-report/', views.add_report, name='add-report'),
-    path('patient-profile/',views.patient_profile, name='patient-profile'),
+    path('patient_profile/',views.patient_profile, name='patient_profile'),
    
 
 ]
