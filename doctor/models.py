@@ -93,6 +93,7 @@ class Appointment(models.Model):
     serial_number = models.CharField(max_length=200, null=True, blank=True)
     payment_status = models.CharField(
         max_length=200, null=True, blank=True, default='pending')
+    transaction_id = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return str(self.patient.username)
