@@ -87,6 +87,11 @@ def prescription_view(request):
 def add_prescription(request):
     return render(request, 'add-prescription.html')
 
+def view_report(request):
+    return render(request, 'view-report.html')
+
+def add_report(request):
+    return render(request, 'add-report.html')
 
 # def login(request):
 #     return render(request, 'login.html')
