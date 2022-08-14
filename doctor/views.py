@@ -26,10 +26,6 @@ def generate_random_string():
     return string_var
 
 
-def doctor_profile(request):
-    return render(request, 'doctor-profile.html')
-
-
 def doctor_change_password(request):
     return render(request, 'doctor-change-password.html')
 
@@ -158,6 +154,20 @@ def booking(request, pk):
 
     context = {'patient': patient, 'doctor': doctor}
     return render(request, 'booking.html', context)
+
+
+def doctor_profile(request, pk):
+    # request.user --> get logged in user
+    if request.user.is_patient:
+        patient = request.user.patient
+    else:
+        patient = None
+    
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    context = {'doctor': doctor, 'patient': patient}
+    
+    return render(request, 'doctor-profile.html', context)
+
 
 
 def prescription_view(request):

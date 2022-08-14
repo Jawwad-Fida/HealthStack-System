@@ -12,7 +12,7 @@ urlpatterns = [
     path('', views.doctor_login, name='doctor-login'),
     path('doctor-dashboard/<int:pk>/',
          views.doctor_dashboard, name='doctor-dashboard'),
-    path('doctor-profile/', views.doctor_profile, name='doctor-profile'),
+    path('doctor-profile/<int:pk>/', views.doctor_profile, name='doctor-profile'),
     path('doctor-change-password/', views.doctor_change_password,
          name='doctor-change-password'),
     path('doctor-profile-settings/<int:pk>/', views.doctor_profile_settings,
