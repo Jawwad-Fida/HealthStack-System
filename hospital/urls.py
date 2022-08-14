@@ -45,7 +45,8 @@ urlpatterns = [
 
     path('prescription-view/', views.prescription_view, name='prescription-view'),
     path('add-prescription/', views.add_prescription, name='add-prescription'),
-
+    path('view-report/', views.view_report, name='view-report'),
+    path('add-report/', views.add_report, name='add-report'),
     path('payment/', views.payment, name='payment'),
 ]
 

@@ -150,6 +150,9 @@ def booking_success(request):
     return render(request, 'booking-success.html')
 
 
+
+
+
 # def booking(request):
 #     return render(request, 'booking.html')
 
