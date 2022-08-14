@@ -67,9 +67,12 @@ def forgot_password_doctor(request):
 def multiple_hospital(request):
     return render(request, 'multiple-hospital.html')
 
+def chat(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+    doctors = Doctor_Information.objects.all()
 
-def chat(request):
-    return render(request, 'chat.html')
+    context = {'patient': patient, 'doctors': doctors}
+    return render(request, 'chat.html', context)
 
 
 def chat_doctor(request):
