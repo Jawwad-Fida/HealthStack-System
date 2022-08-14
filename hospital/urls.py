@@ -42,11 +42,6 @@ urlpatterns = [
     path('chat/', views.chat, name='chat'),
     path('chat-doctor/', views.chat_doctor, name='chat-doctor'),
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
-
-    path('prescription-view/', views.prescription_view, name='prescription-view'),
-    path('add-prescription/', views.add_prescription, name='add-prescription'),
-    path('view-report/', views.view_report, name='view-report'),
-    path('add-report/', views.add_report, name='add-report'),
     path('payment/', views.payment, name='payment'),
 ]
 
