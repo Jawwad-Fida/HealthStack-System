@@ -80,70 +80,7 @@ class Patient(models.Model):
 
     def __str__(self):
         return str(self.user.username)
-
-
-# class Payment_Details(models.Model):
-#     payment_id = models.AutoField(primary_key=True, editable=False)
-#     patient_name = models.CharField(max_length=200)
-#     patient_email = models.CharField(max_length=200)
-#     patient_phone_number = models.IntegerField(default=0)
-#     paid_amount = models.IntegerField(default=0)
-#     transaction_id = models.TextField(null=True, blank=True)
-#     payment_date = models.DateField(null=True, blank=True)
-#     status = models.CharField(max_length=200)
-#     currency = models.CharField(max_length=200)
-#     fee_type = models.CharField(max_length=200)
-
-#     def __str__(self):
-#         return self.patient_name
-
-
-# class Admin_Information(models.Model):
-#     ADMIN_TYPE = (
-#         ('Hospital', 'Hospital Admin'),
-#         ('Laboratory', 'Laboratory Admin'),
-#         ('Pharmacy', 'Pharmacy Admin'),
-#     )
-
-#     admin_id = models.AutoField(primary_key=True, editable=False)
-#     admin_username = models.CharField(max_length=200)
-#     admin_phone_number = models.IntegerField(default=0)
-#     admin_email = models.CharField(max_length=200, null=True, blank=True)
-#     #admin_password = models.CharField(max_length=200, null=True, blank=True)
-#     admin_role = models.CharField(
-#         max_length=200, choices=ADMIN_TYPE, null=True, blank=True)
-
-#     def __str__(self):
-#         return self.admin_username
-
-
-# class Report_Information(models.Model):
-
-#     REPORT_TYPE = (
-#         ('Urgent', 'Urgent'),
-#         ('Normal', 'Normal'),
-#     )
-
-#     report_id = models.AutoField(primary_key=True, editable=False)
-#     report_date = models.DateField(null=True, blank=True)
-#     report_time = models.TimeField(null=True, blank=True)
-#     report_type = models.CharField(
-#         max_length=200, null=True, blank=True, choices=REPORT_TYPE)
-#     delivery_date = models.TimeField(null=True, blank=True)
-#     report_doctor = models.ForeignKey(
-#         Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
-#     patient_name = models.ForeignKey(
-#         Patient, on_delete=models.CASCADE, null=True, blank=True)
-#     Hospital_name = models.ForeignKey(
-#         Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
-#     report_description = models.TextField(null=True, blank=True)
-#     report_image = models.ImageField(
-#         null=True, blank=True, default="default.jpg")
-#     total_report_fee = models.IntegerField(default=0)
-
-#     def __str__(self):
-#         return self.report_type
-
+    
 
 # class Test_information(models.Model):
 #     test_id = models.AutoField(primary_key=True, editable=False)

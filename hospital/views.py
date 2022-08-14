@@ -80,19 +80,6 @@ def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 
 
-def prescription_view(request):
-    return render(request, 'prescription-view.html')
-
-
-def add_prescription(request):
-    return render(request, 'add-prescription.html')
-
-def view_report(request):
-    return render(request, 'view-report.html')
-
-def add_report(request):
-    return render(request, 'add-report.html')
-
 # def login(request):
 #     return render(request, 'login.html')
 
@@ -164,13 +151,6 @@ def patient_register(request):
 
     context = {'page': page, 'form': form}
     return render(request, 'patient-register.html', context)
-
-
-def patient_profile(request, pk):
-    patient = Patient.objects.get(patient_id=pk)
-    context = {'patient': patient}
-
-    return render(request, 'patient-profile.html', context)
 
 
 def patient_dashboard(request, pk):

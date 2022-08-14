@@ -27,6 +27,15 @@
             <span>Dashboard</span>
           </a>
         </li>
+
+        <li>
+        <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">
+          <i class="fas fa-columns"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+
+
         <li>
           <a href="{% url 'patient-id'%}">
             <i class="fas fa-user-circle"></i>
@@ -41,7 +50,7 @@
           </a>
         </li>
         <li>
-          <a href="{% url 'my-patients'%}">
+          <a href="{% url 'my-patients' pk=doctor.doctor_id %}">
             <i class="fas fa-user-injured"></i>
             <span>My Patients</span>
           </a>

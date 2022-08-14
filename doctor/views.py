@@ -26,16 +26,8 @@ def generate_random_string():
     return string_var
 
 
-def doctor_profile(request):
-    return render(request, 'doctor-profile.html')
-
-
 def doctor_change_password(request):
     return render(request, 'doctor-change-password.html')
-
-
-def my_patients(request):
-    return render(request, 'my-patients.html')
 
 
 def schedule_timings(request):
@@ -106,24 +98,12 @@ def doctor_login(request):
     return render(request, 'doctor-login.html')
 
 
-# def doctor_dashboard(request):
-#     return render(request, 'doctor-dashboard.html')
-
 def doctor_dashboard(request, pk):
     doctor = Doctor_Information.objects.get(user_id=pk)
     context = {'doctor': doctor}
 
     return render(request, 'doctor-dashboard.html', context)
 
-
-# def doctor_profile_settings(request):
-#     return render(request, 'doctor-profile-settings.html')
-
-# def doctor_profile_settings(request, pk):
-#     doctor = Doctor_Information.objects.get(user_id=pk)
-#     context = {'doctor': doctor}
-
-#     return render(request, 'doctor-profile-settings.html', context)
 
 
 def doctor_profile_settings(request, pk):
@@ -150,13 +130,6 @@ def booking_success(request):
     return render(request, 'booking-success.html')
 
 
-
-
-
-# def booking(request):
-#     return render(request, 'booking.html')
-
-
 def booking(request, pk):
     patient = request.user.patient
     doctor = Doctor_Information.objects.get(doctor_id=pk)
@@ -177,3 +150,44 @@ def booking(request, pk):
 
     context = {'patient': patient, 'doctor': doctor}
     return render(request, 'booking.html', context)
+
+
+def doctor_profile(request, pk):
+    # request.user --> get logged in user
+    if request.user.is_patient:
+        patient = request.user.patient
+    else:
+        patient = None
+    
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    context = {'doctor': doctor, 'patient': patient}
+    
+    return render(request, 'doctor-profile.html', context)
+
+
+def my_patients(request, pk):
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    patients = Patient.objects.all()
+    context = {'doctor': doctor, 'patients': patients}
+    return render(request, 'my-patients.html', context)
+
+
+def patient_profile(request):
+    # patient = Patient.objects.get(patient_id=pk)
+    # context = {'patient': patient}
+
+    return render(request, 'patient-profile.html')
+
+def view_report(request):
+    return render(request, 'view-report.html')
+
+def add_report(request):
+    return render(request, 'add-report.html')
+
+
+def prescription_view(request):
+    return render(request, 'prescription-view.html')
+
+def add_prescription(request):
+    return render(request, 'add-prescription.html')
+
