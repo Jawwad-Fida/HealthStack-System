@@ -42,6 +42,8 @@ urlpatterns = [
     path('hospital-admin-profile/<int:pk>/', views.hospital_admin_profile,
          name='hospital-admin-profile'),
 
+   path('create-invoice/<int:pk>/', views.create_invoice,name='create-invoice'),
+
 ]  
 
 

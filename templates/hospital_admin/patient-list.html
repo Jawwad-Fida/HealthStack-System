@@ -91,7 +91,7 @@
 											<tbody>
 												{%for patient in all%}
 												<tr>
-													<td>{{patient.nid}}</td>
+													<td>{{patient.patient_id}}</td>
 													<td>
 														<h2 class="table-avatar">
 															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{patient.featured_image.url}}" alt="User Image"></a>
@@ -105,10 +105,10 @@
 													<td>
 													<div class="table-action">
 														<a
-														  href="#"
+														  href="{% url 'create-invoice' pk=patient.patient_id %}"
 														  class="btn btn-sm bg-success-light"
 														>
-														  <i class="fas fa-dollar-sign"></i> Create Bill
+														  <i class="fas fa-dollar-sign"></i> Create Invoice
 														</a>
 							
 													  </div>
