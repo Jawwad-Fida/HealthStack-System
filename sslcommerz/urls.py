@@ -8,7 +8,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path('', views.payment_home, name='payment_home'),
-    path('ssl-payment-request/', views.ssl_payment_request,
+    path('ssl-payment-request/<int:pk>/<int:id>/', views.ssl_payment_request,
          name='ssl-payment-request'),
     path('ssl-payment-success/', views.ssl_payment_success,
          name='ssl-payment-success'),
