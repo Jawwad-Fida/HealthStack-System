@@ -125,13 +125,13 @@
                           <span>Search Doctor</span>
                         </a>
                       </li>
+                      <li></li>
                       <li>
-                      <li>
-                          <a href="{% url 'multiple-hospital' %}">
-                            <i class="fas fa-user-md"></i>
-                            <span>Multiple Hospital</span>
-                          </a>
-                        </li>
+                        <a href="{% url 'multiple-hospital' %}">
+                          <i class="fas fa-user-md"></i>
+                          <span>Multiple Hospital</span>
+                        </a>
+                      </li>
                       <li>
                         <a href="{% url 'profile-settings' pk=user.id %}">
                           <i class="fas fa-user-cog"></i>
@@ -219,14 +219,14 @@
                                 <tr>
                                   <th>Doctor</th>
                                   <th>Appt Date</th>
-                                  <th>Booking Date</th>
-                                  <th>Amount</th>
-                                  <th>Follow Up</th>
+                                  <th>Type</th>
                                   <th>Status</th>
+                                  <th>Amount</th>
                                   <th></th>
                                 </tr>
                               </thead>
                               <tbody>
+                                {% for appointment in appointments %}
                                 <tr>
                                   <td>
                                     <h2 class="table-avatar">
@@ -236,30 +236,39 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}"
+                                          src="{{ appointment.doctor.featured_image.url }}"
                                           alt="User Image"
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >Dr. Darren Elder <span>Dental</span></a
+                                        >{{ appointment.doctor.name }}
+                                        <span
+                                          >{{appointment.doctor.department}}</span
+                                        ></a
                                       >
                                     </h2>
                                   </td>
                                   <td>
-                                    12 Nov 2019
+                                    {{appointment.id}}
                                     <span class="d-block text-info"
-                                      >8.00 PM</span
+                                      >{{appointment.time}}</span
                                     >
                                   </td>
-                                  <td>12 Nov 2019</td>
-                                  <td>$250</td>
-                                  <td>14 Nov 2019</td>
+                                  <td>{{appointment.appointment_type}}</td>
+                                  
+                                  <td>{{appointment.doctor.consultation_fee}} BDT</td>
                                   <td>
-                                    <span
-                                      class="badge badge-pill bg-success-light"
-                                      >Confirm</span
-                                    >
+                                    {% if appointment.appointment_status == 'pending' %}
+                                    <span class="badge badge-pill bg-warning-light">Pending</span>
+                                    {% endif %}
+                                    {% if appointment.appointment_status == 'confirmed' %}
+                                    <span class="badge badge-pill bg-success-light">Confirm</span>
+                                    {% endif %}
+                                    {% if appointment.appointment_status == 'cancelled' %}
+                                    <span class="badge badge-pill bg-danger-light">Cancelled</span>
+                                    {% endif %}
                                   </td>
+
                                   <td class="text-right">
                                     <div class="table-action">
                                       <a
@@ -285,6 +294,7 @@
                                     </div>
                                   </td>
                                 </tr>
+                                {% endfor %}
                               </tbody>
                             </table>
                           </div>
@@ -503,10 +513,12 @@
                                   <th>Doctor</th>
                                   <th>Amount</th>
                                   <th>Paid On</th>
-                                  <th></th>
+                                  <th>Payment Status</th>
                                 </tr>
                               </thead>
                               <tbody>
+
+                              
                                 <tr>
                                   <td>
                                     <a href="invoice-view.html">#INV-0010</a>
@@ -530,6 +542,9 @@
                                   </td>
                                   <td>$450</td>
                                   <td>14 Nov 2019</td>
+                                  <td>
+                                    <span class="badge badge-pill bg-warning-light">Pending</span>
+                                  </td>
                                   <td class="text-right">
                                     <div class="table-action">
                                       <a
@@ -547,6 +562,9 @@
                                     </div>
                                   </td>
                                 </tr>
+                             
+
+
                               </tbody>
                             </table>
                           </div>
