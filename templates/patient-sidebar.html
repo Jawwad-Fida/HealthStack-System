@@ -40,15 +40,32 @@
                                           <small class="unread-msg">23</small>
                                       </a>
                                   </li> -->
-            <li>
-              <a href="{% url 'search' pk=user.id %}">
+            <li class="submenu">
+              <!-- {% url 'search' pk=user.id %} -->
+              <a href="javascript:void(0);">
                 <i class="fas fa-user-md"></i>
-                <span>Search Doctor</span>
+                <span>Search Doctor</span><span class="menu-arrow"></span>
               </a>
+              <ul style="display: none;">
+                <li class="submenu">
+                  <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
+                </li>
+              </ul>
+              
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fe fe-layout"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
+                <li><a href="form-input-groups.html">Input Groups </a></li>
+                <li><a href="form-horizontal.html">Horizontal Form </a></li>
+                <li><a href="form-vertical.html"> Vertical Form </a></li>
+                <li><a href="form-mask.html"> Form Mask </a></li>
+                <li><a href="form-validation.html"> Form Validation </a></li>
+              </ul>
             </li>
             <li>
-            <li>
-                <a href="{% url 'multiple-hospital' %}">
+                <a href="{% url 'multiple-hospital'%}">
                   <i class="fas fa-user-md"></i>
                   <span>Multiple Hospital</span>
                 </a>
