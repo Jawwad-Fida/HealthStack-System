@@ -19,7 +19,7 @@ urlpatterns = [
          name='doctor-profile-settings'),
     path('doctor-register/', views.doctor_register, name='doctor-register'),
     path('doctor-logout/', views.logoutDoctor, name='doctor-logout'),
-    path('my-patients/', views.my_patients, name='my-patients'),
+    path('my-patients/<int:pk>/', views.my_patients, name='my-patients'),
     path('booking/<int:pk>/', views.booking, name='booking'),
     path('booking-success/', views.booking_success, name='booking-success'),
     path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('prescription-view/', views.prescription_view, name='prescription-view'),
     path('view-report/', views.view_report, name='view-report'),
     path('add-report/', views.add_report, name='add-report'),
+    path('patient-profile/',views.patient_profile, name='patient-profile'),
    
 
 ]

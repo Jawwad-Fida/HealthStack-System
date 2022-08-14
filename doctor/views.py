@@ -30,10 +30,6 @@ def doctor_change_password(request):
     return render(request, 'doctor-change-password.html')
 
 
-def my_patients(request):
-    return render(request, 'my-patients.html')
-
-
 def schedule_timings(request):
     return render(request, 'schedule-timings.html')
 
@@ -169,6 +165,25 @@ def doctor_profile(request, pk):
     return render(request, 'doctor-profile.html', context)
 
 
+def my_patients(request, pk):
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    patients = Patient.objects.all()
+    context = {'doctor': doctor, 'patients': patients}
+    return render(request, 'my-patients.html', context)
+
+
+def patient_profile(request):
+    # patient = Patient.objects.get(patient_id=pk)
+    # context = {'patient': patient}
+
+    return render(request, 'patient-profile.html')
+
+def view_report(request):
+    return render(request, 'view-report.html')
+
+def add_report(request):
+    return render(request, 'add-report.html')
+
 
 def prescription_view(request):
     return render(request, 'prescription-view.html')
@@ -176,8 +191,3 @@ def prescription_view(request):
 def add_prescription(request):
     return render(request, 'add-prescription.html')
 
-def view_report(request):
-    return render(request, 'view-report.html')
-
-def add_report(request):
-    return render(request, 'add-report.html')
