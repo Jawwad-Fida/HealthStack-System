@@ -22,6 +22,18 @@ from django.contrib import messages
 def pharmacy_homepage(request):
     return render(request, 'pharmacy/index.html')
 
+def pharmacy_menu(request):
+    return render(request, 'pharmacy/menu.html')
+
+def pharmacy_single_product(request):
+    return render(request, 'pharmacy/product-single.html')
+
+def pharmacy_shop(request):
+    return render(request, 'pharmacy/shop.html')
+
+def checkout(request):
+    return render(request, 'pharmacy/checkout.html')
+
 def cart(request):
     return render(request, 'pharmacy/cart.html')
 
