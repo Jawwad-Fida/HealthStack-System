@@ -172,12 +172,13 @@ def my_patients(request, pk):
     return render(request, 'my-patients.html', context)
 
 
-def patient_profile(request):
-    # patient = Patient.objects.get(patient_id=pk)
-    
-    # context = {'patient': patient}
+# def patient_profile(request):
+#     return render(request, 'patient_profile.html')
 
-    return render(request, 'patient_profile.html')
+def patient_profile(request):
+    patient = Patient.objects.all()
+    context = {'patient': patient}
+    return render(request, 'patient_profile.html', context)
 
 def view_report(request):
     return render(request, 'view-report.html')
