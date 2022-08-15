@@ -8,33 +8,60 @@
                 <li class="active"> 
                     <a href="{%url 'admin-dashboard' pk=user.id %}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
                 </li>
+                
+                <li class="submenu">
+                    <a href="#"><i class="fe fe-document"></i> <span> Hospitals</span></a>
+                    <ul style="display: none;">
+                        <li><a href="{% url 'hospital-list' %}"><i class="fe fe-users"></i> <span>Hospital</span></a></li>
+                        <li><a href="{% url 'emergency' %}"><i class="fe fe-moon"></i> <span>Emergency Information</span></a></li>
+                    </ul>
+                </li>
+
                 <li> 
                     <a href="{% url 'appointment-list' %}"><i class="fe fe-layout"></i> <span>Appointments</span></a>
                 </li>
-                <li> 
-                    <a href="{% url 'hospital-list' %}"><i class="fe fe-users"></i> <span>Hospital</span></a>
-                </li>
+
                 <li> 
                     <a href="{%url 'doctor-list'%}"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
                 </li>
+                
                 <li> 
                     <a href="{% url 'patient-list'%}"><i class="fe fe-user"></i> <span>Patients</span></a>
                 </li>
-                <li> 
-                    <a href="{% url 'emergency' %}"><i class="fe fe-moon"></i> <span>Emergency Information</span></a>
-                </li>
+         
                 <li> 
                     <a href="{% url 'transactions_list' %}"><i class="fe fe-activity"></i> <span>Transactions</span></a>
                 </li>
+                
                 <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Reports</span></a>
                     <ul style="display: none;">
                         <li><a href="invoice-report.html">Invoice Reports</a></li>
                     </ul>
                 </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="fe fe-document"></i> <span> Pharmacists</span></a>
+                    <ul style="display: none;">
+                        <li><a href="invoice-report.html">Add Pharmacists</a></li>
+                        <li><a href="invoice-report.html">Pharmacists List</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="fe fe-document"></i> <span> Medicines</span></a>
+                    <ul style="display: none;">
+                        <li><a href="invoice-report.html">Add Medicines</a></li>
+                        <li><a href="invoice-report.html">Medicines List</a></li>
+                    </ul>
+                </li>
+
+                
                 <li> 
                     <a href="{%url 'hospital-admin-profile' pk=user.id %}"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
                 </li>
+
+                
             </ul>
         </div>
     </div>
