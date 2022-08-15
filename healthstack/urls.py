@@ -28,7 +28,7 @@ urlpatterns = [
     path('', include('hospital.urls')),
     path('doctor/', include('doctor.urls')),
     path('hospital_admin/', include('hospital_admin.urls')),
-    path('api/', include('ChatSystem.urls'))
+    path('api/', include('ChatSystem.urls')),
     path('sslcommerz/', include('sslcommerz.urls')),
     path('pharmacy/', include('pharmacy.urls')),
 ]
