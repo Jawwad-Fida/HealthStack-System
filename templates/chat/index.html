@@ -1,0 +1,71 @@
+{% load static %}
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
+    </head>
+
+    <body>
+    {% block body %}
+        <div class="section gray lighten-3" style="background-color: gray">
+            <div class="container white-text center-align text">
+            <h2>A Simple Chat Application Using Django</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+            <div class="col s12 m8 l6 offset-m2 offset-l3">
+                <div class="section center-block">
+                <div>
+                    {% block form %}
+                    <h3>
+                    Login
+                    </h3>
+                    <form id="login-form" class="form-group" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="username" id="id_username" type="text">
+                                <label for="id_username">Username</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="password" id="id_password" type="password">
+                                <label for="id_password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s8">
+                                <a href="{% url 'register' %}" style="color: gray">Register</a>
+                            </div>
+                            <div class="col s4">
+                            <div class="right">
+                                <button class="btn waves-effect waves-light pull-s12" style="background-color: gray">Login</button>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                    {% endblock %}
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+    
+  
+  </html>
