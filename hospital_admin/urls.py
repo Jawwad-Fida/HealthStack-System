@@ -9,7 +9,6 @@ urlpatterns = [
     
     path('admin-dashboard/<int:pk>/',
          views.admin_dashboard, name='admin-dashboard'),
-         
     path('hospital-admin-profile/<int:pk>/', views.hospital_admin_profile,
          name='hospital-admin-profile'),
 
@@ -40,7 +39,10 @@ urlpatterns = [
     path('edit-emergency-information/<int:pk>/', views.edit_emergency_information,name='edit-emergency-information'),
     
     path('hospital-profile/', views.hospital_profile ,name='hospital-profile'),
+    path('hospital-admin-profile/<int:pk>/', views.hospital_admin_profile,
+         name='hospital-admin-profile'),
 
+   path('create-invoice/<int:pk>/', views.create_invoice,name='create-invoice'),
 
 ]  
 

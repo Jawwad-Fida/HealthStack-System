@@ -57,6 +57,8 @@
       href="{% static 'HealthStack-System/css/Normal/style.css' %}"
     />
 
+    <link rel="stylesheet"href="{% static 'HealthStack-System/css/Normal/search2.css' %}">
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.min.js"></script>
@@ -72,176 +74,40 @@
 
       <!-- Breadcrumb -->
       <div class="breadcrumb-bar">
-        <div class="container-fluid">
-          <div class="row align-items-center">
-            <div class="col-md-8 col-12">
-              <nav aria-label="breadcrumb" class="page-breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
-                    <a href="index-2.html">Home</a>
-                  </li>
-                  <li class="breadcrumb-item active" aria-current="page">
-                    Search Doctor
-                  </li>
-                </ol>
-              </nav>
-              <h2 class="breadcrumb-title">Search Doctor</h2>
-            </div>
-            <!-- <div class="col-md-4 col-12 d-md-block d-none">
-							<div class="sort-by">
-								<span class="sort-title">Sort by</span>
-								<span class="sortby-fliter">
-									<select class="select">
-										<option>Select</option>
-										<option class="sorting">Rating</option>
-										<option class="sorting">Popular</option>
-										<option class="sorting">Latest</option>
-										<option class="sorting">Free</option>
-									</select>
-								</span>
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-6 col-6">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Search Doctor</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Search Doctor</h2>
+						</div>
+						<div class="col-md-6 col-6 text-right">
+							
+							<div class="top-nav-search">
+								<form>
+									<input type="text" class="form-control" placeholder="Search doctor">
+									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
+								</form>
 							</div>
-						</div> -->
-          </div>
-        </div>
-      </div>
+						</div>
+					</div>
+				</div>
+			</div>
       <!-- /Breadcrumb -->
 
       <!-- Page Content -->
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-              <!-- Search Filter -->
-              <div class="card search-filter">
-                <div class="card-header">
-                  <h4 class="card-title mb-0">Search Filter</h4>
-                </div>
-                <div class="card-body">
-                  <div class="filter-widget">
-                    <div class="cal-icon">
-                      <input
-                        type="text"
-                        class="form-control datetimepicker"
-                        placeholder="Select Date"
-                      />
-                    </div>
-                  </div>
-                  <div class="filter-widget">
-                    <h4>Gender</h4>
-                    <div>
-                      <label class="custom_check">
-                        <input type="checkbox" name="gender_type" checked />
-                        <span class="checkmark"></span> Male Doctor
-                      </label>
-                    </div>
-                    <div>
-                      <label class="custom_check">
-                        <input type="checkbox" name="gender_type" />
-                        <span class="checkmark"></span> Female Doctor
-                      </label>
-                    </div>
-                  </div>
-                  <div class="filter-widget">
-                    <h4>Select Specialist</h4>
-                    <div>
-                      <label class="custom_check">
-                        <input
-                          type="checkbox"
-                          name="select_specialist"
-                          checked
-                        />
-                        <span class="checkmark"></span> Urology
-                      </label>
-                    </div>
-                    <div>
-                      <label class="custom_check">
-                        <input
-                          type="checkbox"
-                          name="select_specialist"
-                          checked
-                        />
-                        <span class="checkmark"></span> Neurology
-                      </label>
-                    </div>
-                    <div>
-                      <label class="custom_check">
-                        <input type="checkbox" name="select_specialist" />
-                        <span class="checkmark"></span> Dentist
-                      </label>
-                    </div>
-                    <div>
-                      <label class="custom_check">
-                        <input type="checkbox" name="select_specialist" />
-                        <span class="checkmark"></span> Orthopedic
-                      </label>
-                    </div>
-                    <div>
-                      <label class="custom_check">
-                        <input type="checkbox" name="select_specialist" />
-                        <span class="checkmark"></span> Cardiologist
-                      </label>
-                    </div>
-                    <div>
-                      <label class="custom_check">
-                        <input type="checkbox" name="select_specialist" />
-                        <span class="checkmark"></span> Cardiologist
-                      </label>
-                    </div>
-                  </div>
-                  <div class="btn-search">
-                    <button type="button" class="btn btn-block">Search</button>
-                  </div>
-                </div>
-              </div>
-              <!-- /Search Filter -->
-              <nav class="dashboard-menu">
-                <ul>
-                  <li class="active">
-                    <a href="#">
-                      <i class="fas fa-columns"></i>
-                      <span>Dashboard</span>
-                    </a>
-                  </li>
-                  <!-- <li>
-										<a href="favourites.html">
-											<i class="fas fa-bookmark"></i>
-											<span>Favourites</span>
-										</a>
-									</li> -->
-                  <!-- <li>
-										<a href="chat.html">
-											<i class="fas fa-comments"></i>
-											<span>Message</span>
-											<small class="unread-msg">23</small>
-										</a>
-									</li> -->
-                  <li>
-                    <a href="{% url 'search' pk=user.id %}">
-                      <i class="fas fa-user-md"></i>
-                      <span>Search Doctor</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="{% url 'profile-settings' pk=user.id %}">
-                      <i class="fas fa-user-cog"></i>
-                      <span>Profile Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="{% url 'change-password'%}">
-                      <i class="fas fa-lock"></i>
-                      <span>Change Password</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="{% url 'logout' %}">
-                      <i class="fas fa-sign-out-alt"></i>
-                      <span>Logout</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+            <!-- Profile Sidebar -->
+            <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+              <div>{% include 'patient-sidebar.html' %}</div>
             </div>
+            <!-- / Profile Sidebar -->
 
             <div class="col-md-12 col-lg-8 col-xl-9">
               {% for doctor in doctors %}
@@ -339,7 +205,7 @@
                         </ul>
                       </div>
                       <div class="clinic-booking">
-                        <a class="view-pro-btn" href="{% url 'doctor-profile'%}"
+                        <a class="view-pro-btn" href="{% url 'doctor-profile' pk=doctor.doctor_id %}"
                           >View Profile</a
                         >
                         <a

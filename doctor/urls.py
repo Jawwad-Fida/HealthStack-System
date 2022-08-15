@@ -12,18 +12,24 @@ urlpatterns = [
     path('', views.doctor_login, name='doctor-login'),
     path('doctor-dashboard/<int:pk>/',
          views.doctor_dashboard, name='doctor-dashboard'),
-    path('doctor-profile/', views.doctor_profile, name='doctor-profile'),
+    path('doctor-profile/<int:pk>/', views.doctor_profile, name='doctor-profile'),
     path('doctor-change-password/', views.doctor_change_password,
          name='doctor-change-password'),
     path('doctor-profile-settings/<int:pk>/', views.doctor_profile_settings,
          name='doctor-profile-settings'),
     path('doctor-register/', views.doctor_register, name='doctor-register'),
     path('doctor-logout/', views.logoutDoctor, name='doctor-logout'),
-    path('my-patients/', views.my_patients, name='my-patients'),
+    path('my-patients/<int:pk>/', views.my_patients, name='my-patients'),
     path('booking/<int:pk>/', views.booking, name='booking'),
     path('booking-success/', views.booking_success, name='booking-success'),
     path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
     path('patient-id/', views.patient_id, name='patient-id'),
+    path('add-prescription/', views.add_prescription, name='add-prescription'),
+    path('prescription-view/', views.prescription_view, name='prescription-view'),
+    path('view-report/', views.view_report, name='view-report'),
+    path('add-report/', views.add_report, name='add-report'),
+    path('patient_profile/',views.patient_profile, name='patient_profile'),
+   
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -36,7 +36,18 @@
 		<div class="main-wrapper">
 		
 			<!-- Header -->
-			<header class="header">{% include 'doctor-navbar.html' %}</header>
+			<header class="header">
+				
+				{% if user.is_authenticated and user.is_patient %}
+				{% include 'patient_navbar.html' %}
+				{% endif %}
+				
+				{% if user.is_authenticated and user.is_doctor %}
+				{% include 'doctor-navbar.html' %}
+				{% endif %}
+			
+			
+			</header>
 			<!-- /Header -->
 			
 			<!-- Breadcrumb -->
@@ -67,12 +78,12 @@
 							<div class="doctor-widget">
 								<div class="doc-info-left">
 									<div class="doctor-img">
-										<img src="{% static 'images/doctors/Rafi.png' %}" class="img-fluid" alt="User Image">
+										<img src="{{doctor.featured_image.url}}" class="img-fluid" alt="User Image">
 									</div>
 									<div class="doc-info-cont">
-										<h4 class="doc-name">Dr. Fahad Al Rafi</h4>
-										<p class="doc-speciality">Gynaecologist, Obstetrician & Infertility Specialist Sr. Consultant</p>
-										<h4 class="doc-hospital">Labaid Hospital LTD</h4>
+										<h4 class="doc-name">Dr. {{doctor.name}}</h4>
+										<p class="doc-speciality">{{doctor.department}}</p>
+										<h4 class="doc-hospital">{{doctor.hospital_name}}</h4>
 										<p class="doc-department"><img src="{% static 'HealthStack-System/images/Normal/obgyn.png' %}" class="img-fluid" alt="Speciality">OBGYN</p>
 										<div class="rating">
 											<i class="fas fa-star filled"></i>
@@ -119,7 +130,7 @@
 											<li><i class="far fa-thumbs-up"></i> 99%</li>
 											<li><i class="far fa-comment"></i> 35 Feedback</li>
 											<li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
-											<li><i class="far fa-money-bill-alt"></i> 5tk per hour </li>
+											<li><i class="far fa-money-bill-alt"></i>{{doctor.consultation_fee}} BDT</li>
 										</ul>
 									</div>
 									<div class="doctor-action">
@@ -136,9 +147,15 @@
 											<i class="fas fa-video"></i>
 										</a>
 									</div>
+
+									{% if user.is_authenticated and user.is_patient %}
 									<div class="clinic-booking">
-										<a class="apt-btn" href="{% url 'booking'%}">Book Your Appointment</a>
+										<a class="apt-btn" href="{% url 'booking' pk=doctor.doctor_id  %}">Book Your Appointment</a>
 									</div>
+									{% endif %}
+
+
+
 								</div>
 							</div>
 						</div>
@@ -789,6 +806,9 @@
 
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+
+		<!-- Searchbar JS -->
+		<script src="{% static 'HealthStack-System/js/Normal/sidebar.js' %}"></script>
 		
 	</body>
 

@@ -5,13 +5,15 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User
 from doctor.models import Doctor_Information
+from sslcommerz.models import Payment
 from hospital.models import Patient
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information
+import random
+import string
 
 
 # Create your views here.
-
 
 def admin_dashboard(request, pk):
     admin = Admin_Information.objects.get(user_id=pk)
@@ -62,6 +64,7 @@ def hospital_admin_profile(request, pk):
 
     context = {'admin': admin, 'form': form}
     return render(request, 'hospital_admin/hospital-admin-profile.html', context)
+
 
 def admin_register(request):
     page = 'hospital_admin/register'
@@ -150,6 +153,25 @@ def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 
 
+def hospital_admin_profile(request, pk):
+
+    # profile = request.user.profile
+    # get user id of logged in user, and get all info from table
+    admin = Admin_Information.objects.get(user_id=pk)
+    form = AdminForm(instance=admin)
+
+    if request.method == 'POST':
+        form = AdminForm(request.POST, request.FILES,
+                          instance=admin)
+        if form.is_valid():
+            form.save()
+            return redirect('admin-dashboard', pk=pk)
+        else:
+            form = AdminForm()
+
+    context = {'admin': admin, 'form': form}
+    return render(request, 'hospital-admin-profile', context)
+
 
 
 # def add_hospital(request):
@@ -224,3 +246,33 @@ def delete_hospital(request, pk):
 	hospital = Hospital_Information.objects.get(hospital_id=pk)
 	hospital.delete()
 	return redirect('hospital-list')
+
+def generate_random_invoice():
+    N = 4
+    string_var = ""
+    string_var = ''.join(random.choices(string.digits, k=N))
+    string_var = "#INV-" + string_var
+    return string_var
+
+def create_invoice(request, pk):
+    patient = Patient.objects.get(patient_id=pk)
+
+    if request.method == 'POST':
+        invoice = Payment(patient=patient)
+        
+        consulation_fee = request.POST['consulation_fee']
+        report_fee = request.POST['report_fee']
+        #total_ammount = request.POST['currency_amount']
+        invoice.currency_amount = int(consulation_fee) + int(report_fee)
+        invoice.consulation_fee = consulation_fee
+        invoice.report_fee = report_fee
+        invoice.invoice_number = generate_random_invoice()
+        invoice.name = patient
+        invoice.status = 'Pending'
+        
+
+        invoice.save()
+        return redirect('patient-list')
+
+    context = {'patient': patient}
+    return render(request, 'hospital_admin/create-invoice.html', context)

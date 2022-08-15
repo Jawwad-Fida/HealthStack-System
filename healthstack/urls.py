@@ -29,6 +29,8 @@ urlpatterns = [
     path('doctor/', include('doctor.urls')),
     path('hospital_admin/', include('hospital_admin.urls')),
     path('api/', include('ChatSystem.urls'))
+    path('sslcommerz/', include('sslcommerz.urls')),
+    path('pharmacy/', include('pharmacy.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
