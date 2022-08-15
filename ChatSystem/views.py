@@ -10,9 +10,9 @@ from .serializers import MessageSerializer , UserSerializer
 
 @csrf_exempt
 
-def message_list(request, sender= None , reciver =None):
+def message_list(request, sender= None , receiver =None):
     if request.method == 'GET':
-        messages = Message.objects.filter(sender_id=sender, receiver_id=reciver,is_read = False)
+        messages = Message.objects.filter(sender_id=sender, receiver_id=receiver,is_read = False)
         serializer = MessageSerializer(messages, many=True, context={'request': request})
         for message in messages:
             message.is_read = True
@@ -31,14 +31,16 @@ def chat_view(request):
     if not request.user.is_authenticated:
         return redirect('')
     if request.method == 'GET':
-        return render(request, 'chat.html',{'users': User.objects.exclude(username=request.user.username)})
+        return render(request, 'chat/chat.html',{'users': User.objects.exclude(username=request.user.username)})
 
 def message_view(request,sender,receiver):
     if not request.user.is_authenticated:
-        return redirect('')
+        return render(request, 'chat/index.html')
     if request.method == 'GET':
         return render(request, "chat/messages.html",
                       {'users': User.objects.exclude(username=request.user.username),
                        'receiver': User.objects.get(id=receiver),
                        'messages': Message.objects.filter(sender_id=sender, receiver_id=receiver) |
                                    Message.objects.filter(sender_id=receiver, receiver_id=sender)})
+
+

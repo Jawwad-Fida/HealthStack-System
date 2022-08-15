@@ -1,0 +1,70 @@
+{% extends 'chat/index.html' %}
+{% block body %}
+<nav class="lighten-3" style="background-color: gray">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">Chat</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="">{{ request.user.username }}</a></li>
+          <li><a href="{% url 'logout' %}"><i class="material-icons">power_settings_new</i></a></li>
+      </ul>
+    </div>
+</nav>
+    <div class="section" style="height: 80vh">
+    <div class="row">
+        <div class="col s3">
+        <div class="card">
+            <div class="collection">
+                {% for user in users %}
+                <a href="{% url 'chat' request.user.id user.id %}" id="user{{ user.id }}" class="collection-item row">
+                    <img src="https://frontend-1.adjust.com/new-assets/images/site-images/interface/user.svg" class="col s4">
+                    <div class="col s8">
+                    <span class="title" style="font-weight: bolder">{{ user.username }}</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+        <div class="col s9">
+            <div class="card">
+            <div id="board" class="section grey lighten-3" style="height: 68vh; padding: 5px; overflow-y: scroll">
+                {% block messages %}
+
+                {% endblock %}
+            </div>
+            <form id="chat-box" class="form-group {% block hide %}hide{% endblock %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col s11">
+                        <div class="input-field">
+                            <input id="id_message" name="message" type="text" placeholder="Type your message..">
+                        </div>
+                    </div>
+                    <div class="col s1" style="line-height: 80px">
+                        <button type ="submit" class="btn btn-floating lighten-2 waves-effect waves-light" style="background-color: gray"><i class="material-icons">send</i></button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% load static %}
+    <script src="{% static 'js/chat.js' %}"></script>
+    <script>
+        // For receiving
+        sender_id = "{{ receiver.id }}";
+        receiver_id = "{{ request.user.id }}";
+
+        //For sending
+        $(function () {
+            scrolltoend();
+            $('#chat-box').submit( function (event) {
+                event.preventDefault();
+                var message = $('#id_message');
+                send('{{ request.user.username }}', '{{ receiver.username }}', message.val());
+                message.val('');
+            })
+        })
+    </script>
+{% endblock %}

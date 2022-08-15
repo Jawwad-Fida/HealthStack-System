@@ -36,9 +36,11 @@ urlpatterns = [
     path('logout/', views.logoutUser, name='logout'),
     path('forgot-password-doctor/', views.forgot_password_doctor,
          name='forgot-password-doctor'),
+
     path('multiple-hospital/<int:pk>/', views.multiple_hospital, name='multiple-hospital'),
     path('chat/<int:pk>/', views.chat, name='chat'),
     path('chat-doctor/', views.chat_doctor, name='chat-doctor'),
+
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
     path('payment/', views.payment, name='payment'),
 ]
