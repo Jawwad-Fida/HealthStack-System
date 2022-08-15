@@ -25,33 +25,48 @@
         </div>
       </div>
       <div class="dashboard-widget">
-        <nav class="dashboard-menu sidebar">
+        <nav class="dashboard-menu">
           <ul>
-            <li class="active">
-              <a href="{% url 'patient-dashboard' pk=user.id %}">
-                <i class="fas fa-columns"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-
-            <li class="nav-item has-submenu">
-              <a href="{% url 'search' pk=user.id %}">
+            <!-- <li>
+                                      <a href="favourites.html">
+                                          <i class="fas fa-bookmark"></i>
+                                          <span>Favourites</span>
+                                      </a>
+                                  </li> -->
+            <!-- <li>
+                                      <a href="chat.html">
+                                          <i class="fas fa-comments"></i>
+                                          <span>Message</span>
+                                          <small class="unread-msg">23</small>
+                                      </a>
+                                  </li> -->
+            <li class="submenu">
+              <!-- {% url 'search' pk=user.id %} -->
+              <a href="javascript:void(0);">
                 <i class="fas fa-user-md"></i>
-                <span>Search Doctor</span>
+                <span>Search Doctor</span><span class="menu-arrow"></span>
               </a>
-            </li>
-
-            <!-- <li class="nav-item has-submenu">
-              <a href="#" class="nav-link"><i class="fas fa-user-md"></i><span>Search</span></a>
-              <ul class="submenu collapse" style="padding:19px">
-                  <li><a class="nav-link" href="#">Search</a></li>
-                  <input type="text" class="form-control" placeholder="search">
+              <ul style="display: none;">
+                <li class="submenu">
+                  <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
+                </li>
               </ul>
-            </li> -->
-            
+              
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fe fe-layout"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
+                <li><a href="form-input-groups.html">Input Groups </a></li>
+                <li><a href="form-horizontal.html">Horizontal Form </a></li>
+                <li><a href="form-vertical.html"> Vertical Form </a></li>
+                <li><a href="form-mask.html"> Form Mask </a></li>
+                <li><a href="form-validation.html"> Form Validation </a></li>
+              </ul>
+            </li>
             <li>
-                <a href="{% url 'multiple-hospital' pk=user.id %}">
-                  <i class="fas fa-hospital"></i>
+                <a href="{% url 'multiple-hospital'%}">
+                  <i class="fas fa-user-md"></i>
                   <span>Multiple Hospital</span>
                 </a>
               </li>
@@ -74,8 +89,6 @@
               </a>
             </li>
           </ul>
-
-
         </nav>
       </div>
     </div>

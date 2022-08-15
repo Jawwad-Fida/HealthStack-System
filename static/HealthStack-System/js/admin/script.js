@@ -40,8 +40,6 @@ Version      : 1.0
 	
 	// Sidebar Initiate
 	init();
-
-	
 	
 	// Mobile menu sidebar overlay
 	

@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="dashboard-widget">
-    <nav class="dashboard-menu sidebar">
+    <nav class="dashboard-menu">
       <ul>
         <li class="active">
           <a href="{% url 'doctor-dashboard' pk=user.id%}">
@@ -36,22 +36,15 @@
       </li>
 
 
-        <!-- <li>
+        <li>
           <a href="{% url 'patient-id'%}">
             <i class="fas fa-user-circle"></i>
             <span>Patient ID</span>
           </a>
-        </li> -->
-        <li class="nav-item has-submenu">
-              <a href="#" class="nav-link"><i class="fas fa-search"></i><span>Patient ID</span></a>
-              <ul class="submenu collapse" style="padding:19px">
-                  <!-- <li><a class="nav-link" href="#">Search</a></li> -->
-                  <input type="text" class="form-control" placeholder="search">
-              </ul>
         </li>
         <li>
 
-          <a href="{% url 'appointments'}">
+          <a href="{% url 'appointments'%}">
             <i class="fas fa-calendar-check"></i>
             <span>Appointments</span>
           </a>
