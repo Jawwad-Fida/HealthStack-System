@@ -64,8 +64,8 @@ def forgot_password_doctor(request):
     return render(request, 'forgot-password-doctor.html')
 
 
-def multiple_hospital(request):
-    return render(request, 'multiple-hospital.html')
+# def multiple_hospital(request):
+#     return render(request, 'multiple-hospital.html')
 
 def chat(request, pk):
     patient = Patient.objects.get(user_id=pk)
@@ -198,6 +198,13 @@ def search(request, pk):
 
     return render(request, 'search.html', context)
 
-
 def payment(request):
     return render(request, 'checkout.html')
+
+def multiple_hospital(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+
+    doctors = Doctor_Information.objects.all()
+    context = {'patient': patient, 'doctors': doctors}
+
+    return render(request, 'multiple-hospital.html', context)
