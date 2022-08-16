@@ -37,6 +37,9 @@ def schedule_timings(request):
 def patient_id(request):
     return render(request, 'patient-id.html')
 
+def appointments(request):
+    return render(request, 'appointments.html')
+
 
 def logoutDoctor(request):
     logout(request)
@@ -91,36 +94,41 @@ def doctor_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('doctor-dashboard', pk=user.id)
+            return redirect('doctor-dashboard')
         else:
             messages.error(request, 'Invalid username or password')
 
     return render(request, 'doctor-login.html')
 
 
-def doctor_dashboard(request, pk):
-    doctor = Doctor_Information.objects.get(user_id=pk)
+def doctor_dashboard(request):
+    if request.user.is_doctor:
+        # doctor = Doctor_Information.objects.get(user_id=pk)
+        doctor = Doctor_Information.objects.get(user=request.user)
+    else:
+        redirect('doctor-logout')
+    
     context = {'doctor': doctor}
-
     return render(request, 'doctor-dashboard.html', context)
 
 
 
-def doctor_profile_settings(request, pk):
+def doctor_profile_settings(request):
 
-    # profile = request.user.profile
-    # get user id of logged in user, and get all info from table
-    doctor = Doctor_Information.objects.get(user_id=pk)
-    form = DoctorForm(instance=doctor)
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+    
+        form = DoctorForm(instance=doctor)
 
-    if request.method == 'POST':
-        form = DoctorForm(request.POST, request.FILES,
-                          instance=doctor)
-        if form.is_valid():
-            form.save()
-            return redirect('doctor-dashboard', pk=pk)
-        else:
-            form = DoctorForm()
+        if request.method == 'POST':
+            form = DoctorForm(request.POST, request.FILES,instance=doctor)
+            if form.is_valid():
+                form.save()
+                return redirect('doctor-dashboard')
+            else:
+                form = DoctorForm()
+    else:
+        redirect('doctor-logout')
 
     context = {'doctor': doctor, 'form': form}
     return render(request, 'doctor-profile-settings.html', context)
@@ -165,9 +173,14 @@ def doctor_profile(request, pk):
     return render(request, 'doctor-profile.html', context)
 
 
-def my_patients(request, pk):
-    doctor = Doctor_Information.objects.get(doctor_id=pk)
-    patients = Patient.objects.all()
+def my_patients(request):
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        patients = Patient.objects.all()
+    else:
+        redirect('doctor-logout')
+    
+    
     context = {'doctor': doctor, 'patients': patients}
     return render(request, 'my-patients.html', context)
 
