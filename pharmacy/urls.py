@@ -15,9 +15,11 @@ urlpatterns = [
     path('',views.pharmacy_homepage, name='pharmacy_homepage'),
     path('menu/', views.pharmacy_menu, name='pharmacy-menu'),
     path('single-product/', views.pharmacy_single_product, name='pharmacy-single-product'),
-    path('shop/', views.pharmacy_shop, name='pharmacy-shop'),
+    path('shop/', views.pharmacy_shop, name='pharmacy_shop'),
+    path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('cart/', views.cart, name='cart'),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

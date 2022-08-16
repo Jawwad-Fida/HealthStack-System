@@ -31,11 +31,15 @@ def pharmacy_single_product(request):
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
 
+def cart(request):
+    return render(request, 'pharmacy/cart.html')
+
 def checkout(request):
     return render(request, 'pharmacy/checkout.html')
 
 def cart(request):
     return render(request, 'pharmacy/cart.html')
+
 
 
 

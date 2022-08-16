@@ -1,5 +1,5 @@
 from unicodedata import name
-from django.urls import path
+from django.urls import path,include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -43,6 +43,7 @@ urlpatterns = [
 
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
     path('payment/', views.payment, name='payment'),
+    path('shop/', views.pharmacy_shop, name='pharmacy_shop'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

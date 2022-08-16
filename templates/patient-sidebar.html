@@ -1,6 +1,5 @@
 {% load static %}
 
-
     <div class="profile-sidebar">
       <div class="widget-profile pro-widget-content">
         <div class="profile-info-widget">
@@ -41,21 +40,25 @@
               </a>
             </li>
 
-            <!-- <li class="nav-item has-submenu">
-              <a href="#" class="nav-link"><i class="fas fa-user-md"></i><span>Search</span></a>
-              <ul class="submenu collapse" style="padding:19px">
-                  <li><a class="nav-link" href="#">Search</a></li>
-                  <input type="text" class="form-control" placeholder="search">
-              </ul>
-            </li> -->
+            <li class="has-submenu">
+              <a href="{% url 'pharmacy_shop' %}" class="nav-link"><i class="fas fa-capsules"></i><span>Medical Shop</span></a>
+
+            </li>
             
             <li>
                 <a href="{% url 'multiple-hospital' pk=user.id %}">
                   <i class="fas fa-hospital"></i>
                   <span>Multiple Hospital</span>
                 </a>
-              </li>
+            </li>
+            
             <li>
+              <a href="{% url 'pharmacy_shop' %}">
+                <i class="fas fa-capsules"></i>
+                <span>Medical Shop</span>
+              </a>
+            </li>
+            <li>            
               <a href="{% url 'profile-settings' pk=user.id %}">
                 <i class="fas fa-user-cog"></i>
                 <span>Profile Settings</span>
