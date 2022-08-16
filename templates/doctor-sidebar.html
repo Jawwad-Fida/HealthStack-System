@@ -22,14 +22,14 @@
     <nav class="dashboard-menu sidebar">
       <ul>
         <li class="active">
-          <a href="{% url 'doctor-dashboard' pk=user.id%}">
+          <a href="{% url 'doctor-dashboard' %}">
             <i class="fas fa-columns"></i>
             <span>Dashboard</span>
           </a>
         </li>
 
         <li>
-        <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">
+        <a href="#">
           <i class="fas fa-columns"></i>
           <span>Profile</span>
         </a>
@@ -51,13 +51,13 @@
         </li>
         <li>
 
-          <a href="{% url 'appointments'}">
+          <a href="{% url 'appointments' %}">
             <i class="fas fa-calendar-check"></i>
             <span>Appointments</span>
           </a>
         </li>
         <li>
-          <a href="{% url 'my-patients' pk=doctor.doctor_id %}">
+          <a href="{% url 'my-patients' %}">
             <i class="fas fa-user-injured"></i>
             <span>My Patients</span>
           </a>
@@ -89,7 +89,7 @@
         </li> -->
         <li>
           <a
-            href="{% url 'doctor-profile-settings' pk=user.id %}"
+            href="{% url 'doctor-profile-settings' %}"
           >
             <i class="fas fa-user-cog"></i>
             <span>Profile Settings</span>

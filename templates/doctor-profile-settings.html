@@ -109,7 +109,7 @@
 
 			
             <div class="col-md-7 col-lg-8 col-xl-9">
-				<form action="{% url 'doctor-profile-settings' pk=user.id %}" method="POST" enctype="multipart/form-data">
+				<form action="{% url 'doctor-profile-settings' %}" method="POST" enctype="multipart/form-data">
 					{% csrf_token %}
               <!-- Basic Information -->
               <div class="card">
