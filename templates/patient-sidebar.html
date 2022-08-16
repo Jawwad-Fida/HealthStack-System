@@ -41,7 +41,10 @@
             </li>
 
             <li class="has-submenu">
-              <a href="{% url 'pharmacy_shop' %}" class="nav-link"><i class="fas fa-capsules"></i><span>Medical Shop</span></a>
+              <a href="{% url 'pharmacy_shop' %}" class="nav-link">
+                <i class="fas fa-capsules"></i>
+                <span>Medical Shop</span>
+              </a>
 
             </li>
             
@@ -51,13 +54,7 @@
                   <span>Multiple Hospital</span>
                 </a>
             </li>
-            
-            <li>
-              <a href="{% url 'pharmacy_shop' %}">
-                <i class="fas fa-capsules"></i>
-                <span>Medical Shop</span>
-              </a>
-            </li>
+        
             <li>            
               <a href="{% url 'profile-settings' pk=user.id %}">
                 <i class="fas fa-user-cog"></i>
