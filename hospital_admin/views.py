@@ -16,9 +16,13 @@ import string
 # Create your views here.
 
 def admin_dashboard(request, pk):
-    admin = Admin_Information.objects.get(user_id=pk)
-    context = {'admin': admin}
+    # admin = Admin_Information.objects.get(user_id=pk)
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user_id=pk)
+        context = {'admin': user}
     return render(request, 'hospital_admin/admin-dashboard.html', context)
+    
+    # return render(request, 'hospital_admin/admin-dashboard.html', context)
 
 def logoutAdmin(request):
     logout(request)
