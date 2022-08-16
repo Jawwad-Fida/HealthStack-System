@@ -15,10 +15,10 @@ import string
 
 # Create your views here.
 
-def admin_dashboard(request, pk):
+def admin_dashboard(request):
     # admin = Admin_Information.objects.get(user_id=pk)
     if request.user.is_hospital_admin:
-        user = Admin_Information.objects.get(user_id=pk)
+        user = Admin_Information.objects.get(user=request.user)
         context = {'admin': user}
     return render(request, 'hospital_admin/admin-dashboard.html', context)
     
@@ -46,7 +46,7 @@ def admin_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('admin-dashboard', pk=user.id)
+            return redirect('admin-dashboard')
         else:
             messages.error(request, 'Invalid username or password')
 
@@ -54,6 +54,7 @@ def admin_login(request):
 
 def hospital_admin_profile(request, pk):
 
+    
     admin = Admin_Information.objects.get(user_id=pk)
     form = AdminForm(instance=admin)
 
