@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User
-from doctor.models import Doctor_Information
+from doctor.models import Doctor_Information,Report
 from sslcommerz.models import Payment
 from hospital.models import Patient
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
@@ -258,13 +258,37 @@ def create_invoice(request, pk):
         invoice.invoice_number = generate_random_invoice()
         invoice.name = patient
         invoice.status = 'Pending'
-        
-
+    
         invoice.save()
         return redirect('patient-list')
 
     context = {'patient': patient}
     return render(request, 'hospital_admin/create-invoice.html', context)
+
+
+def create_report(request, pk):
+    patient = Patient.objects.get(patient_id=pk)
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+
+    if request.method == 'POST':
+        report = Report(patient=patient)
+        
+        test_name = request.POST['test_name']
+        description = request.POST['description']
+        result = request.POST['result']
+        delivery_date = request.POST['delivery_date']
+        
+        report.test_name = test_name
+        report.description = description
+        report.result = result
+        report.delivery_date = delivery_date
+        report.doctor = doctor
+        report.save()
+
+        return redirect('patient-list')
+
+    context = {'patient': patient}
+    return render(request, 'hospital_admin/create-report.html', context)
 
 def add_pharmacist(request):
     return render(request, 'hospital_admin/add-pharmacist.html')
