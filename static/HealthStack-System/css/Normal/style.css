@@ -2244,7 +2244,7 @@ html.menu-opened body {
 
 
 .section-search { 
-	background: #f9f9f9 url(..search-bg.png)no-repeat bottom center; static/HealthStack-System/css/Normal/search-bg.png
+	background: #f9f9f9 url(..search-bg.png)no-repeat bottom center; 
     min-height: 450px;
     background-size: 100% auto;
     position: relative;
@@ -2886,8 +2886,8 @@ home-image{
 }
 .doc-info-right {
     margin-left: auto;
-    -ms-flex: 0 0 200px;
-    flex: 0 0 200px;
+    -ms-flex: 0 0 205px;
+    flex: 0 0 205px;
     max-width: 200px;
 }
 .doctor-img {
@@ -3032,6 +3032,8 @@ home-image{
 .load-more {
 	margin-bottom: 30px;
 }
+
+
 
 /*-----------------
 	17. Doctor Profile
@@ -5108,6 +5110,42 @@ home-image{
     margin-right: 10px;
     width: 16px;
 }
+
+.dashboard-menu .menu-arrow {
+	-webkit-transition: -webkit-transform 0.15s;
+	-o-transition: -o-transform 0.15s;
+	transition: transform .15s;
+	position: absolute;
+	right: 15px;
+	display: inline-block;
+	font-family: 'FontAwesome';
+	text-rendering: auto;
+	line-height: 40px;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-transform: translate(0, 0);
+	-ms-transform: translate(0, 0);
+	-o-transform: translate(0, 0);
+	transform: translate(0, 0);
+	line-height: 18px;
+	top: 11px;
+	color:#000;
+}
+.dashboard-menu .menu-arrow:before {
+	content: "\f001";
+}
+.dashboard-menu li a.subdrop .menu-arrow {
+	-ms-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.dashboard-menu ul ul a .menu-arrow {
+	top: 10px;
+}
+
 .unread-msg {
     background-color: #09e5ab;
     border-radius: 2px;
@@ -6739,3 +6777,4 @@ home-image{
 		margin-bottom: 10px;
 	}
 }
+

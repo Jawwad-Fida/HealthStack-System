@@ -3,29 +3,30 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from hospital.models import User
-
-from .forms import AdminUserCreationForm
+from hospital.models import Hospital_Information, User
+from doctor.models import Doctor_Information
+from sslcommerz.models import Payment
+from hospital.models import Patient
+from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information
+import random
+import string
+
+
 # Create your views here.
 
-
-def admin_home(request):
-    return render(request, 'hospital_admin/index.html')
-
+def admin_dashboard(request, pk):
+    admin = Admin_Information.objects.get(user_id=pk)
+    context = {'admin': admin}
+    return render(request, 'hospital_admin/admin-dashboard.html', context)
 
 def logoutAdmin(request):
     logout(request)
     messages.info(request, 'User Logged out')
     return redirect('admin_login')
-
-
-def admin_login(request):
-    return render(request, 'hospital_admin/login.html')
-
+            
 
 def admin_login(request):
-    # page = 'patient_login'
     if request.method == 'GET':
         return render(request, 'hospital_admin/login.html')
     elif request.method == 'POST':
@@ -41,29 +42,28 @@ def admin_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('hospital_home')
+            return redirect('admin-dashboard', pk=user.id)
         else:
             messages.error(request, 'Invalid username or password')
 
-    return render(request, 'doctor-login.html')
+    return render(request, 'hospital_admin/login.html')
 
+def hospital_admin_profile(request, pk):
 
-# def register(request):
-#     return render(request, 'hospital_admin/register.html')
+    admin = Admin_Information.objects.get(user_id=pk)
+    form = AdminForm(instance=admin)
 
+    if request.method == 'POST':
+        form = AdminForm(request.POST, request.FILES,
+                          instance=admin)
+        if form.is_valid():
+            form.save()
+            return redirect('hospital_admin/admin-dashboard', pk=pk)
+        else:
+            form = AdminForm()
 
-# def admin_register(request):
-#     username = request.POST.get('username')
-#     email = request.POST.get('email')
-#     password = request.POST.get('password')
-#     password1 = request.POST.get('password1')
-#     if password == password1:
-#         user = User(username=username, email=email, password=password)
-#         user.save()
-#         return redirect('admin_login')
-#     else:
-#         messages.error(request, 'Password does not match')
-#         return render(request, 'hospital_admin/register.html')
+    context = {'admin': admin, 'form': form}
+    return render(request, 'hospital_admin/hospital-admin-profile.html', context)
 
 
 def admin_register(request):
@@ -99,12 +99,10 @@ def admin_forgot_password(request):
     return render(request, 'hospital_admin/forgot-password.html')
 
 
-def admin_profile(request):
-    return render(request, 'hospital_admin/profile.html')
-
 
 def doctor_list(request):
-    return render(request, 'hospital_admin/doctor-list.html')
+    doctors = Doctor_Information.objects.all()
+    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors})
 
 
 def invoice(request):
@@ -120,7 +118,8 @@ def lock_screen(request):
 
 
 def patient_list(request):
-    return render(request, 'hospital_admin/patient-list.html')
+    patients = Patient.objects.all()
+    return render(request, 'hospital_admin/patient-list.html', {'all': patients})
 
 
 def specialitites(request):
@@ -135,33 +134,145 @@ def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
 
 
-def add_hospital(request):
-    return render(request, 'hospital_admin/add-hospital.html')
-
-
-def edit_hospital(request):
-    return render(request, 'hospital_admin/edit-hospital.html')
-
-
 def emergency_details(request):
-    return render(request, 'hospital_admin/emergency.html')
-
-
-def add_emergency_information(request):
-    return render(request, 'hospital_admin/add-emergency-information.html')
+    hospitals = Hospital_Information.objects.all()
+    return render(request, 'hospital_admin/emergency.html', {'all': hospitals})
 
 
 def hospital_list(request):
-    return render(request, 'hospital_admin/hospital-list.html')
+    hospitals = Hospital_Information.objects.all()
+    return render(request, 'hospital_admin/hospital-list.html', {'hospitals': hospitals})
 
 
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
 
 
-def transactions_list(request):
-    return render(request, 'hospital_admin/transactions-list.html')
-
 
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
+
+
+def hospital_admin_profile(request, pk):
+
+    # profile = request.user.profile
+    # get user id of logged in user, and get all info from table
+    admin = Admin_Information.objects.get(user_id=pk)
+    form = AdminForm(instance=admin)
+
+    if request.method == 'POST':
+        form = AdminForm(request.POST, request.FILES,
+                          instance=admin)
+        if form.is_valid():
+            form.save()
+            return redirect('admin-dashboard', pk=pk)
+        else:
+            form = AdminForm()
+
+    context = {'admin': admin, 'form': form}
+    return render(request, 'hospital-admin-profile', context)
+
+
+
+# def add_hospital(request):
+#     return render(request, 'hospital_admin/add-hospital.html')
+
+
+def add_hospital(request):
+    page = 'hospital-list'
+    form = AddHospitalForm()
+
+    if request.method == 'POST':
+        form = AddHospitalForm(request.POST, request.FILES)
+        if form.is_valid():
+            # form.save()
+            hospital = form.save(commit=False)
+            hospital.save()
+
+            messages.success(request, 'Hospital was created!')
+
+            return redirect('hospital-list')
+
+        else:
+            messages.error(
+                request, 'An error has occurred during input')
+    # else:
+    #     form = AddHospitalForm()
+
+    context = {'page': page, 'form': form}
+    return render(request, 'hospital_admin/add-hospital.html', context)
+
+
+# def edit_hospital(request, pk):
+#     hospital = Hospital_Information.objects.get(hospital_id=pk)
+#     return render(request, 'hospital_admin/edit-hospital.html')
+
+def edit_hospital(request, pk):
+
+    hospital = Hospital_Information.objects.get(hospital_id=pk)
+    form = EditHospitalForm(instance=hospital)  
+
+    if request.method == 'POST':
+        form = EditHospitalForm(request.POST, request.FILES,
+                           instance=hospital)  
+        if form.is_valid():
+            form.save()
+            return redirect('hospital-list')
+        else:
+            form = EditHospitalForm()
+
+    context = {'hospital': hospital, 'form': form}
+    return render(request, 'hospital_admin/edit-hospital.html', context)
+
+def edit_emergency_information(request, pk):
+
+    hospital = Hospital_Information.objects.get(hospital_id=pk)
+    form = EditEmergencyForm(instance=hospital)  
+
+    if request.method == 'POST':
+        form = EditEmergencyForm(request.POST, request.FILES,
+                           instance=hospital)  
+        if form.is_valid():
+            form.save()
+            return redirect('emergency')
+        else:
+            form = EditEmergencyForm()
+
+    context = {'hospital': hospital, 'form': form}
+    return render(request, 'hospital_admin/edit-emergency-information.html', context)
+
+
+def delete_hospital(request, pk):
+	hospital = Hospital_Information.objects.get(hospital_id=pk)
+	hospital.delete()
+	return redirect('hospital-list')
+
+def generate_random_invoice():
+    N = 4
+    string_var = ""
+    string_var = ''.join(random.choices(string.digits, k=N))
+    string_var = "#INV-" + string_var
+    return string_var
+
+def create_invoice(request, pk):
+    patient = Patient.objects.get(patient_id=pk)
+
+    if request.method == 'POST':
+        invoice = Payment(patient=patient)
+        
+        consulation_fee = request.POST['consulation_fee']
+        report_fee = request.POST['report_fee']
+        #total_ammount = request.POST['currency_amount']
+        invoice.currency_amount = int(consulation_fee) + int(report_fee)
+        invoice.consulation_fee = consulation_fee
+        invoice.report_fee = report_fee
+        invoice.invoice_number = generate_random_invoice()
+        invoice.name = patient
+        invoice.status = 'Pending'
+        
+
+        invoice.save()
+        return redirect('patient-list')
+
+    context = {'patient': patient}
+    return render(request, 'hospital_admin/create-invoice.html', context)

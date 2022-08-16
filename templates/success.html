@@ -1,0 +1,41 @@
+<h1>Payment Success</h1>
+
+<table>
+  <tr>
+    <td>Transaction ID</td>
+    <td>Validation ID</td>
+    <td>Amount</td>
+    <td>Card Type</td>
+    <td>Card No.</td>
+    <td>Bank Transaction ID</td>
+    <td>Status</td>
+    <td>Transaction Date</td>
+    <td>Currency</td>
+    <td>Card Issuer</td>
+    <td>Card Brand</td>
+    <td>Card Issuer Country</td>
+    <td>Currency Type</td>
+    <td>Currency Amount</td>
+  </tr>
+
+  <tr>
+    <td>{{payment_data.tran_id}}</td>
+    <td>{{payment_data.val_id}}</td>
+    <td>{{payment_data.amount}}</td>
+    <td>{{payment_data.card_type}}</td>
+    <td>{{payment_data.card_no}}</td>
+    <td>{{payment_data.bank_tran_id}}</td>
+    <td>{{payment_data.status}}</td>
+    <td>{{payment_data.tran_date}}</td>
+    <td>{{payment_data.currency}}</td>
+    <td>{{payment_data.card_issuer}}</td>
+    <td>{{payment_data.card_brand}}</td>
+    <td>{{payment_data.card_issuer_country}}</td>
+    <td>{{payment_data.currency_type}}</td>
+    <td>{{payment_data.currency_amount}}</td>
+  </tr>
+</table>
+
+<br>
+<hr>
+{{ response }}

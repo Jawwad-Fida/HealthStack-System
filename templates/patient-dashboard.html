@@ -63,11 +63,11 @@
                     <a href="index-2.html">Home</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Dashboard
+                    Patient Dashboard
                   </li>
                 </ol>
               </nav>
-              <h2 class="breadcrumb-title">Dashboard</h2>
+              <h2 class="breadcrumb-title">Patient Dashboard</h2>
             </div>
           </div>
         </div>
@@ -80,73 +80,7 @@
           <div class="row">
             <!-- Profile Sidebar -->
             <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-              <div class="profile-sidebar">
-                <div class="widget-profile pro-widget-content">
-                  <div class="profile-info-widget">
-                    <a href="#" class="booking-doc-img">
-                      <img
-                        src="{{ patient.featured_image.url }}"
-                        alt="User Image"
-                      />
-                    </a>
-                    <div class="profile-det-info">
-                      <h3>{{patient.name}}</h3>
-                      <div class="patient-details">
-                        <h5>
-                          <i class="fas fa-birthday-cake"></i> {{ patient.dob }}
-                        </h5>
-                        <h5 class="mb-0">
-                          <i class="fas fa-map-marker-alt"></i>
-                          {{ patient.address }}
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="dashboard-widget">
-                  <nav class="dashboard-menu">
-                    <ul>
-                      <!-- <li>
-												<a href="favourites.html">
-													<i class="fas fa-bookmark"></i>
-													<span>Favourites</span>
-												</a>
-											</li> -->
-                      <!-- <li>
-												<a href="chat.html">
-													<i class="fas fa-comments"></i>
-													<span>Message</span>
-													<small class="unread-msg">23</small>
-												</a>
-											</li> -->
-                      <li>
-                        <a href="{% url 'search' pk=user.id %}">
-                          <i class="fas fa-user-md"></i>
-                          <span>Search Doctor</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="{% url 'profile-settings' pk=user.id %}">
-                          <i class="fas fa-user-cog"></i>
-                          <span>Profile Settings</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="{% url 'change-password'%}">
-                          <i class="fas fa-lock"></i>
-                          <span>Change Password</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="{% url 'logout' %}">
-                          <i class="fas fa-sign-out-alt"></i>
-                          <span>Logout</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
+              <div>{% include 'patient-sidebar.html' %}</div>
             </div>
             <!-- / Profile Sidebar -->
 
@@ -170,6 +104,11 @@
                           href="#pat_prescriptions"
                           data-toggle="tab"
                           >Prescriptions</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="tab"
+                          ><span class="med-records">Reports</span></a
                         >
                       </li>
                       <li class="nav-item">
@@ -207,14 +146,15 @@
                                 <tr>
                                   <th>Doctor</th>
                                   <th>Appt Date</th>
-                                  <th>Booking Date</th>
+                                  <th>Type</th>
                                   <th>Amount</th>
-                                  <th>Follow Up</th>
                                   <th>Status</th>
+                                  <th>Payment Status</th>
                                   <th></th>
                                 </tr>
                               </thead>
                               <tbody>
+                                {% for appointment in appointments %}
                                 <tr>
                                   <td>
                                     <h2 class="table-avatar">
@@ -224,38 +164,67 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-02.jpg' %}"
+                                          src="{{ appointment.doctor.featured_image.url }}"
                                           alt="User Image"
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >Dr. Darren Elder <span>Dental</span></a
+                                        >{{ appointment.doctor.name }}
+                                        <span
+                                          >{{appointment.doctor.department}}</span
+                                        ></a
                                       >
                                     </h2>
                                   </td>
                                   <td>
-                                    12 Nov 2019
+                                    {{appointment.date}}
                                     <span class="d-block text-info"
-                                      >8.00 PM</span
+                                      >{{appointment.time}}</span
                                     >
                                   </td>
-                                  <td>12 Nov 2019</td>
-                                  <td>$250</td>
-                                  <td>14 Nov 2019</td>
+                                  <td>{{appointment.appointment_type}}</td>
+                                  
+                                  {% if appointment.appointment_type == 'checkup' %}
+                                  <td>{{appointment.doctor.consultation_fee}} BDT</td>
+                                  {% else %}
+                                  <td>{{appointment.doctor.report_fee}} BDT</td>
+                                  {% endif %}
                                   <td>
-                                    <span
-                                      class="badge badge-pill bg-success-light"
-                                      >Confirm</span
-                                    >
+                                    {% if appointment.appointment_status == 'pending' %}
+                                    <span class="badge badge-pill bg-warning-light">Pending</span>
+                                    {% endif %}
+                                    {% if appointment.appointment_status == 'confirmed' %}
+                                    <span class="badge badge-pill bg-success-light">Confirm</span>
+                                    {% endif %}
+                                    {% if appointment.appointment_status == 'cancelled' %}
+                                    <span class="badge badge-pill bg-danger-light">Cancelled</span>
+                                    {% endif %}
                                   </td>
+                                  <td>
+                                    {% if appointment.payment_status == 'pending' %}
+                                    <span class="badge badge-pill bg-warning-light">Pending</span>
+                                    {% endif %}
+                                    {% if appointment.payment_status == 'VALID' %}
+                                    <span class="badge badge-pill bg-success-light">Paid</span>
+                                    {% endif %}
+                                  </td>
+
                                   <td class="text-right">
                                     <div class="table-action">
                                       <a
-                                        href="javascript:void(0);"
+                                        href="{% url 'ssl-payment-request' pk=appointment.patient.patient_id id=appointment.id %}"
+                                        class="btn btn-sm bg-success-light"
+                                      >
+                                        <i class="fas fa-dollar-sign"></i> Pay
+                                        Now
+                                      </a>
+                                      <a
+                                        href="#"
                                         class="btn btn-sm bg-primary-light"
                                       >
                                         <i class="fas fa-print"></i> Print
                                       </a>
+
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
@@ -265,108 +234,7 @@
                                     </div>
                                   </td>
                                 </tr>
-                                <tr>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-03.jpg' %}"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Deborah Angel
-                                        <span>Cardiology</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td>
-                                    11 Nov 2019
-                                    <span class="d-block text-info"
-                                      >11.00 AM</span
-                                    >
-                                  </td>
-                                  <td>10 Nov 2019</td>
-                                  <td>$400</td>
-                                  <td>13 Nov 2019</td>
-                                  <td>
-                                    <span
-                                      class="badge badge-pill bg-danger-light"
-                                      >Cancelled</span
-                                    >
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-04.jpg' %}"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Sofia Brient
-                                        <span>Urology</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td>
-                                    10 Nov 2019
-                                    <span class="d-block text-info"
-                                      >3.00 PM</span
-                                    >
-                                  </td>
-                                  <td>10 Nov 2019</td>
-                                  <td>$350</td>
-                                  <td>12 Nov 2019</td>
-                                  <td>
-                                    <span
-                                      class="badge badge-pill bg-warning-light"
-                                      >Pending</span
-                                    >
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
+                                {% endfor %}
                               </tbody>
                             </table>
                           </div>
@@ -435,7 +303,7 @@
                     </div>
                     <!-- /Prescription Tab -->
 
-                    <!-- Medical Records Tab -->
+                    <!-- -->
                     <div id="pat_medical_records" class="tab-pane fade">
                       <div class="card card-table mb-0">
                         <div class="card-body">
@@ -501,26 +369,30 @@
                     </div>
                     <!-- /Medical Records Tab -->
 
-                    <!-- Billing Tab -->
-                    <div id="pat_billing" class="tab-pane fade">
+                    <!-- medical record -->
+                    <div id="pat_medical_records" class="tab-pane fade">
                       <div class="card card-table mb-0">
                         <div class="card-body">
                           <div class="table-responsive">
                             <table class="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
-                                  <th>Invoice No</th>
-                                  <th>Doctor</th>
-                                  <th>Amount</th>
-                                  <th>Paid On</th>
+                                  <th>ID</th>
+                                  <th>Date</th>
+                                  <th>Description</th>
+                                  <th>Attachment</th>
+                                  <th>Created</th>
                                   <th></th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
                                   <td>
-                                    <a href="invoice-view.html">#INV-0010</a>
+                                    <a href="javascript:void(0);">#MR-0010</a>
                                   </td>
+                                  <td>14 Nov 2019</td>
+                                  <td>Dental Filling</td>
+                                  <td><a href="#">dental-test.pdf</a></td>
                                   <td>
                                     <h2 class="table-avatar">
                                       <a
@@ -534,12 +406,96 @@
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >Ruby Perrin <span>Dental</span></a
+                                        >Dr. Ruby Perrin <span>Dental</span></a
                                       >
                                     </h2>
                                   </td>
-                                  <td>$450</td>
-                                  <td>14 Nov 2019</td>
+                                  <td class="text-right">
+                                    <div class="table-action">
+                                      <a
+                                        href="javascript:void(0);"
+                                        class="btn btn-sm bg-info-light"
+                                      >
+                                        <i class="far fa-eye"></i> View
+                                      </a>
+                                      <a
+                                        href="javascript:void(0);"
+                                        class="btn btn-sm bg-info-light"
+                                      >
+                                        <i class="far fa-paypal"></i> Pay Now
+                                      </a>
+                                      <a
+                                        href="javascript:void(0);"
+                                        class="btn btn-sm bg-primary-light"
+                                      >
+                                        <i class="fas fa-print"></i> Print
+                                      </a>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /Medical Records Tab -->
+
+                    <!-- Billing Tab -->
+                    <div id="pat_billing" class="tab-pane fade">
+                      <div class="card card-table mb-0">
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-hover table-center mb-0">
+                              <thead>
+                                <tr>
+                                  <th>Invoice ID</th>
+                                  <th>Doctor</th>
+                                  <th>Tranx ID</th>
+                                  <th>Tranx Date</th>
+                                  <th>Amount</th>
+                                  <th>Card Type</th>
+                                  <th>Card Issuer</th>
+                                  <th>Payment Status</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                {% for payment in payments %}
+                                <tr>
+                                  <td>
+                                    <a href="invoice-view.html">{{payment.invoice_number}}</a>
+                                  </td>
+                                  <td>
+                                    <h2 class="table-avatar">
+                                      <a
+                                        href="doctor-profile.html"
+                                        class="avatar avatar-sm mr-2"
+                                      >
+                                        <img
+                                          class="avatar-img rounded-circle"
+                                          src="{{payment.appointment.doctor.featured_image.url}}"
+                                          alt="User Image"
+                                        />
+                                      </a>
+                                      <a href="doctor-profile.html"
+                                        >{{payment.appointment.doctor.name}} <span>{{payment.appointment.doctor.department}}</span></a
+                                      >
+                                    </h2>
+                                  </td>
+                                  <td>{{payment.transaction_id}}</td>
+                                  <td>{{payment.transaction_date}}</td>
+                                  <td>{{payment.currency_amount}} BDT</td>
+                                  <td>{{payment.card_type}}</td>
+                                  <td>{{payment.card_issuer}}</td>
+                                  <td>
+                                    {% if payment.status == 'VALID' %}
+                                    <span class="badge badge-pill bg-success-light">Success</span>
+                                    {% else %}
+                                    <span class="badge badge-pill bg-warning-light">Pending</span>
+                                    {% endif %}
+                                  </td>
                                   <td class="text-right">
                                     <div class="table-action">
                                       <a
@@ -557,6 +513,11 @@
                                     </div>
                                   </td>
                                 </tr>
+                                {% endfor %}
+                          
+                             
+
+
                               </tbody>
                             </table>
                           </div>
@@ -781,6 +742,9 @@
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+
+    <!-- Searchbar JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/sidebar.js' %}"></script>
   </body>
 
   <!-- doccure/patient-dashboard.html  30 Nov 2019 04:12:16 GMT -->

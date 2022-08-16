@@ -35,9 +35,10 @@
 	
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
-		
-			<!-- Header -->
 			<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
+				<!-- Logo -->
+
+            
 			<!-- /Header -->
 			
 			<!-- Sidebar -->
@@ -46,16 +47,16 @@
 			<!-- /Sidebar -->
 			
 			<!-- Page Wrapper -->
+			
+			<!-- Page Wrapper -->
             <div class="page-wrapper">
+
                 <div class="content container-fluid">
-					<div class="col-sm-5 col">
-						<a href="{% url 'add-emergency-information' %}"  class="btn btn-primary float-right mt-2">Add</a>
-					</div>
 					<!-- Page Header -->
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="page-title">Emergency information of Hospitals</h3>
+								<h3 class="page-title">Emergency Hospital</h3>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
 									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
@@ -65,14 +66,16 @@
 						</div>
 					</div>
 					<!-- /Page Header -->
-
+					
 					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-body">
-									<div class="table-responsive">
+						 <div class="col-sm-12">
+							 <div class="card">
+								 <div class="card-body">
+									 <div class="table-responsive">
 										<table class="datatable table table-hover table-center mb-0">
-											<thead>
+										
+											 
+											 <thead>
 												<tr>
 													<th>Hospital Name</th>
 													<th>General Bed </th>
@@ -80,73 +83,35 @@
 													<th>Regular Cabin </th>
 													<th>Emergency Cabin </th>
 													<th>Vip Room</th>
-                                                  
-													
+													<th>Update</th>
+													<th>Delete</th>
 												</tr>
-											</thead>
+											 </thead>
+											 {% for hospital in all %}
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'images/hospitals/hospital1.png' %}" alt="User Image"></a><a href="profile.html">Square Hospital</a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospital.featured_image.url}}" alt="User Image"></a>															
+															<a href="profile.html">{{hospital.name}}</a>
 														</h2>
 													</td>
-                                                    
-													<td>10</td>
-													<td>10</td>
-                                                    <td>10</td>
-												    <td>10</td>
-													<td>10</td>
-                                                    
-													<td><a class="btn btn-primary btn-m" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Update </a></td>
-                                    
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Update Emergency Information</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form>
-                                                            <div class="form-group">
-                                                                <div class="col-12 col-md-6"><label for="general-bed-no" class="col-form-label">General Bed:</label><input type="text" class="form-control" id="recipient-name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="col-12 col-md-6"><label for="icu-no" class="col-form-label">ICU:</label><input type="text" class="form-control" id="recipient-name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="col-12 col-md-6"><label for="regular-cabin-no" class="col-form-label">Regular Cabin:</label><input type="text" class="form-control" id="recipient-name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="col-12 col-md-6"><label for="emergency-cabin-no" class="col-form-label">Emergency Cabin:</label><input type="text" class="form-control" id="recipient-name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="col-12 col-md-6"><label for="vip-cabin-no" class="col-form-label">VIP Cabin:</label><input type="text" class="form-control" id="recipient-name">
-                                                            </div>
-
-                                                            </div>
-                                                            </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Update</button>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-													<td><a href="javascript:(0);" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
+													<td>{{hospital.hospital_id_id}}</td>
+													<td>{{hospital.available_icu_no}}</td>
+                                                    <td>{{hospital.regular_cabin_no}}</td>
+												    <td>{{hospital.emergency_cabin_no}}</td>
+													<td>{{hospital.vip_cabin_no}}</td>
+													<td><a href="{% url 'edit-emergency-information' pk=hospital.hospital_id %}" class="btn btn-primary">Edit</a></td>
+													<td><a href="#" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
 												</tr>
 													
 													</td>
 												</tr>
-											</tbody>
+												{% endfor %}
+											
 										</table>
 									</div>
 								</div>
-							</div>
-						</div>			
+							</div>	
 					</div>
 					
 				</div>			
@@ -172,6 +137,7 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+		
     </body>
 
 <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->

@@ -39,10 +39,7 @@
         <a href="#">Appointments <i class="fas fa-chevron-down"></i></a>
         <ul class="submenu">
           <li><a href="{% url 'search' pk=user.id %}">Search Doctor</a></li>
-          <li>
-            <a href="{% url 'doctor-profile'%}">Doctor Profile</a>
-          </li>
-          <li><a href="{% url 'booking'%}">Booking</a></li>
+          <li><a href="#">Booking</a></li>
           <!-- <li><a href="#">Checkout</a></li> -->
           <li>
             <a href="{% url 'booking-success'%}">Booking Success</a>
@@ -50,6 +47,9 @@
           <!-- <li><a href="#">Favourites</a></li> -->
           <!-- <li><a href="#">Chat</a></li> -->
         </ul>
+      </li>
+      <li>
+        <a href="{% url 'chat' pk=user.id %}">Chat with Doctor</a>
       </li>
       <!-- <li class="has-submenu">
                   <a href="#">Pages <i class="fas fa-chevron-down"></i></a>

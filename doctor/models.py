@@ -3,7 +3,7 @@ from django.db import models
 import uuid
 
 # import django user model
-from hospital.models import Hospital_Information, User
+from hospital.models import Hospital_Information, User, Patient
 
 # # Create your models here.
 
@@ -56,3 +56,77 @@ class Doctor_Information(models.Model):
 
     def __str__(self):
         return str(self.user.username)
+
+
+"""
+ amount, followup, status
+
+
+appointment_type,payment_status  # appointment_status --> pending, confirmed, cancelled
+
+"""
+
+
+class Appointment(models.Model):
+    # ('database value', 'display_name')
+    APPOINTMENT_TYPE = (
+        ('report', 'report'),
+        ('checkup', 'checkup'),
+    )
+    APPOINTMENT_STATUS = (
+        ('pending', 'pending'),
+        ('confirmed', 'confirmed'),
+        ('cancelled', 'cancelled'),
+    )
+
+    id = models.AutoField(primary_key=True)
+    date = models.DateField(null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
+    doctor = models.ForeignKey(
+        Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    patient = models.ForeignKey(
+        Patient, on_delete=models.CASCADE, null=True, blank=True)
+    appointment_type = models.CharField(
+        max_length=200, choices=APPOINTMENT_TYPE)
+    appointment_status = models.CharField(
+        max_length=200, choices=APPOINTMENT_STATUS)
+    serial_number = models.CharField(max_length=200, null=True, blank=True)
+    payment_status = models.CharField(
+        max_length=200, null=True, blank=True, default='pending')
+    transaction_id = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.patient.username)
+
+
+class Report(models.Model):
+
+    report_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
+    test_name = models.CharField(max_length=200, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    result = models.CharField(max_length=200, null=True, blank=True)
+    delivery_date = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.doctor.username)
+        
+class Prescription(models.Model):
+
+    # medicine name, quantity, days, time, description, test, test_descrip
+    prescription_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
+    
+    medicine_name = models.CharField(max_length=200, null=True, blank=True)
+    quantity = models.CharField(max_length=200, null=True, blank=True)
+    days = models.CharField(max_length=200, null=True, blank=True)
+    time = models.CharField(max_length=200, null=True, blank=True)
+    medicine_description = models.TextField(null=True, blank=True)
+
+    test_name = models.CharField(max_length=200, null=True, blank=True)
+    test_description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.doctor.username)

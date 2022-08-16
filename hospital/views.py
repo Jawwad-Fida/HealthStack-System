@@ -14,7 +14,9 @@ from django.contrib import messages
 # from django.dispatch import receiver
 
 from .models import Patient, User
-from doctor.models import Doctor_Information
+from doctor.models import Doctor_Information, Appointment
+
+from sslcommerz.models import Payment
 
 
 # Create your views here.
@@ -34,20 +36,8 @@ def add_billing(request):
     return render(request, 'add-billing.html')
 
 
-def add_prescription(request):
-    return render(request, 'add-prescription.html')
-
-
 def appointments(request):
     return render(request, 'appointments.html')
-
-
-def booking_success(request):
-    return render(request, 'booking-success.html')
-
-
-def booking(request):
-    return render(request, 'booking.html')
 
 
 def edit_billing(request):
@@ -74,12 +64,15 @@ def forgot_password_doctor(request):
     return render(request, 'forgot-password-doctor.html')
 
 
-def multiple_hospital(request):
-    return render(request, 'multiple-hospital.html')
+# def multiple_hospital(request):
+#     return render(request, 'multiple-hospital.html')
 
+def chat(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+    doctors = Doctor_Information.objects.all()
 
-def chat(request):
-    return render(request, 'chat.html')
+    context = {'patient': patient, 'doctors': doctors}
+    return render(request, 'chat.html', context)
 
 
 def chat_doctor(request):
@@ -163,31 +156,18 @@ def patient_register(request):
     return render(request, 'patient-register.html', context)
 
 
-def patient_profile(request, pk):
-    patient = Patient.objects.get(patient_id=pk)
-    context = {'patient': patient}
-
-    return render(request, 'patient-profile.html', context)
-
-# http://127.0.0.1:8000/patient-dashboard/1/
-
-
 def patient_dashboard(request, pk):
     patient = Patient.objects.get(user_id=pk)
-    context = {'patient': patient}
+    #appointments = Appointment.objects.all()
+    appointments = Appointment.objects.filter(patient=patient)
+    #payments = Payment.objects.filter(patient_id=patient.patient_id).filter(payment_type='appointment')
+    
+    # payments = Payment.objects.filter(patient=patient).filter(payment_type='appointment')
+    payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
+
+    context = {'patient': patient, 'appointments': appointments, 'payments': payments}
 
     return render(request, 'patient-dashboard.html', context)
-
-
-# def profile_settings(request):
-#     return render(request, 'profile-settings.html')
-
-
-# def profile_settings(request, pk):
-#     patient = Patient.objects.get(user_id=pk)
-#     context = {'patient': patient}
-
-#     return render(request, 'profile-settings.html', context)
 
 
 def profile_settings(request, pk):
@@ -209,10 +189,6 @@ def profile_settings(request, pk):
     return render(request, 'profile-settings.html', context)
 
 
-# def search(request):
-#     return render(request, 'search.html')
-
-
 def search(request, pk):
     patient = Patient.objects.get(user_id=pk)
 
@@ -221,3 +197,14 @@ def search(request, pk):
     context = {'patient': patient, 'doctors': doctors}
 
     return render(request, 'search.html', context)
+
+def payment(request):
+    return render(request, 'checkout.html')
+
+def multiple_hospital(request, pk):
+    patient = Patient.objects.get(user_id=pk)
+
+    doctors = Doctor_Information.objects.all()
+    context = {'patient': patient, 'doctors': doctors}
+
+    return render(request, 'multiple-hospital.html', context)

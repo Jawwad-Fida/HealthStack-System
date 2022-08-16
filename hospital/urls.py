@@ -16,19 +16,16 @@ urlpatterns = [
     path('change-password/', views.change_password, name='change-password'),
 
     path('add-billing/', views.add_billing, name='add-billing'),
-    path('add-prescription/', views.add_prescription, name='add-prescription'),
+
     path('appointments/', views.appointments, name='appointments'),
-    path('booking-success/', views.booking_success, name='booking-success'),
-    path('booking/', views.booking, name='booking'),
+
     path('edit-billing/', views.edit_billing, name='edit-billing'),
     path('edit-prescription/', views.edit_prescription, name='edit-prescription'),
     path('forgot-password-patient/', views.forgot_password_patient,
          name='forgot-password-patient'),
     path('patient-dashboard/<int:pk>/',
          views.patient_dashboard, name='patient-dashboard'),
-    # path('patient-profile', views.patient_profile, name='patient-profile'),
-    path('patient-profile/<str:pk>/',
-         views.patient_profile, name='patient-profile'),
+    
     path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
     # path('profile-settings/', views.profile_settings, name='profile-settings'),
     path('profile-settings/<str:pk>/',
@@ -39,12 +36,13 @@ urlpatterns = [
     path('logout/', views.logoutUser, name='logout'),
     path('forgot-password-doctor/', views.forgot_password_doctor,
          name='forgot-password-doctor'),
-    path('multiple-hospital/', views.multiple_hospital, name='multiple-hospital'),
-    path('chat/', views.chat, name='chat'),
+
+    path('multiple-hospital/<int:pk>/', views.multiple_hospital, name='multiple-hospital'),
+    path('chat/<int:pk>/', views.chat, name='chat'),
     path('chat-doctor/', views.chat_doctor, name='chat-doctor'),
+
     path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
-
-
+    path('payment/', views.payment, name='payment'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

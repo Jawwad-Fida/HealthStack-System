@@ -52,11 +52,10 @@
             <div class="page-wrapper">
 
                 <div class="content container-fluid">
-				
-					<!-- Page Header -->
-					<div class="col-sm-5 col">
-						<a href="{% url 'add-hospital' %}"  class="btn btn-primary float-right mt-2">Add</a>
+					<div class="">
+						<a href="{% url 'add-hospital' %}"  class="fe fe-plus btn btn-primary float-right mt-2 ">Add hospital</a>
 					</div>
+					<!-- Page Header -->
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
@@ -72,48 +71,56 @@
 					<!-- /Page Header -->
 					
 					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-body">
-									<div class="table-responsive">
+						 <div class="col-sm-12">
+							 <div class="card">
+								 <div class="card-body">
+									 <div class="table-responsive">
 										<table class="datatable table table-hover table-center mb-0">
-											<thead>
+										
+											 
+											 <thead>
 												<tr>
 													<th>Hospital Name</th>
 													<th>Address</th>
 													<th>Email</th>
 													<th>Phone Number</th>
 													<th>Hospital Type</th>
-													<th>Edit</th>
-													<th>Delete</th>
+													<th>Edit Hospital</th>
+													<th>Delete Hospital</th>
 													
 												</tr>
-											</thead>
+											 </thead>
+											 {% for hospital in hospitals %}
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{% static 'images/hospitals/hospital1.png' %}" alt="User Image"></a>															<a href="profile.html">Square Hospital</a>
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospital.featured_image.url}}" alt="User Image"></a>															
+															<a href="profile.html">{{hospital.name}}</a>
 														</h2>
 													</td>
-													<td>Dhanmondi</td>
+													<td>{{hospital.address}}</td>
 													
-													<td>square@gmail.com <br>
+													<td>{{hospital.email}}<br>
 													
-													<td>01234567788</td>
+													<td>{{hospital.phone_number}}</td>
 													
-													<td>private</td>
-													<td><a href="{% url 'edit-hospital' %}" class="btn btn-primary btn-m">Edit </a></td>
-													<td><a href="javascript:(0);" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
+
+
+
+													<td>{{hospital.hospital_type}}</td>
+													<td><a href="{% url 'edit-hospital' pk=hospital.hospital_id %}" class="btn btn-primary">Edit</a></td>
+													<td><a href="{% url 'delete-hospital' pk=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
+
 												</tr>
 													
 													</td>
 												</tr>
-											</tbody>
+												{% endfor %}
+											
 										</table>
 									</div>
 								</div>
-							</div>
-						</div>			
+							</div>	
 					</div>
 					
 				</div>			

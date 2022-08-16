@@ -23,6 +23,21 @@
 		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
+
+		<style>
+			th, td {
+			border: 1px solid white;
+	 		border-radius: 10px;
+			 /* #96D4D4 */
+	 		background-color: #0DB9F2;
+	 		height: 50px;
+	 		color: black;
+			width: 1000px;
+			text-align: center;
+
+
+		}
+		</style>
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -36,142 +51,7 @@
 		<div class="main-wrapper">
 		
 			<!-- Header -->
-			<header class="header">
-				<nav class="navbar navbar-expand-lg header-nav">
-				  <div class="navbar-header">
-					<a id="mobile_btn" href="javascript:void(0);">
-					  <span class="bar-icon">
-						<span></span>
-						<span></span>
-						<span></span>
-					  </span>
-					</a>
-					<a href="{% url 'hospital_home'%}" class="navbar-brand logo">
-					  <img
-						src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
-						class="img-fluid"
-						alt="Logo"
-					  />
-					</a>
-				  </div>
-				  <div class="main-menu-wrapper">
-					<div class="menu-header">
-					  <a href="{% url 'hospital_home'%}" class="menu-logo">
-						<img
-						  src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
-						  class="img-fluid"
-						  alt="Logo"
-						/>
-					  </a>
-					  <a id="menu_close" class="menu-close" href="javascript:void(0);">
-						<i class="fas fa-times"></i>
-					  </a>
-					</div>
-					<ul class="main-nav">
-					  <li>
-						<a href="{% url 'hospital_home'%}">Home</a>
-					  </li>
-					  <li class="has-submenu active">
-						<a href="#">Hospital <i class="fas fa-chevron-down"></i></a>
-						<ul class="submenu">
-						 
-						  <li><a href="{% url 'appointments'%}">Appointments</a></li>
-						  <li><a href="{% url 'schedule-timings'%}">Schedule Timing</a></li>
-						  <li><a href="{% url 'my-patients'%}">Patients List</a></li>
-						  <li><a href="#">Patients Profile</a></li>
-						  <!-- <li><a href="#">Chat</a></li>
-						  <li><a href="#">Invoices</a></li> -->
-						  
-						  <!-- <li><a href="reviews.html">Reviews</a></li> -->
-						  <!-- <li class="active">
-							<a href="doctor-register.html">Doctor Register</a>
-						  </li> -->
-						</ul>
-					  </li>
-					  <li class="has-submenu">
-						<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
-						<ul class="submenu">
-						  <li><a href="{% url 'search'%}">Search Doctor</a></li>
-						  <li><a href="{% url 'doctor-profile'%}">Doctor Profile</a></li>
-						  <li><a href="{% url 'booking'%}">Booking</a></li>
-						  <!-- <li><a href="#">Checkout</a></li> -->
-						  <li><a href="{% url 'booking-success'%}">Booking Success</a></li>
-						  
-						  <!-- <li><a href="#">Favourites</a></li> -->
-						  <!-- <li><a href="#">Chat</a></li> -->
-						  
-						  <li><a href="{% url 'change-password'%}">Change Password</a></li>
-						</ul>
-					  </li>
-					  <li>
-						<a href="{% url 'about-us'%}">About Us</a>
-					  </li>
-					  <!-- <li class="has-submenu">
-						<a href="#">Pages <i class="fas fa-chevron-down"></i></a>
-						<ul class="submenu">
-						  <li><a href="voice-call.html">Voice Call</a></li>
-						  <li><a href="video-call.html">Video Call</a></li>
-						  <li><a href="search.html">Search Doctors</a></li>
-						  <li><a href="calendar.html">Calendar</a></li>
-						  <li><a href="components.html">Components</a></li>
-						  <li class="has-submenu">
-							<a href="invoices.html">Invoices</a>
-							<ul class="submenu">
-							  <li><a href="invoices.html">Invoices</a></li>
-							  <li><a href="invoice-view.html">Invoice View</a></li>
-							</ul>
-						  </li>
-						  <li><a href="blank-page.html">Starter Page</a></li>
-						  <li><a href="login.html">Login</a></li>
-						  <li><a href="register.html">Register</a></li>
-						  <li><a href="forgot-password.html">Forgot Password</a></li>
-						</ul>
-					  </li> -->
-					  <li>
-						<a href="{% url 'admin_login' %}" target="_blank">Admin</a>
-					  </li>
-					  <li class="login-link">
-						<a href="{% url 'login' %}">Login / Signup</a>
-					  </li>
-					</ul>
-				  </div>
-				  <ul class="nav header-navbar-rht">
-					<li class="nav-item contact-item">
-					  <div class="header-contact-img">
-						<i class="far fa-hospital"></i>
-					  </div>
-					  <div class="header-contact-detail">
-						<p class="contact-header">Contact</p>
-						<p class="contact-info-header">+880 1795087285</p>
-					  </div>
-					</li>
-					<!-- User Menu -->
-					<li class="nav-item dropdown has-arrow logged-item">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<span class="user-img">
-								
-								<img class="rounded-circle" src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" width="31" alt="Richard Wilson">
-							</span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right">
-							<div class="user-header">
-								<div class="avatar avatar-sm">
-									<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
-								</div>
-								<div class="user-text">
-									<h6>Richard Wilson</h6>
-									<p class="text-muted mb-0">Patient</p>
-								</div>
-							</div>
-							
-							
-							<a class="dropdown-item" href="{% url 'hospital_home'%}">Logout</a>
-						</div>
-					</li>
-					<!-- /User Menu -->
-				  </ul>
-				</nav>
-			  </header>
+			<header class="header">{% include 'patient_navbar.html' %}</header>
 			<!-- /Header -->
 			
 			<!-- Breadcrumb -->
@@ -201,10 +81,13 @@
 						<div class="card-body">
 							<div class="doctor-widget">
 								<div class="doc-info-left">
+									<div class="row">
+									<div class="col-lg-6 col-md-6" style=" display: flex;justify-content: left;width: 65%;">
 									<div class="doctor-img">
-										<img src="{% static 'images/hospitals/hospital1.png' %}" class="img-fluid" alt="User Image">
+										<img src="{% static 'images/hospitals/hospital3.png' %}" style="height: 250px; width: 280px; margin: auto; " alt="User Image">
 									</div>
-									<div class="doc-info-cont">
+									</div>
+									<div class="doc-info-cont col-md-6">
 										<h4 class="doc-name">Baby's Care childrens Hospital</h4>
 										<p class="doc-speciality">Childrens Hospital</p>
 										
@@ -247,8 +130,9 @@
                                             
 										</div>
 									</div>
+									</div>
 								</div>
-								<div class="doc-info-right">
+								<div class="doc-info-right col-md-6" >
 									<div class="clini-infos">
 										<ul>
 											<li><i class="far fa-thumbs-up"></i> 99%</li>
@@ -272,7 +156,7 @@
 										</a>
 									</div>
 									<div class="clinic-booking">
-										<a class="apt-btn" href="{% url 'booking'%}">Doctor List</a>
+										<a class="apt-btn" href="#">Doctor List</a>
 									</div>
 								</div>
 							</div>
@@ -511,7 +395,7 @@
 											<!-- /Clinic Content -->
 											
 											<!-- Clinic Timing -->
-											<div class="col-md-2">
+											<div class="col-md-4">
 												<div class="clinic-timing">
 													<div>
 														<p class="timings-days">
@@ -544,77 +428,38 @@
 
 								</div>
 								<!-- /Locations Content -->
-								
-							
-										
-								
+									
 								<!-- Overview Content -->
 								<div role="tabpanel" id="doc_emergency" class="tab-pane fade show">
 									<div class="row">
-										<div class="col-md-12 col-lg-9">
-										
-											<!-- Clinic Timing -->
-											<div class="col-md-6">
-												<div class="clinic-timing">
-													
-													
-													<div>
-													<p class="timings-days">
-														<span>General Bed</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-													</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>ICU</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-													</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>Regular Cabin</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-													</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>Emergency cabin</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-										        	</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>VIP Room</span>
-													</p>
-													<p class="timings-times">
-														<span>10</span>
-													</p>
-													<div>
-
-												</div>
-											</div>
-											<!-- /Clinic Timing -->
-										
-											
-									
-											
-								
-											
-
+										<div class="col-md-12 col-lg-12">
+											<Table>
+												<tr>
+													<td><b>General Bed</b></td>
+													<td>10</td>
+												</tr>
+												<tr>
+													<td><b>Regular Cabin</b></td>
+													<td>9</td>
+												</tr>
+												<tr>
+													<td><b>ICU</b></td>
+													<td>8</td>
+												</tr>
+												<tr>
+													<td><b>Emergency Cabin</b></td>
+													<td>7</td>
+												</tr>
+												<tr>
+													<td><b>VIP room</b></td>
+													<td>-</td>
+												</tr>
+												
+											</Table>
 										</div>
 									</div>
 								</div>
 								<!-- /Overview Content -->
-								
-					
 								
 							</div>
 						</div>
