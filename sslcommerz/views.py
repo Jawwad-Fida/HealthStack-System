@@ -204,7 +204,7 @@ def ssl_payment_success(request):
 
         #dic = {'payment_data': payment_data, 'response': response}
         #return render(request, 'success.html', dic)
-        return redirect('hospital_home')
+        return redirect('patient-dashboard')
 
     elif status == 'FAILED':
         redirect('ssl-payment-fail')

@@ -77,12 +77,12 @@
 
           {% if user.is_authenticated and user.is_patient %}
           <li>
-            <a href="{% url 'patient-dashboard' pk=user.id %}"
+            <a href="{% url 'patient-dashboard' %}"
               >Patient Dashboard</a
             >
           </li>
           <li>
-            <a href="{% url 'profile-settings' pk=user.id %}"
+            <a href="{% url 'profile-settings' %}"
               >Profile Settings</a
             >
           </li>
