@@ -52,23 +52,7 @@ def admin_login(request):
 
     return render(request, 'hospital_admin/login.html')
 
-def hospital_admin_profile(request, pk):
 
-    
-    admin = Admin_Information.objects.get(user_id=pk)
-    form = AdminForm(instance=admin)
-
-    if request.method == 'POST':
-        form = AdminForm(request.POST, request.FILES,
-                          instance=admin)
-        if form.is_valid():
-            form.save()
-            return redirect('hospital_admin/admin-dashboard', pk=pk)
-        else:
-            form = AdminForm()
-
-    context = {'admin': admin, 'form': form}
-    return render(request, 'hospital_admin/hospital-admin-profile.html', context)
 
 
 def admin_register(request):
@@ -175,7 +159,7 @@ def hospital_admin_profile(request, pk):
             form = AdminForm()
 
     context = {'admin': admin, 'form': form}
-    return render(request, 'hospital-admin-profile', context)
+    return render(request, 'hospital_admin/hospital-admin-profile.html', context)
 
 
 
@@ -281,3 +265,6 @@ def create_invoice(request, pk):
 
     context = {'patient': patient}
     return render(request, 'hospital_admin/create-invoice.html', context)
+
+def add_pharmacist(request):
+    return render(request, 'hospital_admin/add-pharmacist.html')
