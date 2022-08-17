@@ -110,7 +110,7 @@ class Report(models.Model):
     delivery_date = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return str(self.doctor.username)
+        return str(self.patient.username)
         
 class Prescription(models.Model):
 
