@@ -12,9 +12,12 @@ from django.contrib import messages
 from hospital.models import User, Patient
 from .models import Doctor_Information, Appointment
 
+from django.db.models import Q
+
 import random
 import string
 
+import datetime
 # Create your views here.
 
 
@@ -105,14 +108,27 @@ def doctor_dashboard(request):
     if request.user.is_doctor:
         # doctor = Doctor_Information.objects.get(user_id=pk)
         doctor = Doctor_Information.objects.get(user=request.user)
-        appointments = Appointment.objects.filter(doctor=doctor)
+        appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
+        current_date = datetime.date.today()
+        today_appointments = Appointment.objects.filter(date=current_date).filter(doctor=doctor).filter(appointment_status='confirmed')
+        # .filter(appointment_status='confirmed')
     else:
         redirect('doctor-logout')
     
-    context = {'doctor': doctor, 'appointments': appointments}
+    context = {'doctor': doctor, 'appointments': appointments, 'today_appointments': today_appointments}
     return render(request, 'doctor-dashboard.html', context)
 
+def accept_appointment(request, pk):
+    appointment = Appointment.objects.get(id=pk)
+    appointment.appointment_status = 'confirmed'
+    appointment.save()
+    return redirect('doctor-dashboard')
 
+def reject_appointment(request, pk):
+    appointment = Appointment.objects.get(id=pk)
+    appointment.appointment_status = 'cancelled'
+    appointment.save()
+    return redirect('doctor-dashboard')
 
 def doctor_profile_settings(request):
 
