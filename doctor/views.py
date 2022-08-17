@@ -154,7 +154,7 @@ def booking(request, pk):
         appointment.serial_number = generate_random_string()
         appointment.appointment_type = appointment_type
         appointment.save()
-        return redirect('patient-dashboard', pk=patient.user_id)
+        return redirect('patient-dashboard')
 
     context = {'patient': patient, 'doctor': doctor}
     return render(request, 'booking.html', context)
