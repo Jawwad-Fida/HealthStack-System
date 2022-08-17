@@ -81,6 +81,7 @@ def chat_doctor(request):
 
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
+
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
 
