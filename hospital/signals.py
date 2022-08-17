@@ -3,7 +3,12 @@ from django.dispatch import receiver
 # from django.contrib.auth.models import User
 from .models import Patient, User
 from doctor.models import Doctor_Information
-from hospital_admin.models import Admin_Information
+from hospital_admin.models import Admin_Information, Clinical_Laboratory_Technician
+
+from pharmacy.models import Pharmacist
+
+import random
+import string
 
 
 # # from django.core.mail import send_mail
@@ -18,6 +23,13 @@ from hospital_admin.models import Admin_Information
 #     if created:
 #         Patient.objects.create(user=instance)
 
+def generate_random_string():
+    N = 6
+    string_var = ""
+    string_var = ''.join(random.choices(
+        string.ascii_uppercase + string.digits, k=N))
+    string_var = "#PT" + string_var
+    return string_var
 
 @receiver(post_save, sender=User)
 def createPatient(sender, instance, created, **kwargs):
@@ -25,7 +37,7 @@ def createPatient(sender, instance, created, **kwargs):
         if instance.is_patient:
             user = instance
             Patient.objects.create(
-                user=user, username=user.username, email=user.email)
+                user=user, username=user.username, email=user.email, serial_number = generate_random_string())
         elif instance.is_doctor:
             user = instance
             Doctor_Information.objects.create(
@@ -34,6 +46,12 @@ def createPatient(sender, instance, created, **kwargs):
             user = instance
             Admin_Information.objects.create(
                 user=user, username=user.username, email=user.email)
+        elif instance.is_pharmacist:
+            user = instance
+            Pharmacist.objects.create(user=user, username=user.username, email=user.email)
+        elif instance.is_labworker:
+            user = instance
+            Clinical_Laboratory_Technician.objects.create(user=user, username=user.username, email=user.email)
         
 
 
