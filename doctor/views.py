@@ -105,10 +105,11 @@ def doctor_dashboard(request):
     if request.user.is_doctor:
         # doctor = Doctor_Information.objects.get(user_id=pk)
         doctor = Doctor_Information.objects.get(user=request.user)
+        appointments = Appointment.objects.filter(doctor=doctor)
     else:
         redirect('doctor-logout')
     
-    context = {'doctor': doctor}
+    context = {'doctor': doctor, 'appointments': appointments}
     return render(request, 'doctor-dashboard.html', context)
 
 
