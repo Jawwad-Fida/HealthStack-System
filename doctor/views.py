@@ -206,9 +206,17 @@ def my_patients(request):
 #     return render(request, 'patient_profile.html')
 
 def patient_profile(request):
-    patient = Patient.objects.all()
-    context = {'patient': patient}
-    return render(request, 'patient_profile.html', context)
+    if request.user.is_doctor:
+        # doctor = Doctor_Information.objects.get(user_id=pk)
+        doctor = Doctor_Information.objects.get(user=request.user)
+        appointments = Appointment.objects.filter(doctor=doctor)
+    else:
+        redirect('doctor-logout')
+    context = {'doctor': doctor, 'appointments': appointments}    
+    return render(request, 'patient-profile.html', context)
+
+     
+    
 
 def view_report(request):
     return render(request, 'view-report.html')
