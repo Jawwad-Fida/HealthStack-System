@@ -91,8 +91,10 @@ def admin_forgot_password(request):
 
 
 def doctor_list(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
     doctors = Doctor_Information.objects.all()
-    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors})
+    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors, 'admin': user})
 
 
 def invoice(request):
@@ -108,8 +110,10 @@ def lock_screen(request):
 
 
 def patient_list(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
     patients = Patient.objects.all()
-    return render(request, 'hospital_admin/patient-list.html', {'all': patients})
+    return render(request, 'hospital_admin/patient-list.html', {'all': patients, 'admin': user})
 
 
 def specialitites(request):
@@ -268,27 +272,28 @@ def create_invoice(request, pk):
 
 
 def create_report(request, pk):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
     doctors =Doctor_Information.objects.get(doctor_id=pk)
 
     if request.method == 'POST':
-        patient = Patient.objects.get(serial_number=request.POST['serial_number'])
+        patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
         report = Report(patient=patient, doctor=doctors)
         test_name = request.POST['test_name']
         description = request.POST['description']
         result = request.POST['result']
         delivery_date = request.POST['delivery_date']
-        doctors = request.POST['doctor']
 
+        # Save to report table
         report.test_name = test_name
         report.description = description
         report.result = result
         report.delivery_date = delivery_date
-        
         report.save()
 
         return redirect('doctor-list')
 
-    context = {'doctors': doctors}
+    context = {'doctors': doctors, 'admin': user}
     return render(request, 'hospital_admin/create-report.html',context)
 
 def add_pharmacist(request):
