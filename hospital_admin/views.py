@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -267,28 +268,28 @@ def create_invoice(request, pk):
 
 
 def create_report(request, pk):
-    patient = Patient.objects.get(patient_id=pk)
-    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    doctors =Doctor_Information.objects.get(doctor_id=pk)
 
     if request.method == 'POST':
-        report = Report(patient=patient)
-        
+        patient = Patient.objects.get(serial_number=request.POST['serial_number'])
+        report = Report(patient=patient, doctor=doctors)
         test_name = request.POST['test_name']
         description = request.POST['description']
         result = request.POST['result']
         delivery_date = request.POST['delivery_date']
-        
+        doctors = request.POST['doctor']
+
         report.test_name = test_name
         report.description = description
         report.result = result
         report.delivery_date = delivery_date
-        report.doctor = doctor
+        
         report.save()
 
-        return redirect('patient-list')
+        return redirect('doctor-list')
 
-    context = {'patient': patient}
-    return render(request, 'hospital_admin/create-report.html', context)
+    context = {'doctors': doctors}
+    return render(request, 'hospital_admin/create-report.html',context)
 
 def add_pharmacist(request):
     return render(request, 'hospital_admin/add-pharmacist.html')
