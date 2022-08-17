@@ -198,7 +198,8 @@
                                     <th>Appt Date</th>
                                     <th>Purpose</th>
                                     <th>Contact</th>
-                                    <th class="text-center">Payment Status</th>
+                                    <th>Payment Status</th>
+                                    <th>Appoinment Status</th>
                                     <th></th>
                                   </tr>
                                 </thead>
@@ -239,7 +240,15 @@
                                       {% if appointment.payment_status == 'VALID' %}
                                       <span class="badge badge-pill bg-success-light">Paid</span>
                                       {% endif %}
-                                      {% if appointment.payment_status == 'cancelled' %}
+                                    </td>
+                                    <td>
+                                      {% if appointment.appointment_status == 'pending' %}
+                                      <span class="badge badge-pill bg-warning-light">Pending</span>
+                                      {% endif %}
+                                      {% if appointment.appointment_status == 'confirmed' %}
+                                      <span class="badge badge-pill bg-success-light">Confirmed</span>
+                                      {% endif %}
+                                      {% if appointment.appointment_status == 'cancelled' %}
                                       <span class="badge badge-pill bg-danger-light">Cancelled</span>
                                       {% endif %}
                                     </td>
@@ -249,10 +258,10 @@
                                           <i class="far fa-eye"></i> View
                                         </a>
 
-                                        <a href="javascript:void(0);" onclick="return confirm('Accept appointment?');" class="btn btn-sm bg-success-light">
+                                        <a href="{% url 'accept-appointment' pk=appointment.id %}" onclick="return confirm('Accept appointment?');" class="btn btn-sm bg-success-light">
                                           <i class="fas fa-check"></i> Accept
                                         </a>
-                                        <a href="javascript:void(0);" onclick="return confirm('Reject Appointment?');" class="btn btn-sm bg-danger-light">
+                                        <a href="{% url 'reject-appointment' pk=appointment.id %}" onclick="return confirm('Reject Appointment?');" class="btn btn-sm bg-danger-light">
                                           <i class="fas fa-times"></i> Cancel
                                         </a>
                                       </div>
@@ -283,12 +292,13 @@
                                     <th>Patient Name</th>
                                     <th>Appt Date</th>
                                     <th>Purpose</th>
-                                    <th>Type</th>
-                                    <th class="text-center">Paid Amount</th>
-                                    <th></th>
+                                    <th>Contact</th>
+                                    <th>Status</th>
                                   </tr>
                                 </thead>
                                 <tbody>
+
+                                  {% for today in today_appointments %}
                                   <tr>
                                     <td>
                                       <h2 class="table-avatar">
@@ -297,98 +307,32 @@
                                           class="avatar avatar-sm mr-2"
                                           ><img
                                             class="avatar-img rounded-circle"
-                                            src="{% static 'HealthStack-System/images/Normal/patients/patient8.jpg' %}"
+                                            src="{{ today.patient.featured_image.url }}"
                                             alt="User Image"
                                         /></a>
-                                        <a href="patient-profile.html"
-                                          >Daniel Griffing
-                                          <span>#PT0007</span></a
-                                        >
+                                        <a href="patient-profile.html">{{today.patient.name}}<span>#PT{{today.serial_number}}</span></a>
                                       </h2>
                                     </td>
+                                    <td>{{today.date}}<span class="d-block text-info">{{today.time}}</span></td>
+                                    <td>{{ today.appointment_type }}</td>
                                     <td>
-                                      14 Nov 2019
+                                      {{today.patient.email}}
                                       <span class="d-block text-info"
-                                        >3.00 PM</span
+                                        >{{today.patient.phone_number}}</span
                                       >
                                     </td>
-                                    <td>General</td>
-                                    <td>New Patient</td>
-                                    <td class="text-center">$75</td>
-                                    <td class="text-right">
-                                      <div class="table-action">
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-info-light"
-                                        >
-                                          <i class="far fa-eye"></i> View
-                                        </a>
-
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-success-light"
-                                        >
-                                          <i class="fas fa-check"></i> Accept
-                                        </a>
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-danger-light"
-                                        >
-                                          <i class="fas fa-times"></i> Cancel
-                                        </a>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
                                     <td>
-                                      <h2 class="table-avatar">
-                                        <a
-                                          href="patient-profile.html"
-                                          class="avatar avatar-sm mr-2"
-                                          ><img
-                                            class="avatar-img rounded-circle"
-                                            src="{% static 'HealthStack-System/images/Normal/patients/patient9.jpg' %}"
-                                            alt="User Image"
-                                        /></a>
-                                        <a href="patient-profile.html"
-                                          >Walter Roberson
-                                          <span>#PT0008</span></a
-                                        >
-                                      </h2>
+                                      {% if today.appointment_status == 'pending' %}
+                                      <span class="badge badge-pill bg-warning-light">Pending</span>
+                                      {% endif %}
+                                      {% if today.appointment_status == 'confirmed' %}
+                                      <span class="badge badge-pill bg-success-light">Confirmed</span>
+                                      {% endif %}
                                     </td>
-                                    <td>
-                                      14 Nov 2019
-                                      <span class="d-block text-info"
-                                        >1.00 PM</span
-                                      >
-                                    </td>
-                                    <td>General</td>
-                                    <td>Old Patient</td>
-                                    <td class="text-center">$350</td>
-                                    <td class="text-right">
-                                      <div class="table-action">
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-info-light"
-                                        >
-                                          <i class="far fa-eye"></i> View
-                                        </a>
-
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-success-light"
-                                        >
-                                          <i class="fas fa-check"></i> Accept
-                                        </a>
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-danger-light"
-                                        >
-                                          <i class="fas fa-times"></i> Cancel
-                                        </a>
-                                      </div>
-                                    </td>
+                                  
                                   </tr>
+                                  {% endfor %}
+                 
                                 </tbody>
                               </table>
                             </div>
