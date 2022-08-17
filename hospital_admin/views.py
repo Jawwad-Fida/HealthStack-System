@@ -249,6 +249,9 @@ def generate_random_invoice():
     return string_var
 
 def create_invoice(request, pk):
+    if  request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+
     patient = Patient.objects.get(patient_id=pk)
 
     if request.method == 'POST':
@@ -267,7 +270,7 @@ def create_invoice(request, pk):
         invoice.save()
         return redirect('patient-list')
 
-    context = {'patient': patient}
+    context = {'patient': patient,'admin': user}
     return render(request, 'hospital_admin/create-invoice.html', context)
 
 
@@ -297,4 +300,7 @@ def create_report(request, pk):
     return render(request, 'hospital_admin/create-report.html',context)
 
 def add_pharmacist(request):
-    return render(request, 'hospital_admin/add-pharmacist.html')
+    if request.user.is_hospital_admin:
+     user = Admin_Information.objects.get(user=request.user)
+    return render(request, 'hospital_admin/add-pharmacist.html',{'admin': user})  
+
