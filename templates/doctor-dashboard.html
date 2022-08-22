@@ -105,9 +105,9 @@
                               </div>
                             </div>
                             <div class="dash-widget-info">
-                              <h6>Total Patient</h6>
-                              <h3>1500</h3>
-                              <p class="text-muted">Till Today</p>
+                              <h6>Next Day Appoinment</h6>
+                              <h3>{{next_days_appointment}}</h3>
+                              <p class="text-muted">{{next_date}}</p>
                             </div>
                           </div>
                         </div>
@@ -125,8 +125,8 @@
                             </div>
                             <div class="dash-widget-info">
                               <h6>Today Patient</h6>
-                              <h3>160</h3>
-                              <p class="text-muted">06, Nov 2019</p>
+                              <h3>{{today_patient_count.count}}</h3>
+                              <p class="text-muted">{{current_date}}</p>
                             </div>
                           </div>
                         </div>
@@ -143,9 +143,9 @@
                               </div>
                             </div>
                             <div class="dash-widget-info">
-                              <h6>Appoinments</h6>
-                              <h3>85</h3>
-                              <p class="text-muted">06, Apr 2019</p>
+                              <h6>Total Appoinments</h6>
+                              <h3>{{total_appointments_count.count}}</h3>
+                              <p class="text-muted">{{current_date}}</p>
                             </div>
                           </div>
                         </div>

@@ -1,9 +1,8 @@
 from django.db import models
+
 import hospital
 from hospital.models import User, Hospital_Information
 from doctor.models import Doctor_Information
-
-
 
 
 # Create your models here.
@@ -45,6 +44,7 @@ class Clinical_Laboratory_Technician(models.Model):
         return str(self.user.username)
 
 
+
 class hospital_department(models.Model):
     hospital_department_id = models.AutoField(primary_key=True)
     hospital_department_name = models.CharField(max_length=200, null=True, blank=True)
@@ -71,3 +71,6 @@ class service(models.Model):
 
     def __str__(self):
         return str(self.hospital.name) 
+
+    
+
