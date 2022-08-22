@@ -12,11 +12,12 @@ from django.contrib import messages
 from hospital.models import User, Patient
 from .models import Doctor_Information, Appointment
 
-from django.db.models import Q
+from django.db.models import Q, Count
 
 import random
 import string
 
+from datetime import datetime, timedelta
 import datetime
 # Create your views here.
 
@@ -108,14 +109,23 @@ def doctor_dashboard(request):
     if request.user.is_doctor:
         # doctor = Doctor_Information.objects.get(user_id=pk)
         doctor = Doctor_Information.objects.get(user=request.user)
+        patient = Patient.objects.all()
         appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
         current_date = datetime.date.today()
         today_appointments = Appointment.objects.filter(date=current_date).filter(doctor=doctor).filter(appointment_status='confirmed')
-        # .filter(appointment_status='confirmed')
+        
+        # next days date
+        next_date = current_date + datetime.timedelta(days=1)
+        
+        # Count
+        next_days_appointment = Appointment.objects.filter(date=next_date).filter(doctor=doctor).filter(appointment_status='pending').count()
+        # .values('count')
+        today_patient_count = Appointment.objects.filter(date=current_date).filter(doctor=doctor).annotate(count=Count('patient'))
+        total_appointments_count = Appointment.objects.filter(doctor=doctor).annotate(count=Count('id'))
     else:
         redirect('doctor-logout')
     
-    context = {'doctor': doctor, 'appointments': appointments, 'today_appointments': today_appointments}
+    context = {'doctor': doctor, 'appointments': appointments, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date, 'next_date': next_date}
     return render(request, 'doctor-dashboard.html', context)
 
 def accept_appointment(request, pk):

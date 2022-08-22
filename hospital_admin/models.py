@@ -1,5 +1,6 @@
 from django.db import models
-from hospital.models import User
+from hospital.models import User, Hospital_Information
+from doctor.models import Doctor_Information
 
 
 # Create your models here.
@@ -39,3 +40,15 @@ class Clinical_Laboratory_Technician(models.Model):
 
     def __str__(self):
         return str(self.user.username)
+    
+
+# class department(models.Model):
+#     name = models.CharField(max_length=200, null=True, blank=True)
+#     # username = models.CharField(max_length=200, null=True, blank=True)
+#     # age = models.IntegerField(null=True, blank=True)
+#     # email = models.EmailField(max_length=200, null=True, blank=True)
+#     # phone_number = models.IntegerField(null=True, blank=True)
+#     # featured_image = models.ImageField(upload_to='technician/', default='technician/user-default.png', null=True, blank=True)
+
+#     def __str__(self):
+#         return str(self.name)
