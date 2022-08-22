@@ -4,6 +4,7 @@ from django.http import HttpResponse
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm
+from hospital.models import Hospital_Information, User, Patient
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -79,8 +80,17 @@ def chat_doctor(request):
     return render(request, 'chat-doctor.html')
 
 
-def hospital_profile(request):
-    return render(request, 'hospital-profile.html')
+def hospital_profile(request, pk):
+    if request.user.is_patient:
+        # patient = Patient.objects.get(user_id=pk)
+        patient = Patient.objects.get(user=request.user)
+        doctors = Doctor_Information.objects.all()
+        hospitals = Hospital_Information.objects.get(hospital_id=pk)
+    
+        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
+        return render(request, 'hospital-profile.html', context)
+    else:
+        redirect('logout')
 
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
@@ -212,8 +222,12 @@ def multiple_hospital(request):
         # patient = Patient.objects.get(user_id=pk)
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.all()
+        hospitals = Hospital_Information.objects.all()
     
-        context = {'patient': patient, 'doctors': doctors}
+        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
         return render(request, 'multiple-hospital.html', context)
     else:
         redirect('logout')
+    
+def data_table(request):
+    return render(request, 'data-table.html')

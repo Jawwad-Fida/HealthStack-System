@@ -53,6 +53,8 @@
 			<!-- Header -->
 			<header class="header">{% include 'patient_navbar.html' %}</header>
 			<!-- /Header -->
+
+				
 			
 			<!-- Breadcrumb -->
 			<div class="breadcrumb-bar">
@@ -74,396 +76,408 @@
 			
 			<!-- Page Content -->
 			<div class="content">
-				<div class="container">
-
-					<!-- Doctor Widget -->
-					<div class="card">
-						<div class="card-body">
-							<div class="doctor-widget">
-								<div class="doc-info-left">
-									<div class="row">
-									<div class="col-lg-6 col-md-6" style=" display: flex;justify-content: left;width: 65%;">
-									<div class="doctor-img">
-										<img src="{% static 'images/hospitals/hospital3.png' %}" style="height: 250px; width: 280px; margin: auto; " alt="User Image">
-									</div>
-									</div>
-									<div class="doc-info-cont col-md-6">
-										<h4 class="doc-name">Baby's Care childrens Hospital</h4>
-										<p class="doc-speciality">Childrens Hospital</p>
-										
-										<div class="rating">
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star"></i>
-											<span class="d-inline-block average-rating">(35)</span>
-										</div>
-										<div class="clinic-details">
-											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</p>
-											<ul class="clinic-gallery">
-												<li>
-													<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" data-fancybox="gallery">
-														<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" alt="Feature">
-													</a>
-												</li>
-												<li>
-													<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}" data-fancybox="gallery">
-														<img  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}" alt="Feature">
-													</a>
-												</li>
-												<li>
-													<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}" data-fancybox="gallery">
-														<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}" alt="Feature">
-													</a>
-												</li>
-												<li>
-													<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" data-fancybox="gallery">
-														<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" alt="Feature">
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="clinic-services">
-											<span>24/7 NICU specialist</span>
-											<span>Always available emergency doctors</span>
-                                            
-										</div>
-									</div>
-									</div>
-								</div>
-								<div class="doc-info-right col-md-6" >
-									<div class="clini-infos">
-										<ul>
-											<li><i class="far fa-thumbs-up"></i> 99%</li>
-											<li><i class="far fa-comment"></i> 35 Feedback</li>
-											<li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
-										
-										</ul>
-									</div>
-									<div class="doctor-action">
-										<a href="javascript:void(0)" class="btn btn-white fav-btn">
-											<i class="far fa-bookmark"></i>
-										</a>
-										<a href="chat.html" class="btn btn-white msg-btn">
-											<i class="far fa-comment-alt"></i>
-										</a>
-										<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
-											<i class="fas fa-phone"></i>
-										</a>
-										<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-											<i class="fas fa-video"></i>
-										</a>
-									</div>
-									<div class="clinic-booking">
-										<a class="apt-btn" href="#">Doctor List</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /Doctor Widget -->
-					
-					<!-- Doctor Details Tab -->
-					<div class="card">
-						<div class="card-body pt-0">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 						
-							<!-- Tab Menu -->
-							<nav class="user-tabs mb-4">
-								<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-									<li class="nav-item">
-										<a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#doc_locations" data-toggle="tab">Locations and Contact</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#doc_emergency" data-toggle="tab">Emergency Info</a>
-									</li>
-									
-									
-								</ul>
-							</nav>
-							<!-- /Tab Menu -->
+							<!-- Profile Sidebar -->
+							<div>{% include 'patient-sidebar.html' %}</div>
+							<!-- /Profile Sidebar -->
 							
-							<!-- Tab Content -->
-							<div class="tab-content pt-0">
-							
-								<!-- Overview Content -->
-								<div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
-									<div class="row">
-										<div class="col-md-12 col-lg-9">
-										
-											<!-- About Details -->
-											<div class="widget about-widget">
-												<h4 class="widget-title">About Our Hospital</h4>
-												<p>Our hospital is one of the largest and most recognized private healthcare brands in Bangladesh. Known for its pioneering works in setting-up the first super-specialty Cardiac hospital within country. It is also widely acknowledged for bringing high quality diagnostic & specialized consultation facilities under a single roof through its now ubiquitous centers in all corners of Bangladesh. Around 2.1 million annual patient interactions, more than 5,000 employees, and upward of 800 consultant physicians countrywide.</p>
+						</div>
+						
+						<div class="col-md-7 col-lg-8 col-xl-9">
+							<div class="card">
+								<div class="card-body">
+									<div class="doctor-widget">
+										<div class="doc-info-left">
+											<div class="row">
+											<div class="col-lg-6 col-md-6" style=" display: flex;justify-content: left;width: 65%;">
+											<div class="doctor-img">
+												<img src="{{hospitals.featured_image.url}}" style="height: 250px; width: 280px; margin: auto; " alt="User Image">
 											</div>
-											<!-- /About Details -->
-										
-											
-									
-											
-								
-											<!-- Awards Details -->
-											<div class="widget awards-widget">
-												<h4 class="widget-title">Departments</h4>
-												<div class="experience-box">
-													<ul class="experience-list">
+											</div>
+											<div class="doc-info-cont col-md-6 col-lg-6">
+												<h4 class="doc-name">{{hospitals.name}}</h4>
+												<p class="doc-speciality">{{hospitals.hospital_type}} Hospital</p>
+												
+												<div class="rating">
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star"></i>
+													<span class="d-inline-block average-rating">(35)</span>
+												</div>
+												<div class="clinic-details">
+													<p class="doc-location"><i class="fas fa-map-marker-alt"></i>{{hospitals.address}}</p>
+													<ul class="clinic-gallery">
 														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">Allergy and Immunology</h4>
-																	<p></p>
-																</div>
-															</div>
+															<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" data-fancybox="gallery">
+																<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" alt="Feature">
+															</a>
 														</li>
 														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">Anesthesiology</h4>
-																	<p></p>
-																</div>
-															</div>
+															<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}" data-fancybox="gallery">
+																<img  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}" alt="Feature">
+															</a>
 														</li>
 														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">ARCH (At Risk Children) Center</h4>
-																	<p></p>
-																</div>
-															</div>
+															<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}" data-fancybox="gallery">
+																<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg'%}" alt="Feature">
+															</a>
 														</li>
-                                                        <li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">Autism and Developmental Disabilities (CADD)</h4>
-																	<p></p>
-																</div>
-															</div>
-														</li>
-                                                        <li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">Cancer and Blood Disorders (CCBD)</h4>
-																	<p></p>
-																</div>
-															</div>
-														</li>
-                                                        <li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">Cardiology and Cardiothoracic Surgery (Heart Center)</h4>
-																	<p></p>
-																</div>
-															</div>
-														</li>
-                                                        <li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">Center for Cerebrovascular Disorders</h4>
-																	<p></p>
-																</div>
-															</div>
-														</li>
-                                                        <li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">Dentistry and Orthodontics</h4>
-																	<p></p>
-																</div>
-															</div>
-														</li>
-                                                        <li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	
-																	<h4 class="exp-title">Ear Nose and Throat (ENT)</h4>
-																	<p></p>
-																</div>
-															</div>
+														<li>
+															<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" data-fancybox="gallery">
+																<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" alt="Feature">
+															</a>
 														</li>
 													</ul>
 												</div>
+												<div class="clinic-services">
+													<span>childrens special</span>
+													<span>Always available emergency doctors</span>
+													
+												</div>
 											</div>
-											<!-- /Awards Details -->
-											
-											<!-- Services List -->
-											<div class="service-list">
-												<h4>Services</h4>
-												<ul class="clearfix">
-													<li>Pediatrician</li>
-                                                    <li>Pediatric dentist</li>
-                                                    <li>ophthalmologist</li>
-                                                    <li>Surgical Extractions</li>
-                                                    <li>Allergist</li>
+											</div>
+										</div>
+										<div class="doc-info-right col-md-6" >
+											<div class="clini-infos">
+												<ul>
+													<li><i class="far fa-thumbs-up"></i> 99%</li>
+													<li><i class="far fa-comment"></i> 35 Feedback</li>
+													<li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+												
 												</ul>
 											</div>
-											<!-- /Services List -->
-											
-											<!-- Specializations List -->
-											<div class="service-list">
-												<h4>Specializations</h4>
-												<ul class="clearfix">
-													<li>Children Care</li>	
-													<li>Periodontist</li>	
-													<li>Prosthodontics</li>	
-												</ul>
+											<div class="doctor-action">
+												<a href="javascript:void(0)" class="btn btn-white fav-btn">
+													<i class="far fa-bookmark"></i>
+												</a>
+												<a href="chat.html" class="btn btn-white msg-btn">
+													<i class="far fa-comment-alt"></i>
+												</a>
+												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
+													<i class="fas fa-phone"></i>
+												</a>
+												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
+													<i class="fas fa-video"></i>
+												</a>
 											</div>
-											<!-- /Specializations List -->
-
+											<div class="clinic-booking">
+												<a class="apt-btn" href="#">Doctor List</a>
+											</div>
 										</div>
 									</div>
 								</div>
-								<!-- /Overview Content -->
+							</div>
+							<!-- /Doctor Widget -->
+							
+							<!-- Doctor Details Tab -->
+							<div class="card">
+								<div class="card-body pt-0">
 								
-								<!-- Locations Content -->
-								<div role="tabpanel" id="doc_locations" class="tab-pane fade">
-								
-									<!-- Location List -->
-									<div class="location-list">
-										<div class="row">
-										
-											<!-- Clinic Content -->
-											<div class="col-md-4">
-												<div class="clinic-content">
-													<h4 class="clinic-name"><a href="#">Baby's Care childrens Hospital</a></h4>
-													<p class="doc-speciality">Pediatric Care</p>
+									<!-- Tab Menu -->
+									<nav class="user-tabs mb-4">
+										<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+											<li class="nav-item">
+												<a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#doc_locations" data-toggle="tab">Locations and Contact</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#doc_emergency" data-toggle="tab">Emergency Info</a>
+											</li>
+											
+											
+										</ul>
+									</nav>
+									<!-- /Tab Menu -->
+									
+									<!-- Tab Content -->
+									<div class="tab-content pt-0">
+									
+										<!-- Overview Content -->
+										<div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
+											<div class="row">
+												<div class="col-md-12 col-lg-9">
+												
+													<!-- About Details -->
+													<div class="widget about-widget">
+														<h4 class="widget-title">About Our Hospital</h4>
+														<p>Our hospital is one of the largest and most recognized private healthcare brands in Bangladesh. Known for its pioneering works in setting-up the first super-specialty Cardiac hospital within country. It is also widely acknowledged for bringing high quality diagnostic & specialized consultation facilities under a single roof through its now ubiquitous centers in all corners of Bangladesh. Around 2.1 million annual patient interactions, more than 5,000 employees, and upward of 800 consultant physicians countrywide.</p>
+													</div>
+													<!-- /About Details -->
+												
 													
-													<div class="clinic-details mb-0">
-														<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> Dhanmondi 15, Dhaka, Dangladesh <br><a href="javascript:void(0);">Get Directions</a></h5>
-														<ul>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" data-fancybox="gallery2">
-																	<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature Image">
-																</a>
-															</li>
+											
+													
+										
+													<!-- Awards Details -->
+													<div class="widget awards-widget">
+														<h4 class="widget-title">Departments</h4>
+														<div class="experience-box">
+															<ul class="experience-list">
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">Allergy and Immunology</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">Anesthesiology</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">ARCH (At Risk Children) Center</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">Autism and Developmental Disabilities (CADD)</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">Cancer and Blood Disorders (CCBD)</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">Cardiology and Cardiothoracic Surgery (Heart Center)</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">Center for Cerebrovascular Disorders</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">Dentistry and Orthodontics</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+																<li>
+																	<div class="experience-user">
+																		<div class="before-circle"></div>
+																	</div>
+																	<div class="experience-content">
+																		<div class="timeline-content">
+																			
+																			<h4 class="exp-title">Ear Nose and Throat (ENT)</h4>
+																			<p></p>
+																		</div>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<!-- /Awards Details -->
+													
+													<!-- Services List -->
+													<div class="service-list">
+														<h4>Services</h4>
+														<ul class="clearfix">
+															<li>Pediatrician</li>
+															<li>Pediatric dentist</li>
+															<li>ophthalmologist</li>
+															<li>Surgical Extractions</li>
+															<li>Allergist</li>
 														</ul>
 													</div>
+													<!-- /Services List -->
+													
+													<!-- Specializations List -->
+													<div class="service-list">
+														<h4>Specializations</h4>
+														<ul class="clearfix">
+															<li>Children Care</li>	
+															<li>Periodontist</li>	
+															<li>Prosthodontics</li>	
+														</ul>
+													</div>
+													<!-- /Specializations List -->
+		
 												</div>
 											</div>
-											<!-- /Clinic Content -->
-											
-											<!-- Clinic Timing -->
-											<div class="col-md-4">
-												<div class="clinic-timing">
-													<div>
-														<p class="timings-days">
-															<span> Emails </span>
-														</p>
-														<p class="timings-times">
-															<span>baby@gmail.com</span>
-															<span>care@gmail.com</span>
-														</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>Contact</span>
-													</p>
-													<p class="timings-times">
-														<span>+8801812174323</span>
-													</p>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Timing -->
-											
-											
-											
 										</div>
-									</div>
-									<!-- /Location List -->
-									
-									
-
-								</div>
-								<!-- /Locations Content -->
-									
-								<!-- Overview Content -->
-								<div role="tabpanel" id="doc_emergency" class="tab-pane fade show">
-									<div class="row">
-										<div class="col-md-12 col-lg-12">
-											<Table>
-												<tr>
-													<td><b>General Bed</b></td>
-													<td>10</td>
-												</tr>
-												<tr>
-													<td><b>Regular Cabin</b></td>
-													<td>9</td>
-												</tr>
-												<tr>
-													<td><b>ICU</b></td>
-													<td>8</td>
-												</tr>
-												<tr>
-													<td><b>Emergency Cabin</b></td>
-													<td>7</td>
-												</tr>
-												<tr>
-													<td><b>VIP room</b></td>
-													<td>-</td>
-												</tr>
+										<!-- /Overview Content -->
+										
+										<!-- Locations Content -->
+										<div role="tabpanel" id="doc_locations" class="tab-pane fade">
+										
+											<!-- Location List -->
+											<div class="location-list">
+												<div class="row">
 												
-											</Table>
+													<!-- Clinic Content -->
+													<div class="col-md-4">
+														<div class="clinic-content">
+															<h4 class="clinic-name"><a href="#">{{hospitals.name}}</a></h4>
+															<p class="doc-speciality">{{hospital.hospital_type}}</p>
+															
+															<div class="clinic-details mb-0">
+																<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i>{{hospitals.address}} <br><a href="javascript:void(0);">Get Directions</a></h5>
+																<ul>
+																	<li>
+																		<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery2">
+																			<img src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" alt="Feature Image">
+																		</a>
+																	</li>
+																	<li>
+																		<a href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" data-fancybox="gallery2">
+																			<img src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}" alt="Feature Image">
+																		</a>
+																	</li>
+																	<li>
+																		<a href="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" data-fancybox="gallery2">
+																			<img src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}" alt="Feature Image">
+																		</a>
+																	</li>
+																	<li>
+																		<a href="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" data-fancybox="gallery2">
+																			<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature Image">
+																		</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+													<!-- /Clinic Content -->
+													
+													<!-- Clinic Timing -->
+													<div class="col-md-4">
+														<div class="clinic-timing">
+															<div>
+																<p class="timings-days">
+																	<span> Emails </span>
+																</p>
+																<p class="timings-times">
+																	<span>{{hospitals.email}}</span>
+																	<!-- <span>care@gmail.com</span> -->
+																</p>
+															</div>
+															<div>
+															<p class="timings-days">
+																<span>Contact</span>
+															</p>
+															<p class="timings-times">
+																<span>{{hospitals.phone_number}}</span>
+															</p>
+															</div>
+														</div>
+													</div>
+													<!-- /Clinic Timing -->
+													
+													
+													
+												</div>
+											</div>
+											<!-- /Location List -->
+											
+											
+		
 										</div>
+										<!-- /Locations Content -->
+											
+										<!-- Overview Content -->
+										<div role="tabpanel" id="doc_emergency" class="tab-pane fade show">
+											<div class="row">
+												<div class="col-md-12 col-lg-12">
+													<Table>
+														<tr>
+															<td><b>General Bed</b></td>
+															<td>{{hospitals.general_bed_no}}</td>
+														</tr>
+														<tr>
+															<td><b>Regular Cabin</b></td>
+															<td>{{hospitals.regular_cabin_no}}</td>
+														</tr>
+														<tr>
+															<td><b>ICU</b></td>
+															<td>{{hospitals.available_icu_no}}</td>
+														</tr>
+														<tr>
+															<td><b>Emergency Cabin</b></td>
+															<td>{{hospitals.emergency_cabin_no}}</td>
+														</tr>
+														<tr>
+															<td><b>VIP room</b></td>
+															<td>{{hospitals.vip_cabin_no}}</td>
+														</tr>
+														
+													</Table>
+												</div>
+											</div>
+										</div>
+										<!-- /Overview Content -->
+										
 									</div>
 								</div>
-								<!-- /Overview Content -->
-								
 							</div>
 						</div>
-					</div>
+					
+					<!-- Doctor Widget -->
+					
 					<!-- /Doctor Details Tab -->
 
 				</div>
