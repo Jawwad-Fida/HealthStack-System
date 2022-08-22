@@ -37,9 +37,10 @@ urlpatterns = [
     path('chat/<int:pk>/', views.chat, name='chat'),
     path('chat-doctor/', views.chat_doctor, name='chat-doctor'),
 
-    path('hospital-profile/', views.hospital_profile, name='hospital-profile'),
+    path('hospital-profile/<int:pk>/', views.hospital_profile, name='hospital-profile'),
     path('checkout-payment/', views.checkout_payment, name='checkout-payment'),
     path('shop/', views.pharmacy_shop, name='pharmacy_shop'),
+    path('data-table/', views.data_table, name='data-table'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

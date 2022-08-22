@@ -4,10 +4,9 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from hospital.models import Hospital_Information, User
+from hospital.models import Hospital_Information, User, Patient
 from doctor.models import Doctor_Information,Report
 from sslcommerz.models import Payment
-from hospital.models import Patient
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information
 import random
