@@ -49,6 +49,20 @@ class Doctor_Information(models.Model):
     report_fee = models.IntegerField(null=True, blank=True)
     #doctor_password = models.CharField(max_length=200, null=True, blank=True)
     dob = models.DateField(null=True, blank=True)
+    
+    # Education
+    educational_institute_1 = models.CharField(max_length=200, null=True, blank=True)
+    edu_start_year_1 = models.CharField(max_length=200, null=True, blank=True)
+    edu_end_year_1 = models.CharField(max_length=200, null=True, blank=True, default='Present')
+    # degree
+    
+    # work experience
+    work_place = models.CharField(max_length=200, null=True, blank=True)
+    work_experience_years = models.CharField(max_length=200, null=True, blank=True)
+    start_year_1 = models.CharField(max_length=200, null=True, blank=True)
+    end_year_1 = models.CharField(max_length=200, null=True, blank=True, default='Present')
+    
+    
 
     # ForeignKey --> one to one relationship with Hospital_Information model.
     hospital_name = models.ForeignKey(
