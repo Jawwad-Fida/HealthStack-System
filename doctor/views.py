@@ -173,7 +173,16 @@ def doctor_profile_settings(request):
         #old_degree = list(old_degree)
         
         if request.method == 'GET':
-            context = {'doctor': doctor, 'range': range(1,3), 'old_degree': old_degree}
+            # context = {'doctor': doctor, 'range': range(1,3), 'old_degree': old_degree}
+            # doctor = Doctor_Information.objects.get(user=request.user)
+            degree = doctor.degree
+            degree = re.sub("'", "", degree)
+            degree = degree.replace("[", "")
+            degree = degree.replace("]", "")
+            degree = degree.replace(",", "")
+            degree_array = degree.split()
+
+            context = {'doctor': doctor, 'degree_array': degree_array,}
             return render(request, 'doctor-profile-settings.html', context)
         elif request.method == 'POST':
             if 'featured_image' in request.FILES:
