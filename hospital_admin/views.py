@@ -5,12 +5,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
-from doctor.models import Doctor_Information,Report
+from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information
 import random
 import string
+from django.db.models import  Count
 
 
 # Create your views here.
@@ -19,7 +20,10 @@ def admin_dashboard(request):
     # admin = Admin_Information.objects.get(user_id=pk)
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
-        context = {'admin': user}
+        total_patient_count = Patient.objects.annotate(count=Count('patient_id'))
+        total_doctor_count = Doctor_Information.objects.annotate(count=Count('doctor_id'))
+        pending_appointment = Appointment.objects.filter(appointment_status='pending').count()
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment, }
     return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
