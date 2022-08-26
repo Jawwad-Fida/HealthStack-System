@@ -6,7 +6,7 @@
  */
 :root {
   --blue: #007bff;
-  --indigo: #6610f2;
+  --indigo: #6610f2;f
   --purple: #6f42c1;
   --pink: #e83e8c;
   --red: #dc3545;
@@ -7273,8 +7273,8 @@ body {
   font-size: 15px;
   line-height: 1.8;
   font-weight: 300;
-  color: gray;
-  background: url(../images/bg_4.jpg) no-repeat fixed;
+  color: #15558d;
+  background: #f8f9fa;
   background-size: cover; }
   body.menu-show {
     overflow: hidden;
@@ -7283,7 +7283,7 @@ body {
     width: 100%; }
 
 span {
-  color: #bfbfbf; }
+  color: #000; }
 
 a {
   -webkit-transition: .3s all ease;
@@ -7298,7 +7298,7 @@ a {
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   line-height: 1.4;
-  color: #fff;
+  color: #20c0f3;
   font-weight: 400;
   font-family: "Josefin Sans", Arial, sans-serif; }
 
@@ -7306,7 +7306,7 @@ h1, h2, h3, h4, h5,
   color: #c49b63 !important; }
 
 .ftco-navbar-light {
-  background: transparent !important;
+  background: #15558d !important;
   position: absolute;
   top: 0;
   left: 0;
@@ -7342,9 +7342,9 @@ h1, h2, h3, h4, h5,
         padding-bottom: 1.5rem;
         padding-left: 20px;
         padding-right: 20px;
-        color: rgba(255, 255, 255, 0.9); } }
+        color: #fff; } }
     .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover, .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:focus {
-      color: #c49b63; }
+      color: #20c0f3; }
       .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover:after, .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:focus:after {
         opacity: 1; }
   .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu {
@@ -7445,7 +7445,7 @@ h1, h2, h3, h4, h5,
     left: 0;
     top: 0;
     margin-top: -130px;
-    background: #151111 !important;
+    background: #15558d !important;
     -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     border: none; }
@@ -7718,20 +7718,20 @@ h1, h2, h3, h4, h5,
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #c49b63;
-    border: 1px solid #c49b63;
+    background: #20c0f3;
+    border: 1px solid #20c0f3;
     color: #000; }
     .btn.btn-primary:hover {
-      border: 1px solid #c49b63;
+      border: 1px solid #20c0f3;
       background: transparent;
-      color: #c49b63; }
+      color: #20c0f3; }
     .btn.btn-primary.btn-outline-primary {
-      border: 1px solid #c49b63;
+      border: 1px solid #3e3e3e;
       background: transparent;
-      color: #c49b63; }
+      color: #3e3e3e; }
       .btn.btn-primary.btn-outline-primary:hover {
         border: 1px solid transparent;
-        background: #c49b63;
+        background: #20c0f3;
         color: #fff; }
   .btn.btn-white {
     background: #fff;
@@ -7968,9 +7968,9 @@ h1, h2, h3, h4, h5,
     font-size: 18px;
     text-transform: uppercase; }
     .menu-entry .text h3 a {
-      color: #fff; }
+      color: #20c0f3; }
   .menu-entry .text .price span {
-    color: #fff;
+    color: #0044cc;
     font-size: 18px; }
 
 .product-details h3 {
@@ -8040,7 +8040,7 @@ h1, h2, h3, h4, h5,
   height: 54px !important;
   text-align: center;
   bordeR: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: #c49b63 !important;
+  color: #000 !important;
   padding: 0; }
 
 .ftco-cart .form-group {
@@ -8079,17 +8079,17 @@ h1, h2, h3, h4, h5,
   .table th {
     font-weight: 500; }
   .table .thead-primary {
-    background: #c49b63; }
+    background: #20c0f3; }
     .table .thead-primary tr th {
       padding: 20px 10px;
-      color: #fff !important;
+      color: #3e3e3e !important;
       border: 1px solid transparent !important; }
   .table tbody tr td {
     text-align: center !important;
     vertical-align: middle;
     padding: 40px 10px;
     border: 1px solid transparent !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
+    border-bottom: 1px solid #20c0f3 !important; }
     .table tbody tr td.product-remove a {
       bordeR: 1px solid rgba(255, 255, 255, 0.1);
       padding: 5px 10px; }
@@ -8110,7 +8110,7 @@ h1, h2, h3, h4, h5,
         font-size: 16px;
         text-transform: uppercase; }
     .table tbody tr td.total, .table tbody tr td.price {
-      color: #fff; }
+      color: #000; }
 
 .cart-wrap .btn-primary {
   display: block;
@@ -8133,7 +8133,7 @@ h1, h2, h3, h4, h5,
     .cart-total p.total-price span {
       text-transform: uppercase; }
       .cart-total p.total-price span:last-child {
-        color: #c49b63; }
+        color: #000; }
   .cart-total hr {
     background: rgba(255, 255, 255, 0.1); }
 
@@ -8220,12 +8220,12 @@ h1, h2, h3, h4, h5,
     font-size: 18px;
     text-transform: uppercase; }
     .menu-wrap .text h3 a {
-      color: #fff; }
+      color: #20c0f3; }
   .menu-wrap .text .price {
     font-size: 18px;
     font-weight: 400; }
     .menu-wrap .text .price span {
-      color: #fff; }
+      color: #0044cc; }
 
 .ftco-appointment {
   width: 100%;
@@ -8504,12 +8504,12 @@ textarea.form-control {
       padding: 6em 0; } }
 
 .ftco-bg-dark {
-  background: #030202; }
+  background: #17a2b8; }
 
 .ftco-footer {
   font-size: 16px;
   padding: 7em 0;
-  background: #120f0f; }
+  background: #15558d; }
   .ftco-footer .ftco-footer-logo {
     text-transform: uppercase;
     letter-spacing: .1em; }
@@ -8840,12 +8840,12 @@ textarea.form-control {
   .ftco-menu .nav-pills .nav-link {
     border-radius: 0;
     margin-bottom: 0;
-    color: #c49b63;
+    color: #3e3e3e;
     font-size: 18px;
     font-weight: 400;
     position: relative;
     display: inline-block;
-    border-bottom: 1px solid #c49b63;
+    border-bottom: 1px solid #3e3e3e;
     margin-left: 5px;
     margin-right: 5px; }
     .ftco-menu .nav-pills .nav-link.active, .ftco-menu .nav-pills .nav-link:hover {
@@ -8855,7 +8855,7 @@ textarea.form-control {
       -webkit-transition: all 0.3s ease;
       -ms-transition: all 0.3s ease;
       transition: all 0.3s ease;
-      background: #c49b63;
+      background: #20c0f3;
       border-bottom: 1px solid transparent; }
       .ftco-menu .nav-pills .nav-link.active:after, .ftco-menu .nav-pills .nav-link:hover:after {
         opacity: 1; }
