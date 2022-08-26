@@ -19,8 +19,11 @@ import string
 
 from datetime import datetime, timedelta
 import datetime
-# Create your views here.
 
+# import json
+import re
+
+# Create your views here.
 
 def generate_random_string():
     N = 8
@@ -140,27 +143,101 @@ def reject_appointment(request, pk):
     appointment.save()
     return redirect('doctor-dashboard')
 
-def doctor_profile_settings(request):
+# def doctor_profile_settings(request):
 
+#     if request.user.is_doctor:
+#         doctor = Doctor_Information.objects.get(user=request.user)
+    
+#         form = DoctorForm(instance=doctor)
+
+#         if request.method == 'POST':
+#             form = DoctorForm(request.POST, request.FILES,instance=doctor)
+#             if form.is_valid():
+#                 form.save()
+#                 return redirect('doctor-dashboard')
+#             else:
+#                 form = DoctorForm()
+#     else:
+#         redirect('doctor-logout')
+
+#     context = {'doctor': doctor, 'form': form}
+#     return render(request, 'doctor-profile-settings.html', context)
+
+def doctor_profile_settings(request):
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
+        old_featured_image = doctor.featured_image
+        old_degree = doctor.degree
     
-        form = DoctorForm(instance=doctor)
-
-        if request.method == 'POST':
-            form = DoctorForm(request.POST, request.FILES,instance=doctor)
-            if form.is_valid():
-                form.save()
-                return redirect('doctor-dashboard')
+        #old_degree = json.loads(old_degree)
+        #old_degree = list(old_degree)
+        
+        if request.method == 'GET':
+            context = {'doctor': doctor, 'range': range(1,3), 'old_degree': old_degree}
+            return render(request, 'doctor-profile-settings.html', context)
+        elif request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
             else:
-                form = DoctorForm()
+                featured_image = old_featured_image
+                
+            name = request.POST.get('name')
+            number = request.POST.get('number')
+            gender = request.POST.get('gender')
+            dob = request.POST.get('dob')
+            consultation_fee = request.POST.get('consultation_fee')
+            report_fee = request.POST.get('report_fee')
+            
+            degree = request.POST.getlist('degree')
+            # degree = list(degree)
+            
+            institute = request.POST.getlist('institute')
+            # institute = list(institute)
+            
+            year_complete = request.POST.getlist('year_complete')
+            # year_complete = list(year_complete)
+            
+            hospital_name = request.POST.getlist('hospital_name')
+            hospital_name = list(hospital_name)
+            
+            start_year= request.POST.getlist('from')
+            start_year = list(start_year)
+            
+            end_year = request.POST.getlist('to')
+            end_year = list(end_year)
+            
+            designation = request.POST.getlist('designation')
+            designation = list(designation)
+            
+            #hospital_address = request.POST.getlist('hospital_address')
+            # save to database
+            
+            doctor.name = name
+            doctor.gender = gender
+            doctor.featured_image = featured_image
+            doctor.phone_number = number
+            #doctor.visiting_hour
+            doctor.consultation_fee = consultation_fee
+            doctor.report_fee = report_fee
+            doctor.dob = dob
+            
+            # Education
+            doctor.institute = institute
+            doctor.degree = degree
+            doctor.completion_year = year_complete 
+            
+            doctor.work_place = hospital_name
+            doctor.designation = designation
+            doctor.start_year = start_year
+            doctor.end_year = end_year
+            
+            doctor.save()
+                
+            # context = {'degree': degree}
+            return redirect('doctor-dashboard')
     else:
         redirect('doctor-logout')
-
-    context = {'doctor': doctor, 'form': form}
-    return render(request, 'doctor-profile-settings.html', context)
-
-
+        
 def booking_success(request):
     return render(request, 'booking-success.html')
 
@@ -228,6 +305,18 @@ def patient_profile(request, pk):
 
      
     
+def testing(request):
+    doctor = Doctor_Information.objects.get(user=request.user)
+    degree = doctor.degree
+    degree = re.sub("'", "", degree)
+    degree = degree.replace("[", "")
+    degree = degree.replace("]", "")
+    degree = degree.replace(",", "")
+    degree_array = degree.split()
+    context = {'doctor': doctor, 'degree': degree, 'degree_array': degree_array}
+    return render(request, 'testing.html', context)
+
+
 
 def view_report(request):
     return render(request, 'view-report.html')
@@ -239,6 +328,6 @@ def add_report(request):
 def prescription_view(request):
     return render(request, 'prescription-view.html')
 
-def add_prescription(request):
-    return render(request, 'add-prescription.html')
+def create_prescription(request):
+    return render(request, 'create-prescription.html')
 
