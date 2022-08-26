@@ -239,6 +239,6 @@ def add_report(request):
 def prescription_view(request):
     return render(request, 'prescription-view.html')
 
-def add_prescription(request):
-    return render(request, 'add-prescription.html')
+def create_prescription(request):
+    return render(request, 'create-prescription.html')
 

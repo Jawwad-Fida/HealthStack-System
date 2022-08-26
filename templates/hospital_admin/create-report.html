@@ -94,7 +94,7 @@
                                                 <thead>
                                                   <tr>
                                                     <th style="min-width: 300px">Patient Serial Number</th>
-													<th style="min-width: 300px">Doctor Serial Number</th>
+													
                                                     <th style="min-width: 50px;"></th>
                                                   </tr>
                                                 </thead>
@@ -104,9 +104,7 @@
                                                       <input class="form-control" type="text" name="patient_serial_number">
 													  
                                                     </td>
-													<td>
-													  <input class="form-control" type="text" name= "doctor_serial_number">
-												    </td>
+													
                                                   </tr>
                                                 </tbody>
                                               </table>
@@ -120,16 +118,52 @@
 												  <thead>
 													<tr>
 													  
-													  <th style="min-width: 300px">Specimen Information</th>
+													  <th style="min-width: 300px;font-size:20px"><b>Specimen Information</b></th>
 													  <th style="min-width: 50px;"></th>
 													</tr>
 												  </thead>
+												  <thead>
+													<tr>
+													  <th style="min-width: 300px">Specimen ID</th>
+													  <th style="min-width: 300px">Specimen Type</th>
+													 
+													  
+													  <th style="min-width: 50px;"></th>
+													</tr>
+												  </thead>
+												
 												  <tbody>
 													<tr>
-													  
 													  <td>
-														<input class="form-control" type="text" name= "specimen_information">
+														<input class="form-control" type="text" name="specimen_ID">
 													  </td>
+													  <td>
+														<input class="form-control" type="text" name="specimen_type">
+													  </td>
+													  
+													  
+													</tr>
+												  </tbody>
+												  <thead>
+													<tr>
+												
+													  <th style="min-width: 300px">Collection Date/Time</th>
+													  <th style="min-width: 300px">Receiving Date/Time</th>
+													  
+													  <th style="min-width: 50px;"></th>
+													</tr>
+												  </thead>
+												
+												  <tbody>
+													<tr>
+													 
+													  <td>
+														<input class="form-control" type="text" name="collection_date/Time">
+													  </td>
+													  <td>
+														<input class="form-control" type="text" name="receiving_date/Time">
+													  </td>
+													  
 													</tr>
 												  </tbody>
 												</table>
@@ -140,15 +174,22 @@
                                           <div class="card-body">
                                             <div class="table-responsive">
                                               <table class="table table-hover table-center">
+												<thead>
+													<tr>
+													  
+													  <th style="min-width: 300px;font-size:20px"><b>Test Information</b></th>
+													  <th style="min-width: 50px;"></th>
+													</tr>
+												  </thead>
                                                 <thead>
                                                   <tr>
                                                     <th style="min-width: 300px">Test Name</th>
                                                     <th style="min-width: 300px">Result</th>
-													<th style="min-width: 300px">Unit</th>
-													<th style="min-width: 300px">Referred Value</th>
+													
                                                     <th style="min-width: 50px;"></th>
                                                   </tr>
                                                 </thead>
+												
                                                 <tbody>
                                                   <tr>
                                                     <td>
@@ -157,14 +198,29 @@
                                                     <td>
                                                       <input class="form-control" type="text" name="result">
                                                     </td>
-													<td>
-														<input class="form-control" type="text" name="unit">
-													  </td>
-													  <td>
-														<input class="form-control" type="text" name="referred_value">
-													  </td>
+													
                                                   </tr>
                                                 </tbody>
+												<thead>
+													<tr>
+													 
+													  <th style="min-width: 300px">Unit</th>
+													  <th style="min-width: 300px">Referred Value</th>
+													  <th style="min-width: 50px;"></th>
+													</tr>
+												  </thead>
+												  
+												  <tbody>
+													<tr>
+													  
+													  <td>
+														  <input class="form-control" type="text" name="unit">
+														</td>
+														<td>
+														  <input class="form-control" type="text" name="referred_value">
+														</td>
+													</tr>
+												  </tbody>
                                               </table>
                                             </div>
                                           </div>
