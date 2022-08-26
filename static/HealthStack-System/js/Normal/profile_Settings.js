@@ -148,7 +148,7 @@ Version      : 1.0
         var membershipcontent = '<div class="row form-row membership-cont">' +
 			'<div class="col-12 col-md-10 col-lg-5">' +
 				'<div class="form-group">' +
-					'<label>Memberships</label>' +
+					'<label>Member</label>' +
 					'<input type="text" class="form-control">' +
 				'</div>' +
 			'</div>' +
