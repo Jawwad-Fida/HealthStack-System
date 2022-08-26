@@ -43,6 +43,19 @@
 								<!-- Form -->
 								<form action="{% url 'admin-login'%}" method="POST">
 									{% csrf_token %}
+									{% if messages %}
+                      
+                          				{% for message in messages %}
+                          					<div class="alert alert-danger alert-dismissible fade show" id="CredentialCheck" role="alert">
+                           						 <a href="#" class="alert-link"></a><a{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</a>
+                            					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              						<span aria-hidden="true">&times;</span>
+                            					</button>
+                          					</div>
+                          				{% endfor %}
+                      
+                      				{% endif %}
+
 									<div class="form-group">
 										<input class="form-control" type="text" placeholder="Username" name="username">
 									</div>
@@ -81,6 +94,15 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+
+		<!-- alert js -->
+		<script>
+			var x = document.getElementById('CredentialCheck');
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			}
+			$('#CredentialCheck').delay(4000).fadeOut('slow');     
+		</script>
 		
     </body>
 
