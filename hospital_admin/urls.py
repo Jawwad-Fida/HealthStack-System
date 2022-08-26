@@ -23,7 +23,6 @@ urlpatterns = [
     path('delete-hospital/<int:pk>/', views.delete_hospital,name='delete-hospital'),
 
     path('hospital-list/', views.hospital_list,name='hospital-list'),
-    path('add-hospital/', views.add_hospital,name='add-hospital'),
     path('add-pharmacist/', views.add_pharmacist,name='add-pharmacist'),
     #path('edit-hospital/', views.edit_hospital,name='edit-hospital'),
     path('invoice/',views.invoice, name='invoice'),
