@@ -43,7 +43,8 @@ class Hospital_Information(models.Model):
 
     featured_image = models.ImageField(
         upload_to='hospitals/', default='hospitals/default.png', null=True, blank=True)
-
+    # extra image
+    description = models.TextField(null=True, blank=True)
     email = models.EmailField(max_length=200, null=True, blank=True)
     phone_number = models.IntegerField(null=True, blank=True)
     hospital_type = models.CharField(max_length=200, choices=HOSPITAL_TYPE)
