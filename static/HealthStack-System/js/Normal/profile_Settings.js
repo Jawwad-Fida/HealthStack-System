@@ -40,7 +40,7 @@ Version      : 1.0
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
-							'<label>College/Institute</label>' +
+							'<label>Institute</label>' +
 							'<input type="text" name="institute" class="form-control">' +
 						'</div>' +
 					'</div>' +

@@ -161,10 +161,21 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="form-control select" name="gender" value="{{doctor.gender}}">
-													<option>Select</option>
-													<option>Male</option>
-													<option>Female</option>
+												<select class="form-control select" name="gender">
+                          {% if doctor.gender == 'male' %}
+                          <option value="{{doctor.gender}}">{{doctor.gender}}</option>
+                          <option value="female">Female</option>
+                          {% elif doctor.gender == 'female' %}
+                          <option value="{{doctor.gender}}">{{doctor.gender}}</option>
+                          <option value="male">Male</option>
+                          {% else %}
+                          <option>Select</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          {% endif %}
+
+													
+                       
 												</select>
 											</div>
 										</div>
@@ -185,7 +196,7 @@
 									<h4 class="card-title">About Me</h4>
 									<div class="form-group mb-0">
 										<label>Biography</label>
-										<textarea class="form-control" rows="5" name="description"></textarea>
+										<textarea class="form-control" rows="5" name="description">{{doctor.description}}</textarea>
 									</div>
 								</div>
 							</div>
@@ -245,16 +256,14 @@
 							<div class="card services-card">
 								<div class="card-body">
 									<h4 class="card-title">Services and Specialization</h4>
-									<div class="form-group">
-										<label>Services</label>
-										<input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="Tooth cleaning " id="services">
-										<small class="form-text text-muted">Note : Type & Press enter to add new services</small>
-									</div> 
+								
 									<div class="form-group mb-0">
 										<label>Specialization </label>
 										<input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialist" value="Children Care,Dental Care" id="specialist">
 										<small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
 									</div> 
+
+
 								</div>              
 							</div>
 							<!-- /Services and Specialization --> 
@@ -270,45 +279,42 @@
 											<div class="col-12 col-md-10 col-lg-11">
 												<div class="row form-row">
 
-                          {% for i in degree_array %}
+                          {% for e in education %}
 
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>Degree</label>
-															<input type="text" name="degree" class="form-control" value="{{i}}">
+															<input type="text" name="degree" class="form-control" value="{{e.0}}">
 														</div> 
 													</div>
-               
-
                
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>Institute</label>
-															<input type="text" name="institute" class="form-control" >
+															<input type="text" name="institute" class="form-control" value="{{e.1}}">
 														</div> 
 													</div>
-                
-                          
+                  
                          
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>Year of Completion</label>
-															<input type="text" name="year_complete"  class="form-control">
+															<input type="text" name="year_complete"  class="form-control" value="{{e.2}}">
 														</div> 
 													</div>
-
+    
                           {% endfor %}
-                       
-                          
 
 												</div>
 											</div>
+
 										</div>
 									</div>
 									<div class="add-more">
-										<a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
+										<a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add Education</a>
 									</div>
 								</div>
+                
 							</div>
               
             
@@ -321,37 +327,48 @@
 									<div class="experience-info">
 										<div class="row form-row experience-cont">
 											<div class="col-12 col-md-10 col-lg-11">
+
+                        {% for e in experience %}
 												<div class="row form-row">
+
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>Hospital Name</label>
-															<input type="text" name="hospital_name" class="form-control">
-														</div> 
+															<input type="text" name="hospital_name" class="form-control" value="{{e.0}}">
+														</div>
 													</div>
+
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>From</label>
-															<input type="text" name="from" class="form-control">
+															<input type="text" name="from" class="form-control" value="{{e.1}}">
 														</div> 
 													</div>
+
+
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>To</label>
-															<input type="text" name="to" class="form-control">
+															<input type="text" name="to" class="form-control" value="{{e.2}}">
 														</div> 
 													</div>
+
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>Designation</label>
-															<input type="text" name="designation" class="form-control">
+															<input type="text" name="designation" class="form-control" value="{{e.3}}">
 														</div> 
 													</div>
+
 												</div>
+                        {% endfor %}
+
+
 											</div>
 										</div>
 									</div>
 									<div class="add-more">
-										<a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
+										<a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add Experience</a>
 									</div>
 								</div>
 							</div>

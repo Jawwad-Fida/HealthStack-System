@@ -35,7 +35,7 @@ class Doctor_Information(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
     gender = models.CharField(max_length=200, null=True, blank=True)
-
+    description = models.TextField(max_length=1000, null=True, blank=True)
     department = models.CharField(
         max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
 

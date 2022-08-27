@@ -194,13 +194,7 @@
 											<!-- About Details -->
 											<div class="widget about-widget">
 												<h4 class="widget-title">About Me</h4>
-												<p>Gynaecologist, Obstetrician & Infertility Specialist
-
-													Sr. Consultant, Dept. of Gynae & Obs and
-													
-													Labaid Fertility Center
-													
-													Labaid Specialized Hospital, Dhaka.</p>
+												<p>{{doctor.description}}</p>
 											</div>
 											<!-- /About Details -->
 										
@@ -209,30 +203,24 @@
 												<h4 class="widget-title">Education</h4>
 												<div class="experience-box">
 													<ul class="experience-list">
+
+
+														{% for e in education %}
 														<li>
 															<div class="experience-user">
 																<div class="before-circle"></div>
 															</div>
 															<div class="experience-content">
 																<div class="timeline-content">
-																	<a href="#/" class="name">American Dental Medical University</a>
-																	<div>BDS</div>
-																	<span class="time">1998 - 2003</span>
+																	<a href="#/" class="name">{{e.1}}</a>
+																	<div>{{e.0}}</div>
+																	<span class="time">{{e.2}}</span>
 																</div>
 															</div>
 														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">American Dental Medical University</a>
-																	<div>MDS</div>
-																	<span class="time">2003 - 2005</span>
-																</div>
-															</div>
-														</li>
+														{% endfor %}
+													
+
 													</ul>
 												</div>
 											</div>
@@ -243,39 +231,26 @@
 												<h4 class="widget-title">Work & Experience</h4>
 												<div class="experience-box">
 													<ul class="experience-list">
+
+														{% for e in experience %}
 														<li>
 															<div class="experience-user">
 																<div class="before-circle"></div>
 															</div>
 															<div class="experience-content">
 																<div class="timeline-content">
-																	<a href="#/" class="name">Glowing Smiles Family Dental Clinic</a>
-																	<span class="time">2010 - Present (5 years)</span>
+																	<a href="#/" class="name">{{e.0}}</a>
+																	<span class="time">{{ e.1 }}</span>
+																	<span class="time">{{ e.2 }} - {{e.3}}</span>
 																</div>
 															</div>
 														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">Comfort Care Dental Clinic</a>
-																	<span class="time">2007 - 2010 (3 years)</span>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">Dream Smile Dental Practice</a>
-																	<span class="time">2005 - 2007 (2 years)</span>
-																</div>
-															</div>
-														</li>
+														{% endfor %}
+
+
+												
+
+
 													</ul>
 												</div>
 											</div>
