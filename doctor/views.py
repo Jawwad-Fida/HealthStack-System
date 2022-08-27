@@ -244,6 +244,7 @@ def doctor_profile(request, pk):
     return render(request, 'doctor-profile.html', context)
 
 def doctor_profile_settings(request):
+    # profile_Settings.js
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
         old_featured_image = doctor.featured_image
