@@ -7315,7 +7315,7 @@ h1, h2, h3, h4, h5,
   border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
   @media (max-width: 991.98px) {
     .ftco-navbar-light {
-      background: #000 !important;
+      background: #dc3545 !important;
       position: relative;
       top: 0; } }
   .ftco-navbar-light .navbar-brand {

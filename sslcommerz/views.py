@@ -14,9 +14,17 @@ from doctor.models import Appointment
 
 # from .models import Patient, User
 from sslcommerz_lib import SSLCOMMERZ
-settings = {'store_id': 'fidal5ed892039802d',
-            'store_pass': 'fidal5ed892039802d@ssl', 'issandbox': True}
-sslcz = SSLCOMMERZ(settings)
+from django.conf import settings
+
+
+STORE_ID = settings.STORE_ID
+STORE_PASSWORD = settings.STORE_PASSWORD
+STORE_NAME = settings.STORE_NAME
+
+payment_settings = {'store_id': STORE_ID,
+            'store_pass': STORE_PASSWORD, 'issandbox': True}
+
+sslcz = SSLCOMMERZ(payment_settings)
 
 
 # Create your views here.
@@ -204,7 +212,7 @@ def ssl_payment_success(request):
 
         #dic = {'payment_data': payment_data, 'response': response}
         #return render(request, 'success.html', dic)
-        return redirect('hospital_home')
+        return redirect('patient-dashboard')
 
     elif status == 'FAILED':
         redirect('ssl-payment-fail')

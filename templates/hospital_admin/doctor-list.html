@@ -12,16 +12,16 @@
         <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
 
 		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"> 
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}"> 
 		
 		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">
+        <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
 		
 		<!-- Feathericon CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
 		
 		<!-- Datatables CSS -->
-		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}"> 
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}"> 
 		
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
@@ -76,7 +76,7 @@
 													<th>Speciality</th>
 													<th>Consultation Fee</th>
 													<th>Degree</th>
-													<th>Account Status</th>
+													<th>Action</th>
 													</tr>
 													<tbody>
 														{% for doctor in all%}
@@ -92,13 +92,17 @@
 															<td>{{doctor.consultation_fee}}</td>
 															
 															<td>{{doctor.degree}}</td>
-															
 															<td>
-																<div class="status-toggle">
-																	<input type="checkbox" id="status_1" class="check" checked>
-																	<label for="status_1" class="checktoggle">checkbox</label>
-																</div>
-															</td>
+																<div class="table-action">
+																	<a
+																	  href="{% url 'create-report' pk=doctor.doctor_id %}"
+																	  class="btn btn-outline-info btn-rounded" 
+																		>
+																		<i class="fas fa-file-alt"></i> Create Report 
+																	</a>
+										
+																  </div>
+																</td>
 														</tr>
 														{% endfor %}
 													</tbody>

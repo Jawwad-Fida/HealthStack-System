@@ -12,19 +12,26 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+# django-environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+### setting up env
+env = environ.Env()
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--%)2&l2zj#1jj-co*+9xh-#+z6y5xjdym)7m9%^y935l8=qx6t'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -45,7 +52,8 @@ INSTALLED_APPS = [
     'sslcommerz.apps.SslcommerzConfig',
     'ChatSystem.apps.ChatsystemConfig',
     'widget_tweaks',
-    'rest_framework'
+    'rest_framework',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +64,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 ROOT_URLCONF = 'healthstack.urls'
@@ -134,6 +147,30 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+### SSLCOMMERZ env variables
+#VARIABLE should be in capital letter.
+STORE_ID = env('STORE_ID')
+STORE_PASSWORD = env('STORE_PASSWORD')
+STORE_NAME = env('STORE_NAME')
+
+###Mailtrap env Variables
+SMTP_HOST = env('SMTP_HOST')
+SMTP_PORT = env('SMTP_PORT')
+SMTP_USER = env('SMTP_USER')
+SMTP_PASSWORD = env('SMTP_PASSWORD')
+
+# EMAIL
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_PORT = SMTP_PORT
+EMAIL_HOST_USER = SMTP_USER
+EMAIL_HOST_PASSWORD = SMTP_PASSWORD
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

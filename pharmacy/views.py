@@ -37,8 +37,8 @@ def cart(request):
 def checkout(request):
     return render(request, 'pharmacy/checkout.html')
 
-def cart(request):
-    return render(request, 'pharmacy/cart.html')
+# def cart(request):
+#     return render(request, 'pharmacy/cart.html')
 
 
 

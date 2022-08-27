@@ -27,14 +27,14 @@
         <nav class="dashboard-menu sidebar">
           <ul>
             <li class="active">
-              <a href="{% url 'patient-dashboard' pk=user.id %}">
+              <a href="{% url 'patient-dashboard' %}">
                 <i class="fas fa-columns"></i>
                 <span>Dashboard</span>
               </a>
             </li>
 
             <li class="nav-item has-submenu">
-              <a href="{% url 'search' pk=user.id %}">
+              <a href="{% url 'search' %}">
                 <i class="fas fa-user-md"></i>
                 <span>Search Doctor</span>
               </a>
@@ -49,14 +49,14 @@
             </li>
             
             <li>
-                <a href="{% url 'multiple-hospital' pk=user.id %}">
+                <a href="{% url 'multiple-hospital' %}">
                   <i class="fas fa-hospital"></i>
                   <span>Multiple Hospital</span>
                 </a>
             </li>
         
             <li>            
-              <a href="{% url 'profile-settings' pk=user.id %}">
+              <a href="{% url 'profile-settings' %}">
                 <i class="fas fa-user-cog"></i>
                 <span>Profile Settings</span>
               </a>

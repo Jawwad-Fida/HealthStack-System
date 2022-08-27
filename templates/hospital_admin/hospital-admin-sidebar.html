@@ -3,17 +3,17 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="menu-title"> 
-                    <span>Main</span>
+                    <span>Menu</span>
                 </li>
-                <li class="active"> 
-                    <a href="{%url 'admin-dashboard' pk=user.id %}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+                <li class=""> 
+                    <a href="{%url 'admin-dashboard' %}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
                 </li>
                 
                 <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Hospitals</span></a>
-                    <ul style="display: none;">
-                        <li><a href="{% url 'hospital-list' %}"><i class="fe fe-users"></i> <span>Hospital</span></a></li>
-                        <li><a href="{% url 'emergency' %}"><i class="fe fe-moon"></i> <span>Emergency Information</span></a></li>
+                    <ul style="display:none;">
+                        <li><a href="{% url 'hospital-list' %}"><i class="fe fe-building"></i> <span>Add Hospital</span></a></li>
+                        <li><a href="{% url 'emergency' %}"><i class="fe fe-mask"></i> <span>Add Emergency Info</span></a></li>
                     </ul>
                 </li>
 
@@ -43,7 +43,7 @@
                 <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Pharmacists</span></a>
                     <ul style="display: none;">
-                        <li><a href="invoice-report.html">Add Pharmacists</a></li>
+                        <li><a href="{% url 'add-pharmacist' %}">Add Pharmacists</a></li>
                         <li><a href="invoice-report.html">Pharmacists List</a></li>
                     </ul>
                 </li>

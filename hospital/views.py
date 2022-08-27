@@ -4,6 +4,7 @@ from django.http import HttpResponse
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm
+from hospital.models import Hospital_Information, User, Patient
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -79,8 +80,18 @@ def chat_doctor(request):
     return render(request, 'chat-doctor.html')
 
 
-def hospital_profile(request):
-    return render(request, 'hospital-profile.html')
+def hospital_profile(request, pk):
+    if request.user.is_patient:
+        # patient = Patient.objects.get(user_id=pk)
+        patient = Patient.objects.get(user=request.user)
+        doctors = Doctor_Information.objects.all()
+        hospitals = Hospital_Information.objects.get(hospital_id=pk)
+    
+        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
+        return render(request, 'hospital-profile.html', context)
+    else:
+        redirect('logout')
+
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
 
@@ -115,7 +126,7 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            return redirect('patient-dashboard', pk=user.id)
+            return redirect('patient-dashboard')
         else:
             messages.error(request, 'Invalid username or password')
 
@@ -158,55 +169,65 @@ def patient_register(request):
     return render(request, 'patient-register.html', context)
 
 
-def patient_dashboard(request, pk):
-    patient = Patient.objects.get(user_id=pk)
-    #appointments = Appointment.objects.all()
-    appointments = Appointment.objects.filter(patient=patient)
-    #payments = Payment.objects.filter(patient_id=patient.patient_id).filter(payment_type='appointment')
-    
-    # payments = Payment.objects.filter(patient=patient).filter(payment_type='appointment')
-    payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
+def patient_dashboard(request):
+    if request.user.is_patient:
+        patient = Patient.objects.get(user=request.user)
+        # patient = Patient.objects.get(user_id=pk)
+        appointments = Appointment.objects.filter(patient=patient)
+        payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
 
-    context = {'patient': patient, 'appointments': appointments, 'payments': payments}
-
+        context = {'patient': patient, 'appointments': appointments, 'payments': payments}
+    else:
+        return redirect('logout')
+        
     return render(request, 'patient-dashboard.html', context)
 
 
-def profile_settings(request, pk):
+def profile_settings(request):
+    if request.user.is_patient:
+        # patient = Patient.objects.get(user_id=pk)
+        patient = Patient.objects.get(user=request.user)
+        form = PatientForm(instance=patient)  
 
-    # profile = request.user.profile
-    patient = Patient.objects.get(user_id=pk)
-    form = PatientForm(instance=patient)  # instance=patient
-
-    if request.method == 'POST':
-        form = PatientForm(request.POST, request.FILES,
-                           instance=patient)  # instance=patient
-        if form.is_valid():
-            form.save()
-            return redirect('patient-dashboard', pk=pk)
-        else:
-            form = PatientForm()
+        if request.method == 'POST':
+            form = PatientForm(request.POST, request.FILES,instance=patient)  
+            if form.is_valid():
+                form.save()
+                return redirect('patient-dashboard')
+            else:
+                form = PatientForm()
+    else:
+        redirect('logout')
 
     context = {'patient': patient, 'form': form}
     return render(request, 'profile-settings.html', context)
 
 
-def search(request, pk):
-    patient = Patient.objects.get(user_id=pk)
-
-    doctors = Doctor_Information.objects.all()
-
+def search(request):
+    if request.user.is_patient:
+        # patient = Patient.objects.get(user_id=pk)
+        patient = Patient.objects.get(user=request.user)
+        doctors = Doctor_Information.objects.all()
+    else:
+        redirect('logout')
+        
     context = {'patient': patient, 'doctors': doctors}
-
     return render(request, 'search.html', context)
 
-def payment(request):
+def checkout_payment(request):
     return render(request, 'checkout.html')
 
-def multiple_hospital(request, pk):
-    patient = Patient.objects.get(user_id=pk)
-
-    doctors = Doctor_Information.objects.all()
-    context = {'patient': patient, 'doctors': doctors}
-
-    return render(request, 'multiple-hospital.html', context)
+def multiple_hospital(request):
+    if request.user.is_patient:
+        # patient = Patient.objects.get(user_id=pk)
+        patient = Patient.objects.get(user=request.user)
+        doctors = Doctor_Information.objects.all()
+        hospitals = Hospital_Information.objects.all()
+    
+        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
+        return render(request, 'multiple-hospital.html', context)
+    else:
+        redirect('logout')
+    
+def data_table(request):
+    return render(request, 'data-table.html')

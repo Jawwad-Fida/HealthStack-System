@@ -86,119 +86,29 @@
 									<div class="content">
 										<div class="container">
 											<div class="row">
+												{% for hospital in hospitals %}
+
 												<div class="col-xs-12 col-sm-4">
 													<div class="card">
 														<a class="img-card" href="#">
-														<img src="{% static 'images/hospitals/hospital2.png' %}" />
+														<img src="{{hospital.featured_image.url}}" />
 													  </a>
 														<div class="card-content">
 															<h4 class="card-title">
-																<a href="#"> Labaid
+																<a href="#"> {{hospital.name}}
 															  </a>
 															</h4>   
 														</div>
 														<div class="card-read-more">
-															<a href="{% url 'hospital-profile'%}" class="btn btn-link btn-block">
+															<a href="{% url 'hospital-profile' pk=hospital.hospital_id %}" class="btn btn-link btn-block">
 																Explore
 															</a>
 														</div>
 													</div>
 												</div>
+												{% endfor %}
+
 						
-												<div class="col-xs-12 col-sm-4">
-													<div class="card">
-														<a class="img-card" href="#">
-														<img src="{% static 'images/hospitals/hospital3.png' %}" />
-													  </a>
-														<div class="card-content">
-															<h4 class="card-title">
-																<a href="#"> Square
-															  </a>
-															</h4>
-														</div>
-														<div class="card-read-more">
-															<a href="#" class="btn btn-link btn-block">
-																Explore
-															</a>
-														</div>
-													</div>
-												</div>
-						
-												<div class="col-xs-12 col-sm-4">
-													<div class="card">
-														<a class="img-card" href="#">
-														<img src="{% static 'images/hospitals/hospital2.png' %}" />
-													  </a>
-														<div class="card-content">
-															<h4 class="card-title">
-																<a href="#"> Popular
-															  </a>
-															</h4>
-														</div>
-														<div class="card-read-more">
-															<a href="#" class="btn btn-link btn-block">
-																Explore
-															</a>
-														</div>
-													</div>
-												</div>
-						
-												<div class="col-xs-12 col-sm-4">
-													<div class="card">
-														<a class="img-card" href="#">
-														<img src="{% static 'images/hospitals/hospital3.png' %}" />
-													  </a>
-														<div class="card-content">
-															<h4 class="card-title">
-																<a href="#"> Al-Raji
-															  </a>
-															</h4>
-														</div>
-														<div class="card-read-more">
-															<a href="#" class="btn btn-link btn-block">
-																Explore
-															</a>
-														</div>
-													</div>
-												</div>
-						
-												<div class="col-xs-12 col-sm-4">
-													<div class="card">
-														<a class="img-card" href="#">
-														<img src="{% static 'images/hospitals/hospital2.png' %}" />
-													  </a>
-														<div class="card-content">
-															<h4 class="card-title">
-																<a href="#"> Somorita
-															  </a>
-															</h4>
-														</div>
-														<div class="card-read-more">
-															<a href="#" class="btn btn-link btn-block">
-																Explore
-															</a>
-														</div>
-													</div>
-												</div>
-						
-												<div class="col-xs-12 col-sm-4">
-													<div class="card">
-														<a class="img-card" href="#">
-														<img src="{% static 'images/hospitals/hospital3.png' %}" />
-													  </a>
-														<div class="card-content">
-															<h4 class="card-title">
-																<a href="#"> United Hospital
-															  </a>
-															</h4>
-														</div>
-														<div class="card-read-more">
-															<a href="#" class="btn btn-link btn-block">
-																Explore
-															</a>
-														</div>
-													</div>
-												</div>
 											</div>
 										</div>
 									</div>

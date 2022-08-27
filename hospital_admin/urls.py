@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.admin_login, name='admin-login'),
     
-    path('admin-dashboard/<int:pk>/',
+    path('admin-dashboard/',
          views.admin_dashboard, name='admin-dashboard'),
     path('hospital-admin-profile/<int:pk>/', views.hospital_admin_profile,
          name='hospital-admin-profile'),
@@ -23,7 +23,7 @@ urlpatterns = [
     path('delete-hospital/<int:pk>/', views.delete_hospital,name='delete-hospital'),
 
     path('hospital-list/', views.hospital_list,name='hospital-list'),
-    path('add-hospital/', views.add_hospital,name='add-hospital'),
+    path('add-pharmacist/', views.add_pharmacist,name='add-pharmacist'),
     #path('edit-hospital/', views.edit_hospital,name='edit-hospital'),
     path('invoice/',views.invoice, name='invoice'),
     path('invoice-report/',views.invoice_report, name='invoice_report'),
@@ -43,6 +43,7 @@ urlpatterns = [
          name='hospital-admin-profile'),
 
    path('create-invoice/<int:pk>/', views.create_invoice,name='create-invoice'),
+   path('create-report/<int:pk>/', views.create_report,name='create-report'),
 
 ]  
 

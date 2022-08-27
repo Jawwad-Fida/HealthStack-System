@@ -1,25 +1,31 @@
+import email
+from email.mime import image
+from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from hospital.models import Hospital_Information, User
-from doctor.models import Doctor_Information
+from hospital.models import Hospital_Information, User, Patient
+from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
-from hospital.models import Patient
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
-from .models import Admin_Information
+from .models import Admin_Information,specialization,service,hospital_department
 import random
 import string
+from django.db.models import  Count
 
 
 # Create your views here.
 
-def admin_dashboard(request, pk):
+def admin_dashboard(request):
     # admin = Admin_Information.objects.get(user_id=pk)
     if request.user.is_hospital_admin:
-        user = Admin_Information.objects.get(user_id=pk)
-        context = {'admin': user}
+        user = Admin_Information.objects.get(user=request.user)
+        total_patient_count = Patient.objects.annotate(count=Count('patient_id'))
+        total_doctor_count = Doctor_Information.objects.annotate(count=Count('doctor_id'))
+        pending_appointment = Appointment.objects.filter(appointment_status='pending').count()
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment, }
     return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
@@ -46,28 +52,13 @@ def admin_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('admin-dashboard', pk=user.id)
+            return redirect('admin-dashboard')
         else:
             messages.error(request, 'Invalid username or password')
 
     return render(request, 'hospital_admin/login.html')
 
-def hospital_admin_profile(request, pk):
 
-    admin = Admin_Information.objects.get(user_id=pk)
-    form = AdminForm(instance=admin)
-
-    if request.method == 'POST':
-        form = AdminForm(request.POST, request.FILES,
-                          instance=admin)
-        if form.is_valid():
-            form.save()
-            return redirect('hospital_admin/admin-dashboard', pk=pk)
-        else:
-            form = AdminForm()
-
-    context = {'admin': admin, 'form': form}
-    return render(request, 'hospital_admin/hospital-admin-profile.html', context)
 
 
 def admin_register(request):
@@ -105,8 +96,10 @@ def admin_forgot_password(request):
 
 
 def doctor_list(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
     doctors = Doctor_Information.objects.all()
-    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors})
+    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors, 'admin': user})
 
 
 def invoice(request):
@@ -122,8 +115,10 @@ def lock_screen(request):
 
 
 def patient_list(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
     patients = Patient.objects.all()
-    return render(request, 'hospital_admin/patient-list.html', {'all': patients})
+    return render(request, 'hospital_admin/patient-list.html', {'all': patients, 'admin': user})
 
 
 def specialitites(request):
@@ -174,37 +169,62 @@ def hospital_admin_profile(request, pk):
             form = AdminForm()
 
     context = {'admin': admin, 'form': form}
-    return render(request, 'hospital-admin-profile', context)
+    return render(request, 'hospital_admin/hospital-admin-profile.html', context)
 
-
-
-# def add_hospital(request):
-#     return render(request, 'hospital_admin/add-hospital.html')
 
 
 def add_hospital(request):
-    page = 'hospital-list'
-    form = AddHospitalForm()
+    if  request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
 
     if request.method == 'POST':
-        form = AddHospitalForm(request.POST, request.FILES)
-        if form.is_valid():
-            # form.save()
-            hospital = form.save(commit=False)
-            hospital.save()
+        hospital = Hospital_Information()
+        specializations = specialization(hospital=hospital)
+        services = service(hospital=hospital)
+        departments =hospital_department(hospital=hospital)
 
-            messages.success(request, 'Hospital was created!')
+        hospital_name = request.POST['hospital_name']
+        address = request.POST['address']
+        description = request.POST['description']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number'] 
+        hospital_type = request.POST['type']
+        specialization_name =request.POST['specialization']
+        department_name =request.POST['departments']
+        service_name =request.POST['service']
 
-            return redirect('hospital-list')
 
-        else:
-            messages.error(
-                request, 'An error has occurred during input')
-    # else:
-    #     form = AddHospitalForm()
+        doc = request.FILES 
+        doc_name = doc['image']
+        
 
-    context = {'page': page, 'form': form}
-    return render(request, 'hospital_admin/add-hospital.html', context)
+
+
+        hospital.name = hospital_name
+        hospital.description = description
+        hospital.address = address
+        hospital.email = email
+        hospital.phone_number =phone_number
+        hospital.featured_image=doc_name 
+        hospital.hospital_type=hospital_type
+        specializations.specialization_name=specialization_name
+        services.service_name = service_name
+        departments.hospital_department_name = department_name 
+
+
+
+
+  
+        hospital.save()
+        specializations.save()
+        services.save()
+        departments.save()
+
+        return redirect('hospital-list')
+
+    context = { 'admin': user}
+    return render(request, 'hospital_admin/add-hospital.html',context)
+
 
 
 # def edit_hospital(request, pk):
@@ -259,6 +279,9 @@ def generate_random_invoice():
     return string_var
 
 def create_invoice(request, pk):
+    if  request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+
     patient = Patient.objects.get(patient_id=pk)
 
     if request.method == 'POST':
@@ -273,10 +296,41 @@ def create_invoice(request, pk):
         invoice.invoice_number = generate_random_invoice()
         invoice.name = patient
         invoice.status = 'Pending'
-        
-
+    
         invoice.save()
         return redirect('patient-list')
 
-    context = {'patient': patient}
+    context = {'patient': patient,'admin': user}
     return render(request, 'hospital_admin/create-invoice.html', context)
+
+
+def create_report(request, pk):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+    doctors =Doctor_Information.objects.get(doctor_id=pk)
+
+    if request.method == 'POST':
+        patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
+        report = Report(patient=patient, doctor=doctors)
+        test_name = request.POST['test_name']
+        description = request.POST['description']
+        result = request.POST['result']
+        delivery_date = request.POST['delivery_date']
+
+        # Save to report table
+        report.test_name = test_name
+        report.description = description
+        report.result = result
+        report.delivery_date = delivery_date
+        report.save()
+
+        return redirect('doctor-list')
+
+    context = {'doctors': doctors, 'admin': user}
+    return render(request, 'hospital_admin/create-report.html',context)
+
+def add_pharmacist(request):
+    if request.user.is_hospital_admin:
+     user = Admin_Information.objects.get(user=request.user)
+    return render(request, 'hospital_admin/add-pharmacist.html',{'admin': user})  
+

@@ -75,40 +75,198 @@
 			<div class="call-content-full">
 				<div class="container-lg">
 					<div class="row-cols-6">
-						<div class="col-md-7 col-lg-8 col-xl-20">
+						<div class="col-md-7 col-lg-8 col-xl-12">
 							<div class="card">
 								<div class="card-body">
-
-								<div class="col-12 col-md-12">
-												<div class="form-group">
-													<div class="change-avatar">
-														<div class="profile-img">
-															<img src="{% static 'images/hospitals/hospital1.png' %}" width="225 px" alt="User Image">
+									
+									<!-- Profile Settings Form -->
+                                    <form action="#" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<div class="row form-row">
+										  <div class="col-12 col-md-12">
+											<div class="form-group">
+												<div class="change-avatar"></div>
+											</div>
+											<div class="card card-table">
+											  <div class="card-body">
+												<div class="table-responsive">
+												  <table class="table table-hover table-center">
+													<thead>
+													  <tr>
+														<th style="min-width: 300px">Hospital Name</th>
+														<th style="min-width: 50px;"></th>
+													  </tr>
+													</thead>
+													<tbody>
+													  <tr>
+														<td>
+														  <input class="form-control" type="text" name="hospital_name">
+														</td>
+													  </tr>
+													</tbody>
+												  </table>
+												</div>
+											  </div>
+											</div>
+											<div class="card card-table">
+												<div class="card-body">
+												  <div class="table-responsive">
+													<table class="table table-hover table-center">
+													  <thead>
+														<tr>
+														  <th style="min-width: 300px">Address</th>
+														  <th style="min-width: 50px;"></th>
+														</tr>
+													  </thead>
+													  <tbody>
+														<tr>
+														  <td>
+															<input class="form-control" type="text" name="address">
+														  </td>
+														</tr>
+													  </tbody>
+													</table>
+												  </div>
+												</div>
+											  </div>
+											<div class="card card-table">
+											  <div class="card-body">
+												<div class="table-responsive">
+												  <table class="table table-hover table-center">
+													<thead>
+													  <tr>
+														<th style="min-width: 300px">Email</th>
+														<th style="min-width: 300px">Phone number</th>
+														<th style="min-width: 50px;"></th>
+													  </tr>
+													</thead>
+													<tbody>
+													  <tr>
+														<td>
+														  <input class="form-control" type="email" name="email">
+														</td>
+														<td>
+														  <input class="form-control" type="text" name="phone_number">
+														</td>
+													  </tr>
+													</tbody>
+												  </table>
+												</div>
+											  </div>
+											</div>
+											<div class="card card-table">
+												<div class="card-body">
+												  <div class="table-responsive">
+													<table class="table table-hover table-center">
+													  <thead>
+														<tr>
+														  <th style="min-width: 300px">Hospital Type</th>
+														  <th style="min-width: 300px">Upload Image</th>
+														  <th style="min-width: 50px;"></th>
+														</tr>
+													  </thead>
+													  <tbody>
+														<tr>
+														  <td>
+															<label for="cars">Choose Hospital Type: </label>
+															<select id="type" name="type" >
+																<option value="public">Public</option>
+																<option value="private">Private</option>
+															  </select>
+														  </td>
+														  <td>
+															<input class="form-control" type="file"  name="image">
+														  </td>
+														</tr>
+													  </tbody>
+													</table>
+												  </div>
+												</div>
+											  </div>
+											  <div class="card">
+												<div class="card-body">
+													<h4 class="card-title">Departments</h4>
+													<div class="membership-info">
+														<div class="row form-row membership-cont">
+															<div class="col-12 col-md-10 col-lg-5">
+																<div class="form-group">
+																	<label>Add New Departments</label>
+																	<input type="text" class="form-control" id="departments" name="departments">
+																</div> 
+															</div>
 														</div>
+													</div>
+													<div class="add-more">
+														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
 													</div>
 												</div>
 											</div>
-									
-									<!-- Profile Settings Form -->
-									<form action="{% url 'add-hospital'  %}" method="POST" enctype="multipart/form-data">
-										{% csrf_token %}
-										<div class="row form-row">
-
-											{% for field in form %}
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>{{field.label}}</label>
-													{{field}}{{field.errors}}
+											<div class="card">
+												<div class="card-body">
+													<h4 class="card-title">Services</h4>
+													<div class="membership-info">
+														<div class="row form-row membership-cont">
+															<div class="col-12 col-md-10 col-lg-5">
+																<div class="form-group">
+																	<label>Add New Services</label>
+																	<input type="text" class="form-control" id="service" name="service">
+																</div> 
+															</div>
+														</div>
+													</div>
+													<div class="add-more">
+														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
+													</div>
 												</div>
 											</div>
-											{% endfor %}
+											<div class="card">
+												<div class="card-body">
+													<h4 class="card-title">Specialization</h4>
+													<div class="membership-info">
+														<div class="row form-row membership-cont">
+															<div class="col-12 col-md-10 col-lg-5">
+																<div class="form-group">
+																	<label>Add New Specialization</label>
+																	<input type="text" class="form-control" id="specialization" name="specialization">
+																</div> 
+															</div>
+														</div>
+													</div>
+													<div class="add-more">
+														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
+													</div>
+												</div>
+											</div>
+											  <div class="card card-table">
+												<div class="card-body">
+												  <div class="table-responsive">
+													<table class="table table-hover table-center">
+													  <thead>
+														<tr>
+														  <th style="min-width: 300px">Description</th>
+														  <th style="min-width: 50px;"></th>
+														</tr>
+													  </thead>
+													  <tbody>
+														<tr>
+														  <td>
+															   <textarea  class="form-control" rows="4" cols="50" type="text" name="description"></textarea>
+														  </td>
+														</tr>
+													  </tbody>
+													</table>
+												  </div>
+												</div>
+											  </div>
+										  </div>
+										  <div class="submit-section">
+											<button type="submit" class="btn btn-primary submit-btn">
+											Save Changes
+											</button>
+										  </div>
+										</div>
+									  </form>
 
-		
-										</div>
-										<div class="submit-section">
-											<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-										</div>
-									</form>
 									<!-- /Profile Settings Form -->
 									
 								</div>
@@ -148,6 +306,8 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/profile_Settings.js' %}"></script>
+
 		
     </body>
 
