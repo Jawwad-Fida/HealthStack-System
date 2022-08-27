@@ -163,26 +163,160 @@ def reject_appointment(request, pk):
 #     context = {'doctor': doctor, 'form': form}
 #     return render(request, 'doctor-profile-settings.html', context)
 
+def doctor_profile(request, pk):
+    # request.user --> get logged in user
+    if request.user.is_patient:
+        patient = request.user.patient
+    else:
+        patient = None
+    
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    # doctor = Doctor_Information.objects.filter(doctor_id=pk).order_by('-doctor_id')
+    
+    degree = doctor.degree
+    work_place = doctor.work_place
+    
+    
+    education = None
+    experience = None
+    
+    
+    if degree:
+        degree = re.sub("'", "", degree)
+        degree = degree.replace("[", "")
+        degree = degree.replace("]", "")
+        degree = degree.replace(",", "")
+        degree_array = degree.split()
+        
+        institute = doctor.institute
+        institute = re.sub("'", "", institute)
+        institute = institute.replace("[", "")
+        institute = institute.replace("]", "")
+        institute = institute.replace(",", "")
+        institute_array = institute.split()
+        
+        completion_year = doctor.completion_year
+        completion_year = re.sub("'", "", completion_year)
+        completion_year = completion_year.replace("[", "")
+        completion_year = completion_year.replace("]", "")
+        completion_year = completion_year.replace(",", "")
+        completion_year_array = completion_year.split()
+    
+        education = zip(degree_array, institute_array, completion_year_array)
+    else:
+        education = None
+        
+    if work_place:
+        work_place = re.sub("'", "", work_place)
+        work_place = work_place.replace("[", "")
+        work_place = work_place.replace("]", "")
+        work_place = work_place.replace(",", "")
+        work_place_array = work_place.split()
+        
+        designation = doctor.designation
+        designation = re.sub("'", "", designation)
+        designation = designation.replace("[", "")
+        designation = designation.replace("]", "")
+        designation = designation.replace(",", "")
+        designation_array = designation.split()
+        
+        start_year = doctor.start_year
+        start_year = re.sub("'", "", start_year)
+        start_year = start_year.replace("[", "")
+        start_year = start_year.replace("]", "")
+        start_year = start_year.replace(",", "")
+        start_year_array = start_year.split()
+        
+        end_year = doctor.end_year
+        end_year = re.sub("'", "", end_year)
+        end_year = end_year.replace("[", "")
+        end_year = end_year.replace("]", "")
+        end_year = end_year.replace(",", "")
+        end_year_array = end_year.split()
+                
+                
+        experience = zip(work_place_array, designation_array, start_year_array, end_year_array)
+    else:
+        experience = None
+    
+    context = {'doctor': doctor, 'patient': patient, 'education': education, 'experience': experience}
+    
+    return render(request, 'doctor-profile.html', context)
+
 def doctor_profile_settings(request):
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
         old_featured_image = doctor.featured_image
-        old_degree = doctor.degree
-    
-        #old_degree = json.loads(old_degree)
-        #old_degree = list(old_degree)
         
-        if request.method == 'GET':
-            # context = {'doctor': doctor, 'range': range(1,3), 'old_degree': old_degree}
-            # doctor = Doctor_Information.objects.get(user=request.user)
-            degree = doctor.degree
-            degree = re.sub("'", "", degree)
-            degree = degree.replace("[", "")
-            degree = degree.replace("]", "")
-            degree = degree.replace(",", "")
-            degree_array = degree.split()
+        education = None
+        experience = None
 
-            context = {'doctor': doctor, 'degree_array': degree_array,}
+
+        if request.method == 'GET':
+            degree = doctor.degree
+            work_place = doctor.work_place
+            
+            
+            if degree:
+                degree = re.sub("'", "", degree)
+                degree = degree.replace("[", "")
+                degree = degree.replace("]", "")
+                degree = degree.replace(",", "")
+                degree_array = degree.split()
+                
+                institute = doctor.institute
+                institute = re.sub("'", "", institute)
+                institute = institute.replace("[", "")
+                institute = institute.replace("]", "")
+                institute = institute.replace(",", "")
+                institute_array = institute.split()
+                
+                completion_year = doctor.completion_year
+                completion_year = re.sub("'", "", completion_year)
+                completion_year = completion_year.replace("[", "")
+                completion_year = completion_year.replace("]", "")
+                completion_year = completion_year.replace(",", "")
+                completion_year_array = completion_year.split()
+                
+                education = zip(degree_array, institute_array, completion_year_array)
+            else:
+                education = None
+                
+            if work_place:
+                work_place = re.sub("'", "", work_place)
+                work_place = work_place.replace("[", "")
+                work_place = work_place.replace("]", "")
+                work_place = work_place.replace(",", "")
+                work_place_array = work_place.split()
+                
+                designation = doctor.designation
+                designation = re.sub("'", "", designation)
+                designation = designation.replace("[", "")
+                designation = designation.replace("]", "")
+                designation = designation.replace(",", "")
+                designation_array = designation.split()
+                
+                start_year = doctor.start_year
+                start_year = re.sub("'", "", start_year)
+                start_year = start_year.replace("[", "")
+                start_year = start_year.replace("]", "")
+                start_year = start_year.replace(",", "")
+                start_year_array = start_year.split()
+                
+                end_year = doctor.end_year
+                end_year = re.sub("'", "", end_year)
+                end_year = end_year.replace("[", "")
+                end_year = end_year.replace("]", "")
+                end_year = end_year.replace(",", "")
+                end_year_array = end_year.split()
+                
+                
+                experience = zip(work_place_array, designation_array, start_year_array, end_year_array)
+            else:
+                experience = None
+                
+                    
+            context = {'doctor': doctor, 'education': education, 'experience': experience}
             return render(request, 'doctor-profile-settings.html', context)
         elif request.method == 'POST':
             if 'featured_image' in request.FILES:
@@ -194,33 +328,17 @@ def doctor_profile_settings(request):
             number = request.POST.get('number')
             gender = request.POST.get('gender')
             dob = request.POST.get('dob')
+            description = request.POST.get('description')
             consultation_fee = request.POST.get('consultation_fee')
             report_fee = request.POST.get('report_fee')
-            
             degree = request.POST.getlist('degree')
-            # degree = list(degree)
-            
             institute = request.POST.getlist('institute')
-            # institute = list(institute)
-            
             year_complete = request.POST.getlist('year_complete')
-            # year_complete = list(year_complete)
-            
-            hospital_name = request.POST.getlist('hospital_name')
-            hospital_name = list(hospital_name)
-            
+            hospital_name = request.POST.getlist('hospital_name')     
             start_year= request.POST.getlist('from')
-            start_year = list(start_year)
-            
             end_year = request.POST.getlist('to')
-            end_year = list(end_year)
-            
             designation = request.POST.getlist('designation')
-            designation = list(designation)
-            
-            #hospital_address = request.POST.getlist('hospital_address')
-            # save to database
-            
+
             doctor.name = name
             doctor.gender = gender
             doctor.featured_image = featured_image
@@ -228,6 +346,7 @@ def doctor_profile_settings(request):
             #doctor.visiting_hour
             doctor.consultation_fee = consultation_fee
             doctor.report_fee = report_fee
+            doctor.description = description
             doctor.dob = dob
             
             # Education
@@ -235,6 +354,7 @@ def doctor_profile_settings(request):
             doctor.degree = degree
             doctor.completion_year = year_complete 
             
+            # Experience
             doctor.work_place = hospital_name
             doctor.designation = designation
             doctor.start_year = start_year
@@ -273,18 +393,6 @@ def booking(request, pk):
     return render(request, 'booking.html', context)
 
 
-def doctor_profile(request, pk):
-    # request.user --> get logged in user
-    if request.user.is_patient:
-        patient = request.user.patient
-    else:
-        patient = None
-    
-    doctor = Doctor_Information.objects.get(doctor_id=pk)
-    context = {'doctor': doctor, 'patient': patient}
-    
-    return render(request, 'doctor-profile.html', context)
-
 
 def my_patients(request):
     if request.user.is_doctor:
@@ -322,7 +430,20 @@ def testing(request):
     degree = degree.replace("]", "")
     degree = degree.replace(",", "")
     degree_array = degree.split()
-    context = {'doctor': doctor, 'degree': degree, 'degree_array': degree_array}
+    
+    institute = doctor.institute
+    institute = re.sub("'", "", institute)
+    institute = institute.replace("[", "")
+    institute = institute.replace("]", "")
+    institute = institute.replace(",", "")
+    institute_array = institute.split()
+
+
+    education = zip(degree_array, institute_array)
+    
+    context = {'doctor': doctor, 'degree': institute, 'institute_array': institute_array, 'education': education}
+    # test range, len, and loop to show variables before moving on to doctor profile
+    
     return render(request, 'testing.html', context)
 
 

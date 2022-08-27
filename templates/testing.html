@@ -13,5 +13,16 @@
     {{i}}
     <br>
 {% endfor %}
+<br>
+<hr>
+{% for e in education %}
+    <tr>
+        <td>{{ e.0 }}</td>
+        <td>{{ e.1 }}</td>
+        <td>{{ e.2 }} </td>
+    </tr>
+{% endfor %}
+
+
 
 
