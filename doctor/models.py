@@ -34,8 +34,8 @@ class Doctor_Information(models.Model):
         User, on_delete=models.CASCADE, null=True, blank=True, related_name='profile')
     name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
+    gender = models.CharField(max_length=200, null=True, blank=True)
 
-    degree = models.CharField(max_length=200, null=True, blank=True)
     department = models.CharField(
         max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
 
@@ -48,19 +48,20 @@ class Doctor_Information(models.Model):
     consultation_fee = models.IntegerField(null=True, blank=True)
     report_fee = models.IntegerField(null=True, blank=True)
     #doctor_password = models.CharField(max_length=200, null=True, blank=True)
-    dob = models.DateField(null=True, blank=True)
+    dob = models.CharField(max_length=200, null=True, blank=True)
     
     # Education
-    educational_institute_1 = models.CharField(max_length=200, null=True, blank=True)
-    edu_start_year_1 = models.CharField(max_length=200, null=True, blank=True)
-    edu_end_year_1 = models.CharField(max_length=200, null=True, blank=True, default='Present')
+    institute = models.CharField(max_length=200, null=True, blank=True)
+    degree = models.CharField(max_length=200, null=True, blank=True)
+    completion_year = models.CharField(max_length=200, null=True, blank=True)
+    
     # degree
     
     # work experience
     work_place = models.CharField(max_length=200, null=True, blank=True)
-    work_experience_years = models.CharField(max_length=200, null=True, blank=True)
-    start_year_1 = models.CharField(max_length=200, null=True, blank=True)
-    end_year_1 = models.CharField(max_length=200, null=True, blank=True, default='Present')
+    designation = models.CharField(max_length=200, null=True, blank=True)
+    start_year = models.CharField(max_length=200, null=True, blank=True)
+    end_year = models.CharField(max_length=200, null=True, blank=True)
     
     
 
