@@ -16,6 +16,7 @@
 		
 		<!-- Fontawesome CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
 		
 		<!-- Feathericon CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
@@ -24,7 +25,9 @@
 		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}"> 
 		
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}">
+		
+		<link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/add-hospital.css'%}"> 
 		
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -83,10 +86,26 @@
                                     <form action="#" method="POST" enctype="multipart/form-data">
 										{% csrf_token %}
 										<div class="row form-row">
-										  <div class="col-12 col-md-12">
-											<div class="form-group">
-												<div class="change-avatar"></div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<div class="change-avatar">
+														<div class="profile-img">
+															<img src="{% static 'images/hospitals/hospital1.png' %}" alt="Admin Profile Image">
+														</div>
+														<div class="upload-img">
+															<div class="change-photo-btn">
+																<span><i class="fa fa-upload"></i> Upload Photo</span>
+																<input type="file" class="upload" name="featured_image">
+															</div>
+															<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+														</div>
+													</div>
+												</div>
 											</div>
+										<div class="col-12 col-md-12">
+											<!-- <div class="form-group">
+												<div class="change-avatar"></div>
+											</div> -->
 											<div class="card card-table">
 											  <div class="card-body">
 												<div class="table-responsive">
@@ -182,12 +201,12 @@
 													</table>
 												  </div>
 												</div>
-											  </div>
-											  <div class="card">
+											</div>
+											<div class="card">
 												<div class="card-body">
 													<h4 class="card-title">Departments</h4>
-													<div class="membership-info">
-														<div class="row form-row membership-cont">
+													<div class="department-info">
+														<div class="row form-row department-cont">
 															<div class="col-12 col-md-10 col-lg-5">
 																<div class="form-group">
 																	<label>Add New Departments</label>
@@ -197,15 +216,15 @@
 														</div>
 													</div>
 													<div class="add-more">
-														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
+														<a href="javascript:void(0);" class="add-department"><i class="fa fa-plus-circle"></i> Add More</a>
 													</div>
 												</div>
 											</div>
 											<div class="card">
 												<div class="card-body">
 													<h4 class="card-title">Services</h4>
-													<div class="membership-info">
-														<div class="row form-row membership-cont">
+													<div class="service-info">
+														<div class="row form-row service-cont">
 															<div class="col-12 col-md-10 col-lg-5">
 																<div class="form-group">
 																	<label>Add New Services</label>
@@ -215,15 +234,15 @@
 														</div>
 													</div>
 													<div class="add-more">
-														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
+														<a href="javascript:void(0);" class="add-service" style="color: #20c0f3"><i class="fa fa-plus-circle"></i> Add More</a>
 													</div>
 												</div>
 											</div>
 											<div class="card">
 												<div class="card-body">
 													<h4 class="card-title">Specialization</h4>
-													<div class="membership-info">
-														<div class="row form-row membership-cont">
+													<div class="specialization-info">
+														<div class="row form-row specialization-cont">
 															<div class="col-12 col-md-10 col-lg-5">
 																<div class="form-group">
 																	<label>Add New Specialization</label>
@@ -233,7 +252,7 @@
 														</div>
 													</div>
 													<div class="add-more">
-														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
+														<a href="javascript:void(0);" class="add-specialization"><i class="fa fa-plus-circle"></i> Add More</a>
 													</div>
 												</div>
 											</div>
@@ -306,7 +325,8 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
-		<script src="{% static 'HealthStack-System/js/Normal/profile_Settings.js' %}"></script>
+		
+		<script src="{% static 'HealthStack-System/js/Normal/add-more.js' %}"></script>
 
 		
     </body>

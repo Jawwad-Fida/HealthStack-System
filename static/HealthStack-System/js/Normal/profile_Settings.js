@@ -35,19 +35,19 @@ Version      : 1.0
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>Degree</label>' +
-							'<input type="text" name="degree" class="form-control">' +
+							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
-							'<label>Institute</label>' +
-							'<input type="text" name="institute" class="form-control">' +
+							'<label>College/Institute</label>' +
+							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>Year of Completion</label>' +
-							'<input type="text" name="year_complete" class="form-control">' +
+							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
 				'</div>' +
@@ -74,25 +74,25 @@ Version      : 1.0
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>Hospital Name</label>' +
-							'<input type="text" name="hospital_name" class="form-control">' +
+							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>From</label>' +
-							'<input type="text" name="from" class="form-control">' +
+							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>To</label>' +
-							'<input type="text" name="to" class="form-control">' +
+							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>Designation</label>' +
-							'<input type="text" name="designation" class="form-control">' +
+							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
 				'</div>' +
@@ -104,19 +104,19 @@ Version      : 1.0
         return false;
     });
 	
-	// Awards Add More
+	// service Add More
 	
-    $(".awards-info").on('click','.trash', function () {
-		$(this).closest('.awards-cont').remove();
+    $(".service-info").on('click','.trash', function () {
+		$(this).closest('.service-cont').remove();
 		return false;
     });
 
-    $(".add-award").on('click', function () {
+    $(".add-service").on('click', function () {
 
-        var regcontent = '<div class="row form-row awards-cont">' +
+        var servicecontent = '<div class="row form-row service-cont">' +
 			'<div class="col-12 col-md-5">' +
 				'<div class="form-group">' +
-					'<label>Awards</label>' +
+					'<label>Add More Services</label>' +
 					'<input type="text" class="form-control">' +
 				'</div>' +
 			'</div>' +
@@ -132,7 +132,7 @@ Version      : 1.0
 			'</div>' +
 		'</div>';
 		
-        $(".awards-info").append(regcontent);
+        $(".service-info").append(servicecontent);
         return false;
     });
 	
@@ -149,7 +149,7 @@ Version      : 1.0
 			'<div class="col-12 col-md-10 col-lg-5">' +
 				'<div class="form-group">' +
 
-					'<label>Member</label>' +
+					'<label>Add More</label>' +
 
 					'<input type="text" class="form-control">' +
 				'</div>' +
