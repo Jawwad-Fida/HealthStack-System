@@ -183,24 +183,33 @@ def patient_dashboard(request):
     return render(request, 'patient-dashboard.html', context)
 
 
+# def profile_settings(request):
+#     if request.user.is_patient:
+#         # patient = Patient.objects.get(user_id=pk)
+#         patient = Patient.objects.get(user=request.user)
+#         form = PatientForm(instance=patient)  
+
+#         if request.method == 'POST':
+#             form = PatientForm(request.POST, request.FILES,instance=patient)  
+#             if form.is_valid():
+#                 form.save()
+#                 return redirect('patient-dashboard')
+#             else:
+#                 form = PatientForm()
+#     else:
+#         redirect('logout')
+
+#     context = {'patient': patient, 'form': form}
+#     return render(request, 'profile-settings.html', context)
+
 def profile_settings(request):
     if request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
         patient = Patient.objects.get(user=request.user)
-        form = PatientForm(instance=patient)  
-
-        if request.method == 'POST':
-            form = PatientForm(request.POST, request.FILES,instance=patient)  
-            if form.is_valid():
-                form.save()
-                return redirect('patient-dashboard')
-            else:
-                form = PatientForm()
+        context = {'patient': patient}
+        return render(request, 'profile-settings.html', context)
     else:
-        redirect('logout')
-
-    context = {'patient': patient, 'form': form}
-    return render(request, 'profile-settings.html', context)
+        redirect('logout')  
 
 
 def search(request):

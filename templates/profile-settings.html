@@ -108,64 +108,6 @@
                     enctype="multipart/form-data"
                   >
                     {% csrf_token %}
-
-                    <div class="row form-row">
-                      <div class="col-12 col-md-12">
-                        <div class="form-group">
-                          <div class="change-avatar">
-                            <div class="profile-img">
-                              <img
-                                src="{{patient.featured_image.url}}"
-                                alt="User Image"
-                              />
-                            </div>
-
-                            <div class="upload-img">
-                              <div class="change-photo-btn">
-                                <span
-                                  ><i class="fa fa-upload"></i> Upload
-                                  Photo</span
-                                >
-                                <input type="file" class="upload" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {% for field in form %}
-                      <div class="col-12 col-md-6">
-                        <div class="form-group">
-                          <label>{{ field.label }}</label>
-                          {{field}}{{ field.errors }}
-                        </div>
-                      </div>
-                      {% endfor %}
-
-                      <div class="col-12 col-md-6">
-                        <div class="form-group">
-                          <label>Blood Group</label>
-                          <select class="form-control select">
-                            <option>A-</option>
-                            <option>A+</option>
-                            <option>B-</option>
-                            <option>B+</option>
-                            <option>AB-</option>
-                            <option>AB+</option>
-                            <option>O-</option>
-                            <option>O+</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="submit-section">
-                      <button type="submit" class="btn btn-primary submit-btn">
-                        Save Changes
-                      </button>
-                    </div>
-                  </form>
-                  
               </div>
             </div> -->
 
@@ -180,12 +122,12 @@
 												<div class="form-group">
 													<div class="change-avatar">
 														<div class="profile-img">
-															<img src="assets/img/patients/patient.jpg" alt="User Image">
+															<img src="{{patient.featured_image.url}}" alt="User Image">
 														</div>
 														<div class="upload-img">
 															<div class="change-photo-btn">
 																<span><i class="fa fa-upload"></i> Upload Photo</span>
-																<input type="file" class="upload">
+																<input type="file" class="upload" name="featured_image">
 															</div>
 															<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
 														</div>
@@ -194,28 +136,24 @@
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
-													<label>First Name</label>
-													<input type="text" class="form-control" value="Richard">
+													<label>Name</label>
+													<input type="text" class="form-control" value="{{ patient.name }}" name="name">
 												</div>
 											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>Last Name</label>
-													<input type="text" class="form-control" value="Wilson">
-												</div>
-											</div>
+							
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Date of Birth</label>
 													<div class="cal-icon">
-														<input type="text" class="form-control datetimepicker" value="24-07-1983">
+														<input type="text" class="form-control datetimepicker" value="{{patient.dob}}" name="dob">
 													</div>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Blood Group</label>
-													<select class="form-control select">
+													<select class="form-control select" name="blood_group">
+                            <option value="{{patient.blood_group}}">{{patient.blood_group}}</option>
 														<option>A-</option>
 														<option>A+</option>
 														<option>B-</option>
