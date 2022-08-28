@@ -1,4 +1,5 @@
 import email
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth.models import User
@@ -26,7 +27,9 @@ from django.db.models import Q, Count
 
 
 def hospital_home(request):
-    return render(request, 'index-2.html')
+    doctors = Doctor_Information.objects.all() 
+    context = {'doctors': doctors} 
+    return render(request, 'index-2.html', context)
 
 
 def change_password(request):
