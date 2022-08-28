@@ -18,7 +18,7 @@ from .models import Patient, User
 from doctor.models import Doctor_Information, Appointment
 
 from sslcommerz.models import Payment
-
+from django.db.models import Q, Count
 
 # Create your views here.
 
@@ -126,7 +126,11 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            return redirect('patient-dashboard')
+            if request.user.is_patient:          
+                return redirect('patient-dashboard')
+            else:
+                messages.error(request, 'Invalid credentials. Not a Patient')
+                return redirect('logout')
         else:
             messages.error(request, 'Invalid username or password')
 
@@ -173,7 +177,8 @@ def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
         # patient = Patient.objects.get(user_id=pk)
-        appointments = Appointment.objects.filter(patient=patient)
+        # appointments = Appointment.objects.filter(patient=patient)
+        appointments = Appointment.objects.filter(patient=patient).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
         payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
 
         context = {'patient': patient, 'appointments': appointments, 'payments': payments}

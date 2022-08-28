@@ -117,7 +117,7 @@
                   <div class="doctor-widget">
                     <div class="doc-info-left">
                       <div class="doctor-img">
-                        <a href="doctor-profile.html">
+                        <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">
                           <img
                             src="{{ doctor.featured_image.url }}"
                             class="img-fluid"
@@ -127,7 +127,7 @@
                       </div>
                       <div class="doc-info-cont">
                         <h4 class="doc-name">
-                          <a href="doctor-profile.html">Dr. {{doctor.name}}</a>
+                          <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">Dr. {{doctor.name}}</a>
                         </h4>
                         <p class="doc-speciality">{{ doctor.degree }}</p>
                         <h5 class="doc-department">
