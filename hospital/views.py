@@ -206,8 +206,38 @@ def profile_settings(request):
     if request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
         patient = Patient.objects.get(user=request.user)
-        context = {'patient': patient}
-        return render(request, 'profile-settings.html', context)
+        old_featured_image = patient.featured_image
+        
+        if request.method == 'GET':
+            context = {'patient': patient}
+            return render(request, 'profile-settings.html', context)
+        elif request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = old_featured_image
+                
+            name = request.POST.get('name')
+            dob = request.POST.get('dob')
+            age = request.POST.get('age')
+            blood_group = request.POST.get('blood_group')
+            phone_number = request.POST.get('phone_number')
+            address = request.POST.get('address')
+            nid = request.POST.get('nid')
+            history = request.POST.get('history')
+            
+            patient.name = name
+            patient.age = age
+            patient.phone_number = phone_number
+            patient.address = address
+            patient.blood_group = blood_group
+            patient.history = history
+            patient.dob = dob
+            patient.nid = nid
+            patient.featured_image = featured_image
+            
+            patient.save()
+            return redirect('patient-dashboard')
     else:
         redirect('logout')  
 

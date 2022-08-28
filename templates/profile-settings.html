@@ -116,7 +116,8 @@
 								<div class="card-body">
 									
 									<!-- Profile Settings Form -->
-									<form>
+									<form action="{% url 'profile-settings' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
 										<div class="row form-row">
 											<div class="col-12 col-md-12">
 												<div class="form-group">
@@ -133,8 +134,23 @@
 														</div>
 													</div>
 												</div>
+											</div>     
+
+                      <div class="col-12 col-md-6">
+                        <div class="form-group">
+                          <label>Username <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" readonly value="{{patient.username}}" >
+                        </div>
 											</div>
-											<div class="col-12 col-md-6">
+
+                      <div class="col-12 col-md-6">
+                        <div class="form-group">
+                          <label>Email <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" readonly value="{{patient.email}}" >
+                        </div>
+											</div>  
+
+                      <div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Name</label>
 													<input type="text" class="form-control" value="{{ patient.name }}" name="name">
@@ -144,9 +160,7 @@
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Date of Birth</label>
-													<div class="cal-icon">
-														<input type="text" class="form-control datetimepicker" value="{{patient.dob}}" name="dob">
-													</div>
+														<input type="date" class="form-control datetimepicker" value="{{patient.dob}}" name="dob">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
@@ -154,57 +168,46 @@
 													<label>Blood Group</label>
 													<select class="form-control select" name="blood_group">
                             <option value="{{patient.blood_group}}">{{patient.blood_group}}</option>
-														<option>A-</option>
-														<option>A+</option>
-														<option>B-</option>
-														<option>B+</option>
-														<option>AB-</option>
-														<option>AB+</option>
-														<option>O-</option>
-														<option>O+</option>
+														<option value="A-">A-</option>
+														<option value="A+">A+</option>
+														<option value="B-">B-</option>
+														<option value="B+">B+</option>
+														<option value="AB-">AB-</option>
+														<option value="AB+">AB+</option>
+														<option value="O-">O-</option>
+														<option value="O+">O+</option>
 													</select>
 												</div>
 											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>Email ID</label>
-													<input type="email" class="form-control" value="richard@example.com">
-												</div>
-											</div>
+										
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Mobile</label>
-													<input type="text" value="+1 202-555-0125" class="form-control">
+													<input type="text" value="{{patient.phone_number}}" class="form-control" name="phone_number">
 												</div>
 											</div>
-											<div class="col-12">
+											<div class="col-12 col-md-6">
 												<div class="form-group">
 												<label>Address</label>
-													<input type="text" class="form-control" value="806 Twin Willow Lane">
+													<input type="text" class="form-control" value="{{patient.address}}" name="address">
+												</div>
+											</div>
+                      <div class="col-12 col-md-6">
+												<div class="form-group">
+												<label>Age</label>
+													<input type="text" class="form-control" value="{{patient.age}}" name="age">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
-													<label>City</label>
-													<input type="text" class="form-control" value="Old Forge">
+													<label>NID</label>
+													<input type="text" class="form-control" value="{{patient.nid}}" name="nid">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
-													<label>State</label>
-													<input type="text" class="form-control" value="Newyork">
-												</div>
-											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>Zip Code</label>
-													<input type="text" class="form-control" value="13420">
-												</div>
-											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>Country</label>
-													<input type="text" class="form-control" value="United States">
+													<label>History</label>
+													<input type="text" class="form-control" value="{{patient.history}}" name="history">
 												</div>
 											</div>
 										</div>
