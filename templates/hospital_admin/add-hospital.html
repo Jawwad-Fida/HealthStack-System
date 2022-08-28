@@ -83,7 +83,7 @@
 								<div class="card-body">
 									
 									<!-- Profile Settings Form -->
-                                    <form action="#" method="POST" enctype="multipart/form-data">
+                                    <form action="{% url 'add-hospital' %}" method="POST" enctype="multipart/form-data">
 										{% csrf_token %}
 										<div class="row form-row">
 											<div class="col-md-6">
@@ -180,7 +180,7 @@
 													  <thead>
 														<tr>
 														  <th style="min-width: 300px">Hospital Type</th>
-														  <th style="min-width: 300px">Upload Image</th>
+														  {% comment %} <th style="min-width: 300px">Upload Image</th> {% endcomment %}
 														  <th style="min-width: 50px;"></th>
 														</tr>
 													  </thead>
@@ -193,9 +193,9 @@
 																<option value="private">Private</option>
 															  </select>
 														  </td>
-														  <td>
+														  {% comment %} <td>
 															<input class="form-control" type="file"  name="image">
-														  </td>
+														  </td> {% endcomment %}
 														</tr>
 													  </tbody>
 													</table>
@@ -210,7 +210,7 @@
 															<div class="col-12 col-md-10 col-lg-5">
 																<div class="form-group">
 																	<label>Add New Departments</label>
-																	<input type="text" class="form-control" id="departments" name="departments">
+																	<input type="text" class="form-control" id="departments" name="department">
 																</div> 
 															</div>
 														</div>

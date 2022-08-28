@@ -181,23 +181,21 @@ def add_hospital(request):
         hospital = Hospital_Information()
         specializations = specialization(hospital=hospital)
         services = service(hospital=hospital)
-        departments =hospital_department(hospital=hospital)
-
-        hospital_name = request.POST['hospital_name']
-        address = request.POST['address']
-        description = request.POST['description']
-        email = request.POST['email']
-        phone_number = request.POST['phone_number'] 
-        hospital_type = request.POST['type']
-        specialization_name =request.POST['specialization']
-        department_name =request.POST['departments']
-        service_name =request.POST['service']
-
-
-        doc = request.FILES 
-        doc_name = doc['image']
+        departments = hospital_department(hospital=hospital)
         
-
+        
+        featured_image = request.FILES['featured_image']
+        
+        
+        hospital_name = request.POST.get('hospital_name')
+        address = request.POST.get('address')
+        description = request.POST.get('description')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number') 
+        hospital_type = request.POST.get('type')
+        specialization_name = request.POST.getlist('specialization')
+        department_name = request.POST.getlist('department')
+        service_name = request.POST.getlist('service')
 
 
         hospital.name = hospital_name
@@ -205,16 +203,13 @@ def add_hospital(request):
         hospital.address = address
         hospital.email = email
         hospital.phone_number =phone_number
-        hospital.featured_image=doc_name 
+        hospital.featured_image=featured_image 
         hospital.hospital_type=hospital_type
+        
         specializations.specialization_name=specialization_name
         services.service_name = service_name
         departments.hospital_department_name = department_name 
 
-
-
-
-  
         hospital.save()
         specializations.save()
         services.save()

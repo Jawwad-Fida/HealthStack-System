@@ -52,7 +52,7 @@ class hospital_department(models.Model):
     hospital = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return str(self.hospital_department_name)     
+        return str(self.hospital)     
 
 class specialization(models.Model):
     specialization_id = models.AutoField(primary_key=True)
@@ -61,7 +61,7 @@ class specialization(models.Model):
     hospital = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return str(self.specialization_name)   
+        return str(self.hospital)  
 
 class service(models.Model):
     service_id = models.AutoField(primary_key=True)
@@ -70,7 +70,7 @@ class service(models.Model):
     hospital = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return str(self.service_name) 
+        return str(self.hospital) 
 
     
 
