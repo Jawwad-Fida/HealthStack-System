@@ -22,6 +22,7 @@ from doctor.models import Doctor_Information, Appointment
 
 from sslcommerz.models import Payment
 from django.db.models import Q, Count
+import re
 
 # Create your views here.
 
@@ -87,16 +88,37 @@ def chat_doctor(request):
 
 def hospital_profile(request, pk):
     if request.user.is_patient:
-        # patient = Patient.objects.get(user_id=pk)
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.all()
         hospitals = Hospital_Information.objects.get(hospital_id=pk)
-        departments = hospital_department.objects.all()
-        #departments = hospital_department.objects.values_list('hospital_department_name').filter(hospital_id=pk)
-        specializations = specialization.objects.all()
-        services = service.objects.all()
-    
-        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals,'departments': departments, 'specializations': specializations, 'services': services}
+        
+        departments = hospital_department.objects.filter(hospital=hospitals)
+        specializations = specialization.objects.filter(hospital=hospitals)
+        services = service.objects.filter(hospital=hospitals)
+        
+        # departments = re.sub("'", "", departments)
+        # departments = departments.replace("[", "")
+        # departments = departments.replace("]", "")
+        # departments = departments.replace(",", "")
+        # departments_array = departments.split()
+        
+        # specializations = re.sub("'", "", specializations)
+        # specializations = specializations.replace("[", "")
+        # specializations = specializations.replace("]", "")
+        # specializations = specializations.replace(",", "")
+        # specializations_array = specializations.split()
+        
+        # services = re.sub("'", "", services)
+        # services = services.replace("[", "")
+        # services = services.replace("]", "")
+        # services = services.replace(",", "")
+        # services_array = services.split()
+        
+        
+        
+        
+        
+        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
         return render(request, 'hospital-profile.html', context)
     else:
         redirect('logout')
