@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from .forms import CustomUserCreationForm, PatientForm
 from hospital.models import Hospital_Information, User, Patient
 
+from hospital_admin.models import hospital_department, specialization, service
+
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -89,8 +91,12 @@ def hospital_profile(request, pk):
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.all()
         hospitals = Hospital_Information.objects.get(hospital_id=pk)
+        departments = hospital_department.objects.all()
+        #departments = hospital_department.objects.values_list('hospital_department_name').filter(hospital_id=pk)
+        specializations = specialization.objects.all()
+        services = service.objects.all()
     
-        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
+        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals,'departments': departments, 'specializations': specializations, 'services': services}
         return render(request, 'hospital-profile.html', context)
     else:
         redirect('logout')
@@ -270,6 +276,7 @@ def multiple_hospital(request):
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.all()
         hospitals = Hospital_Information.objects.all()
+        
     
         context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
         return render(request, 'multiple-hospital.html', context)

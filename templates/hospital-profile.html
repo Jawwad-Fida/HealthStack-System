@@ -207,7 +207,7 @@
 													<!-- About Details -->
 													<div class="widget about-widget">
 														<h4 class="widget-title">About Our Hospital</h4>
-														<p>Our hospital is one of the largest and most recognized private healthcare brands in Bangladesh. Known for its pioneering works in setting-up the first super-specialty Cardiac hospital within country. It is also widely acknowledged for bringing high quality diagnostic & specialized consultation facilities under a single roof through its now ubiquitous centers in all corners of Bangladesh. Around 2.1 million annual patient interactions, more than 5,000 employees, and upward of 800 consultant physicians countrywide.</p>
+														<p>{{hospitals.description}}</p>
 													</div>
 													<!-- /About Details -->
 												
@@ -220,6 +220,7 @@
 														<h4 class="widget-title">Departments</h4>
 														<div class="experience-box">
 															<ul class="experience-list">
+																{% for d in depatments %}
 																<li>
 																	<div class="experience-user">
 																		<div class="before-circle"></div>
@@ -227,107 +228,11 @@
 																	<div class="experience-content">
 																		<div class="timeline-content">
 																			
-																			<h4 class="exp-title">Allergy and Immunology</h4>
-																			<p></p>
+																			<h4 class="exp-title">{{d.Doctor}}</h4>
+																			<p>{{d.hospital_department_name}}</p>
 																		</div>
 																	</div>
-																</li>
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Anesthesiology</h4>
-																			<p></p>
-																		</div>
-																	</div>
-																</li>
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">ARCH (At Risk Children) Center</h4>
-																			<p></p>
-																		</div>
-																	</div>
-																</li>
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Autism and Developmental Disabilities (CADD)</h4>
-																			<p></p>
-																		</div>
-																	</div>
-																</li>
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Cancer and Blood Disorders (CCBD)</h4>
-																			<p></p>
-																		</div>
-																	</div>
-																</li>
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Cardiology and Cardiothoracic Surgery (Heart Center)</h4>
-																			<p></p>
-																		</div>
-																	</div>
-																</li>
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Center for Cerebrovascular Disorders</h4>
-																			<p></p>
-																		</div>
-																	</div>
-																</li>
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Dentistry and Orthodontics</h4>
-																			<p></p>
-																		</div>
-																	</div>
-																</li>
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Ear Nose and Throat (ENT)</h4>
-																			<p></p>
-																		</div>
-																	</div>
-																</li>
+																	{% endfor %}
 															</ul>
 														</div>
 													</div>
