@@ -302,27 +302,29 @@ def create_invoice(request, pk):
 def create_report(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
-    doctors =Doctor_Information.objects.get(doctor_id=pk)
+        doctors =Doctor_Information.objects.get(doctor_id=pk)
 
-    if request.method == 'POST':
-        patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
-        report = Report(patient=patient, doctor=doctors)
-        test_name = request.POST['test_name']
-        description = request.POST['description']
-        result = request.POST['result']
-        delivery_date = request.POST['delivery_date']
+        if request.method == 'POST':
+            patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
+            report = Report(patient=patient, doctor=doctors)
+            test_name = request.POST['test_name']
+            description = request.POST['description']
+            result = request.POST['result']
+            delivery_date = request.POST['delivery_date']
 
-        # Save to report table
-        report.test_name = test_name
-        report.description = description
-        report.result = result
-        report.delivery_date = delivery_date
-        report.save()
+            # Save to report table
+            report.test_name = test_name
+            report.description = description
+            report.result = result
+            report.delivery_date = delivery_date
+            report.save()
 
-        return redirect('doctor-list')
 
-    context = {'doctors': doctors, 'admin': user}
-    return render(request, 'hospital_admin/create-report.html',context)
+
+            return redirect('doctor-list')
+
+        context = {'doctors': doctors, 'admin': user}
+        return render(request, 'hospital_admin/create-report.html',context)
 
 def add_pharmacist(request):
     if request.user.is_hospital_admin:

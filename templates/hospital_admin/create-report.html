@@ -79,97 +79,95 @@
 							<div class="card">
 								<div class="card-body">
 									
-									<!-- Profile Settings Form -->
-                                    <form action="#" method="POST" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <div class="row form-row">
-                                      <div class="col-12 col-md-12">
-                                        <div class="form-group">
+									<!-- Patient Settings Form -->
+                                    <form action="{% url 'create-report' pk=doctors.doctor_id %}" method="POST" enctype="multipart/form-data">
+                                    <!-- {% csrf_token %} -->
+									<div class="card">
+										<div class="card-body">
+											<h4 class="card-title">Patient</h4>
+											<div class="row form-row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Patient ID<span class="text-danger">*</span></label>
+														<input type="text" class="form-control" readonly value="{{patient.id}}" >
+													</div>
+												</div>
+                                        <!-- <div class="form-group">
                                             <div class="change-avatar"></div>
-                                        </div>
-                                        <div class="card card-table">
+                                        </div> -->
+                                        <!-- <div class="card card-table">
                                           <div class="card-body">
                                             <div class="table-responsive">
                                               <table class="table table-hover table-center">
                                                 <thead>
                                                   <tr>
                                                     <th style="min-width: 300px">Patient Serial Number</th>
+													<div class="row form-row">
+													
 													
                                                     <th style="min-width: 50px;"></th>
                                                   </tr>
                                                 </thead>
-                                                <tbody>
-                                                  <tr>
-                                                    <td>
-                                                      <input class="form-control" type="text" name="patient_serial_number">
-													  
-                                                    </td>
-													
-                                                  </tr>
-                                                </tbody>
+                                                
                                               </table>
                                             </div>
                                           </div>
-                                        </div>
-										<div class="card card-table">
+                                        </div> -->
+										<div class="card">
 											<div class="card-body">
-											  <div class="table-responsive">
-												<table class="table table-hover table-center">
-												  <thead>
-													<tr>
-													  
-													  <th style="min-width: 300px;font-size:20px"><b>Specimen Information</b></th>
-													  <th style="min-width: 50px;"></th>
-													</tr>
-												  </thead>
-												  <thead>
-													<tr>
-													  <th style="min-width: 300px">Specimen ID</th>
-													  <th style="min-width: 300px">Specimen Type</th>
-													 
-													  
-													  <th style="min-width: 50px;"></th>
-													</tr>
-												  </thead>
-												
-												  <tbody>
-													<tr>
-													  <td>
-														<input class="form-control" type="text" name="specimen_ID">
-													  </td>
-													  <td>
-														<input class="form-control" type="text" name="specimen_type">
-													  </td>
-													  
-													  
-													</tr>
-												  </tbody>
-												  <thead>
-													<tr>
-												
-													  <th style="min-width: 300px">Collection Date/Time</th>
-													  <th style="min-width: 300px">Receiving Date/Time</th>
-													  
-													  <th style="min-width: 50px;"></th>
-													</tr>
-												  </thead>
-												
-												  <tbody>
-													<tr>
-													 
-													  <td>
-														<input class="form-control" type="text" name="collection_date/Time">
-													  </td>
-													  <td>
-														<input class="form-control" type="text" name="receiving_date/Time">
-													  </td>
-													  
-													</tr>
-												  </tbody>
-												</table>
-											  </div>
+												<h4 class="card-title">Specimen Information</h4>
+												<div class="education-info">
+													<div class="row form-row education-cont">
+								                    {% for e in specimen %}
+														<div class="col-12 col-md-10 col-lg-11">  
+															<div class="row form-row">
+			
+									  
+			
+																<div class="col-12 col-md-6 col-lg-4">
+																	<div class="form-group">
+																		<label>Specimen ID</label>
+																		<input type="text" name="specimen_ID" class="form-control" value="{{e.0}}">
+																	</div> 
+																</div>
+						   
+																<div class="col-12 col-md-6 col-lg-4">
+																	<div class="form-group">
+																		<label>Specimen Type</label>
+																		<input type="text" name="specimen_type" class="form-control" value="{{e.1}}">
+																	</div> 
+																</div>
+							  
+									 
+																<div class="col-12 col-md-6 col-lg-4">
+																	<div class="form-group">
+																		<label>Collection Date/Time</label>
+																		<input type="text" name="collection_date"  class="form-control" value="{{e.2}}">
+																	</div> 
+																</div>
+
+
+																<div class="col-12 col-md-6 col-lg-4">
+																	<div class="form-group">
+																		<label>Receiving Date/Time</label>
+																		<input type="text" name="receiving_date"  class="form-control" value="{{e.3}}">
+																	</div> 
+																</div>
+			
+															</div>
+														</div>
+			
+								                        <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+								                     {% endfor %}
+			
+													</div>
+												</div>
+												<div class="add-more">
+													<a href="javascript:void(0);" class="add-specimen"><i class="fa fa-plus-circle"></i> Add Specimen</a>
+												</div>
 											</div>
-										  </div>
+							
+										</div>
                                         <div class="card card-table">
                                           <div class="card-body">
                                             <div class="table-responsive">
@@ -268,16 +266,16 @@
 				</div>			
 			</div>
       			<!-- Footer -->
-			<footer class="footer">
-				
+			<!-- <footer class="footer">
+				 -->
 				<!-- Footer Top -->
-				<div class="footer-top">
+				<!-- <div class="footer-top">
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-lg-3 col-md-6">
 							
 								<!-- Footer Widget -->
-								<div class="footer-widget footer-about">
+								<!-- <div class="footer-widget footer-about">
 									<div class="footer-logo">
 										<img src="{% static 'HealthStack-System/images/Normal/footer_logo.png' %}" alt="logo">
 									</div>
@@ -303,15 +301,15 @@
 											</ul>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<!-- /Footer Widget -->
 								
-							</div>
+							<!-- </div> -->
 							
-							<div class="col-lg-3 col-md-6">
+							<!-- <div class="col-lg-3 col-md-6"> -->
 							
 								<!-- Footer Widget -->
-								<div class="footer-widget footer-menu">
+								<!-- <div class="footer-widget footer-menu">
 									<h2 class="footer-title">For Patients</h2>
 									<ul>
 										<li><a href="search.html"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
@@ -320,15 +318,15 @@
 										<li><a href="booking.html"><i class="fas fa-angle-double-right"></i> Booking</a></li>
 										<li><a href="patient-dashboard.html"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
 									</ul>
-								</div>
+								</div> -->
 								<!-- /Footer Widget -->
 								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
+							<!-- </div> -->
+<!-- 							
+							<div class="col-lg-3 col-md-6"> -->
 							
 								<!-- Footer Widget -->
-								<div class="footer-widget footer-menu">
+								<!-- <div class="footer-widget footer-menu">
 									<h2 class="footer-title">For Doctors</h2>
 									<ul>
 										<li><a href="appointments.html"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
@@ -337,15 +335,15 @@
 										<li><a href="doctor-register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
 										<li><a href="doctor-dashboard.html"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
 									</ul>
-								</div>
+								</div> -->
 								<!-- /Footer Widget -->
 								
-							</div>
+							<!-- </div>
 							
-							<div class="col-lg-3 col-md-6">
+							<div class="col-lg-3 col-md-6"> -->
 							
 								<!-- Footer Widget -->
-								<div class="footer-widget footer-contact">
+								<!-- <div class="footer-widget footer-contact">
 									<h2 class="footer-title">Contact Us</h2>
 									<div class="footer-contact-info">
 										<div class="footer-address">
@@ -361,49 +359,49 @@
 											doccure@example.com
 										</p>
 									</div>
-								</div>
+								</div> -->
 								<!-- /Footer Widget -->
 								
-							</div>
+							<!-- </div>
 							
 						</div>
 					</div>
-				</div>
+				</div>  -->
 				<!-- /Footer Top -->
 				
 				<!-- Footer Bottom -->
-                <div class="footer-bottom">
-					<div class="container-fluid">
+                <!-- <div class="footer-bottom">
+					<div class="container-fluid"> -->
 					
 						<!-- Copyright -->
-						<div class="copyright">
+						<!-- <div class="copyright">
 							<div class="row">
 								<div class="col-md-6 col-lg-6">
 									<div class="copyright-text">
 										<p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
 									</div>
 								</div>
-								<div class="col-md-6 col-lg-6">
+								<div class="col-md-6 col-lg-6"> -->
 								
 									<!-- Copyright Menu -->
-									<div class="copyright-menu">
+									<!-- <div class="copyright-menu">
 										<ul class="policy-menu">
 											<li><a href="term-condition.html">Terms and Conditions</a></li>
 											<li><a href="privacy-policy.html">Policy</a></li>
 										</ul>
-									</div>
+									</div> -->
 									<!-- /Copyright Menu -->
 									
-								</div>
+								<!-- </div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /Copyright -->
-						
+<!-- 						
 					</div>
-				</div>
+				</div> -->
 				<!-- /Footer Bottom -->
 				
-			</footer>
+			<!-- </footer> -->
 			<!-- /Footer -->
 			<!-- /Page Wrapper -->
 		
@@ -420,7 +418,8 @@
         <!-- Sticky Sidebar JS -->
             <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
             <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
-        
+        <!-- Report Settings JS -->
+        <script src="{% static 'HealthStack-System/js/Normal/report_settings.js' %}"></script>
         <!-- Custom JS -->
         <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		
