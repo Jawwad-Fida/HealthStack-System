@@ -9,45 +9,51 @@ Version      : 1.0
 	
 	// Pricing Options Show
 	
-	$('#pricing_select input[name="rating_option"]').on('click', function() {
-		if ($(this).val() == 'price_free') {
-			$('#custom_price_cont').hide();
-		}
-		if ($(this).val() == 'custom_price') {
-			$('#custom_price_cont').show();
-		}
-		else {
-		}
-	});
+	// $('#pricing_select input[name="rating_option"]').on('click', function() {
+	// 	if ($(this).val() == 'price_free') {
+	// 		$('#custom_price_cont').hide();
+	// 	}
+	// 	if ($(this).val() == 'custom_price') {
+	// 		$('#custom_price_cont').show();
+	// 	}
+	// 	else {
+	// 	}
+	// });
 	
-	// Education Add More
+	// Specimen Add More
 	
-    $(".education-info").on('click','.trash', function () {
-		$(this).closest('.education-cont').remove();
+    $(".specimen-info").on('click','.trash', function () {
+		$(this).closest('.specimen-cont').remove();
 		return false;
     });
 
-    $(".add-education").on('click', function () {
+    $(".add-specimen").on('click', function () {  
 		
-		var educationcontent = '<div class="row form-row education-cont">' +
+		var specimencontent = '<div class="row form-row specimen-cont">' +
 			'<div class="col-12 col-md-10 col-lg-11">' +
 				'<div class="row form-row">' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
-							'<label>Degree</label>' +
-							'<input type="text" name="degree" class="form-control">' +
+							'<label>Specimen ID</label>' +
+							'<input type="text" name="specimen_ID" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
-							'<label>Institute</label>' +
-							'<input type="text" name="institute" class="form-control">' +
+							'<label>Specimen Type</label>' +
+							'<input type="text" name="specimen_type" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
-							'<label>Year of Completion</label>' +
-							'<input type="text" name="year_complete" class="form-control">' +
+							'<label>Collection Date/Time</label>' +
+							'<input type="text" name="collection_date" class="form-control">' +
+						'</div>' +
+					'</div>' +
+                    '<div class="col-12 col-md-6 col-lg-4">' +
+						'<div class="form-group">' +
+							'<label>Receiving Date/Time</label>' +
+							'<input type="text" name="receiving_date" class="form-control">' +
 						'</div>' +
 					'</div>' +
 				'</div>' +
@@ -55,7 +61,7 @@ Version      : 1.0
 			'<div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>' +
 		'</div>';
 		
-        $(".education-info").append(educationcontent);
+        $(".specimen-info").append(specimencontent);
         return false;
     });
 	

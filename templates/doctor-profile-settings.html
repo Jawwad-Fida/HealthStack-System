@@ -276,10 +276,11 @@
 									<h4 class="card-title">Education</h4>
 									<div class="education-info">
 										<div class="row form-row education-cont">
+                      {% for e in education %}
 											<div class="col-12 col-md-10 col-lg-11">
 												<div class="row form-row">
 
-                          {% for e in education %}
+                          
 
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
@@ -302,11 +303,12 @@
 															<input type="text" name="year_complete"  class="form-control" value="{{e.2}}">
 														</div> 
 													</div>
-    
-                          {% endfor %}
 
 												</div>
 											</div>
+
+                      <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+                      {% endfor %}
 
 										</div>
 									</div>
@@ -326,19 +328,20 @@
 									<h4 class="card-title">Experience</h4>
 									<div class="experience-info">
 										<div class="row form-row experience-cont">
+                      {% for e in experience %}
 											<div class="col-12 col-md-10 col-lg-11">
 
-                        {% for e in experience %}
+                        
 												<div class="row form-row">
 
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>Hospital Name</label>
 															<input type="text" name="hospital_name" class="form-control" value="{{e.0}}">
 														</div>
 													</div>
 
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>From</label>
 															<input type="text" name="from" class="form-control" value="{{e.1}}">
@@ -346,25 +349,30 @@
 													</div>
 
 
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>To</label>
 															<input type="text" name="to" class="form-control" value="{{e.2}}">
 														</div> 
 													</div>
 
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>Designation</label>
 															<input type="text" name="designation" class="form-control" value="{{e.3}}">
 														</div> 
 													</div>
+                          
+
+                          
 
 												</div>
-                        {% endfor %}
+                        
 
 
 											</div>
+                      <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+                      {% endfor %}
 										</div>
 									</div>
 									<div class="add-more">
@@ -602,7 +610,7 @@
     <script src="{% static 'HealthStack-System/plugins/Normal/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
 
     <!-- Profile Settings JS -->
-    <script src="{% static 'HealthStack-System/js/Normal/profile_Settings.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/profile_settings.js' %}"></script>
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>

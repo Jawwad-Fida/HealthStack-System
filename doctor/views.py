@@ -91,19 +91,28 @@ def doctor_login(request):
     elif request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
+        
+        # 
         try:
             user = User.objects.get(username=username)
         except:
             messages.error(request, 'Username does not exist')
-
+                
         user = authenticate(username=username, password=password)
-
+        
         if user is not None:
             login(request, user)
-            return redirect('doctor-dashboard')
+            if request.user.is_doctor:
+                return redirect('doctor-dashboard')
+            else:
+                messages.error(request, 'Invalid credentials. Not a Doctor')
+                return redirect('doctor-logout')   
         else:
-            messages.error(request, 'Invalid username or password')
+            messages.error(request, 'Invalid username or password')  
+        # else:
+        #     messages.error(request, 'Invalid credentials. Not a Doctor')
+        #     return redirect('doctor-login')
+            
 
     return render(request, 'doctor-login.html')
 
