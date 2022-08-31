@@ -1,10 +1,13 @@
 import email
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm
 from hospital.models import Hospital_Information, User, Patient
+
+from hospital_admin.models import hospital_department, specialization, service
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -18,7 +21,8 @@ from .models import Patient, User
 from doctor.models import Doctor_Information, Appointment
 
 from sslcommerz.models import Payment
-
+from django.db.models import Q, Count
+import re
 
 # Create your views here.
 
@@ -26,7 +30,9 @@ from sslcommerz.models import Payment
 
 
 def hospital_home(request):
-    return render(request, 'index-2.html')
+    doctors = Doctor_Information.objects.all() 
+    context = {'doctors': doctors} 
+    return render(request, 'index-2.html', context)
 
 
 def change_password(request):
@@ -77,17 +83,47 @@ def chat(request, pk):
 
 
 def chat_doctor(request):
-    return render(request, 'chat-doctor.html')
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        patients = Patient.objects.all()
+        
+    context = {'patients': patients, 'doctor': doctor}
+    return render(request, 'chat-doctor.html', context)
 
 
 def hospital_profile(request, pk):
     if request.user.is_patient:
-        # patient = Patient.objects.get(user_id=pk)
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.all()
         hospitals = Hospital_Information.objects.get(hospital_id=pk)
-    
-        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
+        
+        departments = hospital_department.objects.filter(hospital=hospitals)
+        specializations = specialization.objects.filter(hospital=hospitals)
+        services = service.objects.filter(hospital=hospitals)
+        
+        # departments = re.sub("'", "", departments)
+        # departments = departments.replace("[", "")
+        # departments = departments.replace("]", "")
+        # departments = departments.replace(",", "")
+        # departments_array = departments.split()
+        
+        # specializations = re.sub("'", "", specializations)
+        # specializations = specializations.replace("[", "")
+        # specializations = specializations.replace("]", "")
+        # specializations = specializations.replace(",", "")
+        # specializations_array = specializations.split()
+        
+        # services = re.sub("'", "", services)
+        # services = services.replace("[", "")
+        # services = services.replace("]", "")
+        # services = services.replace(",", "")
+        # services_array = services.split()
+        
+        
+        
+        
+        
+        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
         return render(request, 'hospital-profile.html', context)
     else:
         redirect('logout')
@@ -126,7 +162,11 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            return redirect('patient-dashboard')
+            if request.user.is_patient:          
+                return redirect('patient-dashboard')
+            else:
+                messages.error(request, 'Invalid credentials. Not a Patient')
+                return redirect('logout')
         else:
             messages.error(request, 'Invalid username or password')
 
@@ -173,7 +213,8 @@ def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
         # patient = Patient.objects.get(user_id=pk)
-        appointments = Appointment.objects.filter(patient=patient)
+        # appointments = Appointment.objects.filter(patient=patient)
+        appointments = Appointment.objects.filter(patient=patient).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
         payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
 
         context = {'patient': patient, 'appointments': appointments, 'payments': payments}
@@ -183,24 +224,63 @@ def patient_dashboard(request):
     return render(request, 'patient-dashboard.html', context)
 
 
+# def profile_settings(request):
+#     if request.user.is_patient:
+#         # patient = Patient.objects.get(user_id=pk)
+#         patient = Patient.objects.get(user=request.user)
+#         form = PatientForm(instance=patient)  
+
+#         if request.method == 'POST':
+#             form = PatientForm(request.POST, request.FILES,instance=patient)  
+#             if form.is_valid():
+#                 form.save()
+#                 return redirect('patient-dashboard')
+#             else:
+#                 form = PatientForm()
+#     else:
+#         redirect('logout')
+
+#     context = {'patient': patient, 'form': form}
+#     return render(request, 'profile-settings.html', context)
+
 def profile_settings(request):
     if request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
         patient = Patient.objects.get(user=request.user)
-        form = PatientForm(instance=patient)  
-
-        if request.method == 'POST':
-            form = PatientForm(request.POST, request.FILES,instance=patient)  
-            if form.is_valid():
-                form.save()
-                return redirect('patient-dashboard')
+        old_featured_image = patient.featured_image
+        
+        if request.method == 'GET':
+            context = {'patient': patient}
+            return render(request, 'profile-settings.html', context)
+        elif request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
             else:
-                form = PatientForm()
+                featured_image = old_featured_image
+                
+            name = request.POST.get('name')
+            dob = request.POST.get('dob')
+            age = request.POST.get('age')
+            blood_group = request.POST.get('blood_group')
+            phone_number = request.POST.get('phone_number')
+            address = request.POST.get('address')
+            nid = request.POST.get('nid')
+            history = request.POST.get('history')
+            
+            patient.name = name
+            patient.age = age
+            patient.phone_number = phone_number
+            patient.address = address
+            patient.blood_group = blood_group
+            patient.history = history
+            patient.dob = dob
+            patient.nid = nid
+            patient.featured_image = featured_image
+            
+            patient.save()
+            return redirect('patient-dashboard')
     else:
-        redirect('logout')
-
-    context = {'patient': patient, 'form': form}
-    return render(request, 'profile-settings.html', context)
+        redirect('logout')  
 
 
 def search(request):
@@ -223,6 +303,7 @@ def multiple_hospital(request):
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.all()
         hospitals = Hospital_Information.objects.all()
+        
     
         context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
         return render(request, 'multiple-hospital.html', context)

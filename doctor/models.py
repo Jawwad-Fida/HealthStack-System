@@ -34,8 +34,8 @@ class Doctor_Information(models.Model):
         User, on_delete=models.CASCADE, null=True, blank=True, related_name='profile')
     name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
-
-    degree = models.CharField(max_length=200, null=True, blank=True)
+    gender = models.CharField(max_length=200, null=True, blank=True)
+    description = models.TextField(max_length=1000, null=True, blank=True)
     department = models.CharField(
         max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
 
@@ -48,7 +48,22 @@ class Doctor_Information(models.Model):
     consultation_fee = models.IntegerField(null=True, blank=True)
     report_fee = models.IntegerField(null=True, blank=True)
     #doctor_password = models.CharField(max_length=200, null=True, blank=True)
-    dob = models.DateField(null=True, blank=True)
+    dob = models.CharField(max_length=200, null=True, blank=True)
+    
+    # Education
+    institute = models.CharField(max_length=200, null=True, blank=True)
+    degree = models.CharField(max_length=200, null=True, blank=True)
+    completion_year = models.CharField(max_length=200, null=True, blank=True)
+    
+    # degree
+    
+    # work experience
+    work_place = models.CharField(max_length=200, null=True, blank=True)
+    designation = models.CharField(max_length=200, null=True, blank=True)
+    start_year = models.CharField(max_length=200, null=True, blank=True)
+    end_year = models.CharField(max_length=200, null=True, blank=True)
+    
+    
 
     # ForeignKey --> one to one relationship with Hospital_Information model.
     hospital_name = models.ForeignKey(

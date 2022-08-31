@@ -1,3 +1,5 @@
+import email
+from email.mime import image
 from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -5,12 +7,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
-from doctor.models import Doctor_Information,Report
+from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
-from .models import Admin_Information
-import random
+from .models import Admin_Information,specialization,service,hospital_department
+import random,re
 import string
+from django.db.models import  Count
 
 
 # Create your views here.
@@ -19,7 +22,10 @@ def admin_dashboard(request):
     # admin = Admin_Information.objects.get(user_id=pk)
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
-        context = {'admin': user}
+        total_patient_count = Patient.objects.annotate(count=Count('patient_id'))
+        total_doctor_count = Doctor_Information.objects.annotate(count=Count('doctor_id'))
+        pending_appointment = Appointment.objects.filter(appointment_status='pending').count()
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment, }
     return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
@@ -167,33 +173,53 @@ def hospital_admin_profile(request, pk):
 
 
 
-# def add_hospital(request):
-#     return render(request, 'hospital_admin/add-hospital.html')
-
-
 def add_hospital(request):
-    page = 'hospital-list'
-    form = AddHospitalForm()
+    if  request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
 
     if request.method == 'POST':
-        form = AddHospitalForm(request.POST, request.FILES)
-        if form.is_valid():
-            # form.save()
-            hospital = form.save(commit=False)
-            hospital.save()
+        hospital = Hospital_Information()
+        specializations = specialization(hospital=hospital)
+        services = service(hospital=hospital)
+        departments = hospital_department(hospital=hospital)
+        
+        
+        featured_image = request.FILES['featured_image']
+        
+        
+        hospital_name = request.POST.get('hospital_name')
+        address = request.POST.get('address')
+        description = request.POST.get('description')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number') 
+        hospital_type = request.POST.get('type')
+        specialization_name = request.POST.getlist('specialization')
+        department_name = request.POST.getlist('department')
+        service_name = request.POST.getlist('service')
 
-            messages.success(request, 'Hospital was created!')
 
-            return redirect('hospital-list')
+        hospital.name = hospital_name
+        hospital.description = description
+        hospital.address = address
+        hospital.email = email
+        hospital.phone_number =phone_number
+        hospital.featured_image=featured_image 
+        hospital.hospital_type=hospital_type
+        
+        specializations.specialization_name=specialization_name
+        services.service_name = service_name
+        departments.hospital_department_name = department_name 
 
-        else:
-            messages.error(
-                request, 'An error has occurred during input')
-    # else:
-    #     form = AddHospitalForm()
+        hospital.save()
+        specializations.save()
+        services.save()
+        departments.save()
 
-    context = {'page': page, 'form': form}
-    return render(request, 'hospital_admin/add-hospital.html', context)
+        return redirect('hospital-list')
+
+    context = { 'admin': user}
+    return render(request, 'hospital_admin/add-hospital.html',context)
+
 
 
 # def edit_hospital(request, pk):
@@ -201,21 +227,59 @@ def add_hospital(request):
 #     return render(request, 'hospital_admin/edit-hospital.html')
 
 def edit_hospital(request, pk):
+         if  request.user.is_hospital_admin:
+             user = Admin_Information.objects.get(user=request.user)
 
-    hospital = Hospital_Information.objects.get(hospital_id=pk)
-    form = EditHospitalForm(instance=hospital)  
+             hospital = Hospital_Information.objects.get(hospital_id=pk)
 
-    if request.method == 'POST':
-        form = EditHospitalForm(request.POST, request.FILES,
-                           instance=hospital)  
-        if form.is_valid():
-            form.save()
-            return redirect('hospital-list')
-        else:
-            form = EditHospitalForm()
+             old_featured_image = hospital.featured_image
 
-    context = {'hospital': hospital, 'form': form}
-    return render(request, 'hospital_admin/edit-hospital.html', context)
+             if request.method == 'GET':
+                    
+                    specializations =specialization.objects.filter(hospital=hospital)
+                    services=service.objects.filter(hospital=hospital)
+                    departments =hospital_department.objects.filter(hospital=hospital)
+
+                    context = {'hospital': hospital, 'specializations': specializations, 'services': services,'departments':departments} 
+                    return render(request, 'hospital_admin/edit-hospital.html',context)
+
+             elif request.method == 'POST':
+                if 'featured_image' in request.FILES:
+                    featured_image = request.FILES['featured_image']
+                else:
+                    featured_image = old_featured_image
+
+                                
+                    hospital_name = request.POST.get('hospital_name')
+                    address = request.POST.get('address')
+                    description = request.POST.get('description')
+                    email = request.POST.get('email')
+                    phone_number = request.POST.get('phone_number') 
+                    hospital_type = request.POST.get('type')
+                    specialization_name = request.POST.getlist('specialization')
+                    department_name = request.POST.getlist('department')
+                    service_name = request.POST.getlist('service')
+
+                    hospital.name = hospital_name
+                    hospital.description = description
+                    hospital.address = address
+                    hospital.email = email
+                    hospital.phone_number =phone_number
+                    hospital.featured_image =featured_image 
+                    hospital.hospital_type =hospital_type
+                    
+                    specializations.specialization_name=specialization_name
+                    services.service_name = service_name
+                    departments.hospital_department_name = department_name 
+
+                    hospital.save()
+                    specializations.save()
+                    services.save()
+                    departments.save()
+                    return redirect('hospital-list')
+
+             context = { 'admin': user,'hospital':hospital,'departments':departments,'specializations':specializations,'services':services}
+             return render(request, 'hospital_admin/edit-hospital.html',context)
 
 def edit_emergency_information(request, pk):
 

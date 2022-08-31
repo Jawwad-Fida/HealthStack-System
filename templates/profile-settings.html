@@ -98,78 +98,130 @@
             </div>
             <!-- /Profile Sidebar -->
 
-            <div class="col-md-7 col-lg-8 col-xl-9">
+            <!-- <div class="col-md-7 col-lg-8 col-xl-9">
               <div class="card">
                 <div class="card-body">
-                  <!------------------------------------------------- Profile Settings Form ----------------------------------------------->
+                  
                   <form
                     action="{% url 'profile-settings' %}"
                     method="POST"
                     enctype="multipart/form-data"
                   >
                     {% csrf_token %}
+              </div>
+            </div> -->
 
-                    <div class="row form-row">
-                      <div class="col-12 col-md-12">
-                        <div class="form-group">
-                          <div class="change-avatar">
-                            <div class="profile-img">
-                              <img
-                                src="{{patient.featured_image.url}}"
-                                alt="User Image"
-                              />
-                            </div>
+            <div class="col-md-7 col-lg-8 col-xl-9">
+							<div class="card">
+								<div class="card-body">
+									
+									<!-- Profile Settings Form -->
+									<form action="{% url 'profile-settings' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+										<div class="row form-row">
+											<div class="col-12 col-md-12">
+												<div class="form-group">
+													<div class="change-avatar">
+														<div class="profile-img">
+															<img src="{{patient.featured_image.url}}" alt="User Image">
+														</div>
+														<div class="upload-img">
+															<div class="change-photo-btn">
+																<span><i class="fa fa-upload"></i> Upload Photo</span>
+																<input type="file" class="upload" name="featured_image">
+															</div>
+															<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+														</div>
+													</div>
+												</div>
+											</div>     
 
-                            <!-- <div class="upload-img">
-                              <div class="change-photo-btn">
-                                <span
-                                  ><i class="fa fa-upload"></i> Upload
-                                  Photo</span
-                                >
-                                <input type="file" class="upload" />
-                              </div>
-                            </div> -->
-                          </div>
-                        </div>
-                      </div>
-
-                      {% for field in form %}
                       <div class="col-12 col-md-6">
                         <div class="form-group">
-                          <label>{{ field.label }}</label>
-                          {{field}}{{ field.errors }}
+                          <label>Username <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" readonly value="{{patient.username}}" >
                         </div>
-                      </div>
-                      {% endfor %}
+											</div>
 
-                      <!-- <div class="col-12 col-md-6">
+                      <div class="col-12 col-md-6">
                         <div class="form-group">
-                          <label>Blood Group</label>
-                          <select class="form-control select">
-                            <option>A-</option>
-                            <option>A+</option>
-                            <option>B-</option>
-                            <option>B+</option>
-                            <option>AB-</option>
-                            <option>AB+</option>
-                            <option>O-</option>
-                            <option>O+</option>
-                          </select>
+                          <label>Email <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" readonly value="{{patient.email}}" >
                         </div>
-                      </div> -->
-                    </div>
+											</div>  
 
-                    <div class="submit-section">
-                      <button type="submit" class="btn btn-primary submit-btn">
-                        Save Changes
-                      </button>
-                    </div>
-                  </form>
-                  <!------------------------------------------------- Profile Settings Form ----------------------------------------------->
-                </div>
-              </div>
-            </div>
+                      <div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Name</label>
+													<input type="text" class="form-control" value="{{ patient.name }}" name="name">
+												</div>
+											</div>
+							
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Date of Birth</label>
+														<input type="date" class="form-control datetimepicker" value="{{patient.dob}}" name="dob">
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Blood Group</label>
+													<select class="form-control select" name="blood_group">
+                            <option value="{{patient.blood_group}}">{{patient.blood_group}}</option>
+														<option value="A-">A-</option>
+														<option value="A+">A+</option>
+														<option value="B-">B-</option>
+														<option value="B+">B+</option>
+														<option value="AB-">AB-</option>
+														<option value="AB+">AB+</option>
+														<option value="O-">O-</option>
+														<option value="O+">O+</option>
+													</select>
+												</div>
+											</div>
+										
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Mobile</label>
+													<input type="text" value="{{patient.phone_number}}" class="form-control" name="phone_number">
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+												<label>Address</label>
+													<input type="text" class="form-control" value="{{patient.address}}" name="address">
+												</div>
+											</div>
+                      <div class="col-12 col-md-6">
+												<div class="form-group">
+												<label>Age</label>
+													<input type="text" class="form-control" value="{{patient.age}}" name="age">
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>NID</label>
+													<input type="text" class="form-control" value="{{patient.nid}}" name="nid">
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>History</label>
+													<input type="text" class="form-control" value="{{patient.history}}" name="history">
+												</div>
+											</div>
+										</div>
+										<div class="submit-section">
+											<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+										</div>
+									</form>
+									<!-- /Profile Settings Form -->
+									
+								</div>
+							</div>
+						</div>
           </div>
+
         </div>
       </div>
       <!-- /Page Content -->

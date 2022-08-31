@@ -35,19 +35,19 @@ Version      : 1.0
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>Degree</label>' +
-							'<input type="text" class="form-control">' +
+							'<input type="text" name="degree" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
-							'<label>College/Institute</label>' +
-							'<input type="text" class="form-control">' +
+							'<label>Institute</label>' +
+							'<input type="text" name="institute" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>Year of Completion</label>' +
-							'<input type="text" class="form-control">' +
+							'<input type="text" name="year_complete" class="form-control">' +
 						'</div>' +
 					'</div>' +
 				'</div>' +
@@ -71,28 +71,28 @@ Version      : 1.0
 		var experiencecontent = '<div class="row form-row experience-cont">' +
 			'<div class="col-12 col-md-10 col-lg-11">' +
 				'<div class="row form-row">' +
-					'<div class="col-12 col-md-6 col-lg-4">' +
+					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Hospital Name</label>' +
-							'<input type="text" class="form-control">' +
+							'<input type="text" name="hospital_name" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-4">' +
+					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>From</label>' +
-							'<input type="text" class="form-control">' +
+							'<input type="text" name="from" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-4">' +
+					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>To</label>' +
-							'<input type="text" class="form-control">' +
+							'<input type="text" name="to" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-4">' +
+					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Designation</label>' +
-							'<input type="text" class="form-control">' +
+							'<input type="text" name="designation" class="form-control">' +
 						'</div>' +
 					'</div>' +
 				'</div>' +
@@ -104,80 +104,52 @@ Version      : 1.0
         return false;
     });
 	
-	// service Add More
+	// Awards Add More
 	
-    // $(".service-info").on('click','.trash', function () {
-	// 	$(this).closest('.service-cont').remove();
-	// 	return false;
-    // });
-
-    // $(".add-service").on('click', function () {
-
-    //     var servicecontent = '<div class="row form-row service-cont">' +
-	// 		'<div class="col-12 col-md-5">' +
-	// 			'<div class="form-group">' +
-	// 				'<label>Add More Services</label>' +
-	// 				'<input type="text" class="form-control">' +
-	// 			'</div>' +
-	// 		'</div>' +
-	// 		'<div class="col-12 col-md-5">' +
-	// 			'<div class="form-group">' +
-	// 				'<label>Year</label>' +
-	// 				'<input type="text" class="form-control">' +
-	// 			'</div>' +
-	// 		'</div>' +
-	// 		'<div class="col-12 col-md-2">' +
-	// 			'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
-	// 			'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
-	// 		'</div>' +
-	// 	'</div>';
-		
-    //     $(".service-info").append(servicecontent);
-    //     return false;
-    // });
-	
-	// Deapartments Add More
-	
-    $(".department-info").on('click','.trash', function () {
-		$(this).closest('.department-cont').remove();
+    $(".awards-info").on('click','.trash', function () {
+		$(this).closest('.awards-cont').remove();
 		return false;
     });
 
-    $(".add-department").on('click', function () {
+    $(".add-award").on('click', function () {
 
-        var departmentcontent = '<div class="row form-row department-cont">' +
-			'<div class="col-12 col-md-10 col-lg-5">' +
+        var regcontent = '<div class="row form-row awards-cont">' +
+			'<div class="col-12 col-md-5">' +
 				'<div class="form-group">' +
-
-					'<label>Add New Departments</label>' +
-
+					'<label>Awards</label>' +
 					'<input type="text" class="form-control">' +
 				'</div>' +
 			'</div>' +
-			'<div class="col-12 col-md-2 col-lg-2">' +
+			'<div class="col-12 col-md-5">' +
+				'<div class="form-group">' +
+					'<label>Year</label>' +
+					'<input type="text" class="form-control">' +
+				'</div>' +
+			'</div>' +
+			'<div class="col-12 col-md-2">' +
 				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
 				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
 			'</div>' +
 		'</div>';
 		
-        $(".department-info").append(departmentcontent);
+        $(".awards-info").append(regcontent);
         return false;
     });
-
-	// Service Add More
 	
-    $(".service-info").on('click','.trash', function () {
-		$(this).closest('.service-cont').remove();
+	// Membership Add More
+	
+    $(".membership-info").on('click','.trash', function () {
+		$(this).closest('.membership-cont').remove();
 		return false;
     });
 
-    $(".add-service").on('click', function () {
+    $(".add-membership").on('click', function () {
 
-        var servicecontent = '<div class="row form-row service-cont">' +
+        var membershipcontent = '<div class="row form-row membership-cont">' +
 			'<div class="col-12 col-md-10 col-lg-5">' +
 				'<div class="form-group">' +
 
-					'<label>Add New Services</label>' +
+					'<label>Member</label>' +
 
 					'<input type="text" class="form-control">' +
 				'</div>' +
@@ -188,35 +160,7 @@ Version      : 1.0
 			'</div>' +
 		'</div>';
 		
-        $(".service-info").append(servicecontent);
-        return false;
-    });
-
-	// Specialization Add More
-	
-    $(".specialization-info").on('click','.trash', function () {
-		$(this).closest('.specialization-cont').remove();
-		return false;
-    });
-
-    $(".add-specialization").on('click', function () {
-
-        var specializationcontent = '<div class="row form-row specialization-cont">' +
-			'<div class="col-12 col-md-10 col-lg-5">' +
-				'<div class="form-group">' +
-
-					'<label>Add New Specializations</label>' +
-
-					'<input type="text" class="form-control">' +
-				'</div>' +
-			'</div>' +
-			'<div class="col-12 col-md-2 col-lg-2">' +
-				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
-				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
-			'</div>' +
-		'</div>';
-		
-        $(".specialization-info").append(specializationcontent);
+        $(".membership-info").append(membershipcontent);
         return false;
     });
 	

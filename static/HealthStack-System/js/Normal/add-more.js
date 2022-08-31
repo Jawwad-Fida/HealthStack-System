@@ -135,6 +135,7 @@ Version      : 1.0
     //     $(".service-info").append(servicecontent);
     //     return false;
     // });
+
 	
 	// Deapartments Add More
 	
@@ -151,7 +152,7 @@ Version      : 1.0
 
 					'<label>Add New Departments</label>' +
 
-					'<input type="text" class="form-control">' +
+					'<input type="text" name="department" class="form-control">' +
 				'</div>' +
 			'</div>' +
 			'<div class="col-12 col-md-2 col-lg-2">' +
@@ -179,7 +180,7 @@ Version      : 1.0
 
 					'<label>Add New Services</label>' +
 
-					'<input type="text" class="form-control">' +
+					'<input type="text" name="service" class="form-control">' +
 				'</div>' +
 			'</div>' +
 			'<div class="col-12 col-md-2 col-lg-2">' +
@@ -207,7 +208,7 @@ Version      : 1.0
 
 					'<label>Add New Specializations</label>' +
 
-					'<input type="text" class="form-control">' +
+					'<input type="text" name="specialization" class="form-control">' +
 				'</div>' +
 			'</div>' +
 			'<div class="col-12 col-md-2 col-lg-2">' +

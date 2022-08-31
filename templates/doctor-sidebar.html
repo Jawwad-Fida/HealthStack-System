@@ -13,7 +13,7 @@
         <h3>{{ doctor.name }}</h3>
 
         <div class="patient-details">
-          <h5 class="mb-0">{{doctor.degree}}</h5>
+          <h5 class="mb-0">{{doctor.department}}</h5>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
         </li>
 
         <li>
-        <a href="#">
+        <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">
           <i class="fas fa-columns"></i>
           <span>Profile</span>
         </a>
