@@ -1,0 +1,19 @@
+{% extends 'chat/base.html' %} {% load static %} {% block header %} {% endblock %} {% block content %}
+<div class="container h-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="col-md-6">
+        <div class="card bg-dark">
+            <div class="card-header">
+                <h5 class="card-title">Profile Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <p><b>First Name:</b> {{user.first_name}}</p>
+                    <p><b>Last Name:</b> {{user.lastn_ame}}</p>
+                    <p><b>Email:</b> {{user.email}}</p>
+                    <p><b>Username:</b> {{user.username}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

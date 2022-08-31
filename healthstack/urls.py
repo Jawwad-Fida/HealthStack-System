@@ -28,7 +28,7 @@ urlpatterns = [
     path('', include('hospital.urls')),
     path('doctor/', include('doctor.urls')),
     path('hospital_admin/', include('hospital_admin.urls')),
-    path('api/', include('ChatSystem.urls')),
+    path('chat/', include('ChatApp.urls')),
     path('sslcommerz/', include('sslcommerz.urls')),
     path('pharmacy/', include('pharmacy.urls')),
     path('__debug__/', include('debug_toolbar.urls')),

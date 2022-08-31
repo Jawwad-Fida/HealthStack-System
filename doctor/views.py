@@ -457,7 +457,6 @@ def testing(request):
     return render(request, 'testing.html', context)
 
 
-
 def view_report(request):
     return render(request, 'view-report.html')
 

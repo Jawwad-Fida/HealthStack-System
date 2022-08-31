@@ -11,7 +11,7 @@ from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information,specialization,service,hospital_department
-import random
+import random,re
 import string
 from django.db.models import  Count
 
@@ -227,21 +227,59 @@ def add_hospital(request):
 #     return render(request, 'hospital_admin/edit-hospital.html')
 
 def edit_hospital(request, pk):
+         if  request.user.is_hospital_admin:
+             user = Admin_Information.objects.get(user=request.user)
 
-    hospital = Hospital_Information.objects.get(hospital_id=pk)
-    form = EditHospitalForm(instance=hospital)  
+             hospital = Hospital_Information.objects.get(hospital_id=pk)
 
-    if request.method == 'POST':
-        form = EditHospitalForm(request.POST, request.FILES,
-                           instance=hospital)  
-        if form.is_valid():
-            form.save()
-            return redirect('hospital-list')
-        else:
-            form = EditHospitalForm()
+             old_featured_image = hospital.featured_image
 
-    context = {'hospital': hospital, 'form': form}
-    return render(request, 'hospital_admin/edit-hospital.html', context)
+             if request.method == 'GET':
+                    
+                    specializations =specialization.objects.filter(hospital=hospital)
+                    services=service.objects.filter(hospital=hospital)
+                    departments =hospital_department.objects.filter(hospital=hospital)
+
+                    context = {'hospital': hospital, 'specializations': specializations, 'services': services,'departments':departments} 
+                    return render(request, 'hospital_admin/edit-hospital.html',context)
+
+             elif request.method == 'POST':
+                if 'featured_image' in request.FILES:
+                    featured_image = request.FILES['featured_image']
+                else:
+                    featured_image = old_featured_image
+
+                                
+                    hospital_name = request.POST.get('hospital_name')
+                    address = request.POST.get('address')
+                    description = request.POST.get('description')
+                    email = request.POST.get('email')
+                    phone_number = request.POST.get('phone_number') 
+                    hospital_type = request.POST.get('type')
+                    specialization_name = request.POST.getlist('specialization')
+                    department_name = request.POST.getlist('department')
+                    service_name = request.POST.getlist('service')
+
+                    hospital.name = hospital_name
+                    hospital.description = description
+                    hospital.address = address
+                    hospital.email = email
+                    hospital.phone_number =phone_number
+                    hospital.featured_image =featured_image 
+                    hospital.hospital_type =hospital_type
+                    
+                    specializations.specialization_name=specialization_name
+                    services.service_name = service_name
+                    departments.hospital_department_name = department_name 
+
+                    hospital.save()
+                    specializations.save()
+                    services.save()
+                    departments.save()
+                    return redirect('hospital-list')
+
+             context = { 'admin': user,'hospital':hospital,'departments':departments,'specializations':specializations,'services':services}
+             return render(request, 'hospital_admin/edit-hospital.html',context)
 
 def edit_emergency_information(request, pk):
 

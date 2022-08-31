@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<style>
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App using Django</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+    {% block header %} {% endblock header %}
+</head>
+
+<body class='bg-dark text-light'>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100 border-bottom border-primary mb-2" id="top-nav">
+        <a class="navbar-brand" href="{% url 'chat-home' %}">Chat App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-menu" aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="collapse navbar-collapse" id="nav-menu">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% if page == 'home' %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'chat-home' %}"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'chat-logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+            {% if user.is_authenticated %}
+            <span><a class="text-light"  href="{% url 'chat-profile' %}"><i class="fa fa-user"></i> <b>Welcome {{user.first_name}}!</b></a></span> {% endif %}
+        </div>
+
+    </nav>
+    <div class="container h-100">
+        {% block content %}{% endblock content %}
+    </div>
+</body>
+<script>
+    $(function() {
+        $('div.dataTables_length select').addClass('bg-dark')
+    })
+</script>
+{% block footer %}{% endblock footer %}
+
+</html>
