@@ -83,7 +83,12 @@ def chat(request, pk):
 
 
 def chat_doctor(request):
-    return render(request, 'chat-doctor.html')
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        patients = Patient.objects.all()
+        
+    context = {'patients': patients, 'doctor': doctor}
+    return render(request, 'chat-doctor.html', context)
 
 
 def hospital_profile(request, pk):
