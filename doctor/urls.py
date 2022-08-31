@@ -30,7 +30,6 @@ urlpatterns = [
     path('accept-appointment/<int:pk>/',views.accept_appointment, name='accept-appointment'),
     path('reject-appointment/<int:pk>/',views.reject_appointment, name='reject-appointment'),
     path('testing/',views.testing, name='testing'),
-    path('chat-patient/',views.chat_patient, name='chat-patient'),
    
 
 ]
