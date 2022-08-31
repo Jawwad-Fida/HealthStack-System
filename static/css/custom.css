@@ -1,0 +1,22 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#pre-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0000009c;
+}
+
+.bg-none {
+    background: unset !important;
+}

@@ -3,10 +3,11 @@ from . import views
 
 
 urlpatterns = [
-    path('chat/', views.chat_view, name='chats'),
-    path('chat/<int:sender>/<int:receiver>/', views.message_view, name='chat'),
-    path('messages/<int:sender>/<int:receiver>/', views.message_list, name='message-detail'),
-    path('messages/', views.message_list, name='message-list'),
+    path('', views.chat_view, name='chat'),
+    path('<int:sender>/<int:receiver>/', views.message_view, name='chats'),
+    path('chat/messages/', views.message_list, name='message-list'),
+    path('chat/messages/<int:sender>/<int:receiver>/', views.message_list, name='message-detail'),
+    
     
     
 ]
