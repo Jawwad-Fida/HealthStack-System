@@ -456,7 +456,13 @@ def testing(request):
     
     return render(request, 'testing.html', context)
 
-
+def chat_patient(request):
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        patients = Patient.objects.all()
+        
+    context = {'patients': patients, 'doctor': doctor}
+    return render(request, 'chat-patient.html', context)
 
 def view_report(request):
     return render(request, 'view-report.html')
