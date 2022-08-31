@@ -20,7 +20,6 @@
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/script.min.js' %}"></script>
 
 </head>
 
@@ -29,31 +28,27 @@
         <div class="col-md-6 offset-md-3">
             <div class="card bg-dark card-outline-primary">
                 <div class="card-header">
-                    <h5 class="card-title">Create an Account</h5>
+                    <h5 class="card-title">Login</h5>
                 </div>
                 <div class="card-body">
-                    <form id="register-frm" action="" method="post">
+                    {% if messages %} {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %} {% endif %}
+                    <form id="login-frm" method="POST">
                         {% csrf_token %}
                         <!-- <div class="from-group">
-                            <label for="firstname" class="control-label">FirstName</label>
-                            <input type="text" class='form-control' name="firstname" required>
+                            <label for="username" class="control-label">Username</label>
+                            <input type="text" class='form-control' name="username" required>
                         </div>
                         <div class="from-group">
-                            <label for="lastname" class="control-label">LastName</label>
-                            <input type="text" class='form-control' name="lastname" required>
-                        </div>
-                        <div class="from-group">
-                            <label for="gender" class="control-label">Gender</label>
-                            <select class='custom custom-select' name="gender" required>
-                                <option >Male</option>
-                                <option >Female</option>
-                            </select>
+                            <label for="password" class="control-label">Password</label>
+                            <input type="password" class='form-control' name="password" required>
                         </div> -->
-                        {{ form|crispy }}
+                        {{form|crispy}}
                         <div class="from-group">
                             <div class="mt-2 d-flex w-100 justify-content-end">
-                                <a class="btn btn-light rounded-0 btn-sm mr-2" href="/login"><i class="fa fa-angle-left"></i> Back to Login</a>
-                                <button class="btn btn-primary rounded-0 btn-sm">Create Account</button>
+                                <button class="btn btn-primary rounded-0 btn-sm mr-2">Login</button>
+                                <a class="btn btn-light rounded-0 btn-sm" href="/register">Register</a>
                             </div>
                         </div>
                     </form>
@@ -63,11 +58,7 @@
     </div>
 </body>
 <script>
-    $(function() {
-        $('#register-frm').submit(function(e) {
-            start_loader()
-        })
-    })
+    $(function() {})
 </script>
 
 </html>
