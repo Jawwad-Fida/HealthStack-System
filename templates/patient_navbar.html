@@ -48,9 +48,13 @@
           <!-- <li><a href="#">Chat</a></li> -->
         </ul>
       </li>
+
+      {% if user.is_authenticated and user.is_patient %}
       <li>
         <a href="{% url 'chat' pk=user.id %}">Chat with Doctor</a>
       </li>
+      {% endif %}
+
       <li>
         <a href="">Medical Shop</a>
       </li>

@@ -30,17 +30,14 @@ class Doctor_Information(models.Model):
         ('Dermatologists', 'Dermatologists'),
     )
     doctor_id = models.AutoField(primary_key=True)
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, null=True, blank=True, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='profile')
     name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
     gender = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
-    department = models.CharField(
-        max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
+    department = models.CharField(max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
 
-    featured_image = models.ImageField(
-        upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
+    featured_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
 
     email = models.EmailField(max_length=200, null=True, blank=True)
     phone_number = models.IntegerField(null=True, blank=True)
@@ -55,19 +52,14 @@ class Doctor_Information(models.Model):
     degree = models.CharField(max_length=200, null=True, blank=True)
     completion_year = models.CharField(max_length=200, null=True, blank=True)
     
-    # degree
-    
     # work experience
     work_place = models.CharField(max_length=200, null=True, blank=True)
     designation = models.CharField(max_length=200, null=True, blank=True)
     start_year = models.CharField(max_length=200, null=True, blank=True)
     end_year = models.CharField(max_length=200, null=True, blank=True)
     
-    
-
     # ForeignKey --> one to one relationship with Hospital_Information model.
-    hospital_name = models.ForeignKey(
-        Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
+    hospital_name = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.user.username)
