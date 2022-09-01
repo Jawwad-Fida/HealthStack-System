@@ -34,52 +34,52 @@ import re
 
 # function to return views for the urls
 
-
+@login_required(login_url="login")
 def hospital_home(request):
     doctors = Doctor_Information.objects.all() 
     context = {'doctors': doctors} 
     return render(request, 'index-2.html', context)
 
-
+@login_required(login_url="login")
 def change_password(request):
     return render(request, 'change-password.html')
 
-
+@login_required(login_url="login")
 def add_billing(request):
     return render(request, 'add-billing.html')
 
-
+@login_required(login_url="login")
 def appointments(request):
     return render(request, 'appointments.html')
 
-
+@login_required(login_url="login")
 def edit_billing(request):
     return render(request, 'edit-billing.html')
 
-
+@login_required(login_url="login")
 def edit_prescription(request):
     return render(request, 'edit-prescription.html')
 
-
+@login_required(login_url="login")
 def forgot_password_patient(request):
     return render(request, 'forgot-password-patient.html')
 
-
+@login_required(login_url="login")
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
-
+@login_required(login_url="login")
 def about_us(request):
     return render(request, 'about-us.html')
 
-
+@login_required(login_url="login")
 def forgot_password_doctor(request):
     return render(request, 'forgot-password-doctor.html')
 
 
 # def multiple_hospital(request):
 #     return render(request, 'multiple-hospital.html')
-
+@login_required(login_url="login")
 def chat(request, pk):
     patient = Patient.objects.get(user_id=pk)
     doctors = Doctor_Information.objects.all()
@@ -87,7 +87,7 @@ def chat(request, pk):
     context = {'patient': patient, 'doctors': doctors}
     return render(request, 'chat.html', context)
 
-
+@login_required(login_url="login")
 def chat_doctor(request):
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
@@ -96,7 +96,7 @@ def chat_doctor(request):
     context = {'patients': patients, 'doctor': doctor}
     return render(request, 'chat-doctor.html', context)
 
-
+@login_required(login_url="login")
 def hospital_profile(request, pk):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
@@ -130,7 +130,7 @@ def hospital_profile(request, pk):
         return render(request, 'hospital-profile.html', context)
     else:
         redirect('logout')
-
+@login_required(login_url="login")
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
 
@@ -181,7 +181,7 @@ def logoutUser(request):
     messages.info(request, 'User Logged out')
     return redirect('login')
 
-
+@login_required(login_url="login")
 def patient_register(request):
     page = 'patient-register'
     form = CustomUserCreationForm()
@@ -212,8 +212,11 @@ def patient_register(request):
     return render(request, 'patient-register.html', context)
 
 
-# @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
+
+
 def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
@@ -247,6 +250,9 @@ def patient_dashboard(request):
 
 #     context = {'patient': patient, 'form': form}
 #     return render(request, 'profile-settings.html', context)
+
+
+
 
 @login_required(login_url="login")
 def profile_settings(request):
@@ -308,7 +314,7 @@ def search(request):
 
 def checkout_payment(request):
     return render(request, 'checkout.html')
-
+@login_required(login_url="login")
 def multiple_hospital(request):
     if request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
