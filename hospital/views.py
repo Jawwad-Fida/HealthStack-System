@@ -215,12 +215,6 @@ def patient_register(request):
 
 
 @login_required(login_url="login")
-
-
-
-
-
-
 def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
