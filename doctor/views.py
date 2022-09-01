@@ -32,18 +32,18 @@ def generate_random_string():
         string.ascii_uppercase + string.digits, k=N))
     return string_var
 
-@login_required
+@login_required(login_url="doctor-login")
 def doctor_change_password(request):
     return render(request, 'doctor-change-password.html')
 
-@login_required
+@login_required(login_url="doctor-login")
 def schedule_timings(request):
     return render(request, 'schedule-timings.html')
 
-@login_required
+@login_required(login_url="doctor-login")
 def patient_id(request):
     return render(request, 'patient-id.html')
-@login_required
+@login_required(login_url="doctor-login")
 def appointments(request):
     return render(request, 'appointments.html')
 
@@ -116,7 +116,7 @@ def doctor_login(request):
 
     return render(request, 'doctor-login.html')
 
-@login_required
+@login_required(login_url="doctor-login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def doctor_dashboard(request):
         if request.user.is_authenticated:    
@@ -143,14 +143,14 @@ def doctor_dashboard(request):
             return render(request, 'doctor-dashboard.html', context)
         else:
             return redirect('doctor-login')
-@login_required
+@login_required(login_url="doctor-login")
 def accept_appointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     appointment.appointment_status = 'confirmed'
     appointment.save()
     return redirect('doctor-dashboard')
 
-@login_required
+@login_required(login_url="doctor-login")
 def reject_appointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     appointment.appointment_status = 'cancelled'
@@ -176,7 +176,7 @@ def reject_appointment(request, pk):
 
 #     context = {'doctor': doctor, 'form': form}
 #     return render(request, 'doctor-profile-settings.html', context)
-@login_required
+@login_required(login_url="doctor-login")
 def doctor_profile(request, pk):
     # request.user --> get logged in user
     if request.user.is_patient:
@@ -256,7 +256,7 @@ def doctor_profile(request, pk):
     context = {'doctor': doctor, 'patient': patient, 'education': education, 'experience': experience}
     
     return render(request, 'doctor-profile.html', context)
-@login_required
+@login_required(login_url="doctor-login")
 def doctor_profile_settings(request):
     # profile_Settings.js
     if request.user.is_doctor:
@@ -381,11 +381,11 @@ def doctor_profile_settings(request):
             return redirect('doctor-dashboard')
     else:
         redirect('doctor-logout')
-@login_required        
+@login_required(login_url="doctor-login")      
 def booking_success(request):
     return render(request, 'booking-success.html')
 
-@login_required
+@login_required(login_url="doctor-login")
 def booking(request, pk):
     patient = request.user.patient
     doctor = Doctor_Information.objects.get(doctor_id=pk)
@@ -408,7 +408,7 @@ def booking(request, pk):
     return render(request, 'booking.html', context)
 
 
-@login_required
+@login_required(login_url="doctor-login")
 def my_patients(request):
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
@@ -423,7 +423,7 @@ def my_patients(request):
 
 # def patient_profile(request):
 #     return render(request, 'patient_profile.html')
-@login_required
+@login_required(login_url="doctor-login")
 def patient_profile(request, pk):
     if request.user.is_doctor:
         # doctor = Doctor_Information.objects.get(user_id=pk)
@@ -436,7 +436,7 @@ def patient_profile(request, pk):
     return render(request, 'patient-profile.html', context)
 
      
-@login_required  
+@login_required(login_url="doctor-login") 
 def testing(request):
     doctor = Doctor_Information.objects.get(user=request.user)
     degree = doctor.degree
@@ -461,17 +461,17 @@ def testing(request):
     
     return render(request, 'testing.html', context)
 
-
+@login_required(login_url="doctor-login")
 def view_report(request):
     return render(request, 'view-report.html')
-
+@login_required(login_url="doctor-login")
 def add_report(request):
     return render(request, 'add-report.html')
 
-
+@login_required(login_url="doctor-login")
 def prescription_view(request):
     return render(request, 'prescription-view.html')
-
+@login_required(login_url="doctor-login")
 def create_prescription(request):
     return render(request, 'create-prescription.html')
 
