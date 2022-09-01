@@ -96,41 +96,6 @@ def chat_doctor(request):
     context = {'patients': patients, 'doctor': doctor}
     return render(request, 'chat-doctor.html', context)
 
-@login_required(login_url="login")
-def hospital_profile(request, pk):
-    if request.user.is_patient:
-        patient = Patient.objects.get(user=request.user)
-        doctors = Doctor_Information.objects.all()
-        hospitals = Hospital_Information.objects.get(hospital_id=pk)
-        
-        departments = hospital_department.objects.filter(hospital=hospitals)
-        specializations = specialization.objects.filter(hospital=hospitals)
-        services = service.objects.filter(hospital=hospitals)
-        
-        # departments = re.sub("'", "", departments)
-        # departments = departments.replace("[", "")
-        # departments = departments.replace("]", "")
-        # departments = departments.replace(",", "")
-        # departments_array = departments.split()
-        
-        # specializations = re.sub("'", "", specializations)
-        # specializations = specializations.replace("[", "")
-        # specializations = specializations.replace("]", "")
-        # specializations = specializations.replace(",", "")
-        # specializations_array = specializations.split()
-        
-        # services = re.sub("'", "", services)
-        # services = services.replace("[", "")
-        # services = services.replace("]", "")
-        # services = services.replace(",", "")
-        # services_array = services.split()
-        
-        
-        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
-        return render(request, 'hospital-profile.html', context)
-    else:
-        redirect('logout')
-        
         
 @login_required(login_url="login")
 def pharmacy_shop(request):
@@ -341,5 +306,103 @@ def multiple_hospital(request):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
     
+    
+@login_required(login_url="login")
+def hospital_profile(request, pk):
+    
+    if request.user.is_authenticated: 
+        
+        if request.user.is_patient:
+            patient = Patient.objects.get(user=request.user)
+            doctors = Doctor_Information.objects.all()
+            hospitals = Hospital_Information.objects.get(hospital_id=pk)
+        
+            departments = hospital_department.objects.filter(hospital=hospitals)
+            specializations = specialization.objects.filter(hospital=hospitals)
+            services = service.objects.filter(hospital=hospitals)
+            
+            department_list = None
+            specializations_list = None
+            services_list = None
+            
+            
+            for d in departments:
+                vald = d.hospital_department_name
+                vald = re.sub("'", "", vald)
+                vald = vald.replace("[", "")
+                vald = vald.replace("]", "")
+                vald = vald.replace(",", "")
+                department_list = vald.split()
+                
+            for s in specializations:
+                vald = s.specialization_name
+                vald = re.sub("'", "", vald)
+                vald = vald.replace("[", "")
+                vald = vald.replace("]", "")
+                vald = vald.replace(",", "")
+                specializations_list = vald.split()
+                
+            for s in services:
+                vald = s.service_name
+                vald = re.sub("'", "", vald)
+                vald = vald.replace("[", "")
+                vald = vald.replace("]", "")
+                vald = vald.replace(",", "")
+                services_list = vald.split()
+            
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'department_list': department_list, 'specializations_list': specializations_list, 'services_list': services_list}
+            return render(request, 'hospital-profile.html', context)
+        
+        elif request.user.is_doctor:
+           
+            doctor = Doctor_Information.objects.get(user=request.user)
+            hospitals = Hospital_Information.objects.get(hospital_id=pk)
+            
+            departments = hospital_department.objects.filter(hospital=hospitals)
+            specializations = specialization.objects.filter(hospital=hospitals)
+            services = service.objects.filter(hospital=hospitals)
+            
+            
+            context = {'doctor': doctor, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
+            return render(request, 'hospital-profile.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html') 
+    
+    
 def data_table(request):
     return render(request, 'data-table.html')
+
+def testing(request):
+    hospitals = Hospital_Information.objects.get(hospital_id=1)
+        
+    departments = hospital_department.objects.filter(hospital=hospitals)
+    specializations = specialization.objects.filter(hospital=hospitals)
+    services = service.objects.filter(hospital=hospitals)
+    
+    department_list = None
+    for d in departments:
+        vald = d.hospital_department_name
+        vald = re.sub("'", "", vald)
+        vald = vald.replace("[", "")
+        vald = vald.replace("]", "")
+        vald = vald.replace(",", "")
+        department_list = vald.split()
+        # department_list.append(d.hospital_department_name)
+        
+            
+    # degree = doctor.degree
+    # degree = re.sub("'", "", degree)
+    # degree = degree.replace("[", "")
+    # degree = degree.replace("]", "")
+    # degree = degree.replace(",", "")
+    # degree_array = degree.split()
+    
+    # education = zip(degree_array, institute_array)
+    
+    context = {'departments': departments, 'department_list': department_list}
+    # test range, len, and loop to show variables before moving on to doctor profile
+    
+    return render(request, 'testing.html', context)
+

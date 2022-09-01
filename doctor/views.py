@@ -1,4 +1,5 @@
 import email
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth.models import User
@@ -38,7 +39,10 @@ def doctor_change_password(request):
 
 @login_required(login_url="doctor-login")
 def schedule_timings(request):
-    return render(request, 'schedule-timings.html')
+    doctor = Doctor_Information.objects.get(user=request.user)
+    context = {'doctor': doctor}
+    
+    return render(request, 'schedule-timings.html', context)
 
 @login_required(login_url="doctor-login")
 def patient_id(request):
@@ -46,7 +50,9 @@ def patient_id(request):
 
 @login_required(login_url="doctor-login")
 def appointments(request):
-    return render(request, 'appointments.html')
+    doctor = Doctor_Information.objects.get(user=request.user)
+    context = {'doctor': doctor}
+    return render(request, 'appointments.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutDoctor(request):
@@ -439,31 +445,6 @@ def patient_profile(request, pk):
     return render(request, 'patient-profile.html', context)
 
 
-def testing(request):
-    doctor = Doctor_Information.objects.get(user=request.user)
-    degree = doctor.degree
-    degree = re.sub("'", "", degree)
-    degree = degree.replace("[", "")
-    degree = degree.replace("]", "")
-    degree = degree.replace(",", "")
-    degree_array = degree.split()
-    
-    institute = doctor.institute
-    institute = re.sub("'", "", institute)
-    institute = institute.replace("[", "")
-    institute = institute.replace("]", "")
-    institute = institute.replace(",", "")
-    institute_array = institute.split()
-
-
-    education = zip(degree_array, institute_array)
-    
-    context = {'doctor': doctor, 'degree': institute, 'institute_array': institute_array, 'education': education}
-    # test range, len, and loop to show variables before moving on to doctor profile
-    
-    return render(request, 'testing.html', context)
-
-
 def view_report(request):
     return render(request, 'view-report.html')
 
@@ -478,4 +459,29 @@ def prescription_view(request):
 
 def create_prescription(request):
     return render(request, 'create-prescription.html')
+
+
+# def testing(request):
+#     doctor = Doctor_Information.objects.get(user=request.user)
+#     degree = doctor.degree
+#     degree = re.sub("'", "", degree)
+#     degree = degree.replace("[", "")
+#     degree = degree.replace("]", "")
+#     degree = degree.replace(",", "")
+#     degree_array = degree.split()
+    
+#     institute = doctor.institute
+#     institute = re.sub("'", "", institute)
+#     institute = institute.replace("[", "")
+#     institute = institute.replace("]", "")
+#     institute = institute.replace(",", "")
+#     institute_array = institute.split()
+
+
+#     education = zip(degree_array, institute_array)
+    
+#     context = {'doctor': doctor, 'degree': institute, 'institute_array': institute_array, 'education': education}
+#     # test range, len, and loop to show variables before moving on to doctor profile
+    
+#     return render(request, 'testing.html', context)
 

@@ -51,7 +51,19 @@
 		<div class="main-wrapper">
 		
 			<!-- Header -->
-			<header class="header">{% include 'patient_navbar.html' %}</header>
+			<header class="header">
+				
+				{% if user.is_authenticated and user.is_patient %}
+				{% include 'patient_navbar.html' %}
+				{% endif %}
+				
+				{% if user.is_authenticated and user.is_doctor %}
+				{% include 'doctor-navbar.html' %}
+				{% endif %}
+			
+			
+			
+			</header>
 			<!-- /Header -->
 
 				
@@ -81,7 +93,19 @@
 						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 						
 							<!-- Profile Sidebar -->
-							<div>{% include 'patient-sidebar.html' %}</div>
+							<div>
+								
+								{% if user.is_authenticated and user.is_patient %}
+								{% include 'patient-sidebar.html' %}
+								{% endif %}
+				
+								{% if user.is_authenticated and user.is_doctor %}
+								{% include 'doctor-sidebar.html' %}
+								{% endif %}
+							
+							
+							
+							</div>
 							<!-- /Profile Sidebar -->
 							
 						</div>
@@ -220,8 +244,7 @@
 														<h4 class="widget-title">Departments</h4>
 														<div class="experience-box">
 															<ul class="experience-list">
-																{% for d in departments %}
-
+																{% for i in department_list %}
 																<li>
 																	<div class="experience-user">
 																		<div class="before-circle"></div>
@@ -229,51 +252,13 @@
 																	<div class="experience-content">
 																		<div class="timeline-content">
 																			
-																			<h4 class="exp-title">{{d.hospital_department_name}}</h4>
+																			<h4 class="exp-title">{{i}}</h4>
 							
 																		</div>
 																	</div>
 																</li>
 																{% endfor %}
-																<!-- <li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Maternity</h4>
-							
-																		</div>
-																	</div>
-																</li>
-
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Oncology</h4>
-							
-																		</div>
-																	</div>
-																</li>
-
-																<li>
-																	<div class="experience-user">
-																		<div class="before-circle"></div>
-																	</div>
-																	<div class="experience-content">
-																		<div class="timeline-content">
-																			
-																			<h4 class="exp-title">Neurology</h4>
-							
-																		</div>
-																	</div>
-																</li> -->
-																	
+															
 															</ul>
 														</div>
 													</div>
@@ -283,11 +268,10 @@
 													<div class="service-list">
 														<h4>Services</h4>
 														<ul class="clearfix">
-															<li>Pediatrician</li>
-															<li>Pediatric dentist</li>
-															<li>ophthalmologist</li>
-															<li>Surgical Extractions</li>
-															<li>Allergist</li>
+															{% for i in services_list %}
+															<li>{{i}}</li>
+															{% endfor %}
+															
 														</ul>
 													</div>
 													<!-- /Services List -->
@@ -296,9 +280,10 @@
 													<div class="service-list">
 														<h4>Specializations</h4>
 														<ul class="clearfix">
-															<li>Children Care</li>	
-															<li>Periodontist</li>	
-															<li>Prosthodontics</li>	
+															{% for i in specializations_list %}
+															<li>{{i}}</li>
+															{% endfor %}	
+
 														</ul>
 													</div>
 													<!-- /Specializations List -->
