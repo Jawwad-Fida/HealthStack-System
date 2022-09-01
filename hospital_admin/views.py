@@ -26,7 +26,7 @@ def admin_dashboard(request):
         total_doctor_count = Doctor_Information.objects.annotate(count=Count('doctor_id'))
         pending_appointment = Appointment.objects.filter(appointment_status='pending').count()
         context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment, }
-    return render(request, 'hospital_admin/admin-dashboard.html', context)
+        return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
 
