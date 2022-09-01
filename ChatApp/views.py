@@ -14,26 +14,48 @@ from django.core import serializers
 # Create your views here.
 @login_required
 def home(request,pk):
-    User = get_user_model()
-    users = User.objects.all()
-    patients = Patient.objects.get(user_id=pk)
-    doctor = Doctor_Information.objects.all()
+    if request.user.is_patient:
+            User = get_user_model()
+            users = User.objects.all()
+            patients = Patient.objects.get(user_id=pk)
+            doctor = Doctor_Information.objects.all()
 
-    chats = {}
-    if request.method == 'GET' and 'u' in request.GET:
-        # chats = chatMessages.objects.filter(Q(user_from=request.user.id & user_to=request.GET['u']) | Q(user_from=request.GET['u'] & user_to=request.user.id))
-        chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
-        chats = chats.order_by('date_created')
-    context = {
-        "page":"home",
-        "users":users,
-        "chats":chats,
-        "patient":patients,
-        "doctor":doctor,
-        "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
-    }
-    print(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
-    return render(request,"chat.html",context)
+            chats = {}
+            if request.method == 'GET' and 'u' in request.GET:
+                # chats = chatMessages.objects.filter(Q(user_from=request.user.id & user_to=request.GET['u']) | Q(user_from=request.GET['u'] & user_to=request.user.id))
+                chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
+                chats = chats.order_by('date_created')
+            context = {
+                "page":"home",
+                "users":users,
+                "chats":chats,
+                "patient":patients,
+                "doctor":doctor,
+                "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
+            }
+            print(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
+            return render(request,"chat.html",context)
+    elif request.user.is_doctor:
+            User = get_user_model()
+            users = User.objects.all()
+            patients = Patient.objects.get(user_id=pk)
+            doctor = Doctor_Information.objects.all()
+
+            chats = {}
+            if request.method == 'GET' and 'u' in request.GET:
+                # chats = chatMessages.objects.filter(Q(user_from=request.user.id & user_to=request.GET['u']) | Q(user_from=request.GET['u'] & user_to=request.user.id))
+                chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
+                chats = chats.order_by('date_created')
+            context = {
+                "page":"home",
+                "users":users,
+                "chats":chats,
+                "patient":patients,
+                "doctor":doctor,
+                "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
+            }
+            print(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
+            return render(request,"chat-doctor.html",context)
 
 @login_required
 def profile(request):
