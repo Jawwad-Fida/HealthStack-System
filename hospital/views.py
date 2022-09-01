@@ -211,8 +211,9 @@ def patient_register(request):
     context = {'page': page, 'form': form}
     return render(request, 'patient-register.html', context)
 
-@login_required
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
+# @cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url="login")
 def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
@@ -247,6 +248,7 @@ def patient_dashboard(request):
 #     context = {'patient': patient, 'form': form}
 #     return render(request, 'profile-settings.html', context)
 
+@login_required(login_url="login")
 def profile_settings(request):
     if request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
@@ -286,7 +288,7 @@ def profile_settings(request):
     else:
         redirect('logout')  
 
-
+@login_required(login_url="login")
 def search(request):
     if request.user.is_authenticated and request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
