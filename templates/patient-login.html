@@ -22,6 +22,7 @@
       rel="stylesheet"
       href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Fontawesome CSS -->
     <link
@@ -96,22 +97,19 @@
                       {% endif %}
                       
 
-                      <div class="form-group form-focus">
-                        <input
-                          type="text"
-                          class="form-control floating"
-                          name="username"
-                        />
-                        <label class="focus-label">Username</label>
+
+                      <div class="form-floating mt-3 mb-3">
+                        <input type="text" class="form-control" name='username' id="floatingInput" placeholder="User Name">
+                        <label for="floatingInput">User Name</label>
                       </div>
-                      <div class="form-group form-focus">
-                        <input
-                          type="password"
-                          class="form-control floating"
-                          name="password"
-                        />
-                        <label class="focus-label">Password</label>
+
+                      <div class="form-floating mt-3 mb-3">
+                        <input type="password" class="form-control" name='password' id="myInput floatingInput" placeholder="Password"> 
+                        <label for="floatingInput">Password</label>
+                        <input type="checkbox" onclick="myFunction11()">Show Password
+                        
                       </div>
+                      
 
                       <div class="text-right">
                         <a
@@ -362,6 +360,10 @@
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 
+    <script src="{% static 'HealthStack-System/js/Normal/Checkbox.js' %}"></script>
+
+
+
     <!-- alert js -->
     <script>
 			var x = document.getElementById('CredentialCheck');
@@ -370,6 +372,19 @@
 			}
 			$('#CredentialCheck').delay(4000).fadeOut('slow');     
 		</script>
+
+    <script>
+      function myFunction11() {
+      var x = document.getElementById('myInput');
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+      }
+    </script>
+
+    
   </body>
 
   <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->

@@ -1,17 +1,23 @@
 import email
 from multiprocessing import context
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm
 from hospital.models import Hospital_Information, User, Patient
 
 from hospital_admin.models import hospital_department, specialization, service
+
 from django.views.decorators.cache import cache_control
+
+
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+
+from .utils import searchDoctors
 
 
 # from django.db.models.signals import post_save, post_delete
@@ -118,9 +124,6 @@ def hospital_profile(request, pk):
         # services = services.replace("]", "")
         # services = services.replace(",", "")
         # services_array = services.split()
-        
-        
-        
         
         
         context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
@@ -285,15 +288,21 @@ def profile_settings(request):
 
 
 def search(request):
-    if request.user.is_patient:
+    if request.user.is_authenticated and request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
+        
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.all()
-    else:
-        redirect('logout')
         
-    context = {'patient': patient, 'doctors': doctors}
-    return render(request, 'search.html', context)
+        doctors, search_query = searchDoctors(request)
+        # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
+        context = {'patient': patient, 'doctors': doctors, 'search_query': search_query}
+        return render(request, 'search.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')    
+    
 
 def checkout_payment(request):
     return render(request, 'checkout.html')
