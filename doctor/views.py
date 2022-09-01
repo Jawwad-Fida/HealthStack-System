@@ -1,4 +1,5 @@
 import email
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth.models import User
@@ -38,7 +39,10 @@ def doctor_change_password(request):
 
 @login_required(login_url="doctor-login")
 def schedule_timings(request):
-    return render(request, 'schedule-timings.html')
+    doctor = Doctor_Information.objects.get(user=request.user)
+    context = {'doctor': doctor}
+    
+    return render(request, 'schedule-timings.html', context)
 
 @login_required(login_url="doctor-login")
 def patient_id(request):
@@ -46,7 +50,9 @@ def patient_id(request):
 
 @login_required(login_url="doctor-login")
 def appointments(request):
-    return render(request, 'appointments.html')
+    doctor = Doctor_Information.objects.get(user=request.user)
+    context = {'doctor': doctor}
+    return render(request, 'appointments.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutDoctor(request):
