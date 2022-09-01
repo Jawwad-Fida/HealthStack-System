@@ -217,7 +217,8 @@ def patient_register(request):
 @login_required(login_url="login")
 
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
+
 
 
 def patient_dashboard(request):
