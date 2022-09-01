@@ -88,8 +88,8 @@
 						<div class="col-md-6 col-6 text-right">
 							
 							<div class="top-nav-search">
-								<form>
-									<input type="text" class="form-control" placeholder="Search doctor">
+								<form action="{% url 'search' %}" method="GET">
+									<input type="text" class="form-control" placeholder="Search doctor" name="search_query" value="{{search_query}}">
 									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</div>
