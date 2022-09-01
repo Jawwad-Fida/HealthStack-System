@@ -36,7 +36,17 @@
 		<div class="main-wrapper">
 		
 			<!-- Header -->
-			<header class="header">{% include 'patient_navbar.html' %}</header>
+			<header class="header">
+
+				{% if user.is_authenticated and user.is_patient %}
+				{% include 'patient_navbar.html' %}
+				{% endif %}
+				
+				{% if user.is_authenticated and user.is_doctor %}
+				{% include 'doctor-navbar.html' %}
+				{% endif %}
+
+			</header>
 			<!-- /Header -->
 			
 			<!-- Breadcrumb -->
@@ -55,8 +65,8 @@
 						<div class="col-md-6 col-6 text-right">
 							
 							<div class="top-nav-search">
-								<form>
-									<input type="text" class="form-control" placeholder="Search hospital">
+								<form action="{% url 'multiple-hospital' %}" method="GET">
+									<input type="text" class="form-control" placeholder="Search hospital" name="search_query" value="{{search_query}}">
 									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</div>
@@ -73,7 +83,18 @@
 						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 						
 							<!-- Profile Sidebar -->
-							<div>{% include 'patient-sidebar.html' %}</div>
+							<div>
+								
+								{% if user.is_authenticated and user.is_patient %}
+								{% include 'patient-sidebar.html' %}
+								{% endif %}
+				
+								{% if user.is_authenticated and user.is_doctor %}
+								{% include 'doctor-sidebar.html' %}
+								{% endif %}
+							
+							
+							</div>
 							<!-- /Profile Sidebar -->
 							
 						</div>

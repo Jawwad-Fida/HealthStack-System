@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-from .utils import searchDoctors
+from .utils import searchDoctors, searchHospitals
 
 
 # from django.db.models.signals import post_save, post_delete
@@ -313,17 +313,32 @@ def checkout_payment(request):
 
 @login_required(login_url="login")
 def multiple_hospital(request):
-    if request.user.is_patient:
-        # patient = Patient.objects.get(user_id=pk)
-        patient = Patient.objects.get(user=request.user)
-        doctors = Doctor_Information.objects.all()
-        hospitals = Hospital_Information.objects.all()
-        
     
-        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
-        return render(request, 'multiple-hospital.html', context)
+    if request.user.is_authenticated: 
+        
+        if request.user.is_patient:
+            # patient = Patient.objects.get(user_id=pk)
+            patient = Patient.objects.get(user=request.user)
+            doctors = Doctor_Information.objects.all()
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+        
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'multiple-hospital.html', context)
+        
+        elif request.user.is_doctor:
+            doctor = Doctor_Information.objects.get(user=request.user)
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+            
+            context = {'doctor': doctor, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'multiple-hospital.html', context)
     else:
-        redirect('logout')
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html') 
     
 def data_table(request):
     return render(request, 'data-table.html')
