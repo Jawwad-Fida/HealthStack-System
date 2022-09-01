@@ -8,7 +8,7 @@ from .forms import CustomUserCreationForm, PatientForm
 from hospital.models import Hospital_Information, User, Patient
 
 from hospital_admin.models import hospital_department, specialization, service
-
+from django.views.decorators.cache import cache_control
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -208,7 +208,8 @@ def patient_register(request):
     context = {'page': page, 'form': form}
     return render(request, 'patient-register.html', context)
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
