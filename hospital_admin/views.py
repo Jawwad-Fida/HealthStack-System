@@ -19,7 +19,8 @@ from django.db.models import  Count
 
 
 # Create your views here.
-
+@login_required(login_url='admin-login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def admin_dashboard(request):
     # admin = Admin_Information.objects.get(user_id=pk)
     if request.user.is_hospital_admin:
@@ -32,12 +33,14 @@ def admin_dashboard(request):
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutAdmin(request):
     logout(request)
     messages.info(request, 'User Logged out')
     return redirect('admin_login')
             
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def admin_login(request):
     if request.method == 'GET':
         return render(request, 'hospital_admin/login.html')
@@ -91,69 +94,69 @@ def admin_register(request):
     context = {'page': page, 'form': form}
     return render(request, 'hospital_admin/register.html', context)
 
-
+@login_required(login_url='admin-login')
 def admin_forgot_password(request):
     return render(request, 'hospital_admin/forgot-password.html')
 
 
-
+@login_required(login_url='admin-login')
 def doctor_list(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
     doctors = Doctor_Information.objects.all()
     return render(request, 'hospital_admin/doctor-list.html', {'all': doctors, 'admin': user})
 
-
+@login_required(login_url='admin-login')
 def invoice(request):
     return render(request, 'hospital_admin/invoice.html')
 
-
+@login_required(login_url='admin-login')
 def invoice_report(request):
     return render(request, 'hospital_admin/invoice-report.html')
 
-
+@login_required(login_url='admin-login')
 def lock_screen(request):
     return render(request, 'hospital_admin/lock-screen.html')
 
-
+@login_required(login_url='admin-login')
 def patient_list(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
     patients = Patient.objects.all()
     return render(request, 'hospital_admin/patient-list.html', {'all': patients, 'admin': user})
 
-
+@login_required(login_url='admin-login')
 def specialitites(request):
     return render(request, 'hospital_admin/specialities.html')
 
-
+@login_required(login_url='admin-login')
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
 
-
+@login_required(login_url='admin-login')
 def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
 
-
+@login_required(login_url='admin-login')
 def emergency_details(request):
     hospitals = Hospital_Information.objects.all()
     return render(request, 'hospital_admin/emergency.html', {'all': hospitals})
 
-
+@login_required(login_url='admin-login')
 def hospital_list(request):
     hospitals = Hospital_Information.objects.all()
     return render(request, 'hospital_admin/hospital-list.html', {'hospitals': hospitals})
 
-
+@login_required(login_url='admin-login')
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
 
 
-
+@login_required(login_url='admin-login')
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 
-
+@login_required(login_url='admin-login')
 def hospital_admin_profile(request, pk):
 
     # profile = request.user.profile
@@ -174,7 +177,7 @@ def hospital_admin_profile(request, pk):
     return render(request, 'hospital_admin/hospital-admin-profile.html', context)
 
 
-
+@login_required(login_url='admin-login')
 def add_hospital(request):
     if  request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -227,7 +230,7 @@ def add_hospital(request):
 # def edit_hospital(request, pk):
 #     hospital = Hospital_Information.objects.get(hospital_id=pk)
 #     return render(request, 'hospital_admin/edit-hospital.html')
-
+@login_required(login_url='admin-login')
 def edit_hospital(request, pk):
          if  request.user.is_hospital_admin:
              user = Admin_Information.objects.get(user=request.user)
@@ -283,6 +286,7 @@ def edit_hospital(request, pk):
              context = { 'admin': user,'hospital':hospital,'departments':departments,'specializations':specializations,'services':services}
              return render(request, 'hospital_admin/edit-hospital.html',context)
 
+@login_required(login_url='admin-login')
 def edit_emergency_information(request, pk):
 
     hospital = Hospital_Information.objects.get(hospital_id=pk)
@@ -300,12 +304,13 @@ def edit_emergency_information(request, pk):
     context = {'hospital': hospital, 'form': form}
     return render(request, 'hospital_admin/edit-emergency-information.html', context)
 
-
+@login_required(login_url='admin-login')
 def delete_hospital(request, pk):
 	hospital = Hospital_Information.objects.get(hospital_id=pk)
 	hospital.delete()
 	return redirect('hospital-list')
 
+@login_required(login_url='admin-login')
 def generate_random_invoice():
     N = 4
     string_var = ""
@@ -313,6 +318,8 @@ def generate_random_invoice():
     string_var = "#INV-" + string_var
     return string_var
 
+
+@login_required(login_url='admin-login')
 def create_invoice(request, pk):
     if  request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -338,7 +345,7 @@ def create_invoice(request, pk):
     context = {'patient': patient,'admin': user}
     return render(request, 'hospital_admin/create-invoice.html', context)
 
-
+@login_required(login_url='admin-login')
 def create_report(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -364,6 +371,7 @@ def create_report(request, pk):
     context = {'doctors': doctors, 'admin': user}
     return render(request, 'hospital_admin/create-report.html',context)
 
+@login_required(login_url='admin-login')
 def add_pharmacist(request):
     if request.user.is_hospital_admin:
      user = Admin_Information.objects.get(user=request.user)
