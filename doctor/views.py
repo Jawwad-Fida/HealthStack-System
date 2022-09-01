@@ -445,31 +445,6 @@ def patient_profile(request, pk):
     return render(request, 'patient-profile.html', context)
 
 
-def testing(request):
-    doctor = Doctor_Information.objects.get(user=request.user)
-    degree = doctor.degree
-    degree = re.sub("'", "", degree)
-    degree = degree.replace("[", "")
-    degree = degree.replace("]", "")
-    degree = degree.replace(",", "")
-    degree_array = degree.split()
-    
-    institute = doctor.institute
-    institute = re.sub("'", "", institute)
-    institute = institute.replace("[", "")
-    institute = institute.replace("]", "")
-    institute = institute.replace(",", "")
-    institute_array = institute.split()
-
-
-    education = zip(degree_array, institute_array)
-    
-    context = {'doctor': doctor, 'degree': institute, 'institute_array': institute_array, 'education': education}
-    # test range, len, and loop to show variables before moving on to doctor profile
-    
-    return render(request, 'testing.html', context)
-
-
 def view_report(request):
     return render(request, 'view-report.html')
 
@@ -484,4 +459,29 @@ def prescription_view(request):
 
 def create_prescription(request):
     return render(request, 'create-prescription.html')
+
+
+# def testing(request):
+#     doctor = Doctor_Information.objects.get(user=request.user)
+#     degree = doctor.degree
+#     degree = re.sub("'", "", degree)
+#     degree = degree.replace("[", "")
+#     degree = degree.replace("]", "")
+#     degree = degree.replace(",", "")
+#     degree_array = degree.split()
+    
+#     institute = doctor.institute
+#     institute = re.sub("'", "", institute)
+#     institute = institute.replace("[", "")
+#     institute = institute.replace("]", "")
+#     institute = institute.replace(",", "")
+#     institute_array = institute.split()
+
+
+#     education = zip(degree_array, institute_array)
+    
+#     context = {'doctor': doctor, 'degree': institute, 'institute_array': institute_array, 'education': education}
+#     # test range, len, and loop to show variables before moving on to doctor profile
+    
+#     return render(request, 'testing.html', context)
 
