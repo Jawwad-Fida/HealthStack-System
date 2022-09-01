@@ -1,7 +1,7 @@
 import email
 from multiprocessing import context
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm
@@ -9,9 +9,15 @@ from hospital.models import Hospital_Information, User, Patient
 
 from hospital_admin.models import hospital_department, specialization, service
 
+from django.views.decorators.cache import cache_control
+
+
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+
+from .utils import searchDoctors, searchHospitals
 
 
 # from django.db.models.signals import post_save, post_delete
@@ -34,7 +40,7 @@ def hospital_home(request):
     context = {'doctors': doctors} 
     return render(request, 'index-2.html', context)
 
-
+@login_required(login_url="login")
 def change_password(request):
     return render(request, 'change-password.html')
 
@@ -73,7 +79,7 @@ def forgot_password_doctor(request):
 
 # def multiple_hospital(request):
 #     return render(request, 'multiple-hospital.html')
-
+@login_required(login_url="login")
 def chat(request, pk):
     patient = Patient.objects.get(user_id=pk)
     doctors = Doctor_Information.objects.all()
@@ -81,7 +87,7 @@ def chat(request, pk):
     context = {'patient': patient, 'doctors': doctors}
     return render(request, 'chat.html', context)
 
-
+@login_required(login_url="login")
 def chat_doctor(request):
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
@@ -90,44 +96,8 @@ def chat_doctor(request):
     context = {'patients': patients, 'doctor': doctor}
     return render(request, 'chat-doctor.html', context)
 
-
-def hospital_profile(request, pk):
-    if request.user.is_patient:
-        patient = Patient.objects.get(user=request.user)
-        doctors = Doctor_Information.objects.all()
-        hospitals = Hospital_Information.objects.get(hospital_id=pk)
         
-        departments = hospital_department.objects.filter(hospital=hospitals)
-        specializations = specialization.objects.filter(hospital=hospitals)
-        services = service.objects.filter(hospital=hospitals)
-        
-        # departments = re.sub("'", "", departments)
-        # departments = departments.replace("[", "")
-        # departments = departments.replace("]", "")
-        # departments = departments.replace(",", "")
-        # departments_array = departments.split()
-        
-        # specializations = re.sub("'", "", specializations)
-        # specializations = specializations.replace("[", "")
-        # specializations = specializations.replace("]", "")
-        # specializations = specializations.replace(",", "")
-        # specializations_array = specializations.split()
-        
-        # services = re.sub("'", "", services)
-        # services = services.replace("[", "")
-        # services = services.replace("]", "")
-        # services = services.replace(",", "")
-        # services_array = services.split()
-        
-        
-        
-        
-        
-        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
-        return render(request, 'hospital-profile.html', context)
-    else:
-        redirect('logout')
-
+@login_required(login_url="login")
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
 
@@ -172,7 +142,7 @@ def login_user(request):
 
     return render(request, 'patient-login.html')
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutUser(request):
     logout(request)
     messages.info(request, 'User Logged out')
@@ -209,6 +179,8 @@ def patient_register(request):
     return render(request, 'patient-register.html', context)
 
 
+@login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
@@ -243,6 +215,8 @@ def patient_dashboard(request):
 #     context = {'patient': patient, 'form': form}
 #     return render(request, 'profile-settings.html', context)
 
+
+@login_required(login_url="login")
 def profile_settings(request):
     if request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
@@ -282,33 +256,153 @@ def profile_settings(request):
     else:
         redirect('logout')  
 
-
+@login_required(login_url="login")
 def search(request):
-    if request.user.is_patient:
+    if request.user.is_authenticated and request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
+        
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.all()
-    else:
-        redirect('logout')
         
-    context = {'patient': patient, 'doctors': doctors}
-    return render(request, 'search.html', context)
+        doctors, search_query = searchDoctors(request)
+        # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
+        context = {'patient': patient, 'doctors': doctors, 'search_query': search_query}
+        return render(request, 'search.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')    
+    
 
 def checkout_payment(request):
     return render(request, 'checkout.html')
 
+@login_required(login_url="login")
 def multiple_hospital(request):
-    if request.user.is_patient:
-        # patient = Patient.objects.get(user_id=pk)
-        patient = Patient.objects.get(user=request.user)
-        doctors = Doctor_Information.objects.all()
-        hospitals = Hospital_Information.objects.all()
-        
     
-        context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals}
-        return render(request, 'multiple-hospital.html', context)
+    if request.user.is_authenticated: 
+        
+        if request.user.is_patient:
+            # patient = Patient.objects.get(user_id=pk)
+            patient = Patient.objects.get(user=request.user)
+            doctors = Doctor_Information.objects.all()
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+        
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'multiple-hospital.html', context)
+        
+        elif request.user.is_doctor:
+            doctor = Doctor_Information.objects.get(user=request.user)
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+            
+            context = {'doctor': doctor, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'multiple-hospital.html', context)
     else:
-        redirect('logout')
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html') 
+    
+    
+@login_required(login_url="login")
+def hospital_profile(request, pk):
+    
+    if request.user.is_authenticated: 
+        
+        if request.user.is_patient:
+            patient = Patient.objects.get(user=request.user)
+            doctors = Doctor_Information.objects.all()
+            hospitals = Hospital_Information.objects.get(hospital_id=pk)
+        
+            departments = hospital_department.objects.filter(hospital=hospitals)
+            specializations = specialization.objects.filter(hospital=hospitals)
+            services = service.objects.filter(hospital=hospitals)
+            
+            department_list = None
+            specializations_list = None
+            services_list = None
+            
+            
+            for d in departments:
+                vald = d.hospital_department_name
+                vald = re.sub("'", "", vald)
+                vald = vald.replace("[", "")
+                vald = vald.replace("]", "")
+                vald = vald.replace(",", "")
+                department_list = vald.split()
+                
+            for s in specializations:
+                vald = s.specialization_name
+                vald = re.sub("'", "", vald)
+                vald = vald.replace("[", "")
+                vald = vald.replace("]", "")
+                vald = vald.replace(",", "")
+                specializations_list = vald.split()
+                
+            for s in services:
+                vald = s.service_name
+                vald = re.sub("'", "", vald)
+                vald = vald.replace("[", "")
+                vald = vald.replace("]", "")
+                vald = vald.replace(",", "")
+                services_list = vald.split()
+            
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'department_list': department_list, 'specializations_list': specializations_list, 'services_list': services_list}
+            return render(request, 'hospital-profile.html', context)
+        
+        elif request.user.is_doctor:
+           
+            doctor = Doctor_Information.objects.get(user=request.user)
+            hospitals = Hospital_Information.objects.get(hospital_id=pk)
+            
+            departments = hospital_department.objects.filter(hospital=hospitals)
+            specializations = specialization.objects.filter(hospital=hospitals)
+            services = service.objects.filter(hospital=hospitals)
+            
+            
+            context = {'doctor': doctor, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
+            return render(request, 'hospital-profile.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html') 
+    
     
 def data_table(request):
     return render(request, 'data-table.html')
+
+def testing(request):
+    hospitals = Hospital_Information.objects.get(hospital_id=1)
+        
+    departments = hospital_department.objects.filter(hospital=hospitals)
+    specializations = specialization.objects.filter(hospital=hospitals)
+    services = service.objects.filter(hospital=hospitals)
+    
+    department_list = None
+    for d in departments:
+        vald = d.hospital_department_name
+        vald = re.sub("'", "", vald)
+        vald = vald.replace("[", "")
+        vald = vald.replace("]", "")
+        vald = vald.replace(",", "")
+        department_list = vald.split()
+        # department_list.append(d.hospital_department_name)
+        
+            
+    # degree = doctor.degree
+    # degree = re.sub("'", "", degree)
+    # degree = degree.replace("[", "")
+    # degree = degree.replace("]", "")
+    # degree = degree.replace(",", "")
+    # degree_array = degree.split()
+    
+    # education = zip(degree_array, institute_array)
+    
+    context = {'departments': departments, 'department_list': department_list}
+    # test range, len, and loop to show variables before moving on to doctor profile
+    
+    return render(request, 'testing.html', context)
+

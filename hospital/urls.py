@@ -41,6 +41,7 @@ urlpatterns = [
     path('checkout-payment/', views.checkout_payment, name='checkout-payment'),
     path('shop/', views.pharmacy_shop, name='pharmacy_shop'),
     path('data-table/', views.data_table, name='data-table'),
+    path('testing/',views.testing, name='testing'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

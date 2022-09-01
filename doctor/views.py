@@ -1,4 +1,5 @@
 import email
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth.models import User
@@ -8,7 +9,7 @@ from .forms import DoctorUserCreationForm, DoctorForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
 from .models import Doctor_Information, Appointment
 
@@ -32,22 +33,28 @@ def generate_random_string():
         string.ascii_uppercase + string.digits, k=N))
     return string_var
 
-
+@login_required(login_url="doctor-login")
 def doctor_change_password(request):
     return render(request, 'doctor-change-password.html')
 
-
+@login_required(login_url="doctor-login")
 def schedule_timings(request):
-    return render(request, 'schedule-timings.html')
+    doctor = Doctor_Information.objects.get(user=request.user)
+    context = {'doctor': doctor}
+    
+    return render(request, 'schedule-timings.html', context)
 
-
+@login_required(login_url="doctor-login")
 def patient_id(request):
     return render(request, 'patient-id.html')
 
+@login_required(login_url="doctor-login")
 def appointments(request):
-    return render(request, 'appointments.html')
+    doctor = Doctor_Information.objects.get(user=request.user)
+    context = {'doctor': doctor}
+    return render(request, 'appointments.html', context)
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutDoctor(request):
     logout(request)
     messages.info(request, 'User Logged out')
@@ -113,39 +120,44 @@ def doctor_login(request):
         #     messages.error(request, 'Invalid credentials. Not a Doctor')
         #     return redirect('doctor-login')
             
-
     return render(request, 'doctor-login.html')
 
-
+@login_required(login_url="doctor-login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def doctor_dashboard(request):
-    if request.user.is_doctor:
-        # doctor = Doctor_Information.objects.get(user_id=pk)
-        doctor = Doctor_Information.objects.get(user=request.user)
-        patient = Patient.objects.all()
-        appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
-        current_date = datetime.date.today()
-        today_appointments = Appointment.objects.filter(date=current_date).filter(doctor=doctor).filter(appointment_status='confirmed')
+        if request.user.is_authenticated:    
+            if request.user.is_doctor:
+                # doctor = Doctor_Information.objects.get(user_id=pk)
+                doctor = Doctor_Information.objects.get(user=request.user)
+                patient = Patient.objects.all()
+                appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
+                current_date = datetime.date.today()
+                today_appointments = Appointment.objects.filter(date=current_date).filter(doctor=doctor).filter(appointment_status='confirmed')
+                
+                # next days date
+                next_date = current_date + datetime.timedelta(days=1)
+                
+                # Count
+                next_days_appointment = Appointment.objects.filter(date=next_date).filter(doctor=doctor).filter(appointment_status='pending').count()
+                # .values('count')
+                today_patient_count = Appointment.objects.filter(date=current_date).filter(doctor=doctor).annotate(count=Count('patient'))
+                total_appointments_count = Appointment.objects.filter(doctor=doctor).annotate(count=Count('id'))
+            else:
+                redirect('doctor-logout')
+            
+            context = {'doctor': doctor, 'appointments': appointments, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date, 'next_date': next_date}
+            return render(request, 'doctor-dashboard.html', context)
+        else:
+            return redirect('doctor-login')
         
-        # next days date
-        next_date = current_date + datetime.timedelta(days=1)
-        
-        # Count
-        next_days_appointment = Appointment.objects.filter(date=next_date).filter(doctor=doctor).filter(appointment_status='pending').count()
-        # .values('count')
-        today_patient_count = Appointment.objects.filter(date=current_date).filter(doctor=doctor).annotate(count=Count('patient'))
-        total_appointments_count = Appointment.objects.filter(doctor=doctor).annotate(count=Count('id'))
-    else:
-        redirect('doctor-logout')
-    
-    context = {'doctor': doctor, 'appointments': appointments, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date, 'next_date': next_date}
-    return render(request, 'doctor-dashboard.html', context)
-
+@login_required(login_url="doctor-login")
 def accept_appointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     appointment.appointment_status = 'confirmed'
     appointment.save()
     return redirect('doctor-dashboard')
 
+@login_required(login_url="doctor-login")
 def reject_appointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     appointment.appointment_status = 'cancelled'
@@ -171,7 +183,7 @@ def reject_appointment(request, pk):
 
 #     context = {'doctor': doctor, 'form': form}
 #     return render(request, 'doctor-profile-settings.html', context)
-
+@login_required(login_url="doctor-login")
 def doctor_profile(request, pk):
     # request.user --> get logged in user
     if request.user.is_patient:
@@ -252,6 +264,7 @@ def doctor_profile(request, pk):
     
     return render(request, 'doctor-profile.html', context)
 
+@login_required(login_url="doctor-login")
 def doctor_profile_settings(request):
     # profile_Settings.js
     if request.user.is_doctor:
@@ -377,10 +390,11 @@ def doctor_profile_settings(request):
     else:
         redirect('doctor-logout')
         
+@login_required(login_url="doctor-login")      
 def booking_success(request):
     return render(request, 'booking-success.html')
 
-
+@login_required(login_url="doctor-login")
 def booking(request, pk):
     patient = request.user.patient
     doctor = Doctor_Information.objects.get(doctor_id=pk)
@@ -403,7 +417,7 @@ def booking(request, pk):
     return render(request, 'booking.html', context)
 
 
-
+@login_required(login_url="doctor-login")
 def my_patients(request):
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
@@ -418,7 +432,7 @@ def my_patients(request):
 
 # def patient_profile(request):
 #     return render(request, 'patient_profile.html')
-
+@login_required(login_url="doctor-login")
 def patient_profile(request, pk):
     if request.user.is_doctor:
         # doctor = Doctor_Information.objects.get(user_id=pk)
@@ -430,35 +444,10 @@ def patient_profile(request, pk):
     context = {'doctor': doctor, 'appointments': appointments, 'patient': patient}  
     return render(request, 'patient-profile.html', context)
 
-     
-    
-def testing(request):
-    doctor = Doctor_Information.objects.get(user=request.user)
-    degree = doctor.degree
-    degree = re.sub("'", "", degree)
-    degree = degree.replace("[", "")
-    degree = degree.replace("]", "")
-    degree = degree.replace(",", "")
-    degree_array = degree.split()
-    
-    institute = doctor.institute
-    institute = re.sub("'", "", institute)
-    institute = institute.replace("[", "")
-    institute = institute.replace("]", "")
-    institute = institute.replace(",", "")
-    institute_array = institute.split()
-
-
-    education = zip(degree_array, institute_array)
-    
-    context = {'doctor': doctor, 'degree': institute, 'institute_array': institute_array, 'education': education}
-    # test range, len, and loop to show variables before moving on to doctor profile
-    
-    return render(request, 'testing.html', context)
-
 
 def view_report(request):
     return render(request, 'view-report.html')
+
 
 def add_report(request):
     return render(request, 'add-report.html')
@@ -467,6 +456,32 @@ def add_report(request):
 def prescription_view(request):
     return render(request, 'prescription-view.html')
 
+
 def create_prescription(request):
     return render(request, 'create-prescription.html')
+
+
+# def testing(request):
+#     doctor = Doctor_Information.objects.get(user=request.user)
+#     degree = doctor.degree
+#     degree = re.sub("'", "", degree)
+#     degree = degree.replace("[", "")
+#     degree = degree.replace("]", "")
+#     degree = degree.replace(",", "")
+#     degree_array = degree.split()
+    
+#     institute = doctor.institute
+#     institute = re.sub("'", "", institute)
+#     institute = institute.replace("[", "")
+#     institute = institute.replace("]", "")
+#     institute = institute.replace(",", "")
+#     institute_array = institute.split()
+
+
+#     education = zip(degree_array, institute_array)
+    
+#     context = {'doctor': doctor, 'degree': institute, 'institute_array': institute_array, 'education': education}
+#     # test range, len, and loop to show variables before moving on to doctor profile
+    
+#     return render(request, 'testing.html', context)
 
