@@ -3,6 +3,8 @@ from email.mime import image
 from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
