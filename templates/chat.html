@@ -70,16 +70,17 @@
 									</form>
 									<div class="chat-users-list">
 										<div class="chat-scroll">
-											{% for doctor in doctors %}
-											<a href="javascript:void(0);" class="media">
+										{% for u in doctor %} {% if not u.id == 1 and not u.id == user.id %}
+											<a href="{% url 'chat-home' pk=user.id %}" class="media">
 												<div class="media-img-wrap">
 													<div class="avatar avatar-away">
-														<img src="{{ doctor.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{{ u.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
 												</div>
 												<div class="media-body">
 													<div>
-														<div class="user-name">{{doctor.name}}</div>
+														<div class="user-name">{{u.name}}</div>
+														
 														<div class="user-last-chat">Hey, How are you?</div>
 													</div>
 													<div>
@@ -88,7 +89,7 @@
 													</div>
 												</div>
 											</a>
-											{% endfor %}
+										{%endif%}{% endfor %}
 										</div>
 									</div>
 								</div>
