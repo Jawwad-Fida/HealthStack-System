@@ -189,9 +189,19 @@
 													<i class="fas fa-video"></i>
 												</a>
 											</div>
+											{% if user.is_authenticated and user.is_patient %}
 											<div class="clinic-booking">
-												<a class="apt-btn" href="#">Doctor List</a>
+												<a class="apt-btn" href="">Doctor List</a>
 											</div>
+											{% endif %}
+				
+											{% if user.is_authenticated and user.is_doctor %}
+											<div class="clinic-booking">
+												<a class="apt-btn" href="#">Register</a>
+											</div>
+											{% endif %}
+											
+											
 										</div>
 									</div>
 								</div>

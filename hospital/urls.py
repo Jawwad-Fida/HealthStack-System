@@ -42,6 +42,8 @@ urlpatterns = [
     path('shop/', views.pharmacy_shop, name='pharmacy_shop'),
     path('data-table/', views.data_table, name='data-table'),
     path('testing/',views.testing, name='testing'),
+
+    path('hospital-department', views.hospital_department, name='hospital-department'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
