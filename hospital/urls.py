@@ -43,7 +43,7 @@ urlpatterns = [
     path('data-table/', views.data_table, name='data-table'),
     path('testing/',views.testing, name='testing'),
 
-    path('hospital-department', views.hospital_department, name='hospital-department'),
+    path('hospital-department-list', views.hospital_department_list, name='hospital-department-list'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
