@@ -38,9 +38,11 @@
       <li>
         <a href="{% url 'about-us'%}">About Us</a>
       </li>
+      
       <li>
-        <a href="{% url 'chat-doctor'%}">Chat with Patients</a>
+        <a href="{% url 'chat-home' pk=user.id %}">Chat with Patients</a>
       </li>
+      
       
 
       <li>
