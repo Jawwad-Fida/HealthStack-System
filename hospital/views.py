@@ -434,4 +434,20 @@ def hospital_department_list(request):
         logout(request)
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html')
-    
+
+
+def hospital_doctor_list(request):
+    if request.user.is_authenticated and request.user.is_patient:
+        # patient = Patient.objects.get(user_id=pk)
+        
+        patient = Patient.objects.get(user=request.user)
+        doctors = Doctor_Information.objects.all()
+        
+        doctors, search_query = searchDoctors(request)
+        # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
+        context = {'patient': patient, 'doctors': doctors, 'search_query': search_query}
+        return render(request, 'hospital-doctor-list.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')   
