@@ -391,7 +391,7 @@ def testing(request):
         department_list = vald.split()
         # department_list.append(d.hospital_department_name)
         
-            
+        
     # degree = doctor.degree
     # degree = re.sub("'", "", degree)
     # degree = degree.replace("[", "")
@@ -406,3 +406,31 @@ def testing(request):
     
     return render(request, 'testing.html', context)
 
+
+def hospital_department(request):
+    if request.user.is_authenticated: 
+        
+        if request.user.is_patient:
+            # patient = Patient.objects.get(user_id=pk)
+            patient = Patient.objects.get(user=request.user)
+            doctors = Doctor_Information.objects.all()
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+        
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'hospital-department.html', context)
+        
+        elif request.user.is_doctor:
+            doctor = Doctor_Information.objects.get(user=request.user)
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+            
+            context = {'doctor': doctor, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'hospital-department.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')
+    
