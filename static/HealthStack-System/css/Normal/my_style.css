@@ -1,0 +1,69 @@
+/*
+
+	INSTRUCTIONS ---------------------------------------------------------------------------------
+  
+  1. link this stylesheet in the head of your HTML
+  	 <link href="YOUR PATH/my-style.css" rel="stylesheet" type="text/css" />
+     
+  2. Set the file name as data-theme attribute on your input
+  	 <input data-theme="my-style" />
+     
+  3. That's it!
+  
+  When you run script the style will be automatically applied.
+
+*/
+div.datedropper.my-style {
+    border-radius: 8px;
+    width: 180px;
+  }
+  div.datedropper.my-style .picker {
+    border-radius: 8px;
+    box-shadow: 0 0 32px 0px rgba(0, 0, 0, 0.1);
+  }
+  div.datedropper.my-style .pick-l {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  div.datedropper.my-style:before,
+  div.datedropper.my-style .pick-submit,
+  div.datedropper.my-style .pick-lg-b .pick-sl:before,
+  div.datedropper.my-style .pick-m,
+  div.datedropper.my-style .pick-lg-h {
+    background-color: blue;
+  }
+  div.datedropper.my-style .pick-y.pick-jump,
+  div.datedropper.my-style .pick li span,
+  div.datedropper.my-style .pick-lg-b .pick-wke,
+  div.datedropper.my-style .pick-btn {
+    color: blue;
+  }
+  div.datedropper.my-style .picker,
+  div.datedropper.my-style .pick-l {
+    background-color: #FFF;
+  }
+  div.datedropper.my-style .picker,
+  div.datedropper.my-style .pick-arw,
+  div.datedropper.my-style .pick-l {
+    color: #4D4D4D;
+  }
+  div.datedropper.my-style .pick-m,
+  div.datedropper.my-style .pick-m .pick-arw,
+  div.datedropper.my-style .pick-lg-h,
+  div.datedropper.my-style .pick-lg-b .pick-sl,
+  div.datedropper.my-style .pick-submit {
+    color: #FFF;
+  }
+  div.datedropper.my-style.picker-tiny:before,
+  div.datedropper.my-style.picker-tiny .pick-m {
+    background-color: #FFF;
+  }
+  div.datedropper.my-style.picker-tiny .pick-m,
+  div.datedropper.my-style.picker-tiny .pick-m .pick-arw {
+    color: #4D4D4D;
+  }
+  div.datedropper.my-style.picker-lkd .pick-submit {
+    background-color: #FFF;
+    color: #4D4D4D;
+  }
+  

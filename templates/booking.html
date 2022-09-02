@@ -39,6 +39,23 @@
       href="{% static 'HealthStack-System/css/Normal/style.css' %}"
     />
 
+    <!-- Booking CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'HealthStack-System/css/Normal/booking.css' %}"
+    />
+    
+    <link
+      rel="stylesheet"
+      href="{% static 'HealthStack-System/css/Normal/timedropper.css' %}"
+    />
+    <link href="{% static 'HealthStack-System/css/Normal/date_dropper.css' %}" rel="stylesheet"/>   
+    <link href="{% static 'HealthStack-System/css/Normal/my_style.css' %}" rel="stylesheet"/>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+    <!-- datedropper -->
+    <!-- <script src="{% static 'HealthStack-System/js/Normal/datedropper-jquery.js' %}"></script> -->
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.min.js"></script>
@@ -111,9 +128,9 @@
 
               <!-- Schedule Widget -->
               <div class="card">
-                <div class="card-body">
+                <!-- <div class="card-body">
                   <div class="booking-doc-info">
-                    <!-- Schedule Header -->
+                    
 
                     <form
                       action="#"
@@ -172,10 +189,62 @@
                           Save Changes
                         </button>
                       </div>
+                      
                     </form>
-                    <!-- /Schedule Header -->
+                    
                   </div>
-                </div>
+                </div> -->
+                <!-- /Schedule Header -->
+
+                <div class="schedule widget-boxed mt-33 mt-0">
+                  <div class="widget-boxed-header">
+                      <h4><i class="fa fa-calendar pr-3 padd-r-10"></i>Schedule an Appointment</h4>
+                  </div>
+
+                  <form method="post" action="#" enctype="multipart/form-data">
+                    {% csrf_token %}
+                      <div class="agent-contact-form-sidebar">
+                          <div class="row">
+                              <div class="col-lg-6 col-md-12 book">
+                                  <label>Appointment Date</label>
+                                  <!-- <input type="date" name="appoint_date" id="reservation-date" data-lang="en" data-large-mode="true" data-min-year="2021" data-max-year="2025" data-id="datedropper-0" data-theme="my-style" class="form-control" > -->
+                                  <input type="date" name="appoint_date" id="reservation-date" data-large-mode="true" data-lock="from" data-theme="my-style" class="form-control"/>
+                                  
+                                </div>
+                              <div class="col-lg-6 col-md-12 book2">
+                                  <label>Appointment Time</label>
+                                  <input type="text" name="appoint_time" id="reservation-time" class="form-control" readonly="">
+                              </div>
+                              <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                  <label>Appointment Type</label>
+                                  <select
+                                    class="form-control select"
+                                    name="appointment_type"
+                                  >
+                                    <option value="checkup">checkup</option>
+                                    <option value="report">report</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-lg-12 col-md-12" style="padding-bottom: 10px;">
+                                <label>Message</label>
+                                <textarea placeholder="Message" name="message"></textarea>
+                              </div>
+
+                          </div>
+                          <div class="submit-section">
+                            <button
+                              type="submit"
+                              class="btn btn-primary submit-btn"
+                            >
+                              Submit Request
+                            </button>
+                          </div>
+                      </div>
+                  </form>
+
+              </div>
               </div>
 
               <!-- /Schedule Widget Payment button -->
@@ -364,6 +433,58 @@
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+
+    <!-- booking js -->
+    <script src="{% static 'HealthStack-System/js/Normal/timedropper.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/date_dropper.js' %}"></script>
+
+    <!-- Date Dropper Script-->
+    <script>
+      $('#reservation-date').dateDropper();
+    </script>
+  <!-- Time Dropper Script-->
+    <script>
+      this.$('#reservation-time').timeDropper({
+          setCurrentTime: false,
+          meridians: true,
+          primaryColor: "blue",
+          borderColor: "blue",
+          minutesInterval: '15'
+      });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+          $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+              disableOn: 700,
+              type: 'iframe',
+              mainClass: 'mfp-fade',
+              removalDelay: 160,
+              preloader: false,
+              fixedContentPos: false
+          });
+      });
+    </script>
+
+    <script>
+      $('.slick-carousel').each(function() {
+          var slider = $(this);
+          $(this).slick({
+              infinite: true,
+              dots: false,
+              arrows: false,
+              centerMode: true,
+              centerPadding: '0'
+          });
+
+          $(this).closest('.slick-slider-area').find('.slick-prev').on("click", function() {
+              slider.slick('slickPrev');
+          });
+          $(this).closest('.slick-slider-area').find('.slick-next').on("click", function() {
+              slider.slick('slickNext');
+          });
+      });
+    </script>
   </body>
 
   <!-- doccure/booking.html  30 Nov 2019 04:12:16 GMT -->
