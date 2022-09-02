@@ -317,6 +317,7 @@ def hospital_profile(request, pk):
             doctors = Doctor_Information.objects.all()
             hospitals = Hospital_Information.objects.get(hospital_id=pk)
         
+            
             departments = hospital_department.objects.filter(hospital=hospitals)
             specializations = specialization.objects.filter(hospital=hospitals)
             services = service.objects.filter(hospital=hospitals)
@@ -407,7 +408,7 @@ def testing(request):
     return render(request, 'testing.html', context)
 
 
-def hospital_department(request):
+def hospital_department_list(request):
     if request.user.is_authenticated: 
         
         if request.user.is_patient:
