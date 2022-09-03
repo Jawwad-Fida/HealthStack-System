@@ -189,14 +189,14 @@
 											</div>
 											
 											<div class="clinic-booking">
-												<a class="apt-btn" href="#">Doctor List</a>
+												<a class="apt-btn" href="{% url 'hospital-department-list' %}">Department List</a>
 											</div>
 											<br>
 											
 				
 											{% if user.is_authenticated and user.is_doctor %}
 											<div class="clinic-booking">
-												<a class="apt-btn" href="#">Register</a>
+												<a class="apt-btn" href="{% url 'hospital-doctor-register' %}">Register</a>
 											</div>
 											{% endif %}
 											
@@ -244,10 +244,7 @@
 													</div>
 													<!-- /About Details -->
 												
-													
-											
-													
-										
+
 													<!-- Awards Details -->
 													<div class="widget awards-widget">
 														<h4 class="widget-title">Departments</h4>

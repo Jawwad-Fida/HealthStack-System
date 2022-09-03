@@ -50,6 +50,7 @@ class hospital_department(models.Model):
     hospital_department_name = models.CharField(max_length=200, null=True, blank=True)
     doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
     hospital = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
+    featured_image = models.ImageField(upload_to='departments/', default='departments/default.png', null=True, blank=True)
 
     def __str__(self):
         return str(self.hospital)     
