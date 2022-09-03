@@ -437,6 +437,7 @@ def hospital_department_list(request):
 
 
 def hospital_doctor_list(request):
+
     if request.user.is_authenticated and request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
         
@@ -447,7 +448,45 @@ def hospital_doctor_list(request):
         # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
         context = {'patient': patient, 'doctors': doctors, 'search_query': search_query}
         return render(request, 'hospital-doctor-list.html', context)
+
+    elif request.user.is_authenticated and request.user.is_doctor:
+        # patient = Patient.objects.get(user_id=pk)
+        
+        doctor = Doctor_Information.objects.get(user=request.user)
+        doctors = Doctor_Information.objects.all()
+        
+        doctors, search_query = searchDoctors(request)
+        # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
+        context = {'doctor':doctor, 'doctors': doctors, 'search_query': search_query}
+        return render(request, 'hospital-doctor-list.html', context)
     else:
         logout(request)
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html')   
+
+def hospital_doctor_register(request):
+    if request.user.is_authenticated: 
+        
+        if request.user.is_patient:
+            # patient = Patient.objects.get(user_id=pk)
+            patient = Patient.objects.get(user=request.user)
+            doctors = Doctor_Information.objects.all()
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+        
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'hospital-doctor-register.html', context)
+        
+        elif request.user.is_doctor:
+            doctor = Doctor_Information.objects.get(user=request.user)
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+            
+            context = {'doctor': doctor, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'hospital-doctor-register.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')

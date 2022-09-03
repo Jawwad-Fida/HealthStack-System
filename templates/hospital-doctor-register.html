@@ -64,6 +64,65 @@
       <script src="assets/js/html5shiv.min.js"></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+    <style>
+
+    .drop-zone {
+      max-width: auto;
+      height: 200px;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: "Quicksand", sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      cursor: pointer;
+      color: #cccccc;
+      border: 4px dashed #8b8b8b;
+      border-radius: 10px;
+    }
+
+    .drop-zone--over {
+      border-style: solid;
+    }
+
+    .drop-zone__input {
+      display: none;
+    }
+
+    .drop-zone__thumb {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #cccccc;
+      background-size: cover;
+      position: relative;
+    }
+
+    .drop-zone__thumb::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 5px 0;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.75);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    </style>
   </head>
   <body>
     <!-- Main Wrapper -->
@@ -88,20 +147,12 @@
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Hospital Doctor List</li>
+									<li class="breadcrumb-item active" aria-current="page">Hospital Doctor Register</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Hospital Doctor List</h2>
+							<h2 class="breadcrumb-title">Hospital Doctor Register</h2>
 						</div>
-						<div class="col-md-6 col-6 text-right">
-							
-							<div class="top-nav-search">
-								<form action="{% url 'search' %}" method="GET">
-									<input type="text" class="form-control" placeholder="Search doctor" name="search_query" value="{{search_query}}">
-									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
-								</form>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -114,137 +165,72 @@
             <!-- Profile Sidebar -->
             <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
               <div>
-                {% if user.is_authenticated and user.is_patient %}
-				        {% include 'patient-sidebar.html' %}
-				        {% endif %}
+			    {% include 'doctor-sidebar.html' %}
 
-				        {% if user.is_authenticated and user.is_doctor %}
-				        {% include 'doctor-sidebar.html' %}
-				        {% endif %}
               </div>
             </div>
             <!-- / Profile Sidebar -->
 
             <div class="col-md-12 col-lg-8 col-xl-9">
-              {% for doctor in doctors %}
-              <!-- Doctor Widget -->
-              <div class="card">
-                <div class="card-body">
-                  <div class="doctor-widget">
-                    <div class="doc-info-left">
-                      <div class="doctor-img">
-                        <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">
-                          <img
-                            src="{{ doctor.featured_image.url }}"
-                            class="img-fluid"
-                            alt="User Image"
-                          />
-                        </a>
-                      </div>
-                      <div class="doc-info-cont">
-                        <h4 class="doc-name">
-                          <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">Dr. {{doctor.name}}</a>
-                        </h4>
-                        <p class="doc-speciality">{{ doctor.degree }}</p>
-                        <h5 class="doc-department">
-                          <img
-                            src="{% static 'HealthStack-System/images/Normal/specialities/specialities-05.png'%}"
-                            class="img-fluid"
-                            alt="Speciality"
-                          />{{ doctor.department }}
-                        </h5>
-                        <div class="rating">
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star"></i>
-                          <span class="d-inline-block average-rating"
-                            >(17)</span
-                          >
-                        </div>
-                        <div class="clinic-details">
-                          <p class="doc-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            {{doctor.hospital_name}}
-                          </p>
-                          <ul class="clinic-gallery">
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                data-fancybox="gallery"
-                              >
-                                <img
-                                  src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg'%}"
-                                  alt="Feature"
-                                />
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="clinic-services">
-                          <span>Dental Fillings</span>
-                          <span> Whitneing</span>
-                        </div>
-                      </div>
-                    </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" style="text-align: center;">Hospital Registation</h2>
+                        <hr>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="col-form-label" style="font-size: 20px;">Choose Department</label>
+                                <div class="col-md-10">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="radio"> Option 1
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="radio"> Option 2
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="radio"> Option 3
+                                        </label>
+                                    </div>
+                                </div>
 
-                    <div class="doc-info-right">
-                      <div class="clini-infos">
-                        <ul>
-                          <li><i class="far fa-thumbs-up"></i> 98%</li>
-                          <li><i class="far fa-comment"></i> 17 Feedback</li>
-                          <li>
-                            <i class="fas fa-map-marker-alt"></i> Dhaka,
-                            Bangladesh
-                          </li>
-                          <li>
-                            <i class="far fa-money-bill-alt"></i>
-                            {{doctor.consultation_fee}} BDT
-                            <i
-                              class="fas fa-info-circle"
-                              data-toggle="tooltip"
-                              title="Lorem Ipsum"
-                            ></i>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="clinic-booking">
-                        <a class="view-pro-btn" href="{% url 'doctor-profile' pk=doctor.doctor_id %}"
-                          >View Profile</a
-                        >
+                            </div>
 
-                        {% if user.is_authenticated and user.is_patient %}
-                        <a
-                          class="apt-btn"
-                          href="{% url 'booking' pk=doctor.doctor_id %}"
-                          >Book Appointment</a
-                        >
-                        {% endif %}
-                      </div>
+                            <div class="col-md-6">
+                                <label class="col-form-label" style="font-size: 20px;">Choose Specialization</label>
+                                <div class="col-md-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          Default radio
+                                        </label>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          None
+                                        </label>
+                                      </div>
+                                </div>
+                            </div>                                       
+                        </div>
+
+                        <label class="col-form-label" style="font-size: 20px;text-align: center;">Drop Certificate</label>
+                        <div class="drop-zone">
+                            
+                            <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                            <input type="file" name="myFile" class="drop-zone__input">
+                        </div>
+
                     </div>
-                  </div>
                 </div>
-              </div>
-              <!-- /Doctor Widget -->
-              {% endfor %}
-
-              <div class="load-more text-center">
-                <a class="btn btn-primary btn-sm" href="javascript:void(0);"
-                  >Load More</a
-                >
-              </div>
+                <div class="submit-section submit-btn-bottom center">
+                    <button type="submit" class="btn btn-info submit-btn" style="min-width: 205px;">Submit</button>
+                </div>
+                          
             </div>
           </div>
         </div>
@@ -468,7 +454,83 @@
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
-  </body>
 
-  <!-- doccure/search.html  30 Nov 2019 04:12:16 GMT -->
-</html>
+    <script>
+        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+      const dropZoneElement = inputElement.closest(".drop-zone");
+
+      dropZoneElement.addEventListener("click", (e) => {
+        inputElement.click();
+      });
+
+      inputElement.addEventListener("change", (e) => {
+        if (inputElement.files.length) {
+          updateThumbnail(dropZoneElement, inputElement.files[0]);
+        }
+      });
+
+      dropZoneElement.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZoneElement.classList.add("drop-zone--over");
+      });
+
+      ["dragleave", "dragend"].forEach((type) => {
+        dropZoneElement.addEventListener(type, (e) => {
+          dropZoneElement.classList.remove("drop-zone--over");
+        });
+      });
+
+      dropZoneElement.addEventListener("drop", (e) => {
+        e.preventDefault();
+
+        if (e.dataTransfer.files.length) {
+          inputElement.files = e.dataTransfer.files;
+          updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+        }
+
+        dropZoneElement.classList.remove("drop-zone--over");
+      });
+    });
+
+    /**
+     * Updates the thumbnail on a drop zone element.
+     *
+     * @param {HTMLElement} dropZoneElement
+     * @param {File} file
+     */
+    function updateThumbnail(dropZoneElement, file) {
+      let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+      // First time - remove the prompt
+      if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+        dropZoneElement.querySelector(".drop-zone__prompt").remove();
+      }
+
+      // First time - there is no thumbnail element, so lets create it
+      if (!thumbnailElement) {
+        thumbnailElement = document.createElement("div");
+        thumbnailElement.classList.add("drop-zone__thumb");
+        dropZoneElement.appendChild(thumbnailElement);
+      }
+
+      thumbnailElement.dataset.label = file.name;
+
+      // Show thumbnail for image files
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+        };
+      } else {
+        thumbnailElement.style.backgroundImage = null;
+      }
+    }
+
+    </script>
+
+    </body>
+
+      <!-- doccure/search.html  30 Nov 2019 04:12:16 GMT -->
+    </html>

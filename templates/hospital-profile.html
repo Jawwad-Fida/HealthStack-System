@@ -185,15 +185,14 @@
 												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
 													<i class="fas fa-phone"></i>
 												</a>
-												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-													<i class="fas fa-video"></i>
-												</a>
+												
 											</div>
-											{% if user.is_authenticated and user.is_patient %}
+											
 											<div class="clinic-booking">
 												<a class="apt-btn" href="#">Doctor List</a>
 											</div>
-											{% endif %}
+											<br>
+											
 				
 											{% if user.is_authenticated and user.is_doctor %}
 											<div class="clinic-booking">
@@ -424,6 +423,7 @@
 				</div>
 			</div>		
 			<!-- /Page Content -->
+			
    
 			<!-- Footer -->
 			<footer class="footer">
@@ -567,12 +567,34 @@
 		</div>
 		<!-- /Main Wrapper -->
 		
+
+		<!-- <div class="modal fade" id="edit_more_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  ...
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			  </div>
+			</div>
+		  </div> -->
+
+
 		<!-- Voice Call Modal -->
-		<div class="modal fade call-modal" id="voice_call">
+		<!-- <div class="modal fade call-modal" id="voice_call">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-body">
-						<!-- Outgoing Call -->
+						
 						<div class="call-box incoming-box">
 							<div class="call-wrapper">
 								<div class="call-inner">
@@ -588,21 +610,21 @@
 								</div>
 							</div>
 						</div>
-						<!-- Outgoing Call -->
+						
 
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- /Voice Call Modal -->
 		
 		<!-- Video Call Modal -->
-		<div class="modal fade call-modal" id="video_call">
+		<!-- <div class="modal fade call-modal" id="video_call">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-body">
 					
-						<!-- Incoming Call -->
+						
 						<div class="call-box incoming-box">
 							<div class="call-wrapper">
 								<div class="call-inner">
@@ -618,12 +640,12 @@
 								</div>
 							</div>
 						</div>
-						<!-- /Incoming Call -->
+						
 						
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Video Call Modal -->
 		
 	
@@ -634,10 +656,11 @@
 		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
 		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
 		
+		
 		<!-- Fancybox JS -->
 		<script src="{% static 'HealthStack-System/plugins/Normal/fancybox/jquery.fancybox.min.js'%}"></script>
 		
-
+		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		
