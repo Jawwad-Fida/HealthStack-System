@@ -43,7 +43,8 @@
 			
 			<!-- Sidebar -->
 			<aside class="sidebar" id="sidebar">
-				{% include 'hospital_admin/hospital-admin-sidebar.html' %} </aside>
+				{% include 'hospital_admin/hospital-admin-sidebar.html' %}
+			</aside>
 			<!-- /Sidebar -->
 			
 			<!-- Page Wrapper -->
@@ -75,7 +76,7 @@
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-7 col-lg-8 col-xl-9">
+						<div class="col-md-7 col-lg-8 col-xl-12">
 							<div class="card">
 								<div class="card-header">
 									<!-- Profile Settings Form -->
@@ -92,14 +93,17 @@
 															<table class="table table-hover table-center">
 															  <thead>
 																<tr>
-																  <th style="min-width: 200px">Name</th>
-																  <th style="min-width: 5px;"></th>
+																  <th style="min-width: 100px">Name</th>
+																  <th style="min-width: 100px">Email</th>
 																</tr>
 															  </thead>
 															  <tbody>
 																<tr>
 																  <td>
 																	<input class="form-control" type="text" name="name">
+																  </td>
+																  <td>
+																	<input class="form-control" type="email" name="email">
 																  </td>
 																</tr>
 															  </tbody>
@@ -114,10 +118,8 @@
 																	<thead>
 																		<tr>
 																			<th style="min-width: 100px">Usename</th>
-																			<th style="min-width: 100px;">Email</th>
-																			<th style="min-width: 50px;">Password</th>
-																			
-																			<th style="min-width: 20px;"></th>
+																			<th style="min-width: 100px;">Password</th>
+																			<th style="min-width: 100px;">Re-Password</th>
 																		</tr>
 																	</thead>
 																	<tbody>
@@ -126,10 +128,10 @@
 																				<input class="form-control" type="text" name="usename">
 																			</td>
 																			<td>
-																				<input class="form-control" type="email" name="email">
+																				<input class="form-control" type="Password" name="Password">
 																			</td>
 																			<td>
-																				<input class="form-control" type="password" name="password">
+																				<input class="form-control" type="password" name="Re-password">
 																			</td>
 																		</tr>
 																	</tbody>
@@ -146,9 +148,7 @@
 																<tr>
 																	<th style="min-width: 100px">Phone Number</th>
 																	<th style="min-width: 100px;">Education</th>
-																	<th style="min-width: 50px;">Age</th>
-																	
-																	<th style="min-width: 20px;"></th>
+																	<th style="min-width: 100px;">Age</th>
 																</tr>
 															</thead>
 															<tbody>
@@ -185,161 +185,27 @@
 
 			<!-- /Page Content -->
 
-			<!-- Footer -->
-			<footer class="footer">
-				
-				<!-- Footer Top -->
-				<div class="footer-top">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-about">
-									<div class="footer-logo">
-										<img src="{% static 'HealthStack-System/images/Normal/footer_logo.png' %}" alt="logo">
-									</div>
-									<div class="footer-about-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-										<div class="social-icon">
-											<ul>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Patients</h2>
-									<ul>
-										<li><a href="search.html"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-										<li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
-										<li><a href="register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
-										<li><a href="booking.html"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-										<li><a href="patient-dashboard.html"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
-									</ul>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Doctors</h2>
-									<ul>
-										<li><a href="appointments.html"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-										<li><a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-										<li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
-										<li><a href="doctor-register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
-										<li><a href="doctor-dashboard.html"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
-									</ul>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-contact">
-									<h2 class="footer-title">Contact Us</h2>
-									<div class="footer-contact-info">
-										<div class="footer-address">
-											<span><i class="fas fa-map-marker-alt"></i></span>
-											<p> 3556  Beech Street, San Francisco,<br> California, CA 94108 </p>
-										</div>
-										<p>
-											<i class="fas fa-phone-alt"></i>
-											+1 315 369 5943
-										</p>
-										<p class="mb-0">
-											<i class="fas fa-envelope"></i>
-											doccure@example.com
-										</p>
-									</div>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				<!-- /Footer Top -->
-				
-				<!-- Footer Bottom -->
-                <div class="footer-bottom">
-					<div class="container-fluid">
-					
-						<!-- Copyright -->
-						<div class="copyright">
-							<div class="row">
-								<div class="col-md-6 col-lg-6">
-									<div class="copyright-text">
-										<p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-6">
-								
-									<!-- Copyright Menu -->
-									<div class="copyright-menu">
-										<ul class="policy-menu">
-											<li><a href="term-condition.html">Terms and Conditions</a></li>
-											<li><a href="privacy-policy.html">Policy</a></li>
-										</ul>
-									</div>
-									<!-- /Copyright Menu -->
-									
-								</div>
-							</div>
-						</div>
-						<!-- /Copyright -->
-						
-					</div>
-				</div>
-				<!-- /Footer Bottom -->
-				
-			</footer>
-			<!-- /Footer -->
+			
 		   
 		</div>
 		<!-- /Main Wrapper -->
 	  
 		<!-- jQuery -->
-		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/admin/jquery-3.2.1.min.js' %}"></script> 
 		
 		<!-- Bootstrap Core JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
-		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+        <script src="{% static 'HealthStack-System/js/admin/popper.min.js' %}"></script> 
+        <script src="{% static 'HealthStack-System/js/admin/bootstrap.min.js' %}"></script> 
 		
-		<!-- Sticky Sidebar JS -->
-        <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
-        <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
+		<!-- Slimscroll JS -->
+        <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js' %}"></script>
+		
+		<!-- Datatables JS -->
+		<script src="{% static 'HealthStack-System/plugins/admin/datatables/jquery.dataTables.min.js'%}"></script> 
+		<script src="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.js'%}"></script>
 		
 		<!-- Custom JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
 		
 	</body>
 
