@@ -189,7 +189,7 @@
 											</div>
 											
 											<div class="clinic-booking">
-												<a class="apt-btn" href="{% url 'hospital-department-list' %}">Department List</a>
+												<a class="apt-btn" href="{% url 'hospital-department-list' pk=hospitals.hospital_id %}">Department List</a>
 											</div>
 											<br>
 											
@@ -250,7 +250,7 @@
 														<h4 class="widget-title">Departments</h4>
 														<div class="experience-box">
 															<ul class="experience-list">
-																{% for i in department_list %}
+																{% for department in departments %}
 																<li>
 																	<div class="experience-user">
 																		<div class="before-circle"></div>
@@ -258,7 +258,7 @@
 																	<div class="experience-content">
 																		<div class="timeline-content">
 																			
-																			<h4 class="exp-title">{{i}}</h4>
+																			<h4 class="exp-title">{{department.hospital_department_name}}</h4>
 							
 																		</div>
 																	</div>
@@ -274,8 +274,8 @@
 													<div class="service-list">
 														<h4>Services</h4>
 														<ul class="clearfix">
-															{% for i in services_list %}
-															<li>{{i}}</li>
+															{% for service in services %}
+															<li>{{service.service_name}}</li>
 															{% endfor %}
 															
 														</ul>
@@ -286,8 +286,8 @@
 													<div class="service-list">
 														<h4>Specializations</h4>
 														<ul class="clearfix">
-															{% for i in specializations_list %}
-															<li>{{i}}</li>
+															{% for specialization in specializations %}
+															<li>{{specialization.specialization_name}}</li>
 															{% endfor %}	
 
 														</ul>

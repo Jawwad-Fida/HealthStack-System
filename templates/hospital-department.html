@@ -106,22 +106,23 @@
 							<div class="row row-grid">
 								
 								
-
+								{% for department in departments %}
 								<div class="col-12 col-md-6 col-lg-4 d-flex">
 									<div class="card flex-fill card1">
 										<a href="#"></a>
-										<img alt="Card Image"style="height: 200px;border-radius: 15px 15px 0px 0px" src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" class="card-img-top">
+										<img alt="Card Image"style="height: 200px;border-radius: 15px 15px 0px 0px" src="{{department.featured_image.url}}" class="card-img-top">
 										<div class="card-header" style="border-radius: 15px">
-											<h3 class="card-title mb-0" style="text-align: center;">Departments Name</h3>
+											<h3 class="card-title mb-0" style="text-align: center;">{{department.hospital_department_name}}</h3>
 										</div>
 										<div class="card-read-more">
-											<a href="#" class="btn btn-link btn-block">
+											<a href="{% url 'hospital-doctor-list' pk=department.hospital_department_id %}" class="btn btn-link btn-block">
 												Explore
 											</a>
 										</div>
 										
 									</div>
 								</div>
+								{% endfor %}
 								
 								
 								
