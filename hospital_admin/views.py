@@ -9,7 +9,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
-from pharmacy.models import Pharmacy_Information
+
+from pharmacy.models import Pharmacist
+
+
 from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
