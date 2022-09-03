@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
+from pharmacy.models import Pharmacy_Information
 from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
@@ -385,4 +386,14 @@ def add_pharmacist(request):
     if request.user.is_hospital_admin:
      user = Admin_Information.objects.get(user=request.user)
     return render(request, 'hospital_admin/add-pharmacist.html',{'admin': user})  
+
+def medicine_list(request):
+    if request.user.is_hospital_admin:
+     user = Admin_Information.objects.get(user=request.user)
+    return render(request, 'hospital_admin/medicine-list.html',{'admin': user})
+
+def add_medicine(request):
+    if request.user.is_hospital_admin:
+     user = Admin_Information.objects.get(user=request.user)
+    return render(request, 'hospital_admin/add-medicine.html',{'admin': user})
 
