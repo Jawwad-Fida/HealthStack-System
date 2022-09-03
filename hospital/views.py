@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-from .utils import searchDoctors, searchHospitals
+from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 
 
 # from django.db.models.signals import post_save, post_delete
@@ -395,21 +395,19 @@ def hospital_doctor_list(request, pk):
         patient = Patient.objects.get(user=request.user)
         departments = hospital_department.objects.get(hospital_department_id=pk)
         
-        # doctors, search_query = searchDoctors(request, departments)
+        departments, search_query = searchDepartmentDoctors(request, pk)
         
-        # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
-        context = {'patient': patient, 'department': departments}
+        context = {'patient': patient, 'department': departments, 'search_query': search_query}
         return render(request, 'hospital-doctor-list.html', context)
 
     elif request.user.is_authenticated and request.user.is_doctor:
         # patient = Patient.objects.get(user_id=pk)
         
         doctor = Doctor_Information.objects.get(user=request.user)
-        doctors = Doctor_Information.objects.all()
+        departments = hospital_department.objects.get(hospital_department_id=pk)
         
-        doctors, search_query = searchDoctors(request)
-        # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
-        context = {'doctor':doctor, 'doctors': doctors, 'search_query': search_query}
+
+        context = {'doctor':doctor, 'department': departments}
         return render(request, 'hospital-doctor-list.html', context)
     else:
         logout(request)

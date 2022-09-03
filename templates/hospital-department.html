@@ -63,14 +63,14 @@
 							<h2 class="breadcrumb-title">Hospital Departments</h2>
 						</div>
 
-						<div class="col-md-6 col-6 text-right">
+						{% comment %} <div class="col-md-6 col-6 text-right">
 							<div class="top-nav-search">
-								<form action="#" method="GET">
-									<input type="text" class="form-control" placeholder="Search department" name="search_query">
+								<form action="{% url 'search' %}" method="GET">
+									<input type="text" class="form-control" placeholder="Search department" name="search_query" value="{{search_query}}">
 									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</div>
-						</div>
+						</div> {% endcomment %}
 						
 
 					</div>

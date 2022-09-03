@@ -36,21 +36,19 @@ def searchHospitals(request):
 
 
 
-def searchDepartmentDoctors(request, departments):
+def searchDepartmentDoctors(request, pk):
     
     search_query = ''
     
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query')
         
-    #skills = Skill.objects.filter(name__icontains=search_query)
     
-    doctors = Doctor_Information.objects.distinct().filter(
-        Q(name__icontains=search_query) |
-        Q(hospital_name__name__icontains=search_query) |  
-        Q(department__icontains=search_query))
+    departments = hospital_department.object.filter(hospital_department_id=pk).filter(
+        Q(doctor__name__icontains=search_query) |  
+        Q(doctor__department__icontains=search_query))
     
-    return doctors, search_query
+    return departments, search_query
 
 
 # products = Products.objects.filter(price__range=[10, 100])
