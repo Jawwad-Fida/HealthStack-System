@@ -113,6 +113,27 @@ class Appointment(models.Model):
     def __str__(self):
         return str(self.patient.username)
 
+class Education(models.Model):
+    education_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    degree = models.CharField(max_length=200, null=True, blank=True)
+    institute = models.CharField(max_length=200, null=True, blank=True)
+    year_of_completion = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.doctor.name)
+    
+class Experience(models.Model):
+    experience_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    work_place_name = models.CharField(max_length=200, null=True, blank=True)
+    from_year = models.CharField(max_length=200, null=True, blank=True)
+    to_year = models.CharField(max_length=200, null=True, blank=True)
+    designation = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.doctor.name)
+
 
 class Report(models.Model):
 
