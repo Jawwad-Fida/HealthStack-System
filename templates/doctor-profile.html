@@ -57,7 +57,16 @@
 						<div class="col-md-12 col-12">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+
+									{% if user.is_authenticated and user.is_patient %}
+									<li class="breadcrumb-item"><a href="{% url 'patient-dashboard' %}">Home</a></li>
+									{% endif %}
+
+									{% if user.is_authenticated and user.is_doctor %}
+									<li class="breadcrumb-item"><a href="{% url 'doctor-dashboard' %}">Home</a></li>
+									{% endif %}
+
+
 									<li class="breadcrumb-item active" aria-current="page">Doctor Profile</li>
 								</ol>
 							</nav>
@@ -100,9 +109,9 @@
 											</div>
 											<div class="doc-info-cont">
 												<h4 class="doc-name">Dr. {{doctor.name}}</h4>
-												<p class="doc-speciality">{{doctor.department}}</p>
+												<p class="doc-speciality">{{doctor.department_name.hospital_department_name}}</p>
 												<h4 class="doc-hospital">{{doctor.hospital_name}}</h4>
-												<p class="doc-department"><img src="{% static 'HealthStack-System/images/Normal/obgyn.png' %}" class="img-fluid" alt="Speciality">OBGYN</p>
+												<p class="doc-department"><img src="{% static 'HealthStack-System/images/Normal/obgyn.png' %}" class="img-fluid" alt="Speciality">{{doctor.specialization.specialization_name}}</p>
 												<div class="rating">
 													<i class="fas fa-star filled"></i>
 													<i class="fas fa-star filled"></i>
@@ -223,16 +232,16 @@
 															<ul class="experience-list">
 
 
-																{% for e in education %}
+																{% for e in educations %}
 																<li>
 																	<div class="experience-user">
 																		<div class="before-circle"></div>
 																	</div>
 																	<div class="experience-content">
 																		<div class="timeline-content">
-																			<a href="#/" class="name">{{e.1}}</a>
-																			<div>{{e.0}}</div>
-																			<span class="time">{{e.2}}</span>
+																			<a href="#/" class="name">{{e.degree}}</a>
+																			<div>{{e.institute}}</div>
+																			<span class="time">{{e.year_of_completion}}</span>
 																		</div>
 																	</div>
 																</li>
@@ -250,16 +259,16 @@
 														<div class="experience-box">
 															<ul class="experience-list">
 
-																{% for e in experience %}
+																{% for e in experiences %}
 																<li>
 																	<div class="experience-user">
 																		<div class="before-circle"></div>
 																	</div>
 																	<div class="experience-content">
 																		<div class="timeline-content">
-																			<a href="#/" class="name">{{e.0}}</a>
-																			<span class="time">{{ e.1 }}</span>
-																			<span class="time">{{ e.2 }} - {{e.3}}</span>
+																			<a href="#/" class="name">{{e.designation}}</a>
+																			<span class="time">{{ e.work_place_name }}</span>
+																			<span class="time">{{ e.from_year }} - {{e.to_year}}</span>
 																		</div>
 																	</div>
 																</li>

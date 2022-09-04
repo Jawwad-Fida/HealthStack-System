@@ -42,13 +42,7 @@
       <li>
         <a href="{% url 'chat-home' pk=user.id %}">Chat with Patients</a>
       </li>
-      
-      
-
-      <li>
-        <a href="{% url 'admin_login' %}" target="_blank">Admin</a>
-      </li>
-
+    
       <li class="login-link">
         <a href="{% url 'login' %}">Login / Signup</a>
       </li>
@@ -61,7 +55,7 @@
       </div>
       <div class="header-contact-detail">
         <p class="contact-header">Contact</p>
-        <p class="contact-info-header">{{doctor.phone_number}}</p>
+        <p class="contact-info-header">+88{{doctor.phone_number}}</p>
       </div>
     </li>
     <!-- User Menu -->
