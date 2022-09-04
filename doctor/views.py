@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
-from .models import Doctor_Information, Appointment
+from .models import Doctor_Information, Appointment, Education, Experience
 
 from django.db.models import Q, Count
 
@@ -264,6 +264,133 @@ def doctor_profile(request, pk):
     
     return render(request, 'doctor-profile.html', context)
 
+# @login_required(login_url="doctor-login")
+# def doctor_profile_settings(request):
+#     # profile_Settings.js
+#     if request.user.is_doctor:
+#         doctor = Doctor_Information.objects.get(user=request.user)
+#         old_featured_image = doctor.featured_image
+        
+#         education = None
+#         experience = None
+
+
+#         if request.method == 'GET':
+#             degree = doctor.degree
+#             work_place = doctor.work_place
+            
+            
+#             if degree:
+#                 degree = re.sub("'", "", degree)
+#                 degree = degree.replace("[", "")
+#                 degree = degree.replace("]", "")
+#                 degree = degree.replace(",", "")
+#                 degree_array = degree.split()
+                
+#                 institute = doctor.institute
+#                 institute = re.sub("'", "", institute)
+#                 institute = institute.replace("[", "")
+#                 institute = institute.replace("]", "")
+#                 institute = institute.replace(",", "")
+#                 institute_array = institute.split()
+                
+#                 completion_year = doctor.completion_year
+#                 completion_year = re.sub("'", "", completion_year)
+#                 completion_year = completion_year.replace("[", "")
+#                 completion_year = completion_year.replace("]", "")
+#                 completion_year = completion_year.replace(",", "")
+#                 completion_year_array = completion_year.split()
+                
+#                 education = zip(degree_array, institute_array, completion_year_array)
+#             else:
+#                 education = None
+                
+#             if work_place:
+#                 work_place = re.sub("'", "", work_place)
+#                 work_place = work_place.replace("[", "")
+#                 work_place = work_place.replace("]", "")
+#                 work_place = work_place.replace(",", "")
+#                 work_place_array = work_place.split()
+                
+#                 designation = doctor.designation
+#                 designation = re.sub("'", "", designation)
+#                 designation = designation.replace("[", "")
+#                 designation = designation.replace("]", "")
+#                 designation = designation.replace(",", "")
+#                 designation_array = designation.split()
+                
+#                 start_year = doctor.start_year
+#                 start_year = re.sub("'", "", start_year)
+#                 start_year = start_year.replace("[", "")
+#                 start_year = start_year.replace("]", "")
+#                 start_year = start_year.replace(",", "")
+#                 start_year_array = start_year.split()
+                
+#                 end_year = doctor.end_year
+#                 end_year = re.sub("'", "", end_year)
+#                 end_year = end_year.replace("[", "")
+#                 end_year = end_year.replace("]", "")
+#                 end_year = end_year.replace(",", "")
+#                 end_year_array = end_year.split()
+                
+                
+#                 experience = zip(work_place_array, designation_array, start_year_array, end_year_array)
+#             else:
+#                 experience = None
+                
+                    
+#             context = {'doctor': doctor, 'education': education, 'experience': experience}
+#             return render(request, 'doctor-profile-settings.html', context)
+#         elif request.method == 'POST':
+#             if 'featured_image' in request.FILES:
+#                 featured_image = request.FILES['featured_image']
+#             else:
+#                 featured_image = old_featured_image
+                
+#             name = request.POST.get('name')
+#             number = request.POST.get('number')
+#             gender = request.POST.get('gender')
+#             dob = request.POST.get('dob')
+#             description = request.POST.get('description')
+#             consultation_fee = request.POST.get('consultation_fee')
+#             report_fee = request.POST.get('report_fee')
+#             degree = request.POST.getlist('degree')
+#             institute = request.POST.getlist('institute')
+#             year_complete = request.POST.getlist('year_complete')
+#             hospital_name = request.POST.getlist('hospital_name')     
+#             start_year= request.POST.getlist('from')
+#             end_year = request.POST.getlist('to')
+#             designation = request.POST.getlist('designation')
+
+#             doctor.name = name
+#             doctor.gender = gender
+#             doctor.featured_image = featured_image
+#             doctor.phone_number = number
+#             #doctor.visiting_hour
+#             doctor.consultation_fee = consultation_fee
+#             doctor.report_fee = report_fee
+#             doctor.description = description
+#             doctor.dob = dob
+            
+#             # Education
+#             doctor.institute = institute
+#             doctor.degree = degree
+#             doctor.completion_year = year_complete 
+            
+#             # Experience
+#             doctor.work_place = hospital_name
+#             doctor.designation = designation
+#             doctor.start_year = start_year
+#             doctor.end_year = end_year
+            
+#             doctor.save()
+                
+#             # context = {'degree': degree}
+#             return redirect('doctor-dashboard')
+#     else:
+#         redirect('doctor-logout')
+        
+        
 @login_required(login_url="doctor-login")
 def doctor_profile_settings(request):
     # profile_Settings.js
@@ -271,75 +398,14 @@ def doctor_profile_settings(request):
         doctor = Doctor_Information.objects.get(user=request.user)
         old_featured_image = doctor.featured_image
         
-        education = None
-        experience = None
-
+        #Education, Experience
 
         if request.method == 'GET':
-            degree = doctor.degree
-            work_place = doctor.work_place
+            educations = Education.objects.filter(doctor=doctor)
+            experiences = Experience.objects.filter(doctor=doctor)
             
-            
-            if degree:
-                degree = re.sub("'", "", degree)
-                degree = degree.replace("[", "")
-                degree = degree.replace("]", "")
-                degree = degree.replace(",", "")
-                degree_array = degree.split()
                 
-                institute = doctor.institute
-                institute = re.sub("'", "", institute)
-                institute = institute.replace("[", "")
-                institute = institute.replace("]", "")
-                institute = institute.replace(",", "")
-                institute_array = institute.split()
-                
-                completion_year = doctor.completion_year
-                completion_year = re.sub("'", "", completion_year)
-                completion_year = completion_year.replace("[", "")
-                completion_year = completion_year.replace("]", "")
-                completion_year = completion_year.replace(",", "")
-                completion_year_array = completion_year.split()
-                
-                education = zip(degree_array, institute_array, completion_year_array)
-            else:
-                education = None
-                
-            if work_place:
-                work_place = re.sub("'", "", work_place)
-                work_place = work_place.replace("[", "")
-                work_place = work_place.replace("]", "")
-                work_place = work_place.replace(",", "")
-                work_place_array = work_place.split()
-                
-                designation = doctor.designation
-                designation = re.sub("'", "", designation)
-                designation = designation.replace("[", "")
-                designation = designation.replace("]", "")
-                designation = designation.replace(",", "")
-                designation_array = designation.split()
-                
-                start_year = doctor.start_year
-                start_year = re.sub("'", "", start_year)
-                start_year = start_year.replace("[", "")
-                start_year = start_year.replace("]", "")
-                start_year = start_year.replace(",", "")
-                start_year_array = start_year.split()
-                
-                end_year = doctor.end_year
-                end_year = re.sub("'", "", end_year)
-                end_year = end_year.replace("[", "")
-                end_year = end_year.replace("]", "")
-                end_year = end_year.replace(",", "")
-                end_year_array = end_year.split()
-                
-                
-                experience = zip(work_place_array, designation_array, start_year_array, end_year_array)
-            else:
-                experience = None
-                
-                    
-            context = {'doctor': doctor, 'education': education, 'experience': experience}
+            context = {'doctor': doctor, 'educations': educations, 'experiences': experiences}
             return render(request, 'doctor-profile-settings.html', context)
         elif request.method == 'POST':
             if 'featured_image' in request.FILES:
@@ -354,6 +420,7 @@ def doctor_profile_settings(request):
             description = request.POST.get('description')
             consultation_fee = request.POST.get('consultation_fee')
             report_fee = request.POST.get('report_fee')
+            
             degree = request.POST.getlist('degree')
             institute = request.POST.getlist('institute')
             year_complete = request.POST.getlist('year_complete')
@@ -372,23 +439,34 @@ def doctor_profile_settings(request):
             doctor.description = description
             doctor.dob = dob
             
-            # Education
-            doctor.institute = institute
-            doctor.degree = degree
-            doctor.completion_year = year_complete 
-            
-            # Experience
-            doctor.work_place = hospital_name
-            doctor.designation = designation
-            doctor.start_year = start_year
-            doctor.end_year = end_year
-            
             doctor.save()
-                
+            
+            # Education
+            for i in range(len(degree)):
+                education = Education(doctor=doctor)
+                education.degree = degree[i]
+                education.institute = institute[i]
+                education.year_of_completion = year_complete[i]
+                education.save()
+
+            # Experience
+            for i in range(len(hospital_name)):
+                experience = Experience(doctor=doctor)
+                experience.work_place_name = hospital_name[i]
+                experience.from_year = start_year[i]
+                experience.to_year = end_year[i]
+                experience.designation = designation[i]
+                experience.save()
+      
             # context = {'degree': degree}
             return redirect('doctor-dashboard')
     else:
         redirect('doctor-logout')
+        
+        
+        
+        
+        
         
 @login_required(login_url="doctor-login")      
 def booking_success(request):
