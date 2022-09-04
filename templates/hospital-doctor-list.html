@@ -69,33 +69,41 @@
     <!-- Main Wrapper -->
     <div class="main-wrapper">
       <!-- Header -->
-      <header class="header">{% include 'patient_navbar.html' %}</header>
+      <header class="header">
+            {% if user.is_authenticated and user.is_patient %}
+		    {% include 'patient_navbar.html' %}
+	        {% endif %}
+				
+		    {% if user.is_authenticated and user.is_doctor %}
+			{% include 'doctor-navbar.html' %}
+			{% endif %}
+      </header>
       <!-- /Header -->
 
       <!-- Breadcrumb -->
       <div class="breadcrumb-bar">
 				<div class="container-fluid">
 					<div class="row align-items-center">
-            
 						<div class="col-md-6 col-6">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Search Doctor</li>
+									<li class="breadcrumb-item active" aria-current="page">Hospital Doctor List</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Search Doctor</h2>
+							<h2 class="breadcrumb-title">Hospital Doctor List</h2>
 						</div>
-
 						<div class="col-md-6 col-6 text-right">
+							
 							<div class="top-nav-search">
-								<form action="{% url 'search' %}" method="GET">
+								<form action="{% url 'hospital-doctor-list' pk=pk_id %}" method="GET">
 									<input type="text" class="form-control" placeholder="Search doctor" name="search_query" value="{{search_query}}">
 									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
 								</form>
-							</div>
-						</div>
+							</div> 
 
+              
+						</div>
 					</div>
 				</div>
 			</div>
@@ -107,13 +115,22 @@
           <div class="row">
             <!-- Profile Sidebar -->
             <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-              <div>{% include 'patient-sidebar.html' %}</div>
+              <div>
+                {% if user.is_authenticated and user.is_patient %}
+				        {% include 'patient-sidebar.html' %}
+				        {% endif %}
+
+				        {% if user.is_authenticated and user.is_doctor %}
+				        {% include 'doctor-sidebar.html' %}
+				        {% endif %}
+              </div>
             </div>
             <!-- / Profile Sidebar -->
 
             <div class="col-md-12 col-lg-8 col-xl-9">
-              {% for doctor in doctors %}
+
               <!-- Doctor Widget -->
+              {% for doctor in doctors %}
               <div class="card">
                 <div class="card-body">
                   <div class="doctor-widget">
@@ -210,18 +227,22 @@
                         <a class="view-pro-btn" href="{% url 'doctor-profile' pk=doctor.doctor_id %}"
                           >View Profile</a
                         >
+
+                        {% if user.is_authenticated and user.is_patient %}
                         <a
                           class="apt-btn"
                           href="{% url 'booking' pk=doctor.doctor_id %}"
                           >Book Appointment</a
                         >
+                        {% endif %}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- /Doctor Widget -->
               {% endfor %}
+              <!-- /Doctor Widget -->
+             
 
               <div class="load-more text-center">
                 <a class="btn btn-primary btn-sm" href="javascript:void(0);"

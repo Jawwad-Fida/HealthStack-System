@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-from .utils import searchDoctors, searchHospitals
+from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 
 
 # from django.db.models.signals import post_save, post_delete
@@ -321,36 +321,18 @@ def hospital_profile(request, pk):
             specializations = specialization.objects.filter(hospital=hospitals)
             services = service.objects.filter(hospital=hospitals)
             
-            department_list = None
-            specializations_list = None
-            services_list = None
+            # department_list = None
             
-            
-            for d in departments:
-                vald = d.hospital_department_name
-                vald = re.sub("'", "", vald)
-                vald = vald.replace("[", "")
-                vald = vald.replace("]", "")
-                vald = vald.replace(",", "")
-                department_list = vald.split()
+            # for d in departments:
+            #     vald = d.hospital_department_name
+            #     vald = re.sub("'", "", vald)
+            #     vald = vald.replace("[", "")
+            #     vald = vald.replace("]", "")
+            #     vald = vald.replace(",", "")
+            #     department_list = vald.split()
                 
-            for s in specializations:
-                vald = s.specialization_name
-                vald = re.sub("'", "", vald)
-                vald = vald.replace("[", "")
-                vald = vald.replace("]", "")
-                vald = vald.replace(",", "")
-                specializations_list = vald.split()
-                
-            for s in services:
-                vald = s.service_name
-                vald = re.sub("'", "", vald)
-                vald = vald.replace("[", "")
-                vald = vald.replace("]", "")
-                vald = vald.replace(",", "")
-                services_list = vald.split()
             
-            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'department_list': department_list, 'specializations_list': specializations_list, 'services_list': services_list}
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
             return render(request, 'hospital-profile.html', context)
         
         elif request.user.is_doctor:
@@ -374,6 +356,98 @@ def hospital_profile(request, pk):
 def data_table(request):
     return render(request, 'data-table.html')
 
+
+def hospital_department_list(request, pk):
+    if request.user.is_authenticated: 
+        
+        if request.user.is_patient:
+            # patient = Patient.objects.get(user_id=pk)
+            patient = Patient.objects.get(user=request.user)
+            doctors = Doctor_Information.objects.all()
+            
+            hospitals = Hospital_Information.objects.get(hospital_id=pk)
+            departments = hospital_department.objects.filter(hospital=hospitals)
+            
+            # hospitals, search_query = searchHospitals(request)
+        
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments}
+            return render(request, 'hospital-department.html', context)
+        
+        elif request.user.is_doctor:
+            doctor = Doctor_Information.objects.get(user=request.user)
+            hospitals = Hospital_Information.objects.get(hospital_id=pk)
+            departments = hospital_department.objects.filter(hospital=hospitals)
+            
+            # hospitals, search_query = searchHospitals(request)
+            
+            context = {'doctor': doctor, 'hospitals': hospitals, 'departments': departments}
+            return render(request, 'hospital-department.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')
+
+
+def hospital_doctor_list(request, pk):
+    if request.user.is_authenticated and request.user.is_patient:
+        # patient = Patient.objects.get(user_id=pk)
+        
+        patient = Patient.objects.get(user=request.user)
+              
+        departments = hospital_department.objects.get(hospital_department_id=pk)
+        doctors = Doctor_Information.objects.filter(department_name=departments)
+        
+        doctors, search_query = searchDepartmentDoctors(request, pk)
+        
+        context = {'patient': patient, 'department': departments, 'doctors': doctors, 'search_query': search_query, 'pk_id': pk}
+        return render(request, 'hospital-doctor-list.html', context)
+
+    elif request.user.is_authenticated and request.user.is_doctor:
+        # patient = Patient.objects.get(user_id=pk)
+        
+        doctor = Doctor_Information.objects.get(user=request.user)
+        departments = hospital_department.objects.get(hospital_department_id=pk)
+        
+        doctors = Doctor_Information.objects.filter(department_name=departments)
+        doctors, search_query = searchDepartmentDoctors(request, pk)
+        
+
+        context = {'doctor':doctor, 'department': departments, 'doctors': doctors, 'search_query': search_query, 'pk_id': pk}
+        return render(request, 'hospital-doctor-list.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')   
+
+def hospital_doctor_register(request):
+    if request.user.is_authenticated: 
+        
+        if request.user.is_patient:
+            # patient = Patient.objects.get(user_id=pk)
+            patient = Patient.objects.get(user=request.user)
+            doctors = Doctor_Information.objects.all()
+            hospitals = Hospital_Information.objects.all()
+        
+            
+            hospitals, search_query = searchHospitals(request)
+        
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'hospital-doctor-register.html', context)
+        
+        elif request.user.is_doctor:
+            doctor = Doctor_Information.objects.get(user=request.user)
+            hospitals = Hospital_Information.objects.all()
+            
+            hospitals, search_query = searchHospitals(request)
+            
+            context = {'doctor': doctor, 'hospitals': hospitals, 'search_query': search_query}
+            return render(request, 'hospital-doctor-register.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')
+    
+    
 def testing(request):
     hospitals = Hospital_Information.objects.get(hospital_id=1)
         
@@ -391,7 +465,7 @@ def testing(request):
         department_list = vald.split()
         # department_list.append(d.hospital_department_name)
         
-            
+        
     # degree = doctor.degree
     # degree = re.sub("'", "", degree)
     # degree = degree.replace("[", "")
@@ -405,4 +479,3 @@ def testing(request):
     # test range, len, and loop to show variables before moving on to doctor profile
     
     return render(request, 'testing.html', context)
-

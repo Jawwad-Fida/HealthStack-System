@@ -2,21 +2,24 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Doccure - Hospital List Page</title>
+        <title>HealthStack</title>
+        <!-- Favicons -->
+        <link
+        type="image/x-icon"
+        href="{% static 'HealthStack-System/images/Normal/favicon.png' %}"
+        rel="icon"
+        />
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
 
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"> 
 		
 		<!-- Fontawesome CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">
-		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
 		
 		<!-- Feathericon CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
@@ -25,9 +28,7 @@
 		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}"> 
 		
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}">
-		
-		<link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/add-hospital.css'%}"> 
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
 		
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -46,8 +47,7 @@
 			
 			<!-- Sidebar -->
 			<aside class="sidebar" id="sidebar">
-				{% include 'hospital_admin/hospital-admin-sidebar.html' %}
-			</aside>
+				{% include 'hospital_admin/hospital-admin-sidebar.html' %} </aside>
 			<!-- /Sidebar -->
 			
 			<!-- Page Wrapper -->
@@ -64,11 +64,11 @@
 						<div class="col-md-12 col-12">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Add hopital information</li>
+									<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Add medicine information</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Adding Hospital Information</h2>
+							<h2 class="breadcrumb-title">Adding medicine Information</h2>
 						</div>
 					</div>
 				</div>
@@ -84,29 +84,13 @@
 								<div class="card-body">
 									
 									<!-- Profile Settings Form -->
-                                    <form action="{% url 'add-hospital' %}" method="POST" enctype="multipart/form-data">
+                                    <form action="#" method="POST" enctype="multipart/form-data">
 										{% csrf_token %}
 										<div class="row form-row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<div class="change-avatar">
-														<div class="profile-img">
-															<img src="{% static 'images/hospitals/hospital1.png' %}" alt="Admin Profile Image">
-														</div>
-														<div class="upload-img">
-															<div class="change-photo-btn">
-																<span><i class="fa fa-upload"></i> Upload Photo</span>
-																<input type="file" class="upload" name="featured_image">
-															</div>
-															<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
-														</div>
-													</div>
-												</div>
-											</div>
-										<div class="col-12 col-md-12">
-											<!-- <div class="form-group">
+										  <div class="col-12 col-md-12">
+											<div class="form-group">
 												<div class="change-avatar"></div>
-											</div> -->
+											</div>
 											<div class="card card-table">
 											  <div class="card-body">
 												<div class="table-responsive">
@@ -181,7 +165,7 @@
 													  <thead>
 														<tr>
 														  <th style="min-width: 300px">Hospital Type</th>
-														  {% comment %} <th style="min-width: 300px">Upload Image</th> {% endcomment %}
+														  <th style="min-width: 300px">Upload Image</th>
 														  <th style="min-width: 50px;"></th>
 														</tr>
 													  </thead>
@@ -194,78 +178,66 @@
 																<option value="private">Private</option>
 															  </select>
 														  </td>
-														  {% comment %} <td>
+														  <td>
 															<input class="form-control" type="file"  name="image">
-														  </td> {% endcomment %}
+														  </td>
 														</tr>
 													  </tbody>
 													</table>
 												  </div>
 												</div>
-											</div>
-											<div class="card">
+											  </div>
+											  <div class="card">
 												<div class="card-body">
 													<h4 class="card-title">Departments</h4>
-													<div class="department-info">
-														<div class="row form-row department-cont">
+													<div class="membership-info">
+														<div class="row form-row membership-cont">
 															<div class="col-12 col-md-10 col-lg-5">
 																<div class="form-group">
 																	<label>Add New Departments</label>
-																	<input type="text" class="form-control" id="departments" name="department">
+																	<input type="text" class="form-control" id="departments" name="departments">
 																</div> 
-															</div>
-															<div class="col-12 col-md-2 col-lg-2"> 
-																<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>
 															</div>
 														</div>
 													</div>
 													<div class="add-more">
-														<a href="javascript:void(0);" class="add-department"><i class="fa fa-plus-circle"></i> Add More</a>
+														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
 													</div>
 												</div>
 											</div>
 											<div class="card">
 												<div class="card-body">
 													<h4 class="card-title">Services</h4>
-													<div class="service-info">
-														<div class="row form-row service-cont">
+													<div class="membership-info">
+														<div class="row form-row membership-cont">
 															<div class="col-12 col-md-10 col-lg-5">
 																<div class="form-group">
 																	<label>Add New Services</label>
 																	<input type="text" class="form-control" id="service" name="service">
 																</div> 
 															</div>
-															<div class="col-12 col-md-2 col-lg-2"> 
-																<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>
-															</div>
 														</div>
 													</div>
 													<div class="add-more">
-														<a href="javascript:void(0);" class="add-service" style="color: #20c0f3"><i class="fa fa-plus-circle"></i> Add More</a>
+														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
 													</div>
 												</div>
 											</div>
 											<div class="card">
 												<div class="card-body">
 													<h4 class="card-title">Specialization</h4>
-													<div class="specialization-info">
-														<div class="row form-row specialization-cont">
+													<div class="membership-info">
+														<div class="row form-row membership-cont">
 															<div class="col-12 col-md-10 col-lg-5">
 																<div class="form-group">
 																	<label>Add New Specialization</label>
 																	<input type="text" class="form-control" id="specialization" name="specialization">
 																</div> 
 															</div>
-															<div class="col-12 col-md-2 col-lg-2"> 
-																<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>
-															</div>
 														</div>
 													</div>
 													<div class="add-more">
-														<a href="javascript:void(0);" class="add-specialization"><i class="fa fa-plus-circle"></i> Add More</a>
+														<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
 													</div>
 												</div>
 											</div>
@@ -338,8 +310,7 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
-		
-		<script src="{% static 'HealthStack-System/js/Normal/add-more.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/profile_Settings.js' %}"></script>
 
 		
     </body>

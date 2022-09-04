@@ -51,11 +51,9 @@
                 <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Medicines</span></a>
                     <ul style="display: none;">
-                        <li><a href="invoice-report.html">Add Medicines</a></li>
-                        <li><a href="invoice-report.html">Medicines List</a></li>
+                        <li><a href="{% url 'medicine-list' %}">Add Medicines</a></li>
                     </ul>
                 </li>
-
                 
                 <li> 
                     <a href="{%url 'hospital-admin-profile' pk=user.id %}"><i class="fe fe-user-plus"></i> <span>Profile</span></a>

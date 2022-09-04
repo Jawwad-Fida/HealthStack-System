@@ -9,6 +9,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
+
+from pharmacy.models import Pharmacist
+
+
 from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
@@ -182,48 +186,57 @@ def add_hospital(request):
     if  request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
 
-    if request.method == 'POST':
-        hospital = Hospital_Information()
-        specializations = specialization(hospital=hospital)
-        services = service(hospital=hospital)
-        departments = hospital_department(hospital=hospital)
+        if request.method == 'POST':
+            hospital = Hospital_Information()
+            
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = "departments/default.png"
+            
+            hospital_name = request.POST.get('hospital_name')
+            address = request.POST.get('address')
+            description = request.POST.get('description')
+            email = request.POST.get('email')
+            phone_number = request.POST.get('phone_number') 
+            hospital_type = request.POST.get('type')
+            specialization_name = request.POST.getlist('specialization')
+            department_name = request.POST.getlist('department')
+            service_name = request.POST.getlist('service')
+            
         
-        
-        featured_image = request.FILES['featured_image']
-        
-        
-        hospital_name = request.POST.get('hospital_name')
-        address = request.POST.get('address')
-        description = request.POST.get('description')
-        email = request.POST.get('email')
-        phone_number = request.POST.get('phone_number') 
-        hospital_type = request.POST.get('type')
-        specialization_name = request.POST.getlist('specialization')
-        department_name = request.POST.getlist('department')
-        service_name = request.POST.getlist('service')
+            hospital.name = hospital_name
+            hospital.description = description
+            hospital.address = address
+            hospital.email = email
+            hospital.phone_number =phone_number
+            hospital.featured_image=featured_image 
+            hospital.hospital_type=hospital_type
+            
+            # print(department_name[0])
+         
+            hospital.save()
+            
+            for i in range(len(department_name)):
+                departments = hospital_department(hospital=hospital)
+                # print(department_name[i])
+                departments.hospital_department_name = department_name[i]
+                departments.save()
+                
+            for i in range(len(specialization_name)):
+                specializations = specialization(hospital=hospital)
+                specializations.specialization_name=specialization_name[i]
+                specializations.save()
+                
+            for i in range(len(service_name)):
+                services = service(hospital=hospital)
+                services.service_name = service_name[i]
+                services.save()
+            
+            return redirect('hospital-list')
 
-
-        hospital.name = hospital_name
-        hospital.description = description
-        hospital.address = address
-        hospital.email = email
-        hospital.phone_number =phone_number
-        hospital.featured_image=featured_image 
-        hospital.hospital_type=hospital_type
-        
-        specializations.specialization_name=specialization_name
-        services.service_name = service_name
-        departments.hospital_department_name = department_name 
-
-        hospital.save()
-        specializations.save()
-        services.save()
-        departments.save()
-
-        return redirect('hospital-list')
-
-    context = { 'admin': user}
-    return render(request, 'hospital_admin/add-hospital.html',context)
+        context = { 'admin': user}
+        return render(request, 'hospital_admin/add-hospital.html',context)
 
 
 
@@ -376,4 +389,14 @@ def add_pharmacist(request):
     if request.user.is_hospital_admin:
      user = Admin_Information.objects.get(user=request.user)
     return render(request, 'hospital_admin/add-pharmacist.html',{'admin': user})  
+
+def medicine_list(request):
+    if request.user.is_hospital_admin:
+     user = Admin_Information.objects.get(user=request.user)
+    return render(request, 'hospital_admin/medicine-list.html',{'admin': user})
+
+def add_medicine(request):
+    if request.user.is_hospital_admin:
+     user = Admin_Information.objects.get(user=request.user)
+    return render(request, 'hospital_admin/add-medicine.html',{'admin': user})
 
