@@ -10,9 +10,11 @@ from doctor.models import Doctor_Information
 from django.db.models import Q
 import json,datetime
 from django.core import serializers
+from django.views.decorators.cache import cache_control
 
 # Create your views here.
 @login_required(login_url='login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def home(request,pk):
     if request.user.is_patient:
             User = get_user_model()
@@ -64,6 +66,7 @@ def profile(request):
     }
     return render(request,"chat/profile.html",context)
 @login_required(login_url='login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def get_messages(request):
     chats = chatMessages.objects.filter(Q(id__gt=request.POST['last_id']),Q(user_from=request.user.id, user_to=request.POST['chat_id']) | Q(user_from=request.POST['chat_id'], user_to=request.user.id))
     new_msgs = []
@@ -79,6 +82,7 @@ def get_messages(request):
     return HttpResponse(json.dumps(new_msgs), content_type="application/json")
 
 @login_required(login_url='login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def send_chat(request):
     resp = {}
     User = get_user_model()

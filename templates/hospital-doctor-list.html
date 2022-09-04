@@ -96,7 +96,7 @@
 						<div class="col-md-6 col-6 text-right">
 							
 							<div class="top-nav-search">
-								<form action="{% url 'hospital-doctor-list' pk=department.hospital_department_id %}" method="GET">
+								<form action="{% url 'hospital-doctor-list' pk=pk_id %}" method="GET">
 									<input type="text" class="form-control" placeholder="Search doctor" name="search_query" value="{{search_query}}">
 									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
 								</form>
@@ -130,14 +130,15 @@
             <div class="col-md-12 col-lg-8 col-xl-9">
 
               <!-- Doctor Widget -->
+              {% for doctor in doctors %}
               <div class="card">
                 <div class="card-body">
                   <div class="doctor-widget">
                     <div class="doc-info-left">
                       <div class="doctor-img">
-                        <a href="{% url 'doctor-profile' pk=department.doctor.doctor_id %}">
+                        <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">
                           <img
-                            src="{{ department.doctor.featured_image.url }}"
+                            src="{{ doctor.featured_image.url }}"
                             class="img-fluid"
                             alt="User Image"
                           />
@@ -145,15 +146,15 @@
                       </div>
                       <div class="doc-info-cont">
                         <h4 class="doc-name">
-                          <a href="{% url 'doctor-profile' pk=department.doctor.doctor_id %}">Dr. {{department.doctor.name}}</a>
+                          <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">Dr. {{doctor.name}}</a>
                         </h4>
-                        <p class="doc-speciality">{{ department.doctor.degree }}</p>
+                        <p class="doc-speciality">{{ doctor.degree }}</p>
                         <h5 class="doc-department">
                           <img
                             src="{% static 'HealthStack-System/images/Normal/specialities/specialities-05.png'%}"
                             class="img-fluid"
                             alt="Speciality"
-                          />{{ department.doctor.department }}
+                          />{{ doctor.specialization }}
                         </h5>
                         <div class="rating">
                           <i class="fas fa-star filled"></i>
@@ -168,7 +169,7 @@
                         <div class="clinic-details">
                           <p class="doc-location">
                             <i class="fas fa-map-marker-alt"></i>
-                            {{department.doctor.hospital_name}}
+                            {{doctor.hospital_name}}
                           </p>
                           <ul class="clinic-gallery">
                             <li>
@@ -213,7 +214,7 @@
                           </li>
                           <li>
                             <i class="far fa-money-bill-alt"></i>
-                            {{department.doctor.consultation_fee}} BDT
+                            {{doctor.consultation_fee}} BDT
                             <i
                               class="fas fa-info-circle"
                               data-toggle="tooltip"
@@ -223,14 +224,14 @@
                         </ul>
                       </div>
                       <div class="clinic-booking">
-                        <a class="view-pro-btn" href="{% url 'doctor-profile' pk=department.doctor.doctor_id %}"
+                        <a class="view-pro-btn" href="{% url 'doctor-profile' pk=doctor.doctor_id %}"
                           >View Profile</a
                         >
 
                         {% if user.is_authenticated and user.is_patient %}
                         <a
                           class="apt-btn"
-                          href="{% url 'booking' pk=department.doctor.doctor_id %}"
+                          href="{% url 'booking' pk=doctor.doctor_id %}"
                           >Book Appointment</a
                         >
                         {% endif %}
@@ -239,6 +240,7 @@
                   </div>
                 </div>
               </div>
+              {% endfor %}
               <!-- /Doctor Widget -->
              
 

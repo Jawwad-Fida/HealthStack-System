@@ -35,6 +35,19 @@ def searchHospitals(request):
     return hospitals, search_query
 
 
+# def searchDepartmentDoctors(request, pk):
+    
+#     search_query = ''
+    
+#     if request.GET.get('search_query'):
+#         search_query = request.GET.get('search_query')
+        
+    
+#     departments = hospital_department.object.filter(hospital_department_id=pk).filter(
+#         Q(doctor__name__icontains=search_query) |  
+#         Q(doctor__department__icontains=search_query))
+    
+#     return departments, search_query
 
 def searchDepartmentDoctors(request, pk):
     
@@ -43,12 +56,17 @@ def searchDepartmentDoctors(request, pk):
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query')
         
+    departments = hospital_department.objects.get(hospital_department_id=pk)
     
-    departments = hospital_department.object.filter(hospital_department_id=pk).filter(
-        Q(doctor__name__icontains=search_query) |  
-        Q(doctor__department__icontains=search_query))
+    doctors = Doctor_Information.objects.filter(department_name=departments).filter(
+        Q(name__icontains=search_query))
     
-    return departments, search_query
+    # doctors = Doctor_Information.objects.filter(department_name=departments).filter(
+    #     Q(name__icontains=search_query) |
+    #     Q(specialization_name__name__icontains=search_query))
+    
+    return doctors, search_query
+
 
 
 # products = Products.objects.filter(price__range=[10, 100])

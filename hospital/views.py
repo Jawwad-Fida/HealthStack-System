@@ -393,11 +393,13 @@ def hospital_doctor_list(request, pk):
         # patient = Patient.objects.get(user_id=pk)
         
         patient = Patient.objects.get(user=request.user)
+              
         departments = hospital_department.objects.get(hospital_department_id=pk)
+        doctors = Doctor_Information.objects.filter(department_name=departments)
         
-        departments, search_query = searchDepartmentDoctors(request, pk)
+        doctors, search_query = searchDepartmentDoctors(request, pk)
         
-        context = {'patient': patient, 'department': departments, 'search_query': search_query}
+        context = {'patient': patient, 'department': departments, 'doctors': doctors, 'search_query': search_query, 'pk_id': pk}
         return render(request, 'hospital-doctor-list.html', context)
 
     elif request.user.is_authenticated and request.user.is_doctor:
@@ -406,8 +408,11 @@ def hospital_doctor_list(request, pk):
         doctor = Doctor_Information.objects.get(user=request.user)
         departments = hospital_department.objects.get(hospital_department_id=pk)
         
+        doctors = Doctor_Information.objects.filter(department_name=departments)
+        doctors, search_query = searchDepartmentDoctors(request, pk)
+        
 
-        context = {'doctor':doctor, 'department': departments}
+        context = {'doctor':doctor, 'department': departments, 'doctors': doctors, 'search_query': search_query, 'pk_id': pk}
         return render(request, 'hospital-doctor-list.html', context)
     else:
         logout(request)
