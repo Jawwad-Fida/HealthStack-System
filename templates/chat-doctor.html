@@ -70,8 +70,7 @@
 									</form>
 									<div class="chat-users-list">
 										<div class="chat-scroll">
-										{% for u in patient %} 
-										{% if not u.id == 1 and not u.id == user.id %}
+										{% for u in patient %} {% if not u.id == 1 and not u.id == user.id %}
 											<a href="{% url 'chat-home' pk=user.id %}?u={{u.user.id}}" class="media">
 												<div class="media-img-wrap">
 													<div class="avatar avatar-away">
@@ -90,8 +89,7 @@
 													</div>
 												</div>
 											</a>
-										{%endif%}
-										{% endfor %}
+										{%endif%}{% endfor %}
 										</div>
 									</div>
 								</div>
@@ -127,8 +125,7 @@
 										{% else%}
 										<div id="chat-box-field" class="h-100">
 											<div class="chat-box" style="height:80%">
-												{% for chat in chats %} 
-												{% if chat.user_from == user %}
+												{% for chat in chats %} {% if chat.user_from == user %}
 												<div class="p-2 w-100 d-flex justify-content-end">
 													<div class=" chat-bubble  ml-2 mb-2 bg-primary text-light rounded" data-id="{{chat.id}}">
 														<p>{{chat.message}}</p>
@@ -142,10 +139,9 @@
 														<div class=" d-flex justify-content-between"><small>Sender</small> <small>{{chat.date_created|date:"M-d-Y H:i"}}</small></div>
 													</div>
 												</div>
-												{% endif %} 
-												{% endfor %}
+												{% endif %} {% endfor %}
 											</div>
-											<div class="chat-box-form border-top p-2" style="height:20%">
+											<div class="chat-box-form border-top p-2" style="height:10%">
 												<div class="w-100 h-100">
 													<form action="" id="chat-submit" class="h-100 d-flex ">
 														<input type="hidden" name="user_from" value="{{ user.id }}">

@@ -127,8 +127,8 @@
 									{% else %}
 
 									<div class="chat-body">
-										<div class="chat-scroll">
-											<ul class="list-unstyled chat-box">
+										<div class="chat-scroll chat-box">
+											<ul class="list-unstyled">
 												{% for chat in chats %} 
 												{% if chat.user_from == user %}
 												<li class="media sent">
@@ -185,7 +185,7 @@
 										</div>
 									</div>
 									
-									<div class="chat-box-form border-top p-2" style="height: 120px;">
+									<div class="chat-box-form border-top p-2" style="height: 70px;">
 										<div class="w-100 h-100">
 											<form action="" id="chat-submit" class="h-100 d-flex ">
 												<input type="hidden" name="user_from" value="{{ user.id }}">
