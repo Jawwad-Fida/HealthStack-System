@@ -322,7 +322,6 @@ def hospital_profile(request, pk):
             services = service.objects.filter(hospital=hospitals)
             
             # department_list = None
-            
             # for d in departments:
             #     vald = d.hospital_department_name
             #     vald = re.sub("'", "", vald)
@@ -419,33 +418,44 @@ def hospital_doctor_list(request, pk):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html')   
 
-def hospital_doctor_register(request):
+def hospital_doctor_register(request, pk):
     if request.user.is_authenticated: 
         
-        if request.user.is_patient:
-            # patient = Patient.objects.get(user_id=pk)
-            patient = Patient.objects.get(user=request.user)
-            doctors = Doctor_Information.objects.all()
-            hospitals = Hospital_Information.objects.all()
-        
-            
-            hospitals, search_query = searchHospitals(request)
-        
-            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query}
-            return render(request, 'hospital-doctor-register.html', context)
-        
-        elif request.user.is_doctor:
+        if request.user.is_doctor:
             doctor = Doctor_Information.objects.get(user=request.user)
-            hospitals = Hospital_Information.objects.all()
+            hospitals = Hospital_Information.objects.get(hospital_id=pk)
             
-            hospitals, search_query = searchHospitals(request)
+            departments = hospital_department.objects.filter(hospital=hospitals)
+            specializations = specialization.objects.filter(hospital=hospitals)
             
-            context = {'doctor': doctor, 'hospitals': hospitals, 'search_query': search_query}
+            if request.method == 'POST':
+                if 'certificate_image' in request.FILES:
+                    certificate_image = request.FILES['certificate_image']
+                else:
+                    certificate_image = "doctors_certificate/default.png"
+                
+                department_id_selected = request.POST.get('department_radio')
+                specialization_id_selected = request.POST.get('specialization_radio')
+                
+                department_chosen = hospital_department.objects.get(hospital_department_id=department_id_selected)
+                specialization_chosen = specialization.objects.get(specialization_id=specialization_id_selected)
+                
+                doctor.department_name = department_chosen
+                doctor.specialization = specialization_chosen
+                doctor.register_status = 'Pending'
+                doctor.certificate_image = certificate_image
+                
+                doctor.save()
+                
+                return redirect('doctor-dashboard')
+                
+                 
+            context = {'doctor': doctor, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations}
             return render(request, 'hospital-doctor-register.html', context)
     else:
         logout(request)
         messages.info(request, 'Not Authorized')
-        return render(request, 'patient-login.html')
+        return render(request, 'doctor-login.html')
     
     
 def testing(request):
