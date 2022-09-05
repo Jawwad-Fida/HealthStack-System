@@ -37,15 +37,13 @@ class Doctor_Information(models.Model):
     username = models.CharField(max_length=200, null=True, blank=True)
     gender = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
-    
     department = models.CharField(max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
-    
     department_name = models.ForeignKey(hospital_department, on_delete=models.CASCADE, null=True, blank=True)
     specialization = models.ForeignKey(specialization, on_delete=models.CASCADE, null=True, blank=True)
     service = models.ForeignKey(service, on_delete=models.CASCADE, null=True, blank=True)
 
-
     featured_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
+    certificate_image = models.ImageField(upload_to='doctors_certificate/', default='doctors_certificate/default.png', null=True, blank=True)
 
     email = models.EmailField(max_length=200, null=True, blank=True)
     phone_number = models.IntegerField(null=True, blank=True)
@@ -66,20 +64,15 @@ class Doctor_Information(models.Model):
     start_year = models.CharField(max_length=200, null=True, blank=True)
     end_year = models.CharField(max_length=200, null=True, blank=True)
     
+    # register_status = models.BooleanField(default=False) default='pending'
+    register_status =  models.CharField(max_length=200, null=True, blank=True)
+    
     # ForeignKey --> one to one relationship with Hospital_Information model.
     hospital_name = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.user.username)
 
-
-"""
- amount, followup, status
-
-
-appointment_type,payment_status  # appointment_status --> pending, confirmed, cancelled
-
-"""
 
 
 class Appointment(models.Model):

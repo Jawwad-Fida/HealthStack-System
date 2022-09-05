@@ -172,6 +172,9 @@
             <!-- / Profile Sidebar -->
 
             <div class="col-md-12 col-lg-8 col-xl-9">
+              <form action="{% url 'hospital-doctor-register' pk=hospitals.hospital_id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title" style="text-align: center;">Hospital Registation</h2>
@@ -180,21 +183,16 @@
                             <div class="col-md-6">
                                 <label class="col-form-label" style="font-size: 20px;">Choose Department</label>
                                 <div class="col-md-10">
+     
+                                    {% for department in departments %}
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="radio"> Option 1
+                                            <input type="radio" value="{{ department.hospital_department_id }}" name="department_radio"> {{ department.hospital_department_name }}
                                         </label>
                                     </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="radio"> Option 2
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="radio"> Option 3
-                                        </label>
-                                    </div>
+                                    {% endfor %}
+                                    
+                                    
                                 </div>
 
                             </div>
@@ -202,18 +200,17 @@
                             <div class="col-md-6">
                                 <label class="col-form-label" style="font-size: 20px;">Choose Specialization</label>
                                 <div class="col-md-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                          Default radio
-                                        </label>
-                                      </div>
+
+                                    {% for specialization in specializations %}
+                                      
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                        <input class="form-check-input" type="radio" value="{{ specialization.specialization_id }}" name="specialization_radio" id="flexRadioDefault2">
                                         <label class="form-check-label" for="flexRadioDefault2">
-                                          None
+                                          {{ specialization.specialization_name }}
                                         </label>
                                       </div>
+                                      {% endfor %}
+                             
                                 </div>
                             </div>                                       
                         </div>
@@ -222,7 +219,7 @@
                         <div class="drop-zone">
                             
                             <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                            <input type="file" name="myFile" class="drop-zone__input">
+                            <input type="file" name="certificate_image" class="drop-zone__input">
                         </div>
 
                     </div>
@@ -230,6 +227,7 @@
                 <div class="submit-section submit-btn-bottom center">
                     <button type="submit" class="btn btn-info submit-btn" style="min-width: 205px;">Submit</button>
                 </div>
+              </form>  
                           
             </div>
           </div>

@@ -10,10 +10,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 
-from pharmacy.models import Pharmacist
+from pharmacy.models import Medicine, Pharmacist
+from doctor.models import Doctor_Information, Prescription, Report, Appointment
 
-
-from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information,specialization,service,hospital_department
@@ -362,27 +361,29 @@ def create_invoice(request, pk):
 def create_report(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
-    doctors =Doctor_Information.objects.get(doctor_id=pk)
+        doctors =Doctor_Information.objects.get(doctor_id=pk)
 
-    if request.method == 'POST':
-        patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
-        report = Report(patient=patient, doctor=doctors)
-        test_name = request.POST['test_name']
-        description = request.POST['description']
-        result = request.POST['result']
-        delivery_date = request.POST['delivery_date']
+        if request.method == 'POST':
+            patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
+            report = Report(patient=patient, doctor=doctors)
+            test_name = request.POST['test_name']
+            description = request.POST['description']
+            result = request.POST['result']
+            delivery_date = request.POST['delivery_date']
 
-        # Save to report table
-        report.test_name = test_name
-        report.description = description
-        report.result = result
-        report.delivery_date = delivery_date
-        report.save()
+            # Save to report table
+            report.test_name = test_name
+            report.description = description
+            report.result = result
+            report.delivery_date = delivery_date
+            report.save()
 
-        return redirect('doctor-list')
 
-    context = {'doctors': doctors, 'admin': user}
-    return render(request, 'hospital_admin/create-report.html',context)
+
+            return redirect('doctor-list')
+
+        context = {'doctors': doctors, 'admin': user}
+        return render(request, 'hospital_admin/create-report.html',context)
 
 @login_required(login_url='admin-login')
 def add_pharmacist(request):
@@ -392,14 +393,56 @@ def add_pharmacist(request):
 
 @login_required(login_url='admin-login')
 def medicine_list(request):
-    if request.user.is_hospital_admin:
-     user = Admin_Information.objects.get(user=request.user)
-    return render(request, 'hospital_admin/medicine-list.html',{'admin': user})
+    medicines = Medicine.objects.all()
+    return render(request, 'hospital_admin/medicine-list.html',{'medicines': medicines})
+
+
+@login_required(login_url='admin-login')
+def generate_random_medicie_ID():
+    N = 4
+    string_var = ""
+    string_var = ''.join(random.choices(string.digits, k=N))
+    string_var = "#M-" + string_var
+    return string_var
 
 @login_required(login_url='admin-login')
 def add_medicine(request):
     if request.user.is_hospital_admin:
      user = Admin_Information.objects.get(user=request.user)
+     
+    if request.method == 'POST':
+       medicine = Medicine()
+       
+       if 'featured_image' in request.FILES:
+           featured_image = request.FILES['featured_image']
+       else:
+           featured_image = "medicines/default.png"
+       
+       name = request.POST.get('name')
+       Prescription_reqiuired = request.POST.get('requirement_type')     
+       weight = request.POST.get('weight') 
+       quantity = request.POST.get('quantity')
+       medicine_category = request.POST.get('category_type')
+       medicine_type = request.POST.get('medicine_type')
+       description = request.POST.get('description')
+       price = request.POST.get('price')
+       
+       medicine.name = name
+       medicine.Prescription_reqiuired = Prescription_reqiuired
+       medicine.weight = weight
+       medicine.quantity = quantity
+       medicine.medicine_category = medicine_category
+       medicine.medicine_type = medicine_type
+       medicine.description = description
+       medicine.price = price
+       medicine.featured_image = featured_image
+       medicine.stock_quantity = 80
+       #medicine.medicine_id = generate_random_medicie_ID()
+       
+       medicine.save()
+       
+       return redirect('medicine-list')
+   
     return render(request, 'hospital_admin/add-medicine.html',{'admin': user})
 
 @login_required(login_url='admin-login')
