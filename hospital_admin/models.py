@@ -2,7 +2,7 @@ from django.db import models
 
 import hospital
 from hospital.models import User, Hospital_Information
-from doctor.models import Doctor_Information
+# from doctor.models import Doctor_Information
 
 
 # Create your models here.
@@ -48,30 +48,42 @@ class Clinical_Laboratory_Technician(models.Model):
 class hospital_department(models.Model):
     hospital_department_id = models.AutoField(primary_key=True)
     hospital_department_name = models.CharField(max_length=200, null=True, blank=True)
-    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    # doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
     hospital = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
     featured_image = models.ImageField(upload_to='departments/', default='departments/default.png', null=True, blank=True)
 
     def __str__(self):
-        return str(self.hospital)     
+        val1 = str(self.hospital_department_name)
+        val2 = str(self.hospital)
+        val3 = val1 + ' - ' + val2
+        return str(val3)     
 
 class specialization(models.Model):
     specialization_id = models.AutoField(primary_key=True)
     specialization_name = models.CharField(max_length=200, null=True, blank=True)
-    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    # doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
     hospital = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return str(self.hospital)  
+        val1 = str(self.specialization_name)
+        val2 = str(self.hospital)
+        val3 = val1 + ' - ' + val2
+        return str(val3)
+    
+    # def __str__(self):
+    #     return str(self.specialization_name)
 
 class service(models.Model):
     service_id = models.AutoField(primary_key=True)
     service_name = models.CharField(max_length=200, null=True, blank=True)
-    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    # doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
     hospital = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return str(self.hospital) 
+        val1 = str(self.service_name)
+        val2 = str(self.hospital)
+        val3 = val1 + ' - ' + val2
+        return str(val3)
 
     
 

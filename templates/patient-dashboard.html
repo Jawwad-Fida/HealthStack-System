@@ -60,7 +60,7 @@
               <nav aria-label="breadcrumb" class="page-breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <a href="index-2.html">Home</a>
+                    <a href="{% url 'patient-dashboard' %}">Home</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">
                     Patient Dashboard
@@ -104,11 +104,6 @@
                           href="#pat_prescriptions"
                           data-toggle="tab"
                           >Prescriptions</a
-                        >
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="tab"
-                          ><span class="med-records">Reports</span></a
                         >
                       </li>
                       <li class="nav-item">
@@ -303,72 +298,6 @@
                     </div>
                     <!-- /Prescription Tab -->
 
-                    <!-- -->
-                    <div id="pat_medical_records" class="tab-pane fade">
-                      <div class="card card-table mb-0">
-                        <div class="card-body">
-                          <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0">
-                              <thead>
-                                <tr>
-                                  <th>ID</th>
-                                  <th>Date</th>
-                                  <th>Description</th>
-                                  <th>Attachment</th>
-                                  <th>Created</th>
-                                  <th></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    <a href="javascript:void(0);">#MR-0010</a>
-                                  </td>
-                                  <td>14 Nov 2019</td>
-                                  <td>Dental Filling</td>
-                                  <td><a href="#">dental-test.pdf</a></td>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-01.jpg' %}"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Ruby Perrin <span>Dental</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /Medical Records Tab -->
-
                     <!-- medical record -->
                     <div id="pat_medical_records" class="tab-pane fade">
                       <div class="card card-table mb-0">
@@ -413,7 +342,7 @@
                                   <td class="text-right">
                                     <div class="table-action">
                                       <a
-                                        href="javascript:void(0);"
+                                        href="{% url 'view-report'%}"
                                         class="btn btn-sm bg-info-light"
                                       >
                                         <i class="far fa-eye"></i> View

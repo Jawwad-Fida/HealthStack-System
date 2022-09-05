@@ -4,6 +4,7 @@ import uuid
 
 # import django user model
 from hospital.models import Hospital_Information, User, Patient
+from hospital_admin.models import hospital_department, specialization, service
 
 # # Create your models here.
 
@@ -29,6 +30,7 @@ class Doctor_Information(models.Model):
         ('Physiatrists', 'Physiatrists'),
         ('Dermatologists', 'Dermatologists'),
     )
+    
     doctor_id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='profile')
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -36,8 +38,12 @@ class Doctor_Information(models.Model):
     gender = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
     department = models.CharField(max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
+    department_name = models.ForeignKey(hospital_department, on_delete=models.CASCADE, null=True, blank=True)
+    specialization = models.ForeignKey(specialization, on_delete=models.CASCADE, null=True, blank=True)
+    service = models.ForeignKey(service, on_delete=models.CASCADE, null=True, blank=True)
 
     featured_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
+    certificate_image = models.ImageField(upload_to='doctors_certificate/', default='doctors_certificate/default.png', null=True, blank=True)
 
     email = models.EmailField(max_length=200, null=True, blank=True)
     phone_number = models.IntegerField(null=True, blank=True)
@@ -58,20 +64,15 @@ class Doctor_Information(models.Model):
     start_year = models.CharField(max_length=200, null=True, blank=True)
     end_year = models.CharField(max_length=200, null=True, blank=True)
     
+    # register_status = models.BooleanField(default=False) default='pending'
+    register_status =  models.CharField(max_length=200, null=True, blank=True)
+    
     # ForeignKey --> one to one relationship with Hospital_Information model.
     hospital_name = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.user.username)
 
-
-"""
- amount, followup, status
-
-
-appointment_type,payment_status  # appointment_status --> pending, confirmed, cancelled
-
-"""
 
 
 class Appointment(models.Model):
@@ -104,6 +105,27 @@ class Appointment(models.Model):
 
     def __str__(self):
         return str(self.patient.username)
+
+class Education(models.Model):
+    education_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    degree = models.CharField(max_length=200, null=True, blank=True)
+    institute = models.CharField(max_length=200, null=True, blank=True)
+    year_of_completion = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.doctor.name)
+    
+class Experience(models.Model):
+    experience_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    work_place_name = models.CharField(max_length=200, null=True, blank=True)
+    from_year = models.CharField(max_length=200, null=True, blank=True)
+    to_year = models.CharField(max_length=200, null=True, blank=True)
+    designation = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.doctor.name)
 
 
 class Report(models.Model):

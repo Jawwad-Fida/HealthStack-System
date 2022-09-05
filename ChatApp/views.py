@@ -10,29 +10,45 @@ from doctor.models import Doctor_Information
 from django.db.models import Q
 import json,datetime
 from django.core import serializers
+from django.views.decorators.cache import cache_control
 
 # Create your views here.
 @login_required(login_url='login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def home(request,pk):
     if request.user.is_patient:
             User = get_user_model()
             users = User.objects.all()
             patients = Patient.objects.get(user_id=pk)
             doctor = Doctor_Information.objects.all()
-
+            
             chats = {}
             if request.method == 'GET' and 'u' in request.GET:
                 # chats = chatMessages.objects.filter(Q(user_from=request.user.id & user_to=request.GET['u']) | Q(user_from=request.GET['u'] & user_to=request.user.id))
                 chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
                 chats = chats.order_by('date_created')
-            context = {
+                doc = Doctor_Information.objects.get(user_id=request.GET['u'])
+                context = {
                 "page":"home",
                 "users":users,
                 "chats":chats,
                 "patient":patients,
                 "doctor":doctor,
+                "doc":doc,
                 "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             }
+            else:
+            
+            
+                context = {
+                    "page":"home",
+                    "users":users,
+                    "chats":chats,
+                    "patient":patients,
+                    "doctor":doctor,
+                    
+                    "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
+                }
             print(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             return render(request,"chat.html",context)
     elif request.user.is_doctor:
@@ -64,6 +80,7 @@ def profile(request):
     }
     return render(request,"chat/profile.html",context)
 @login_required(login_url='login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def get_messages(request):
     chats = chatMessages.objects.filter(Q(id__gt=request.POST['last_id']),Q(user_from=request.user.id, user_to=request.POST['chat_id']) | Q(user_from=request.POST['chat_id'], user_to=request.user.id))
     new_msgs = []
@@ -79,6 +96,7 @@ def get_messages(request):
     return HttpResponse(json.dumps(new_msgs), content_type="application/json")
 
 @login_required(login_url='login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def send_chat(request):
     resp = {}
     User = get_user_model()

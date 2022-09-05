@@ -9,10 +9,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
+
 from pharmacy.models import Medicine, Pharmacist
-from doctor.models import Doctor_Information, Prescription,Report,Appointment
+from doctor.models import Doctor_Information, Prescription, Report, Appointment
+
 from sslcommerz.models import Payment
-from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
+from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information,specialization,service,hospital_department
 import random,re
 import string
@@ -359,27 +361,29 @@ def create_invoice(request, pk):
 def create_report(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
-    doctors =Doctor_Information.objects.get(doctor_id=pk)
+        doctors =Doctor_Information.objects.get(doctor_id=pk)
 
-    if request.method == 'POST':
-        patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
-        report = Report(patient=patient, doctor=doctors)
-        test_name = request.POST['test_name']
-        description = request.POST['description']
-        result = request.POST['result']
-        delivery_date = request.POST['delivery_date']
+        if request.method == 'POST':
+            patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
+            report = Report(patient=patient, doctor=doctors)
+            test_name = request.POST['test_name']
+            description = request.POST['description']
+            result = request.POST['result']
+            delivery_date = request.POST['delivery_date']
 
-        # Save to report table
-        report.test_name = test_name
-        report.description = description
-        report.result = result
-        report.delivery_date = delivery_date
-        report.save()
+            # Save to report table
+            report.test_name = test_name
+            report.description = description
+            report.result = result
+            report.delivery_date = delivery_date
+            report.save()
 
-        return redirect('doctor-list')
 
-    context = {'doctors': doctors, 'admin': user}
-    return render(request, 'hospital_admin/create-report.html',context)
+
+            return redirect('doctor-list')
+
+        context = {'doctors': doctors, 'admin': user}
+        return render(request, 'hospital_admin/create-report.html',context)
 
 @login_required(login_url='admin-login')
 def add_pharmacist(request):
@@ -441,3 +445,53 @@ def add_medicine(request):
    
     return render(request, 'hospital_admin/add-medicine.html',{'admin': user})
 
+@login_required(login_url='admin-login')
+def add_lab_worker(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        
+        form = LabWorkerCreationForm()
+     
+        if request.method == 'POST':
+            form = LabWorkerCreationForm(request.POST)
+            if form.is_valid():
+                # form.save(), commit=False --> don't save to database yet (we have a chance to modify object)
+                user = form.save(commit=False)
+                user.is_labworker = True
+                user.save()
+
+                messages.success(request, 'Clinical Laboratory Technician account was created!')
+
+                # After user is created, we can log them in
+                #login(request, user)
+                return redirect('admin_login')
+            else:
+                messages.error(request, 'An error has occurred during registration')
+    
+    context = {'form': form, 'admin': user}
+    return render(request, 'hospital_admin/add-lab-worker.html', context)  
+
+
+# def admin_register(request):
+#     page = 'hospital_admin/register'
+#     form = AdminUserCreationForm()
+
+#     if request.method == 'POST':
+#         form = AdminUserCreationForm(request.POST)
+#         if form.is_valid():
+#             # form.save()
+#             # commit=False --> don't save to database yet (we have a chance to modify object)
+#             user = form.save(commit=False)
+#             user.is_hospital_admin = True
+#             user.save()
+
+#             messages.success(request, 'User account was created!')
+
+#             # After user is created, we can log them in
+#             #login(request, user)
+#             return redirect('admin_login')
+
+#         else:
+#             messages.error(
+#                 request, 'An error has occurred during registration')
+#     # else:
