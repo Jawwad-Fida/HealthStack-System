@@ -76,17 +76,18 @@
       <div class="breadcrumb-bar">
 				<div class="container-fluid">
 					<div class="row align-items-center">
+            
 						<div class="col-md-6 col-6">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									<li class="breadcrumb-item"><a href="{% url 'patient-dashboard' %}">Home</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Search Doctor</li>
 								</ol>
 							</nav>
 							<h2 class="breadcrumb-title">Search Doctor</h2>
 						</div>
+
 						<div class="col-md-6 col-6 text-right">
-							
 							<div class="top-nav-search">
 								<form action="{% url 'search' %}" method="GET">
 									<input type="text" class="form-control" placeholder="Search doctor" name="search_query" value="{{search_query}}">
@@ -94,6 +95,7 @@
 								</form>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -135,7 +137,7 @@
                             src="{% static 'HealthStack-System/images/Normal/specialities/specialities-05.png'%}"
                             class="img-fluid"
                             alt="Speciality"
-                          />{{ doctor.department }}
+                          />{{ doctor.specialization }}
                         </h5>
                         <div class="rating">
                           <i class="fas fa-star filled"></i>

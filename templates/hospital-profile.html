@@ -75,7 +75,13 @@
 						<div class="col-md-12 col-12">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									{% if user.is_authenticated and user.is_patient %}
+									<li class="breadcrumb-item"><a href="{% url 'patient-dashboard' %}">Home</a></li>
+									{% endif %}
+
+									{% if user.is_authenticated and user.is_doctor %}
+									<li class="breadcrumb-item"><a href="{% url 'doctor-dashboard' %}">Home</a></li>
+									{% endif %}
 									<li class="breadcrumb-item active" aria-current="page">Hospital Profile</li>
 								</ol>
 							</nav>
@@ -185,13 +191,22 @@
 												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
 													<i class="fas fa-phone"></i>
 												</a>
-												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-													<i class="fas fa-video"></i>
-												</a>
+												
 											</div>
+											
 											<div class="clinic-booking">
-												<a class="apt-btn" href="#">Doctor List</a>
+												<a class="apt-btn" href="{% url 'hospital-department-list' pk=hospitals.hospital_id %}">Department List</a>
 											</div>
+											<br>
+											
+				
+											{% if user.is_authenticated and user.is_doctor %}
+											<div class="clinic-booking">
+												<a class="apt-btn" href="{% url 'hospital-doctor-register' %}">Register</a>
+											</div>
+											{% endif %}
+											
+											
 										</div>
 									</div>
 								</div>
@@ -235,16 +250,13 @@
 													</div>
 													<!-- /About Details -->
 												
-													
-											
-													
-										
+
 													<!-- Awards Details -->
 													<div class="widget awards-widget">
 														<h4 class="widget-title">Departments</h4>
 														<div class="experience-box">
 															<ul class="experience-list">
-																{% for i in department_list %}
+																{% for department in departments %}
 																<li>
 																	<div class="experience-user">
 																		<div class="before-circle"></div>
@@ -252,7 +264,7 @@
 																	<div class="experience-content">
 																		<div class="timeline-content">
 																			
-																			<h4 class="exp-title">{{i}}</h4>
+																			<h4 class="exp-title">{{department.hospital_department_name}}</h4>
 							
 																		</div>
 																	</div>
@@ -268,8 +280,8 @@
 													<div class="service-list">
 														<h4>Services</h4>
 														<ul class="clearfix">
-															{% for i in services_list %}
-															<li>{{i}}</li>
+															{% for service in services %}
+															<li>{{service.service_name}}</li>
 															{% endfor %}
 															
 														</ul>
@@ -280,8 +292,8 @@
 													<div class="service-list">
 														<h4>Specializations</h4>
 														<ul class="clearfix">
-															{% for i in specializations_list %}
-															<li>{{i}}</li>
+															{% for specialization in specializations %}
+															<li>{{specialization.specialization_name}}</li>
 															{% endfor %}	
 
 														</ul>
@@ -414,6 +426,7 @@
 				</div>
 			</div>		
 			<!-- /Page Content -->
+			
    
 			<!-- Footer -->
 			<footer class="footer">
@@ -557,12 +570,34 @@
 		</div>
 		<!-- /Main Wrapper -->
 		
+
+		<!-- <div class="modal fade" id="edit_more_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  ...
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			  </div>
+			</div>
+		  </div> -->
+
+
 		<!-- Voice Call Modal -->
-		<div class="modal fade call-modal" id="voice_call">
+		<!-- <div class="modal fade call-modal" id="voice_call">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-body">
-						<!-- Outgoing Call -->
+						
 						<div class="call-box incoming-box">
 							<div class="call-wrapper">
 								<div class="call-inner">
@@ -578,21 +613,21 @@
 								</div>
 							</div>
 						</div>
-						<!-- Outgoing Call -->
+						
 
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- /Voice Call Modal -->
 		
 		<!-- Video Call Modal -->
-		<div class="modal fade call-modal" id="video_call">
+		<!-- <div class="modal fade call-modal" id="video_call">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-body">
 					
-						<!-- Incoming Call -->
+						
 						<div class="call-box incoming-box">
 							<div class="call-wrapper">
 								<div class="call-inner">
@@ -608,12 +643,12 @@
 								</div>
 							</div>
 						</div>
-						<!-- /Incoming Call -->
+						
 						
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Video Call Modal -->
 		
 	
@@ -624,10 +659,11 @@
 		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
 		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
 		
+		
 		<!-- Fancybox JS -->
 		<script src="{% static 'HealthStack-System/plugins/Normal/fancybox/jquery.fancybox.min.js'%}"></script>
 		
-
+		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		

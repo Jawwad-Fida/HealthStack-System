@@ -4,6 +4,7 @@ import uuid
 
 # import django user model
 from hospital.models import Hospital_Information, User, Patient
+from hospital_admin.models import hospital_department, specialization, service
 
 # # Create your models here.
 
@@ -29,13 +30,20 @@ class Doctor_Information(models.Model):
         ('Physiatrists', 'Physiatrists'),
         ('Dermatologists', 'Dermatologists'),
     )
+    
     doctor_id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='profile')
     name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
     gender = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
+    
     department = models.CharField(max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
+    
+    department_name = models.ForeignKey(hospital_department, on_delete=models.CASCADE, null=True, blank=True)
+    specialization = models.ForeignKey(specialization, on_delete=models.CASCADE, null=True, blank=True)
+    service = models.ForeignKey(service, on_delete=models.CASCADE, null=True, blank=True)
+
 
     featured_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
 
@@ -104,6 +112,27 @@ class Appointment(models.Model):
 
     def __str__(self):
         return str(self.patient.username)
+
+class Education(models.Model):
+    education_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    degree = models.CharField(max_length=200, null=True, blank=True)
+    institute = models.CharField(max_length=200, null=True, blank=True)
+    year_of_completion = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.doctor.name)
+    
+class Experience(models.Model):
+    experience_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    work_place_name = models.CharField(max_length=200, null=True, blank=True)
+    from_year = models.CharField(max_length=200, null=True, blank=True)
+    to_year = models.CharField(max_length=200, null=True, blank=True)
+    designation = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.doctor.name)
 
 
 class Report(models.Model):

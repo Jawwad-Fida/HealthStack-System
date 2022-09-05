@@ -42,7 +42,7 @@
 								
 								<!-- Form -->
 								<form action="{%url 'admin_register'%}" method="POST">
-									{%	csrf_token%} {% for field in form %}
+									{%	csrf_token %} {% for field in form %}
 
 									<div class="form-group">
 										<label class="focus-label">{{ field.label }}</label>
