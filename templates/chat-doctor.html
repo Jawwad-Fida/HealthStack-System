@@ -1,4 +1,5 @@
 {% load static %}
+{% load tz%}
 <!DOCTYPE html> 
 <html lang="en">
 	
@@ -105,11 +106,11 @@
 										<div class="media">
 											<div class="media-img-wrap">
 												<div class="avatar avatar-online">
-													<img src="{{patient.featured_image.url}}" alt="User Image" class="avatar-img rounded-circle">
+													<img src="{{doctor.featured_image.url}}" alt="User Image" class="avatar-img rounded-circle">
 												</div>
 											</div>
 											<div class="media-body">
-												<div class="user-name">{{patient.name}}</div>
+												<div class="user-name">{{doctor.name}}</div>
 												<div class="user-status">online</div>
 											</div>
 										</div>
@@ -150,7 +151,7 @@
 												<li class="media received">
 													
 													<div class="avatar">
-														<img src="{{ doc.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{{ pat.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
 													
 													<div class="media-body">
