@@ -120,7 +120,7 @@
 										
 									</div>
 									{% if not chat_id > 0 %}
-										<div class="h-100 d-flex flex-column justify-content-center align-items-center">
+										<div class="d-flex flex-column justify-content-center align-items-center" style="height: 650px;">
 											<h3>Start Chat now</h3>
 											<p><small class="text-muted">Please select a person to chat with.</small></p>
 										</div>
@@ -165,7 +165,8 @@
 																<ul class="chat-msg-info">
 																	<li>
 																		<div class="chat-time">
-																			<span>{{chat.date_created|date:"M-d-Y H:i"}}</span>
+																			<span>{{chat.date_created|localtime}}</span>
+																			<span>{{value|localtime}}</span>
 																		</div>
 																	</li>
 																</ul>
