@@ -34,8 +34,24 @@ def generate_random_string():
     return string_var
 
 @login_required(login_url="doctor-login")
-def doctor_change_password(request):
-    return render(request, 'doctor-change-password.html')
+def doctor_change_password(request,pk):
+    doctor = Doctor_Information.objects.get(user_id=pk)
+    context={'doctor':doctor}
+    if request.method == "POST":
+        
+        new_password = request.POST["new_password"]
+        confirm_password = request.POST["confirm_password"]
+        if new_password == confirm_password:
+            
+            request.user.set_password(new_password)
+            request.user.save()
+            messages.success(request,"Password Changed Successfully")
+            return redirect("doctor-dashboard")
+            
+        else:
+            messages.error(request,"New Password and Confirm Password is not same")
+            return redirect("change-password",pk)
+    return render(request, 'doctor-change-password.html',context)
 
 @login_required(login_url="doctor-login")
 def schedule_timings(request):
