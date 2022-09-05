@@ -15,7 +15,7 @@ from doctor.models import Doctor_Information, Prescription, Report, Appointment
 
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
-from .models import Admin_Information,specialization,service,hospital_department
+from .models import Admin_Information,specialization,service,hospital_department, Clinical_Laboratory_Technician
 import random,re
 import string
 from django.db.models import  Count
@@ -471,27 +471,19 @@ def add_lab_worker(request):
     context = {'form': form, 'admin': user}
     return render(request, 'hospital_admin/add-lab-worker.html', context)  
 
+@login_required(login_url='admin-login')
+def view_lab_worker(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        lab_workers = Clinical_Laboratory_Technician.objects.all()
+        
+    return render(request, 'hospital_admin/lab-worker-list.html', {'lab_workers': lab_workers, 'admin': user})
 
-# def admin_register(request):
-#     page = 'hospital_admin/register'
-#     form = AdminUserCreationForm()
+@login_required(login_url='admin-login')
+def edit_lab_worker(request, pk):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        lab_worker = Clinical_Laboratory_Technician.objects.get(technician_id=pk)
+        
+    return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
-#     if request.method == 'POST':
-#         form = AdminUserCreationForm(request.POST)
-#         if form.is_valid():
-#             # form.save()
-#             # commit=False --> don't save to database yet (we have a chance to modify object)
-#             user = form.save(commit=False)
-#             user.is_hospital_admin = True
-#             user.save()
-
-#             messages.success(request, 'User account was created!')
-
-#             # After user is created, we can log them in
-#             #login(request, user)
-#             return redirect('admin_login')
-
-#         else:
-#             messages.error(
-#                 request, 'An error has occurred during registration')
-#     # else:
