@@ -202,7 +202,7 @@
 				
 											{% if user.is_authenticated and user.is_doctor %}
 											<div class="clinic-booking">
-												<a class="apt-btn" href="{% url 'hospital-doctor-register' %}">Register</a>
+												<a class="apt-btn" href="{% url 'hospital-doctor-register' pk=hospitals.hospital_id %}">Register</a>
 											</div>
 											{% endif %}
 											

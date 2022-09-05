@@ -143,7 +143,7 @@ def doctor_dashboard(request):
                 today_patient_count = Appointment.objects.filter(date=current_date).filter(doctor=doctor).annotate(count=Count('patient'))
                 total_appointments_count = Appointment.objects.filter(doctor=doctor).annotate(count=Count('id'))
             else:
-                redirect('doctor-logout')
+                return redirect('doctor-logout')
             
             context = {'doctor': doctor, 'appointments': appointments, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date, 'next_date': next_date}
             return render(request, 'doctor-dashboard.html', context)
@@ -183,86 +183,15 @@ def reject_appointment(request, pk):
 
 #     context = {'doctor': doctor, 'form': form}
 #     return render(request, 'doctor-profile-settings.html', context)
-# @login_required(login_url="doctor-login")
-# def doctor_profile(request, pk):
-#     # request.user --> get logged in user
-#     if request.user.is_patient:
-#         patient = request.user.patient
-#     else:
-#         patient = None
-    
-#     doctor = Doctor_Information.objects.get(doctor_id=pk)
-#     # doctor = Doctor_Information.objects.filter(doctor_id=pk).order_by('-doctor_id')
-    
-#     degree = doctor.degree
-#     work_place = doctor.work_place
-    
-    
-#     education = None
-#     experience = None
-    
-    
-#     if degree:
-#         degree = re.sub("'", "", degree)
-#         degree = degree.replace("[", "")
-#         degree = degree.replace("]", "")
-#         degree = degree.replace(",", "")
-#         degree_array = degree.split()
-        
-#         institute = doctor.institute
-#         institute = re.sub("'", "", institute)
-#         institute = institute.replace("[", "")
-#         institute = institute.replace("]", "")
-#         institute = institute.replace(",", "")
-#         institute_array = institute.split()
-        
-#         completion_year = doctor.completion_year
-#         completion_year = re.sub("'", "", completion_year)
-#         completion_year = completion_year.replace("[", "")
-#         completion_year = completion_year.replace("]", "")
-#         completion_year = completion_year.replace(",", "")
-#         completion_year_array = completion_year.split()
-    
-#         education = zip(degree_array, institute_array, completion_year_array)
-#     else:
-#         education = None
-        
-#     if work_place:
-#         work_place = re.sub("'", "", work_place)
-#         work_place = work_place.replace("[", "")
-#         work_place = work_place.replace("]", "")
-#         work_place = work_place.replace(",", "")
-#         work_place_array = work_place.split()
-        
-#         designation = doctor.designation
-#         designation = re.sub("'", "", designation)
-#         designation = designation.replace("[", "")
-#         designation = designation.replace("]", "")
-#         designation = designation.replace(",", "")
-#         designation_array = designation.split()
-        
-#         start_year = doctor.start_year
-#         start_year = re.sub("'", "", start_year)
-#         start_year = start_year.replace("[", "")
-#         start_year = start_year.replace("]", "")
-#         start_year = start_year.replace(",", "")
-#         start_year_array = start_year.split()
-        
+
+
 #         end_year = doctor.end_year
 #         end_year = re.sub("'", "", end_year)
 #         end_year = end_year.replace("[", "")
 #         end_year = end_year.replace("]", "")
 #         end_year = end_year.replace(",", "")
-#         end_year_array = end_year.split()
-                
-                
+#         end_year_array = end_year.split()       
 #         experience = zip(work_place_array, designation_array, start_year_array, end_year_array)
-#     else:
-#         experience = None
-    
-#     context = {'doctor': doctor, 'patient': patient, 'education': education, 'experience': experience}
-    
-#     return render(request, 'doctor-profile.html', context)
 
 
 @login_required(login_url="doctor-login")
