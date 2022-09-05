@@ -1,0 +1,305 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>Doccure - Hospital List Page</title>
+		
+		<!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
+
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"> 
+		
+		<!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">
+		
+		<!-- Feathericon CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
+		
+		<!-- Datatables CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}"> 
+		
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
+		
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+    </head>
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+			<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
+				<!-- Logo -->
+
+            
+			<!-- /Header -->
+			
+			<!-- Sidebar -->
+			<aside class="sidebar" id="sidebar">
+				{% include 'hospital_admin/hospital-admin-sidebar.html' %} </aside>
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+
+                <div class="content container-fluid">
+
+<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Create Report</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Create Report </h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="call-content-full">
+				<div class="container-lg">
+					<div class="row-cols-6">
+						<div class="col-md-7 col-lg-8 col-xl-12">
+							<div class="card">
+								<div class="card-body">
+									
+									<!-- Profile Settings Form -->
+                                    <form action="#" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row form-row">
+                                      <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="change-avatar"></div>
+                                        </div>
+                                        <div class="card card-table">
+                                          <div class="card-body">
+                                            <div class="table-responsive">
+                                              <table class="table table-hover table-center">
+                                                <thead>
+                                                  <tr>
+                                                    <th style="min-width: 300px">Patient Serial Number</th>
+													
+                                                    <th style="min-width: 50px;"></th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>
+                                                      <input class="form-control" type="text" name="patient_serial_number">
+													  
+                                                    </td>
+													
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+							<!-- /specimen -->
+										<div class="card card-table">
+											<div class="card-body">
+                                                <h4 class="card-title">Specimen Information</h4>
+                                                <div class="specimen-info">
+                                                    <div class="row form-row specimen-cont"></div>
+                                                   
+                                                        <div class="col-12 col-md-10 col-lg-11">
+                                                            <div class="row form-row">
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Specimen ID</label>
+                                                                        <input type="text" class="form-control" value="{{report.specimen_id}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Specimen Type</label>
+                                                                        <input type="text" class="form-control" value="{{report.specimen_type}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Collection Date</label>
+                                                                        <input type="text" class="form-control" value="{{report.collection_date}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Receiving Date</label>
+                                                                        <input type="text" class="form-control" value="{{report.receiving_date}}">
+                                                                    </div> 
+                                                                </div>
+            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+                        
+
+                                                </div>
+                                            </div>
+                                            <div class="add-more">
+                                                <a href="javascript:void(0);" class="add-specimen"><i class="fa fa-plus-circle"></i> Add Specimen</a>
+                                            </div>
+                                        </div>
+                        
+                                    
+							<!-- /specimen -->
+
+                            	<!-- /Test -->
+
+                                        <div class="card card-table">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Test Information</h4>
+                                                <div class="specimen-info">
+                                                    <div class="row form-row specimen-cont"></div>
+                                                
+                                                        <div class="col-12 col-md-10 col-lg-11">
+                                                            <div class="row form-row">
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Test Name</label>
+                                                                        <input type="text" class="form-control" value="{{report.test_name}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Result</label>
+                                                                        <input type="text" class="form-control" value="{{report.result}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Unit</label>
+                                                                        <input type="text" class="form-control" value="{{report.unit}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Referred Value</label>
+                                                                        <input type="text" class="form-control" value="{{report.referred_value}}">
+                                                                    </div> 
+                                                                </div>
+            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+                        
+
+                                                </div>
+                                            </div>
+                                            <div class="add-more">
+                                                <a href="javascript:void(0);" class="add-test"><i class="fa fa-plus-circle"></i> Add Test</a>
+                                            </div>
+                                        </div>
+                                        <!-- /Test -->
+
+
+                                        <div class="card card-table">
+                                            <div class="card-body">
+                                              <div class="table-responsive">
+                                                <table class="table table-hover table-center">
+                                                  <thead>
+                                                    <tr>
+                                                      <th style="min-width: 300px">Delivery Date</th>
+                                                      <th style="min-width: 50px;"></th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr>
+                                                      <td>
+                                                        <input class="form-control" type="date" name="delivery_date">
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                            </div>
+                                        </div>
+
+                                
+                                      <div class="submit-section">
+                                        <button type="submit" class="btn btn-primary submit-btn">
+                                        Save Changes
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+									<!-- /Profile Settings Form -->
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+				</div>			
+			</div>
+      		
+			<!-- /Page Wrapper -->
+		
+        </div>
+		<!-- /Main Wrapper -->
+		
+
+		<!-- jQuery -->
+		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap Core JS -->
+		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+	
+		<!-- Sticky Sidebar JS -->
+		<script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+		<script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
+	
+		<!-- Select2 JS -->
+		<script src="{% static 'HealthStack-System/plugins/Normal/select2/js/select2.min.js' %}"></script>
+	
+		<!-- Dropzone JS -->
+		<script src="{% static 'HealthStack-System/plugins/Normal/dropzone/dropzone.min.js' %}"></script>
+	
+		<!-- Bootstrap Tagsinput JS -->
+		<script src="{% static 'HealthStack-System/plugins/Normal/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
+	
+		<!-- Report Settings JS -->
+		<script src="{% static 'HealthStack-System/js/Normal/report-settings.js' %}"></script>
+	
+		<!-- Searchbar JS -->
+		<script src="{% static 'HealthStack-System/js/Normal/sidebar.js' %}"></script>
+	
+		<!-- Custom JS -->
+		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+		
+		
+	</body>
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+</html>
