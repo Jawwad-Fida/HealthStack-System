@@ -67,7 +67,10 @@ def patient_id(request):
 @login_required(login_url="doctor-login")
 def appointments(request):
     doctor = Doctor_Information.objects.get(user=request.user)
-    context = {'doctor': doctor}
+
+
+    appointments = Appointment.objects.filter(doctor=doctor).order_by('date')
+    context = {'doctor': doctor, 'appointments': appointments}
     return render(request, 'appointments.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
