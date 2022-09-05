@@ -43,6 +43,7 @@ def hospital_home(request):
     return render(request, 'index-2.html', context)
 
 @login_required(login_url="login")
+
 def change_password(request,pk):
     patient = Patient.objects.get(user_id=pk)
     context={"patient":patient}
@@ -61,6 +62,7 @@ def change_password(request,pk):
             messages.error(request,"New Password and Confirm Password is not same")
             return redirect("change-password",pk)
     return render(request, 'change-password.html',context)
+
 
 
 def add_billing(request):
