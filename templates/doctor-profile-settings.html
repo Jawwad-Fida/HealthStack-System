@@ -82,9 +82,7 @@
             <div class="col-md-12 col-12">
               <nav aria-label="breadcrumb" class="page-breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
-                    <a href="index-2.html">Home</a>
-                  </li>
+                  <li class="breadcrumb-item"><a href="{% url 'doctor-dashboard' %}">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">
                     Profile Settings
                   </li>
@@ -276,23 +274,21 @@
 									<h4 class="card-title">Education</h4>
 									<div class="education-info">
 										<div class="row form-row education-cont">
-                      {% for e in education %}
+                      {% for education in educations %}
 											<div class="col-12 col-md-10 col-lg-11">
 												<div class="row form-row">
-
-                          
 
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>Degree</label>
-															<input type="text" name="degree" class="form-control" value="{{e.0}}">
+															<input type="text" class="form-control" value="{{education.degree}}">
 														</div> 
 													</div>
                
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>Institute</label>
-															<input type="text" name="institute" class="form-control" value="{{e.1}}">
+															<input type="text" class="form-control" value="{{education.institute}}">
 														</div> 
 													</div>
                   
@@ -300,7 +296,7 @@
 													<div class="col-12 col-md-6 col-lg-4">
 														<div class="form-group">
 															<label>Year of Completion</label>
-															<input type="text" name="year_complete"  class="form-control" value="{{e.2}}">
+															<input type="text" class="form-control" value="{{education.year_of_completion}}">
 														</div> 
 													</div>
 
@@ -328,7 +324,7 @@
 									<h4 class="card-title">Experience</h4>
 									<div class="experience-info">
 										<div class="row form-row experience-cont">
-                      {% for e in experience %}
+                      {% for e in experiences %}
 											<div class="col-12 col-md-10 col-lg-11">
 
                         
@@ -337,14 +333,14 @@
 													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>Hospital Name</label>
-															<input type="text" name="hospital_name" class="form-control" value="{{e.0}}">
+															<input type="text" class="form-control" value="{{e.work_place_name}}">
 														</div>
 													</div>
 
 													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>From</label>
-															<input type="text" name="from" class="form-control" value="{{e.1}}">
+															<input type="text" class="form-control" value="{{e.from_year}}">
 														</div> 
 													</div>
 
@@ -352,23 +348,20 @@
 													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>To</label>
-															<input type="text" name="to" class="form-control" value="{{e.2}}">
+															<input type="text" class="form-control" value="{{e.to_year}}">
 														</div> 
 													</div>
 
 													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>Designation</label>
-															<input type="text" name="designation" class="form-control" value="{{e.3}}">
+															<input type="text" class="form-control" value="{{e.designation}}">
 														</div> 
 													</div>
                           
 
-                          
-
 												</div>
                         
-
 
 											</div>
                       <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>

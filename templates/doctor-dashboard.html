@@ -46,6 +46,7 @@
     <![endif]-->
   </head>
   <body>
+  {% if user.is_authenticated %}
     <!-- Main Wrapper -->
     <div class="main-wrapper">
       <!-- Header -->
@@ -543,7 +544,9 @@
       <!-- /Footer -->
     </div>
     <!-- /Main Wrapper -->
-
+  {% else %} 
+  <p> You are not logged in </p> 
+  {% endif %}
     <!-- jQuery -->
     <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 

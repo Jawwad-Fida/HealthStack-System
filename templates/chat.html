@@ -1,4 +1,5 @@
 {% load static %}
+{%load tz%}
 <!DOCTYPE html> 
 <html lang="en">
 	
@@ -23,11 +24,11 @@
 
 		<!-- Fancybox CSS -->
 		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fancybox/jquery.fancybox.min.css'%}">
-		{% comment %} <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-    	<script src="{% static 'js/popper.min.js' %}"></script>
-    	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    	{% comment %} <script src="{% static 'js/popper.min.js' %}"></script>
+    	<script src="{% static 'js/bootstrap.min.js' %}"></script> {% endcomment %}
    	 	<script src="{% static 'js/script.js' %}"></script>
-    	 {% endcomment %}
+    	 
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -70,16 +71,19 @@
 									</form>
 									<div class="chat-users-list">
 										<div class="chat-scroll">
-											{% for doctor in doctors %}
-											<a href="javascript:void(0);" class="media">
+
+										{% for d in doctor %} 
+										{% if not d.id == 1 and not d.id == user.id %}
+											<a href="{% url 'chat-home' pk=user.id %}?u={{d.user.id}}" class="media">
 												<div class="media-img-wrap">
 													<div class="avatar avatar-away">
-														<img src="{{ doctor.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{{ d.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
 												</div>
 												<div class="media-body">
 													<div>
-														<div class="user-name">{{doctor.name}}</div>
+														<div class="user-name">{{d.name}}</div>
+														
 														<div class="user-last-chat">Hey, How are you?</div>
 													</div>
 													<div>
@@ -88,13 +92,15 @@
 													</div>
 												</div>
 											</a>
-											{% endfor %}
+										{%endif%}
+										{% endfor %}
 										</div>
 									</div>
 								</div>
 								<!-- /Chat Left -->
 							
 								<!-- Chat Right -->
+								
 								<div class="chat-cont-right">
 									<div class="chat-header">
 										<a id="back_user_list" href="javascript:void(0)" class="back-user-list">
@@ -113,219 +119,147 @@
 										</div>
 										
 									</div>
+									{% if not chat_id > 0 %}
+										<div class="h-100 d-flex flex-column justify-content-center align-items-center">
+											<h3>Start Chat now</h3>
+											<p><small class="text-muted">Please select a person to chat with.</small></p>
+										</div>
+									{% else %}
+
 									<div class="chat-body">
-										<div class="chat-scroll">
+										<div class="chat-scroll chat-box">
 											<ul class="list-unstyled">
-												{% comment %} <li class="media sent">
-													<div class="media-body">
-														<div class="msg-box">
-															<div>
-																<p>Hello. What can I do for you?</p>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>8:30 AM</span>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</li> {% endcomment %}
-												{% comment %} <li class="media received">
-													<div class="avatar">
-														<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
-													</div>
-													<div class="media-body">
-														<div class="msg-box">
-															<div>
-																<p>I'm just looking around.</p>
-																<p>Will you tell me something about yourself?</p>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>8:35 AM</span>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
-														<div class="msg-box">
-															<div>
-																<p>Are you there? That time!</p>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>8:40 AM</span>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
-														<div class="msg-box">
-															<div>
-																<div class="chat-msg-attachments">
-																	<div class="chat-attachment">
-																		<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
-																		<div class="chat-attach-caption">placeholder.jpg</div>
-																		<a href="#" class="chat-attach-download">
-																			<i class="fas fa-download"></i>
-																		</a>
-																	</div>
-																	<div class="chat-attachment">
-																		<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
-																		<div class="chat-attach-caption">placeholder.jpg</div>
-																		<a href="#" class="chat-attach-download">
-																			<i class="fas fa-download"></i>
-																		</a>
-																	</div>
-																</div>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>8:41 AM</span>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</li> {% endcomment %}
-												{% comment %} <li class="media sent">
-													<div class="media-body">
-														<div class="msg-box">
-															<div>
-																<p>Where?</p>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>8:42 AM</span>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
-														<div class="msg-box">
-															<div>
-																<p>OK, my name is Limingqiang. I like singing, playing basketballand so on.</p>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>8:42 AM</span>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
-														<div class="msg-box">
-															<div>
-																<div class="chat-msg-attachments">
-																	<div class="chat-attachment">
-																		<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
-																		<div class="chat-attach-caption">placeholder.jpg</div>
-																		<a href="#" class="chat-attach-download">
-																			<i class="fas fa-download"></i>
-																		</a>
-																	</div>
-																</div>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>8:50 AM</span>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</li> {% endcomment %}
-												{% comment %} <li class="media received">
-													<div class="avatar">
-														<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
-													</div>
-													<div class="media-body">
-														<div class="msg-box">
-															<div>
-																<p>You wait for notice.</p>
-																<p>Consectetuorem ipsum dolor sit?</p>
-																<p>Ok?</p>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>8:55 PM</span>
-																		</div>
-																	</li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</li> {% endcomment %}
-												<li class="chat-date">Today</li>
-												 <li class="media received">
-													<div class="avatar">
-														<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
-													</div>
-													<div class="media-body">
-														<div class="msg-box">
-															<div>
-																<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-																<ul class="chat-msg-info">
-																	<li>
-																		<div class="chat-time">
-																			<span>10:17 AM</span>
-																		</div>
-																	</li>
-																	<li><a href="#">Edit</a></li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</li> 
+												{% for chat in chats %} 
+												{% if chat.user_from == user %}
 												<li class="media sent">
 													<div class="media-body">
+														
 														<div class="msg-box">
-															<div>
-																<p>Lorem ipsum dollar sit</p>
-																<div class="chat-msg-actions dropdown">
-																	<a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		<i class="fe fe-elipsis-v"></i>
-																	</a>
-																	<div class="dropdown-menu dropdown-menu-right">
-																		<a class="dropdown-item" href="#">Delete</a>
-																	</div>
-																</div>
+															<div class="chat-bubble" data-id="{{chat.id}}">
+																<p>{{chat.message}}</p>
 																<ul class="chat-msg-info">
 																	<li>
 																		<div class="chat-time">
-																			<span>10:19 AM</span>
+																			<span>{{chat.date_created|localtime}}</span>
+																			
 																		</div>
 																	</li>
-																	<li><a href="#">Edit</a></li>
 																</ul>
 															</div>
 														</div>
+														
 													</div>
 												</li>
+												{% else %}
 												<li class="media received">
+													
 													<div class="avatar">
-														<img src="{% static 'HealthStack-System/images/Normal/patients/patient.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{{ doc.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
+													
 													<div class="media-body">
 														<div class="msg-box">
-															<div>
-																<div class="msg-typing">
-																	<span></span>
-																	<span></span>
-																	<span></span>
-																</div>
+															<div class="chat-bubble" data-id="{{chat.id}}">
+																<p>{{chat.message}}</p>
+																
+																<ul class="chat-msg-info">
+																	<li>
+																		<div class="chat-time">
+																			<span>{{chat.date_created|localtime}}</span>
+																		</div>
+																	</li>
+																</ul>
 															</div>
 														</div>
+														
 													</div>
 												</li>
+												{% endif %} 
+												{% endfor %}
+												
+												
+												<!-- <li class="chat-date">Today</li> -->
+				
+												
 											</ul>
 										</div>
 									</div>
-									<div class="chat-footer">
+									
+									<div class="chat-box-form border-top p-2" style="height: 70px;">
+										<div class="w-100 h-100">
+											<form action="" id="chat-submit" class="h-100 d-flex ">
+												<input type="hidden" name="user_from" value="{{ user.id }}">
+												<input type="hidden" name="user_to" value="{{ chat_id }}">
+												<div class="col-md-10 h-100">
+													<textarea name="message" id="" class="h-100 w-100 form-control" placeholder="Write your message here"></textarea>
+												</div>
+												<button class="button btn btn-rounded btn-info h-100 w-100 justify-content-center align-items-center d-flex"><i class="fab fa-telegram-plane"></i></button>
+											</form>
+										</div>
+									</div>
+									<!-- <div class="chat-footer">
+										<div class="input-group">
+											<form action="" id="chat-submit">
+											
+												<input type="hidden" name="user_from" value="{{ user.id }}">
+												<input type="hidden" name="user_to" value="{{ chat_id }}">	
+
+												<input type="text"  name="message" class="input-msg-send form-control" placeholder="Type something">
+											<div class="input-group-append">
+												<button class="btn msg-send-btn"><i class="fab fa-telegram-plane"></i></button>
+											</div>
+											</form>
+										</div>
+									</div> -->
+									{% endif %}
+
+									<!-- <div class="col-md-8 h-100">
+										{% if not chat_id > 0 %}
+										<div class="h-100 d-flex flex-column justify-content-center align-items-center">
+											<h3>Start Chat now</h3>
+											<p><small class="text-muted">Please select a person to chat with.</small></p>
+										</div>
+										{% else%}
+										<div id="chat-box-field" class="h-100">
+											<div class="chat-box" style="height:80%">
+												{% for chat in chats %} 
+
+												{% if chat.user_from == user %}
+												<div class="p-2 w-100 d-flex justify-content-end">
+													<div class=" chat-bubble  ml-2 mb-2 bg-primary text-light rounded" data-id="{{chat.id}}">
+														<p>{{chat.message}}</p>
+														<div class="d-flex justify-content-between"><small>You</small> <small>{{chat.date_created|date:"M-d-Y H:i"}}</small></div>
+													</div>
+												</div>
+												{% else %}
+
+												<div class="p-2 w-100 d-flex justify-content-start">
+													<div class="chat-bubble mr-2 mb-2 bg-light text-dark rounded" data-id="{{chat.id}}">
+														<p>{{chat.message}}</p>
+														<div class=" d-flex justify-content-between"><small>Sender</small> <small>{{chat.date_created|date:"M-d-Y H:i"}}</small></div>
+													</div>
+												</div>
+												{% endif %}
+
+												{% endfor %}
+											</div>
+											<div class="chat-box-form border-top p-2" style="height:20%">
+												<div class="w-100 h-100">
+													<form action="" id="chat-submit" class="h-100 d-flex ">
+														<input type="hidden" name="user_from" value="{{ user.id }}">
+														<input type="hidden" name="user_to" value="{{ chat_id }}">
+														<div class="col-md-10 h-100">
+															<textarea name="message" id="" class="h-100 w-100 form-control" placeholder="Write your message here"></textarea>
+														</div>
+														<button class="button btn btn-primary h-100 w-100 justify-content-center align-items-center d-flex">SEND</button>
+													</form>
+												</div>
+											</div>
+										</div>
+										{% endif %}
+									</div> -->
+									
+									<!-- <div class="chat-footer">
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<div class="btn-file btn">
@@ -333,13 +267,20 @@
 													<input type="file">
 												</div>
 											</div>
+											<form action="" id="chat-submit" class="h-100 d-flex">
+											<input type="hidden" name="user_from" value="{{user.id}}">
+											<input type="hidden" name="user_from" value="{{chat_id}}">	
 											<input type="text" class="input-msg-send form-control" placeholder="Type something">
 											<div class="input-group-append">
-												<button type="button" class="btn msg-send-btn"><i class="fab fa-telegram-plane"></i></button>
+												<button name="message" type="button" class="btn msg-send-btn"><i class="fab fa-telegram-plane"></i></button>
 											</div>
+											</form>
+											
+											
 										</div>
-									</div>
-								</div>
+									</div> -->
+								</div> 
+								
 								<!-- /Chat Right -->
 								
 							</div>
@@ -423,6 +364,7 @@
 						user_id: '{{user.id}}',
 						chat_id: '{{chat_id}}'
 					},
+												
 					dataType: 'json',
 					error: err => {
 						console.log(err)
@@ -432,19 +374,41 @@
 						if (Object.keys(resp).length > 0) {
 							Object.keys(resp).map(k => {
 								if (resp[k].id.user_from == '{{user.id}}') {
-									bubble = '<div class="p-2 w-100 d-flex justify-content-end">' +
-										'<div class=" chat-bubble  ml-2 mb-2 bg-primary text-light rounded" data-id="' + resp[k].id + '">' +
-										'<p>' + resp[k].message + '</p>' +
-										' <div class="d-flex justify-content-between"><small>You</small> <small>' + resp[k].date_created + '</small></div>' +
-										' </div>' +
-										' </div>';
+									bubble = '<li class="media sent">'+
+													'<div class="media-body">'+	
+														'<div class="msg-box">'+
+															'<div class="chat-bubble" data-id="' + resp[k].id + '">'+
+																'<p>' + resp[k].message + '</p>'+
+																'<ul class="chat-msg-info">'+
+																	'<li>'+
+																		'<div class="chat-time">'+
+																			'<span>' + resp[k].date_created + '</span>'+
+																		'</div>'+
+																	'</li>'+
+																'</ul>'+
+															'</div>'+
+														'</div>'+
+														
+													'</div>'+
+												'</li>';
 								} else {
-									bubble = '<div class="p-2 w-100 d-flex justify-content-start">' +
-										'<div class="chat-bubble mr-2 mb-2 bg-light text-dark rounded"  data-id="' + resp[k].id + '">' +
-										' <p>' + resp[k].message + '</p>' +
-										' <div class=" d-flex justify-content-between"><small>Sender</small> <small>' + resp[k].date_created + '</small></div>' +
-										'</div>' +
-										'</div>';
+									bubble = '<li class="media sent">'+
+													'<div class="media-body">'+	
+														'<div class="msg-box">'+
+															'<div class="chat-bubble" data-id="' + resp[k].id + '">'+
+																'<p>' + resp[k].message + '</p>'+
+																'<ul class="chat-msg-info">'+
+																	'<li>'+
+																		'<div class="chat-time">'+
+																			'<span>' + resp[k].date_created + '</span>'+
+																		'</div>'+
+																	'</li>'+
+																'</ul>'+
+															'</div>'+
+														'</div>'+
+														
+													'</div>'+
+												'</li>';
 								}
 								// console.log(bubble)
 								$('.chat-box').append(bubble)

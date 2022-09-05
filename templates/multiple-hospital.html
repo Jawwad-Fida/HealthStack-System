@@ -36,7 +36,17 @@
 		<div class="main-wrapper">
 		
 			<!-- Header -->
-			<header class="header">{% include 'patient_navbar.html' %}</header>
+			<header class="header">
+
+				{% if user.is_authenticated and user.is_patient %}
+				{% include 'patient_navbar.html' %}
+				{% endif %}
+				
+				{% if user.is_authenticated and user.is_doctor %}
+				{% include 'doctor-navbar.html' %}
+				{% endif %}
+
+			</header>
 			<!-- /Header -->
 			
 			<!-- Breadcrumb -->
@@ -46,7 +56,13 @@
 						<div class="col-md-6 col-6">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									{% if user.is_authenticated and user.is_patient %}
+									<li class="breadcrumb-item"><a href="{% url 'patient-dashboard' %}">Home</a></li>
+									{% endif %}
+
+									{% if user.is_authenticated and user.is_doctor %}
+									<li class="breadcrumb-item"><a href="{% url 'doctor-dashboard' %}">Home</a></li>
+									{% endif %}
 									<li class="breadcrumb-item active" aria-current="page">Hospitals</li>
 								</ol>
 							</nav>
@@ -55,8 +71,8 @@
 						<div class="col-md-6 col-6 text-right">
 							
 							<div class="top-nav-search">
-								<form>
-									<input type="text" class="form-control" placeholder="Search hospital">
+								<form action="{% url 'multiple-hospital' %}" method="GET">
+									<input type="text" class="form-control" placeholder="Search hospital" name="search_query" value="{{search_query}}">
 									<button class="btn" type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</div>
@@ -73,15 +89,27 @@
 						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 						
 							<!-- Profile Sidebar -->
-							<div>{% include 'patient-sidebar.html' %}</div>
+							<div>
+								
+								{% if user.is_authenticated and user.is_patient %}
+								{% include 'patient-sidebar.html' %}
+								{% endif %}
+				
+								{% if user.is_authenticated and user.is_doctor %}
+								{% include 'doctor-sidebar.html' %}
+								{% endif %}
+							
+							
+							</div>
 							<!-- /Profile Sidebar -->
 							
 						</div>
 						
 						<div class="col-md-7 col-lg-8 col-xl-9">
 							<section class="wrapper">
-								<div class="container-fostrap">
-										<h1>All Hospitals</h1>
+								<div class="container-fostrap" style="padding-top: 0px;">
+									<h1 class="card-title" style="text-align: center;font-size: 45px;">All Hospitals</h1>
+									<hr>	
 
 									<div class="content">
 										<div class="container">
