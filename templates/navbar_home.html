@@ -92,7 +92,7 @@
           <!-- <li><a href="#">Chat</a></li> -->
 
           <li>
-            <a href="{% url 'change-password'%}">Change Password</a>
+            <a href="{% url 'change-password' pk=user.id}">Change Password</a>
           </li>
         </ul>
       </li>
