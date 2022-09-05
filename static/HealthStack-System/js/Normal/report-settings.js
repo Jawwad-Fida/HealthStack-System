@@ -65,141 +65,141 @@ Version      : 1.0
         return false;
     });
 	
-	// Experience Add More
+	// // Experience Add More
 	
-    $(".experience-info").on('click','.trash', function () {
-		$(this).closest('.experience-cont').remove();
-		return false;
-    });
+    // $(".experience-info").on('click','.trash', function () {
+	// 	$(this).closest('.experience-cont').remove();
+	// 	return false;
+    // });
 
-    $(".add-experience").on('click', function () {
+    // $(".add-experience").on('click', function () {
 		
-		var experiencecontent = '<div class="row form-row experience-cont">' +
-			'<div class="col-12 col-md-10 col-lg-11">' +
-				'<div class="row form-row">' +
-					'<div class="col-12 col-md-6 col-lg-3">' +
-						'<div class="form-group">' +
-							'<label>Hospital Name</label>' +
-							'<input type="text" name="hospital_name" class="form-control">' +
-						'</div>' +
-					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-3">' +
-						'<div class="form-group">' +
-							'<label>From</label>' +
-							'<input type="text" name="from" class="form-control">' +
-						'</div>' +
-					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-3">' +
-						'<div class="form-group">' +
-							'<label>To</label>' +
-							'<input type="text" name="to" class="form-control">' +
-						'</div>' +
-					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-3">' +
-						'<div class="form-group">' +
-							'<label>Designation</label>' +
-							'<input type="text" name="designation" class="form-control">' +
-						'</div>' +
-					'</div>' +
-				'</div>' +
-			'</div>' +
-			'<div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>' +
-		'</div>';
+	// 	var experiencecontent = '<div class="row form-row experience-cont">' +
+	// 		'<div class="col-12 col-md-10 col-lg-11">' +
+	// 			'<div class="row form-row">' +
+	// 				'<div class="col-12 col-md-6 col-lg-3">' +
+	// 					'<div class="form-group">' +
+	// 						'<label>Hospital Name</label>' +
+	// 						'<input type="text" name="hospital_name" class="form-control">' +
+	// 					'</div>' +
+	// 				'</div>' +
+	// 				'<div class="col-12 col-md-6 col-lg-3">' +
+	// 					'<div class="form-group">' +
+	// 						'<label>From</label>' +
+	// 						'<input type="text" name="from" class="form-control">' +
+	// 					'</div>' +
+	// 				'</div>' +
+	// 				'<div class="col-12 col-md-6 col-lg-3">' +
+	// 					'<div class="form-group">' +
+	// 						'<label>To</label>' +
+	// 						'<input type="text" name="to" class="form-control">' +
+	// 					'</div>' +
+	// 				'</div>' +
+	// 				'<div class="col-12 col-md-6 col-lg-3">' +
+	// 					'<div class="form-group">' +
+	// 						'<label>Designation</label>' +
+	// 						'<input type="text" name="designation" class="form-control">' +
+	// 					'</div>' +
+	// 				'</div>' +
+	// 			'</div>' +
+	// 		'</div>' +
+	// 		'<div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>' +
+	// 	'</div>';
 		
-        $(".experience-info").append(experiencecontent);
-        return false;
-    });
+    //     $(".experience-info").append(experiencecontent);
+    //     return false;
+    // });
 	
-	// Awards Add More
+	// // Awards Add More
 	
-    $(".awards-info").on('click','.trash', function () {
-		$(this).closest('.awards-cont').remove();
-		return false;
-    });
+    // $(".awards-info").on('click','.trash', function () {
+	// 	$(this).closest('.awards-cont').remove();
+	// 	return false;
+    // });
 
-    $(".add-award").on('click', function () {
+    // $(".add-award").on('click', function () {
 
-        var regcontent = '<div class="row form-row awards-cont">' +
-			'<div class="col-12 col-md-5">' +
-				'<div class="form-group">' +
-					'<label>Awards</label>' +
-					'<input type="text" class="form-control">' +
-				'</div>' +
-			'</div>' +
-			'<div class="col-12 col-md-5">' +
-				'<div class="form-group">' +
-					'<label>Year</label>' +
-					'<input type="text" class="form-control">' +
-				'</div>' +
-			'</div>' +
-			'<div class="col-12 col-md-2">' +
-				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
-				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
-			'</div>' +
-		'</div>';
+    //     var regcontent = '<div class="row form-row awards-cont">' +
+	// 		'<div class="col-12 col-md-5">' +
+	// 			'<div class="form-group">' +
+	// 				'<label>Awards</label>' +
+	// 				'<input type="text" class="form-control">' +
+	// 			'</div>' +
+	// 		'</div>' +
+	// 		'<div class="col-12 col-md-5">' +
+	// 			'<div class="form-group">' +
+	// 				'<label>Year</label>' +
+	// 				'<input type="text" class="form-control">' +
+	// 			'</div>' +
+	// 		'</div>' +
+	// 		'<div class="col-12 col-md-2">' +
+	// 			'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
+	// 			'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
+	// 		'</div>' +
+	// 	'</div>';
 		
-        $(".awards-info").append(regcontent);
-        return false;
-    });
+    //     $(".awards-info").append(regcontent);
+    //     return false;
+    // });
 	
-	// Membership Add More
+	// // Membership Add More
 	
-    $(".membership-info").on('click','.trash', function () {
-		$(this).closest('.membership-cont').remove();
-		return false;
-    });
+    // $(".membership-info").on('click','.trash', function () {
+	// 	$(this).closest('.membership-cont').remove();
+	// 	return false;
+    // });
 
-    $(".add-membership").on('click', function () {
+    // $(".add-membership").on('click', function () {
 
-        var membershipcontent = '<div class="row form-row membership-cont">' +
-			'<div class="col-12 col-md-10 col-lg-5">' +
-				'<div class="form-group">' +
+    //     var membershipcontent = '<div class="row form-row membership-cont">' +
+	// 		'<div class="col-12 col-md-10 col-lg-5">' +
+	// 			'<div class="form-group">' +
 
-					'<label>Member</label>' +
+	// 				'<label>Member</label>' +
 
-					'<input type="text" class="form-control">' +
-				'</div>' +
-			'</div>' +
-			'<div class="col-12 col-md-2 col-lg-2">' +
-				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
-				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
-			'</div>' +
-		'</div>';
+	// 				'<input type="text" class="form-control">' +
+	// 			'</div>' +
+	// 		'</div>' +
+	// 		'<div class="col-12 col-md-2 col-lg-2">' +
+	// 			'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
+	// 			'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
+	// 		'</div>' +
+	// 	'</div>';
 		
-        $(".membership-info").append(membershipcontent);
-        return false;
-    });
+    //     $(".membership-info").append(membershipcontent);
+    //     return false;
+    // });
 	
-	// Registration Add More
+	// // Registration Add More
 	
-    $(".registrations-info").on('click','.trash', function () {
-		$(this).closest('.reg-cont').remove();
-		return false;
-    });
+    // $(".registrations-info").on('click','.trash', function () {
+	// 	$(this).closest('.reg-cont').remove();
+	// 	return false;
+    // });
 
-    $(".add-reg").on('click', function () {
+    // $(".add-reg").on('click', function () {
 
-        var regcontent = '<div class="row form-row reg-cont">' +
-			'<div class="col-12 col-md-5">' +
-				'<div class="form-group">' +
-					'<label>Registrations</label>' +
-					'<input type="text" class="form-control">' +
-				'</div>' +
-			'</div>' +
-			'<div class="col-12 col-md-5">' +
-				'<div class="form-group">' +
-					'<label>Year</label>' +
-					'<input type="text" class="form-control">' +
-				'</div>' +
-			'</div>' +
-			'<div class="col-12 col-md-2">' +
-				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
-				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
-			'</div>' +
-		'</div>';
+    //     var regcontent = '<div class="row form-row reg-cont">' +
+	// 		'<div class="col-12 col-md-5">' +
+	// 			'<div class="form-group">' +
+	// 				'<label>Registrations</label>' +
+	// 				'<input type="text" class="form-control">' +
+	// 			'</div>' +
+	// 		'</div>' +
+	// 		'<div class="col-12 col-md-5">' +
+	// 			'<div class="form-group">' +
+	// 				'<label>Year</label>' +
+	// 				'<input type="text" class="form-control">' +
+	// 			'</div>' +
+	// 		'</div>' +
+	// 		'<div class="col-12 col-md-2">' +
+	// 			'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
+	// 			'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
+	// 		'</div>' +
+	// 	'</div>';
 		
-        $(".registrations-info").append(regcontent);
-        return false;
-    });
+    //     $(".registrations-info").append(regcontent);
+    //     return false;
+    // });
 	
 })(jQuery);
