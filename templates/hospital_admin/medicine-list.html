@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -41,7 +40,6 @@
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
 			<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
-			<!-- Logo -->
           
 			<!-- /Header -->
 			
@@ -83,36 +81,32 @@
 											 
 											 <thead>
 												<tr>
-													<th>Hospital Name</th>
-													<th>Address</th>
-													<th>Email</th>
-													<th>Phone Number</th>
-													<th>Hospital Type</th>
-													<th>Edit Hospital</th>
-													<th>Delete Hospital</th>
+													<th>Medicine Name</th>
+													<th>Stock Quantity</th>
+													<th>Medicine Type</th>
+													<th>Medicine Category</th>
+													<th>Price</th>
+													<th>Each Quantity</th>
+													<th>Edit Medicine</th>
+													<th>Delete Medicine</th>
 													
 												</tr>
 											 </thead>
-											 {% for hospital in hospitals %}
+											 {% for medicine in medicines %}
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospital.featured_image.url}}" alt="User Image"></a>															
-															<a href="profile.html">{{hospital.name}}</a>
+															<a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{medicine.featured_image.url}}" alt="Medicine Image"></a>															
+															<a href="">{{medicine.name}}</a>
 														</h2>
 													</td>
-													<td>{{hospital.address}}</td>
-													
-													<td>{{hospital.email}}<br>
-													
-													<td>{{hospital.phone_number}}</td>
-													
-
-
-
-													<td>{{hospital.hospital_type}}</td>
-													<td><a href="{% url 'edit-hospital' pk=hospital.hospital_id %}" class="btn btn-primary">Edit</a></td>
-													<td><a href="{% url 'delete-hospital' pk=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
+													<td>{{medicine.stock_quantity}}</td>
+													<td>{{medicine.medicine_type}}</td>
+													<td>{{medicine.medicine_category}}</td>
+													<td>{{medicine.price}}</td>
+													<td>{{medicine.quantity}}</td>
+													<td><a href="#" class="btn btn-primary">Edit</a></td>
+													<td><a href="#" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
 
 												</tr>
 													
