@@ -373,8 +373,8 @@ def patient_profile(request, pk):
 
 
 
-def add_report(request):
-    return render(request, 'add-report.html')
+# def add_report(request):
+#     return render(request, 'add-report.html')
 
 
 def prescription_view(request):

@@ -358,6 +358,14 @@ def create_invoice(request, pk):
     return render(request, 'hospital_admin/create-invoice.html', context)
 
 @login_required(login_url='admin-login')
+def generate_random_specimen():
+    N = 4
+    string_var = ""
+    string_var = ''.join(random.choices(string.digits, k=N))
+    string_var = "#INV-" + string_var
+    return string_var
+
+@login_required(login_url='admin-login')
 def create_report(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -366,16 +374,27 @@ def create_report(request, pk):
         if request.method == 'POST':
             patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
             report = Report(patient=patient, doctor=doctors)
+            specimen_id = generate_random_specimen()
+            specimen_type = request.POST['specimen_type']
+            collecton_date = request.POST['collection_date']
+            receiving_date = request.POST['reciving_date']
             test_name = request.POST['test_name']
-            description = request.POST['description']
             result = request.POST['result']
+            unit = request.POST['unit']
+            referred_value = request.POST['referred_value']
             delivery_date = request.POST['delivery_date']
 
             # Save to report table
             report.test_name = test_name
-            report.description = description
+      
             report.result = result
             report.delivery_date = delivery_date
+            report.specimen_id = specimen_id
+            report.specimen_type = specimen_type
+            report.collecton_date = collecton_date
+            report.receiving_date = receiving_date
+            report.unit = unit
+            report.referred_value = referred_value
             report.save()
 
 
