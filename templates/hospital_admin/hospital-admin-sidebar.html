@@ -28,6 +28,24 @@
                 <li> 
                     <a href="{% url 'patient-list'%}"><i class="fe fe-user"></i> <span>Patients</span></a>
                 </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="fe fe-document"></i> <span> Lab Worker</span></a>
+                    <ul style="display:none;">
+                        <li><a href="{% url 'add-lab-worker' %}"><i class="fe fe-building"></i> <span>Add Lab Worker</span></a></li>
+                        <li><a href="#"><i class="fe fe-mask"></i> <span>Edit Lab Worker</span></a></li>
+                        <li><a href="#"><i class="fe fe-mask"></i> <span>View Lab Worker</span></a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="fe fe-document"></i> <span> Pharmacist</span></a>
+                    <ul style="display:none;">
+                        <li><a href="{% url 'add-pharmacist' %}"><i class="fe fe-building"></i> <span>Add Pharmacist</span></a></li>
+                        <li><a href="#"><i class="fe fe-mask"></i> <span>Edit Pharmacist</span></a></li>
+                        <li><a href="#"><i class="fe fe-mask"></i> <span>View Pharmacist</span></a></li>
+                    </ul>
+                </li>
          
                 <li> 
                     <a href="{% url 'transactions_list' %}"><i class="fe fe-activity"></i> <span>Transactions</span></a>
