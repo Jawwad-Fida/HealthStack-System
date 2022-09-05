@@ -13,7 +13,7 @@ from django.contrib import admin
 urlpatterns = [
     path('', views.hospital_home, name='hospital_home'),
     path('search/', views.search, name='search'),
-    path('change-password/', views.change_password, name='change-password'),
+    path('change-password/<int:pk>', views.change_password, name='change-password'),
 
     path('add-billing/', views.add_billing, name='add-billing'),
 
@@ -45,7 +45,10 @@ urlpatterns = [
 
     path('hospital-department-list/<int:pk>/', views.hospital_department_list, name='hospital-department-list'),
     path('hospital-doctor-list/<int:pk>/', views.hospital_doctor_list, name='hospital-doctor-list'),
+
     path('hospital-doctor-register/', views.hospital_doctor_register, name='hospital-doctor-register'),
+    path('view-report/', views.view_report, name='view-report'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
