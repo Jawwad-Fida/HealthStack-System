@@ -48,7 +48,6 @@ def change_password(request,pk):
     patient = Patient.objects.get(user_id=pk)
     context={"patient":patient}
     if request.method == "POST":
-        old_password = request.POST["old_password"]
         new_password = request.POST["new_password"]
         confirm_password = request.POST["confirm_password"]
         if new_password == confirm_password:
