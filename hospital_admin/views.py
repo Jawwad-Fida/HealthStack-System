@@ -390,13 +390,20 @@ def add_pharmacist(request):
      user = Admin_Information.objects.get(user=request.user)
     return render(request, 'hospital_admin/add-pharmacist.html',{'admin': user})  
 
+@login_required(login_url='admin-login')
 def medicine_list(request):
     if request.user.is_hospital_admin:
      user = Admin_Information.objects.get(user=request.user)
     return render(request, 'hospital_admin/medicine-list.html',{'admin': user})
 
+@login_required(login_url='admin-login')
 def add_medicine(request):
     if request.user.is_hospital_admin:
      user = Admin_Information.objects.get(user=request.user)
     return render(request, 'hospital_admin/add-medicine.html',{'admin': user})
 
+@login_required(login_url='admin-login')
+def add_lab_worker(request):
+    if request.user.is_hospital_admin:
+     user = Admin_Information.objects.get(user=request.user)
+    return render(request, 'hospital_admin/add-lab-worker.html',{'admin': user})  
