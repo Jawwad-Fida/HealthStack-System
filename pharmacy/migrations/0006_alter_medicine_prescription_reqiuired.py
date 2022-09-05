@@ -7,6 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('pharmacy', '0005_merge_20220905_2240'),
+    ]
 
     operations = [
         migrations.AlterField(
