@@ -62,10 +62,10 @@
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Create Pharmacist</li>
+									<li class="breadcrumb-item active" aria-current="page">Edit Clinical Laboratory Technician</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Add Pharmacist</h2>
+							<h2 class="breadcrumb-title">Edit Clinical Laboratory Technician</h2>
 						</div>
 					</div>
 				</div>
@@ -95,15 +95,19 @@
 																<tr>
 																  <th style="min-width: 100px">Name</th>
 																  <th style="min-width: 100px">Email</th>
+																  <th style="min-width: 100px">Image</th>
 																</tr>
 															  </thead>
 															  <tbody>
 																<tr>
 																  <td>
-																	<input class="form-control" type="text" name="name">
+																	<input class="form-control" type="text" name="name" value="{{lab_worker.name}}">
 																  </td>
 																  <td>
-																	<input class="form-control" type="email" name="email">
+																	<input class="form-control" type="email" name="email" value="{{lab_worker.email}}">
+																  </td>
+																  <td>
+																	<input type="file" class="upload" name="featured_image">
 																  </td>
 																</tr>
 															  </tbody>
@@ -118,20 +122,20 @@
 																	<thead>
 																		<tr>
 																			<th style="min-width: 100px">Usename</th>
-																			<th style="min-width: 100px;">Password</th>
-																			<th style="min-width: 100px;">Re-Password</th>
+																			<th style="min-width: 100px;">Phone number</th>
+																			<th style="min-width: 100px;">Age</th>
 																		</tr>
 																	</thead>
 																	<tbody>
 																		<tr>
 																			<td>
-																				<input class="form-control" type="text" name="usename">
+																				<input class="form-control" type="text" name="username" value="{{lab_worker.username}}">
 																			</td>
 																			<td>
-																				<input class="form-control" type="Password" name="Password">
+																				<input class="form-control" type="text" name="phone_number" value="{{lab_worker.phone_number}}">
 																			</td>
 																			<td>
-																				<input class="form-control" type="password" name="Re-password">
+																				<input class="form-control" type="text" name="age" value="{{lab_worker.age}}">
 																			</td>
 																		</tr>
 																	</tbody>
@@ -140,34 +144,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="card card-table">
-												<div class="card-body">
-													<div class="table-responsive">
-														<table class="table table-hover table-center">
-															<thead>
-																<tr>
-																	<th style="min-width: 100px">Phone Number</th>
-																	<th style="min-width: 100px;">Education</th>
-																	<th style="min-width: 100px;">Age</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>
-																		<input class="form-control" type="text" name="phone_number">
-																	</td>
-																	<td>
-																		<input class="form-control" type="text" name="education">
-																	</td>
-																	<td>
-																		<input class="form-control" type="text" name="age">
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												</div>
+									
 												<div class="submit-section">
 													<button type="submit" class="btn btn-primary submit-btn" >
 														Save Changes

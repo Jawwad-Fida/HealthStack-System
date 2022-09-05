@@ -39,13 +39,12 @@ urlpatterns = [
     path('edit-emergency-information/<int:pk>/', views.edit_emergency_information,name='edit-emergency-information'),
     
     path('hospital-profile/', views.hospital_profile ,name='hospital-profile'),
-    path('hospital-admin-profile/<int:pk>/', views.hospital_admin_profile,
-         name='hospital-admin-profile'),
-
+    path('hospital-admin-profile/<int:pk>/', views.hospital_admin_profile,name='hospital-admin-profile'),
     path('create-invoice/<int:pk>/', views.create_invoice,name='create-invoice'),
     path('create-report/<int:pk>/', views.create_report,name='create-report'),
     path('add-lab-worker/', views.add_lab_worker,name='add-lab-worker'),
-    
+    path('lab-worker-list/', views.view_lab_worker,name='lab-worker-list'),
+    path('edit-lab-worker/<int:pk>/', views.edit_lab_worker,name='edit-lab-worker'),
     path('medicine-list/', views.medicine_list,name='medicine-list'),
     path('add-medicine/', views.add_medicine,name='add-medicine'),
 
