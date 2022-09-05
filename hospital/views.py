@@ -15,6 +15,8 @@ from django.views.decorators.cache import cache_control
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from datetime import datetime
+import datetime
 
 
 from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
@@ -43,6 +45,7 @@ def hospital_home(request):
 @login_required(login_url="login")
 def change_password(request):
     return render(request, 'change-password.html')
+    
 
 
 def add_billing(request):
@@ -479,3 +482,12 @@ def testing(request):
     # test range, len, and loop to show variables before moving on to doctor profile
     
     return render(request, 'testing.html', context)
+
+def view_report(request):
+    if request.user.is_patient:
+        patient = Patient.objects.get(user=request.user)
+        current_date = datetime.date.today()
+        context = {'patient':patient,'current_date' : current_date}
+        return render(request, 'view-report.html',context)
+    else:
+        redirect('logout') 

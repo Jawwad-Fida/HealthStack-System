@@ -426,8 +426,6 @@ def patient_profile(request, pk):
     return render(request, 'patient-profile.html', context)
 
 
-def view_report(request):
-    return render(request, 'view-report.html')
 
 
 def add_report(request):
