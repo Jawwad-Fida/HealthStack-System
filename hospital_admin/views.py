@@ -15,7 +15,7 @@ from pharmacy.models import Pharmacist
 
 from doctor.models import Doctor_Information,Report,Appointment
 from sslcommerz.models import Payment
-from .forms import AdminUserCreationForm, AddHospitalForm, EditHospitalForm, EditEmergencyForm,AdminForm
+from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
 from .models import Admin_Information,specialization,service,hospital_department
 import random,re
 import string
@@ -405,5 +405,50 @@ def add_medicine(request):
 @login_required(login_url='admin-login')
 def add_lab_worker(request):
     if request.user.is_hospital_admin:
-     user = Admin_Information.objects.get(user=request.user)
-    return render(request, 'hospital_admin/add-lab-worker.html',{'admin': user})  
+        user = Admin_Information.objects.get(user=request.user)
+        
+        form = LabWorkerCreationForm()
+     
+        if request.method == 'POST':
+            form = LabWorkerCreationForm(request.POST)
+            if form.is_valid():
+                # form.save(), commit=False --> don't save to database yet (we have a chance to modify object)
+                user = form.save(commit=False)
+                user.is_labworker = True
+                user.save()
+
+                messages.success(request, 'Clinical Laboratory Technician account was created!')
+
+                # After user is created, we can log them in
+                #login(request, user)
+                return redirect('admin_login')
+            else:
+                messages.error(request, 'An error has occurred during registration')
+    
+    context = {'form': form, 'admin': user}
+    return render(request, 'hospital_admin/add-lab-worker.html', context)  
+
+
+# def admin_register(request):
+#     page = 'hospital_admin/register'
+#     form = AdminUserCreationForm()
+
+#     if request.method == 'POST':
+#         form = AdminUserCreationForm(request.POST)
+#         if form.is_valid():
+#             # form.save()
+#             # commit=False --> don't save to database yet (we have a chance to modify object)
+#             user = form.save(commit=False)
+#             user.is_hospital_admin = True
+#             user.save()
+
+#             messages.success(request, 'User account was created!')
+
+#             # After user is created, we can log them in
+#             #login(request, user)
+#             return redirect('admin_login')
+
+#         else:
+#             messages.error(
+#                 request, 'An error has occurred during registration')
+#     # else:
