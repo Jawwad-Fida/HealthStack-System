@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from doctor.models import Prescription
 
 from hospital.models import User, Patient
 
@@ -52,7 +53,7 @@ class Medicine(models.Model):
     price = models.CharField(max_length=200, choices=MEDICINE_TYPE, null=True, blank=True)
     # category
     serial_number = models.CharField(max_length=200, choices=MEDICINE_TYPE, null=True, blank=True)
-    
+    Prescription_reqiuired = models.BooleanField(default=False, null=True, blank=True)
     def __str__(self):
         return str(self.name)
     
