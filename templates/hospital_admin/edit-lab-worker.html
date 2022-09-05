@@ -54,7 +54,7 @@
 
                 <div class="content container-fluid">
 
-            <!-- Breadcrumb -->
+<!-- Breadcrumb -->
 			<div class="breadcrumb-bar">
 				<div class="container-fluid">
 					<div class="row align-items-center">
@@ -62,10 +62,10 @@
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Create Lab Worker</li>
+									<li class="breadcrumb-item active" aria-current="page">Create Pharmacist</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title" style="text-align: center">Add Clinical Laboratory Technician</h2>
+							<h2 class="breadcrumb-title">Add Pharmacist</h2>
 						</div>
 					</div>
 				</div>
@@ -80,22 +80,94 @@
 							<div class="card">
 								<div class="card-header">
 									<!-- Profile Settings Form -->
-									<form action="{% url 'add-lab-worker' %}" method="POST" enctype="multipart/form-data" >
-										{% csrf_token %}
-
-                                                    {% for field in form %}
-													<div class="row form-row justify-content-center">
-														<div class="col-4 col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="focus-label">{{ field.label }}</label>
-                                                                {{field}}
-                                                            </div>
+									<form action="#" method="POST" enctype="multipart/form-data" >
+													{% csrf_token %}
+							
+													<div class="row form-row">
+														<div class="col-12 col-md-12">
+															<div class="form-group">
+															<div class="change-avatar"></div>
+													<div class="card card-table">
+														<div class="card-body">
+														  <div class="table-responsive">
+															<table class="table table-hover table-center">
+															  <thead>
+																<tr>
+																  <th style="min-width: 100px">Name</th>
+																  <th style="min-width: 100px">Email</th>
+																</tr>
+															  </thead>
+															  <tbody>
+																<tr>
+																  <td>
+																	<input class="form-control" type="text" name="name">
+																  </td>
+																  <td>
+																	<input class="form-control" type="email" name="email">
+																  </td>
+																</tr>
+															  </tbody>
+															</table>
+														  </div>
+														</div>
+													  </div>
+													<div class="card card-table">
+														<div class="card-body">
+															<div class="table-responsive">
+																<table class="table table-hover table-center">
+																	<thead>
+																		<tr>
+																			<th style="min-width: 100px">Usename</th>
+																			<th style="min-width: 100px;">Password</th>
+																			<th style="min-width: 100px;">Re-Password</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<input class="form-control" type="text" name="usename">
+																			</td>
+																			<td>
+																				<input class="form-control" type="Password" name="Password">
+																			</td>
+																			<td>
+																				<input class="form-control" type="password" name="Re-password">
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
 														</div>
 													</div>
-                                                    {% endfor %}
-												
-
-
+												</div>
+												<div class="card card-table">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center">
+															<thead>
+																<tr>
+																	<th style="min-width: 100px">Phone Number</th>
+																	<th style="min-width: 100px;">Education</th>
+																	<th style="min-width: 100px;">Age</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>
+																		<input class="form-control" type="text" name="phone_number">
+																	</td>
+																	<td>
+																		<input class="form-control" type="text" name="education">
+																	</td>
+																	<td>
+																		<input class="form-control" type="text" name="age">
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												</div>
 												<div class="submit-section">
 													<button type="submit" class="btn btn-primary submit-btn" >
 														Save Changes
