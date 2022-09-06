@@ -34,8 +34,24 @@ def generate_random_string():
     return string_var
 
 @login_required(login_url="doctor-login")
-def doctor_change_password(request):
-    return render(request, 'doctor-change-password.html')
+def doctor_change_password(request,pk):
+    doctor = Doctor_Information.objects.get(user_id=pk)
+    context={'doctor':doctor}
+    if request.method == "POST":
+        
+        new_password = request.POST["new_password"]
+        confirm_password = request.POST["confirm_password"]
+        if new_password == confirm_password:
+            
+            request.user.set_password(new_password)
+            request.user.save()
+            messages.success(request,"Password Changed Successfully")
+            return redirect("doctor-dashboard")
+            
+        else:
+            messages.error(request,"New Password and Confirm Password is not same")
+            return redirect("change-password",pk)
+    return render(request, 'doctor-change-password.html',context)
 
 @login_required(login_url="doctor-login")
 def schedule_timings(request):
@@ -51,7 +67,10 @@ def patient_id(request):
 @login_required(login_url="doctor-login")
 def appointments(request):
     doctor = Doctor_Information.objects.get(user=request.user)
-    context = {'doctor': doctor}
+
+
+    appointments = Appointment.objects.filter(doctor=doctor).order_by('date')
+    context = {'doctor': doctor, 'appointments': appointments}
     return render(request, 'appointments.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -357,8 +376,8 @@ def patient_profile(request, pk):
 
 
 
-def add_report(request):
-    return render(request, 'add-report.html')
+# def add_report(request):
+#     return render(request, 'add-report.html')
 
 
 def prescription_view(request):

@@ -111,144 +111,138 @@
                                             </div>
                                           </div>
                                         </div>
+                                        
+							<!-- /specimen -->
 										<div class="card card-table">
 											<div class="card-body">
-											  <div class="table-responsive">
-												<table class="table table-hover table-center">
-												  <thead>
-													<tr>
-													  
-													  <th style="min-width: 300px;font-size:20px"><b>Specimen Information</b></th>
-													  <th style="min-width: 50px;"></th>
-													</tr>
-												  </thead>
-												  <thead>
-													<tr>
-													  <th style="min-width: 300px">Specimen ID</th>
-													  <th style="min-width: 300px">Specimen Type</th>
-													 
-													  
-													  <th style="min-width: 50px;"></th>
-													</tr>
-												  </thead>
-												
-												  <tbody>
-													<tr>
-													  <td>
-														<input class="form-control" type="text" name="specimen_ID">
-													  </td>
-													  <td>
-														<input class="form-control" type="text" name="specimen_type">
-													  </td>
-													</tr>
-												  </tbody>
-												  <thead>
-													<tr>
-												
-													  <th style="min-width: 300px">Collection Date/Time</th>
-													  <th style="min-width: 300px">Receiving Date/Time</th>
-													  
-													  <th style="min-width: 50px;"></th>
-													</tr>
-												  </thead>
-												
-												  <tbody>
-													<tr>
-													 
-													  <td>
-														<input class="form-control" type="text" name="collection_date/Time">
-													  </td>
-													  <td>
-														<input class="form-control" type="text" name="receiving_date/Time">
-													  </td>
-													  
-													</tr>
-												  </tbody>
-												</table>
-											  </div>
-											  <div class="add-specimen">
-												<a href="javascript:void(0);" class="add-specimen"><i class="fa fa-plus-circle"></i> Add More</a>
-											</div>
-											</div>
-										  </div>
-                                        <div class="card card-table">
-                                          <div class="card-body">
-                                            <div class="table-responsive">
-                                              <table class="table table-hover table-center">
-												<thead>
-													<tr>
-													  
-													  <th style="min-width: 300px;font-size:20px"><b>Test Information</b></th>
-													  <th style="min-width: 50px;"></th>
-													</tr>
-												  </thead>
-                                                <thead>
-                                                  <tr>
-                                                    <th style="min-width: 300px">Test Name</th>
-                                                    <th style="min-width: 300px">Result</th>
-													
-                                                    <th style="min-width: 50px;"></th>
-                                                  </tr>
-                                                </thead>
-												
-                                                <tbody>
-                                                  <tr>
-                                                    <td>
-                                                      <input class="form-control" type="text" name="test_name">
-                                                    </td>
-                                                    <td>
-                                                      <input class="form-control" type="text" name="result">
-                                                    </td>
-													
-                                                  </tr>
-                                                </tbody>
-												<thead>
-													<tr>
-													 
-													  <th style="min-width: 300px">Unit</th>
-													  <th style="min-width: 300px">Referred Value</th>
-													  <th style="min-width: 50px;"></th>
-													</tr>
-												  </thead>
-												  
-												  <tbody>
-													<tr>
-													  
-													  <td>
-														  <input class="form-control" type="text" name="unit">
-														</td>
-														<td>
-														  <input class="form-control" type="text" name="referred_value">
-														</td>
-													</tr>
-												  </tbody>
-                                              </table>
+                                                <h4 class="card-title">Specimen Information</h4>
+                                                <div class="specimen-info">
+                                                    <div class="row form-row specimen-cont"></div>
+                                                   
+                                                        <div class="col-12 col-md-10 col-lg-11">
+                                                            <div class="row form-row">
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Specimen ID</label>
+                                                                        <input type="text" class="form-control" value="{{report.specimen_id}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Specimen Type</label>
+                                                                        <input type="text" class="form-control" value="{{report.specimen_type}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Collection Date</label>
+                                                                        <input type="text" class="form-control" value="{{report.collection_date}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Receiving Date</label>
+                                                                        <input type="text" class="form-control" value="{{report.receiving_date}}">
+                                                                    </div> 
+                                                                </div>
+            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+                        
+
+                                                </div>
                                             </div>
-                                          </div>
-                                        </div>
-                                      
-                                        <div class="card card-table">
-                                          <div class="card-body">
-                                            <div class="table-responsive">
-                                              <table class="table table-hover table-center">
-                                                <thead>
-                                                  <tr>
-                                                    <th style="min-width: 300px">Delivery Date</th>
-                                                    <th style="min-width: 50px;"></th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  <tr>
-                                                    <td>
-                                                      <input class="form-control" type="date" name="delivery_date">
-                                                    </td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
+                                            <div class="add-more">
+                                                <a href="javascript:void(0);" class="add-specimen"><i class="fa fa-plus-circle"></i> Add Specimen</a>
                                             </div>
-                                          </div>
                                         </div>
-                                      </div>
+                        
+                                    
+							<!-- /specimen -->
+
+                            	<!-- /Test -->
+
+                                        <div class="card card-table">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Test Information</h4>
+                                                <div class="specimen-info">
+                                                    <div class="row form-row specimen-cont"></div>
+                                                
+                                                        <div class="col-12 col-md-10 col-lg-11">
+                                                            <div class="row form-row">
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Test Name</label>
+                                                                        <input type="text" class="form-control" value="{{report.test_name}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Result</label>
+                                                                        <input type="text" class="form-control" value="{{report.result}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Unit</label>
+                                                                        <input type="text" class="form-control" value="{{report.unit}}">
+                                                                    </div> 
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Referred Value</label>
+                                                                        <input type="text" class="form-control" value="{{report.referred_value}}">
+                                                                    </div> 
+                                                                </div>
+            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+                        
+
+                                                </div>
+                                            </div>
+                                            <div class="add-more">
+                                                <a href="javascript:void(0);" class="add-test"><i class="fa fa-plus-circle"></i> Add Test</a>
+                                            </div>
+                                        </div>
+                                        <!-- /Test -->
+
+
+                                        <div class="card card-table">
+                                            <div class="card-body">
+                                              <div class="table-responsive">
+                                                <table class="table table-hover table-center">
+                                                  <thead>
+                                                    <tr>
+                                                      <th style="min-width: 300px">Delivery Date</th>
+                                                      <th style="min-width: 50px;"></th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr>
+                                                      <td>
+                                                        <input class="form-control" type="date" name="delivery_date">
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                            </div>
+                                        </div>
+
+                                
                                       <div class="submit-section">
                                         <button type="submit" class="btn btn-primary submit-btn">
                                         Save Changes
@@ -268,144 +262,7 @@
 			<!-- /Page Content -->
 				</div>			
 			</div>
-      			<!-- Footer -->
-			<footer class="footer">
-				
-				<!-- Footer Top -->
-				<div class="footer-top">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-about">
-									<div class="footer-logo">
-										<img src="{% static 'HealthStack-System/images/Normal/footer_logo.png' %}" alt="logo">
-									</div>
-									<div class="footer-about-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-										<div class="social-icon">
-											<ul>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Patients</h2>
-									<ul>
-										<li><a href="search.html"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-										<li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
-										<li><a href="register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
-										<li><a href="booking.html"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-										<li><a href="patient-dashboard.html"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
-									</ul>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Doctors</h2>
-									<ul>
-										<li><a href="appointments.html"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-										<li><a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-										<li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
-										<li><a href="doctor-register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
-										<li><a href="doctor-dashboard.html"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
-									</ul>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-contact">
-									<h2 class="footer-title">Contact Us</h2>
-									<div class="footer-contact-info">
-										<div class="footer-address">
-											<span><i class="fas fa-map-marker-alt"></i></span>
-											<p> 3556  Beech Street, San Francisco,<br> California, CA 94108 </p>
-										</div>
-										<p>
-											<i class="fas fa-phone-alt"></i>
-											+1 315 369 5943
-										</p>
-										<p class="mb-0">
-											<i class="fas fa-envelope"></i>
-											doccure@example.com
-										</p>
-									</div>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				<!-- /Footer Top -->
-				
-				<!-- Footer Bottom -->
-                <div class="footer-bottom">
-					<div class="container-fluid">
-					
-						<!-- Copyright -->
-						<div class="copyright">
-							<div class="row">
-								<div class="col-md-6 col-lg-6">
-									<div class="copyright-text">
-										<p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-6">
-								
-									<!-- Copyright Menu -->
-									<div class="copyright-menu">
-										<ul class="policy-menu">
-											<li><a href="term-condition.html">Terms and Conditions</a></li>
-											<li><a href="privacy-policy.html">Policy</a></li>
-										</ul>
-									</div>
-									<!-- /Copyright Menu -->
-									
-								</div>
-							</div>
-						</div>
-						<!-- /Copyright -->
-						
-					</div>
-				</div>
-				<!-- /Footer Bottom -->
-				
-			</footer>
-			<!-- /Footer -->
+      		
 			<!-- /Page Wrapper -->
 		
         </div>

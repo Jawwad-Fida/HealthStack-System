@@ -62,14 +62,27 @@ def home(request,pk):
                 # chats = chatMessages.objects.filter(Q(user_from=request.user.id & user_to=request.GET['u']) | Q(user_from=request.GET['u'] & user_to=request.user.id))
                 chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
                 chats = chats.order_by('date_created')
-            context = {
+                pat = Patient.objects.get(user_id=request.GET['u'])
+                context = {
                 "page":"home",
                 "users":users,
                 "chats":chats,
                 "patient":patients,
                 "doctor":doctor,
+                "pat":pat,
                 "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             }
+            
+            else:
+            
+                context = {
+                    "page":"home",
+                    "users":users,
+                    "chats":chats,
+                    "patient":patients,
+                    "doctor":doctor,
+                    "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
+                }
             print(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             return render(request,"chat-doctor.html",context)
 

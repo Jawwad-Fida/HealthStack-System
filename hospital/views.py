@@ -43,9 +43,25 @@ def hospital_home(request):
     return render(request, 'index-2.html', context)
 
 @login_required(login_url="login")
-def change_password(request):
-    return render(request, 'change-password.html')
-    
+
+def change_password(request,pk):
+    patient = Patient.objects.get(user_id=pk)
+    context={"patient":patient}
+    if request.method == "POST":
+        new_password = request.POST["new_password"]
+        confirm_password = request.POST["confirm_password"]
+        if new_password == confirm_password:
+            
+            request.user.set_password(new_password)
+            request.user.save()
+            messages.success(request,"Password Changed Successfully")
+            return redirect("patient-dashboard")
+            
+        else:
+            messages.error(request,"New Password and Confirm Password is not same")
+            return redirect("change-password",pk)
+    return render(request, 'change-password.html',context)
+
 
 
 def add_billing(request):

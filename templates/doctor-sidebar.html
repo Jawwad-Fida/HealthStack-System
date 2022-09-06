@@ -107,7 +107,7 @@
           </a>
         </li> -->
         <li>
-          <a href="{% url 'doctor-change-password'%}">
+          <a href="{% url 'doctor-change-password' pk=user.id%}">
             <i class="fas fa-lock"></i>
             <span>Change Password</span>
           </a>

@@ -15,7 +15,7 @@ from doctor.models import Doctor_Information, Prescription, Report, Appointment
 
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
-from .models import Admin_Information,specialization,service,hospital_department
+from .models import Admin_Information,specialization,service,hospital_department, Clinical_Laboratory_Technician
 import random,re
 import string
 from django.db.models import  Count
@@ -358,6 +358,14 @@ def create_invoice(request, pk):
     return render(request, 'hospital_admin/create-invoice.html', context)
 
 @login_required(login_url='admin-login')
+def generate_random_specimen():
+    N = 4
+    string_var = ""
+    string_var = ''.join(random.choices(string.digits, k=N))
+    string_var = "#INV-" + string_var
+    return string_var
+
+@login_required(login_url='admin-login')
 def create_report(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -366,16 +374,27 @@ def create_report(request, pk):
         if request.method == 'POST':
             patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
             report = Report(patient=patient, doctor=doctors)
+            specimen_id = generate_random_specimen()
+            specimen_type = request.POST['specimen_type']
+            collecton_date = request.POST['collection_date']
+            receiving_date = request.POST['reciving_date']
             test_name = request.POST['test_name']
-            description = request.POST['description']
             result = request.POST['result']
+            unit = request.POST['unit']
+            referred_value = request.POST['referred_value']
             delivery_date = request.POST['delivery_date']
 
             # Save to report table
             report.test_name = test_name
-            report.description = description
+      
             report.result = result
             report.delivery_date = delivery_date
+            report.specimen_id = specimen_id
+            report.specimen_type = specimen_type
+            report.collecton_date = collecton_date
+            report.receiving_date = receiving_date
+            report.unit = unit
+            report.referred_value = referred_value
             report.save()
 
 
@@ -471,27 +490,19 @@ def add_lab_worker(request):
     context = {'form': form, 'admin': user}
     return render(request, 'hospital_admin/add-lab-worker.html', context)  
 
+@login_required(login_url='admin-login')
+def view_lab_worker(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        lab_workers = Clinical_Laboratory_Technician.objects.all()
+        
+    return render(request, 'hospital_admin/lab-worker-list.html', {'lab_workers': lab_workers, 'admin': user})
 
-# def admin_register(request):
-#     page = 'hospital_admin/register'
-#     form = AdminUserCreationForm()
+@login_required(login_url='admin-login')
+def edit_lab_worker(request, pk):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        lab_worker = Clinical_Laboratory_Technician.objects.get(technician_id=pk)
+        
+    return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
-#     if request.method == 'POST':
-#         form = AdminUserCreationForm(request.POST)
-#         if form.is_valid():
-#             # form.save()
-#             # commit=False --> don't save to database yet (we have a chance to modify object)
-#             user = form.save(commit=False)
-#             user.is_hospital_admin = True
-#             user.save()
-
-#             messages.success(request, 'User account was created!')
-
-#             # After user is created, we can log them in
-#             #login(request, user)
-#             return redirect('admin_login')
-
-#         else:
-#             messages.error(
-#                 request, 'An error has occurred during registration')
-#     # else:
