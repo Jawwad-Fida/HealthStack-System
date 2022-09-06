@@ -465,6 +465,47 @@ def add_medicine(request):
     return render(request, 'hospital_admin/add-medicine.html',{'admin': user})
 
 @login_required(login_url='admin-login')
+def edit_medicine(request, pk):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        
+        medicine = Medicine.objects.get(serial_number=pk)
+        old_medicine_image = medicine.featured_image
+        
+        if request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = old_medicine_image
+                name = request.POST.get('name')
+                Prescription_reqiuired = request.POST.get('requirement_type')     
+                weight = request.POST.get('weight') 
+                quantity = request.POST.get('quantity')
+                medicine_category = request.POST.get('category_type')
+                medicine_type = request.POST.get('medicine_type')
+                description = request.POST.get('description')
+                price = request.POST.get('price')
+                
+                medicine.name = name
+                medicine.Prescription_reqiuired = Prescription_reqiuired
+                medicine.weight = weight
+                medicine.quantity = quantity
+                medicine.medicine_category = medicine_category
+                medicine.medicine_type = medicine_type
+                medicine.description = description
+                medicine.price = price
+                medicine.featured_image = featured_image
+                medicine.stock_quantity = 80
+                #medicine.medicine_id = generate_random_medicine_ID()
+            
+                medicine.save()
+            
+                return redirect('medicine-list')
+   
+    return render(request, 'hospital_admin/edit-medicine.html',{'medicine': medicine,'admin': user})
+
+
+@login_required(login_url='admin-login')
 def add_lab_worker(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
