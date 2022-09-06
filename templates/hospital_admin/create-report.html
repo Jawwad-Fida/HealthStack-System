@@ -12,16 +12,19 @@
         <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
 
 		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"> 
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}">
+        
 		
 		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">
+        <!-- <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}"> -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}"/>
+        <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}"/>
 		
 		<!-- Feathericon CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
 		
 		<!-- Datatables CSS -->
-		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}"> 
+		    <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}"> 
 		
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
@@ -35,15 +38,16 @@
 	
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
-			<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
+			    <header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
 				<!-- Logo -->
 
             
 			<!-- /Header -->
 			
 			<!-- Sidebar -->
-			<aside class="sidebar" id="sidebar">
-				{% include 'hospital_admin/hospital-admin-sidebar.html' %} </aside>
+			  <aside class="sidebar" id="sidebar">
+				  {% include 'hospital_admin/hospital-admin-sidebar.html' %} 
+        </aside>
 			<!-- /Sidebar -->
 			
 			<!-- Page Wrapper -->
@@ -115,53 +119,53 @@
 							<!-- /specimen -->
 										<div class="card card-table">
 											<div class="card-body">
-                                                <h4 class="card-title">Specimen Information</h4>
-                                                <div class="specimen-info">
-                                                    <div class="row form-row specimen-cont"></div>
+                        <h4 class="card-title">Specimen Information</h4>
+                        <div class="specimen-info">
+                            <div class="row form-row specimen-cont">
                                                    
-                                                        <div class="col-12 col-md-10 col-lg-11">
-                                                            <div class="row form-row">
+                              <div class="col-12 col-md-10 col-lg-11">
+                                <div class="row form-row">
 
-                                                                <div class="col-12 col-md-6 col-lg-4">
-                                                                    <div class="form-group">
-                                                                        <label>Specimen ID</label>
-                                                                        <input type="text" class="form-control" value="{{report.specimen_id}}">
-                                                                    </div> 
-                                                                </div>
+                                  <div class="col-12 col-md-6 col-lg-3">
+                                      <div class="form-group">
+                                          <label>Specimen ID</label>
+                                          <input type="text" class="form-control" value="{{report.specimen_id}}">
+                                      </div>
+                                  </div> 
+                                  
+                                  <div class="col-12 col-md-6 col-lg-3">
+                                      <div class="form-group">
+                                          <label>Specimen Type</label>
+                                          <input type="text" class="form-control" value="{{report.specimen_type}}">
+                                      </div> 
+                                  </div>
 
-                                                                <div class="col-12 col-md-6 col-lg-4">
-                                                                    <div class="form-group">
-                                                                        <label>Specimen Type</label>
-                                                                        <input type="text" class="form-control" value="{{report.specimen_type}}">
-                                                                    </div> 
-                                                                </div>
+                                  <div class="col-12 col-md-6 col-lg-3">
+                                      <div class="form-group">
+                                          <label>Collection Date</label>
+                                          <input type="text" class="form-control" value="{{report.collection_date}}">
+                                      </div> 
+                                  </div>
 
-                                                                <div class="col-12 col-md-6 col-lg-4">
-                                                                    <div class="form-group">
-                                                                        <label>Collection Date</label>
-                                                                        <input type="text" class="form-control" value="{{report.collection_date}}">
-                                                                    </div> 
-                                                                </div>
+                                  <div class="col-12 col-md-6 col-lg-3">
+                                      <div class="form-group">
+                                          <label>Receiving Date</label>
+                                          <input type="text" class="form-control" value="{{report.receiving_date}}">
+                                      </div> 
+                                  </div>
 
-                                                                <div class="col-12 col-md-6 col-lg-4">
-                                                                    <div class="form-group">
-                                                                        <label>Receiving Date</label>
-                                                                        <input type="text" class="form-control" value="{{report.receiving_date}}">
-                                                                    </div> 
-                                                                </div>
-            
-                                                        </div>
-                                                    </div>
+                                </div>
+                              </div>
+                              <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
 
-                                                    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
-                        
+                            </div>
+                        </div>
 
-                                                </div>
-                                            </div>
-                                            <div class="add-more">
-                                                <a href="javascript:void(0);" class="add-specimen"><i class="fa fa-plus-circle"></i> Add Specimen</a>
-                                            </div>
-                                        </div>
+                        <div class="add-more">
+                          <a href="javascript:void(0);" class="add-specimen"><i class="fa fa-plus-circle"></i> Add Specimen</a>
+                        </div>
+                      </div>
+                    </div>
                         
                                     
 							<!-- /specimen -->
@@ -171,34 +175,34 @@
                                         <div class="card card-table">
                                             <div class="card-body">
                                                 <h4 class="card-title">Test Information</h4>
-                                                <div class="specimen-info">
-                                                    <div class="row form-row specimen-cont"></div>
+                                                <div class="test-info">
+                                                    <div class="row form-row test-cont">
                                                 
                                                         <div class="col-12 col-md-10 col-lg-11">
                                                             <div class="row form-row">
 
-                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="col-12 col-md-6 col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Test Name</label>
                                                                         <input type="text" class="form-control" value="{{report.test_name}}">
                                                                     </div> 
                                                                 </div>
 
-                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="col-12 col-md-6 col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Result</label>
                                                                         <input type="text" class="form-control" value="{{report.result}}">
                                                                     </div> 
                                                                 </div>
 
-                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="col-12 col-md-6 col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Unit</label>
                                                                         <input type="text" class="form-control" value="{{report.unit}}">
                                                                     </div> 
                                                                 </div>
 
-                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="col-12 col-md-6 col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Referred Value</label>
                                                                         <input type="text" class="form-control" value="{{report.referred_value}}">
@@ -209,13 +213,13 @@
                                                     </div>
 
                                                     <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
-                        
 
                                                 </div>
                                             </div>
                                             <div class="add-more">
                                                 <a href="javascript:void(0);" class="add-test"><i class="fa fa-plus-circle"></i> Add Test</a>
                                             </div>
+                                        </div>
                                         </div>
                                         <!-- /Test -->
 
@@ -261,7 +265,7 @@
 			</div>		
 			<!-- /Page Content -->
 				</div>			
-			</div>
+			      </div>
       		
 			<!-- /Page Wrapper -->
 		
@@ -270,33 +274,24 @@
 		
 
 		<!-- jQuery -->
-		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/admin/jquery-3.2.1.min.js' %}"></script>
 
 		<!-- Bootstrap Core JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
-		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
-	
-		<!-- Sticky Sidebar JS -->
-		<script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
-		<script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
-	
-		<!-- Select2 JS -->
-		<script src="{% static 'HealthStack-System/plugins/Normal/select2/js/select2.min.js' %}"></script>
-	
-		<!-- Dropzone JS -->
-		<script src="{% static 'HealthStack-System/plugins/Normal/dropzone/dropzone.min.js' %}"></script>
-	
-		<!-- Bootstrap Tagsinput JS -->
-		<script src="{% static 'HealthStack-System/plugins/Normal/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/admin/popper.min.js' %}"></script> 
+    <script src="{% static 'HealthStack-System/js/admin/bootstrap.min.js' %}"></script>
+
+    <!-- Slimscroll JS -->
+    <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js' %}"></script>
 	
 		<!-- Report Settings JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/report-settings.js' %}"></script>
-	
-		<!-- Searchbar JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/sidebar.js' %}"></script>
-	
+    <script src="{% static 'HealthStack-System/js/Normal/report_settings.js' %}"></script>
+
+		<!-- Datatables JS -->
+		<script src="{% static 'HealthStack-System/plugins/admin/datatables/jquery.dataTables.min.js'%}"></script> 
+		<script src="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.js'%}"></script>
+		
 		<!-- Custom JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
 		
 		
 	</body>
