@@ -1,0 +1,325 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>HealthStack</title>
+    <!-- Favicons -->
+    <link
+    type="image/x-icon"
+    href="{% static 'HealthStack-System/images/Normal/favicon.png' %}"
+    rel="icon"
+    />
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">
+
+	<!-- Feathericon CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
+
+	<!-- Datatables CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}">
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/add-medicine.css'%}">
+
+
+	<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+		<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
+		<!-- /Header -->
+
+		<!-- Sidebar -->
+		<aside class="sidebar" id="sidebar">
+			{% include 'hospital_admin/hospital-admin-sidebar.html' %} </aside>
+		<!-- /Sidebar -->
+
+		<div class="page-wrapper">
+
+			<div class="content container-fluid">
+
+				<!-- Breadcrumb -->
+				<div class="breadcrumb-bar">
+					<div class="container-fluid">
+						<div class="row align-items-center">
+							<div class="col-md-12 col-12">
+								<nav aria-label="breadcrumb" class="page-breadcrumb">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Edit medicine information
+										</li>
+									</ol>
+								</nav>
+								<h2 class="breadcrumb-title">Edit Medicine Information</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Breadcrumb -->
+
+				<!-- Page Content -->
+				<div class="call-content-full">
+					<div class="container-lg">
+						<div class="row-cols-6">
+							<div class="col-md-7 col-lg-8 col-xl-12">
+								<div class="card">
+									<div class="card-body">
+
+										<!-- Medicine data entry Form -->
+										<form action="#" method="POST" enctype="multipart/form-data">
+											{% csrf_token %}
+											<div class="row form-row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<div class="change-avatar">
+															<div class="profile-img">
+																<img src="{{medicine.featured_image.url}}"
+																	alt="Medicine Image">
+															</div>
+															<div class="upload-img">
+																<div class="change-photo-btn">
+																	<span><i class="fa fa-upload"></i> Upload Photo</span>
+																	<input type="file" class="upload"
+                                                                           name="featured_image"
+                                                                           value="{{featured_image}}">
+																</div>
+																<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+															</div>
+														</div>
+													</div>
+												</div>
+												
+												<div class="col-12 col-md-12">
+													<div class="form-group">
+														<div class="change-avatar"></div>
+													</div>
+													<div class="card card-table">
+														<div class="card-body">
+															<div class="table-responsive">
+																<table class="table table-hover table-center">
+																	<thead>
+																		<tr>
+																			<th style="min-width: 300px">Medicine Name</th>
+																			<th style="min-width: 300px">Weight</th></th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<input class="form-control" type="text" name="name" value="{{medicine.name}}">
+																			</td>
+																			<td>
+																				<input class="form-control" type="text"
+																					name="weight" value="{{medicine.weight}}">
+																			</td>
+																			
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="card card-table">
+														<div class="card-body">
+															<div class="table-responsive">
+																<table class="table table-hover table-center">
+																	<thead>
+																		<tr>
+																			<th style="min-width: 300px">Quantity</th>
+																			<th style="min-width: 300px">Price</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<input class="form-control" type="text"
+																					name="quantity" value="{{medicine.quantity}}">
+																			</td>
+																			<td>
+																				<input class="form-control" type="text"
+																					name="price" value="{{medicine.price}}" >
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="card card-table">
+														<div class="card-body">
+															<div class="table-responsive">
+																<table class="table table-hover table-center">
+																	<thead>
+																		<tr>
+																			<th style="min-width: 300px">Prescription Requirement
+																			<th style="min-width: 300px">Medicine Category</th>	
+																			<th style="min-width: 300px">Medicine Type </th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<label for="cars">Choose Requirement Type:
+																				</label>
+																				<select id="type" name="requirement_type" value="{{medicine.Prescription_reqiuired}}">
+																					<option value="yes">yes
+																					</option>
+																					<option value="no">no
+																					</option>									
+																				</select>
+																			</td>
+																			<td>
+																				<label for="cars">Choose medicine Category:
+																				</label>
+																				<select id="type" name="category_type" value="{{medicine.medicine_category}}">
+																					<option value="fever">fever
+																					</option>
+																					<option value="pain">pain
+																					</option>
+																					<option value="cough">cough
+																					</option>
+																					<option value="cold">cold
+																					</option>
+																					<option value="flu">flu
+																					</option>
+																					<option value="diabetes">diabetes
+																					</option>
+																					<option value="eye">eye
+																					</option>
+																					<option value="ear">ear
+																					</option>
+																					<option value="allergy">allergy
+																					</option>
+																					<option value="asthma">asthma
+																					</option>
+																					<option value="bloodpressure">bloodpressure
+																					</option>
+																					<option value="heartdisease">heartdisease
+																					</option>
+																					<option value="vitamins">vitamins
+																					</option>
+																					<option value="digestivehealth">digestivehealth
+																					</option>
+																					<option value="skin">skin
+																					</option>
+																					<option value="infection">infection
+																					</option>
+																					<option value="nurological">nurological
+																					</option>
+																				</select>
+																			</td>
+
+																			<td>
+																				<label for="cars">Choose medicine Type:
+																				</label>
+																				<select id="type" name="medicine_type" value="{{medicine.medicine_type}}">
+																					<option value="tablets">tablets
+																					</option>
+																					<option value="syrup">syrup
+																					</option>
+																					<option value="capsule">capsule
+																					</option>
+																					<option value="general">general
+																					</option>
+																				</select>
+																			</td>
+
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="card card-table">
+														<div class="card-body">
+															<div class="table-responsive">
+																<table class="table table-hover table-center">
+																	<thead>
+																		<tr>
+																			<th style="min-width: 300px">Description
+																			</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<textarea class="form-control" rows="4"
+																					cols="50" type="text"
+																					name="description" value="{{medicine.description}}"></textarea>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="submit-section">
+													<button type="submit" class="btn btn-primary submit-btn">
+														Save Changes
+													</button>
+												</div>
+											</div>
+										</form>
+
+										<!-- / Medicine data entry Form -->
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /Page Content -->
+
+
+
+
+
+
+			</div>
+		</div>
+		<!-- /Page Wrapper -->
+
+	</div>
+	<!-- /Main Wrapper -->
+
+	<!-- jQuery -->
+	<script src="{% static 'HealthStack-System/js/admin/jquery-3.2.1.min.js' %}"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="{% static 'HealthStack-System/js/admin/popper.min.js' %}"></script>
+	<script src="{% static 'HealthStack-System/js/admin/bootstrap.min.js' %}"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+	<!-- Datatables JS -->
+	<script src="{% static 'HealthStack-System/plugins/admin/datatables/jquery.dataTables.min.js'%}"></script>
+	<script src="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.js'%}"></script>
+
+	<!-- Custom JS -->
+	<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+	<script src="{% static 'HealthStack-System/js/Normal/profile_Settings.js' %}"></script>
+
+
+</body>
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+
+</html>
