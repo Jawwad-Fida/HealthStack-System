@@ -40,7 +40,7 @@ class Doctor_Information(models.Model):
     department = models.CharField(max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
     department_name = models.ForeignKey(hospital_department, on_delete=models.CASCADE, null=True, blank=True)
     specialization = models.ForeignKey(specialization, on_delete=models.CASCADE, null=True, blank=True)
-    service = models.ForeignKey(service, on_delete=models.CASCADE, null=True, blank=True)
+    # service = models.ForeignKey(service, on_delete=models.CASCADE, null=True, blank=True)
 
     featured_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
     certificate_image = models.ImageField(upload_to='doctors_certificate/', default='doctors_certificate/default.png', null=True, blank=True)
