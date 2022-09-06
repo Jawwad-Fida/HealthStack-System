@@ -417,7 +417,7 @@ def medicine_list(request):
 
 
 @login_required(login_url='admin-login')
-def generate_random_medicie_ID():
+def generate_random_medicine_ID():
     N = 4
     string_var = ""
     string_var = ''.join(random.choices(string.digits, k=N))
@@ -456,7 +456,7 @@ def add_medicine(request):
        medicine.price = price
        medicine.featured_image = featured_image
        medicine.stock_quantity = 80
-       #medicine.medicine_id = generate_random_medicie_ID()
+       #medicine.medicine_id = generate_random_medicine_ID()
        
        medicine.save()
        
