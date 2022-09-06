@@ -105,7 +105,7 @@
 													<td>{{medicine.medicine_category}}</td>
 													<td>{{medicine.price}}</td>
 													<td>{{medicine.quantity}}</td>
-													<td><a href="#" class="btn btn-primary">Edit</a></td>
+													<td><a href="{% url 'edit-medicine' pk=medicine.serial_number %}" class="btn btn-primary">Edit</a></td>
 													<td><a href="#" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
 
 												</tr>
