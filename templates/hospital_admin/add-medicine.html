@@ -70,12 +70,12 @@
 				<!-- /Breadcrumb -->
 
 				<!-- Page Content -->
-				<div class="call-content-full">
-					<div class="container-lg">
-						<div class="row-cols-6">
+				<div class="content">
+					<div class="container-fluid">
+						<div class="row">
 							<div class="col-md-7 col-lg-8 col-xl-12">
 								<div class="card">
-									<div class="card-body">
+									<div class="card-header">
 
 										<!-- Medicine data entry Form -->
 										<form action="{% url 'add-medicine' %}" method="POST" enctype="multipart/form-data">
@@ -242,6 +242,28 @@
 																<table class="table table-hover table-center">
 																	<thead>
 																		<tr>
+																			<th style="min-width: 300px">Medicine Category
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<label for="cars">Choose medicine Category:
+																				</label>
+																				<input type="checkbox" name="favorite_pet" value="Cats">Cats<br> 
+																			</td> 
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="card card-table">
+														<div class="card-body">
+															<div class="table-responsive">
+																<table class="table table-hover table-center">
+																	<thead>
+																		<tr>
 																			<th style="min-width: 300px">Description
 																			</th>
 																		</tr>
@@ -259,12 +281,13 @@
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="submit-section">
-													<button type="submit" class="btn btn-primary submit-btn">
-														Save Changes
-													</button>
-												</div>
+													
+												
+													<div class="submit-section">
+														<button type="submit" class="btn btn-primary submit-btn">
+															Save Changes
+														</button>
+													</div>
 											</div>
 										</form>
 

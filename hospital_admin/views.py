@@ -504,6 +504,13 @@ def edit_medicine(request, pk):
    
     return render(request, 'hospital_admin/edit-medicine.html',{'medicine': medicine,'admin': user})
 
+@login_required(login_url='admin-login')
+def delete_medicine(request, pk):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        medicine = Medicine.objects.get(serial_number=pk)
+        medicine.delete()
+        return redirect('medicine-list')
 
 @login_required(login_url='admin-login')
 def add_lab_worker(request):

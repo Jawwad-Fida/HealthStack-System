@@ -49,7 +49,7 @@ urlpatterns = [
     path('add-medicine/', views.add_medicine,name='add-medicine'),
     
     path('edit-medicine/<int:pk>/', views.edit_medicine,name='edit-medicine'),
-
+    path('delete-medicine/<int:pk>/', views.delete_medicine,name='delete-medicine'),
 
 ]  
 
