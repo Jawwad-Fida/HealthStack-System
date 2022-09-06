@@ -330,8 +330,8 @@ def booking(request, pk):
 
     if request.method == 'POST':
         appointment = Appointment(patient=patient, doctor=doctor)
-        date = request.POST['date']
-        time = request.POST['time']
+        date = request.POST['appoint_date']
+        time = request.POST['appoint_time']
         appointment_type = request.POST['appointment_type']
 
         appointment.date = date

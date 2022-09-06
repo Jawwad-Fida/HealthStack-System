@@ -88,19 +88,14 @@ class Appointment(models.Model):
     )
 
     id = models.AutoField(primary_key=True)
-    date = models.DateField(null=True, blank=True)
-    time = models.TimeField(null=True, blank=True)
-    doctor = models.ForeignKey(
-        Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
-    patient = models.ForeignKey(
-        Patient, on_delete=models.CASCADE, null=True, blank=True)
-    appointment_type = models.CharField(
-        max_length=200, choices=APPOINTMENT_TYPE)
-    appointment_status = models.CharField(
-        max_length=200, choices=APPOINTMENT_STATUS)
+    date = models.CharField(max_length=200, null=True, blank=True)
+    time = models.CharField(max_length=200, null=True, blank=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
+    appointment_type = models.CharField(max_length=200, choices=APPOINTMENT_TYPE)
+    appointment_status = models.CharField(max_length=200, choices=APPOINTMENT_STATUS)
     serial_number = models.CharField(max_length=200, null=True, blank=True)
-    payment_status = models.CharField(
-        max_length=200, null=True, blank=True, default='pending')
+    payment_status = models.CharField(max_length=200, null=True, blank=True, default='pending')
     transaction_id = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
