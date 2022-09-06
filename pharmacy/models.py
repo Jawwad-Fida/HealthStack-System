@@ -65,6 +65,7 @@ class Medicine(models.Model):
     price = models.IntegerField(null=True, blank=True, default=0)
     stock_quantity = models.IntegerField(null=True, blank=True, default=0)
     Prescription_reqiuired = models.CharField(max_length=200, choices=REQUIREMENT_TYPE, null=True, blank=True)
+    
     def __str__(self):
         return str(self.name)
     
