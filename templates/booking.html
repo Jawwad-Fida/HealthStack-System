@@ -199,14 +199,14 @@
                       <h4><i class="fa fa-calendar pr-3 padd-r-10"></i>Schedule an Appointment</h4>
                   </div>
 
-                  <form method="post" action="#" enctype="multipart/form-data">
+                  <form method="post" action="{% url 'booking' pk=doctor.doctor_id %}" enctype="multipart/form-data">
                     {% csrf_token %}
                       <div class="agent-contact-form-sidebar">
                           <div class="row">
                               <div class="col-lg-6 col-md-12 book">
                                   <label>Appointment Date</label>
                                   <!-- <input type="date" name="appoint_date" id="reservation-date" data-lang="en" data-large-mode="true" data-min-year="2021" data-max-year="2025" data-id="datedropper-0" data-theme="my-style" class="form-control" > -->
-                                  <input type="date" name="appoint_date" id="reservation-date" data-large-mode="true" data-lock="from" data-theme="my-style" class="form-control"/>
+                                  <input type="text" name="appoint_date" id="reservation-date" data-large-mode="true" data-lock="from" data-theme="my-style" class="form-control"/>
                                   
                                 </div>
                               <div class="col-lg-6 col-md-12 book2">
