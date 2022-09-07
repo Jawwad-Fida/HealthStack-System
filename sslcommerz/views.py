@@ -13,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.mail import BadHeaderError, send_mail
 from django.template.loader import render_to_string
-from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.utils.html import strip_tags
 
