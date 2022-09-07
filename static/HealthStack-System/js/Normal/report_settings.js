@@ -22,7 +22,6 @@ Version      : 1.0
 					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Specimen ID</label>' +
-							'<input type="text" name="specimen_ID" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-3">' +
@@ -34,13 +33,13 @@ Version      : 1.0
 					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Collection Date</label>' +
-							'<input type="text" name="collection_date" class="form-control">' +
+							'<input type="date" name="collection_date" class="form-control">' +
 						'</div>' +
 					'</div>' +
                     '<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Receiving Date</label>' +
-							'<input type="text" name="receiving_date" class="form-control">' +
+							'<input type="date" name="receiving_date" class="form-control">' +
 						'</div>' +
 					'</div>' +
 				'</div>' +

@@ -376,30 +376,27 @@ def create_report(request, pk):
         if request.method == 'POST':
             patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
             report = Report(patient=patient, doctor=doctors)
-            specimen_id = generate_random_specimen()
-            specimen_type = request.POST['specimen_type']
-            collecton_date = request.POST['collection_date']
-            receiving_date = request.POST['reciving_date']
-            test_name = request.POST['test_name']
-            result = request.POST['result']
-            unit = request.POST['unit']
-            referred_value = request.POST['referred_value']
-            delivery_date = request.POST['delivery_date']
+            
+            specimen_type = request.POST.getlist('specimen_type')
+            collection_date  = request.POST.getlist('collection_date')
+            receiving_date = request.POST.getlist('reciving_date')
+            test_name = request.POST.getlist('test_name')
+            result = request.POST.getlist('result')
+            unit = request.POST.getlist('unit')
+            referred_value = request.POST.getlist('referred_value')
+            delivery_date = request.POST.get('delivery_date')
 
             # Save to report table
             report.test_name = test_name
-      
             report.result = result
             report.delivery_date = delivery_date
-            report.specimen_id = specimen_id
+            #report.specimen_id =generate_random_specimen()
             report.specimen_type = specimen_type
-            report.collecton_date = collecton_date
+            report.collection_date  = collection_date 
             report.receiving_date = receiving_date
             report.unit = unit
             report.referred_value = referred_value
             report.save()
-
-
 
             return redirect('doctor-list')
 
