@@ -9,6 +9,7 @@ from hospital.models import Hospital_Information, User, Patient
 
 from hospital_admin.models import hospital_department, specialization, service
 
+
 from django.views.decorators.cache import cache_control
 
 
@@ -26,7 +27,7 @@ from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 # from django.dispatch import receiver
 
 from .models import Patient, User
-from doctor.models import Doctor_Information, Appointment
+from doctor.models import Doctor_Information, Appointment,Report
 
 from sslcommerz.models import Payment
 from django.db.models import Q, Count
@@ -203,12 +204,13 @@ def patient_register(request):
 def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
+        report = Report.objects.filter(patient=patient)
         # patient = Patient.objects.get(user_id=pk)
         # appointments = Appointment.objects.filter(patient=patient)
         appointments = Appointment.objects.filter(patient=patient).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
         payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
 
-        context = {'patient': patient, 'appointments': appointments, 'payments': payments}
+        context = {'patient': patient, 'appointments': appointments, 'payments': payments,'report':report}
     else:
         return redirect('logout')
         
@@ -509,11 +511,12 @@ def testing(request):
     
     return render(request, 'testing.html', context)
 
-def view_report(request):
+def view_report(request,pk):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
+        report = Report.objects.get(report_id=pk)
         current_date = datetime.date.today()
-        context = {'patient':patient,'current_date' : current_date}
+        context = {'patient':patient,'current_date' : current_date,'report':report}
         return render(request, 'view-report.html',context)
     else:
         redirect('logout') 

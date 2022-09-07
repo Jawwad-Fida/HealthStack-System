@@ -67,7 +67,7 @@
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
                                     {% if user.is_authenticated and user.is_patient %}
-									<li class="breadcrumb-item"><a href="{% url 'view-report' %}">View Report</a></li>
+									<li class="breadcrumb-item"><a href="">View Report</a></li>
                                     {% endif %}
 									<li class="breadcrumb-item active" aria-current="page">Report Result</li>
 								</ol>
@@ -114,9 +114,10 @@
 											<div class="invoice-info">
 												<strong class="customer-text">Doctor Information</strong>
 												<p class="invoice-details invoice-details-two">
-													Dr. Darren Elder <br>
-													806  Twin Willow Lane, Old Forge,<br>
-													Newyork, USA <br>
+													{{report.doctor.name}} <br>
+													{{report.doctor.address}}<br>
+													{{report.doctor.email}}<br>
+                          {{report.doctor.phone_number}}<br>
 												</p>
 											</div>
 										</div>
@@ -187,9 +188,15 @@
 													<thead>
 														<tr>
 															<th>Specimen Information</th>
-                                                            <th class="text-center">Specimen ID</th>
-															<th class="text-center">Collection Date/Time</th>
-                                                            <th class="text-center">Receiving Date/Time</th>
+                              <th class="text-center">Specimen ID</th>
+                              <th class="text-center">Collection Date/Time</th>
+                              <th class="text-center">Receiving Date/Time</th>
+														</tr>
+                            <tr>
+															<th class="text-center">{{report.specimen_type}}</th>
+                              <th class="text-center">none</th>
+                              <th class="text-center">{{report.collection_date }}</th>
+                              <th class="text-center">{{report.receiving_date}}</th>
 	
 														</tr>
 														
@@ -201,9 +208,9 @@
 									</div>
 								</div>
 
-
-                                <br>
-                                <div class="invoice-item invoice-table-wrap">
+           
+                  <br>
+                  <div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
@@ -211,9 +218,16 @@
 													<thead>
 														<tr>
 															<th>Test Name</th>
-                                                            <th class="text-center">Result</th>
+                              <th class="text-center">Result</th>
 															<th class="text-center">Unit</th>
-                                                            <th class="text-center">Referred value</th>
+                             <th class="text-center">Referred value</th>
+	
+														</tr>
+                            <tr>
+															<th>{{report.test_name}}</th>
+                              <th class="text-center">{{report.result}}</th>
+															<th class="text-center">{{report.unit}}</th>
+                              <th class="text-center">{{report.referred_value}}</th>
 	
 														</tr>
 														

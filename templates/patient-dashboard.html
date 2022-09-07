@@ -306,21 +306,21 @@
                             <table class="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
-                                  <th>ID</th>
-                                  <th>Date</th>
-                                  <th>Description</th>
+                                  <th>Report ID</th>
+                                  <th>Delivery Date</th>
                                   <th>Attachment</th>
-                                  <th>Created</th>
+                                  <th>Doctor</th>
                                   <th></th>
                                 </tr>
                               </thead>
                               <tbody>
+                                {% for report in report %}
                                 <tr>
                                   <td>
-                                    <a href="javascript:void(0);">#MR-0010</a>
+                                    <a href="javascript:void(0);">{{report.report_id}}</a>
                                   </td>
-                                  <td>14 Nov 2019</td>
-                                  <td>Dental Filling</td>
+                                  <td>{{report.delivery_date }}</td>
+                                  
                                   <td><a href="#">dental-test.pdf</a></td>
                                   <td>
                                     <h2 class="table-avatar">
@@ -330,19 +330,19 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-01.jpg' %}"
+                                          src="{{report.doctor.featured_image.url }}"
                                           alt="User Image"
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >Dr. Ruby Perrin <span>Dental</span></a
+                                        >{{report.doctor}}<span>{{report.doctor.department_name }}</span></a
                                       >
                                     </h2>
                                   </td>
                                   <td class="text-right">
                                     <div class="table-action">
                                       <a
-                                        href="{% url 'view-report'%}"
+                                        href="{% url 'view-report' pk=report.report_id %}"
                                         class="btn btn-sm bg-info-light"
                                       >
                                         <i class="far fa-eye"></i> View
@@ -362,6 +362,7 @@
                                     </div>
                                   </td>
                                 </tr>
+                                {% endfor %}
                               </tbody>
                             </table>
                           </div>
