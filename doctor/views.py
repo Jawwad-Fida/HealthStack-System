@@ -1,7 +1,6 @@
 import email
 from multiprocessing import context
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 # from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import DoctorUserCreationForm, DoctorForm
@@ -17,12 +16,15 @@ from django.db.models import Q, Count
 
 import random
 import string
-
 from datetime import datetime, timedelta
 import datetime
-
 # import json
 import re
+
+from django.core.mail import BadHeaderError, send_mail
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from django.utils.html import strip_tags
 
 # Create your views here.
 
@@ -174,6 +176,39 @@ def accept_appointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     appointment.appointment_status = 'confirmed'
     appointment.save()
+    
+    # Mailtrap
+    
+    # patient_email = payment.patient.email
+    # patient_name = payment.patient.name
+    # patient_username = payment.patient.username
+    # patient_phone_number = payment.patient.phone_number
+    # doctor_name = appointment.doctor.name
+    
+    # subject = "Payment Receipt for appointment"
+    
+    # values = {
+    #         "email":patient_email,
+    #         "name":patient_name,
+    #         "username":patient_username,
+    #         "phone_number":patient_phone_number,
+    #         "doctor_name":doctor_name,
+    #         "tran_id":payment_data['tran_id'],
+    #         "currency_amount":payment_data['currency_amount'],
+    #         "card_type":payment_data['card_type'],
+    #         "bank_transaction_id":payment_data['bank_tran_id'],
+    #         "transaction_date":payment_data['tran_date'],
+    #         "card_issuer":payment_data['card_issuer'],
+    #     }
+    
+    # html_message = render_to_string('appointment_mail_payment_template.html', {'values': values})
+    # plain_message = strip_tags(html_message)
+    
+    # try:
+    #     send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+    # except BadHeaderError:
+    #     return HttpResponse('Invalid header found')
+    
     return redirect('doctor-dashboard')
 
 @login_required(login_url="doctor-login")
@@ -181,6 +216,10 @@ def reject_appointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     appointment.appointment_status = 'cancelled'
     appointment.save()
+    
+    # Mailtrap
+    
+    
     return redirect('doctor-dashboard')
 
 # def doctor_profile_settings(request):
@@ -397,14 +436,6 @@ def create_prescription(request):
 #     degree = degree.replace(",", "")
 #     degree_array = degree.split()
     
-#     institute = doctor.institute
-#     institute = re.sub("'", "", institute)
-#     institute = institute.replace("[", "")
-#     institute = institute.replace("]", "")
-#     institute = institute.replace(",", "")
-#     institute_array = institute.split()
-
-
 #     education = zip(degree_array, institute_array)
     
 #     context = {'doctor': doctor, 'degree': institute, 'institute_array': institute_array, 'education': education}

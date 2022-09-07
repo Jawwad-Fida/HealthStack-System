@@ -12,7 +12,7 @@ from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
 from pharmacy.models import Medicine, Pharmacist
-from doctor.models import Doctor_Information, Prescription, Report, Appointment
+from doctor.models import Doctor_Information, Prescription, Report, Appointment, Experience , Education
 
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
@@ -544,6 +544,27 @@ def edit_lab_worker(request, pk):
         user = Admin_Information.objects.get(user=request.user)
         lab_worker = Clinical_Laboratory_Technician.objects.get(technician_id=pk)
         
+        if request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = "technician/user-default.png"
+                
+            name = request.POST.get('name')
+            email = request.POST.get('email')     
+            phone_number = request.POST.get('phone_number')
+            age = request.POST.get('age')  
+    
+            lab_worker.name = name
+            lab_worker.email = email
+            lab_worker.phone_number = phone_number
+            lab_worker.age = age
+            lab_worker.featured_image = featured_image
+    
+            lab_worker.save()
+        
+            return redirect('lab-worker-list')
+        
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
 
@@ -554,6 +575,7 @@ def department_image_list(request,pk):
     context = {'departments': departments}
     return render(request, 'hospital_admin/department-image-list.html',context)
 
+<<<<<<< HEAD
 @login_required(login_url='admin-login')
 def register_doctor_list(request):
     if request.user.is_hospital_admin:
@@ -567,3 +589,13 @@ def pending_doctor_list(request):
         user = Admin_Information.objects.get(user=request.user)
     doctors = Doctor_Information.objects.all()
     return render(request, 'hospital_admin/pending-doctor-list.html', {'all': doctors, 'admin': user})
+=======
+
+def admin_doctor_profile(request,pk):
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    admin = Admin_Information.objects.get(user=request.user)
+    experience= Experience.objects.filter(doctor_id=pk)
+    education = Education.objects.filter(doctor_id=pk)
+    context = {'doctor': doctor, 'admin': admin, 'experience': experience, 'education': education}
+    return render(request, 'hospital_admin/doctor-profile.html',context)
+>>>>>>> e586f983cf4775ebf818e622bfab669bb07b65d4
