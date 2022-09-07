@@ -26,6 +26,7 @@
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
 
+        <!-- pending doctor-list css -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/pending-doctor-list.css'%}"> 
 		
 		<!--[if lt IE 9]>
@@ -38,14 +39,18 @@
 		<!-- Main Wrapper -->
 
 		
-			<!-- Header -->
-            <div class="main-wrapper">
-				<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
+			
+        <div class="main-wrapper">
+            <!-- Header -->
+				<header class="header">
+                    {% include 'hospital_admin/hospital-admin-navbar.html' %}
+                </header>
 			<!-- /Header -->
 			
 			<!-- Sidebar -->
             <aside class="sidebar" id="sidebar">
-				{% include 'hospital_admin/hospital-admin-sidebar.html' %} </aside>
+				{% include 'hospital_admin/hospital-admin-sidebar.html' %} 
+            </aside>
 			<!-- /Sidebar -->
 			
 			<!-- Page Wrapper -->
