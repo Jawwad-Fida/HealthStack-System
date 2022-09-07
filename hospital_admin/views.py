@@ -552,6 +552,27 @@ def edit_lab_worker(request, pk):
         user = Admin_Information.objects.get(user=request.user)
         lab_worker = Clinical_Laboratory_Technician.objects.get(technician_id=pk)
         
+        if request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = "technician/user-default.png"
+                
+            name = request.POST.get('name')
+            email = request.POST.get('email')     
+            phone_number = request.POST.get('phone_number')
+            age = request.POST.get('age')  
+    
+            lab_worker.name = name
+            lab_worker.email = email
+            lab_worker.phone_number = phone_number
+            lab_worker.age = age
+            lab_worker.featured_image = featured_image
+    
+            lab_worker.save()
+        
+            return redirect('lab-worker-list')
+        
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
 
