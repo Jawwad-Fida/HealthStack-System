@@ -47,10 +47,12 @@
 			<!-- /Sidebar -->
 			
 			<!-- Page Wrapper -->
-            <div class="page-wrapper">
+            
+			<div class="page-wrapper">
                 <div class="content container-fluid">
 				
 					<!-- Page Header -->
+			
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-7 col-auto">
@@ -78,16 +80,17 @@
 												</tr>
 											</thead>
 											<tbody>
+											{%for dep in departments%}
 												<tr>
 													
                                                     <td>
-                                                        <h5>Department Name</h5>
+                                                        <h5>{{dep.hospital_department_name}}</h5>
                                                     </td>
 													
 													<td>
 														<h2 class="table-avatar">
 															<a href="profile.html" class="avatar avatar-sm mr-2">
-																<img class="avatar-img" src="assets/img/specialities/specialities-01.png" alt="Speciality">
+																<img class="avatar-img" src="{{dep.featured_image.url}}" alt="Speciality">
 															</a>
 															
 														</h2>
@@ -103,8 +106,41 @@
 															
 														</div>
 													</td>
+													<div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
+														<div class="modal-dialog modal-dialog-centered" role="document" >
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title">Edit Department Name</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<form>
+																		<div class="row form-row">
+																			<div class="col-12 col-sm-6">
+																				<div class="form-group">
+																					<label>Department Name</label>
+																					<input type="text" class="form-control" value="{{dep.hospital_department_id}}">
+																				</div>
+																			</div>
+																			<div class="col-12 col-sm-6">
+																				<div class="form-group">
+																					<label>Image</label>
+																					<input type="file"  class="form-control">
+																				</div>
+																			</div>
+																			
+																		</div>
+																		<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+																	</form>
+																</div>
+															</div>
+														</div>
+													</div>
 												</tr>
 												
+											{%endfor%}
 											</tbody>
 										</table>
 									</div>
@@ -115,8 +151,8 @@
 				</div>			
 			</div>
         </div>
-
-        <div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
+	
+        {% comment %} <div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document" >
                 <div class="modal-content">
                     <div class="modal-header">
@@ -131,7 +167,7 @@
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label>Department Name</label>
-                                        <input type="text" class="form-control" value="Cardiology">
+                                        <input type="text" class="form-control" value="{{deps.hospital_department_name}}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
@@ -147,8 +183,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div> {% endcomment %}
+	
 		<!-- /Main Wrapper -->
 		
 		<!-- jQuery -->
