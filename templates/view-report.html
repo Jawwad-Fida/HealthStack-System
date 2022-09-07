@@ -53,7 +53,10 @@
 		<div class="main-wrapper">
 		
 			<!-- Header -->
-			<header class="header">{% include 'patient_navbar.html' %}</header>
+			<header class="header">	{% if user.is_authenticated and user.is_patient %}
+                                    {% include 'patient_navbar.html' %}
+                                    {% endif %}
+				</header>
 			<!-- /Header -->
 			
 			<!-- Breadcrumb -->
@@ -63,7 +66,9 @@
 						<div class="col-md-12 col-12">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
+                                    {% if user.is_authenticated and user.is_patient %}
 									<li class="breadcrumb-item"><a href="{% url 'view-report' %}">View Report</a></li>
+                                    {% endif %}
 									<li class="breadcrumb-item active" aria-current="page">Report Result</li>
 								</ol>
 							</nav>
@@ -79,7 +84,12 @@
 				<div class="container-fluid">
 
 					<div class="row">
-						<div class="col-lg-8 offset-lg-2">
+                         <!-- Profile Sidebar -->
+                                <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                                    <div>{% include 'patient-sidebar.html' %}</div>
+                                </div>
+                            <!-- / Profile Sidebar -->
+						<div class="col-md-7 col-lg-8 col-xl-9">
 							<div class="invoice-content">
 								<div class="invoice-item">
 									<div class="row">
@@ -176,18 +186,11 @@
 												<table class="invoice-table table table-bordered">
 													<thead>
 														<tr>
-															<th>Test Name</th>
-                                                            <th class="text-center">Test Result</th>
-															<th class="text-center">Description</th>
-															
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>Blood test</td>
-                                                            <td class="text-center">Positive</td>
-															<td class="text-center">Dead</td>
-															
+															<th>Specimen Information</th>
+                                                            <th class="text-center">Specimen ID</th>
+															<th class="text-center">Collection Date/Time</th>
+                                                            <th class="text-center">Receiving Date/Time</th>
+	
 														</tr>
 														
 													</tbody>
@@ -197,6 +200,31 @@
 										
 									</div>
 								</div>
+
+
+                                <br>
+                                <div class="invoice-item invoice-table-wrap">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="table-responsive">
+												<table class="invoice-table table table-bordered">
+													<thead>
+														<tr>
+															<th>Test Name</th>
+                                                            <th class="text-center">Result</th>
+															<th class="text-center">Unit</th>
+                                                            <th class="text-center">Referred value</th>
+	
+														</tr>
+														
+													</tbody>
+												</table>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+                                
 								<!-- /Invoice Item -->
                                 
 								
