@@ -208,7 +208,7 @@
                                   src="{{doctor.featured_image.url}}"
                                   alt="User Image"
                               /></a>
-                              <a href="profile.html">{{doctor.name}}</a>
+                              <a href="{%url 'admin-doctor-profile' pk=doctor.doctor_id%}">{{doctor.name}}</a>
                             </h2>
                           </td>
                           <td>{{doctor.department}}</td>

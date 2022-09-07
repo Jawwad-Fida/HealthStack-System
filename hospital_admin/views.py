@@ -12,7 +12,7 @@ from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
 from pharmacy.models import Medicine, Pharmacist
-from doctor.models import Doctor_Information, Prescription, Report, Appointment
+from doctor.models import Doctor_Information, Prescription, Report, Appointment, Experience , Education
 
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
@@ -561,3 +561,12 @@ def department_image_list(request,pk):
     #departments = hospital_department.objects.all()
     context = {'departments': departments}
     return render(request, 'hospital_admin/department-image-list.html',context)
+
+
+def admin_doctor_profile(request,pk):
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    admin = Admin_Information.objects.get(user=request.user)
+    experience= Experience.objects.filter(doctor_id=pk)
+    education = Education.objects.filter(doctor_id=pk)
+    context = {'doctor': doctor, 'admin': admin, 'experience': experience, 'education': education}
+    return render(request, 'hospital_admin/doctor-profile.html',context)
