@@ -1,5 +1,6 @@
 import email
 from email.mime import image
+from multiprocessing import context
 from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -9,7 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
-
+from django.db.models import Q
 from pharmacy.models import Medicine, Pharmacist
 from doctor.models import Doctor_Information, Prescription, Report, Appointment
 
@@ -555,6 +556,8 @@ def edit_lab_worker(request, pk):
 
 
 
-def department_image_list(request):
-    # departments = Department.objects.all()
-    return render(request, 'hospital_admin/department-image-list.html')
+def department_image_list(request,pk):
+    departments = hospital_department.objects.filter(hospital_id=pk)
+    #departments = hospital_department.objects.all()
+    context = {'departments': departments}
+    return render(request, 'hospital_admin/department-image-list.html',context)
