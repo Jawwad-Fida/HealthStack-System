@@ -53,70 +53,99 @@
 					<!-- Page Header -->
 					<div class="page-header">
 						<div class="row">
-							<div class="col-sm-12">
-								<h3 class="page-title">List of Doctors</h3>
+							<div class="col-sm-7 col-auto">
+								<h3 class="page-title">Department</h3>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
-									<li class="breadcrumb-item active">Doctor</li>
+									<li class="breadcrumb-item active">Hospital Department</li>
 								</ul>
 							</div>
+							
 						</div>
 					</div>
 					<!-- /Page Header -->
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-sm-8">
 							<div class="card">
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="datatable table table-hover table-center mb-0">
 											<thead>
 												<tr>
-													<th>Doctor Name</th>
-													<th>Speciality</th>
-													<th>Consultation Fee</th>
-													<th>Degree</th>
-													<th>Action</th>
-													</tr>
-													<tbody>
-														{% for doctor in all%}
-														<tr>
-															<td>
-																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
-																	<a href="profile.html">{{doctor.name}}</a>
-																</h2>
-															</td>
-															<td>{{doctor.department}}</td>
-															
-															<td>{{doctor.consultation_fee}}</td>
-															
-															<td>{{doctor.degree}}</td>
-															<td>
-																<div class="table-action">
-																	<a
-																	  href="{% url 'create-report' pk=doctor.doctor_id %}"
-																	  class="btn btn-outline-info btn-rounded" 
-																		>
-																		<i class="fas fa-file-alt"></i> Create Report 
-																	</a>
-										
-																  </div>
-																</td>
-														</tr>
-														{% endfor %}
-													</tbody>
+													<th>Department Name</th>
+													<th>Image</th>
+													<th class="text-right">Actions</th>
+												</tr>
 											</thead>
-                                        </table>
+											<tbody>
+												<tr>
+													
+                                                    <td>
+                                                        <h5>Department Name</h5>
+                                                    </td>
+													
+													<td>
+														<h2 class="table-avatar">
+															<a href="profile.html" class="avatar avatar-sm mr-2">
+																<img class="avatar-img" src="assets/img/specialities/specialities-01.png" alt="Speciality">
+															</a>
+															
+														</h2>
+													</td>
+
+                                                    
+												
+													<td class="text-right">
+														<div class="actions">
+															<a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
+																<i class="fe fe-pencil"></i> Edit
+															</a>
+															
+														</div>
+													</td>
+												</tr>
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>			
+					</div>
+				</div>			
+			</div>
+        </div>
+
+        <div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Department Name</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row form-row">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Department Name</label>
+                                        <input type="text" class="form-control" value="Cardiology">
                                     </div>
                                 </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <input type="file"  class="form-control">
+                                    </div>
+                                </div>
+                                
                             </div>
-                        </div>
+                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                        </form>
                     </div>
                 </div>
-					
-			<!-- /Page Wrapper -->
-		
             </div>
         </div>
 

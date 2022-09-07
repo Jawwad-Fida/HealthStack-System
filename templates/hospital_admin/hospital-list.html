@@ -78,7 +78,7 @@
 										<table class="datatable table table-hover table-center mb-0">
 										
 											 
-											 <thead>
+											 
 												<tr>
 													<th>Hospital Name</th>
 													<th>Address</th>
@@ -86,12 +86,13 @@
 													<th>Phone Number</th>
 													<th>Hospital Type</th>
 													<th>Edit Hospital</th>
+													<th>Department List</th>
 													<th>Delete Hospital</th>
 													
 												</tr>
-											 </thead>
+											 
 											 {% for hospital in hospitals %}
-												<tr>
+												<tr style="text-align: center;">
 													<td>
 														<h2 class="table-avatar">
 															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospital.featured_image.url}}" alt="User Image"></a>															
@@ -103,12 +104,10 @@
 													<td>{{hospital.email}}<br>
 													
 													<td>{{hospital.phone_number}}</td>
-													
-
-
 
 													<td>{{hospital.hospital_type}}</td>
 													<td><a href="{% url 'edit-hospital' pk=hospital.hospital_id %}" class="btn btn-primary">Edit</a></td>
+													<td><a href="{% url 'department-image-list'%}" class="btn btn-primary">Edit</a></td>
 													<td><a href="{% url 'delete-hospital' pk=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
 
 												</tr>

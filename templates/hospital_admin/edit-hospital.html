@@ -79,7 +79,7 @@
 				<div class="call-content-full">
 					<div class="container-lg">
 						<div class="row-cols-6">
-							<div class="col-md-7 col-lg-8 col-xl-20">
+							<div class="col-md-6 col-lg-6">
 								<div class="card">
 									<div class="card-body">
 
@@ -98,8 +98,8 @@
 										<form action="{% url 'add-hospital' %}" method="GET"
 											enctype="multipart/form-data">
 											{% csrf_token %}
-											<div class="row form-row">
-												<div class="col-md-6">
+											<div >
+												<div class="col-12 col-md-6 col-lg-6">
 													<div class="form-group">
 														<div class="change-avatar">
 															<div class="upload-img">
@@ -116,14 +116,14 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-12 col-md-12">
+												<div class="col-md-12">
 													<div class="card card-table">
 														<div class="card-body">
 															<div class="table-responsive">
 																<table class="table table-hover table-center">
 																	<thead>
 																		<tr>
-																			<th style="min-width: 300px">Hospital Name
+																			<th style="max-width: 300px;min-width: 280px;">Hospital Name
 																			</th>
 																			<th style="min-width: 50px;"></th>
 																		</tr>
@@ -147,7 +147,7 @@
 																<table class="table table-hover table-center">
 																	<thead>
 																		<tr>
-																			<th style="min-width: 300px">Address</th>
+																			<th style="max-width: 300px;min-width: 280px;">Address</th>
 																			<th style="min-width: 50px;"></th>
 																		</tr>
 																	</thead>
@@ -170,7 +170,7 @@
 																<table class="table table-hover table-center">
 																	<thead>
 																		<tr>
-																			<th style="min-width: 300px">Hospital Email
+																			<th style="max-width: 300px;min-width: 280px;">Hospital Email
 																			</th>
 																			<th style="min-width: 50px;"></th>
 																		</tr>
@@ -194,7 +194,7 @@
 																<table class="table table-hover table-center">
 																	<thead>
 																		<tr>
-																			<th style="min-width: 300px">Hospital phone
+																			<th style="max-width: 300px;min-width: 280px;">Hospital phone
 																				Number</th>
 																			<th style="min-width: 50px;"></th>
 																		</tr>
@@ -212,12 +212,13 @@
 															</div>
 														</div>
 													</div>
-													<!-- <div class="card">
+													<div class="card">
 														<div class="card-body">
 															<h4 class="card-title">Departments</h4>
 															<div class="department-info">
+																
 																<div class="row form-row department-cont">
-																	<div class="col-12 col-md-10 col-lg-5">
+																	<div class="col-12 col-md-10 col-lg-11">
 																		<div class="form-group">
 																			<label>Add New Departments</label>
 																			<input type="text" class="form-control"
@@ -225,7 +226,15 @@
 																				value="{{departments.hospital_department_name}}">
 																		</div>
 																	</div>
+																	<div class="col-md-2 col-lg-1">
+																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+																		<a href="#" class="btn btn-danger trash">
+																		  <i class="far fa-trash-alt"></i>
+																		</a>
+																	</div>
 																</div>
+																
+
 															</div>
 															<div class="add-more">
 																<a href="javascript:void(0);" class="add-department"><i
@@ -238,13 +247,19 @@
 															<h4 class="card-title">Services</h4>
 															<div class="service-info">
 																<div class="row form-row service-cont">
-																	<div class="col-12 col-md-10 col-lg-5">
+																	<div class="col-12 col-md-8 col-lg-11">
 																		<div class="form-group">
 																			<label>Add New Services</label>
 																			<input type="text" class="form-control"
 																				name="service"
 																				value="{{services.service_name}}">
 																		</div>
+																	</div>
+																	<div class="col-md-2 col-lg-1">
+																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+																		<a href="#" class="btn btn-danger trash">
+																		  <i class="far fa-trash-alt"></i>
+																		</a>
 																	</div>
 																</div>
 															</div>
@@ -261,13 +276,19 @@
 															<div class="specialization-info">
 																<div class="row form-row specialization-cont">
 
-																	<div class="col-12 col-md-10 col-lg-5">
+																	<div class="col-12 col-md-8 col-lg-11">
 																		<div class="form-group">
 																			<label>Add New Specialization</label>
 																			<input type="text" class="form-control"
 																				name="specialization"
 																				value="{{specializations.hospital}}">
 																		</div>
+																	</div>
+																	<div class="col-md-2 col-lg-1">
+																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+																		<a href="#" class="btn btn-danger trash">
+																		  <i class="far fa-trash-alt"></i>
+																		</a>
 																	</div>
 
 																</div>
@@ -278,7 +299,7 @@
 																		class="fa fa-plus-circle"></i> Add More</a>
 															</div>
 														</div>
-													</div> -->
+													</div>
 													
 													<div class="card">
 														<div class="card-body">
@@ -348,6 +369,9 @@
 
 	<!-- Custom JS -->
 	<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+
+	<!-- add js -->
+	<script src="{% static 'HealthStack-System/js/Normal/edit-hospital.js' %}"></script>
 
 </body>
 
