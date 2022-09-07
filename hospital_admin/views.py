@@ -553,3 +553,8 @@ def edit_lab_worker(request, pk):
         
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
+
+
+def department_image_list(request):
+    # departments = Department.objects.all()
+    return render(request, 'hospital_admin/department-image-list.html')

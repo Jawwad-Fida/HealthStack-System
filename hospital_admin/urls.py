@@ -50,6 +50,7 @@ urlpatterns = [
     
     path('edit-medicine/<int:pk>/', views.edit_medicine,name='edit-medicine'),
     path('delete-medicine/<int:pk>/', views.delete_medicine,name='delete-medicine'),
+    path('department-image-list/', views.department_image_list,name='department-image-list'),
 
 ]  
 
