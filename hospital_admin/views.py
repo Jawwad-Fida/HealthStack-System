@@ -104,14 +104,6 @@ def admin_register(request):
 def admin_forgot_password(request):
     return render(request, 'hospital_admin/forgot-password.html')
 
-
-@login_required(login_url='admin-login')
-def doctor_list(request):
-    if request.user.is_hospital_admin:
-        user = Admin_Information.objects.get(user=request.user)
-    doctors = Doctor_Information.objects.all()
-    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors, 'admin': user})
-
 @login_required(login_url='admin-login')
 def invoice(request):
     return render(request, 'hospital_admin/invoice.html')
@@ -561,3 +553,17 @@ def department_image_list(request,pk):
     #departments = hospital_department.objects.all()
     context = {'departments': departments}
     return render(request, 'hospital_admin/department-image-list.html',context)
+
+@login_required(login_url='admin-login')
+def register_doctor_list(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+    doctors = Doctor_Information.objects.all()
+    return render(request, 'hospital_admin/register-doctor-list.html', {'all': doctors, 'admin': user})
+
+@login_required(login_url='admin-login')
+def pending_doctor_list(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+    doctors = Doctor_Information.objects.all()
+    return render(request, 'hospital_admin/pending-doctor-list.html', {'all': doctors, 'admin': user})

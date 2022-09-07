@@ -21,8 +21,12 @@
                     <a href="{% url 'appointment-list' %}"><i class="fe fe-layout"></i> <span>Appointments</span></a>
                 </li>
 
-                <li> 
-                    <a href="{%url 'doctor-list'%}"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
+                <li class="submenu"> 
+                    <a href="#"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
+                    <ul style="display:none;">
+                        <li><a href="{%url 'register-doctor-list'%}"><i class="fe fe-building"></i> <span>Registered</span></a></li>
+                        <li><a href="{%url 'pending-doctor-list'%}"><i class="fe fe-mask"></i> <span>Pending</span></a></li>
+                    </ul>
                 </li>
                 
                 <li> 

@@ -1,0 +1,128 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>Doccure - Doctor List Page</title>
+		
+		<!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
+
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}"> 
+		
+		<!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+		
+		<!-- Feathericon CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
+		
+		<!-- Datatables CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}"> 
+		
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
+
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/pending-doctor-list.css'%}"> 
+		
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+    </head>
+    <body>
+	
+		<!-- Main Wrapper -->
+
+		
+			<!-- Header -->
+            <div class="main-wrapper">
+				<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
+			<!-- /Header -->
+			
+			<!-- Sidebar -->
+            <aside class="sidebar" id="sidebar">
+				{% include 'hospital_admin/hospital-admin-sidebar.html' %} </aside>
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3 class="page-title">List of Doctors</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
+									<li class="breadcrumb-item active">Doctor</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+                    <div class="appointments">
+                        <div class="appointment-list">
+                            <div class="profile-info-widget">
+                                <a href="patient-profile.html" class="booking-doc-img">
+                                    <img src="assets/img/patients/patient.jpg" alt="User Image">
+                                </a>
+                                <div class="profile-det-info">
+                                    <h3><a href="patient-profile.html">Richard Wilson</a></h3>
+                                    <div class="patient-details">
+                                        <h5><i class="far fa-clock"></i> 14 Nov 2019, 10.00 AM</h5>
+                                        <h5><i class="fas fa-map-marker-alt"></i> Newyork, United States</h5>
+                                        <h5><i class="fas fa-envelope"></i> richard@example.com</h5>
+                                        <h5 class="mb-0"><i class="fas fa-phone"></i> +1 923 782 4575</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="appointment-action">
+                                <a href="#" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
+                                    <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                    <i class="fas fa-check"></i> Accept
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                    <i class="fas fa-times"></i> Cancel
+                                </a>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+					
+			<!-- /Page Wrapper -->
+		
+            </div>
+        </div>
+
+		<!-- /Main Wrapper -->
+		
+		<!-- jQuery -->
+        <script src="{% static 'HealthStack-System/js/admin/jquery-3.2.1.min.js' %}"></script> 
+		
+		<!-- Bootstrap Core JS -->
+        <script src="{% static 'HealthStack-System/js/admin/popper.min.js' %}"></script> 
+        <script src="{% static 'HealthStack-System/js/admin/bootstrap.min.js' %}"></script> 
+		
+		<!-- Slimscroll JS -->
+        <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js' %}"></script>
+		
+		<!-- Datatables JS -->
+		<script src="{% static 'HealthStack-System/plugins/admin/datatables/jquery.dataTables.min.js'%}"></script> 
+		<script src="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.js'%}"></script>
+		
+		<!-- Custom JS -->
+		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+		
+    </body>
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+</html>
