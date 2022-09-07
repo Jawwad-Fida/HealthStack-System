@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
 from .models import Doctor_Information, Appointment, Education, Experience
-
+from .uitls import searchPatients
 from django.db.models import Q, Count
 
 import random
@@ -414,3 +414,16 @@ def create_prescription(request):
 
 
 
+@login_required(login_url="login")
+def patient_search(request, pk):
+    if request.user.is_authenticated and request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(doctor_id=pk)
+        id = int(request.GET['search_query'])
+        patient = Patient.objects.get(patient_id=id)
+        appointments = Appointment.objects.filter(doctor=doctor).filter(patient=patient)
+        context = {'patient': patient, 'doctor': doctor, 'appointments': appointments}
+        return render(request, 'patient-profile.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
