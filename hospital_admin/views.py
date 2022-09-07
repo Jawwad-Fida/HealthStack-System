@@ -599,7 +599,6 @@ def admin_doctor_profile(request,pk):
     context = {'doctor': doctor, 'admin': admin, 'experience': experience, 'education': education}
     return render(request, 'hospital_admin/doctor-profile.html',context)
 
-
 @login_required(login_url='admin-login')
 def accept_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
