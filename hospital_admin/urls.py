@@ -14,8 +14,8 @@ urlpatterns = [
 
     path('appointment-list',views.appointment_list, name='appointment-list'),
     
-    path('doctor-list/', views.doctor_list,name='doctor-list'),
-    
+    path('register-doctor-list/', views.register_doctor_list,name='register-doctor-list'),
+    path('pending-doctor-list/', views.pending_doctor_list,name='pending-doctor-list'),
     path('forgot-password/', views.admin_forgot_password,name='admin_forgot_password'),
     path('hospital-list/', views.hospital_list,name='hospital-list'),
     path('add-hospital/', views.add_hospital,name='add-hospital'),
