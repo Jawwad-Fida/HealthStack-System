@@ -100,13 +100,13 @@
 												
 													<td class="text-right">
 														<div class="actions">
-															<a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
+															<a class="btn btn-sm bg-success-light" data-toggle="modal" data-target="#modal-default{{dep.hospital_department_name}}">
 																<i class="fe fe-pencil"></i> Edit
 															</a>
 															
 														</div>
 													</td>
-													<div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
+													<div class="modal fade" id="modal-default{{dep.hospital_department_name}}" aria-hidden="true" role="dialog">
 														<div class="modal-dialog modal-dialog-centered" role="document" >
 															<div class="modal-content">
 																<div class="modal-header">
@@ -121,7 +121,7 @@
 																			<div class="col-12 col-sm-6">
 																				<div class="form-group">
 																					<label>Department Name</label>
-																					<input type="text" class="form-control" value="{{dep.hospital_department_id}}">
+																					<input type="text" class="form-control" placeholder={{dep.hospital_department_name}}>
 																				</div>
 																			</div>
 																			<div class="col-12 col-sm-6">
