@@ -20,8 +20,8 @@ from .models import Admin_Information,specialization,service,hospital_department
 import random,re
 import string
 from django.db.models import  Count
-
-
+from datetime import datetime
+import datetime
 
 
 # Create your views here.
@@ -41,8 +41,44 @@ def admin_dashboard(request):
         patients = Patient.objects.all()
         hospitals = Hospital_Information.objects.all()
         lab_workers = Clinical_Laboratory_Technician.objects.all()
+        
+        sat_date = datetime.date.today()
+        sat_date_str = str(sat_date)
+        sat = sat_date.strftime("%A")
 
-        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count}
+        sun_date = sat_date + datetime.timedelta(days=1) 
+        sun_date_str = str(sun_date)
+        sun = sun_date.strftime("%A")
+        
+        mon_date = sat_date + datetime.timedelta(days=2) 
+        mon_date_str = str(mon_date)
+        mon = mon_date.strftime("%A")
+        
+        tues_date = sat_date + datetime.timedelta(days=3) 
+        tues_date_str = str(tues_date)
+        tues = tues_date.strftime("%A")
+        
+        wed_date = sat_date + datetime.timedelta(days=4) 
+        wed_date_str = str(wed_date)
+        wed = wed_date.strftime("%A")
+        
+        thurs_date = sat_date + datetime.timedelta(days=5) 
+        thurs_date_str = str(thurs_date)
+        thurs = thurs_date.strftime("%A")
+        
+        fri_date = sat_date + datetime.timedelta(days=6) 
+        fri_date_str = str(fri_date)
+        fri = fri_date.strftime("%A")
+        
+        sat_count = Appointment.objects.filter(date=sat_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        sun_count = Appointment.objects.filter(date=sun_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        mon_count = Appointment.objects.filter(date=mon_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        tues_count = Appointment.objects.filter(date=tues_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        wed_count = Appointment.objects.filter(date=wed_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        thurs_count = Appointment.objects.filter(date=thurs_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        fri_count = Appointment.objects.filter(date=fri_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
