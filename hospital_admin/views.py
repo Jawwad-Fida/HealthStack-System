@@ -268,7 +268,7 @@ def edit_hospital(request, pk):
                     featured_image = request.FILES['featured_image']
                 else:
                     featured_image = old_featured_image
-
+                    
                                 
                     hospital_name = request.POST.get('hospital_name')
                     address = request.POST.get('address')
@@ -288,14 +288,36 @@ def edit_hospital(request, pk):
                     hospital.featured_image =featured_image 
                     hospital.hospital_type =hospital_type
                     
-                    specializations.specialization_name=specialization_name
-                    services.service_name = service_name
-                    departments.hospital_department_name = department_name 
+                    # specializations.specialization_name=specialization_name
+                    # services.service_name = service_name
+                    # departments.hospital_department_name = department_name 
 
                     hospital.save()
-                    specializations.save()
-                    services.save()
-                    departments.save()
+
+                    # Specialization
+                    for i in range(len(specialization_name)):
+                        specializations = specialization(hospital=hospital)
+                        specializations.specialization_name = specialization_name[i]
+                        
+                        specializations.save()
+
+                    # Experience
+                    for i in range(len(service_name)):
+                        services = service(hospital=hospital)
+                        services.service_name = service_name[i]
+                        services.save()
+                    for i in range(len(department_name)):
+                        departments = hospital_department(hospital=hospital)
+                        departments.department_name = department_name[i]
+                        departments.save()
+
+
+
+
+
+                    # specializations.save()
+                    # services.save()
+                    # departments.save()
                     return redirect('hospital-list')
 
              context = { 'admin': user,'hospital':hospital,'departments':departments,'specializations':specializations,'services':services}

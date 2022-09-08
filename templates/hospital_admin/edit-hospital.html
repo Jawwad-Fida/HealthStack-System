@@ -95,7 +95,7 @@
 										</div>
 
 										<!-- Profile Settings Form -->
-										<form action="{% url 'edit-hospital' pk=hospital.hospital_id %}" method="GET"
+										<form action="{% url 'edit-hospital' pk=hospital.hospital_id %}" method="POST"
 											enctype="multipart/form-data">
 											{% csrf_token %}
 											<div >
@@ -205,6 +205,30 @@
 																				<input class="form-control" type="text"
 																					name="phone_number"
 																					value="{{hospital.phone_number}}">
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="card card-table">
+														<div class="card-body">
+															<div class="table-responsive">
+																<table class="table table-hover table-center">
+																	<thead>
+																		<tr>
+																			<th style="max-width: 300px;min-width: 280px;">Hospital Type
+																				</th>
+																			<th style="min-width: 50px;"></th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<input class="form-control" type="text"
+																					name="type"
+																					value="{{hospital.hospital_type}}">
 																			</td>
 																		</tr>
 																	</tbody>
