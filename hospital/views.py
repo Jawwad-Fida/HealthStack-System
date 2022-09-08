@@ -505,14 +505,54 @@ def testing(request):
     #     # department_list.append(d.hospital_department_name)
     
     # # education = zip(degree_array, institute_array)
-    current_date = datetime.date.today()
-    current_date = str(current_date)    
+
     
-    given_date = "09/08/2022"
-    transformed_date = datetime.datetime.strptime(given_date, '%m/%d/%Y').strftime('%Y-%m-%d')
-    transformed_date = str(transformed_date)
+    # given_date = "09/08/2022"
+    # transformed_date = datetime.datetime.strptime(given_date, '%m/%d/%Y').strftime('%Y-%m-%d')
+    # transformed_date = str(transformed_date)
     
-    context = {'current_date': current_date, 'given_date': given_date, 'transformed_date': transformed_date}
+
+    sat_date = datetime.date.today()
+    sat_date_str = str(sat_date)
+    sat = sat_date.strftime("%A")
+
+    sun_date = sat_date + datetime.timedelta(days=1) 
+    sun_date_str = str(sun_date)
+    sun = sun_date.strftime("%A")
+    
+    mon_date = sat_date + datetime.timedelta(days=2) 
+    mon_date_str = str(mon_date)
+    mon = mon_date.strftime("%A")
+    
+    tues_date = sat_date + datetime.timedelta(days=3) 
+    tues_date_str = str(tues_date)
+    tues = tues_date.strftime("%A")
+    
+    wed_date = sat_date + datetime.timedelta(days=4) 
+    wed_date_str = str(wed_date)
+    wed = wed_date.strftime("%A")
+    
+    thurs_date = sat_date + datetime.timedelta(days=5) 
+    thurs_date_str = str(thurs_date)
+    thurs = thurs_date.strftime("%A")
+    
+    fri_date = sat_date + datetime.timedelta(days=6) 
+    fri_date_str = str(fri_date)
+    fri = fri_date.strftime("%A")
+    
+    
+    day = datetime.date.today().strftime("%A")  
+
+    sat_count = Appointment.objects.filter(date=sat_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+    sun_count = Appointment.objects.filter(date=sun_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+    mon_count = Appointment.objects.filter(date=mon_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+    tues_count = Appointment.objects.filter(date=tues_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+    wed_count = Appointment.objects.filter(date=wed_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+    thurs_count = Appointment.objects.filter(date=thurs_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+    fri_count = Appointment.objects.filter(date=fri_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+    
+    
+    context = {'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
     # test range, len, and loop to show variables before moving on to doctor profile
     
     return render(request, 'testing.html', context)
