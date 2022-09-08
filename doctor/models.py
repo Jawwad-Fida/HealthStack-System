@@ -140,6 +140,31 @@ class Report(models.Model):
 
     def __str__(self):
         return str(self.patient.username)
+
+class Specimen(models.Model):
+
+    report = models.ForeignKey(Report, on_delete=models.CASCADE, null=True, blank=True)
+    specimen_id = models.AutoField(primary_key=True)
+    specimen_type = models.CharField(max_length=200, null=True, blank=True)
+    collection_date = models.CharField(max_length=200, null=True, blank=True)
+    receiving_date = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.report.report_id)
+
+class Test(models.Model):
+
+    report = models.ForeignKey(Report, on_delete=models.CASCADE, null=True, blank=True)
+    test_id = models.AutoField(primary_key=True)
+    test_name = models.CharField(max_length=200, null=True, blank=True)
+    result = models.CharField(max_length=200, null=True, blank=True)
+    unit = models.CharField(max_length=200, null=True, blank=True)
+    referred_value = models.CharField(max_length=200, null=True, blank=True)
+    delivery_date = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.report.report_id)
+
         
 class Prescription(models.Model):
 
