@@ -12,7 +12,7 @@ from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
 from pharmacy.models import Medicine, Pharmacist
-from doctor.models import Doctor_Information, Prescription, Report, Appointment, Experience , Education
+from doctor.models import Doctor_Information, Prescription, Report, Appointment, Experience , Education,Specimen,Test
 
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
@@ -380,26 +380,43 @@ def create_report(request, pk):
             
             specimen_type = request.POST.getlist('specimen_type')
             collection_date  = request.POST.getlist('collection_date')
-            receiving_date = request.POST.getlist('reciving_date')
+            receiving_date = request.POST.getlist('receiving_date')
             test_name = request.POST.getlist('test_name')
             result = request.POST.getlist('result')
             unit = request.POST.getlist('unit')
             referred_value = request.POST.getlist('referred_value')
             delivery_date = request.POST.get('delivery_date')
 
-            # Save to report table
-            report.test_name = test_name
-            report.result = result
+            # # Save to report table
+            # report.test_name = test_name
+            # report.result = result
             report.delivery_date = delivery_date
-            #report.specimen_id =generate_random_specimen()
-            report.specimen_type = specimen_type
-            report.collection_date  = collection_date 
-            report.receiving_date = receiving_date
-            report.unit = unit
-            report.referred_value = referred_value
+            # #report.specimen_id =generate_random_specimen()
+            # report.specimen_type = specimen_type
+            # report.collection_date  = collection_date 
+            # report.receiving_date = receiving_date
+            # report.unit = unit
+            # report.referred_value = referred_value
+
             report.save()
 
-            return redirect('doctor-list')
+            for i in range(len(specimen_type)):
+                specimens = Specimen(report=report)
+                specimens.specimen_type = specimen_type[i]
+                specimens.collection_date = collection_date[i]
+                specimens.receiving_date = receiving_date[i]
+                specimens.save()
+                
+            for i in range(len(test_name)):
+                tests = Test(report=report)
+                tests.test_name=test_name[i]
+                tests.result=result[i]
+                tests.unit=unit[i]
+                tests.referred_value=referred_value[i]
+                tests.save()
+                
+
+            return redirect('register-doctor-list')
 
         context = {'doctors': doctors, 'admin': user}
         return render(request, 'hospital_admin/create-report.html',context)
