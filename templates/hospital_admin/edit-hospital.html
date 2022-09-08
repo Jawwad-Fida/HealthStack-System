@@ -95,7 +95,7 @@
 										</div>
 
 										<!-- Profile Settings Form -->
-										<form action="{% url 'add-hospital' %}" method="GET"
+										<form action="{% url 'edit-hospital' pk=hospital.hospital_id %}" method="GET"
 											enctype="multipart/form-data">
 											{% csrf_token %}
 											<div >
@@ -216,14 +216,14 @@
 														<div class="card-body">
 															<h4 class="card-title">Departments</h4>
 															<div class="department-info">
-																
+															{%for department in departments%}	
 																<div class="row form-row department-cont">
 																	<div class="col-12 col-md-10 col-lg-11">
 																		<div class="form-group">
 																			<label>Add New Departments</label>
 																			<input type="text" class="form-control"
 																				name="department"
-																				value="{{departments.hospital_department_name}}">
+																				value={{department.hospital_department_name}}>
 																		</div>
 																	</div>
 																	<div class="col-md-2 col-lg-1">
@@ -233,6 +233,7 @@
 																		</a>
 																	</div>
 																</div>
+															{% endfor %}
 																
 
 															</div>
@@ -245,6 +246,7 @@
 													<div class="card">
 														<div class="card-body">
 															<h4 class="card-title">Services</h4>
+														{%for service in services%}	
 															<div class="service-info">
 																<div class="row form-row service-cont">
 																	<div class="col-12 col-md-8 col-lg-11">
@@ -252,7 +254,7 @@
 																			<label>Add New Services</label>
 																			<input type="text" class="form-control"
 																				name="service"
-																				value="{{services.service_name}}">
+																				value="{{service.service_name}}">
 																		</div>
 																	</div>
 																	<div class="col-md-2 col-lg-1">
@@ -263,6 +265,7 @@
 																	</div>
 																</div>
 															</div>
+														{%endfor%}
 															<div class="add-more">
 																<a href="javascript:void(0);" class="add-service"
 																	style="color: #20c0f3"><i
@@ -274,6 +277,8 @@
 														<div class="card-body">
 															<h4 class="card-title">Specialization</h4>
 															<div class="specialization-info">
+
+															{%for specialization in specializations%}	
 																<div class="row form-row specialization-cont">
 
 																	<div class="col-12 col-md-8 col-lg-11">
@@ -281,7 +286,7 @@
 																			<label>Add New Specialization</label>
 																			<input type="text" class="form-control"
 																				name="specialization"
-																				value="{{specializations.hospital}}">
+																				value="{{specialization.specialization_name}}">
 																		</div>
 																	</div>
 																	<div class="col-md-2 col-lg-1">
@@ -292,6 +297,7 @@
 																	</div>
 
 																</div>
+															{%endfor%}	
 															</div>
 															<div class="add-more">
 																<a href="javascript:void(0);"
