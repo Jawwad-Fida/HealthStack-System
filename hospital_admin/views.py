@@ -1,5 +1,6 @@
 import email
 from email.mime import image
+from multiprocessing import context
 from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -9,9 +10,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
-
+from django.db.models import Q
 from pharmacy.models import Medicine, Pharmacist
-from doctor.models import Doctor_Information, Prescription, Report, Appointment
+from doctor.models import Doctor_Information, Prescription, Report, Appointment, Experience , Education
 
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
@@ -32,8 +33,16 @@ def admin_dashboard(request):
         user = Admin_Information.objects.get(user=request.user)
         total_patient_count = Patient.objects.annotate(count=Count('patient_id'))
         total_doctor_count = Doctor_Information.objects.annotate(count=Count('doctor_id'))
+        total_pharmacist_count = Pharmacist.objects.annotate(count=Count('pharmacist_id'))
+        total_hospital_count = Hospital_Information.objects.annotate(count=Count('hospital_id'))
+        total_labworker_count = Clinical_Laboratory_Technician.objects.annotate(count=Count('technician_id'))
         pending_appointment = Appointment.objects.filter(appointment_status='pending').count()
-        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment, }
+        doctors = Doctor_Information.objects.all()
+        patients = Patient.objects.all()
+        hospitals = Hospital_Information.objects.all()
+        lab_workers = Clinical_Laboratory_Technician.objects.all()
+
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
@@ -102,14 +111,6 @@ def admin_register(request):
 @login_required(login_url='admin-login')
 def admin_forgot_password(request):
     return render(request, 'hospital_admin/forgot-password.html')
-
-
-@login_required(login_url='admin-login')
-def doctor_list(request):
-    if request.user.is_hospital_admin:
-        user = Admin_Information.objects.get(user=request.user)
-    doctors = Doctor_Information.objects.all()
-    return render(request, 'hospital_admin/doctor-list.html', {'all': doctors, 'admin': user})
 
 @login_required(login_url='admin-login')
 def invoice(request):
@@ -551,4 +552,70 @@ def edit_lab_worker(request, pk):
         user = Admin_Information.objects.get(user=request.user)
         lab_worker = Clinical_Laboratory_Technician.objects.get(technician_id=pk)
         
+        if request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = "technician/user-default.png"
+                
+            name = request.POST.get('name')
+            email = request.POST.get('email')     
+            phone_number = request.POST.get('phone_number')
+            age = request.POST.get('age')  
+    
+            lab_worker.name = name
+            lab_worker.email = email
+            lab_worker.phone_number = phone_number
+            lab_worker.age = age
+            lab_worker.featured_image = featured_image
+    
+            lab_worker.save()
+        
+            return redirect('lab-worker-list')
+        
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
+
+def department_image_list(request,pk):
+    departments = hospital_department.objects.filter(hospital_id=pk)
+    #departments = hospital_department.objects.all()
+    context = {'departments': departments}
+    return render(request, 'hospital_admin/department-image-list.html',context)
+
+
+@login_required(login_url='admin-login')
+def register_doctor_list(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+    doctors = Doctor_Information.objects.filter(register_status='Accepted')
+    return render(request, 'hospital_admin/register-doctor-list.html', {'all': doctors, 'admin': user})
+
+@login_required(login_url='admin-login')
+def pending_doctor_list(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+    doctors = Doctor_Information.objects.filter(register_status='Pending')
+    return render(request, 'hospital_admin/Pending-doctor-list.html', {'all': doctors, 'admin': user})
+
+@login_required(login_url='admin-login')
+def admin_doctor_profile(request,pk):
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    admin = Admin_Information.objects.get(user=request.user)
+    experience= Experience.objects.filter(doctor_id=pk)
+    education = Education.objects.filter(doctor_id=pk)
+    context = {'doctor': doctor, 'admin': admin, 'experience': experience, 'education': education}
+    return render(request, 'hospital_admin/doctor-profile.html',context)
+
+@login_required(login_url='admin-login')
+def accept_doctor(request,pk):
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    doctor.register_status = 'Accepted'
+    doctor.save()
+    return redirect('admin-dashboard')
+
+@login_required(login_url='admin-login')
+def reject_doctor(request,pk):
+    doctor = Doctor_Information.objects.get(doctor_id=pk)
+    doctor.register_status = 'Rejected'
+    doctor.save()
+    return redirect('admin-dashboard')
+

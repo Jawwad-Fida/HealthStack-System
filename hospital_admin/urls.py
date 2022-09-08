@@ -16,8 +16,8 @@ urlpatterns = [
 
     path('appointment-list',views.appointment_list, name='appointment-list'),
     
-    path('doctor-list/', views.doctor_list,name='doctor-list'),
-    
+    path('register-doctor-list/', views.register_doctor_list,name='register-doctor-list'),
+    path('pending-doctor-list/', views.pending_doctor_list,name='pending-doctor-list'),
     path('forgot-password/', views.admin_forgot_password,name='admin_forgot_password'),
     path('hospital-list/', views.hospital_list,name='hospital-list'),
     path('add-hospital/', views.add_hospital,name='add-hospital'),
@@ -52,6 +52,10 @@ urlpatterns = [
     
     path('edit-medicine/<int:pk>/', views.edit_medicine,name='edit-medicine'),
     path('delete-medicine/<int:pk>/', views.delete_medicine,name='delete-medicine'),
+    path('department-image-list/<int:pk>', views.department_image_list,name='department-image-list'),
+    path('admin-doctor-profile/<int:pk>/', views.admin_doctor_profile,name='admin-doctor-profile'),
+    path('accept-doctor/<int:pk>/', views.accept_doctor,name='accept-doctor'),
+    path('reject-doctor/<int:pk>/', views.reject_doctor,name='reject-doctor'),
 
 ]
   

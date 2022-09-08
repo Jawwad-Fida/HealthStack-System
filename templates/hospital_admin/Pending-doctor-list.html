@@ -24,7 +24,11 @@
 		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}"> 
 		
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}">
+ 
+
+        <!-- pending doctor-list css -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/pending-doctor-list.css'%}"> 
 		
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -36,14 +40,18 @@
 		<!-- Main Wrapper -->
 
 		
-			<!-- Header -->
-            <div class="main-wrapper">
-				<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
+			
+        <div class="main-wrapper">
+            <!-- Header -->
+				<header class="header">
+                    {% include 'hospital_admin/hospital-admin-navbar.html' %}
+                </header>
 			<!-- /Header -->
 			
 			<!-- Sidebar -->
             <aside class="sidebar" id="sidebar">
-				{% include 'hospital_admin/hospital-admin-sidebar.html' %} </aside>
+				{% include 'hospital_admin/hospital-admin-sidebar.html' %} 
+            </aside>
 			<!-- /Sidebar -->
 			
 			<!-- Page Wrapper -->
@@ -64,54 +72,37 @@
 						</div>
 					</div>
 					<!-- /Page Header -->
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-body">
-									<div class="table-responsive">
-										<table class="datatable table table-hover table-center mb-0">
-											<thead>
-												<tr>
-													<th>Doctor Name</th>
-													<th>Speciality</th>
-													<th>Consultation Fee</th>
-													<th>Degree</th>
-													<th>Action</th>
-													</tr>
-													<tbody>
-														{% for doctor in all%}
-														<tr>
-															<td>
-																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
-																	<a href="{%url 'admin-doctor-profile' doctor.doctor_id%}">{{doctor.name}}</a>
-																</h2>
-															</td>
-															<td>{{doctor.department}}</td>
-															
-															<td>{{doctor.consultation_fee}}</td>
-															
-															<td>{{doctor.degree}}</td>
-															<td>
-																<div class="table-action">
-																	<a
-																	  href="{% url 'create-report' pk=doctor.doctor_id %}"
-																	  class="btn btn-outline-info btn-rounded" 
-																		>
-																		<i class="fas fa-file-alt"></i> Create Report 
-																	</a>
-										
-																  </div>
-																</td>
-														</tr>
-														{% endfor %}
-													</tbody>
-											</thead>
-                                        </table>
+					{%for doctor in all%}
+                    <div class="appointments">
+                        <div class="appointment-list">
+                            <div class="profile-info-widget">
+                                <a href="{%url 'admin-doctor-profile' pk=doctor.doctor_id%}" class="booking-doc-img">
+                                    <img src="{{doctor.featured_image.url}}" alt="User Image">
+                                </a>
+                                <div class="profile-det-info" style="padding-left:8px">
+                                    <h3><a href="{%url 'admin-doctor-profile' pk=doctor.doctor_id%}">{{doctor.name}}</a></h3>
+                                    <div class="patient-details">
+                                        <h5 style="color: #757575;font-size: 18px;font-weight: normal;margin-bottom: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><i class="fas fa-envelope"></i> {{doctor.email}}</h5>
+                                        <h5 style="color: #757575;font-size: 18px;font-weight: normal;margin-bottom: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><i class="fas fa-phone"></i> {{doctor.phone_number}}</h5>
+                                        <h5 style="color: #757575;font-size: 18px;font-weight: normal;margin-bottom: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><i class="fas fa-brain"></i><span style="color:black"><b> Department:</b></span> {{doctor.department_name}}</h5>
+                                        <h5 style="color: #757575;font-size: 18px;font-weight: normal;margin-bottom: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><i class="fas fa-user-md"></i><span style="color:black"><b> Specialization:</b></span> {{doctor.specialization}}</h5>
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="appointment-action">
+                                <a href="{%url 'admin-doctor-profile' doctor.doctor_id%}" class="btn btn-sm bg-info-light" >
+                                    <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="{%url 'accept-doctor' pk=doctor.doctor_id%}" class="btn btn-sm bg-success-light">
+                                    <i class="fas fa-check"></i> Accept
+                                </a>
+                                <a href="{%url 'reject-doctor' pk=doctor.doctor_id%}" class="btn btn-sm bg-danger-light">
+                                    <i class="fas fa-times"></i> Cancel
+                                </a>
+                            </div>
+                        </div> 
+                        {% endfor %}
                     </div>
                 </div>
 					

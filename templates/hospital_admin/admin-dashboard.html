@@ -41,8 +41,10 @@
       rel="stylesheet"
       href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}"
     />
-
-    <!-- Feathericon CSS -->
+<!-- Fontawesome CSS -->
+<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+   
+<!-- Feathericon CSS -->
     <link
       rel="stylesheet"
       href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}"
@@ -140,7 +142,7 @@
                 <div class="card-body">
                   <div class="dash-widget-header">
                     <span class="dash-widget-icon text-danger border-danger">
-                      <i class="fe fe-file-image"></i>
+                      <i class="fe fe-money"></i>
                     </span>
                     <div class="dash-count">
                       <h3>{{pending_appointment}}</h3>
@@ -163,7 +165,7 @@
                       <i class="fe fe-folder"></i>
                     </span>
                     <div class="dash-count">
-                      <h3>$62523</h3>
+                      <h3>{{total_labworker_count.count}}</h3>
                     </div>
                   </div>
                   <div class="dash-widget-info">
@@ -176,32 +178,69 @@
               </div>
             </div>
           </div>
+          
           <div class="row">
-            <div class="col-md-12 col-lg-6">
-              <!-- Sales Chart -->
-              {% comment %} <div class="card card-chart">
+            <div class="col-md-6 d-flex">
+              <!-- Recent Orders -->
+              <div class="card card-table flex-fill">
                 <div class="card-header">
-                  <h4 class="card-title">Revenue</h4>
+                  <h4 class="card-title"> Hospital List</h4>
                 </div>
                 <div class="card-body">
-                  <div id="morrisArea"></div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-center mb-0">
+                      <thead>
+                        <tr>
+                          <th>Hospital Name</th>
+                          <th>Address</th>
+                          <th>Email</th>
+                          <th>Phone Number</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for hospital in hospitals%}
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="#"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="{{hospital.featured_image.url}}"
+                                  alt="User Image"
+                              /></a>
+                              <a href="#">{{hospital.name}}</a>
+                            </h2>
+                          </td>
+                          <td>{{hospital.address}}</td>
+                          <td>{{hospital.email}}</td>
+                          <td>{{hospital.phone_number}}</td>
+
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div> {% endcomment %}
-              <!-- /Sales Chart -->
+              </div>
+              <!-- /Recent Orders -->
             </div>
-            <div class="col-md-12 col-lg-6">
-              <!-- Invoice Chart -->
-              {% comment %} <div class="card card-chart">
-                <div class="card-header">
-                  <h4 class="card-title">Status</h4>
-                </div>
-                <div class="card-body">
-                  <div id="morrisLine"></div>
-                </div>
-              </div> {% endcomment %}
-              <!-- /Invoice Chart -->
+
+            <div class="col-lg-6 col-sm-6">
+              <div class="card">
+                  <div class="card-header">
+                      <h4 class="card-title">Donught Chart</h4>
+                  </div>
+                  <div class="card-body">
+                      
+                      <div id="morris_donught" class="morris_chart_height" style=" height: 240px !important;"></div>
+                  </div>
+              </div>
             </div>
+            
           </div>
+
           <div class="row">
             <div class="col-md-6 d-flex">
               <!-- Recent Orders -->
@@ -215,12 +254,13 @@
                       <thead>
                         <tr>
                           <th>Doctor Name</th>
+                          <th>Department</th>
                           <th>Speciality</th>
-                          <th>Earned</th>
-                          <th>Reviews</th>
+                          <th>Hospital</th>
                         </tr>
                       </thead>
                       <tbody>
+                        {% for doctor in doctors%}
                         <tr>
                           <td>
                             <h2 class="table-avatar">
@@ -229,118 +269,18 @@
                                 class="avatar avatar-sm mr-2"
                                 ><img
                                   class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-01.jpg'%}"
+                                  src="{{doctor.featured_image.url}}"
                                   alt="User Image"
                               /></a>
-                              <a href="profile.html">Dr. Ruby Perrin</a>
+                              <a href="{%url 'admin-doctor-profile' pk=doctor.doctor_id%}">{{doctor.name}}</a>
                             </h2>
                           </td>
-                          <td>Dental</td>
-                          <td>$3200.00</td>
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
+                          <td>{{doctor.department}}</td>
+                          <td>{{doctor.speciality}}</td>
+                          <td>{{doctor.hospital}}</td>
+
                         </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-02.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Darren Elder</a>
-                            </h2>
-                          </td>
-                          <td>Dental</td>
-                          <td>$3100.00</td>
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-03.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Deborah Angel</a>
-                            </h2>
-                          </td>
-                          <td>Cardiology</td>
-                          <td>$4000.00</td>
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-04.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Sofia Brient</a>
-                            </h2>
-                          </td>
-                          <td>Urology</td>
-                          <td>$3200.00</td>
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-05.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Marvin Campbell</a>
-                            </h2>
-                          </td>
-                          <td>Orthopaedics</td>
-                          <td>$3500.00</td>
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-                        </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
                   </div>
@@ -348,397 +288,109 @@
               </div>
               <!-- /Recent Orders -->
             </div>
-            <div class="col-md-6 d-flex">
-              <!-- Feed Activity -->
-              <div class="card card-table flex-fill">
-                <div class="card-header">
-                  <h4 class="card-title">Patients List</h4>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-hover table-center mb-0">
-                      <thead>
-                        <tr>
-                          <th>Patient Name</th>
-                          <th>Phone</th>
-                          <th>Last Visit</th>
-                          <th>Paid</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient1.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Charlene Reed </a>
-                            </h2>
-                          </td>
-                          <td>8286329170</td>
-                          <td>20 Oct 2019</td>
-                          <td class="text-right">$100.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient2.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Travis Trimble </a>
-                            </h2>
-                          </td>
-                          <td>2077299974</td>
-                          <td>22 Oct 2019</td>
-                          <td class="text-right">$200.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient3.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Carl Kelly</a>
-                            </h2>
-                          </td>
-                          <td>2607247769</td>
-                          <td>21 Oct 2019</td>
-                          <td class="text-right">$250.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient4.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html"> Michelle Fairfax</a>
-                            </h2>
-                          </td>
-                          <td>5043686874</td>
-                          <td>21 Sep 2019</td>
-                          <td class="text-right">$150.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient5.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Gina Moore</a>
-                            </h2>
-                          </td>
-                          <td>9548207887</td>
-                          <td>18 Sep 2019</td>
-                          <td class="text-right">$350.00</td>
-                        </tr>
-                      </tbody>
-                    </table>
+
+            <div class="col-lg-6 col-sm-6">
+              <div class="card">
+                  <div class="card-header">
+                      <h4 class="card-title">Gradient Bar Chart</h4>
                   </div>
-                </div>
+                  <div class="card-body">
+                      <canvas id="barChart_2"></canvas>
+                  </div>
               </div>
-              <!-- /Feed Activity -->
             </div>
+            
           </div>
+
           <div class="row">
-            <div class="col-md-12">
-              <!-- Recent Orders -->
-              <div class="card card-table">
-                <div class="card-header">
-                  <h4 class="card-title">Appointment List</h4>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-hover table-center mb-0">
-                      <thead>
-                        <tr>
-                          <th>Doctor Name</th>
-                          <th>Speciality</th>
-                          <th>Patient Name</th>
-                          <th>Apointment Time</th>
-                          <th>Status</th>
-                          <th class="text-right">Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-01.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Ruby Perrin</a>
-                            </h2>
-                          </td>
-                          <td>Dental</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient1.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Charlene Reed </a>
-                            </h2>
-                          </td>
-                          <td>
-                            9 Nov 2019
-                            <span class="text-primary d-block"
-                              >11.00 AM - 11.15 AM</span
-                            >
-                          </td>
-                          <td>
-                            <div class="status-toggle">
-                              <input
-                                type="checkbox"
-                                id="status_1"
-                                class="check"
-                                checked
-                              />
-                              <label for="status_1" class="checktoggle"
-                                >checkbox</label
-                              >
-                            </div>
-                          </td>
-                          <td class="text-right">$200.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-02.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Darren Elder</a>
-                            </h2>
-                          </td>
-                          <td>Dental</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient2.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Travis Trimble </a>
-                            </h2>
-                          </td>
 
-                          <td>
-                            5 Nov 2019
-                            <span class="text-primary d-block"
-                              >11.00 AM - 11.35 AM</span
-                            >
-                          </td>
-                          <td>
-                            <div class="status-toggle">
-                              <input
-                                type="checkbox"
-                                id="status_2"
-                                class="check"
-                                checked
-                              />
-                              <label for="status_2" class="checktoggle"
-                                >checkbox</label
-                              >
-                            </div>
-                          </td>
-                          <td class="text-right">$300.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-03.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Deborah Angel</a>
-                            </h2>
-                          </td>
-                          <td>Cardiology</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient3.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Carl Kelly</a>
-                            </h2>
-                          </td>
-                          <td>
-                            11 Nov 2019
-                            <span class="text-primary d-block"
-                              >12.00 PM - 12.15 PM</span
-                            >
-                          </td>
-                          <td>
-                            <div class="status-toggle">
-                              <input
-                                type="checkbox"
-                                id="status_3"
-                                class="check"
-                                checked
-                              />
-                              <label for="status_3" class="checktoggle"
-                                >checkbox</label
-                              >
-                            </div>
-                          </td>
-                          <td class="text-right">$150.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-04.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Sofia Brient</a>
-                            </h2>
-                          </td>
-                          <td>Urology</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient4.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html"> Michelle Fairfax</a>
-                            </h2>
-                          </td>
-                          <td>
-                            7 Nov 2019<span class="text-primary d-block"
-                              >1.00 PM - 1.20 PM</span
-                            >
-                          </td>
-                          <td>
-                            <div class="status-toggle">
-                              <input
-                                type="checkbox"
-                                id="status_4"
-                                class="check"
-                                checked
-                              />
-                              <label for="status_4" class="checktoggle"
-                                >checkbox</label
-                              >
-                            </div>
-                          </td>
-                          <td class="text-right">$150.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/doctors/doctor-thumb-05.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Marvin Campbell</a>
-                            </h2>
-                          </td>
-                          <td>Orthopaedics</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="{%static 'HealthStack-System/images/admin/patients/patient5.jpg'%}"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Gina Moore</a>
-                            </h2>
-                          </td>
+            <div class="col-md-6 d-flex">
+						
+							<!-- Feed Activity -->
+							<div class="card  card-table flex-fill">
+								<div class="card-header">
+									<h4 class="card-title">Patients List</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>													
+													<th>Patient Name</th>
+													<th>Phone</th>
+													<th>Email</th>
+													<th>Address</th>													
+												</tr>
+											</thead>
+											<tbody>
+                        {% for patient in patients%}
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{patient.featured_image.url}}" alt="User Image"></a>
+															<a href="#">{{patient.name}}</a>
+														</h2>
+													</td>
+													<td>{{patient.phone_number}}</td>
+													<td>{{patient.email}}</td>
+													<td>{{patient.address}}</td>
+												</tr>
+                        {% endfor %}
+												
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Feed Activity -->
+							
+						</div>
 
-                          <td>
-                            15 Nov 2019
-                            <span class="text-primary d-block"
-                              >1.00 PM - 1.15 PM</span
-                            >
-                          </td>
-                          <td>
-                            <div class="status-toggle">
-                              <input
-                                type="checkbox"
-                                id="status_5"
-                                class="check"
-                                checked
-                              />
-                              <label for="status_5" class="checktoggle"
-                                >checkbox</label
-                              >
-                            </div>
-                          </td>
-                          <td class="text-right">$200.00</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /Recent Orders -->
-            </div>
+            <div class="col-md-6 d-flex">
+						
+							<!-- Feed Activity -->
+							<div class="card  card-table flex-fill">
+								<div class="card-header">
+									<h4 class="card-title">Lab-Worker List</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>													
+													<th>Lab-Worker Name</th>
+													<th>Phone</th>
+													<th>Email</th>
+													<th>Address</th>													
+												</tr>
+											</thead>
+											<tbody>
+                        {% for lab_worker in lab_workers%}
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{patient.featured_image.url}}" alt="User Image"></a>
+															<a href="#">{{lab_worker.name}}</a>
+														</h2>
+													</td>
+													<td>{{lab_worker.phone_number}}</td>
+													<td>{{lab_worker.email}}</td>
+													<td>{{lab_worker.address}}</td>
+												</tr>
+                        {% endfor %}
+												
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Feed Activity -->
+							
+						</div>
           </div>
+          
         </div>
       </div>
       <!-- /Page Wrapper -->
@@ -766,6 +418,26 @@
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/js/admin/script.js'%}"></script>
+
+    <!-- Chart JS -->
+
+    <script>
+      var total_patient_count = "{{total_patient_count.count}}";total_hospital_count
+      var total_labworker_count= "{{total_labworker_count.count}}";
+      var total_hospital_count= "{{total_hospital_count.count}}";
+      var total_pharmacist_count= "{{total_pharmacist_count.count}}";
+    </script>
+
+    <script src="{% static 'HealthStack-System/js/admin/Chart.bundle.min.js'%}"></script>
+
+    <script src="{% static 'HealthStack-System/js/admin/raphael.min.js'%}"></script>
+
+    <script src="{% static 'HealthStack-System/js/admin/morris.min.js'%}"></script>
+
+    <script src="{% static 'HealthStack-System/js/admin/morris_init.js'%}"></script>
+
+    
+
   </body>
 
 

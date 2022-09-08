@@ -9,6 +9,7 @@ from hospital.models import Hospital_Information, User, Patient
 
 from hospital_admin.models import hospital_department, specialization, service
 
+
 from django.views.decorators.cache import cache_control
 
 
@@ -32,7 +33,7 @@ from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 # from django.dispatch import receiver
 
 from .models import Patient, User
-from doctor.models import Doctor_Information, Appointment
+from doctor.models import Doctor_Information, Appointment,Report
 
 from sslcommerz.models import Payment
 from django.db.models import Q, Count
@@ -209,12 +210,13 @@ def patient_register(request):
 def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
+        report = Report.objects.filter(patient=patient)
         # patient = Patient.objects.get(user_id=pk)
         # appointments = Appointment.objects.filter(patient=patient)
         appointments = Appointment.objects.filter(patient=patient).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
         payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
 
-        context = {'patient': patient, 'appointments': appointments, 'payments': payments}
+        context = {'patient': patient, 'appointments': appointments, 'payments': payments,'report':report}
     else:
         return redirect('logout')
         
@@ -484,42 +486,56 @@ def hospital_doctor_register(request, pk):
     
     
 def testing(request):
-    hospitals = Hospital_Information.objects.get(hospital_id=1)
+    # hospitals = Hospital_Information.objects.get(hospital_id=1)
         
-    departments = hospital_department.objects.filter(hospital=hospitals)
-    specializations = specialization.objects.filter(hospital=hospitals)
-    services = service.objects.filter(hospital=hospitals)
+    # departments = hospital_department.objects.filter(hospital=hospitals)
+    # specializations = specialization.objects.filter(hospital=hospitals)
+    # services = service.objects.filter(hospital=hospitals)
     
-    department_list = None
-    for d in departments:
-        vald = d.hospital_department_name
-        vald = re.sub("'", "", vald)
-        vald = vald.replace("[", "")
-        vald = vald.replace("]", "")
-        vald = vald.replace(",", "")
-        department_list = vald.split()
-        # department_list.append(d.hospital_department_name)
-        
-        
-    # degree = doctor.degree
-    # degree = re.sub("'", "", degree)
-    # degree = degree.replace("[", "")
-    # degree = degree.replace("]", "")
-    # degree = degree.replace(",", "")
-    # degree_array = degree.split()
+    # department_list = None
+    # for d in departments:
+    #     vald = d.hospital_department_name
+    #     vald = re.sub("'", "", vald)
+    #     vald = vald.replace("[", "")
+    #     vald = vald.replace("]", "")
+    #     vald = vald.replace(",", "")
+    #     department_list = vald.split()
+    #     # department_list.append(d.hospital_department_name)
     
-    # education = zip(degree_array, institute_array)
+    # # education = zip(degree_array, institute_array)
+    current_date = datetime.date.today()
+    current_date = str(current_date)    
     
-    context = {'departments': departments, 'department_list': department_list}
+    given_date = "09/08/2022"
+    transformed_date = datetime.datetime.strptime(given_date, '%m/%d/%Y').strftime('%Y-%m-%d')
+    transformed_date = str(transformed_date)
+    
+    context = {'current_date': current_date, 'given_date': given_date, 'transformed_date': transformed_date}
     # test range, len, and loop to show variables before moving on to doctor profile
     
     return render(request, 'testing.html', context)
 
-def view_report(request):
+def view_report(request,pk):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
+        report = Report.objects.get(report_id=pk)
         current_date = datetime.date.today()
-        context = {'patient':patient,'current_date' : current_date}
+        test_name = report.test_name
+        test_name = re.sub("'", "", test_name)
+        test_name = test_name.replace("[", " ")
+        test_name = test_name.replace("]", " ")
+        test_name = test_name.replace(",", " ")
+        test_name = test_name.split()
+        test_name = report.test_name
+
+        # test_name = re.sub("'", "", test_name)
+        # test_name = test_name.replace("[", "")
+        # test_name = test_name.replace("]", "")
+        # test_name = test_name.replace(",", "")
+        # test_name = test_name.split()
+    
+    # education = zip(degree_array, institute_array)
+        context = {'patient':patient,'current_date' : current_date,'report':report,'test_name':test_name}
         return render(request, 'view-report.html',context)
     else:
         redirect('logout') 

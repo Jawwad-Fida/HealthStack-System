@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
-
 from django.shortcuts import render, HttpResponseRedirect, redirect
-from django.http import HttpResponse
-
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import random
@@ -11,6 +8,14 @@ import string
 from .models import Payment
 from hospital.models import Patient
 from doctor.models import Appointment
+from django.contrib.auth.decorators import login_required
+
+
+from django.core.mail import BadHeaderError, send_mail
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from django.utils.html import strip_tags
+
 
 # from .models import Patient, User
 from sslcommerz_lib import SSLCOMMERZ
@@ -28,12 +33,6 @@ sslcz = SSLCOMMERZ(payment_settings)
 
 
 # Create your views here.
-"""
-Also learn how to bring store data using environment variables.
-
-Learn how to apply two decorators to a single view function.
-in this case --> @login_required and @csrf_exempt    
-"""
 
 
 
@@ -145,8 +144,6 @@ def ssl_payment_request(request, pk, id):
 
     # return render(request, 'checkout.html')
 
-# @login_required
-
 
 @csrf_exempt
 def ssl_payment_success(request):
@@ -212,6 +209,39 @@ def ssl_payment_success(request):
 
         #dic = {'payment_data': payment_data, 'response': response}
         #return render(request, 'success.html', dic)
+        
+        # Mailtrap
+        patient_email = payment.patient.email
+        patient_name = payment.patient.name
+        patient_username = payment.patient.username
+        patient_phone_number = payment.patient.phone_number
+        doctor_name = appointment.doctor.name
+       
+        subject = "Payment Receipt for appointment"
+        
+        values = {
+				"email":patient_email,
+                "name":patient_name,
+                "username":patient_username,
+                "phone_number":patient_phone_number,
+                "doctor_name":doctor_name,
+                "tran_id":payment_data['tran_id'],
+                "currency_amount":payment_data['currency_amount'],
+                "card_type":payment_data['card_type'],
+                "bank_transaction_id":payment_data['bank_tran_id'],
+                "transaction_date":payment_data['tran_date'],
+                "card_issuer":payment_data['card_issuer'],
+			}
+        
+        html_message = render_to_string('appointment_mail_payment_template.html', {'values': values})
+        plain_message = strip_tags(html_message)
+        
+        try:
+            send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+        except BadHeaderError:
+            return HttpResponse('Invalid header found')
+   
+        
         return redirect('patient-dashboard')
 
     elif status == 'FAILED':

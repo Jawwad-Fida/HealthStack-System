@@ -80,7 +80,7 @@
 							<div class="card">
 								<div class="card-header">
 									<!-- Profile Settings Form -->
-									<form action="#" method="POST" enctype="multipart/form-data" >
+									<form action="{% url 'edit-lab-worker' pk=lab_worker.technician_id %}" method="POST" enctype="multipart/form-data" >
 													{% csrf_token %}
 							
 													<div class="row form-row">
@@ -129,7 +129,7 @@
 																	<tbody>
 																		<tr>
 																			<td>
-																				<input class="form-control" type="text" name="username" value="{{lab_worker.username}}">
+																				<input class="form-control" type="text" readonly value="{{lab_worker.username}}">
 																			</td>
 																			<td>
 																				<input class="form-control" type="text" name="phone_number" value="{{lab_worker.phone_number}}">

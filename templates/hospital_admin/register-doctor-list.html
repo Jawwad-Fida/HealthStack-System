@@ -1,3 +1,33 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@Rafnarok335 
+Jawwad-Fida
+/
+HealthStack-System
+Private
+Code
+Issues
+1
+Pull requests
+Discussions
+Actions
+Projects
+Wiki
+Security
+Insights
+HealthStack-System/templates/hospital_admin/register-doctor-list.html
+@PrantoPodder98
+PrantoPodder98 merge conflict solved
+Latest commit b04f98f 1 hour ago
+ History
+ 1 contributor
+158 lines (128 sloc)  5.39 KB
+
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
@@ -73,10 +103,10 @@
 											<thead>
 												<tr>
 													<th>Doctor Name</th>
-													<th>Speciality</th>
-													<th>Consultation Fee</th>
-													<th>Degree</th>
-													<th>Action</th>
+													<th>Email</th>
+													<th>Department</th>
+													<th>Hospital</th>
+													<th>View profile</th>
 													</tr>
 													<tbody>
 														{% for doctor in all%}
@@ -87,12 +117,13 @@
 																	<a href="{%url 'admin-doctor-profile' doctor.doctor_id%}">{{doctor.name}}</a>
 																</h2>
 															</td>
+															<td>{{doctor.email}}</td>
+
 															<td>{{doctor.department}}</td>
-															
-															<td>{{doctor.consultation_fee}}</td>
-															
-															<td>{{doctor.degree}}</td>
-															<td>
+
+															<td>{{doctor.hospital}}</td>
+
+															<!-- <td>
 																<div class="table-action">
 																	<a
 																	  href="{% url 'create-report' pk=doctor.doctor_id %}"
@@ -102,12 +133,24 @@
 																	</a>
 										
 																  </div>
-																</td>
+															</td> -->
+															<td>
+																<div class="table-action">
+																	<a
+																	  href=""
+																	  class="btn btn-outline-info btn-rounded" 
+																		>
+																		<i class="fas fa-file-alt"></i> view
+																	</a>
+										
+																  </div>
+															</td>
 														</tr>
 														{% endfor %}
 													</tbody>
 											</thead>
                                         </table>
+										
                                     </div>
                                 </div>
                             </div>
@@ -143,3 +186,4 @@
 
 <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 </html>
+
