@@ -101,6 +101,8 @@
 										</div>
 										<div class="col-md-6">
 											<p class="invoice-details">
+                        {% for report in report %}
+                        <strong>Report ID:</strong>{{report.report_id}} <br>
 												<strong>Patient ID:</strong> {{patient.patient_id }} <br>
 												<strong>Date:</strong> {{current_date}}
 											</p>
@@ -114,7 +116,7 @@
 										<div class="col-md-6">
 											<div class="invoice-info">
 												<strong class="customer-text">Doctor Information</strong>
-                        {% for report in report %}
+                        
 												<p class="invoice-details invoice-details-two">
 													{{report.doctor.name}} <br>
 													{{report.doctor.address}}<br>
@@ -128,9 +130,9 @@
 											<div class="invoice-info invoice-info2">
 												<strong class="customer-text">Patient Information</strong>
 												<p class="invoice-details">
-													{{patient.address}}<br>
-													{{patient.email}} <br>
-													{{patient.phone_number}}<br>
+													{{report.patient.address}}<br>
+													{{report.patient.email}} <br>
+													{{report.patient.phone_number}}<br>
 												</p>
 											</div>
 										</div>
@@ -183,16 +185,11 @@
 														</tr>
                             {% for t in test %}
                             <tr>
-
-                              <th class="text-center">{{report.report_id}}</th>
-                              <th class="text-center">{{report.result|slugify}}</th>
-															<th class="text-center">{{report.unit|slugify}}</th>
-                              <th class="text-center">{{report.referred_value|slugify}}</th>
-
                               <th class="text-center">{{t.test_name}}</th>
                               <th class="text-center">{{t.result}}</th>
 															<th class="text-center">{{t.unit}}</th>
                               <th class="text-center">{{t.referred_value}}</th>
+
 
 	
 														</tr>

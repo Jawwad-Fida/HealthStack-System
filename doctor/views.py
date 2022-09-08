@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
 
-from .models import Doctor_Information, Appointment, Education, Experience, Report
+from .models import Doctor_Information, Appointment, Education, Experience, Report,Specimen,Test
 from .uitls import searchPatients
 
 from django.db.models import Q, Count
@@ -476,10 +476,13 @@ def render_to_pdf(template_src, context_dict=()):
 
 
 def report_pdf(request, pk):
-    report=Report.objects.get(report_id=pk)
+ if request.user.is_patient:
+    patient = Patient.objects.get(user=request.user)
+    report = Report.objects.filter(patient=patient)
+    specimen = Specimen.objects.filter(report__in=report)
+    test = Test.objects.filter(report__in=report)
     current_date = datetime.date.today()
-    context={'report':report, 'current_date':current_date,
-    }
+    context={'patient':patient,'current_date' : current_date,'report':report,'test':test,'specimen':specimen}
     pdf=render_to_pdf('report_pdf.html', context)
     if pdf:
         response=HttpResponse(pdf, content_type='application/pdf')
