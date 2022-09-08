@@ -31,13 +31,16 @@ def admin_dashboard(request):
         user = Admin_Information.objects.get(user=request.user)
         total_patient_count = Patient.objects.annotate(count=Count('patient_id'))
         total_doctor_count = Doctor_Information.objects.annotate(count=Count('doctor_id'))
+        total_pharmacist_count = Pharmacist.objects.annotate(count=Count('pharmacist_id'))
+        total_hospital_count = Hospital_Information.objects.annotate(count=Count('hospital_id'))
+        total_labworker_count = Clinical_Laboratory_Technician.objects.annotate(count=Count('technician_id'))
         pending_appointment = Appointment.objects.filter(appointment_status='pending').count()
         doctors = Doctor_Information.objects.all()
         patients = Patient.objects.all()
         hospitals = Hospital_Information.objects.all()
         lab_workers = Clinical_Laboratory_Technician.objects.all()
 
-        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers}
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
