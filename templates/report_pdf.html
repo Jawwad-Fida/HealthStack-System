@@ -91,7 +91,7 @@
 										</div>
 										<div class="col-md-6">
 											<p class="invoice-details">
-												<strong>Patient ID:</strong> {{patient.patient_id }} <br>
+												<strong>Patient ID:</strong> {{report.patient.patient_id }} <br>
 												<strong>Date:</strong> {{current_date}}
 											</p>
 										</div>
@@ -116,9 +116,9 @@
 											<div class="invoice-info invoice-info2">
 												<strong class="customer-text">Patient Information</strong>
 												<p class="invoice-details">
-													{{patient.address}}<br>
-													{{patient.email}} <br>
-													{{patient.phone_number}}<br>
+													{{report.patient.name}}<br>
+													{{report.patient.email}} <br>
+													{{report.patient.phone_number}}<br>
 												</p>
 											</div>
 										</div>
