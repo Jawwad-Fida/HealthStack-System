@@ -113,12 +113,14 @@
 										<div class="col-md-6">
 											<div class="invoice-info">
 												<strong class="customer-text">Doctor Information</strong>
+                        {% for report in report %}
 												<p class="invoice-details invoice-details-two">
 													{{report.doctor.name}} <br>
 													{{report.doctor.address}}<br>
 													{{report.doctor.email}}<br>
                           {{report.doctor.phone_number}}<br>
 												</p>
+                        
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -133,74 +135,28 @@
 										</div>
 									</div>
 								</div>
-								<!-- /Invoice Item -->
-								
-								
-								
-								<!-- Invoice Item
 								<div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
-													<thead>
-														<tr>
-															<th>Medicine Name</th>
-															<th class="text-center">Quantity</th>
-															<th class="text-center">Days</th>
-															<th class="text-center">Time</th>
-															<th class="text-center">Description</th>
-															
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>NAPA</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															
-														</tr>
-														<tr>
-															<td>SECLO</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										
-									</div>
-								</div> -->
-
-								
-                                <!-- Invoice Item -->
-								<div class="invoice-item invoice-table-wrap">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
-													<thead>
-														<tr>
+												<table class="invoice-table table table-bordered" >
+													<thead >
+														<tr style="background-color: rgb(84, 147, 199);">
 															<th>Specimen Information</th>
                               <th class="text-center">Specimen ID</th>
                               <th class="text-center">Collection Date/Time</th>
                               <th class="text-center">Receiving Date/Time</th>
 														</tr>
+                            {% for s in specimen %}
                             <tr>
                               
-															<th class="text-center">{{report.specimen_type|slugify}}</th>
-                              <th class="text-center">none</th>
-                              <th class="text-center">{{report.collection_date |slugify}}</th>
-                              <th class="text-center">{{report.receiving_date|slugify}}</th>
+															<th class="text-center">{{s.specimen_type}}</th>
+                              <th class="text-center">{{s.specimen_id}}</th>
+                              <th class="text-center">{{s.collection_date}}</th>
+                              <th class="text-center">{{s.receiving_date}}</th>
 	
 														</tr>
-														
+														{% endfor %}
 													</tbody>
 												</table>
 											</div>
@@ -217,21 +173,22 @@
 											<div class="table-responsive">
 												<table class="invoice-table table table-bordered">
 													<thead>
-														<tr>
+														<tr style="background-color: rgb(84, 147, 199);">
 															<th>Test Name</th>
                               <th class="text-center">Result</th>
 															<th class="text-center">Unit</th>
                              <th class="text-center">Referred value</th>
 	
 														</tr>
+                            {% for t in test %}
                             <tr>
-                              <th class="text-center">{{report.test_name|slugify}}</th>
-                              <th class="text-center">{{report.result|slugify}}</th>
-															<th class="text-center">{{report.unit|slugify}}</th>
-                              <th class="text-center">{{report.referred_value|slugify}}</th>
+                              <th class="text-center">{{t.test_name}}</th>
+                              <th class="text-center">{{t.result}}</th>
+															<th class="text-center">{{t.unit}}</th>
+                              <th class="text-center">{{t.referred_value}}</th>
 	
 														</tr>
-														
+														{% endfor %}
 													</tbody>
 												</table>
 											</div>
@@ -245,8 +202,9 @@
 								
 								<!-- Invoice Information -->
 								<div class="other-info">
-									<h4>Other information</h4>
-									<p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
+									<h4 style="background-color: rgb(84, 147, 199);">Other information</h4>
+									<p>{{report.other_information}}</p>
+                  {% endfor %}
 								</div>
 								<!-- /Invoice Information -->
 								

@@ -2,6 +2,8 @@ import email
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
+
+import doctor
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm
@@ -33,7 +35,7 @@ from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 # from django.dispatch import receiver
 
 from .models import Patient, User
-from doctor.models import Doctor_Information, Appointment,Report
+from doctor.models import Doctor_Information, Appointment,Report, Specimen,Test
 
 from sslcommerz.models import Payment
 from django.db.models import Q, Count
@@ -515,27 +517,16 @@ def testing(request):
     
     return render(request, 'testing.html', context)
 
-def view_report(request,pk):
+def view_report(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
-        report = Report.objects.get(report_id=pk)
-        current_date = datetime.date.today()
-        test_name = report.test_name
-        test_name = re.sub("'", "", test_name)
-        test_name = test_name.replace("[", " ")
-        test_name = test_name.replace("]", " ")
-        test_name = test_name.replace(",", " ")
-        test_name = test_name.split()
-        test_name = report.test_name
+        report = Report.objects.filter(patient=patient)
+        specimen = Specimen.objects.filter(report__in=report)
+        test = Test.objects.filter(report__in=report)
 
-        # test_name = re.sub("'", "", test_name)
-        # test_name = test_name.replace("[", "")
-        # test_name = test_name.replace("]", "")
-        # test_name = test_name.replace(",", "")
-        # test_name = test_name.split()
-    
-    # education = zip(degree_array, institute_array)
-        context = {'patient':patient,'current_date' : current_date,'report':report,'test_name':test_name}
+        current_date = datetime.date.today()
+
+        context = {'patient':patient,'current_date' : current_date,'report':report,'test':test,'specimen':specimen}
         return render(request, 'view-report.html',context)
     else:
         redirect('logout') 
