@@ -395,8 +395,8 @@ mark,
     content: "\2014 \00A0"; }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto; }
+  width : 100%;
+  height: 200px; }
 
 .img-thumbnail {
   padding: 0.25rem;
@@ -8220,7 +8220,8 @@ h1, h2, h3, h4, h5,
     font-size: 18px;
     text-transform: uppercase; }
     .menu-wrap .text h3 a {
-      color: #20c0f3; }
+      color: #20c0f3;
+     }
   .menu-wrap .text .price {
     font-size: 18px;
     font-weight: 400; }
