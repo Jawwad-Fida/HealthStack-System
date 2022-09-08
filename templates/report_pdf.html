@@ -4,7 +4,7 @@
   <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->
   <head>
     <meta charset="utf-8" />
-    <title>pdf | {% block title %} {% endblock title %}</title>
+    <title>Report</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
@@ -49,15 +49,67 @@
 	</head>
 	<body>
 
-        
+	<!-- Main Wrapper -->
+		<!-- <div class="main-wrapper"> -->
+        <div class="wrapper">
 
-        </div class="container">
-        {% block content %}
-        {% ebdblock content %}
+            <h3 style="text-align: center; color:green; font-size: 18px;">Report</h3>
+                
+                <table cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr class="head"> 
+                    <td>report_id</td>
+                    <td>doctor</td>
+                    <td>patient</td>
+                    <td>specimen_id</td>
+                    <td>specimen_type</td>
+                    <td>collection_date</td>
+                    <td>receiving_date</td>
+                    <td>test_name</td>
+                    <td>result</td>
+                    <td>unit</td>
+                    <td>referred_value</td>
+                    <td>delivery_date</td>
+                    </tr>
+                    </thead>
+                    
+                <tbody>
 
-        <div>
+                    
+                    
+                    
+                    
+                    <tr class="item">
+                    <td>{{item.report_id}}</td>
+                    <td>{{item.doctor}}</td> 
+                    <td>{{item.patient}}</td>
+                    <td>{{item.specimen_id}}</td>
+                    <td>{{item.specimen_type}}</td>
+                    <td>{{item.collection_date}}</td>
+                    <td>{{item.receiving_date}}</td>
+                    <td>{{item.test_name}}</td>
+                    <td>{{item.result}}</td>
+                    <td>{{item.unit}}</td>
+                    <td>{{item.referred_value}}</td>
+                    <td>{{item.delivery_date}}</td>
+                    </tr>
+                </tbody>
+                   
 
-        <!-- /Main Wrapper -->
+                    
+                        
+
+</table>
+
+
+<!-- <h3 style="color:blue; text-align:center; font-size-16px;">HealthStack-System</h3>  -->
+
+
+
+</div>
+		
+			
+    <!-- /Main Wrapper -->
 
     <!-- jQuery -->
     <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
@@ -77,4 +129,5 @@
     <script src="{% static 'HealthStack-System/js/Normal/sidebar.js' %}"></script>
   </body>
 
+  <!-- doccure/patient-dashboard.html  30 Nov 2019 04:12:16 GMT -->
 </html>

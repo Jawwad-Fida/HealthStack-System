@@ -93,6 +93,7 @@
 							<div class="invoice-content">
 								<div class="invoice-item">
 									<div class="row">
+                    
 										<div class="col-md-6">
 											<div class="invoice-logo">
 												<img src="{% static 'HealthStack-System/images/Normal/FullLogo_Transparent_NoBuffer.png'%}" alt="logo">
@@ -182,15 +183,23 @@
 														</tr>
                             {% for t in test %}
                             <tr>
+
+                              <th class="text-center">{{report.report_id}}</th>
+                              <th class="text-center">{{report.result|slugify}}</th>
+															<th class="text-center">{{report.unit|slugify}}</th>
+                              <th class="text-center">{{report.referred_value|slugify}}</th>
+
                               <th class="text-center">{{t.test_name}}</th>
                               <th class="text-center">{{t.result}}</th>
 															<th class="text-center">{{t.unit}}</th>
                               <th class="text-center">{{t.referred_value}}</th>
+
 	
 														</tr>
 														{% endfor %}
 													</tbody>
 												</table>
+                        <button class="btn btn-secondary"> <a href="{% url 'pdf' pk=report.report_id %}" > PDF </a></button>
 											</div>
 										</div>
 										
