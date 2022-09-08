@@ -1,0 +1,6 @@
+download-pdf.html
+main_report.html
+pdf2.html
+
+
+pip install xhtml2pdf
