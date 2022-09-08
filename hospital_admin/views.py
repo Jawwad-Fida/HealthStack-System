@@ -21,6 +21,8 @@ import string
 from django.db.models import  Count
 
 
+
+
 # Create your views here.
 @login_required(login_url='admin-login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -550,4 +552,3 @@ def edit_lab_worker(request, pk):
         lab_worker = Clinical_Laboratory_Technician.objects.get(technician_id=pk)
         
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
-

@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
-from .models import Doctor_Information, Appointment, Education, Experience
+from .models import Doctor_Information, Appointment, Education, Experience, Report
 
 from django.db.models import Q, Count
 
@@ -20,6 +20,12 @@ import string
 
 from datetime import datetime, timedelta
 import datetime
+
+
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.views.generic import ListView
 
 # import json
 import re
@@ -413,4 +419,10 @@ def create_prescription(request):
 #     return render(request, 'testing.html', context)
 
 
+
+# def download_pdf(request):
+#     return render(request, 'download-pdf.html')
+
+
+    
 
