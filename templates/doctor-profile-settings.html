@@ -184,7 +184,7 @@
                     <div class="col-md-6">
 											<div class="form-group">
 												<label>NID <span class="text-danger">*</span></label>
-												<input type="number" name="number" class="form-control" value="" placeholder="NID">
+												<input type="number" name="nid" class="form-control" value="" placeholder="NID">
 											</div>
 										</div>
 									</div>
@@ -290,12 +290,12 @@
 											</div>
 
                       <div class="col-12 col-md-2 col-lg-1">
-                        
                         <label class="d-md-block d-sm-none d-none">&nbsp;</label>
-                        <a href="#" class="btn btn-danger trash">
+                        <a href="{% url 'delete-education' pk=education.education_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
                           <i class="far fa-trash-alt"></i>
                         </a>
                       </div>
+
                       {% endfor %}
 
 										</div>
@@ -351,13 +351,19 @@
 														</div> 
 													</div>
                           
-
 												</div>
                         
-
 											</div>
-                      <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+
+                      <div class="col-12 col-md-2 col-lg-1">
+                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                        <a href="{% url 'delete-experience' pk=e.experience_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
+                      </div>
+
                       {% endfor %}
+
 										</div>
 									</div>
 									<div class="add-more">
@@ -595,7 +601,7 @@
     <script src="{% static 'HealthStack-System/plugins/Normal/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
 
     <!-- Profile Settings JS -->
-    <script src="{% static 'HealthStack-System/js/Normal/profile_Settings.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/doctor-profile-settings.js' %}"></script>
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
