@@ -480,33 +480,31 @@ def hospital_doctor_register(request, pk):
     
     
 def testing(request):
-    hospitals = Hospital_Information.objects.get(hospital_id=1)
+    # hospitals = Hospital_Information.objects.get(hospital_id=1)
         
-    departments = hospital_department.objects.filter(hospital=hospitals)
-    specializations = specialization.objects.filter(hospital=hospitals)
-    services = service.objects.filter(hospital=hospitals)
+    # departments = hospital_department.objects.filter(hospital=hospitals)
+    # specializations = specialization.objects.filter(hospital=hospitals)
+    # services = service.objects.filter(hospital=hospitals)
     
-    department_list = None
-    for d in departments:
-        vald = d.hospital_department_name
-        vald = re.sub("'", "", vald)
-        vald = vald.replace("[", "")
-        vald = vald.replace("]", "")
-        vald = vald.replace(",", "")
-        department_list = vald.split()
-        # department_list.append(d.hospital_department_name)
-        
-        
-    # degree = doctor.degree
-    # degree = re.sub("'", "", degree)
-    # degree = degree.replace("[", "")
-    # degree = degree.replace("]", "")
-    # degree = degree.replace(",", "")
-    # degree_array = degree.split()
+    # department_list = None
+    # for d in departments:
+    #     vald = d.hospital_department_name
+    #     vald = re.sub("'", "", vald)
+    #     vald = vald.replace("[", "")
+    #     vald = vald.replace("]", "")
+    #     vald = vald.replace(",", "")
+    #     department_list = vald.split()
+    #     # department_list.append(d.hospital_department_name)
     
-    # education = zip(degree_array, institute_array)
+    # # education = zip(degree_array, institute_array)
+    current_date = datetime.date.today()
+    current_date = str(current_date)    
     
-    context = {'departments': departments, 'department_list': department_list}
+    given_date = "09/08/2022"
+    transformed_date = datetime.datetime.strptime(given_date, '%m/%d/%Y').strftime('%Y-%m-%d')
+    transformed_date = str(transformed_date)
+    
+    context = {'current_date': current_date, 'given_date': given_date, 'transformed_date': transformed_date}
     # test range, len, and loop to show variables before moving on to doctor profile
     
     return render(request, 'testing.html', context)

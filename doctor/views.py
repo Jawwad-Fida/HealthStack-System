@@ -177,35 +177,38 @@ def accept_appointment(request, pk):
     
     # Mailtrap
     
-    # patient_email = payment.patient.email
-    # patient_name = payment.patient.name
-    # patient_username = payment.patient.username
-    # patient_phone_number = payment.patient.phone_number
-    # doctor_name = appointment.doctor.name
+    patient_email = appointment.patient.email
+    patient_name = appointment.patient.name
+    patient_username = appointment.patient.username
+    patient_serial_number = appointment.patient.serial_number
+    doctor_name = appointment.doctor.name
+
+    appointment_serial_number = appointment.serial_number
+    appointment_date = appointment.date
+    appointment_time = appointment.time
+    appointment_status = appointment.appointment_status
     
-    # subject = "Payment Receipt for appointment"
+    subject = "Payment Receipt for appointment"
     
-    # values = {
-    #         "email":patient_email,
-    #         "name":patient_name,
-    #         "username":patient_username,
-    #         "phone_number":patient_phone_number,
-    #         "doctor_name":doctor_name,
-    #         "tran_id":payment_data['tran_id'],
-    #         "currency_amount":payment_data['currency_amount'],
-    #         "card_type":payment_data['card_type'],
-    #         "bank_transaction_id":payment_data['bank_tran_id'],
-    #         "transaction_date":payment_data['tran_date'],
-    #         "card_issuer":payment_data['card_issuer'],
-    #     }
+    values = {
+            "email":patient_email,
+            "name":patient_name,
+            "username":patient_username,
+            "serial_number":patient_serial_number,
+            "doctor_name":doctor_name,
+            "appointment_serial_num":appointment_serial_number,
+            "appointment_date":appointment_date,
+            "appointment_time":appointment_time,
+            "appointment_status":appointment_status,
+    }
     
-    # html_message = render_to_string('appointment_mail_payment_template.html', {'values': values})
-    # plain_message = strip_tags(html_message)
+    html_message = render_to_string('appointment_accept_mail.html', {'values': values})
+    plain_message = strip_tags(html_message)
     
-    # try:
-    #     send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
-    # except BadHeaderError:
-    #     return HttpResponse('Invalid header found')
+    try:
+        send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
     
     return redirect('doctor-dashboard')
 
@@ -216,6 +219,26 @@ def reject_appointment(request, pk):
     appointment.save()
     
     # Mailtrap
+    
+    patient_email = appointment.patient.email
+    patient_name = appointment.patient.name
+    doctor_name = appointment.doctor.name
+
+    subject = "Payment Receipt for appointment"
+    
+    values = {
+            "email":patient_email,
+            "name":patient_name,
+            "doctor_name":doctor_name,
+    }
+    
+    html_message = render_to_string('appointment_reject_mail.html', {'values': values})
+    plain_message = strip_tags(html_message)
+    
+    try:
+        send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
     
     
     return redirect('doctor-dashboard')
