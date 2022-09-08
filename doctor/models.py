@@ -88,8 +88,10 @@ class Appointment(models.Model):
     )
 
     id = models.AutoField(primary_key=True)
-    date = models.CharField(max_length=200, null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
     time = models.CharField(max_length=200, null=True, blank=True)
+    # time = models.DateField(auto_now_add=True)
+    # date = models.TimeField(auto_now_add=True)
     doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
     appointment_type = models.CharField(max_length=200, choices=APPOINTMENT_TYPE)
