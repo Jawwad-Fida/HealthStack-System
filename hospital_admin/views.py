@@ -34,7 +34,10 @@ def admin_dashboard(request):
         pending_appointment = Appointment.objects.filter(appointment_status='pending').count()
         doctors = Doctor_Information.objects.all()
         patients = Patient.objects.all()
-        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients}
+        hospitals = Hospital_Information.objects.all()
+        lab_workers = Clinical_Laboratory_Technician.objects.all()
+
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
