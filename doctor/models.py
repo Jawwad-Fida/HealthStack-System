@@ -139,6 +139,7 @@ class Report(models.Model):
     unit = models.CharField(max_length=200, null=True, blank=True)
     referred_value = models.CharField(max_length=200, null=True, blank=True)
     delivery_date = models.CharField(max_length=200, null=True, blank=True)
+    other_information = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return str(self.patient.username)
@@ -162,7 +163,6 @@ class Test(models.Model):
     result = models.CharField(max_length=200, null=True, blank=True)
     unit = models.CharField(max_length=200, null=True, blank=True)
     referred_value = models.CharField(max_length=200, null=True, blank=True)
-    delivery_date = models.CharField(max_length=200, null=True, blank=True)
     
     def __str__(self):
         return str(self.report.report_id)

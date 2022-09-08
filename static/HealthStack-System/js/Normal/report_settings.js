@@ -21,11 +21,6 @@ Version      : 1.0
 				'<div class="row form-row">' +
 					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
-							'<label>Specimen ID</label>' +
-						'</div>' +
-					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-3">' +
-						'<div class="form-group">' +
 							'<label>Specimen Type</label>' +
 							'<input type="text" name="specimen_type" class="form-control">' +
 						'</div>' +

@@ -386,11 +386,13 @@ def create_report(request, pk):
             unit = request.POST.getlist('unit')
             referred_value = request.POST.getlist('referred_value')
             delivery_date = request.POST.get('delivery_date')
+            other_information= request.POST.get('other_information')
 
             # # Save to report table
             # report.test_name = test_name
             # report.result = result
             report.delivery_date = delivery_date
+            report.other_information = other_information
             # #report.specimen_id =generate_random_specimen()
             # report.specimen_type = specimen_type
             # report.collection_date  = collection_date 
