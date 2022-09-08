@@ -8,24 +8,17 @@
 
         data: [{
             label: "\xa0 \xa0 Total Hospital \xa0 \xa0",
-            value: total_patient_count
-
-        }, {
-            label: "\xa0 \xa0 Total Doctor \xa0 \xa0",
-            value: 30
-        }, {
-            label: "\xa0 \xa0 Total Patient \xa0 \xa0",
-            value: 20
+            value: total_labworker_count
         }, {
             label: "\xa0 \xa0 Total Labworker \xa0 \xa0",
-            value: 20
+            value: total_hospital_count
         }, {
             label: "\xa0 \xa0 Total Pharmacist \xa0 \xa0",
-            value: 20
+            value: total_pharmacist_count
         }
     ],
         resize: true,
-        colors: ['#75B432', 'rgb(192, 10, 39)', '#4400eb', '#ff0000', '#00ff00']
+        colors: [ '#4400eb', '#ff0000', '#ABD7F6']
     });
     
 

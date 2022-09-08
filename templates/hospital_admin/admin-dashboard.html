@@ -165,7 +165,7 @@
                       <i class="fe fe-folder"></i>
                     </span>
                     <div class="dash-count">
-                      <h3>$62523</h3>
+                      <h3>{{total_labworker_count.count}}</h3>
                     </div>
                   </div>
                   <div class="dash-widget-info">
@@ -227,48 +227,17 @@
               <!-- /Recent Orders -->
             </div>
 
-            <div class="col-md-6 d-flex">
-						
-							<!-- Feed Activity -->
-							<div class="card  card-table flex-fill">
-								<div class="card-header">
-									<h4 class="card-title">Lab-Worker List</h4>
-								</div>
-								<div class="card-body">
-									<div class="table-responsive">
-										<table class="table table-hover table-center mb-0">
-											<thead>
-												<tr>													
-													<th>Lab-Worker Name</th>
-													<th>Phone</th>
-													<th>Email</th>
-													<th>Address</th>													
-												</tr>
-											</thead>
-											<tbody>
-                        {% for lab_worker in lab_workers%}
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{patient.featured_image.url}}" alt="User Image"></a>
-															<a href="#">{{lab_worker.name}}</a>
-														</h2>
-													</td>
-													<td>{{lab_worker.phone_number}}</td>
-													<td>{{lab_worker.email}}</td>
-													<td>{{lab_worker.address}}</td>
-												</tr>
-                        {% endfor %}
-												
-												
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							<!-- /Feed Activity -->
-							
-						</div>
+            <div class="col-lg-6 col-sm-6">
+              <div class="card">
+                  <div class="card-header">
+                      <h4 class="card-title">Donught Chart</h4>
+                  </div>
+                  <div class="card-body">
+                      
+                      <div id="morris_donught" class="morris_chart_height" style=" height: 240px !important;"></div>
+                  </div>
+              </div>
+            </div>
             
           </div>
 
@@ -320,6 +289,21 @@
               <!-- /Recent Orders -->
             </div>
 
+            <div class="col-lg-6 col-sm-6">
+              <div class="card">
+                  <div class="card-header">
+                      <h4 class="card-title">Gradient Bar Chart</h4>
+                  </div>
+                  <div class="card-body">
+                      <canvas id="barChart_2"></canvas>
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="row">
+
             <div class="col-md-6 d-flex">
 						
 							<!-- Feed Activity -->
@@ -362,31 +346,49 @@
 							<!-- /Feed Activity -->
 							
 						</div>
-            
-          </div>
 
-          <div class="row">
-            <div class="col-lg-6 col-sm-6">
-              <div class="card">
-                  <div class="card-header">
-                      <h4 class="card-title">Donught Chart</h4>
-                  </div>
-                  <div class="card-body">
-                      
-                      <div id="morris_donught" class="morris_chart_height" style=" height: 240px !important;"></div>
-                  </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-sm-6">
-              <div class="card">
-                  <div class="card-header">
-                      <h4 class="card-title">Gradient Bar Chart</h4>
-                  </div>
-                  <div class="card-body">
-                      <canvas id="barChart_2"></canvas>
-                  </div>
-              </div>
-          </div>
+            <div class="col-md-6 d-flex">
+						
+							<!-- Feed Activity -->
+							<div class="card  card-table flex-fill">
+								<div class="card-header">
+									<h4 class="card-title">Lab-Worker List</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>													
+													<th>Lab-Worker Name</th>
+													<th>Phone</th>
+													<th>Email</th>
+													<th>Address</th>													
+												</tr>
+											</thead>
+											<tbody>
+                        {% for lab_worker in lab_workers%}
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{patient.featured_image.url}}" alt="User Image"></a>
+															<a href="#">{{lab_worker.name}}</a>
+														</h2>
+													</td>
+													<td>{{lab_worker.phone_number}}</td>
+													<td>{{lab_worker.email}}</td>
+													<td>{{lab_worker.address}}</td>
+												</tr>
+                        {% endfor %}
+												
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Feed Activity -->
+							
+						</div>
           </div>
           
         </div>
@@ -420,7 +422,10 @@
     <!-- Chart JS -->
 
     <script>
-      var total_patient_count = "{{total_patient_count.count}}";
+      var total_patient_count = "{{total_patient_count.count}}";total_hospital_count
+      var total_labworker_count= "{{total_labworker_count.count}}";
+      var total_hospital_count= "{{total_hospital_count.count}}";
+      var total_pharmacist_count= "{{total_pharmacist_count.count}}";
     </script>
 
     <script src="{% static 'HealthStack-System/js/admin/Chart.bundle.min.js'%}"></script>
