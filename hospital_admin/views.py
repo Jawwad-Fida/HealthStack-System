@@ -22,6 +22,8 @@ import string
 from django.db.models import  Count
 
 
+
+
 # Create your views here.
 @login_required(login_url='admin-login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -573,8 +575,6 @@ def edit_lab_worker(request, pk):
         
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
-
-
 def department_image_list(request,pk):
     departments = hospital_department.objects.filter(hospital_id=pk)
     #departments = hospital_department.objects.all()
@@ -618,3 +618,4 @@ def reject_doctor(request,pk):
     doctor.register_status = 'Rejected'
     doctor.save()
     return redirect('admin-dashboard')
+
