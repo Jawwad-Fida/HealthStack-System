@@ -32,6 +32,8 @@ urlpatterns = [
     path('sslcommerz/', include('sslcommerz.urls')),
     path('pharmacy/', include('pharmacy.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('report_pdf/', include('report_pdf.urls')),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

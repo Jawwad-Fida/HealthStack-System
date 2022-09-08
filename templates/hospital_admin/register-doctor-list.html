@@ -107,6 +107,7 @@ Latest commit b04f98f 1 hour ago
 													<th>Department</th>
 													<th>Hospital</th>
 													<th>View profile</th>
+													<th>Report</th>
 													</tr>
 													<tbody>
 														{% for doctor in all%}
@@ -122,18 +123,6 @@ Latest commit b04f98f 1 hour ago
 															<td>{{doctor.department}}</td>
 
 															<td>{{doctor.hospital}}</td>
-
-															<!-- <td>
-																<div class="table-action">
-																	<a
-																	  href="{% url 'create-report' pk=doctor.doctor_id %}"
-																	  class="btn btn-outline-info btn-rounded" 
-																		>
-																		<i class="fas fa-file-alt"></i> Create Report 
-																	</a>
-										
-																  </div>
-															</td> -->
 															<td>
 																<div class="table-action">
 																	<a
@@ -145,6 +134,18 @@ Latest commit b04f98f 1 hour ago
 										
 																  </div>
 															</td>
+
+															<td>
+																<div class="table-action">
+																	<a
+																	  href="{% url 'create-report' pk=doctor.doctor_id %}"
+																	  class="btn btn-outline-info btn-rounded" 
+																		>
+																		<i class="fas fa-file-alt"></i> Create Report 
+																	</a>
+										
+																  </div>
+															</td> 
 														</tr>
 														{% endfor %}
 													</tbody>

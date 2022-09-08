@@ -4,6 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+
+
 urlpatterns = [
     path('', views.admin_login, name='admin-login'),
     
@@ -55,7 +57,8 @@ urlpatterns = [
     path('accept-doctor/<int:pk>/', views.accept_doctor,name='accept-doctor'),
     path('reject-doctor/<int:pk>/', views.reject_doctor,name='reject-doctor'),
 
-]  
+]
+  
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

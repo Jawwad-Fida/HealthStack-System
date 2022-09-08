@@ -10,15 +10,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
-from .models import Doctor_Information, Appointment, Education, Experience
+
+from .models import Doctor_Information, Appointment, Education, Experience, Report
 from .uitls import searchPatients
+
 from django.db.models import Q, Count
 
 import random
 import string
 from datetime import datetime, timedelta
 import datetime
-# import json
 import re
 
 from django.core.mail import BadHeaderError, send_mail
@@ -470,7 +471,6 @@ def create_prescription(request):
 #     # test range, len, and loop to show variables before moving on to doctor profile
     
 #     return render(request, 'testing.html', context)
-
 
 
 @login_required(login_url="login")

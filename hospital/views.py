@@ -20,6 +20,12 @@ from datetime import datetime
 import datetime
 
 
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
+
+
 from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 
 
@@ -533,3 +539,5 @@ def view_report(request,pk):
         return render(request, 'view-report.html',context)
     else:
         redirect('logout') 
+
+

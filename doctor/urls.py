@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+
 # from . --> same directory
 # Views functions and urls must be linked. # of views == # of urls
 # App URL file - urls related to hospital
