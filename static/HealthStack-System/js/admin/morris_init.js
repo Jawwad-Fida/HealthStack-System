@@ -3,8 +3,6 @@
     
     Morris.Donut({
         element: 'morris_donught',
-        
-
 
         data: [{
             label: "\xa0 \xa0 Total Hospital \xa0 \xa0",

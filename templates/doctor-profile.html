@@ -23,12 +23,6 @@
 		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
-		<link
-      rel="stylesheet"
-      href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"
-    />
-
-
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -51,7 +45,6 @@
 				{% if user.is_authenticated and user.is_doctor %}
 				{% include 'doctor-navbar.html' %}
 				{% endif %}
-				
 			
 			
 			</header>
@@ -72,7 +65,6 @@
 									{% if user.is_authenticated and user.is_doctor %}
 									<li class="breadcrumb-item"><a href="{% url 'doctor-dashboard' %}">Home</a></li>
 									{% endif %}
-									
 
 
 									<li class="breadcrumb-item active" aria-current="page">Doctor Profile</li>
@@ -101,7 +93,6 @@
 								{% if user.is_authenticated and user.is_doctor %}
 								{% include 'doctor-sidebar.html' %}
 								{% endif %}
-								
 							</div>
 							<!-- /Profile Sidebar -->
 						</div>
@@ -602,7 +593,7 @@
 				</div>
 			</div>		
 			<!-- /Page Content -->
-		
+   
 			<!-- Footer -->
 			<footer class="footer">
 				
