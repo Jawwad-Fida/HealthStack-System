@@ -103,45 +103,67 @@
 															<a class="btn btn-sm bg-success-light" data-toggle="modal" data-target="#modal-default{{dep.hospital_department_name}}">
 																<i class="fe fe-pencil"></i> Edit
 															</a>
-															<a class="btn btn-sm bg-danger-light">
+															<a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
 																<i class="fe fe-trash"></i> Delete
 															</a>
 															
 														</div>
 													</td>
-													<div class="modal fade" id="modal-default{{dep.hospital_department_name}}" aria-hidden="true" role="dialog">
-														<div class="modal-dialog modal-dialog-centered" role="document" >
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title">Edit Department Name</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="modal-body">
-																	<form>
-																		<div class="row form-row">
-																			<div class="col-12 col-sm-6">
-																				<div class="form-group">
-																					<label>Department Name</label>
-																					<input type="text" class="form-control" placeholder={{dep.hospital_department_name}}>
-																				</div>
+													
+												</tr>
+
+												<div class="modal fade" id="modal-default{{dep.hospital_department_name}}" aria-hidden="true" role="dialog">
+													<div class="modal-dialog modal-dialog-centered" role="document" >
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title">Edit Department Name</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<form>
+																	<div class="row form-row">
+																		<div class="col-12 col-sm-6">
+																			<div class="form-group">
+																				<label>Department Name</label>
+																				
+																				<input type="text" class="form-control" value={{dep.hospital_department_name}}>
+																				
 																			</div>
-																			<div class="col-12 col-sm-6">
-																				<div class="form-group">
-																					<label>Image</label>
-																					<input type="file"  class="form-control">
-																				</div>
-																			</div>
-																			
 																		</div>
-																		<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-																	</form>
+																		<div class="col-12 col-sm-6">
+																			<div class="form-group">
+																				<label>Image</label>
+																				<input type="file"  class="form-control">
+																			</div>
+																		</div>
+																		
+																	</div>
+																	<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+										
+												<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+													<div class="modal-dialog modal-dialog-centered" role="document" >
+														<div class="modal-content">
+										
+															<div class="modal-body">
+																<div class="form-content p-2">
+																	<h4 class="modal-title">Delete</h4>
+																	<p class="mb-4">Are you sure want to delete?</p>
+																	<button type="button" class="btn btn-primary">Save </button>
+																	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 																</div>
 															</div>
 														</div>
 													</div>
-												</tr>
+												</div>	
+												
+
 												
 											{%endfor%}
 											</tbody>
@@ -154,6 +176,8 @@
 				</div>			
 			</div>
         </div>
+
+		
 	
         {% comment %} <div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document" >
