@@ -1,4 +1,10 @@
 https://www.webmd.com/health-insurance/insurance-doctor-types
 
+https://stackoverflow.com/questions/57026841/django-migrations-conflict-multiple-leaf-nodes-in-the-migration-graph
 
- 
+https://stackoverflow.com/questions/1895059/revert-to-a-commit-by-a-sha-hash-in-git/1895095#1895095
+
+https://stackoverflow.com/questions/3644902/how-to-check-if-a-user-is-logged-in-how-to-properly-use-user-is-authenticated
+
+
+

@@ -193,10 +193,11 @@
                               <th class="text-center">Receiving Date/Time</th>
 														</tr>
                             <tr>
-															<th class="text-center">{{report.specimen_type}}</th>
+                              
+															<th class="text-center">{{report.specimen_type|slugify}}</th>
                               <th class="text-center">none</th>
-                              <th class="text-center">{{report.collection_date }}</th>
-                              <th class="text-center">{{report.receiving_date}}</th>
+                              <th class="text-center">{{report.collection_date |slugify}}</th>
+                              <th class="text-center">{{report.receiving_date|slugify}}</th>
 	
 														</tr>
 														
@@ -224,10 +225,10 @@
 	
 														</tr>
                             <tr>
-															<th>{{report.test_name}}</th>
-                              <th class="text-center">{{report.result}}</th>
-															<th class="text-center">{{report.unit}}</th>
-                              <th class="text-center">{{report.referred_value}}</th>
+                              <th class="text-center">{{report.test_name|slugify}}</th>
+                              <th class="text-center">{{report.result|slugify}}</th>
+															<th class="text-center">{{report.unit|slugify}}</th>
+                              <th class="text-center">{{report.referred_value|slugify}}</th>
 	
 														</tr>
 														

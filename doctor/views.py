@@ -145,16 +145,19 @@ def doctor_dashboard(request):
                 # appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
                 
                 current_date = datetime.date.today()
-                today_appointments = Appointment.objects.filter(date=current_date).filter(doctor=doctor).filter(appointment_status='confirmed')
+                current_date_str = str(current_date)  
+                today_appointments = Appointment.objects.filter(date=current_date_str).filter(doctor=doctor).filter(appointment_status='confirmed')
+                
                 next_date = current_date + datetime.timedelta(days=1) # next days date 
-                # Count
-                next_days_appointment = Appointment.objects.filter(date=next_date).filter(doctor=doctor).filter(appointment_status='pending').count()
-                today_patient_count = Appointment.objects.filter(date=current_date).filter(doctor=doctor).annotate(count=Count('patient'))
+                next_date_str = str(next_date)  
+                next_days_appointment = Appointment.objects.filter(date=next_date_str).filter(doctor=doctor).filter(appointment_status='pending').count()
+                
+                today_patient_count = Appointment.objects.filter(date=current_date_str).filter(doctor=doctor).annotate(count=Count('patient'))
                 total_appointments_count = Appointment.objects.filter(doctor=doctor).annotate(count=Count('id'))
             else:
                 return redirect('doctor-logout')
             
-            context = {'doctor': doctor, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date, 'next_date': next_date}
+            context = {'doctor': doctor, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date_str, 'next_date': next_date_str}
             return render(request, 'doctor-dashboard.html', context)
         else:
             return redirect('doctor-login')
@@ -177,35 +180,38 @@ def accept_appointment(request, pk):
     
     # Mailtrap
     
-    # patient_email = payment.patient.email
-    # patient_name = payment.patient.name
-    # patient_username = payment.patient.username
-    # patient_phone_number = payment.patient.phone_number
-    # doctor_name = appointment.doctor.name
+    patient_email = appointment.patient.email
+    patient_name = appointment.patient.name
+    patient_username = appointment.patient.username
+    patient_serial_number = appointment.patient.serial_number
+    doctor_name = appointment.doctor.name
+
+    appointment_serial_number = appointment.serial_number
+    appointment_date = appointment.date
+    appointment_time = appointment.time
+    appointment_status = appointment.appointment_status
     
-    # subject = "Payment Receipt for appointment"
+    subject = "Appointment Acceptance Email"
     
-    # values = {
-    #         "email":patient_email,
-    #         "name":patient_name,
-    #         "username":patient_username,
-    #         "phone_number":patient_phone_number,
-    #         "doctor_name":doctor_name,
-    #         "tran_id":payment_data['tran_id'],
-    #         "currency_amount":payment_data['currency_amount'],
-    #         "card_type":payment_data['card_type'],
-    #         "bank_transaction_id":payment_data['bank_tran_id'],
-    #         "transaction_date":payment_data['tran_date'],
-    #         "card_issuer":payment_data['card_issuer'],
-    #     }
+    values = {
+            "email":patient_email,
+            "name":patient_name,
+            "username":patient_username,
+            "serial_number":patient_serial_number,
+            "doctor_name":doctor_name,
+            "appointment_serial_num":appointment_serial_number,
+            "appointment_date":appointment_date,
+            "appointment_time":appointment_time,
+            "appointment_status":appointment_status,
+    }
     
-    # html_message = render_to_string('appointment_mail_payment_template.html', {'values': values})
-    # plain_message = strip_tags(html_message)
+    html_message = render_to_string('appointment_accept_mail.html', {'values': values})
+    plain_message = strip_tags(html_message)
     
-    # try:
-    #     send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
-    # except BadHeaderError:
-    #     return HttpResponse('Invalid header found')
+    try:
+        send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
     
     return redirect('doctor-dashboard')
 
@@ -216,6 +222,26 @@ def reject_appointment(request, pk):
     appointment.save()
     
     # Mailtrap
+    
+    patient_email = appointment.patient.email
+    patient_name = appointment.patient.name
+    doctor_name = appointment.doctor.name
+
+    subject = "Appointment Rejection Email"
+    
+    values = {
+            "email":patient_email,
+            "name":patient_name,
+            "doctor_name":doctor_name,
+    }
+    
+    html_message = render_to_string('appointment_reject_mail.html', {'values': values})
+    plain_message = strip_tags(html_message)
+    
+    try:
+        send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
     
     
     return redirect('doctor-dashboard')
@@ -371,7 +397,11 @@ def booking(request, pk):
         time = request.POST['appoint_time']
         appointment_type = request.POST['appointment_type']
 
-        appointment.date = date
+    
+        transformed_date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
+        transformed_date = str(transformed_date)
+         
+        appointment.date = transformed_date
         appointment.time = time
         appointment.appointment_status = 'pending'
         appointment.serial_number = generate_random_string()
