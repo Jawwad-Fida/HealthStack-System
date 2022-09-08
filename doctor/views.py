@@ -145,16 +145,19 @@ def doctor_dashboard(request):
                 # appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
                 
                 current_date = datetime.date.today()
-                today_appointments = Appointment.objects.filter(date=current_date).filter(doctor=doctor).filter(appointment_status='confirmed')
+                current_date_str = str(current_date)  
+                today_appointments = Appointment.objects.filter(date=current_date_str).filter(doctor=doctor).filter(appointment_status='confirmed')
+                
                 next_date = current_date + datetime.timedelta(days=1) # next days date 
-                # Count
-                next_days_appointment = Appointment.objects.filter(date=next_date).filter(doctor=doctor).filter(appointment_status='pending').count()
-                today_patient_count = Appointment.objects.filter(date=current_date).filter(doctor=doctor).annotate(count=Count('patient'))
+                next_date_str = str(next_date)  
+                next_days_appointment = Appointment.objects.filter(date=next_date_str).filter(doctor=doctor).filter(appointment_status='pending').count()
+                
+                today_patient_count = Appointment.objects.filter(date=current_date_str).filter(doctor=doctor).annotate(count=Count('patient'))
                 total_appointments_count = Appointment.objects.filter(doctor=doctor).annotate(count=Count('id'))
             else:
                 return redirect('doctor-logout')
             
-            context = {'doctor': doctor, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date, 'next_date': next_date}
+            context = {'doctor': doctor, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date_str, 'next_date': next_date_str}
             return render(request, 'doctor-dashboard.html', context)
         else:
             return redirect('doctor-login')
@@ -188,7 +191,7 @@ def accept_appointment(request, pk):
     appointment_time = appointment.time
     appointment_status = appointment.appointment_status
     
-    subject = "Payment Receipt for appointment"
+    subject = "Appointment Acceptance Email"
     
     values = {
             "email":patient_email,
@@ -224,7 +227,7 @@ def reject_appointment(request, pk):
     patient_name = appointment.patient.name
     doctor_name = appointment.doctor.name
 
-    subject = "Payment Receipt for appointment"
+    subject = "Appointment Rejection Email"
     
     values = {
             "email":patient_email,
@@ -394,7 +397,11 @@ def booking(request, pk):
         time = request.POST['appoint_time']
         appointment_type = request.POST['appointment_type']
 
-        appointment.date = date
+    
+        transformed_date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
+        transformed_date = str(transformed_date)
+         
+        appointment.date = transformed_date
         appointment.time = time
         appointment.appointment_status = 'pending'
         appointment.serial_number = generate_random_string()
