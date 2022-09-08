@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'ChatApp.apps.ChatappConfig',
+    'report_pdf.apps.ReportPdfConfig',
  
 ]
 
