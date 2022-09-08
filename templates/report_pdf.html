@@ -4,7 +4,7 @@
   <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->
   <head>
     <meta charset="utf-8" />
-    <title>Report</title>
+    <title>Report PDF</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
@@ -49,66 +49,203 @@
 	</head>
 	<body>
 
-	<!-- Main Wrapper -->
-		<!-- <div class="main-wrapper"> -->
-        <div class="wrapper">
-
-            <h3 style="text-align: center; color:green; font-size: 18px;">Report</h3>
-                
-                <table cellpadding="0" cellspacing="0">
-                    <thead>
-                    <tr class="head"> 
-                    <td>report_id</td>
-                    <td>doctor</td>
-                    <td>patient</td>
-                    <td>specimen_id</td>
-                    <td>specimen_type</td>
-                    <td>collection_date</td>
-                    <td>receiving_date</td>
-                    <td>test_name</td>
-                    <td>result</td>
-                    <td>unit</td>
-                    <td>referred_value</td>
-                    <td>delivery_date</td>
-                    </tr>
-                    </thead>
-                    
-                <tbody>
-
-                    
-                    
-                    
-                    
-                    <tr class="item">
-                    <td>{{item.report_id}}</td>
-                    <td>{{item.doctor}}</td> 
-                    <td>{{item.patient}}</td>
-                    <td>{{item.specimen_id}}</td>
-                    <td>{{item.specimen_type}}</td>
-                    <td>{{item.collection_date}}</td>
-                    <td>{{item.receiving_date}}</td>
-                    <td>{{item.test_name}}</td>
-                    <td>{{item.result}}</td>
-                    <td>{{item.unit}}</td>
-                    <td>{{item.referred_value}}</td>
-                    <td>{{item.delivery_date}}</td>
-                    </tr>
-                </tbody>
-                   
-
-                    
-                        
-
-</table>
-
-
-<!-- <h3 style="color:blue; text-align:center; font-size-16px;">HealthStack-System</h3>  -->
-
-
-
-</div>
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
 		
 			
+			<!-- Breadcrumb -->
+			<!-- <div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+                                    {% if user.is_authenticated and user.is_patient %}
+									<li class="breadcrumb-item"><a href="">View Report</a></li>
+                                    {% endif %}
+									<li class="breadcrumb-item active" aria-current="page">Report Result</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Report Result</h2>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+                         
+						<div class="col-md-7 col-lg-8">
+							<div class="invoice-content">
+								<div class="invoice-item">
+									<div class="row">
+                    
+										<div class="col-md-6">
+											<div class="invoice-logo">
+												<img src="{% static 'HealthStack-System/images/Normal/FullLogo_Transparent_NoBuffer.png'%}" alt="logo">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<p class="invoice-details">
+												<strong>Patient ID:</strong> {{patient.patient_id }} <br>
+												<strong>Date:</strong> {{current_date}}
+											</p>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Invoice Item -->
+								<div class="invoice-item">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="invoice-info">
+												<strong class="customer-text">Doctor Information</strong>
+												<p class="invoice-details invoice-details-two">
+													{{report.doctor.name}} <br>
+													{{report.doctor.address}}<br>
+													{{report.doctor.email}}<br>
+                          {{report.doctor.phone_number}}<br>
+												</p>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="invoice-info invoice-info2">
+												<strong class="customer-text">Patient Information</strong>
+												<p class="invoice-details">
+													{{patient.address}}<br>
+													{{patient.email}} <br>
+													{{patient.phone_number}}<br>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Invoice Item -->
+								
+								
+								
+								<!-- Invoice Item
+								<div class="invoice-item invoice-table-wrap">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="table-responsive">
+												<table class="invoice-table table table-bordered">
+													<thead>
+														<tr>
+															<th>Medicine Name</th>
+															<th class="text-center">Quantity</th>
+															<th class="text-center">Days</th>
+															<th class="text-center">Time</th>
+															<th class="text-center">Description</th>
+															
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>NAPA</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
+															
+														</tr>
+														<tr>
+															<td>SECLO</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
+															<td class="text-center">1</td>
+															
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										
+									</div>
+								</div> -->
+
+								
+                                <!-- Invoice Item -->
+								<div class="invoice-item invoice-table-wrap">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="table-responsive">
+												<table class="invoice-table table table-bordered">
+													<thead>
+														<tr>
+															<th>Specimen Information</th>
+                              <th class="text-center">Specimen ID</th>
+                              <th class="text-center">Collection Date/Time</th>
+                              <th class="text-center">Receiving Date/Time</th>
+														</tr>
+                            <tr>
+                              
+															<th class="text-center">{{report.specimen_type|slugify}}</th>
+                              <th class="text-center">none</th>
+                              <th class="text-center">{{report.collection_date |slugify}}</th>
+                              <th class="text-center">{{report.receiving_date|slugify}}</th>
+	
+														</tr>
+														
+													</tbody>
+												</table>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+
+           
+                  <br>
+                  <div class="invoice-item invoice-table-wrap">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="table-responsive">
+												<table class="invoice-table table table-bordered">
+													<thead>
+														<tr>
+															<th>Test Name</th>
+                              <th class="text-center">Result</th>
+															<th class="text-center">Unit</th>
+                             <th class="text-center">Referred value</th>
+	
+														</tr>
+                            <tr>
+                              <th class="text-center">{{report.report_id}}</th>
+                              <th class="text-center">{{report.result|slugify}}</th>
+															<th class="text-center">{{report.unit|slugify}}</th>
+                              <th class="text-center">{{report.referred_value|slugify}}</th>
+	
+														</tr>
+														
+													</tbody>
+												</table>
+                        <!-- <button class="btn btn-secondary"> <a href="{% url 'pdf' pk=report.report_id %}" > PDF </a></button> -->
+											</div>
+										</div>
+										
+									</div>
+								</div>
+                                
+								<!-- /Invoice Item -->
+                                
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+
+   
+    </div>
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
