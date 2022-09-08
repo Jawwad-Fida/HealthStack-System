@@ -455,6 +455,12 @@ def prescription_view(request):
 def create_prescription(request):
     return render(request, 'create-prescription.html')
 
+def report_pdf(request, pk):
+     report=Report.objects.get(report_id=pk)
+     context={'report':report}
+
+     return render(request, 'report_pdf.html', context)
+
 
 # def testing(request):
 #     doctor = Doctor_Information.objects.get(user=request.user)
