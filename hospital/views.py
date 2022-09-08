@@ -516,7 +516,22 @@ def view_report(request,pk):
         patient = Patient.objects.get(user=request.user)
         report = Report.objects.get(report_id=pk)
         current_date = datetime.date.today()
-        context = {'patient':patient,'current_date' : current_date,'report':report}
+        test_name = report.test_name
+        test_name = re.sub("'", "", test_name)
+        test_name = test_name.replace("[", " ")
+        test_name = test_name.replace("]", " ")
+        test_name = test_name.replace(",", " ")
+        test_name = test_name.split()
+        test_name = report.test_name
+
+        # test_name = re.sub("'", "", test_name)
+        # test_name = test_name.replace("[", "")
+        # test_name = test_name.replace("]", "")
+        # test_name = test_name.replace(",", "")
+        # test_name = test_name.split()
+    
+    # education = zip(degree_array, institute_array)
+        context = {'patient':patient,'current_date' : current_date,'report':report,'test_name':test_name}
         return render(request, 'view-report.html',context)
     else:
         redirect('logout') 
