@@ -162,17 +162,17 @@
                   <div class="appointment-tab">
                     <!-- Appointment Tab -->
                     <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
-                      <li class="nav-item">
+                      {% comment %} <li class="nav-item">
                         <a
                           class="nav-link active"
                           href="#upcoming-appointments"
                           data-toggle="tab"
                           >Upcoming</a
                         >
-                      </li>
+                      </li> {% endcomment %}
                       <li class="nav-item">
                         <a
-                          class="nav-link"
+                          class="nav-link active"
                           href="#today-appointments"
                           data-toggle="tab"
                           >Today</a
@@ -181,7 +181,7 @@
                     </ul>
                     <!-- /Appointment Tab -->
 
-                    <div class="tab-content">
+                    {% comment %} <div class="tab-content">
                       <!-- Upcoming Appointment Tab -->
                       <div
                         class="tab-pane show active"
@@ -269,7 +269,7 @@
                                     </td>
                     
                                   </tr>
-                                  {% endfor %}
+                                  {% endfor %} 
 
                                
                                 </tbody>
@@ -278,7 +278,7 @@
                           </div>
                         </div>
                       </div>
-                      <!-- /Upcoming Appointment Tab -->
+                      <!-- /Upcoming Appointment Tab --> {% endcomment %}
 
                       <!-- Today Appointment Tab -->
                       <div class="tab-pane" id="today-appointments">
