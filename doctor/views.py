@@ -27,6 +27,14 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.utils.html import strip_tags
 
+from io import BytesIO
+from urllib import response
+from django.shortcuts import render
+from django.template.loader import get_template
+from django.http import HttpResponse
+from xhtml2pdf import pisa
+from .models import Report
+
 # Create your views here.
 
 def generate_random_string():
@@ -455,11 +463,30 @@ def prescription_view(request):
 def create_prescription(request):
     return render(request, 'create-prescription.html')
 
-def report_pdf(request, pk):
-     report=Report.objects.get(report_id=pk)
-     context={'report':report}
+def render_to_pdf(template_src, context_dict=()):
+    template=get_template(template_src)
+    html=template.render(context_dict)
+    result=BytesIO()
+    pdf=pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(),content_type="aplication/pdf")
+    return None
 
-     return render(request, 'report_pdf.html', context)
+
+
+
+def report_pdf(request, pk):
+    report=Report.objects.get(report_id=pk)
+    current_date = datetime.date.today()
+    context={'report':report, 'current_date':current_date,
+    }
+    pdf=render_to_pdf('report_pdf.html', context)
+    if pdf:
+        response=HttpResponse(pdf, content_type='application/pdf')
+        content="inline; filename=report.pdf"
+        # response['Content-Disposition']= content
+        return response
+    return HttpResponse("Not Found")
 
 
 # def testing(request):
