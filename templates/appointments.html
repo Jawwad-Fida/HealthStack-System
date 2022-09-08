@@ -87,7 +87,7 @@
             <div class="col-md-7 col-lg-8 col-xl-9">
               <div class="appointments">
                 <!-- Appointment List -->
-                {%for app in appointments%}
+                {% for app in appointments %}
                 <div class="appointment-list">
                   <div class="profile-info-widget">
                     <a href="patient-profile.html" class="booking-doc-img">
@@ -97,17 +97,32 @@
                       />
                     </a>
                     <div class="profile-det-info">
-                      <h3><a href="{%url "patient-profile" pk=app.patient.patient_id%}">{{app.patient.name}}</a></h3>
+                      <h3><a href="{%url 'patient-profile' pk=app.patient.patient_id%}">{{app.patient.name}}</a></h3>
+                      
                       <div class="patient-details">
+                        <h5>
+                          <i class="fas fa-file"></i>Appoinment Serial No: #PT{{app.serial_number}}
+                        </h5>
                         <h5>
                           <i class="far fa-clock"></i> {{app.date}} {{app.time}}
                         </h5>
                         <h5>
+                          <i class="fas fa-briefcase-medical"></i> Purpose: {{app.appointment_type}} 
+                        </h5>
+                        <h5>
                           <i class="fas fa-map-marker-alt"></i>{{app.patient.address}}
-                          
                         </h5>
                         <h5>
                           <i class="fas fa-envelope"></i> {{app.patient.email}}
+                        </h5>
+                        
+                        <h5>
+                          {% if app.payment_status == 'pending' %}
+                          <i class="fas fa-money-check-alt"></i> <span class="badge badge-pill bg-warning-light">Payment Status: Pending</span>
+                          {% endif %}
+                          {% if app.payment_status == 'VALID' %}
+                          <i class="fas fa-money-check-alt"></i> <span class="badge badge-pill bg-success-light">Payment Status: Paid</span>
+                          {% endif %}
                         </h5>
                         <h5 class="mb-0">
                           <i class="fas fa-phone"></i> +880{{app.patient.phone_number}}
@@ -116,30 +131,14 @@
                     </div>
                   </div>
                   <div class="appointment-action">
-                    <a
-                      href="#"
-                      class="btn btn-sm bg-info-light"
-                      data-toggle="modal"
-                      data-target="#appt_details"
-                    >
-                      <i class="far fa-eye"></i> View
-                    </a>
-                    <a
-                      href="javascript:void(0);"
-                      class="btn btn-sm bg-success-light"
-                    >
-                      <i class="fas fa-check"></i> Accept
-                    </a>
-                    <a
-                      href="javascript:void(0);"
-                      class="btn btn-sm bg-danger-light"
-                    >
-                      <i class="fas fa-times"></i> Cancel
-                    </a>
+                    <a href="#" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details"><i class="far fa-eye"></i> View</a>
+                    <a href="{% url 'accept-appointment' pk=app.id %}" onclick="return confirm('Accept appointment?');" class="btn btn-sm bg-success-light"><i class="fas fa-check"></i> Accept</a>
+                    <a href="{% url 'reject-appointment' pk=app.id %}" onclick="return confirm('Reject Appointment?');" class="btn btn-sm bg-danger-light"><i class="fas fa-times"></i> Reject</a>
                   </div>
+                  
                 </div>
                 <!-- /Appointment List -->
-                {%endfor%}
+                {% endfor %}
                 
               </div>
               

@@ -66,14 +66,6 @@ def schedule_timings(request):
 def patient_id(request):
     return render(request, 'patient-id.html')
 
-@login_required(login_url="doctor-login")
-def appointments(request):
-    doctor = Doctor_Information.objects.get(user=request.user)
-
-
-    appointments = Appointment.objects.filter(doctor=doctor).order_by('date')
-    context = {'doctor': doctor, 'appointments': appointments}
-    return render(request, 'appointments.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutDoctor(request):
@@ -150,26 +142,32 @@ def doctor_dashboard(request):
             if request.user.is_doctor:
                 # doctor = Doctor_Information.objects.get(user_id=pk)
                 doctor = Doctor_Information.objects.get(user=request.user)
-                patient = Patient.objects.all()
-                appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
+                # appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
+                
                 current_date = datetime.date.today()
                 today_appointments = Appointment.objects.filter(date=current_date).filter(doctor=doctor).filter(appointment_status='confirmed')
-                
-                # next days date
-                next_date = current_date + datetime.timedelta(days=1)
-                
+                next_date = current_date + datetime.timedelta(days=1) # next days date 
                 # Count
                 next_days_appointment = Appointment.objects.filter(date=next_date).filter(doctor=doctor).filter(appointment_status='pending').count()
-                # .values('count')
                 today_patient_count = Appointment.objects.filter(date=current_date).filter(doctor=doctor).annotate(count=Count('patient'))
                 total_appointments_count = Appointment.objects.filter(doctor=doctor).annotate(count=Count('id'))
             else:
                 return redirect('doctor-logout')
             
-            context = {'doctor': doctor, 'appointments': appointments, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date, 'next_date': next_date}
+            context = {'doctor': doctor, 'today_appointments': today_appointments, 'today_patient_count': today_patient_count, 'total_appointments_count': total_appointments_count, 'next_days_appointment': next_days_appointment, 'current_date': current_date, 'next_date': next_date}
             return render(request, 'doctor-dashboard.html', context)
         else:
             return redirect('doctor-login')
+ 
+ 
+@login_required(login_url="doctor-login")
+def appointments(request):
+    doctor = Doctor_Information.objects.get(user=request.user)
+
+    appointments = Appointment.objects.filter(doctor=doctor).filter(appointment_status='pending').order_by('date')
+    context = {'doctor': doctor, 'appointments': appointments}
+    return render(request, 'appointments.html', context) 
+ 
         
 @login_required(login_url="doctor-login")
 def accept_appointment(request, pk):
