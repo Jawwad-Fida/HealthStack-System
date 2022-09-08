@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .pdf import report_pdf
 
 
 
@@ -30,6 +31,7 @@ urlpatterns = [
     path('accept-appointment/<int:pk>/',views.accept_appointment, name='accept-appointment'),
     path('reject-appointment/<int:pk>/',views.reject_appointment, name='reject-appointment'),
     path('patient-search/<int:pk>/', views.patient_search, name='patient-search'),
+    path('pdf/<int:pk>/',views.report_pdf, name='pdf')
     # path('testing/',views.testing, name='testing'),
    
 

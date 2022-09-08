@@ -362,7 +362,7 @@
 													<th>Lab-Worker Name</th>
 													<th>Phone</th>
 													<th>Email</th>
-													<th>Address</th>													
+													<th>Age</th>													
 												</tr>
 											</thead>
 											<tbody>
@@ -370,13 +370,13 @@
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{patient.featured_image.url}}" alt="User Image"></a>
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{lab_worker.featured_image.url}}" alt="User Image"></a>
 															<a href="#">{{lab_worker.name}}</a>
 														</h2>
 													</td>
 													<td>{{lab_worker.phone_number}}</td>
 													<td>{{lab_worker.email}}</td>
-													<td>{{lab_worker.address}}</td>
+													<td>{{lab_worker.age}}</td>
 												</tr>
                         {% endfor %}
 												

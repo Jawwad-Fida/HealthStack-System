@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from hospital import views
 
+
 # ROOT url file
 
 # All urls paths of different pages will be in url patterns below
@@ -32,7 +33,8 @@ urlpatterns = [
     path('sslcommerz/', include('sslcommerz.urls')),
     path('pharmacy/', include('pharmacy.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('report_pdf/', include('report_pdf.urls')),
+  
+   
     
 ]
 
