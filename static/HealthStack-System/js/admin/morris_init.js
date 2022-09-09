@@ -3,8 +3,6 @@
     
     Morris.Donut({
         element: 'morris_donught',
-        
-
 
         data: [{
             label: "\xa0 \xa0 Total Hospital \xa0 \xa0",
@@ -35,11 +33,11 @@
         type: 'bar',
         data: {
             defaultFontFamily: 'Poppins',
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            labels: [sat, sun, mon, tues, wed, thurs, fri],
             datasets: [
                 {
                     label: "My First dataset",
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    data: [sat_count, sun_count, mon_count, tues_count, wed_count, thurs_count, fri_count],
                     borderColor: barChart_2gradientStroke,
                     borderWidth: "0",
                     backgroundColor: barChart_2gradientStroke, 

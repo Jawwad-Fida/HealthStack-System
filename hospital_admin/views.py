@@ -20,8 +20,9 @@ from .models import Admin_Information,specialization,service,hospital_department
 import random,re
 import string
 from django.db.models import  Count
-
-
+from datetime import datetime
+import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -41,8 +42,44 @@ def admin_dashboard(request):
         patients = Patient.objects.all()
         hospitals = Hospital_Information.objects.all()
         lab_workers = Clinical_Laboratory_Technician.objects.all()
+        
+        sat_date = datetime.date.today()
+        sat_date_str = str(sat_date)
+        sat = sat_date.strftime("%A")
 
-        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count}
+        sun_date = sat_date + datetime.timedelta(days=1) 
+        sun_date_str = str(sun_date)
+        sun = sun_date.strftime("%A")
+        
+        mon_date = sat_date + datetime.timedelta(days=2) 
+        mon_date_str = str(mon_date)
+        mon = mon_date.strftime("%A")
+        
+        tues_date = sat_date + datetime.timedelta(days=3) 
+        tues_date_str = str(tues_date)
+        tues = tues_date.strftime("%A")
+        
+        wed_date = sat_date + datetime.timedelta(days=4) 
+        wed_date_str = str(wed_date)
+        wed = wed_date.strftime("%A")
+        
+        thurs_date = sat_date + datetime.timedelta(days=5) 
+        thurs_date_str = str(thurs_date)
+        thurs = thurs_date.strftime("%A")
+        
+        fri_date = sat_date + datetime.timedelta(days=6) 
+        fri_date_str = str(fri_date)
+        fri = fri_date.strftime("%A")
+        
+        sat_count = Appointment.objects.filter(date=sat_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        sun_count = Appointment.objects.filter(date=sun_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        mon_count = Appointment.objects.filter(date=mon_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        tues_count = Appointment.objects.filter(date=tues_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        wed_count = Appointment.objects.filter(date=wed_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        thurs_count = Appointment.objects.filter(date=thurs_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+        fri_count = Appointment.objects.filter(date=fri_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
+
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
@@ -268,7 +305,7 @@ def edit_hospital(request, pk):
                     featured_image = request.FILES['featured_image']
                 else:
                     featured_image = old_featured_image
-
+                    
                                 
                     hospital_name = request.POST.get('hospital_name')
                     address = request.POST.get('address')
@@ -288,14 +325,36 @@ def edit_hospital(request, pk):
                     hospital.featured_image =featured_image 
                     hospital.hospital_type =hospital_type
                     
-                    specializations.specialization_name=specialization_name
-                    services.service_name = service_name
-                    departments.hospital_department_name = department_name 
+                    # specializations.specialization_name=specialization_name
+                    # services.service_name = service_name
+                    # departments.hospital_department_name = department_name 
 
                     hospital.save()
-                    specializations.save()
-                    services.save()
-                    departments.save()
+
+                    # Specialization
+                    for i in range(len(specialization_name)):
+                        specializations = specialization(hospital=hospital)
+                        specializations.specialization_name = specialization_name[i]
+                        
+                        specializations.save()
+
+                    # Experience
+                    for i in range(len(service_name)):
+                        services = service(hospital=hospital)
+                        services.service_name = service_name[i]
+                        services.save()
+                    for i in range(len(department_name)):
+                        departments = hospital_department(hospital=hospital)
+                        departments.department_name = department_name[i]
+                        departments.save()
+
+
+
+
+
+                    # specializations.save()
+                    # services.save()
+                    # departments.save()
                     return redirect('hospital-list')
 
              context = { 'admin': user,'hospital':hospital,'departments':departments,'specializations':specializations,'services':services}
@@ -638,3 +697,37 @@ def reject_doctor(request,pk):
     doctor.save()
     return redirect('admin-dashboard')
 
+
+@login_required(login_url='admin-login')
+def delete_department(request,pk):
+    if request.user.is_authenticated:
+        if request.user.is_hospital_admin:
+            department = hospital_department.objects.get(hospital_department_id=pk)
+            department.delete()
+            return redirect('hospital-list')
+
+@login_required(login_url='admin-login')
+@csrf_exempt
+def edit_department(request,pk):
+    if request.user.is_authenticated:
+        if request.user.is_hospital_admin:
+            # old_featured_image = department.featured_image
+            department = hospital_department.objects.get(hospital_department_id=pk)
+            old_featured_image = department.featured_image
+
+            if request.method == 'POST':
+                if 'featured_image' in request.FILES:
+                    featured_image = request.FILES['featured_image']
+                else:
+                    featured_image = old_featured_image
+
+                department_name = request.POST.get('department_name')
+                department.hospital_department_name = department_name
+                department.featured_image = featured_image
+                department.save()
+                return redirect('hospital-list')
+                
+            context = {'department': department}
+            return render(request, 'hospital_admin/edit-hospital.html',context)
+
+    

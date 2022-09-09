@@ -4,7 +4,7 @@
   <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->
   <head>
     <meta charset="utf-8" />
-    <title>HealthStack</title>
+    <title>Report PDF</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
@@ -49,17 +49,9 @@
 	</head>
 	<body>
 
-        {{myvar}}
-
 		<!-- Main Wrapper -->
-		<!-- <div class="main-wrapper"> -->
+		<div class="main-wrapper">
 		
-			<!-- Header -->
-			<!-- <header class="header">	{% if user.is_authenticated and user.is_patient %}
-                                    {% include 'patient_navbar.html' %}
-                                    {% endif %}
-				</header> -->
-			<!-- /Header -->
 			
 			<!-- Breadcrumb -->
 			<!-- <div class="breadcrumb-bar">
@@ -69,7 +61,7 @@
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
                                     {% if user.is_authenticated and user.is_patient %}
-									<li class="breadcrumb-item"><a href="{% url 'view-report' %}">View Report</a></li>
+									<li class="breadcrumb-item"><a href="">View Report</a></li>
                                     {% endif %}
 									<li class="breadcrumb-item active" aria-current="page">Report Result</li>
 								</ol>
@@ -82,19 +74,16 @@
 			<!-- /Breadcrumb -->
 			
 			<!-- Page Content -->
-			<!-- <div class="content">
+			<div class="content">
 				<div class="container-fluid">
 
-					<div class="row"> -->
-                         <!-- Profile Sidebar -->
-                                <!-- <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-                                    <div>{% include 'patient-sidebar.html' %}</div>
-                                </div> -->
-                            <!-- / Profile Sidebar -->
-						<!-- <div class="col-md-7 col-lg-8 col-xl-9">
+					<div class="row">
+                         
+						<div class="col-md-7 col-lg-8">
 							<div class="invoice-content">
 								<div class="invoice-item">
 									<div class="row">
+                    
 										<div class="col-md-6">
 											<div class="invoice-logo">
 												<img src="{% static 'HealthStack-System/images/Normal/FullLogo_Transparent_NoBuffer.png'%}" alt="logo">
@@ -102,23 +91,26 @@
 										</div>
 										<div class="col-md-6">
 											<p class="invoice-details">
-												<strong>Patient ID:</strong> {{patient.patient_id }} <br>
+												{% for report in report %}
+												<strong>Report ID:</strong>{{report.report_id}} <br>
+												<strong>Patient ID:</strong> {{report.patient.patient_id }} <br>
 												<strong>Date:</strong> {{current_date}}
 											</p>
 										</div>
 									</div>
-								</div> -->
+								</div>
 								
 								<!-- Invoice Item -->
-								<!-- <div class="invoice-item">
+								<div class="invoice-item">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
 												<strong class="customer-text">Doctor Information</strong>
 												<p class="invoice-details invoice-details-two">
-													Dr. Darren Elder <br>
-													806  Twin Willow Lane, Old Forge,<br>
-													Newyork, USA <br>
+													{{report.doctor.name}} <br>
+													{{report.doctor.address}}<br>
+													{{report.doctor.email}}<br>
+                                                    {{report.doctor.phone_number}}<br>
 												</p>
 											</div>
 										</div>
@@ -126,19 +118,14 @@
 											<div class="invoice-info invoice-info2">
 												<strong class="customer-text">Patient Information</strong>
 												<p class="invoice-details">
-													{{patient.address}}<br>
-													{{patient.email}} <br>
-													{{patient.phone_number}}<br>
+													{{report.patient.name}}<br>
+													{{report.patient.email}} <br>
+													{{report.patient.phone_number}}<br>
 												</p>
 											</div>
 										</div>
 									</div>
-								</div> -->
-								<!-- /Invoice Item -->
-								
-								
-								
-								<!-- Invoice Item
+								</div>
 								<div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
@@ -146,55 +133,20 @@
 												<table class="invoice-table table table-bordered">
 													<thead>
 														<tr>
-															<th>Medicine Name</th>
-															<th class="text-center">Quantity</th>
-															<th class="text-center">Days</th>
-															<th class="text-center">Time</th>
-															<th class="text-center">Description</th>
-															
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>NAPA</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															
-														</tr>
-														<tr>
-															<td>SECLO</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															<td class="text-center">1</td>
-															
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										
-									</div>
-								</div> -->
-
-								
-                                <!-- Invoice Item -->
-								<!-- <div class="invoice-item invoice-table-wrap">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
-													<thead>
-														<tr>
 															<th>Specimen Information</th>
-                                                            <th class="text-center">Specimen ID</th>
+															<th class="text-center">Specimen ID</th>
 															<th class="text-center">Collection Date/Time</th>
-                                                            <th class="text-center">Receiving Date/Time</th>
+															<th class="text-center">Receiving Date/Time</th>
+														</tr>
+                                          				 <tr>
+															{% for s in specimen %}
+															<th class="text-center">{{s.specimen_type}}</th>
+															<th class="text-center">{{s.specimen_id}}</th>
+															<th class="text-center">{{s.collection_date}}</th>
+															<th class="text-center">{{s.receiving_date}}</th>
 	
 														</tr>
-														
+														{% endfor %}
 													</tbody>
 												</table>
 											</div>
@@ -203,9 +155,9 @@
 									</div>
 								</div>
 
-
-                                <br>
-                                <div class="invoice-item invoice-table-wrap">
+           
+                  <br>
+                  <div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
@@ -213,43 +165,47 @@
 													<thead>
 														<tr>
 															<th>Test Name</th>
-                                                            <th class="text-center">Result</th>
+                                     						<th class="text-center">Result</th>
 															<th class="text-center">Unit</th>
-                                                            <th class="text-center">Referred value</th>
+                              								<th class="text-center">Referred value</th>
 	
 														</tr>
+														<tr>
+															{% for t in test %}
 														
+															<th class="text-center">{{t.test_name}}</th>
+															<th class="text-center">{{t.result}}</th>
+															<th class="text-center">{{t.unit}}</th>
+															<th class="text-center">{{t.referred_value}}</th>
+	
+														</tr>
+														{% endfor %}
 													</tbody>
 												</table>
 											</div>
 										</div>
 										
 									</div>
-								</div> -->
-                                
+								</div>
+								<div class="other-info">
+									<h4>Other information</h4>
+									<p>{{report.other_information}}</p>
+                                   {% endfor %}
+								</div>
 								<!-- /Invoice Item -->
                                 
 								
-								<!-- Invoice Information -->
-								<!-- <div class="other-info">
-									<h4>Other information</h4>
-									<p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
-								</div> -->
-								<!-- /Invoice Information -->
-								
-							<!-- </div>
+							</div>
 						</div>
 					</div>
 
 				</div>
 
-			</div>		 -->
+			</div>		
 			<!-- /Page Content -->
 
-      <!-- Footer -->
-    
-      <!-- /Footer -->
-    <!-- </div> -->
+   
+    </div>
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->

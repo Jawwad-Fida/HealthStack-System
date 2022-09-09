@@ -23,18 +23,21 @@
 		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
-		<link
-      rel="stylesheet"
-      href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"
-    />
-
-
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+		<style>
+			.zoom {
+			  transition: transform .2s; /* Animation */
+			}
+			
+			.zoom:hover {
+			  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+			}
+		</style>
 	
 	</head>
 	<body>
@@ -51,7 +54,6 @@
 				{% if user.is_authenticated and user.is_doctor %}
 				{% include 'doctor-navbar.html' %}
 				{% endif %}
-				
 			
 			
 			</header>
@@ -72,7 +74,6 @@
 									{% if user.is_authenticated and user.is_doctor %}
 									<li class="breadcrumb-item"><a href="{% url 'doctor-dashboard' %}">Home</a></li>
 									{% endif %}
-									
 
 
 									<li class="breadcrumb-item active" aria-current="page">Doctor Profile</li>
@@ -101,7 +102,6 @@
 								{% if user.is_authenticated and user.is_doctor %}
 								{% include 'doctor-sidebar.html' %}
 								{% endif %}
-								
 							</div>
 							<!-- /Profile Sidebar -->
 						</div>
@@ -208,13 +208,13 @@
 											<li class="nav-item">
 												<a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
 											</li>
-											
+											<li class="nav-item">
+												<a class="nav-link" href="#doc_certificate" data-toggle="tab">Certificate</a>
+											</li>
 											<li class="nav-item">
 												<a class="nav-link" href="#doc_reviews" data-toggle="tab">Reviews</a>
 											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="#doc_business_hours" data-toggle="tab">Business Hours</a>
-											</li>
+											
 										</ul>
 									</nav>
 									<!-- /Tab Menu -->
@@ -525,73 +525,18 @@
 										</div>
 										<!-- /Reviews Content -->
 										
-										<!-- Business Hours Content -->
-										<div role="tabpanel" id="doc_business_hours" class="tab-pane fade">
+										<!-- Certificate Content -->
+										<div role="tabpanel" id="doc_certificate" class="tab-pane fade">
 											<div class="row">
-												<div class="col-md-6 offset-md-3">
-												
-													<!-- Business Hours Widget -->
-													<div class="widget business-widget">
-														<div class="widget-content">
-															<div class="listing-hours">
-																<div class="listing-day current">
-																	<div class="day">Today <span>5 Nov 2019</span></div>
-																	<div class="time-items">
-																		<span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
-																		<span class="time">07:00 AM - 09:00 PM</span>
-																	</div>
-																</div>
-																<div class="listing-day">
-																	<div class="day">Monday</div>
-																	<div class="time-items">
-																		<span class="time">07:00 AM - 09:00 PM</span>
-																	</div>
-																</div>
-																<div class="listing-day">
-																	<div class="day">Tuesday</div>
-																	<div class="time-items">
-																		<span class="time">07:00 AM - 09:00 PM</span>
-																	</div>
-																</div>
-																<div class="listing-day">
-																	<div class="day">Wednesday</div>
-																	<div class="time-items">
-																		<span class="time">07:00 AM - 09:00 PM</span>
-																	</div>
-																</div>
-																<div class="listing-day">
-																	<div class="day">Thursday</div>
-																	<div class="time-items">
-																		<span class="time">07:00 AM - 09:00 PM</span>
-																	</div>
-																</div>
-																<div class="listing-day">
-																	<div class="day">Friday</div>
-																	<div class="time-items">
-																		<span class="time">07:00 AM - 09:00 PM</span>
-																	</div>
-																</div>
-																<div class="listing-day">
-																	<div class="day">Saturday</div>
-																	<div class="time-items">
-																		<span class="time">07:00 AM - 09:00 PM</span>
-																	</div>
-																</div>
-																<div class="listing-day closed">
-																	<div class="day">Sunday</div>
-																	<div class="time-items">
-																		<span class="time"><span class="badge bg-danger-light">Closed</span></span>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- /Business Hours Widget -->
-											
+
+												<div class="col-md-6 offset-md-3 zoom">
+													<img src="{% static 'images/Certificate/Dr.Jawwad_Certificate.png' %}" alt="logo" class="img-fluid">
+															
 												</div>
+												
 											</div>
 										</div>
-										<!-- /Business Hours Content -->
+										<!-- /Certificate Content -->
 										
 									</div>
 								</div>
@@ -602,7 +547,7 @@
 				</div>
 			</div>		
 			<!-- /Page Content -->
-		
+   
 			<!-- Footer -->
 			<footer class="footer">
 				

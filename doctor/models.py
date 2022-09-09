@@ -38,15 +38,16 @@ class Doctor_Information(models.Model):
     gender = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
     department = models.CharField(max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
-    department_name = models.ForeignKey(hospital_department, on_delete=models.CASCADE, null=True, blank=True)
-    specialization = models.ForeignKey(specialization, on_delete=models.CASCADE, null=True, blank=True)
+    department_name = models.ForeignKey(hospital_department, on_delete=models.SET_NULL, null=True, blank=True)
+    specialization = models.ForeignKey(specialization, on_delete=models.SET_NULL, null=True, blank=True)
     # service = models.ForeignKey(service, on_delete=models.CASCADE, null=True, blank=True)
 
     featured_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
     certificate_image = models.ImageField(upload_to='doctors_certificate/', default='doctors_certificate/default.png', null=True, blank=True)
 
     email = models.EmailField(max_length=200, null=True, blank=True)
-    phone_number = models.IntegerField(null=True, blank=True)
+    phone_number = models.CharField(max_length=200, null=True, blank=True)
+    nid = models.CharField(max_length=200, null=True, blank=True)
     visiting_hour = models.CharField(max_length=200, null=True, blank=True)
     consultation_fee = models.IntegerField(null=True, blank=True)
     report_fee = models.IntegerField(null=True, blank=True)
@@ -68,7 +69,7 @@ class Doctor_Information(models.Model):
     register_status =  models.CharField(max_length=200, null=True, blank=True)
     
     # ForeignKey --> one to one relationship with Hospital_Information model.
-    hospital_name = models.ForeignKey(Hospital_Information, on_delete=models.CASCADE, null=True, blank=True)
+    hospital_name = models.ForeignKey(Hospital_Information, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return str(self.user.username)
@@ -128,7 +129,7 @@ class Experience(models.Model):
 class Report(models.Model):
 
     report_id = models.AutoField(primary_key=True)
-    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.SET_NULL, null=True, blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
     specimen_id = models.CharField(max_length=200, null=True, blank=True)
     specimen_type = models.CharField(max_length=200, null=True, blank=True)
@@ -173,7 +174,7 @@ class Prescription(models.Model):
     # medicine name, quantity, days, time, description, test, test_descrip
     prescription_id = models.AutoField(primary_key=True)
     doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
+    patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True, blank=True)
     
     medicine_name = models.CharField(max_length=200, null=True, blank=True)
     quantity = models.CharField(max_length=200, null=True, blank=True)
@@ -183,6 +184,7 @@ class Prescription(models.Model):
 
     test_name = models.CharField(max_length=200, null=True, blank=True)
     test_description = models.TextField(null=True, blank=True)
+    extra_information = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return str(self.doctor.username)

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .pdf import report_pdf
 
 
 
@@ -22,14 +23,17 @@ urlpatterns = [
     path('booking-success/', views.booking_success, name='booking-success'),
     path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
     path('patient-id/', views.patient_id, name='patient-id'),
-    path('create-prescription/', views.create_prescription, name='create-prescription'),
+    path('create-prescription/<int:pk>/', views.create_prescription, name='create-prescription'),
     path('prescription-view/', views.prescription_view, name='prescription-view'),
     # path('add-report/', views.add_report, name='add-report'),
     path('patient-profile/<int:pk>/',views.patient_profile, name='patient-profile'),
+    path('delete-education/<int:pk>/',views.delete_education, name='delete-education'),
+    path('delete-experience/<int:pk>/',views.delete_experience, name='delete-experience'),
     path('appointments/',views.appointments, name='appointments'),
     path('accept-appointment/<int:pk>/',views.accept_appointment, name='accept-appointment'),
     path('reject-appointment/<int:pk>/',views.reject_appointment, name='reject-appointment'),
     path('patient-search/<int:pk>/', views.patient_search, name='patient-search'),
+    path('pdf/<int:pk>/',views.report_pdf, name='pdf')
     # path('testing/',views.testing, name='testing'),
    
 

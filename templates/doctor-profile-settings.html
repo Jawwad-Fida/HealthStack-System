@@ -152,13 +152,13 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label>Phone Number</label>
-												<input type="text" name="number" class="form-control" value="{{doctor.phone_number}}">
+												<label>Phone Number <span class="text-danger">*</span></label>
+												<input type="number" name="number" class="form-control" value="{{doctor.phone_number}}"placeholder="Phone Number">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label>Gender</label>
+												<label>Gender<span class="text-danger">*</span></label>
 												<select class="form-control select" name="gender">
                           {% if doctor.gender == 'male' %}
                           <option value="{{doctor.gender}}">{{doctor.gender}}</option>
@@ -172,15 +172,19 @@
                           <option value="female">Female</option>
                           {% endif %}
 
-													
-                       
 												</select>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group mb-0">
-												<label>Date of Birth</label>
-												<input type="text" class="form-control" name="dob" value="{{doctor.dob}}">
+												<label>Date of Birth<span class="text-danger">*</span></label>
+												<input type="date" class="form-control" name="dob" value="{{doctor.dob}}">
+											</div>
+										</div>
+                    <div class="col-md-6">
+											<div class="form-group">
+												<label>NID <span class="text-danger">*</span></label>
+												<input type="number" name="nid" class="form-control" value="" placeholder="NID">
 											</div>
 										</div>
 									</div>
@@ -249,26 +253,8 @@
 							</div>
 							<!-- /Contact Details -->
 							
-
-							<!-- Services and Specialization -->
-							<div class="card services-card">
-								<div class="card-body">
-									<h4 class="card-title">Services and Specialization</h4>
-								
-									<div class="form-group mb-0">
-										<label>Specialization </label>
-										<input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialist" value="Children Care,Dental Care" id="specialist">
-										<small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
-									</div> 
-
-
-								</div>              
-							</div>
-							<!-- /Services and Specialization --> 
-						 
 							<!-- Education -->
              
-              
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Education</h4>
@@ -304,12 +290,12 @@
 											</div>
 
                       <div class="col-12 col-md-2 col-lg-1">
-                        
                         <label class="d-md-block d-sm-none d-none">&nbsp;</label>
-                        <a href="#" class="btn btn-danger trash">
+                        <a href="{% url 'delete-education' pk=education.education_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
                           <i class="far fa-trash-alt"></i>
                         </a>
                       </div>
+
                       {% endfor %}
 
 										</div>
@@ -365,13 +351,19 @@
 														</div> 
 													</div>
                           
-
 												</div>
                         
-
 											</div>
-                      <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+
+                      <div class="col-12 col-md-2 col-lg-1">
+                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                        <a href="{% url 'delete-experience' pk=e.experience_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
+                      </div>
+
                       {% endfor %}
+
 										</div>
 									</div>
 									<div class="add-more">
@@ -609,7 +601,7 @@
     <script src="{% static 'HealthStack-System/plugins/Normal/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
 
     <!-- Profile Settings JS -->
-    <script src="{% static 'HealthStack-System/js/Normal/profile_Settings.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/doctor-profile-settings.js' %}"></script>
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>

@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
 
-from .models import Doctor_Information, Appointment, Education, Experience, Report
+from .models import Doctor_Information, Appointment, Education, Experience, Report,Specimen,Test
 from .uitls import searchPatients
 
 from django.db.models import Q, Count
@@ -26,6 +26,14 @@ from django.core.mail import BadHeaderError, send_mail
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.utils.html import strip_tags
+
+from io import BytesIO
+from urllib import response
+from django.shortcuts import render
+from django.template.loader import get_template
+from django.http import HttpResponse
+from xhtml2pdf import pisa
+from .models import Report
 
 # Create your views here.
 
@@ -247,25 +255,6 @@ def reject_appointment(request, pk):
     
     return redirect('doctor-dashboard')
 
-# def doctor_profile_settings(request):
-
-#     if request.user.is_doctor:
-#         doctor = Doctor_Information.objects.get(user=request.user)
-    
-#         form = DoctorForm(instance=doctor)
-
-#         if request.method == 'POST':
-#             form = DoctorForm(request.POST, request.FILES,instance=doctor)
-#             if form.is_valid():
-#                 form.save()
-#                 return redirect('doctor-dashboard')
-#             else:
-#                 form = DoctorForm()
-#     else:
-#         redirect('doctor-logout')
-
-#     context = {'doctor': doctor, 'form': form}
-#     return render(request, 'doctor-profile-settings.html', context)
 
 
 #         end_year = doctor.end_year
@@ -291,10 +280,30 @@ def doctor_profile(request, pk):
     educations = Education.objects.filter(doctor=doctor).order_by('-year_of_completion')
     experiences = Experience.objects.filter(doctor=doctor).order_by('-from_year','-to_year')
             
-    
     context = {'doctor': doctor, 'patient': patient, 'educations': educations, 'experiences': experiences}
-    
     return render(request, 'doctor-profile.html', context)
+
+@login_required(login_url="doctor-login")
+def delete_education(request, pk):
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        
+        educations = Education.objects.get(education_id=pk)
+        educations.delete()
+        return redirect('doctor-profile-settings')
+
+     
+@login_required(login_url="doctor-login")
+def delete_experience(request, pk):
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        
+        experiences = Experience.objects.get(experience_id=pk)
+        experiences.delete()
+        return redirect('doctor-profile-settings')
+
+	    
+	    
             
             
 #             if degree:
@@ -335,6 +344,7 @@ def doctor_profile_settings(request):
             description = request.POST.get('description')
             consultation_fee = request.POST.get('consultation_fee')
             report_fee = request.POST.get('report_fee')
+            nid = request.POST.get('nid')
             
             degree = request.POST.getlist('degree')
             institute = request.POST.getlist('institute')
@@ -345,6 +355,7 @@ def doctor_profile_settings(request):
             designation = request.POST.getlist('designation')
 
             doctor.name = name
+            doctor.nid = nid
             doctor.gender = gender
             doctor.featured_image = featured_image
             doctor.phone_number = number
@@ -447,13 +458,50 @@ def patient_profile(request, pk):
 # def add_report(request):
 #     return render(request, 'add-report.html')
 
-
+@login_required(login_url="doctor-login")
 def prescription_view(request):
     return render(request, 'prescription-view.html')
 
+@login_required(login_url="doctor-login")
+def create_prescription(request,pk):
+        if request.user.is_doctor:
+            doctor = Doctor_Information.objects.get(user=request.user)
+            patient = Patient.objects.get(patient_id=pk) 
+            current_date = datetime.date.today()
+        else:
+            redirect('doctor-logout')
+        context = {'doctor': doctor,'patient': patient,'current_date':current_date}  
+        return render(request, 'create-prescription.html',context)
 
-def create_prescription(request):
-    return render(request, 'create-prescription.html')
+       
+
+def render_to_pdf(template_src, context_dict=()):
+    template=get_template(template_src)
+    html=template.render(context_dict)
+    result=BytesIO()
+    pdf=pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(),content_type="aplication/pdf")
+    return None
+
+
+
+
+def report_pdf(request, pk):
+ if request.user.is_patient:
+    patient = Patient.objects.get(user=request.user)
+    report = Report.objects.filter(patient=patient)
+    specimen = Specimen.objects.filter(report__in=report)
+    test = Test.objects.filter(report__in=report)
+    current_date = datetime.date.today()
+    context={'patient':patient,'current_date' : current_date,'report':report,'test':test,'specimen':specimen}
+    pdf=render_to_pdf('report_pdf.html', context)
+    if pdf:
+        response=HttpResponse(pdf, content_type='application/pdf')
+        content="inline; filename=report.pdf"
+        # response['Content-Disposition']= content
+        return response
+    return HttpResponse("Not Found")
 
 
 # def testing(request):

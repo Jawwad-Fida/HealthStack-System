@@ -209,7 +209,7 @@
                             <table class="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
-                                  <th>Patient Name</th>
+                                  <th>Patient Serial Number</th>
                                   <th>Appt Date</th>
                                   <th>Purpose</th>
                                   <th>Contact</th>
@@ -224,16 +224,16 @@
                                   <td>
                                     <h2 class="table-avatar">
                                       <a
-                                        href="patient-profile.html"
+                                        href="#"
                                         class="avatar avatar-sm mr-2"
                                         ><img
                                           class="avatar-img rounded-circle"
                                           src="{{appointment.patient.featured_image.url}}"
                                           alt="User Image"
                                       /></a>
-                                      <a href="patient-profile.html">{{appointment.patient.name}}<span>#PT{{appointment.serial_number}}</span></a>
+                                      <a href="#">#PT{{appointment.serial_number}}</a>
                                     </h2>
-                                  </td>
+                                  </td>               
                                   <td>
                                     {{appointment.date}}
                                     <span class="d-block text-info"
@@ -286,7 +286,7 @@
                     <!-- Prescription Tab -->
                     <div class="tab-pane fade" id="pres">
                       <div class="text-right">
-                        <a href="add-prescription.html" class="add-new-btn"
+                        <a href="{% url 'create-prescription' pk=patient.patient_id %}" class="add-new-btn"
                           >Add Prescription</a
                         >
                       </div>
