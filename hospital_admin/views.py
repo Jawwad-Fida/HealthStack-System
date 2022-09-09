@@ -111,6 +111,10 @@ def admin_login(request):
             return redirect('admin-dashboard')
         else:
             messages.error(request, 'Invalid username or password')
+        
+
+        if user.is_labworker:
+            return redirect('lab-worker-dashboard')
 
     return render(request, 'hospital_admin/login.html')
 
