@@ -114,7 +114,7 @@ Latest commit b04f98f 1 hour ago
 														<tr>
 															<td>
 																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
+																	<a href="{%url 'admin-doctor-profile' doctor.doctor_id%}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
 																	<a href="{%url 'admin-doctor-profile' doctor.doctor_id%}">{{doctor.name}}</a>
 																</h2>
 															</td>
@@ -126,7 +126,7 @@ Latest commit b04f98f 1 hour ago
 															<td>
 																<div class="table-action">
 																	<a
-																	  href=""
+																	  href="{%url 'admin-doctor-profile' doctor.doctor_id%}"
 																	  class="btn btn-outline-info btn-rounded" 
 																		>
 																		<i class="fas fa-file-alt"></i> view
