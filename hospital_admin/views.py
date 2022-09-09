@@ -696,3 +696,11 @@ def reject_doctor(request,pk):
     doctor.save()
     return redirect('admin-dashboard')
 
+
+@login_required(login_url='admin-login')
+def delete_department(request,pk):
+    if request.user.is_authenticated:
+        if request.user.is_hospital_admin:
+            department = hospital_department.objects.get(hospital_department_id=pk)
+            department.delete()
+            return redirect('hospital-list')
