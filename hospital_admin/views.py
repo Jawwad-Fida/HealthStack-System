@@ -108,13 +108,15 @@ def admin_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('admin-dashboard')
+            if user.is_hospital_admin:
+                return redirect('admin-dashboard')
+            elif user.is_labworker:
+                return redirect('labworker-dashboard')
         else:
             messages.error(request, 'Invalid username or password')
         
 
-        if user.is_labworker:
-            return redirect('lab-worker-dashboard')
+        
 
     return render(request, 'hospital_admin/login.html')
 
@@ -734,4 +736,8 @@ def edit_department(request,pk):
             context = {'department': department}
             return render(request, 'hospital_admin/edit-hospital.html',context)
 
-    
+def labworker_dashboard(request):
+    if request.user.is_authenticated:
+        if request.user.is_labworker:
+            
+            return render(request, 'hospital_admin/labworker-dashboard.html')
