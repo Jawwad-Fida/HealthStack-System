@@ -286,7 +286,7 @@
                     <!-- Prescription Tab -->
                     <div class="tab-pane fade" id="pres">
                       <div class="text-right">
-                        <a href="add-prescription.html" class="add-new-btn"
+                        <a href="{% url 'create-prescription' pk=patient.patient_id %}" class="add-new-btn"
                           >Add Prescription</a
                         >
                       </div>
