@@ -458,13 +458,22 @@ def patient_profile(request, pk):
 # def add_report(request):
 #     return render(request, 'add-report.html')
 
-
+@login_required(login_url="doctor-login")
 def prescription_view(request):
     return render(request, 'prescription-view.html')
 
+@login_required(login_url="doctor-login")
+def create_prescription(request,pk):
+        if request.user.is_doctor:
+            doctor = Doctor_Information.objects.get(user=request.user)
+            patient = Patient.objects.get(patient_id=pk) 
+            current_date = datetime.date.today()
+        else:
+            redirect('doctor-logout')
+        context = {'doctor': doctor,'patient': patient,'current_date':current_date}  
+        return render(request, 'create-prescription.html',context)
 
-def create_prescription(request):
-    return render(request, 'create-prescription.html')
+       
 
 def render_to_pdf(template_src, context_dict=()):
     template=get_template(template_src)
