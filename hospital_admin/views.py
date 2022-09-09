@@ -81,7 +81,9 @@ def admin_dashboard(request):
 
         context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
-    
+    elif request.user.is_labworker:
+        messages.error(request, 'You are not authorized to access this page')
+        return redirect('labworker-dashboard')
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -108,13 +110,15 @@ def admin_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('admin-dashboard')
+            if user.is_hospital_admin:
+                return redirect('admin-dashboard')
+            elif user.is_labworker:
+                return redirect('labworker-dashboard')
         else:
             messages.error(request, 'Invalid username or password')
         
 
-        if user.is_labworker:
-            return redirect('lab-worker-dashboard')
+        
 
     return render(request, 'hospital_admin/login.html')
 
@@ -736,4 +740,10 @@ def edit_department(request,pk):
 
 
 def labworker_dashboard(request):
-    return render(request, 'hospital_admin/labworker-dashboard.html')   
+    if request.user.is_authenticated:
+        if request.user.is_labworker:
+            
+            return render(request, 'hospital_admin/labworker-dashboard.html')
+
+
+
