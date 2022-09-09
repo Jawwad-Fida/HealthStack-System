@@ -85,11 +85,4 @@ class Patient(models.Model):
         return str(self.user.username)
     
 
-# class Test_information(models.Model):
-#     test_id = models.AutoField(primary_key=True, editable=False)
-#     test_name = models.CharField(max_length=200)
-#     test_fee = models.IntegerField(default=0)
-#     test_description = models.TextField(null=True, blank=True)
 
-#     def __str__(self):
-#         return self.test_name

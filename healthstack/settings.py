@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'ChatApp.apps.ChatappConfig',
  
- 
+
 ]
 
 MIDDLEWARE = [
