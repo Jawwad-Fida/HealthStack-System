@@ -10,7 +10,7 @@ from hospital.models import Patient
 from datetime import datetime
 
 
-def render_to_pdf(template_src, context_dict=()):
+def render_to_pdf(template_src, context_dict={}):
     template=get_template(template_src)
     html=template.render(context_dict)
     result=BytesIO()
