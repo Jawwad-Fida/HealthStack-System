@@ -292,7 +292,7 @@
             <div class="col-lg-6 col-sm-6">
               <div class="card">
                   <div class="card-header">
-                      <h4 class="card-title">Gradient Bar Chart</h4>
+                      <h4 class="card-title">Appointment Bar Chart</h4>
                   </div>
                   <div class="card-body">
                       <canvas id="barChart_2"></canvas>
@@ -422,10 +422,31 @@
     <!-- Chart JS -->
 
     <script>
-      var total_patient_count = "{{total_patient_count.count}}";total_hospital_count
+      var total_patient_count = "{{total_patient_count.count}}";
       var total_labworker_count= "{{total_labworker_count.count}}";
       var total_hospital_count= "{{total_hospital_count.count}}";
       var total_pharmacist_count= "{{total_pharmacist_count.count}}";
+
+      var sat= "{{sat}}";
+      var sat_count= "{{sat_count}}";
+
+      var sun= "{{sun}}";
+      var sun_count= "{{sun_count}}";
+
+      var mon= "{{mon}}";
+      var mon_count= "{{mon_count}}";
+
+      var tues= "{{tues}}";
+      var tues_count= "{{tues_count}}";
+
+      var wed= "{{wed}}";
+      var wed_count= "{{wed_count}}";
+
+      var thurs= "{{thurs}}";
+      var thurs_count= "{{thurs_count}}";
+
+      var fri= "{{fri}}";
+      var fri_count= "{{fri_count}}";
     </script>
 
     <script src="{% static 'HealthStack-System/js/admin/Chart.bundle.min.js'%}"></script>

@@ -255,25 +255,6 @@ def reject_appointment(request, pk):
     
     return redirect('doctor-dashboard')
 
-# def doctor_profile_settings(request):
-
-#     if request.user.is_doctor:
-#         doctor = Doctor_Information.objects.get(user=request.user)
-    
-#         form = DoctorForm(instance=doctor)
-
-#         if request.method == 'POST':
-#             form = DoctorForm(request.POST, request.FILES,instance=doctor)
-#             if form.is_valid():
-#                 form.save()
-#                 return redirect('doctor-dashboard')
-#             else:
-#                 form = DoctorForm()
-#     else:
-#         redirect('doctor-logout')
-
-#     context = {'doctor': doctor, 'form': form}
-#     return render(request, 'doctor-profile-settings.html', context)
 
 
 #         end_year = doctor.end_year
@@ -299,10 +280,30 @@ def doctor_profile(request, pk):
     educations = Education.objects.filter(doctor=doctor).order_by('-year_of_completion')
     experiences = Experience.objects.filter(doctor=doctor).order_by('-from_year','-to_year')
             
-    
     context = {'doctor': doctor, 'patient': patient, 'educations': educations, 'experiences': experiences}
-    
     return render(request, 'doctor-profile.html', context)
+
+@login_required(login_url="doctor-login")
+def delete_education(request, pk):
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        
+        educations = Education.objects.get(education_id=pk)
+        educations.delete()
+        return redirect('doctor-profile-settings')
+
+     
+@login_required(login_url="doctor-login")
+def delete_experience(request, pk):
+    if request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        
+        experiences = Experience.objects.get(experience_id=pk)
+        experiences.delete()
+        return redirect('doctor-profile-settings')
+
+	    
+	    
             
             
 #             if degree:
@@ -343,6 +344,7 @@ def doctor_profile_settings(request):
             description = request.POST.get('description')
             consultation_fee = request.POST.get('consultation_fee')
             report_fee = request.POST.get('report_fee')
+            nid = request.POST.get('nid')
             
             degree = request.POST.getlist('degree')
             institute = request.POST.getlist('institute')
@@ -353,6 +355,7 @@ def doctor_profile_settings(request):
             designation = request.POST.getlist('designation')
 
             doctor.name = name
+            doctor.nid = nid
             doctor.gender = gender
             doctor.featured_image = featured_image
             doctor.phone_number = number

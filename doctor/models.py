@@ -46,7 +46,8 @@ class Doctor_Information(models.Model):
     certificate_image = models.ImageField(upload_to='doctors_certificate/', default='doctors_certificate/default.png', null=True, blank=True)
 
     email = models.EmailField(max_length=200, null=True, blank=True)
-    phone_number = models.IntegerField(null=True, blank=True)
+    phone_number = models.CharField(max_length=200, null=True, blank=True)
+    nid = models.CharField(max_length=200, null=True, blank=True)
     visiting_hour = models.CharField(max_length=200, null=True, blank=True)
     consultation_fee = models.IntegerField(null=True, blank=True)
     report_fee = models.IntegerField(null=True, blank=True)
