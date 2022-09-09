@@ -534,3 +534,4 @@ def patient_search(request, pk):
         logout(request)
         messages.info(request, 'Not Authorized')
         return render(request, 'doctor-login.html')
+

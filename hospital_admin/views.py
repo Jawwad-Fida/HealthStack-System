@@ -730,4 +730,6 @@ def edit_department(request,pk):
             context = {'department': department}
             return render(request, 'hospital_admin/edit-hospital.html',context)
 
-    
+
+def labworker_dashboard(request):
+    return render(request, 'hospital_admin/labworker-dashboard.html')   
