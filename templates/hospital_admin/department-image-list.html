@@ -103,7 +103,7 @@
 															<a class="btn btn-sm bg-success-light" data-toggle="modal" data-target="#modal-default{{dep.hospital_department_name}}">
 																<i class="fe fe-pencil"></i> Edit
 															</a>
-															<a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
+															<a  data-toggle="modal" data-target="#delete_modal{{dep.hospital_department_id}}" class="btn btn-sm bg-danger-light">
 																<i class="fe fe-trash"></i> Delete
 															</a>
 															
@@ -147,18 +147,20 @@
 													</div>
 												</div>
 										
-												<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+												<div class="modal fade" id="delete_modal{{dep.hospital_department_id}}" aria-hidden="true" role="dialog">
 													<div class="modal-dialog modal-dialog-centered" role="document" >
 														<div class="modal-content">
-										
-															<div class="modal-body">
+															<form method="POST" action="{%url 'delete-department' pk=dep.hospital_department_id%}">		
+															{% csrf_token %}
+																<div class="modal-body">
 																<div class="form-content p-2">
 																	<h4 class="modal-title">Delete</h4>
 																	<p class="mb-4">Are you sure want to delete?</p>
-																	<button type="button" class="btn btn-primary">Save </button>
+																	<button type="submit" class="btn btn-primary">Save </button>
 																	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 																</div>
 															</div>
+														</form>
 														</div>
 													</div>
 												</div>	
