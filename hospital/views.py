@@ -557,10 +557,10 @@ def testing(request):
     
     return render(request, 'testing.html', context)
 
-def view_report(request):
+def view_report(request,pk):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
-        report = Report.objects.filter(patient=patient)
+        report = Report.objects.filter(report_id=pk)
         specimen = Specimen.objects.filter(report__in=report)
         test = Test.objects.filter(report__in=report)
 
