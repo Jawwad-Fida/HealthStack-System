@@ -738,8 +738,12 @@ def edit_department(request,pk):
             context = {'department': department}
             return render(request, 'hospital_admin/edit-hospital.html',context)
 
+
 def labworker_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
             
             return render(request, 'hospital_admin/labworker-dashboard.html')
+
+
+
