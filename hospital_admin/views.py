@@ -22,6 +22,7 @@ import string
 from django.db.models import  Count
 from datetime import datetime
 import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -704,3 +705,29 @@ def delete_department(request,pk):
             department = hospital_department.objects.get(hospital_department_id=pk)
             department.delete()
             return redirect('hospital-list')
+
+@login_required(login_url='admin-login')
+@csrf_exempt
+def edit_department(request,pk):
+    if request.user.is_authenticated:
+        if request.user.is_hospital_admin:
+            # old_featured_image = department.featured_image
+            department = hospital_department.objects.get(hospital_department_id=pk)
+            old_featured_image = department.featured_image
+
+            if request.method == 'POST':
+                if 'featured_image' in request.FILES:
+                    featured_image = request.FILES['featured_image']
+                else:
+                    featured_image = old_featured_image
+
+                department_name = request.POST.get('department_name')
+                department.hospital_department_name = department_name
+                department.featured_image = featured_image
+                department.save()
+                return redirect('hospital-list')
+                
+            context = {'department': department}
+            return render(request, 'hospital_admin/edit-hospital.html',context)
+
+    

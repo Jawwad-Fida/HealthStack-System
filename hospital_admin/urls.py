@@ -57,6 +57,7 @@ urlpatterns = [
     path('accept-doctor/<int:pk>/', views.accept_doctor,name='accept-doctor'),
     path('reject-doctor/<int:pk>/', views.reject_doctor,name='reject-doctor'),
     path('delete-department/<int:pk>',views.delete_department,name='delete-department'),
+    path('edit-department/<int:pk>',views.edit_department,name='edit-department'),
 
 ]
   
