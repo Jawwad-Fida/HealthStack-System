@@ -81,7 +81,9 @@ def admin_dashboard(request):
 
         context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
-    
+    elif request.user.is_labworker:
+        messages.error(request, 'You are not authorized to access this page')
+        return redirect('labworker-dashboard')
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
