@@ -9,6 +9,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from hospital.models import Patient
+from pharmacy.models import Medicine
+
 
 # from django.db.models.signals import post_save, post_delete
 # from django.dispatch import receiver
@@ -18,27 +21,48 @@ from django.contrib import messages
 
 # function to return views for the urls
 
-
-def pharmacy_homepage(request):
-    return render(request, 'pharmacy/index.html')
-
-def pharmacy_menu(request):
-    return render(request, 'pharmacy/menu.html')
-
+@login_required(login_url="login")
 def pharmacy_single_product(request):
     return render(request, 'pharmacy/product-single.html')
 
+@login_required(login_url="login")
 def pharmacy_shop(request):
-    return render(request, 'pharmacy/shop.html')
+    if request.user.is_authenticated and request.user.is_patient:
+         
+        patient = Patient.objects.get(user=request.user)
+        medicines = Medicine.objects.all()
+        
+        context = {'patient': patient, 'medicines': medicines}
+        return render(request, 'pharmacy/shop.html', context)
+    
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')  
+    
+@login_required(login_url="login")
+def demo_medicine_list(request):
+    if request.user.is_authenticated and request.user.is_patient:
+         
+        patient = Patient.objects.get(user=request.user)
+        medicines = Medicine.objects.all()
+        
+        context = {'patient': patient, 'medicines': medicines}
+        return render(request, 'pharmacy/demo-medicine-list.html', context)
+    
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')  
 
+@login_required(login_url="login")
 def cart(request):
     return render(request, 'pharmacy/cart.html')
 
+@login_required(login_url="login")
 def checkout(request):
     return render(request, 'pharmacy/checkout.html')
 
-# def cart(request):
-#     return render(request, 'pharmacy/cart.html')
 
 
 
