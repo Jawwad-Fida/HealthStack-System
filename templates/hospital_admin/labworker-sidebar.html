@@ -6,73 +6,9 @@
                     <span>Menu</span>
                 </li>
                 <li class=""> 
-                    <a href="{%url 'admin-dashboard' %}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
-                </li>
-                
-                <li class="submenu">
-                    <a href="#"><i class="fe fe-building"></i> <span> Hospitals</span></a>
-                    <ul style="display:none;">
-                        <li><a href="{% url 'hospital-list' %}"><i class="fe fe-edit"></i> <span>Add Hospital</span></a></li>
-                        <li><a href="{% url 'emergency' %}"><i class="fe fe-edit"></i> <span>Add Emergency Info</span></a></li>
-                    </ul>
+                    <a href="{%url 'labworker-dashboard' %}"><i class="fe fe-home"></i> <span>Patinet List</span></a>
                 </li>
 
-                
-
-                <li class="submenu"> 
-                    <a href="#"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
-                    <ul style="display:none;">
-                        <li><a href="{%url 'register-doctor-list'%}"><i class="fe fe-users"></i> <span>Registered</span></a></li>
-                        <li><a href="{%url 'pending-doctor-list'%}"><i class="fe fe-users"></i> <span>Pending</span></a></li>
-                    </ul>
-                </li>
-                
-                
-
-                <li class="submenu">
-                    <a href="#"><i class="fe fe-user"></i> <span> Lab Worker</span></a>
-                    <ul style="display:none;">
-                        <li><a href="{% url 'add-lab-worker' %}"><i class="fe fe-user-plus"></i> <span>Add Lab Worker</span></a></li>
-                        <li><a href="{% url 'lab-worker-list' %}"><i class="fe fe-users"></i> <span>View Lab Worker</span></a></li>
-                    </ul>
-                </li>
-
-                <li class="submenu">
-                    <a href="#"><i class="fe fe-user"></i> <span> Pharmacist</span></a>
-                    <ul style="display:none;">
-                        <li><a href="{% url 'add-pharmacist' %}"><i class="fe fe-user-plus"></i> <span>Add Pharmacist</span></a></li>
-                        <li><a href="#"><i class="fe fe-edit"></i> <span>Edit Pharmacist</span></a></li>
-                        <li><a href="#"><i class="fe fe-users"></i> <span>View Pharmacist</span></a></li>
-                    </ul>
-                </li>
-                
-                <li class="submenu">
-                    <a href="#"><i class="fe fe-document"></i> <span> Reports</span></a>
-                    <ul style="display: none;">
-                        <li><a href="invoice-report.html">Invoice Reports</a></li>
-                    </ul>
-                </li>
-
-                <li class="submenu">
-                    <a href="#"><i class="fe fe-user"></i> <span> Pharmacists</span></a>
-                    <ul style="display: none;">
-                        <li><a href="{% url 'add-pharmacist' %}"><i class="fe fe-user-plus"></i> <span>Add Pharmacists</span></a></li>
-                        <li><a href="invoice-report.html"><i class="fe fe-users"></i> <span>Pharmacists List</span></a></li>
-                    </ul>
-                </li>
-
-                <li class="submenu">
-                    <a href="#"><i class="fe fe-document"></i> <span> Medicines</span></a>
-                    <ul style="display: none;">
-                        <li><a href="{% url 'medicine-list' %}"><i class="fe fe-plus"></i> <span>Add Medicines</span></a></li>
-                    </ul>
-                </li>
-                
-                <li> 
-                    <a href="{%url 'hospital-admin-profile' pk=user.id %}"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
-                </li>
-
-                
             </ul>
         </div>
     </div>
