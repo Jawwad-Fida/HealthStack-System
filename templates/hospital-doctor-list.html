@@ -154,7 +154,7 @@
                         <h4 class="doc-name">
                           <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">Dr. {{doctor.name}}</a>
                         </h4>
-                        <p class="doc-speciality">{{ doctor.degree }}</p>
+                        <p class="doc-speciality">{{ doctor.department_name.hospital_department_name }}</p>
                         <h5 class="doc-department">
                           <img
                             src="{% static 'HealthStack-System/images/Normal/specialities/specialities-05.png'%}"
