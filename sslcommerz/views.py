@@ -193,66 +193,75 @@ def ssl_payment_success(request):
 
         # Update Database
         payment = Payment.objects.get(transaction_id=tran_id)
-        payment.val_transaction_id = payment_data['val_id']
-        payment.currency_amount = payment_data['currency_amount']
-        payment.card_type = payment_data['card_type']
-        payment.card_no = payment_data['card_no']
-        payment.bank_transaction_id = payment_data['bank_tran_id']
-        payment.status = payment_data['status']
-        payment.transaction_date = payment_data['tran_date']
-        payment.currency = payment_data['currency']
-        payment.card_issuer = payment_data['card_issuer']
-        payment.card_brand = payment_data['card_brand']
-        payment.save()
         
-        appointment = Appointment.objects.get(transaction_id=tran_id)
-        appointment.transaction_id = tran_id
-        appointment.payment_status = "VALID"
-        appointment.save()
+        payment_type = payment.payment_type
         
-   
-        if sslcz.hash_validate_ipn(payment_data):
-            response = sslcz.validationTransactionOrder(payment_data['val_id'])
-            print(response)
-        else:
-            print("Hash validation failed")
+        if payment_type == "appointment":
+            payment.val_transaction_id = payment_data['val_id']
+            payment.currency_amount = payment_data['currency_amount']
+            payment.card_type = payment_data['card_type']
+            payment.card_no = payment_data['card_no']
+            payment.bank_transaction_id = payment_data['bank_tran_id']
+            payment.status = payment_data['status']
+            payment.transaction_date = payment_data['tran_date']
+            payment.currency = payment_data['currency']
+            payment.card_issuer = payment_data['card_issuer']
+            payment.card_brand = payment_data['card_brand']
+            payment.save()
+            
+            appointment = Appointment.objects.get(transaction_id=tran_id)
+            appointment.transaction_id = tran_id
+            appointment.payment_status = "VALID"
+            appointment.save()
+            
+    
+            if sslcz.hash_validate_ipn(payment_data):
+                response = sslcz.validationTransactionOrder(payment_data['val_id'])
+                print(response)
+            else:
+                print("Hash validation failed")
 
-        #dic = {'payment_data': payment_data, 'response': response}
-        #return render(request, 'success.html', dic)
+            #dic = {'payment_data': payment_data, 'response': response}
+            #return render(request, 'success.html', dic)
+            
+            # Mailtrap
+            patient_email = payment.patient.email
+            patient_name = payment.patient.name
+            patient_username = payment.patient.username
+            patient_phone_number = payment.patient.phone_number
+            doctor_name = appointment.doctor.name
         
-        # Mailtrap
-        patient_email = payment.patient.email
-        patient_name = payment.patient.name
-        patient_username = payment.patient.username
-        patient_phone_number = payment.patient.phone_number
-        doctor_name = appointment.doctor.name
-       
-        subject = "Payment Receipt for appointment"
+            subject = "Payment Receipt for appointment"
+            
+            values = {
+                    "email":patient_email,
+                    "name":patient_name,
+                    "username":patient_username,
+                    "phone_number":patient_phone_number,
+                    "doctor_name":doctor_name,
+                    "tran_id":payment_data['tran_id'],
+                    "currency_amount":payment_data['currency_amount'],
+                    "card_type":payment_data['card_type'],
+                    "bank_transaction_id":payment_data['bank_tran_id'],
+                    "transaction_date":payment_data['tran_date'],
+                    "card_issuer":payment_data['card_issuer'],
+                }
+            
+            html_message = render_to_string('appointment_mail_payment_template.html', {'values': values})
+            plain_message = strip_tags(html_message)
+            
+            try:
+                send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found')
+    
+            return redirect('patient-dashboard')
         
-        values = {
-				"email":patient_email,
-                "name":patient_name,
-                "username":patient_username,
-                "phone_number":patient_phone_number,
-                "doctor_name":doctor_name,
-                "tran_id":payment_data['tran_id'],
-                "currency_amount":payment_data['currency_amount'],
-                "card_type":payment_data['card_type'],
-                "bank_transaction_id":payment_data['bank_tran_id'],
-                "transaction_date":payment_data['tran_date'],
-                "card_issuer":payment_data['card_issuer'],
-			}
-        
-        html_message = render_to_string('appointment_mail_payment_template.html', {'values': values})
-        plain_message = strip_tags(html_message)
-        
-        try:
-            send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
-        except BadHeaderError:
-            return HttpResponse('Invalid header found')
-   
-        
-        return redirect('patient-dashboard')
+        elif payment_type == "test":
+            print("test")
+            
+        elif payment_type == "pharamcy":
+            print("pharamcy")
 
     elif status == 'FAILED':
         redirect('ssl-payment-fail')
