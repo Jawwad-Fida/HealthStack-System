@@ -301,10 +301,7 @@ def delete_experience(request, pk):
         experiences = Experience.objects.get(experience_id=pk)
         experiences.delete()
         return redirect('doctor-profile-settings')
-
-	    
-	    
-            
+      
             
 #             if degree:
 #                 degree = re.sub("'", "", degree)
@@ -312,8 +309,7 @@ def delete_experience(request, pk):
 #                 degree = degree.replace("]", "")
 #                 degree = degree.replace(",", "")
 #                 degree_array = degree.split()
-
-        
+      
         
 @login_required(login_url="doctor-login")
 def doctor_profile_settings(request):
@@ -345,6 +341,7 @@ def doctor_profile_settings(request):
             consultation_fee = request.POST.get('consultation_fee')
             report_fee = request.POST.get('report_fee')
             nid = request.POST.get('nid')
+            visit_hour = request.POST.get('visit_hour')
             
             degree = request.POST.getlist('degree')
             institute = request.POST.getlist('institute')
@@ -355,6 +352,7 @@ def doctor_profile_settings(request):
             designation = request.POST.getlist('designation')
 
             doctor.name = name
+            doctor.visiting_hour = visit_hour
             doctor.nid = nid
             doctor.gender = gender
             doctor.featured_image = featured_image
@@ -388,11 +386,7 @@ def doctor_profile_settings(request):
             return redirect('doctor-dashboard')
     else:
         redirect('doctor-logout')
-        
-        
-        
-        
-        
+               
         
 @login_required(login_url="doctor-login")      
 def booking_success(request):

@@ -91,11 +91,9 @@
                           <h3><a href="{% url 'pharmacy-single-product' %}">{{medicine.name}}</a></h3>
                           
                           <p class="price"><span>{{medicine.price}} BDT</span></p>
-                          <p><a href="{% url 'cart' pk=medicine.serial_number %}" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                          <p><a href="{% url 'shop' pk=medicine.serial_number %}" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
                         </div>
                       </div>
-                      gh
-                      fghbjkml,
                     </div>
                     {% endfor %}
                   </div>

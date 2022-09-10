@@ -672,8 +672,8 @@ def department_image_list(request,pk):
 def register_doctor_list(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
-    doctors = Doctor_Information.objects.filter(register_status='Accepted')
-    return render(request, 'hospital_admin/register-doctor-list.html', {'all': doctors, 'admin': user})
+        doctors = Doctor_Information.objects.filter(register_status='Accepted')
+    return render(request, 'hospital_admin/register-doctor-list.html', {'doctors': doctors, 'admin': user})
 
 @login_required(login_url='admin-login')
 def pending_doctor_list(request):
@@ -686,9 +686,10 @@ def pending_doctor_list(request):
 def admin_doctor_profile(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     admin = Admin_Information.objects.get(user=request.user)
-    experience= Experience.objects.filter(doctor_id=pk)
-    education = Education.objects.filter(doctor_id=pk)
-    context = {'doctor': doctor, 'admin': admin, 'experience': experience, 'education': education}
+    experience= Experience.objects.filter(doctor_id=pk).order_by('-from_year','-to_year')
+    education = Education.objects.filter(doctor_id=pk).order_by('-year_of_completion')
+    
+    context = {'doctor': doctor, 'admin': admin, 'experiences': experience, 'educations': education}
     return render(request, 'hospital_admin/doctor-profile.html',context)
 
 @login_required(login_url='admin-login')
