@@ -79,7 +79,7 @@
 				<div class="call-content-full">
 					<div class="container-lg">
 						<div class="row-cols-6">
-							<div class="col-md-6 col-lg-6">
+							<div class="col-md-6 col-lg-7">
 								<div class="card">
 									<div class="card-body">
 
@@ -99,7 +99,7 @@
 											enctype="multipart/form-data">
 											{% csrf_token %}
 											<div >
-												<div class="col-12 col-md-6 col-lg-6">
+												<div class="col-12 col-md-6 col-lg-8">
 													<div class="form-group">
 														<div class="change-avatar">
 															<div class="upload-img">
@@ -251,7 +251,7 @@
 																	</div>
 																	{% comment %} <div class="col-md-2 col-lg-1">
 																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																		<a href="#" class="btn btn-danger trash">
+																		<a href="#" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
 																		  <i class="far fa-trash-alt"></i>
 																		</a>
 																	</div> {% endcomment %}
@@ -397,7 +397,8 @@
 	<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
 
 	<!-- add js -->
-	<script src="{% static 'HealthStack-System/js/Normal/edit-hospital.js' %}"></script>
+	<!-- <script src="{% static 'HealthStack-System/js/Normal/edit-hospital.js' %}"></script> -->
+	<script src="{% static 'HealthStack-System/js/Normal/edit_hospital.js' %}"></script>
 
 </body>
 
