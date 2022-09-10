@@ -45,6 +45,9 @@
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+		<style>
+
+		</style>
 	
 	</head>
 	<body>
@@ -53,25 +56,7 @@
 		<div class="main-wrapper">
 		
 			
-			<!-- Breadcrumb -->
-			<!-- <div class="breadcrumb-bar">
-				<div class="container-fluid">
-					<div class="row align-items-center">
-						<div class="col-md-12 col-12">
-							<nav aria-label="breadcrumb" class="page-breadcrumb">
-								<ol class="breadcrumb">
-                                    {% if user.is_authenticated and user.is_patient %}
-									<li class="breadcrumb-item"><a href="">View Report</a></li>
-                                    {% endif %}
-									<li class="breadcrumb-item active" aria-current="page">Report Result</li>
-								</ol>
-							</nav>
-							<h2 class="breadcrumb-title">Report Result</h2>
-						</div>
-					</div>
-				</div>
-			</div> -->
-			<!-- /Breadcrumb -->
+
 			
 			<!-- Page Content -->
 			<div class="content">
@@ -86,10 +71,12 @@
                     
 										<div class="col-md-6">
 											<div class="invoice-logo">
-												<img src="{% static 'HealthStack-System/images/Normal/FullLogo_Transparent_NoBuffer.png'%}" alt="logo">
+												<img style="float: left;
+												width: 220px;"src="static/HealthStack-System/images/Normal/FullLogo_Transparent_NoBuffer.png" alt="logo">
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6" style="float: right;
+										width: 50%;">
 											<p class="invoice-details">
 												
 												<strong>Report ID:</strong>{{report.report_id}} <br>
@@ -163,7 +150,7 @@
 											<div class="table-responsive">
 												<table class="invoice-table table table-bordered">
 													<thead>
-														<tr>
+														<tr style="color:red">
 															<th>Test Name</th>
                                      						<th class="text-center">Result</th>
 															<th class="text-center">Unit</th>

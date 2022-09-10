@@ -742,8 +742,9 @@ def edit_department(request,pk):
 def labworker_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
-            
-            return render(request, 'hospital_admin/labworker-dashboard.html')
+            patients = Patient.objects.all()
+            context = {'patients': patients}
+            return render(request, 'hospital_admin/labworker-dashboard.html',context)
 
 
 
