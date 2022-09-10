@@ -1,0 +1,53 @@
+{% load static %}
+
+<h2>Dear Dr. {{ values.doctor_name }},</h2>
+
+<p>Your registration has been accepted. Below are your appointment details.</p>
+
+
+<h3 class="card-title">Doctor Registration</h3>
+
+    <table style="border: 1px solid black">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black">Title</th>
+                <th style="border: 1px solid black">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td style="border: 1px solid black">Doctor Name</td>
+                <td style="border: 1px solid black">{{ values.doctor_name }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Email</td>
+                <td style="border: 1px solid black">{{ values.doctor_email }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Hospital Name</td>
+                <td style="border: 1px solid black">{{ values.doctor_hospital }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Hospital Department</td>
+                <td style="border: 1px solid black">{{ values.doctor_department }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Specialization</td>
+                <td style="border: 1px solid black">{{ values.doctor_specialization }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+     
+
+
+<p>Feel free to contact us for any inquiries.</p>
+
+<p>Sincerely,</p>
+<p>Admin</p>
+
