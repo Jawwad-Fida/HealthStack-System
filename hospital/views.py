@@ -572,3 +572,6 @@ def view_report(request,pk):
         redirect('logout') 
 
 
+def test_cart(request):
+    return render(request, 'test-cart.html')
+

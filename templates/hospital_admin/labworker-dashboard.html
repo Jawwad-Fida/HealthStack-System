@@ -97,38 +97,41 @@
 										<table class="table table-hover table-center mb-0">
 											<thead>
 												<tr>													
-													<th>Patient Name</th>
+													<th>Patient Id</th>
+                          <th>Patient Name</th>
 													<th>Phone</th>
 													<th>Email</th>
-													<th>Address</th>
                           <th>Status</th>													
 												</tr>
 											</thead>
 											<tbody>
                      {% for doctor in doctor%}
 												<tr>
+                          <td>{{doctor.doctor_id}}</td>
+
 													<td>
 														<h2 class="table-avatar">
 															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
 															<a href="#">{{doctor.name}}</a>
 														</h2>
 													</td>
+                          
 													<td>{{doctor.phone_number}}</td>
 													<td>{{doctor.email}}</td>
-													<td>{{doctor.address}}</td>
-                                                    <td>
-                                                      <div class="table-action">
-                                                        <a
-                                                          href="{% url 'create-report' pk=doctor.doctor_id %}"
-                                                          class="btn btn-outline-info btn-rounded" 
-                                                          >
-                                                          <i class="fas fa-file-alt"></i> Create Report 
-                                                        </a>
-                                          
-                                                        </div>
-                                                    </td>
+													
+                          <td>
+                            <div class="table-action">
+                              <a
+                                href="{% url 'create-report' pk=doctor.doctor_id %}"
+                                class="btn btn-outline-info btn-rounded" 
+                                >
+                                <i class="fas fa-file-alt"></i> Create Report 
+                              </a>
+                
+                              </div>
+                          </td>
 												</tr>
-                                            {% endfor %}
+                      {% endfor %}
 												
 												
 											</tbody>

@@ -79,8 +79,8 @@
 										
 											 
 											 
-												<tr>
-													<th>Hospital Name</th>
+												<tr style="text-align: center;">
+													<th style="text-align: left;">Hospital Name</th>
 													<th>Address</th>
 													<th>Email</th>
 													<th>Phone Number</th>
@@ -93,7 +93,7 @@
 											 
 											 {% for hospital in hospitals %}
 												<tr style="text-align: center;">
-													<td>
+													<td style="text-align: left;">
 														<h2 class="table-avatar">
 															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospital.featured_image.url}}" alt="User Image"></a>															
 															<a href="profile.html">{{hospital.name}}</a>
