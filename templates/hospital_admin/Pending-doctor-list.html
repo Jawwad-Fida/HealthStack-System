@@ -91,13 +91,13 @@
                                 </div>
                             </div>
                             <div class="appointment-action">
-                                <a href="{%url 'admin-doctor-profile' doctor.doctor_id%}" class="btn btn-sm bg-info-light" >
+                                <a href="{% url 'admin-doctor-profile' doctor.doctor_id%}" class="btn btn-sm bg-info-light" >
                                     <i class="far fa-eye"></i> View
                                 </a>
-                                <a href="{%url 'accept-doctor' pk=doctor.doctor_id%}" class="btn btn-sm bg-success-light">
+                                <a href="{% url 'accept-doctor' pk=doctor.doctor_id%}" onclick="return confirm('Accept Doctor?');" class="btn btn-sm bg-success-light">
                                     <i class="fas fa-check"></i> Accept
                                 </a>
-                                <a href="{%url 'reject-doctor' pk=doctor.doctor_id%}" class="btn btn-sm bg-danger-light">
+                                <a href="{% url 'reject-doctor' pk=doctor.doctor_id%}" onclick="return confirm('Reject Doctor?');" class="btn btn-sm bg-danger-light">
                                     <i class="fas fa-times"></i> Cancel
                                 </a>
                             </div>
