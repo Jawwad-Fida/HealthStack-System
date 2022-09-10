@@ -427,10 +427,10 @@ def generate_random_specimen():
     string_var = "#INV-" + string_var
     return string_var
 
-@login_required(login_url='admin-login')
+# @login_required(login_url='admin-login')
 def create_report(request, pk):
-    if request.user.is_hospital_admin:
-        user = Admin_Information.objects.get(user=request.user)
+    if request.user.is_labworker:
+        lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
         doctors =Doctor_Information.objects.get(doctor_id=pk)
 
         if request.method == 'POST':
@@ -479,7 +479,7 @@ def create_report(request, pk):
 
             return redirect('register-doctor-list')
 
-        context = {'doctors': doctors, 'admin': user}
+        context = {'doctors': doctors,'lab_workers':lab_workers}
         return render(request, 'hospital_admin/create-report.html',context)
 
 @login_required(login_url='admin-login')
@@ -791,8 +791,10 @@ def edit_department(request,pk):
 def labworker_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
-            patients = Patient.objects.all()
-            context = {'patients': patients}
+            
+            lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
+            doctor = Doctor_Information.objects.all()
+            context = {'doctor': doctor,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/labworker-dashboard.html',context)
 
 

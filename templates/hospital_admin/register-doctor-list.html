@@ -77,7 +77,7 @@
 													<th>Department</th>
 													<th>Hospital</th>
 													<th>View profile</th>
-													<th>Report</th>
+
 													</tr>
 													<tbody>
 														{% for doctor in doctors %}
@@ -105,17 +105,7 @@
 																  </div>
 															</td>
 
-															<td>
-																<div class="table-action">
-																	<a
-																	  href="{% url 'create-report' pk=doctor.doctor_id %}"
-																	  class="btn btn-outline-info btn-rounded" 
-																		>
-																		<i class="fas fa-file-alt"></i> Create Report 
-																	</a>
-										
-																  </div>
-															</td> 
+
 														</tr>
 														{% endfor %}
 													</tbody>

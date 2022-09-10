@@ -101,31 +101,31 @@
 													<th>Phone</th>
 													<th>Email</th>
 													<th>Address</th>
-                                                    <th>Status</th>													
+                          <th>Status</th>													
 												</tr>
 											</thead>
 											<tbody>
-                                            {% for patient in patients%}
+                     {% for doctor in doctor%}
 												<tr>
 													<td>
 														<h2 class="table-avatar">
-															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{patient.featured_image.url}}" alt="User Image"></a>
-															<a href="#">{{patient.name}}</a>
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
+															<a href="#">{{doctor.name}}</a>
 														</h2>
 													</td>
-													<td>{{patient.phone_number}}</td>
-													<td>{{patient.email}}</td>
-													<td>{{patient.address}}</td>
+													<td>{{doctor.phone_number}}</td>
+													<td>{{doctor.email}}</td>
+													<td>{{doctor.address}}</td>
                                                     <td>
-                                                        <div class="table-action">
-                                                            <a
-                                                              href=""
-                                                              class="btn btn-outline-info btn-rounded" 
-                                                                >
-                                                                <i class="fas fa-file-alt"></i> Create Report 
-                                                            </a>
-                                
-                                                          </div>
+                                                      <div class="table-action">
+                                                        <a
+                                                          href="{% url 'create-report' pk=doctor.doctor_id %}"
+                                                          class="btn btn-outline-info btn-rounded" 
+                                                          >
+                                                          <i class="fas fa-file-alt"></i> Create Report 
+                                                        </a>
+                                          
+                                                        </div>
                                                     </td>
 												</tr>
                                             {% endfor %}
