@@ -281,7 +281,7 @@
 																	</div>
 																	<div class="col-md-2 col-lg-1">
 																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																		<a href="#" class="btn btn-danger trash">
+																		<a href="{% url 'delete-service' pk=service.service_id pk2=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
 																		  <i class="far fa-trash-alt"></i>
 																		</a>
 																	</div>
@@ -312,7 +312,7 @@
 																	</div>
 																	<div class="col-md-2 col-lg-1">
 																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																		<a href="#" class="btn btn-danger trash">
+																		<a href="{% url 'delete-specialization' pk=specialization.specialization_id pk2=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
 																		  <i class="far fa-trash-alt"></i>
 																		</a>
 																	</div>
@@ -338,8 +338,7 @@
 																		<div class="form-group">
 																			
 																			<textarea type="text" rows="5" class="form-control"
-																				name="description"
-																				placeholder="{{hospital.description}}"></textarea>
+																				name="description">{{hospital.description}}</textarea>
 																		</div>
 																	</div>
 
