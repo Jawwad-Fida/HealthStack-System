@@ -359,6 +359,17 @@ def edit_hospital(request, pk):
 
             return redirect('hospital-list')
 
+@login_required(login_url="admin-login")
+def delete_specialization(request, pk, pk2):
+    specializations = specialization.objects.get(specialization_id=pk)
+    specializations.delete()
+    return redirect('edit-hospital', pk2)
+
+@login_required(login_url="admin-login")
+def delete_service(request, pk, pk2):
+    services = service.objects.get(service_id=pk)
+    services.delete()
+    return redirect('edit-hospital', pk2)
 
 @login_required(login_url='admin-login')
 def edit_emergency_information(request, pk):
