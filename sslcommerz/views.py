@@ -68,6 +68,7 @@ def payment_home(request):
 
 @csrf_exempt
 def ssl_payment_request(request, pk, id):
+    # Payment Request for appointment payment
     """
     1) Create a Initial Payment Request Session
 
@@ -82,7 +83,6 @@ def ssl_payment_request(request, pk, id):
     
     patient = Patient.objects.get(patient_id=pk)
     appointment = Appointment.objects.get(id=id)
-    payment_type = "appointment"
     
     invoice_number = generate_random_invoice()
     
@@ -122,7 +122,6 @@ def ssl_payment_request(request, pk, id):
     # payment.appointment_id = appointment.id
     payment.patient = patient
     payment.appointment = appointment
-    payment.payment_type = payment_type
     payment.name = post_body['cus_name']
     payment.email = post_body['cus_email']
     payment.phone = post_body['cus_phone']
@@ -134,6 +133,9 @@ def ssl_payment_request(request, pk, id):
     payment.consulation_fee = appointment.doctor.consultation_fee
     payment.report_fee = appointment.doctor.report_fee
     payment.invoice_number = invoice_number
+    
+    payment_type = "appointment"
+    payment.payment_type = payment_type
     payment.save()
     
     
@@ -144,6 +146,14 @@ def ssl_payment_request(request, pk, id):
 
     # return render(request, 'checkout.html')
 
+
+# @csrf_exempt
+# def ssl_payment_request_test(request, pk, id):
+#     # Payment Request for test payment
+    
+# @csrf_exempt
+# def ssl_payment_request_pharamcy(request, pk, id):
+#     # Payment Request for pharamacy payment
 
 @csrf_exempt
 def ssl_payment_success(request):
