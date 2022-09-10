@@ -24,6 +24,11 @@ from datetime import datetime
 import datetime
 from django.views.decorators.csrf import csrf_exempt
 
+from django.core.mail import BadHeaderError, send_mail
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from django.utils.html import strip_tags
+
 
 # Create your views here.
 @login_required(login_url='admin-login')
@@ -697,6 +702,36 @@ def accept_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     doctor.register_status = 'Accepted'
     doctor.save()
+    
+    experience= Experience.objects.filter(doctor_id=pk)
+    education = Education.objects.filter(doctor_id=pk)
+    
+    # Mailtrap
+    doctor_name = doctor.name
+    doctor_email = doctor.email
+    doctor_department = doctor.department_name.hospital_department_name
+    doctor_hospital = doctor.hospital_name.name
+    doctor_specialization = doctor.specialization.specialization_name
+
+    subject = "Acceptance of Doctor Registration"
+
+    values = {
+            "doctor_name":doctor_name,
+            "doctor_email":doctor_email,
+            "doctor_department":doctor_department,
+            "doctor_hospital":doctor_hospital,
+            "doctor_specialization":doctor_specialization,
+        }
+
+    html_message = render_to_string('hospital_admin/accept-doctor-mail.html', {'values': values})
+    plain_message = strip_tags(html_message)
+
+    try:
+        send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [doctor_email], html_message=html_message, fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
+
+    
     return redirect('admin-dashboard')
 
 @login_required(login_url='admin-login')
@@ -704,6 +739,32 @@ def reject_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     doctor.register_status = 'Rejected'
     doctor.save()
+    
+    # Mailtrap
+    doctor_name = doctor.name
+    doctor_email = doctor.email
+    doctor_department = doctor.department_name.hospital_department_name
+    doctor_hospital = doctor.hospital_name.name
+    doctor_specialization = doctor.specialization.specialization_name
+
+    subject = "Rejection of Doctor Registration"
+
+    values = {
+            "doctor_name":doctor_name,
+            "doctor_email":doctor_email,
+            "doctor_department":doctor_department,
+            "doctor_hospital":doctor_hospital,
+            "doctor_specialization":doctor_specialization,
+        }
+
+    html_message = render_to_string('hospital_admin/reject-doctor-mail.html', {'values': values})
+    plain_message = strip_tags(html_message)
+
+    try:
+        send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [doctor_email], html_message=html_message, fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
+    
     return redirect('admin-dashboard')
 
 
