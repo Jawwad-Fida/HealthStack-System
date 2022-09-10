@@ -87,7 +87,7 @@ def admin_dashboard(request):
         context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     elif request.user.is_labworker:
-        messages.error(request, 'You are not authorized to access this page')
+        # messages.error(request, 'You are not authorized to access this page')
         return redirect('labworker-dashboard')
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
 
@@ -297,81 +297,68 @@ def add_hospital(request):
 #     return render(request, 'hospital_admin/edit-hospital.html')
 @login_required(login_url='admin-login')
 def edit_hospital(request, pk):
-         if  request.user.is_hospital_admin:
-             user = Admin_Information.objects.get(user=request.user)
+    if  request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        hospital = Hospital_Information.objects.get(hospital_id=pk)
+        old_featured_image = hospital.featured_image
 
-             hospital = Hospital_Information.objects.get(hospital_id=pk)
+        if request.method == 'GET':
+            specializations = specialization.objects.filter(hospital=hospital)
+            services = service.objects.filter(hospital=hospital)
+            departments = hospital_department.objects.filter(hospital=hospital)
+            context = {'hospital': hospital, 'specializations': specializations, 'services': services,'departments':departments, 'admin': user}
+            return render(request, 'hospital_admin/edit-hospital.html',context)
 
-             old_featured_image = hospital.featured_image
+        elif request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = old_featured_image
+                               
+            hospital_name = request.POST.get('hospital_name')
+            address = request.POST.get('address')
+            description = request.POST.get('description')
+            email = request.POST.get('email')
+            phone_number = request.POST.get('phone_number') 
+            hospital_type = request.POST.get('type')
+            
+            specialization_name = request.POST.getlist('specialization')
+            department_name = request.POST.getlist('department')
+            service_name = request.POST.getlist('service')
 
-             if request.method == 'GET':
-                    
-                    specializations =specialization.objects.filter(hospital=hospital)
-                    services=service.objects.filter(hospital=hospital)
-                    departments =hospital_department.objects.filter(hospital=hospital)
+            hospital.name = hospital_name
+            hospital.description = description
+            hospital.address = address
+            hospital.email = email
+            hospital.phone_number =phone_number
+            hospital.featured_image =featured_image 
+            hospital.hospital_type =hospital_type
+            
+            # specializations.specialization_name=specialization_name
+            # services.service_name = service_name
+            # departments.hospital_department_name = department_name 
 
-                    context = {'hospital': hospital, 'specializations': specializations, 'services': services,'departments':departments} 
-                    return render(request, 'hospital_admin/edit-hospital.html',context)
+            hospital.save()
 
-             elif request.method == 'POST':
-                if 'featured_image' in request.FILES:
-                    featured_image = request.FILES['featured_image']
-                else:
-                    featured_image = old_featured_image
-                    
-                                
-                    hospital_name = request.POST.get('hospital_name')
-                    address = request.POST.get('address')
-                    description = request.POST.get('description')
-                    email = request.POST.get('email')
-                    phone_number = request.POST.get('phone_number') 
-                    hospital_type = request.POST.get('type')
-                    specialization_name = request.POST.getlist('specialization')
-                    department_name = request.POST.getlist('department')
-                    service_name = request.POST.getlist('service')
+            # Specialization
+            for i in range(len(specialization_name)):
+                specializations = specialization(hospital=hospital)
+                specializations.specialization_name = specialization_name[i]
+                specializations.save()
 
-                    hospital.name = hospital_name
-                    hospital.description = description
-                    hospital.address = address
-                    hospital.email = email
-                    hospital.phone_number =phone_number
-                    hospital.featured_image =featured_image 
-                    hospital.hospital_type =hospital_type
-                    
-                    # specializations.specialization_name=specialization_name
-                    # services.service_name = service_name
-                    # departments.hospital_department_name = department_name 
+            # Experience
+            for i in range(len(service_name)):
+                services = service(hospital=hospital)
+                services.service_name = service_name[i]
+                services.save()
+                
+            for i in range(len(department_name)):
+                departments = hospital_department(hospital=hospital)
+                departments.hospital_department_name = department_name[i]
+                departments.save()
 
-                    hospital.save()
+            return redirect('hospital-list')
 
-                    # Specialization
-                    for i in range(len(specialization_name)):
-                        specializations = specialization(hospital=hospital)
-                        specializations.specialization_name = specialization_name[i]
-                        
-                        specializations.save()
-
-                    # Experience
-                    for i in range(len(service_name)):
-                        services = service(hospital=hospital)
-                        services.service_name = service_name[i]
-                        services.save()
-                    for i in range(len(department_name)):
-                        departments = hospital_department(hospital=hospital)
-                        departments.department_name = department_name[i]
-                        departments.save()
-
-
-
-
-
-                    # specializations.save()
-                    # services.save()
-                    # departments.save()
-                    return redirect('hospital-list')
-
-             context = { 'admin': user,'hospital':hospital,'departments':departments,'specializations':specializations,'services':services}
-             return render(request, 'hospital_admin/edit-hospital.html',context)
 
 @login_required(login_url='admin-login')
 def edit_emergency_information(request, pk):
@@ -800,7 +787,7 @@ def edit_department(request,pk):
             context = {'department': department}
             return render(request, 'hospital_admin/edit-hospital.html',context)
 
-
+@login_required(login_url='admin-login')
 def labworker_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:

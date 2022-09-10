@@ -423,12 +423,13 @@ def booking(request, pk):
 def my_patients(request):
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
-        patients = Patient.objects.all()
+        appointments = Appointment.objects.filter(doctor=doctor)
+        # patients = Patient.objects.all()
     else:
         redirect('doctor-logout')
     
     
-    context = {'doctor': doctor, 'patients': patients}
+    context = {'doctor': doctor, 'appointments': appointments}
     return render(request, 'my-patients.html', context)
 
 
