@@ -34,8 +34,6 @@ class Payment(models.Model):
     card_issuer = models.CharField(max_length=255, null=True, blank=True)
     card_brand = models.CharField(max_length=255, null=True, blank=True)
     
-    # API Payment type --> appointment, test, medicine, etc
-    api_payment_type = models.CharField(max_length=200, null=True, blank=True)
 
     # String representation of object
     def __str__(self):
