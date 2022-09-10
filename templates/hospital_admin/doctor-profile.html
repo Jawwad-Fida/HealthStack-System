@@ -127,7 +127,7 @@
 											<h4 class="doc-name">Dr. {{doctor.name}}</h4>
 											<p class="doc-speciality">{{doctor.department_name.hospital_department_name}}</p>
 											<h4 class="doc-hospital">{{doctor.hospital_name}}</h4>
-											<p class="doc-department"><img src="{% static 'HealthStack-System/images/Normal/obgyn.png' %}" class="img-fluid" alt="Speciality">{{doctor.specialization.specialization_name}}</p>
+											<p class="doc-department">{{doctor.specialization.specialization_name}}</p>
 											<div class="rating">
 												<i class="fas fa-star filled"></i>
 												<i class="fas fa-star filled"></i>
@@ -161,10 +161,10 @@
 													</li>
 												</ul>
 											</div>
-											<div class="clinic-services">
+											{% comment %} <div class="clinic-services">
 												<span>obgyn specialist</span>
 												<span>ultra sonogram</span>
-											</div>
+											</div> {% endcomment %}
 										</div>
 									</div>
 									<div class="doc-info-right">
@@ -527,7 +527,7 @@
 									<div class="row">
 
 										<div class="col-md-6 offset-md-3 zoom">
-											<img src="{% static 'images/Certificate/Dr.Jawwad_Certificate.png' %}" alt="logo" class="img-fluid">
+											<img src="{{doctor.certificate_image.url}}" alt="logo" class="img-fluid">
 													
 										</div>
 										
