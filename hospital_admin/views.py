@@ -195,13 +195,17 @@ def transactions_list(request):
 
 @login_required(login_url='admin-login')
 def emergency_details(request):
+    user = Admin_Information.objects.get(user=request.user)
     hospitals = Hospital_Information.objects.all()
-    return render(request, 'hospital_admin/emergency.html', {'all': hospitals})
+    context = { 'admin': user, 'all': hospitals}
+    return render(request, 'hospital_admin/emergency.html', context)
 
 @login_required(login_url='admin-login')
 def hospital_list(request):
+    user = Admin_Information.objects.get(user=request.user)
     hospitals = Hospital_Information.objects.all()
-    return render(request, 'hospital_admin/hospital-list.html', {'hospitals': hospitals})
+    context = { 'admin': user, 'hospitals': hospitals}
+    return render(request, 'hospital_admin/hospital-list.html', context)
 
 @login_required(login_url='admin-login')
 def appointment_list(request):
