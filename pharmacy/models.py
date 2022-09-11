@@ -89,12 +89,13 @@ class Cart(models.Model):
     
 
 class Order(models.Model):
+    # id
     orderitems = models.ManyToManyField(Cart)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
-    paymentId = models.CharField(max_length=264, blank=True, null=True)
-    orderId = models.CharField(max_length=200, blank=True, null=True)
+    payment_status = models.CharField(max_length=200, blank=True, null=True)
+    trans_ID = models.CharField(max_length=200, blank=True, null=True)
 
     # Subtotal
     def get_totals(self):
@@ -109,3 +110,4 @@ class Order(models.Model):
         Bill = self.get_totals()+ delivery_price
         float_Bill = format(Bill, '0.2f')
         return float_Bill
+    
