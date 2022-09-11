@@ -125,7 +125,7 @@
             </p>
             <p class="d-flex">
               <span>Discount</span>
-              <span> 0.00  BDT</span>
+              <span> 0.00 BDT</span>
             </p>
             <hr>
             <p class="d-flex total-price">
@@ -135,7 +135,7 @@
           </div>
           <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to
               Checkout</a></p>
-          <p class="text-center"><a href="#" class="btn btn-primary py-3 px-4">SSLCOMMERZ Test</a></p>
+          <p class="text-center"><a href="{% url 'ssl-payment-request-medicine' pk=order.user.patient.patient_id id=order.id %}" class="btn btn-primary py-3 px-4">SSLCOMMERZ Test</a></p>
         </div>
       </div>
     </div>
