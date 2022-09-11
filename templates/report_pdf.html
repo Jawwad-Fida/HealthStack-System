@@ -3,8 +3,6 @@
 <html lang="en">
   <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->
   <head>
-    <meta charset="utf-8" />
-    <title>Report PDF</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
@@ -54,16 +52,13 @@
 
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
-		
-			
-
-			
+	
 			<!-- Page Content -->
 			<div class="content">
 				<div class="container-fluid">
 
 					<div class="row">
-                         
+						
 						<div class="col-md-7 col-lg-8">
 							<div class="invoice-content">
 								<div class="invoice-item">
@@ -92,22 +87,28 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
-												<strong class="customer-text">Doctor Information</strong>
+												<h1><strong class="customer-text">Doctor Information:</strong></h1>
 												<p class="invoice-details invoice-details-two">
-													{{report.doctor.name}} <br>
-													{{report.doctor.address}}<br>
-													{{report.doctor.email}}<br>
-                                                    {{report.doctor.phone_number}}<br>
+													<b>Name: </b>{{report.doctor.name}} <br>
+													
+													<b>Email: </b>{{report.doctor.email}} <br>
+
+													<b>Department: </b>{{report.doctor.department_name}}<br>
+
+													<b>Hospital: </b>{{report.doctor.hospital_name}}<br>
+                                                    <!-- <b>Doctor Ph: </b>{{report.doctor.phone_number}}<br> -->
 												</p>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="invoice-info invoice-info2">
-												<strong class="customer-text">Patient Information</strong>
+												<h1><strong class="customer-text">Patient Information:</strong></h1>
 												<p class="invoice-details">
-													{{report.patient.name}}<br>
-													{{report.patient.email}} <br>
-													{{report.patient.phone_number}}<br>
+													<b>Name: </b>{{report.patient.name}}<br>
+													<b>Age: </b>{{report.patient.age}}<br>
+													<b>Blood Group: </b>{{report.patient.blood_group}}<br>
+													<b>Email: </b>{{report.patient.email}} <br>
+													<b>Phone: </b>{{report.patient.phone_number}}<br>
 												</p>
 											</div>
 										</div>
@@ -117,15 +118,16 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
-													<thead>
-														<tr>
+												<table class="invoice-table table table-bordered" style="border: 1px dashed black">
+													
+														<tr style="background-color:rgb(84, 147, 199);vertical-align: center;height: 50px;">
 															<th>Specimen Information</th>
 															<th class="text-center">Specimen ID</th>
 															<th class="text-center">Collection Date/Time</th>
 															<th class="text-center">Receiving Date/Time</th>
 														</tr>
-                                          				 <tr>
+													
+                                          				 <tr style="height: 30px;">
 															{% for s in specimen %}
 															<th class="text-center">{{s.specimen_type}}</th>
 															<th class="text-center">{{s.specimen_id}}</th>
@@ -134,7 +136,7 @@
 	
 														</tr>
 														{% endfor %}
-													</tbody>
+													
 												</table>
 											</div>
 										</div>
@@ -143,21 +145,21 @@
 								</div>
 
            
-                  <br>
-                  <div class="invoice-item invoice-table-wrap">
+                  				<br>
+                  				<div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
-													<thead>
-														<tr style="color:red">
+												<table class="invoice-table table table-bordered" style="border: 1px inset black">
+													
+														<tr style="background-color:skyblue;vertical-align: center;height: 50px;">
 															<th>Test Name</th>
                                      						<th class="text-center">Result</th>
 															<th class="text-center">Unit</th>
                               								<th class="text-center">Referred value</th>
 	
 														</tr>
-														<tr>
+														<tr style="height: 30px;">
 															{% for t in test %}
 														
 															<th class="text-center">{{t.test_name}}</th>
@@ -167,7 +169,7 @@
 	
 														</tr>
 														{% endfor %}
-													</tbody>
+													
 												</table>
 											</div>
 										</div>
@@ -175,7 +177,7 @@
 									</div>
 								</div>
 								<div class="other-info">
-									<h4>Other information</h4>
+									<h1>Other information:</h1>
 									<p>{{report.other_information}}</p>
                                   
 								</div>

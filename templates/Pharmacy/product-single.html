@@ -55,23 +55,52 @@
 		</div>
 	</nav>
 
-	</section>
+
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
-					<a href="#" class="image-popup"><img src="{{ medicine.featured_image.url }}" class="img-fluid"
-							alt="Medicine Picture"></a>
+					<a href="#" class="image-popup"><img src="{{ medicines.featured_image.url }}" class="img-fluid"
+							alt="Medicine Picture" style="height:400px"></a>
 				</div>
-				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3>{{ medicine.name }}</h3>
-					<p class="price"><span>{{ medicine.price }}</span></p>
-					<p>{{medicine.description }}</p>
-					<p><a href="" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
+				<div class="col-lg-6 product-details pl-md-5 ftco-animate" >
+					<h3>{{ medicines.name }}</h3>
+					<p class="price"><span>{{ medicines.price }} BDT</span></p>
+					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. 
+					   It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+					</p>
+					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. 
+						It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+					</p>
+
+					<p>{{medicines.description }}</p>
+
+					<div class="w-100"></div>
+					<div class="input-group col-md-6 d-flex mb-3">
+						<span class="input-group-btn mr-2" style="bordeR: 1px solid #ffc107 !important;">
+							<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+								<i class="icon-minus"></i>
+							</button>
+						</span>
+						<input style="bordeR: 1px solid #ffc107 !important; height: 56px !important;" type="text" id="quantity" name="quantity" class="form-control input-number" value="1"
+							min="1" max="100">
+						<span class="input-group-btn ml-2" style="bordeR: 1px solid #817b68 !important;">
+							<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+								<i class="icon-plus"></i>
+							</button>
+						</span>
+					</div>
+					  
+					<p><a href="{% url 'add-to-cart' pk=medicines.serial_number %}" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
 				</div>
 			</div>
 		</div>
 	</section>
+
+
+
+
+	
 	<footer class="ftco-footer ftco-section img">
 		<div class="overlay"></div>
 		<div class="container">

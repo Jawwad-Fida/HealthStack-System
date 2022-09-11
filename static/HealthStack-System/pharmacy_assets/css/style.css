@@ -7995,8 +7995,8 @@ h1, h2, h3, h4, h5,
 .product-details button, .product-details .form-control {
   height: 54px !important;
   text-align: center;
-  bordeR: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: #c49b63 !important;
+  bordeR: 1px solid #ffc107 !important;
+  color: #ffc107 !important;
   padding: 10px 20px; }
 
 .product-details .form-group {

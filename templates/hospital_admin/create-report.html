@@ -79,6 +79,7 @@
 									<!-- Profile Settings Form -->
                                     <form action="#" method="POST" enctype="multipart/form-data">
                                     {% csrf_token %}
+                                    
                                     <div class="row form-row">
                                       <div class="col-12 col-md-12">
                                         <div class="form-group">
@@ -301,6 +302,13 @@
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
 		
+    <script>
+			var x = document.getElementById('CredentialCheck');
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			}
+			$('#CredentialCheck').delay(4000).fadeOut('slow');     
+		</script>
 		
 	</body>
 

@@ -27,8 +27,9 @@ def pharmacy_single_product(request,pk):
          
         patient = Patient.objects.get(user=request.user)
         medicines = Medicine.objects.get(serial_number=pk)
+        carts = Cart.objects.filter(user=request.user, purchased=False)
         
-        context = {'patient': patient, 'medicines': medicines}
+        context = {'patient': patient, 'medicines': medicines, 'carts': carts}
         return render(request, 'pharmacy/product-single.html',context)
      else:
         logout(request)

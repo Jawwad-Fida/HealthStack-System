@@ -492,7 +492,7 @@ def create_report(request, pk):
                 tests.save()
                 
 
-            return redirect('register-doctor-list')
+            return redirect('labworker-dashboard')
 
         context = {'doctors': doctors,'lab_workers':lab_workers}
         return render(request, 'hospital_admin/create-report.html',context)
