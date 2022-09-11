@@ -88,7 +88,7 @@
                           <img src="{{ medicine.featured_image.url }}" Style="height:300px;" class="img-fluid" alt="User Image"/>
                         </a>
                         <div class="text">
-                          <h3><a href="{% url 'pharmacy-single-product' %}">{{medicine.name}}</a></h3>
+                          <h3><a href="{% url 'product-single' pk=medicine.serial_number %}">{{medicine.name}}</a></h3>
                           
                           <p class="price"><span>{{medicine.price}} BDT</span></p>
                           <p><a href="{% url 'shop' pk=medicine.serial_number %}" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
@@ -98,13 +98,13 @@
                     {% endfor %}
                   </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                <!-- <div class="tab-pane fade" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-2-tab">
                   <div class="row">
                     <div class="col-md-4 text-center">
                       <div class="menu-wrap">
                         <a href="#" class="menu-img img mb-4" style="background-image: url(images/drink-1.jpg);"></a>
                         <div class="text">
-                          <h3><a href="{% url 'pharmacy-single-product' %}">Lemonade Juice</a></h3>
+                          <h3><a href=""">Lemonade Juice</a></h3>
                           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.
                           </p>
                           <p class="price"><span>$2.90</span></p>
@@ -113,14 +113,14 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-3-tab">
+                </div> -->
+                <!-- <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-3-tab">
                   <div class="row">
                     <div class="col-md-4 text-center">
                       <div class="menu-wrap">
                         <a href="#" class="menu-img img mb-4" style="background-image: url(images/dessert-1.jpg);"></a>
                         <div class="text">
-                          <h3><a href="{% url 'pharmacy-single-product' %}">Hot Cake Honey</a></h3>
+                          <h3><a href="{">Hot Cake Honey</a></h3>
                           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.
                           </p>
                           <p class="price"><span>$2.90</span></p>
@@ -132,7 +132,7 @@
                       <div class="menu-wrap">
                         <a href="#" class="menu-img img mb-4" style="background-image: url(images/dessert-2.jpg);"></a>
                         <div class="text">
-                          <h3><a href="{% url 'pharmacy-single-product' %}">Hot Cake Honey</a></h3>
+                          <h3><a href="">Hot Cake Honey</a></h3>
                           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.
                           </p>
                           <p class="price"><span>$2.90</span></p>
@@ -141,7 +141,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
