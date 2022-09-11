@@ -85,18 +85,21 @@
                     </td>
                     <td class="price">{{ cart.item.price }} BDT</td>
                     <td>
-                      <div class="input-group col-md-4 d-flex mb-3">
+                      <div class="input-group col-md-6 d-flex mb-3">
                         <span class="input-group-btn mr-2">
-                          <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                          <a href="{% url 'decrease-item' pk=cart.item.pk %}"><button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
                             <i class="icon-minus"></i>
                           </button>
+                          </a>
                         </span>
-                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1"
+                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="{{ cart.quantity }}"
                           min="1" max="100">
                         <span class="input-group-btn ml-2">
-                          <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                          <a class="mr-2" href="{% url 'increase-item' pk=cart.item.pk %}">
+                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
                             <i class="icon-plus"></i>
-                          </button>
+                            </button>
+                          </a>
                         </span>
                       </div>
                     </td>

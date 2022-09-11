@@ -22,8 +22,19 @@ from pharmacy.models import Medicine, Cart, Order
 # function to return views for the urls
 
 @login_required(login_url="login")
-def pharmacy_single_product(request):
-    return render(request, 'pharmacy/product-single.html')
+def pharmacy_single_product(request,pk):
+     if request.user.is_authenticated and request.user.is_patient:
+         
+        patient = Patient.objects.get(user=request.user)
+        medicines = Medicine.objects.get(serial_number=pk)
+        
+        context = {'patient': patient, 'medicines': medicines}
+        return render(request, 'pharmacy/product-single.html',context)
+     else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')  
+
 
 @login_required(login_url="login")
 def pharmacy_shop(request):
@@ -121,6 +132,7 @@ def cart_view(request):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
 
+@login_required(login_url="login")
 def remove_from_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
          
@@ -145,7 +157,7 @@ def remove_from_cart(request, pk):
                 return render(request, 'pharmacy/shop.html', context)
         else:
             messages.info(request, "You don't have an active order")
-            rcontext = {'patient': patient,'medicines': medicines}
+            context = {'patient': patient,'medicines': medicines}
             return render(request, 'pharmacy/shop.html', context)
     else:
         logout(request)
@@ -153,4 +165,74 @@ def remove_from_cart(request, pk):
         return render(request, 'patient-login.html') 
 
 
+
+@login_required(login_url="login")
+def increase_cart(request, pk):
+    if request.user.is_authenticated and request.user.is_patient:
+         
+        patient = Patient.objects.get(user=request.user)
+        medicines = Medicine.objects.all()
+        carts = Cart.objects.filter(user=request.user, purchased=False)
+        item = get_object_or_404(Medicine, pk=pk)
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            if order.orderitems.filter(item=item).exists():
+                order_item = Cart.objects.filter(item=item, user=request.user, purchased=False)[0]
+                if order_item.quantity >= 1:
+                    order_item.quantity += 1
+                    order_item.save()
+                    messages.info(request, f"{item.name} quantity has been updated")
+                    context = {'carts': carts,'order': order}
+                    return render(request, 'Pharmacy/cart.html', context)
+            else:
+                messages.info(request, f"{item.name} is not in your cart")
+                context = {'patient': patient,'medicines': medicines}
+                return render(request, 'pharmacy/shop.html', context)
+        else:
+            messages.info(request, "You don't have an active order")
+            context = {'patient': patient,'medicines': medicines}
+            return render(request, 'pharmacy/shop.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html') 
+
+@login_required(login_url="login")
+def decrease_cart(request, pk):
+    if request.user.is_authenticated and request.user.is_patient:
+         
+        patient = Patient.objects.get(user=request.user)
+        medicines = Medicine.objects.all()
+        carts = Cart.objects.filter(user=request.user, purchased=False)
+        item = get_object_or_404(Medicine, pk=pk)
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            if order.orderitems.filter(item=item).exists():
+                order_item = Cart.objects.filter(item=item, user=request.user, purchased=False)[0]
+                if order_item.quantity > 1:
+                    order_item.quantity -= 1
+                    order_item.save()
+                    messages.info(request, f"{item.name} quantity has been updated")
+                    context = {'carts': carts,'order': order}
+                    return render(request, 'Pharmacy/cart.html', context)
+                else:
+                    order.orderitems.remove(order_item)
+                    order_item.delete()
+                    messages.warning(request, f"{item.name} item has been removed from your cart")
+                    context = {'carts': carts,'order': order}
+                    return render(request, 'Pharmacy/cart.html', context)
+            else:
+                messages.info(request, f"{item.name} is not in your cart")
+                context = {'patient': patient,'medicines': medicines}
+                return render(request, 'pharmacy/shop.html', context)
+        else:
+            messages.info(request, "You don't have an active order")
+            context = {'patient': patient,'medicines': medicines}
+            return render(request, 'pharmacy/shop.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html') 
 # Create your views here.
