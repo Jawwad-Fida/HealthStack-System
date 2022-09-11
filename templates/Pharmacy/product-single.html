@@ -55,23 +55,28 @@
 		</div>
 	</nav>
 
-	</section>
+
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mb-5 ftco-animate">
-					<a href="#" class="image-popup"><img src="{{ medicine.featured_image.url }}" class="img-fluid"
+					<a href="#" class="image-popup"><img src="{{ medicines.featured_image.url }}" class="img-fluid"
 							alt="Medicine Picture"></a>
 				</div>
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3>{{ medicine.name }}</h3>
-					<p class="price"><span>{{ medicine.price }}</span></p>
-					<p>{{medicine.description }}</p>
-					<p><a href="" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
+					<h3>{{ medicines.name }}</h3>
+					<p class="price"><span>{{ medicines.price }}</span></p>
+					<p>{{medicines.description }}</p>
+					<p><a href="{% url 'add-to-cart' pk=medicines.serial_number %}" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
 				</div>
 			</div>
 		</div>
 	</section>
+
+
+
+
+	
 	<footer class="ftco-footer ftco-section img">
 		<div class="overlay"></div>
 		<div class="container">
