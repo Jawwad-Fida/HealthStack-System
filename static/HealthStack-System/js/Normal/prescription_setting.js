@@ -25,19 +25,19 @@ Version      : 1.0
 							'<input type="text" name="medicine_name" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-2">' +
+					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Quantity</label>' +
 							'<input type="text" name="quantity" class="form-control">' +
 						'</div>' +
 					'</div>' +
-                    '<div class="col-12 col-md-6 col-lg-2">' +
+                    '<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Days</label>' +
 							'<input type="text" name="days" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-2">' +
+					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Time</label>' +
 							'<input type="text" name="time" class="form-control">' +
