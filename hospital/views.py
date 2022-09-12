@@ -587,7 +587,7 @@ def prescription_view(request):
     #     current_date = datetime.date.today()
 
         # context = {'patient':patient, 'current_date' : current_date, 'prescription':prescription,'prescription_test':prescription_test,'perscription_medicine':perscription_medicine}
-        return render(request, 'prescription-view.html')
+    return render(request, 'prescription-view.html')
     #  else:
     #     redirect('logout') 
 
