@@ -450,12 +450,7 @@ def patient_profile(request, pk):
 
 
 
-# def add_report(request):
-#     return render(request, 'add-report.html')
 
-@login_required(login_url="doctor-login")
-def prescription_view(request):
-    return render(request, 'prescription-view.html')
 
 @login_required(login_url="doctor-login")
 def create_prescription(request,pk):
