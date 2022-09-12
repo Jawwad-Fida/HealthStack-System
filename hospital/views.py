@@ -47,7 +47,7 @@ import re
 
 
 def hospital_home(request):
-    doctors = Doctor_Information.objects.all() 
+    doctors = Doctor_Information.objects.filter(register_status='Accepted')
     context = {'doctors': doctors} 
     return render(request, 'index-2.html', context)
 
@@ -291,7 +291,7 @@ def search(request):
         # patient = Patient.objects.get(user_id=pk)
         
         patient = Patient.objects.get(user=request.user)
-        doctors = Doctor_Information.objects.all()
+        doctors = Doctor_Information.objects.filter(register_status='Accepted')
         
         doctors, search_query = searchDoctors(request)
         # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
@@ -571,4 +571,7 @@ def view_report(request,pk):
     else:
         redirect('logout') 
 
+
+def test_cart(request):
+    return render(request, 'test-cart.html')
 

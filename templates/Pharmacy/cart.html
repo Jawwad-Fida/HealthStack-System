@@ -68,7 +68,6 @@
               <thead class="thead-primary">
                 <tr class="text-center">
                   <th>&nbsp;</th>
-                  <th>&nbsp;</th>
                   <th>Product</th>
                   <th>Price</th>
                   <th>Quantity</th>
@@ -76,42 +75,37 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="text-center">
-                  <td class="product-remove"><a href="#"><span class="icon-close"></span></a></td>
-                  <td class="image-prod">
-                    <div class="img" ><img src="{{ medicine.featured_image.url }}" Style="height:300px;" class="img-fluid" alt="User Image"/></div>
-                  </td>
-                  <td class="product-name">
-                    <h3>Creamy Latte Coffee</h3>
-                    <p>Far far away, behind the word mountains, far from the countries</p>
-                  </td>
-                  <td class="price">$4.90</td>
-                  <td class="quantity">
-                    <div class="input-group mb-3">
-                      <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1"
-                        max="100">
-                    </div>
-                  </td>
-                  <td class="total">$4.90</td>
-                </tr>
-                <tr class="text-center">
-                  <td class="product-remove"><a href="#"><span class="icon-close"></span></a></td>
-                  <td class="image-prod">
-                    <div class="img" style="background-image:url(images/dish-2.jpg);"></div>
-                  </td>
-                  <td class="product-name">
-                    <h3>Grilled Ribs Beef</h3>
-                    <p>Far far away, behind the word mountains, far from the countries</p>
-                  </td>
-                  <td class="price">$15.70</td>
-                  <td class="quantity">
-                    <div class="input-group mb-3">
-                      <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1"
-                        max="100">
-                    </div>
-                  </td>
-                  <td class="total">$15.70</td>
-                </tr>
+              {% for cart in carts %} 
+                  <tr class="text-center">
+                    <td class="product-remove"><a href="{% url 'remove-item' pk=cart.item.pk  %}"><span class="icon-close"></span></a></td>
+                    
+                    <td class="product-name">
+                      <h3>{{ cart.item.name }}</h3>
+                      <p>{{ cart.item.description}}</p>
+                    </td>
+                    <td class="price">{{ cart.item.price }} BDT</td>
+                    <td>
+                      <div class="input-group col-md-6 d-flex mb-3">
+                        <span class="input-group-btn mr-2">
+                          <a href="{% url 'decrease-item' pk=cart.item.pk %}"><button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                            <i class="icon-minus"></i>
+                          </button>
+                          </a>
+                        </span>
+                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="{{ cart.quantity }}"
+                          min="1" max="100">
+                        <span class="input-group-btn ml-2">
+                          <a class="mr-2" href="{% url 'increase-item' pk=cart.item.pk %}">
+                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                            <i class="icon-plus"></i>
+                            </button>
+                          </a>
+                        </span>
+                      </div>
+                    </td>
+                    <td class="total">{{ cart.get_total }} BDT</td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -123,24 +117,25 @@
             <h3>Cart Totals</h3>
             <p class="d-flex">
               <span>Subtotal</span>
-              <span>$20.60</span>
+              <span>{{ order.get_totals | floatformat:2 }} BDT</span>
             </p>
             <p class="d-flex">
               <span>Delivery</span>
-              <span>$0.00</span>
+              <span> 40.00 BDT</span>
             </p>
             <p class="d-flex">
               <span>Discount</span>
-              <span>$3.00</span>
+              <span> 0.00 BDT</span>
             </p>
             <hr>
             <p class="d-flex total-price">
               <span>Total</span>
-              <span>$17.60</span>
+              <span>{{ order.final_bill | floatformat:2 }} BDT</span>
             </p>
           </div>
           <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to
               Checkout</a></p>
+          <p class="text-center"><a href="{% url 'ssl-payment-request-medicine' pk=order.user.patient.patient_id id=order.id %}" class="btn btn-primary py-3 px-4">SSLCOMMERZ Test</a></p>
         </div>
       </div>
     </div>

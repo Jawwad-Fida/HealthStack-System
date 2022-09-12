@@ -13,7 +13,7 @@ def searchDoctors(request):
         
     #skills = Skill.objects.filter(name__icontains=search_query)
     
-    doctors = Doctor_Information.objects.distinct().filter(
+    doctors = Doctor_Information.objects.filter(register_status='Accepted').distinct().filter(
         Q(name__icontains=search_query) |
         Q(hospital_name__name__icontains=search_query) |  
         Q(department__icontains=search_query))

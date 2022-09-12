@@ -31,29 +31,17 @@
 	
 
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"
-    />
-
+    <link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}"> 
+		
     <!-- Fontawesome CSS -->
-    <link
-      rel="stylesheet"
-      href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}"
-    />
-<!-- Fontawesome CSS -->
-<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
-   
-<!-- Feathericon CSS -->
-    <link
-      rel="stylesheet"
-      href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}"
-    />
+    <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+    
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
 
-    <link
-      rel="stylesheet"
-      href="{% static 'HealthStack-System/plugins/admin/morris/morris.css'%}"
-    />
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
+
 
     <!-- Main CSS -->
     <link
@@ -96,10 +84,71 @@
 					</div>
 					<!-- /Page Header -->
 
+                    <div class="row">
+                        <div class="col-md-12 d-flex">
+						
+							<!-- Feed Activity -->
+							<div class="card  card-table flex-fill">
+								<div class="card-header">
+									<h4 class="card-title">Doctor List</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>													
+													<th>Doctor Id</th>
+                          <th>Doctor Name</th>
+													<th>Phone</th>
+													<th>Email</th>
+                          <th>Status</th>													
+												</tr>
+											</thead>
+											<tbody>
+                     {% for doctor in doctor%}
+												<tr>
+                          <td>{{doctor.doctor_id}}</td>
+
+													<td>
+														<h2 class="table-avatar">
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
+															<a href="#">{{doctor.name}}</a>
+														</h2>
+													</td>
+                          
+													<td>{{doctor.phone_number}}</td>
+													<td>{{doctor.email}}</td>
+													
+                          <td>
+                            <div class="table-action">
+                              <a
+                                href="{% url 'create-report' pk=doctor.doctor_id %}"
+                                class="btn btn-outline-info btn-rounded" 
+                                >
+                                <i class="fas fa-file-alt"></i> Create Report 
+                              </a>
+                
+                              </div>
+                          </td>
+												</tr>
+                      {% endfor %}
+												
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Feed Activity -->
+							
+						</div>
+                    </div>
+
+
           
           
-        </div>
-      </div>
+                </div>
+            </div>
       <!-- /Page Wrapper -->
     </div>
     <!-- /Main Wrapper -->

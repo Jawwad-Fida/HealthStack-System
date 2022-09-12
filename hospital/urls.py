@@ -49,6 +49,8 @@ urlpatterns = [
     path('hospital-doctor-register/<int:pk>/', views.hospital_doctor_register, name='hospital-doctor-register'),
     path('view-report/<int:pk>', views.view_report, name='view-report'),
 
+    path('test-cart/', views.test_cart, name='test-cart'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

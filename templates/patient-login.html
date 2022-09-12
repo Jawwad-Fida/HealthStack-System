@@ -76,7 +76,7 @@
                     <div class="login-header">
                       <h3>
                         Login <span>Patient</span>
-                        <a href="{% url 'doctor-login' %}">Are you a Doctor?</a>
+                        <a href="{% url 'doctor-login' %}" style="text-decoration: none;">Are you a Doctor?</a>
                       </h3>
                     </div>
 
@@ -106,15 +106,16 @@
                       <div class="form-floating mt-3 mb-3">
                         <input type="password" class="form-control" name='password' id="myInput" placeholder="Password"> 
                         <label for="floatingInput">Password</label>
-                        <input type="checkbox" onclick="myFunction11()">Show Password
+
+                        <input type="checkbox" class="mt-2" onclick="myFunction11()">Show Password
                         
                       </div>
                       
 
                       <div class="text-right">
                         <a
-                          class="forgot-link"
-                          href="{% url 'forgot-password-patient' %}"
+                          class="forgot-link" style="text-decoration: none;"
+                          href="{% url 'forgot-password-patient' %}" style="text-decoration: none;"
                           >Forgot Password ?</a
                         >
                       </div>
@@ -142,7 +143,10 @@
                       </div> -->
                       <div class="text-center dont-have">
                         Don't have an account?
-                        <a href="{% url 'patient-register' %}">Register</a>
+                        <a href="{% url 'patient-register' %}" style="text-decoration: none;">Register</a>
+                        <br>
+                        <b>Want to login as 
+                        <a href="{% url 'admin-login' %}" style="color: skyblue;text-decoration: none;"> Admin? </a></b>
                       </div>
                     </form>
                   </div>

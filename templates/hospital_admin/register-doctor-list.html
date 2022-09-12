@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@Rafnarok335 
-Jawwad-Fida
-/
-HealthStack-System
-Private
-Code
-Issues
-1
-Pull requests
-Discussions
-Actions
-Projects
-Wiki
-Security
-Insights
-HealthStack-System/templates/hospital_admin/register-doctor-list.html
-@PrantoPodder98
-PrantoPodder98 merge conflict solved
-Latest commit b04f98f 1 hour ago
- History
- 1 contributor
-158 lines (128 sloc)  5.39 KB
-
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
@@ -107,10 +77,10 @@ Latest commit b04f98f 1 hour ago
 													<th>Department</th>
 													<th>Hospital</th>
 													<th>View profile</th>
-													<th>Report</th>
+
 													</tr>
 													<tbody>
-														{% for doctor in all%}
+														{% for doctor in doctors %}
 														<tr>
 															<td>
 																<h2 class="table-avatar">
@@ -135,17 +105,7 @@ Latest commit b04f98f 1 hour ago
 																  </div>
 															</td>
 
-															<td>
-																<div class="table-action">
-																	<a
-																	  href="{% url 'create-report' pk=doctor.doctor_id %}"
-																	  class="btn btn-outline-info btn-rounded" 
-																		>
-																		<i class="fas fa-file-alt"></i> Create Report 
-																	</a>
-										
-																  </div>
-															</td> 
+
 														</tr>
 														{% endfor %}
 													</tbody>

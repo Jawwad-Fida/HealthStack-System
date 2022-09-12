@@ -7,8 +7,7 @@ Version      : 1.0
 (function($) {
     "use strict";
 	
-	
-	// Deapartments Add More
+	// Departments Add More
 	
     $(".department-info").on('click','.trash', function () {
 		$(this).closest('.department-cont').remove();
@@ -26,7 +25,7 @@ Version      : 1.0
 					'<input type="text" name="department" class="form-control">' +
 				'</div>' +
 			'</div>' +
-			'<div class="col-12 col-md-2 col-lg-1">' +
+			'<div class="col-md-2 col-lg-1">' +
 				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
 				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
 			'</div>' +
@@ -54,7 +53,7 @@ Version      : 1.0
 					'<input type="text" name="service" class="form-control">' +
 				'</div>' +
 			'</div>' +
-			'<div class="col-12 col-md-2 col-lg-1">' +
+			'<div class="col-md-2 col-lg-1">' +
 				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
 				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
 			'</div>' +
@@ -82,7 +81,7 @@ Version      : 1.0
 					'<input type="text" name="specialization" class="form-control">' +
 				'</div>' +
 			'</div>' +
-			'<div class="col-12 col-md-2 col-lg-1">' +
+			'<div class="col-md-2 col-lg-1">' +
 				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
 				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
 			'</div>' +
@@ -92,8 +91,36 @@ Version      : 1.0
         return false;
     });
 	
-
+	// Registration Add More
 	
-   
+    $(".registrations-info").on('click','.trash', function () {
+		$(this).closest('.reg-cont').remove();
+		return false;
+    });
+
+    $(".add-reg").on('click', function () {
+
+        var regcontent = '<div class="row form-row reg-cont">' +
+			'<div class="col-12 col-md-5">' +
+				'<div class="form-group">' +
+					'<label>Registrations</label>' +
+					'<input type="text" class="form-control">' +
+				'</div>' +
+			'</div>' +
+			'<div class="col-12 col-md-5">' +
+				'<div class="form-group">' +
+					'<label>Year</label>' +
+					'<input type="text" class="form-control">' +
+				'</div>' +
+			'</div>' +
+			'<div class="col-12 col-md-2">' +
+				'<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
+				'<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
+			'</div>' +
+		'</div>';
+		
+        $(".registrations-info").append(regcontent);
+        return false;
+    });
 	
 })(jQuery);

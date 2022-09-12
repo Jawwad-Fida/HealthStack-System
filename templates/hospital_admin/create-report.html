@@ -34,22 +34,16 @@
 		<![endif]-->
     </head>
     <body>
-	
-		<!-- Main Wrapper -->
-        <div class="main-wrapper">
-			    <header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
-				<!-- Logo -->
-
-            
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <!-- Header -->
+			<header class="header">{% include 'hospital_admin/labworker-navbar.html' %}</header>            
 			<!-- /Header -->
 			
 			<!-- Sidebar -->
-			  <aside class="sidebar" id="sidebar">
-				  {% include 'hospital_admin/hospital-admin-sidebar.html' %} 
-        </aside>
+			<aside class="sidebar" id="sidebar">
+				{% include 'hospital_admin/labworker-sidebar.html' %} </aside>
 			<!-- /Sidebar -->
-			
-			<!-- Page Wrapper -->
 			
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
@@ -85,6 +79,7 @@
 									<!-- Profile Settings Form -->
                                     <form action="#" method="POST" enctype="multipart/form-data">
                                     {% csrf_token %}
+                                    
                                     <div class="row form-row">
                                       <div class="col-12 col-md-12">
                                         <div class="form-group">
@@ -125,21 +120,21 @@
                               <div class="col-12 col-md-10 col-lg-11">
                                 <div class="row form-row">
                                   
-                                  <div class="col-12 col-md-6 col-lg-3">
+                                  <div class="col-12 col-md-6 col-lg-4">
                                       <div class="form-group">
                                           <label> Specimen Type</label>
                                           <input type="text" class="form-control" name="specimen_type" id="specimen_type">
                                       </div> 
                                   </div>
 
-                                  <div class="col-12 col-md-6 col-lg-3">
+                                  <div class="col-12 col-md-6 col-lg-4">
                                       <div class="form-group">
                                           <label>Collection Date</label>
                                           <input type="date" class="form-control" name="collection_date" id="collection_date">
                                       </div> 
                                   </div>
 
-                                  <div class="col-12 col-md-6 col-lg-3">
+                                  <div class="col-12 col-md-6 col-lg-4">
                                       <div class="form-group">
                                           <label>Receiving Date</label>
                                           <input type="date" class="form-control" name="receiving_date" id="receiving_date">
@@ -297,7 +292,8 @@
     <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js' %}"></script>
 	
 		<!-- Report Settings JS -->
-    <script src="{% static 'HealthStack-System/js/Normal/report_settings.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/report-settings.js' %}"></script>
+
 
 		<!-- Datatables JS -->
 		<script src="{% static 'HealthStack-System/plugins/admin/datatables/jquery.dataTables.min.js'%}"></script> 
@@ -306,6 +302,13 @@
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
 		
+    <script>
+			var x = document.getElementById('CredentialCheck');
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			}
+			$('#CredentialCheck').delay(4000).fadeOut('slow');     
+		</script>
 		
 	</body>
 

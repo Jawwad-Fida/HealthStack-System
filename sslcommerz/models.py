@@ -1,6 +1,7 @@
 from django.db import models
-from doctor.models import Appointment
+from doctor.models import Appointment, test_Order
 from hospital.models import Patient
+from pharmacy.models import Order
 
 # Create your models here.
 
@@ -9,9 +10,14 @@ class Payment(models.Model):
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     payment_id = models.AutoField(primary_key=True)
     invoice_number = models.CharField(max_length=255, null=True, blank=True)
+    
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
     appointment = models.ForeignKey(Appointment, on_delete=models.SET_NULL, null=True, blank=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
+    test_order = models.ForeignKey(test_Order, on_delete=models.SET_NULL, null=True, blank=True)
+    
     payment_type = models.CharField(max_length=200, null=True, blank=True)
+    
     name = models.CharField(max_length=255, null=True, blank=True)
     email = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=255, null=True, blank=True)
@@ -34,8 +40,11 @@ class Payment(models.Model):
     card_issuer = models.CharField(max_length=255, null=True, blank=True)
     card_brand = models.CharField(max_length=255, null=True, blank=True)
     
-    # API Payment type --> appointment, test, medicine, etc
-    api_payment_type = models.CharField(max_length=200, null=True, blank=True)
+    # Pharamcy
+    # {% url 'ssl-payment-request-medicine' pk=order.user.patient.patient_id id=order.id %}
+    # order.orderitems.all.1
+    
+    
 
     # String representation of object
     def __str__(self):

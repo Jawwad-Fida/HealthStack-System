@@ -24,6 +24,11 @@ from datetime import datetime
 import datetime
 from django.views.decorators.csrf import csrf_exempt
 
+from django.core.mail import BadHeaderError, send_mail
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from django.utils.html import strip_tags
+
 
 # Create your views here.
 @login_required(login_url='admin-login')
@@ -82,7 +87,7 @@ def admin_dashboard(request):
         context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     elif request.user.is_labworker:
-        messages.error(request, 'You are not authorized to access this page')
+        # messages.error(request, 'You are not authorized to access this page')
         return redirect('labworker-dashboard')
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
 
@@ -190,13 +195,17 @@ def transactions_list(request):
 
 @login_required(login_url='admin-login')
 def emergency_details(request):
+    user = Admin_Information.objects.get(user=request.user)
     hospitals = Hospital_Information.objects.all()
-    return render(request, 'hospital_admin/emergency.html', {'all': hospitals})
+    context = { 'admin': user, 'all': hospitals}
+    return render(request, 'hospital_admin/emergency.html', context)
 
 @login_required(login_url='admin-login')
 def hospital_list(request):
+    user = Admin_Information.objects.get(user=request.user)
     hospitals = Hospital_Information.objects.all()
-    return render(request, 'hospital_admin/hospital-list.html', {'hospitals': hospitals})
+    context = { 'admin': user, 'hospitals': hospitals}
+    return render(request, 'hospital_admin/hospital-list.html', context)
 
 @login_required(login_url='admin-login')
 def appointment_list(request):
@@ -292,81 +301,79 @@ def add_hospital(request):
 #     return render(request, 'hospital_admin/edit-hospital.html')
 @login_required(login_url='admin-login')
 def edit_hospital(request, pk):
-         if  request.user.is_hospital_admin:
-             user = Admin_Information.objects.get(user=request.user)
+    if  request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        hospital = Hospital_Information.objects.get(hospital_id=pk)
+        old_featured_image = hospital.featured_image
 
-             hospital = Hospital_Information.objects.get(hospital_id=pk)
+        if request.method == 'GET':
+            specializations = specialization.objects.filter(hospital=hospital)
+            services = service.objects.filter(hospital=hospital)
+            departments = hospital_department.objects.filter(hospital=hospital)
+            context = {'hospital': hospital, 'specializations': specializations, 'services': services,'departments':departments, 'admin': user}
+            return render(request, 'hospital_admin/edit-hospital.html',context)
 
-             old_featured_image = hospital.featured_image
+        elif request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = old_featured_image
+                               
+            hospital_name = request.POST.get('hospital_name')
+            address = request.POST.get('address')
+            description = request.POST.get('description')
+            email = request.POST.get('email')
+            phone_number = request.POST.get('phone_number') 
+            hospital_type = request.POST.get('type')
+            
+            specialization_name = request.POST.getlist('specialization')
+            department_name = request.POST.getlist('department')
+            service_name = request.POST.getlist('service')
 
-             if request.method == 'GET':
-                    
-                    specializations =specialization.objects.filter(hospital=hospital)
-                    services=service.objects.filter(hospital=hospital)
-                    departments =hospital_department.objects.filter(hospital=hospital)
+            hospital.name = hospital_name
+            hospital.description = description
+            hospital.address = address
+            hospital.email = email
+            hospital.phone_number =phone_number
+            hospital.featured_image =featured_image 
+            hospital.hospital_type =hospital_type
+            
+            # specializations.specialization_name=specialization_name
+            # services.service_name = service_name
+            # departments.hospital_department_name = department_name 
 
-                    context = {'hospital': hospital, 'specializations': specializations, 'services': services,'departments':departments} 
-                    return render(request, 'hospital_admin/edit-hospital.html',context)
+            hospital.save()
 
-             elif request.method == 'POST':
-                if 'featured_image' in request.FILES:
-                    featured_image = request.FILES['featured_image']
-                else:
-                    featured_image = old_featured_image
-                    
-                                
-                    hospital_name = request.POST.get('hospital_name')
-                    address = request.POST.get('address')
-                    description = request.POST.get('description')
-                    email = request.POST.get('email')
-                    phone_number = request.POST.get('phone_number') 
-                    hospital_type = request.POST.get('type')
-                    specialization_name = request.POST.getlist('specialization')
-                    department_name = request.POST.getlist('department')
-                    service_name = request.POST.getlist('service')
+            # Specialization
+            for i in range(len(specialization_name)):
+                specializations = specialization(hospital=hospital)
+                specializations.specialization_name = specialization_name[i]
+                specializations.save()
 
-                    hospital.name = hospital_name
-                    hospital.description = description
-                    hospital.address = address
-                    hospital.email = email
-                    hospital.phone_number =phone_number
-                    hospital.featured_image =featured_image 
-                    hospital.hospital_type =hospital_type
-                    
-                    # specializations.specialization_name=specialization_name
-                    # services.service_name = service_name
-                    # departments.hospital_department_name = department_name 
+            # Experience
+            for i in range(len(service_name)):
+                services = service(hospital=hospital)
+                services.service_name = service_name[i]
+                services.save()
+                
+            for i in range(len(department_name)):
+                departments = hospital_department(hospital=hospital)
+                departments.hospital_department_name = department_name[i]
+                departments.save()
 
-                    hospital.save()
+            return redirect('hospital-list')
 
-                    # Specialization
-                    for i in range(len(specialization_name)):
-                        specializations = specialization(hospital=hospital)
-                        specializations.specialization_name = specialization_name[i]
-                        
-                        specializations.save()
+@login_required(login_url="admin-login")
+def delete_specialization(request, pk, pk2):
+    specializations = specialization.objects.get(specialization_id=pk)
+    specializations.delete()
+    return redirect('edit-hospital', pk2)
 
-                    # Experience
-                    for i in range(len(service_name)):
-                        services = service(hospital=hospital)
-                        services.service_name = service_name[i]
-                        services.save()
-                    for i in range(len(department_name)):
-                        departments = hospital_department(hospital=hospital)
-                        departments.department_name = department_name[i]
-                        departments.save()
-
-
-
-
-
-                    # specializations.save()
-                    # services.save()
-                    # departments.save()
-                    return redirect('hospital-list')
-
-             context = { 'admin': user,'hospital':hospital,'departments':departments,'specializations':specializations,'services':services}
-             return render(request, 'hospital_admin/edit-hospital.html',context)
+@login_required(login_url="admin-login")
+def delete_service(request, pk, pk2):
+    services = service.objects.get(service_id=pk)
+    services.delete()
+    return redirect('edit-hospital', pk2)
 
 @login_required(login_url='admin-login')
 def edit_emergency_information(request, pk):
@@ -435,10 +442,10 @@ def generate_random_specimen():
     string_var = "#INV-" + string_var
     return string_var
 
-@login_required(login_url='admin-login')
+# @login_required(login_url='admin-login')
 def create_report(request, pk):
-    if request.user.is_hospital_admin:
-        user = Admin_Information.objects.get(user=request.user)
+    if request.user.is_labworker:
+        lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
         doctors =Doctor_Information.objects.get(doctor_id=pk)
 
         if request.method == 'POST':
@@ -485,9 +492,9 @@ def create_report(request, pk):
                 tests.save()
                 
 
-            return redirect('register-doctor-list')
+            return redirect('labworker-dashboard')
 
-        context = {'doctors': doctors, 'admin': user}
+        context = {'doctors': doctors,'lab_workers':lab_workers}
         return render(request, 'hospital_admin/create-report.html',context)
 
 @login_required(login_url='admin-login')
@@ -672,8 +679,8 @@ def department_image_list(request,pk):
 def register_doctor_list(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
-    doctors = Doctor_Information.objects.filter(register_status='Accepted')
-    return render(request, 'hospital_admin/register-doctor-list.html', {'all': doctors, 'admin': user})
+        doctors = Doctor_Information.objects.filter(register_status='Accepted')
+    return render(request, 'hospital_admin/register-doctor-list.html', {'doctors': doctors, 'admin': user})
 
 @login_required(login_url='admin-login')
 def pending_doctor_list(request):
@@ -686,9 +693,10 @@ def pending_doctor_list(request):
 def admin_doctor_profile(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     admin = Admin_Information.objects.get(user=request.user)
-    experience= Experience.objects.filter(doctor_id=pk)
-    education = Education.objects.filter(doctor_id=pk)
-    context = {'doctor': doctor, 'admin': admin, 'experience': experience, 'education': education}
+    experience= Experience.objects.filter(doctor_id=pk).order_by('-from_year','-to_year')
+    education = Education.objects.filter(doctor_id=pk).order_by('-year_of_completion')
+    
+    context = {'doctor': doctor, 'admin': admin, 'experiences': experience, 'educations': education}
     return render(request, 'hospital_admin/doctor-profile.html',context)
 
 @login_required(login_url='admin-login')
@@ -696,6 +704,36 @@ def accept_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     doctor.register_status = 'Accepted'
     doctor.save()
+    
+    experience= Experience.objects.filter(doctor_id=pk)
+    education = Education.objects.filter(doctor_id=pk)
+    
+    # Mailtrap
+    doctor_name = doctor.name
+    doctor_email = doctor.email
+    doctor_department = doctor.department_name.hospital_department_name
+    doctor_hospital = doctor.hospital_name.name
+    doctor_specialization = doctor.specialization.specialization_name
+
+    subject = "Acceptance of Doctor Registration"
+
+    values = {
+            "doctor_name":doctor_name,
+            "doctor_email":doctor_email,
+            "doctor_department":doctor_department,
+            "doctor_hospital":doctor_hospital,
+            "doctor_specialization":doctor_specialization,
+        }
+
+    html_message = render_to_string('hospital_admin/accept-doctor-mail.html', {'values': values})
+    plain_message = strip_tags(html_message)
+
+    try:
+        send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [doctor_email], html_message=html_message, fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
+
+    
     return redirect('admin-dashboard')
 
 @login_required(login_url='admin-login')
@@ -703,6 +741,32 @@ def reject_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     doctor.register_status = 'Rejected'
     doctor.save()
+    
+    # Mailtrap
+    doctor_name = doctor.name
+    doctor_email = doctor.email
+    doctor_department = doctor.department_name.hospital_department_name
+    doctor_hospital = doctor.hospital_name.name
+    doctor_specialization = doctor.specialization.specialization_name
+
+    subject = "Rejection of Doctor Registration"
+
+    values = {
+            "doctor_name":doctor_name,
+            "doctor_email":doctor_email,
+            "doctor_department":doctor_department,
+            "doctor_hospital":doctor_hospital,
+            "doctor_specialization":doctor_specialization,
+        }
+
+    html_message = render_to_string('hospital_admin/reject-doctor-mail.html', {'values': values})
+    plain_message = strip_tags(html_message)
+
+    try:
+        send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [doctor_email], html_message=html_message, fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
+    
     return redirect('admin-dashboard')
 
 
@@ -738,12 +802,15 @@ def edit_department(request,pk):
             context = {'department': department}
             return render(request, 'hospital_admin/edit-hospital.html',context)
 
-
+@login_required(login_url='admin-login')
 def labworker_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
             
-            return render(request, 'hospital_admin/labworker-dashboard.html')
+            lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
+            doctor = Doctor_Information.objects.all()
+            context = {'doctor': doctor,'lab_workers':lab_workers}
+            return render(request, 'hospital_admin/labworker-dashboard.html',context)
 
 
 

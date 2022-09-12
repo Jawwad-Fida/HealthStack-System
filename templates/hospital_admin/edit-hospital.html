@@ -79,7 +79,7 @@
 				<div class="call-content-full">
 					<div class="container-lg">
 						<div class="row-cols-6">
-							<div class="col-md-6 col-lg-6">
+							<div class="col-md-6 col-lg-7">
 								<div class="card">
 									<div class="card-body">
 
@@ -99,7 +99,7 @@
 											enctype="multipart/form-data">
 											{% csrf_token %}
 											<div >
-												<div class="col-12 col-md-6 col-lg-6">
+												<div class="col-12 col-md-6 col-lg-8">
 													<div class="form-group">
 														<div class="change-avatar">
 															<div class="upload-img">
@@ -246,16 +246,15 @@
 																		<div class="form-group">
 																			<label>Add New Departments</label>
 																			<input type="text" class="form-control"
-																				name="department"
 																				value={{department.hospital_department_name}}>
 																		</div>
 																	</div>
-																	<div class="col-md-2 col-lg-1">
+																	{% comment %} <div class="col-md-2 col-lg-1">
 																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																		<a href="#" class="btn btn-danger trash">
+																		<a href="#" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
 																		  <i class="far fa-trash-alt"></i>
 																		</a>
-																	</div>
+																	</div> {% endcomment %}
 																</div>
 															{% endfor %}
 																
@@ -277,13 +276,12 @@
 																		<div class="form-group">
 																			<label>Add New Services</label>
 																			<input type="text" class="form-control"
-																				name="service"
 																				value="{{service.service_name}}">
 																		</div>
 																	</div>
 																	<div class="col-md-2 col-lg-1">
 																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																		<a href="#" class="btn btn-danger trash">
+																		<a href="{% url 'delete-service' pk=service.service_id pk2=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
 																		  <i class="far fa-trash-alt"></i>
 																		</a>
 																	</div>
@@ -309,13 +307,12 @@
 																		<div class="form-group">
 																			<label>Add New Specialization</label>
 																			<input type="text" class="form-control"
-																				name="specialization"
 																				value="{{specialization.specialization_name}}">
 																		</div>
 																	</div>
 																	<div class="col-md-2 col-lg-1">
 																		<label class="d-md-block d-sm-none d-none">&nbsp;</label>
-																		<a href="#" class="btn btn-danger trash">
+																		<a href="{% url 'delete-specialization' pk=specialization.specialization_id pk2=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
 																		  <i class="far fa-trash-alt"></i>
 																		</a>
 																	</div>
@@ -341,8 +338,7 @@
 																		<div class="form-group">
 																			
 																			<textarea type="text" rows="5" class="form-control"
-																				name="description"
-																				placeholder="{{hospital.description}}"></textarea>
+																				name="description">{{hospital.description}}</textarea>
 																		</div>
 																	</div>
 
@@ -401,7 +397,8 @@
 	<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
 
 	<!-- add js -->
-	<script src="{% static 'HealthStack-System/js/Normal/edit-hospital.js' %}"></script>
+	<!-- <script src="{% static 'HealthStack-System/js/Normal/edit-hospital.js' %}"></script> -->
+	<script src="{% static 'HealthStack-System/js/Normal/edit_hospital.js' %}"></script>
 
 </body>
 

@@ -196,7 +196,11 @@
 														{% endfor %}
 													</tbody>
 												</table>
+
+                       
+
                         
+
 											</div>
 										</div>
 										
@@ -210,17 +214,22 @@
 								<div class="other-info">
 									<h4 style="background-color: rgb(84, 147, 199);">Other information</h4>
 									<p>{{report.other_information}}</p>
+                  
 
                   <button class="btn btn-sm bg-primary-light"> <a target="_blank" href="{% url 'pdf' pk=report.report_id %}" > Download Report </a></button>
                   {% endfor %}
+
+                  
 								</div>
 								<!-- /Invoice Information -->
-								
+							  
 							</div>
+        
 						</div>
 					</div>
 
 				</div>
+        
 
 			</div>		
 			<!-- /Page Content -->
