@@ -19,7 +19,7 @@ Version      : 1.0
 		var medicinecontent = '<div class="row form-row medicine-cont">' +
 			'<div class="col-12 col-md-10 col-lg-11">' +
 				'<div class="row form-row">' +
-					'<div class="col-12 col-md-6 col-sm-3">' +
+					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Medicine Name</label>' +
 							'<input type="text" name="medicine_name" class="form-control">' +
@@ -43,13 +43,13 @@ Version      : 1.0
 							'<input type="text" name="relation_with_meal" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-3">' +
+					'<div class="col-12 col-md-6 col-lg-6">' +
 						'<div class="form-group">' +
 							'<label>Duration</label>' +
 							'<input type="text" name="duration" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-3">' +
+					'<div class="col-12 col-md-6 col-lg-6">' +
 						'<div class="form-group">' +
 							'<label>Instruction</label>' +
 							'<input type="text" name="instruction" class="form-control">' +

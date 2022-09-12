@@ -4,6 +4,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+# from .pdf import prescription_pdf
 
 # from . --> same directory
 # Views functions and urls must be linked. # of views == # of urls
@@ -48,8 +49,11 @@ urlpatterns = [
 
     path('hospital-doctor-register/<int:pk>/', views.hospital_doctor_register, name='hospital-doctor-register'),
     path('view-report/<int:pk>', views.view_report, name='view-report'),
+    
 
-    path('test-cart/', views.test_cart, name='test-cart'),
+    path('test-cart/<int:pk>', views.test_cart, name='test-cart'),
+    path('prescription-view/', views.prescription_view, name='prescription-view'),
+    # path('pdf/<int:pk>/',views.prescription_pdf, name='pdf')
 
     path('test-single/<int:pk>/', views.test_single, name='test-single'),
     # path('shop/', views.pharmacy_shop, name='pharmacy_shop'),
