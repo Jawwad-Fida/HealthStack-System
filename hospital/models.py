@@ -85,4 +85,3 @@ class Patient(models.Model):
         return str(self.user.username)
     
 
-
