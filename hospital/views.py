@@ -7,8 +7,8 @@ import doctor
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm
-from hospital.models import Hospital_Information, User, Patient, test_Cart, test_Order
-from doctor.models import Test
+from hospital.models import Hospital_Information, User, Patient 
+from doctor.models import Test, test_Cart, test_Order
 
 from hospital_admin.models import hospital_department, specialization, service
 
@@ -579,7 +579,7 @@ def test_cart(request):
 # test cart system
 
 @login_required(login_url="login")
-def test_single_product(request,pk):
+def test_single(request,pk):
      if request.user.is_authenticated and request.user.is_patient:
          
         patient = Patient.objects.get(user=request.user)

@@ -56,7 +56,7 @@ urlpatterns = [
     # path('cart/', views.cart_view, name='cart'),
     path('test-remove-cart/<int:pk>/', views.test_remove_cart, name='test-remove-cart'),
     path('test-checkout/', views.test_checkout, name='test-checkout'),
-    path('test-list/', views.test_list, name='test-list'),
+    # path('test-list/', views.test_list, name='test-list'),
     path('test-add-to-cart/<int:pk>', views.test_add_to_cart, name='test-add-to-cart'),
 
 ]
