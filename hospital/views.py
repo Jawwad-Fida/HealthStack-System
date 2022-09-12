@@ -35,7 +35,8 @@ from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 # from django.dispatch import receiver
 
 from .models import Patient, User
-from doctor.models import Doctor_Information, Appointment,Report, Specimen,Test
+
+from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Perscription_medicine, Perscription_test
 
 from sslcommerz.models import Payment
 from django.db.models import Q, Count
@@ -574,4 +575,20 @@ def view_report(request,pk):
 
 def test_cart(request):
     return render(request, 'test-cart.html')
+
+
+def prescription_view(request):
+    #  if request.user.is_patient:
+    #     patient = Patient.objects.get(user=request.user)
+    #     prescription = Prescription.objects.filter(prescription_id=pk)
+    #     perscription_medicine = Perscription_medicine.objects.filter(prescription__in=prescription)
+    #     prescription_test = Perscription_test.objects.filter(prescription__in=prescription)
+
+    #     current_date = datetime.date.today()
+
+        # context = {'patient':patient, 'current_date' : current_date, 'prescription':prescription,'prescription_test':prescription_test,'perscription_medicine':perscription_medicine}
+        return render(request, 'prescription-view.html')
+    #  else:
+    #     redirect('logout') 
+
 
