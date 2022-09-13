@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
-from .models import Doctor_Information, Appointment, Education, Experience, Perscription_medicine, Report,Specimen,Test, Perscription_test, Prescription
+from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription
 
 from django.db.models import Q, Count
 
@@ -475,7 +475,7 @@ def create_prescription(request,pk):
                 prescription.save()
 
                 for i in range(len(medicine_name)):
-                    medicine = Perscription_medicine(prescription=prescription)
+                    medicine = Prescription_medicine(prescription=prescription)
                     medicine.medicine_name = medicine_name[i]
                     medicine.quantity = medicine_quantity[i]
                     medicine.frequency = medecine_frequency[i]
@@ -485,7 +485,7 @@ def create_prescription(request,pk):
                     medicine.save()
 
                 for i in range(len(test_name)):
-                    tests = Perscription_test(prescription=prescription)
+                    tests = Prescription_test(prescription=prescription)
                     tests.test_name = test_name[i]
                     tests.test_description = test_description[i]
                     tests.save()

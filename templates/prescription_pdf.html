@@ -109,9 +109,6 @@
 									</div>
 								</div>
 								<!-- /Invoice Item -->
-								
-								
-								
 								<!-- Invoice Item -->
 								<div class="invoice-item invoice-table-wrap">
 									<div class="row">
@@ -123,15 +120,15 @@
 														
 														
 															<th>Medicine Name</th>
-															<th class="text-center">Quantity</th>
-															<th class="text-center">Frequency</th>
-															<th class="text-center">Duration</th>
-															<th class="text-center">Relation with meal</th>
-															<th class="text-center">Instruction</th>
+															<th>Quantity</th>
+															<th>Frequency</th>
+															<th>Duration</th>
+															<th>Relation with meal</th>
+															<th>Instruction</th>
 															
 															
 														</tr>
-														{% for pm in perscription_medicine %}
+														{% for pm in prescription_medicine %}
 														<tr>
 															<th class="text-center">{{pm.medicine_name}}</td>
 															<td class="text-center">{{pm.quantity}}</td>
@@ -157,20 +154,16 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
+												<table class="invoice-table table table-bordered" style="border: 1px dashed black">
 													
-														<tr style="background-color:skyblue;vertical-align: center;height: 50px;">
+														<tr style="background-color: rgb(84, 147, 199);">
 															<th>Test Name</th>
-															<th class="text-center">Description</th>
+															<th>Description</th>
 														</tr>
-													
-													
 														{% for pt in prescription_test %}
-														<tr>
-															
+														<tr>		
 															<td class="text-center">{{pt.test_name}}</td>
-															<td class="text-center">{{pt.test_description}}</td>
-															
+															<td class="text-center">{{pt.test_description}}</td>		
 														</tr>
 														{% endfor %}
 													
@@ -180,33 +173,22 @@
 										
 									</div>
 								</div>
-								<!-- /Invoice Item -->
-                                
-								
-								<!-- Invoice Information -->
-								<!-- <div class="other-info">
-									<h4>Extra Notes</h4>
-									<p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
-								</div> -->
+
 								<div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
 												<table class="invoice-table table table-bordered">
 													<thead>
-														<tr>
-															<th>Advice/Recommendation</th>
-						
-															
+														<tr style="background-color: rgb(84, 147, 199);">
+															<th> Advice/Recommendation</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
-															<td>{{prescription.extra_information}}</td>
-												
-															
+															<td class="text-center">{{prescription.extra_information}}</td>
 														</tr>
-											
+														
 													</tbody>
 												</table>
 											</div>

@@ -192,7 +192,7 @@ class Prescription(models.Model):
     def __str__(self):
         return str(self.patient.username)
 
-class Perscription_medicine(models.Model):
+class Prescription_medicine(models.Model):
     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE, null=True, blank=True)
     medicine_id = models.AutoField(primary_key=True)
     medicine_name = models.CharField(max_length=200, null=True, blank=True)
@@ -205,7 +205,7 @@ class Perscription_medicine(models.Model):
     def __str__(self):
         return str(self.prescription.prescription_id)
 
-class Perscription_test(models.Model):
+class Prescription_test(models.Model):
     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE, null=True, blank=True)
     test_id = models.AutoField(primary_key=True)
     test_name = models.CharField(max_length=200, null=True, blank=True)
