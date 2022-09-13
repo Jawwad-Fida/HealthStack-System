@@ -102,8 +102,8 @@ def edit_prescription(request):
     return render(request, 'edit-prescription.html')
 
 
-def forgot_password_patient(request):
-    return render(request, 'forgot-password-patient.html')
+def forgot_password(request):
+    return render(request, 'forgot-password.html')
 
 
 def privacy_policy(request):
@@ -112,10 +112,6 @@ def privacy_policy(request):
 
 def about_us(request):
     return render(request, 'about-us.html')
-
-
-def forgot_password_doctor(request):
-    return render(request, 'forgot-password-doctor.html')
 
 
 # def multiple_hospital(request):
