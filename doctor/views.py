@@ -11,8 +11,7 @@ from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
-from .models import Doctor_Information, Appointment, Education, Experience, Perscription_medicine, Report,Specimen,Test, Perscription_test, Prescription, Test_Info
-from .uitls import searchPatients
+from .models import Doctor_Information, Appointment, Education, Experience, Perscription_medicine, Report,Specimen,Test, Perscription_test, Prescription
 
 from django.db.models import Q, Count
 
@@ -457,40 +456,43 @@ def create_prescription(request,pk):
         if request.user.is_doctor:
             doctor = Doctor_Information.objects.get(user=request.user)
             patient = Patient.objects.get(patient_id=pk) 
-            test=Test_Info.objects.all()
             
-        if request.method == 'POST':
-            prescription = Prescription(doctor=doctor, patient=patient)
+            if request.method == 'POST':
+                prescription = Prescription(doctor=doctor, patient=patient)
+                
+                test_name= request.POST.getlist('test_name')
+                test_description = request.POST.getlist('description')
+                medicine_name = request.POST.getlist('medicine_name')
+                medicine_quantity = request.POST.getlist('quantity')
+                medecine_frequency = request.POST.getlist('frequency')
+                medicine_duration = request.POST.getlist('duration')
+                medicine_relation_with_meal = request.POST.getlist('relation_with_meal')
+                medicine_instruction = request.POST.getlist('instruction')
+                extra_information = request.POST.get('extra_information')
+
             
-            test_id_selected = request.POST.get('test_radio')
-            medicine_name = request.POST.getlist('medicine_name')
-            medicine_quantity = request.POST.getlist('quantity')
-            medecine_frequency = request.POST.getlist('frequency')
-            medicine_duration = request.POST.getlist('duration')
-            medicine_relation_with_meal = request.POST.getlist('relation_with_meal')
-            medicine_instruction = request.POST.getlist('instruction')
-            extra_information = request.POST.get('extra_information')
+                prescription.extra_information = extra_information
+                prescription.save()
 
-            test_info =  Test_Info.objects.get(test_id=test_id_selected)
-            prescription.test_name = test_info
-            prescription.extra_information = extra_information
-            prescription.save()
+                for i in range(len(medicine_name)):
+                    medicine = Perscription_medicine(prescription=prescription)
+                    medicine.medicine_name = medicine_name[i]
+                    medicine.quantity = medicine_quantity[i]
+                    medicine.frequency = medecine_frequency[i]
+                    medicine.duration = medicine_duration[i]
+                    medicine.instruction = medicine_instruction[i]
+                    medicine.relation_with_meal = medicine_relation_with_meal[i]
+                    medicine.save()
 
-            for i in range(len(medicine_name)):
-                medicine = Perscription_medicine(prescription=prescription)
-                medicine.medicine_name = medicine_name[i]
-                medicine.quantity = medicine_quantity[i]
-                medicine.frequency = medecine_frequency[i]
-                medicine.duration = medicine_duration[i]
-                medicine.instruction = medicine_instruction[i]
-                medicine.relation_with_meal = medicine_relation_with_meal[i]
-                medicine.save()
+                for i in range(len(test_name)):
+                    tests = Perscription_test(prescription=prescription)
+                    tests.test_name = test_name[i]
+                    tests.test_description = test_description[i]
+                    tests.save()
 
-           
-         
-
-            redirect('doctor-logout')
-        context = {'doctor': doctor,'patient': patient,'test': test}  
+                return redirect('patient-profile', pk=patient.patient_id)
+             
+        context = {'doctor': doctor,'patient': patient}  
         return render(request, 'create-prescription.html',context)
 
        
@@ -556,30 +558,8 @@ def patient_search(request, pk):
         return render(request, 'doctor-login.html')
 
 
-def add_test(request):
-    if request.user.is_labworker:
-        lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
-
-    if request.method == 'POST':
-        tests=Test_Info()
-        test_name = request.POST['test_name']
-        description = request.POST['description']
-        tests.test_name = test_name
-        tests.test_description = description
-        tests.save()
-
-        return redirect('test-list')
-        
-    context = {'lab_workers': lab_workers}
-    return render(request, 'add-test.html', context)
 
 
-def test_list(request):
-    if request.user.is_labworker:
-        lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
-        test = Test_Info.objects.all()
-        context = {'test':test,'lab_workers':lab_workers}
-    return render(request, 'test-list.html',context)
 
 
 
