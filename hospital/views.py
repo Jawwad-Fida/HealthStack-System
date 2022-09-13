@@ -36,7 +36,7 @@ from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 
 from .models import Patient, User
 
-from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Perscription_medicine, Perscription_test
+from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Prescription_medicine, Prescription_test
 
 from sslcommerz.models import Payment
 from django.db.models import Q, Count
@@ -49,7 +49,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-from doctor.models import  Prescription,Perscription_medicine,Perscription_test
+from doctor.models import  Prescription,Prescription_medicine,Prescription_test
 from hospital.models import Patient
 from datetime import datetime
 
@@ -591,10 +591,10 @@ def prescription_view(request,pk):
       if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
         prescription = Prescription.objects.filter(prescription_id=pk)
-        perscription_medicine = Perscription_medicine.objects.filter(prescription__in=prescription)
-        prescription_test = Perscription_test.objects.filter(prescription__in=prescription)
+        prescription_medicine = Prescription_medicine.objects.filter(prescription__in=prescription)
+        prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
 
-        context = {'patient':patient,'prescription':prescription,'prescription_test':prescription_test,'perscription_medicine':perscription_medicine}
+        context = {'patient':patient,'prescription':prescription,'prescription_test':prescription_test,'prescription_medicine':prescription_medicine}
         return render(request, 'prescription-view.html',context)
       else:
          redirect('logout') 
@@ -616,10 +616,10 @@ def prescription_pdf(request,pk):
  if request.user.is_patient:
     patient = Patient.objects.get(user=request.user)
     prescription = Prescription.objects.get(prescription_id=pk)
-    perscription_medicine = Perscription_medicine.objects.filter(prescription=prescription)
-    perscription_test = Perscription_test.objects.filter(prescription=prescription)
+    prescription_medicine = Prescription_medicine.objects.filter(prescription=prescription)
+    prescription_test = Prescription_test.objects.filter(prescription=prescription)
     # current_date = datetime.date.today()
-    context={'patient':patient,'prescription':prescription,'perscription_test':perscription_test,'perscription_medicine':perscription_medicine}
+    context={'patient':patient,'prescription':prescription,'prescription_test':prescription_test,'prescription_medicine':prescription_medicine}
     pres_pdf=render_to_pdf('prescription_pdf.html', context)
     if pres_pdf:
         response=HttpResponse(pres_pdf, content_type='application/pres_pdf')
