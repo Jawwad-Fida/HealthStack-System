@@ -25,7 +25,7 @@ import datetime
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-
+from doctor.models import Prescription
 
 
 from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
@@ -35,11 +35,24 @@ from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 # from django.dispatch import receiver
 
 from .models import Patient, User
-from doctor.models import Doctor_Information, Appointment,Report, Specimen,Test
+
+from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Perscription_medicine, Perscription_test
 
 from sslcommerz.models import Payment
 from django.db.models import Q, Count
 import re
+
+from io import BytesIO
+from urllib import response
+from django.shortcuts import render
+
+from django.http import HttpResponse
+
+
+from doctor.models import  Prescription,Perscription_medicine,Perscription_test
+from hospital.models import Patient
+from datetime import datetime
+
 
 # Create your views here.
 
@@ -89,8 +102,8 @@ def edit_prescription(request):
     return render(request, 'edit-prescription.html')
 
 
-def forgot_password_patient(request):
-    return render(request, 'forgot-password-patient.html')
+def forgot_password(request):
+    return render(request, 'forgot-password.html')
 
 
 def privacy_policy(request):
@@ -99,10 +112,6 @@ def privacy_policy(request):
 
 def about_us(request):
     return render(request, 'about-us.html')
-
-
-def forgot_password_doctor(request):
-    return render(request, 'forgot-password-doctor.html')
 
 
 # def multiple_hospital(request):
@@ -213,12 +222,13 @@ def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
         report = Report.objects.filter(patient=patient)
+        prescription = Prescription.objects.filter(patient=patient)
         # patient = Patient.objects.get(user_id=pk)
         # appointments = Appointment.objects.filter(patient=patient)
         appointments = Appointment.objects.filter(patient=patient).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
         payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
 
-        context = {'patient': patient, 'appointments': appointments, 'payments': payments,'report':report}
+        context = {'patient': patient, 'appointments': appointments, 'payments': payments,'report':report,'prescription':prescription}
     else:
         return redirect('logout')
         
@@ -564,9 +574,9 @@ def view_report(request,pk):
         specimen = Specimen.objects.filter(report__in=report)
         test = Test.objects.filter(report__in=report)
 
-        current_date = datetime.date.today()
+        # current_date = datetime.date.today()
 
-        context = {'patient':patient,'current_date' : current_date,'report':report,'test':test,'specimen':specimen}
+        context = {'patient':patient,'report':report,'test':test,'specimen':specimen}
         return render(request, 'view-report.html',context)
     else:
         redirect('logout') 
@@ -575,3 +585,45 @@ def view_report(request,pk):
 def test_cart(request):
     return render(request, 'test-cart.html')
 
+
+
+def prescription_view(request,pk):
+      if request.user.is_patient:
+        patient = Patient.objects.get(user=request.user)
+        prescription = Prescription.objects.filter(prescription_id=pk)
+        perscription_medicine = Perscription_medicine.objects.filter(prescription__in=prescription)
+        prescription_test = Perscription_test.objects.filter(prescription__in=prescription)
+
+        context = {'patient':patient,'prescription':prescription,'prescription_test':prescription_test,'perscription_medicine':perscription_medicine}
+        return render(request, 'prescription-view.html',context)
+      else:
+         redirect('logout') 
+
+
+def render_to_pdf(template_src, context_dict={}):
+    template=get_template(template_src)
+    html=template.render(context_dict)
+    result=BytesIO()
+    pres_pdf=pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pres_pdf.err:
+        return HttpResponse(result.getvalue(),content_type="aplication/pres_pdf")
+    return None
+
+
+
+
+def prescription_pdf(request,pk):
+ if request.user.is_patient:
+    patient = Patient.objects.get(user=request.user)
+    prescription = Prescription.objects.get(prescription_id=pk)
+    perscription_medicine = Perscription_medicine.objects.filter(prescription=prescription)
+    perscription_test = Perscription_test.objects.filter(prescription=prescription)
+    # current_date = datetime.date.today()
+    context={'patient':patient,'prescription':prescription,'perscription_test':perscription_test,'perscription_medicine':perscription_medicine}
+    pres_pdf=render_to_pdf('prescription_pdf.html', context)
+    if pres_pdf:
+        response=HttpResponse(pres_pdf, content_type='application/pres_pdf')
+        content="inline; filename=prescription.pdf"
+        response['Content-Disposition']= content
+        return response
+    return HttpResponse("Not Found")

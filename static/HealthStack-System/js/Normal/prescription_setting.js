@@ -25,28 +25,34 @@ Version      : 1.0
 							'<input type="text" name="medicine_name" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-2">' +
+					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
 							'<label>Quantity</label>' +
 							'<input type="text" name="quantity" class="form-control">' +
 						'</div>' +
 					'</div>' +
-                    '<div class="col-12 col-md-6 col-lg-2">' +
+                    '<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
-							'<label>Days</label>' +
-							'<input type="text" name="days" class="form-control">' +
-						'</div>' +
-					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-2">' +
-						'<div class="form-group">' +
-							'<label>Time</label>' +
-							'<input type="text" name="time" class="form-control">' +
+							'<label>Frequency</label>' +
+							'<input type="text" name="frequency" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-3">' +
 						'<div class="form-group">' +
-							'<label>Description</label>' +
-							'<input type="text" name="description" class="form-control">' +
+							'<label>Relation with meal</label>' +
+							'<input type="text" name="relation_with_meal" class="form-control">' +
+						'</div>' +
+					'</div>' +
+					'<div class="col-12 col-md-6 col-lg-6">' +
+						'<div class="form-group">' +
+							'<label>Duration</label>' +
+							'<input type="text" name="duration" class="form-control">' +
+						'</div>' +
+					'</div>' +
+					'<div class="col-12 col-md-6 col-lg-6">' +
+						'<div class="form-group">' +
+							'<label>Instruction</label>' +
+							'<input type="text" name="instruction" class="form-control">' +
 						'</div>' +
 					'</div>' +
 				'</div>' +

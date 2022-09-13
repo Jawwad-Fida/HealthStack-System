@@ -5,6 +5,8 @@ import uuid
 # import django user model
 from hospital.models import Hospital_Information, User, Patient
 from hospital_admin.models import hospital_department, specialization, service
+from django.conf import settings
+
 
 # # Create your models here.
 
@@ -180,6 +182,7 @@ class Prescription(models.Model):
     quantity = models.CharField(max_length=200, null=True, blank=True)
     days = models.CharField(max_length=200, null=True, blank=True)
     time = models.CharField(max_length=200, null=True, blank=True)
+    relation_with_meal = models.CharField(max_length=200, null=True, blank=True)
     medicine_description = models.TextField(null=True, blank=True)
 
     test_name = models.CharField(max_length=200, null=True, blank=True)
@@ -187,4 +190,66 @@ class Prescription(models.Model):
     extra_information = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.doctor.username)
+        return str(self.patient.username)
+
+class Perscription_medicine(models.Model):
+    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE, null=True, blank=True)
+    medicine_id = models.AutoField(primary_key=True)
+    medicine_name = models.CharField(max_length=200, null=True, blank=True)
+    quantity = models.CharField(max_length=200, null=True, blank=True)
+    duration = models.CharField(max_length=200, null=True, blank=True)
+    frequency = models.CharField(max_length=200, null=True, blank=True)
+    relation_with_meal = models.CharField(max_length=200, null=True, blank=True)
+    instruction = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.prescription.prescription_id)
+
+class Perscription_test(models.Model):
+    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE, null=True, blank=True)
+    test_id = models.AutoField(primary_key=True)
+    test_name = models.CharField(max_length=200, null=True, blank=True)
+    test_description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.prescription.prescription_id)
+
+# # test cart system
+class test_Cart(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='test_cart')
+    item = models.ForeignKey(Test, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    purchased = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f'{self.quantity} X {self.item}'
+
+    def get_total(self):
+        total = self.item.price * self.quantity
+        float_total = format(total, '0.2f')
+        return float_total
+
+class test_Order(models.Model):
+    # id
+    orderitems = models.ManyToManyField(test_Cart)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ordered = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    payment_status = models.CharField(max_length=200, blank=True, null=True)
+    trans_ID = models.CharField(max_length=200, blank=True, null=True)
+
+    # Subtotal
+    def get_totals(self):
+        total = 0 
+        for order_item in self.orderitems.all():
+            total += float(order_item.get_total())
+        return total
+    
+    # TOTAL
+    def final_bill(self):
+        delivery_price= 40.00
+        Bill = self.get_totals()+ delivery_price
+        float_Bill = format(Bill, '0.2f')
+        return float_Bill

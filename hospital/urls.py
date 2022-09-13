@@ -4,6 +4,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from .pres_pdf import prescription_pdf
 
 # from . --> same directory
 # Views functions and urls must be linked. # of views == # of urls
@@ -21,7 +22,7 @@ urlpatterns = [
 
     path('edit-billing/', views.edit_billing, name='edit-billing'),
     path('edit-prescription/', views.edit_prescription, name='edit-prescription'),
-    path('forgot-password-patient/', views.forgot_password_patient,name='forgot-password-patient'),
+    # path('forgot-password/', views.forgot_password,name='forgot-password'),
     path('patient-dashboard/',views.patient_dashboard, name='patient-dashboard'),
     
     path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
@@ -31,7 +32,6 @@ urlpatterns = [
     path('about-us/', views.about_us, name='about-us'),
     path('patient-register/', views.patient_register, name='patient-register'),
     path('logout/', views.logoutUser, name='logout'),
-    path('forgot-password-doctor/', views.forgot_password_doctor,name='forgot-password-doctor'),
 
     path('multiple-hospital/', views.multiple_hospital, name='multiple-hospital'),
     path('chat/<int:pk>/', views.chat, name='chat'),
@@ -48,8 +48,11 @@ urlpatterns = [
 
     path('hospital-doctor-register/<int:pk>/', views.hospital_doctor_register, name='hospital-doctor-register'),
     path('view-report/<int:pk>', views.view_report, name='view-report'),
+    
 
-    path('test-cart/', views.test_cart, name='test-cart'),
+    path('test-cart/<int:pk>', views.test_cart, name='test-cart'),
+    path('prescription-view/<int:pk>', views.prescription_view, name='prescription-view'),
+    path('pres_pdf/<int:pk>/',views.prescription_pdf, name='pres_pdf')
 
 ]
 

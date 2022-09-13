@@ -246,16 +246,30 @@
                             <table class="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
-                                  <th>Date</th>
-                                  <th>Name</th>
-                                  <th>Created by</th>
+                                  <th>Prescription ID</th>
+                                  <th>Doctor Name</th>
+
+                                  <!-- <th>Attachment</th> -->
+
+                                 
+
+                                  <th>Doctor</th>
                                   <th></th>
                                 </tr>
                               </thead>
                               <tbody>
+                                {% for prescription in prescription %}
                                 <tr>
-                                  <td>14 Nov 2019</td>
-                                  <td>Prescription 1</td>
+                                  <td>
+                                    <a href="javascript:void(0);">{{prescription.prescription_id}}</a>
+                                  </td>
+                                  <td>{{prescription.doctor.name }}</td>
+                                  
+
+                                  <!-- <td><a href="#">dental-test.pdf</a></td> -->
+
+                               
+
                                   <td>
                                     <h2 class="table-avatar">
                                       <a
@@ -264,32 +278,39 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-01.jpg' %}"
+                                          src="{{prescription.doctor.featured_image.url }}"
                                           alt="User Image"
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >Dr. Ruby Perrin <span>Dental</span></a
+                                        >{{prescription.doctor}}<span>{{prescription.doctor.department_name }}</span></a
                                       >
                                     </h2>
                                   </td>
                                   <td class="text-right">
                                     <div class="table-action">
                                       <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
+                                        href="{% url 'prescription-view' pk=prescription.prescription_id%}"
+                                        class="btn btn-sm bg-info-light"
                                       >
-                                        <i class="fas fa-print"></i> Print
+                                        <i class="far fa-eye"></i> View
                                       </a>
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i class="far fa-paypal"></i> Pay Now
+                                      </a>
+                                      <a
+                                        href="javascript:void(0);"
+                                        class="btn btn-sm bg-primary-light"
+                                      >
+                                        <i class="fas fa-print"></i> Print
                                       </a>
                                     </div>
                                   </td>
                                 </tr>
+                                {% endfor %}
                               </tbody>
                             </table>
                           </div>

@@ -10,9 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
-
-from .models import Doctor_Information, Appointment, Education, Experience, Report,Specimen,Test
-from .uitls import searchPatients
+from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
+from .models import Doctor_Information, Appointment, Education, Experience, Perscription_medicine, Report,Specimen,Test, Perscription_test, Prescription
 
 from django.db.models import Q, Count
 
@@ -450,22 +449,50 @@ def patient_profile(request, pk):
 
 
 
-# def add_report(request):
-#     return render(request, 'add-report.html')
 
-@login_required(login_url="doctor-login")
-def prescription_view(request):
-    return render(request, 'prescription-view.html')
 
 @login_required(login_url="doctor-login")
 def create_prescription(request,pk):
         if request.user.is_doctor:
             doctor = Doctor_Information.objects.get(user=request.user)
             patient = Patient.objects.get(patient_id=pk) 
-            current_date = datetime.date.today()
-        else:
-            redirect('doctor-logout')
-        context = {'doctor': doctor,'patient': patient,'current_date':current_date}  
+            
+            if request.method == 'POST':
+                prescription = Prescription(doctor=doctor, patient=patient)
+                
+                test_name= request.POST.getlist('test_name')
+                test_description = request.POST.getlist('description')
+                medicine_name = request.POST.getlist('medicine_name')
+                medicine_quantity = request.POST.getlist('quantity')
+                medecine_frequency = request.POST.getlist('frequency')
+                medicine_duration = request.POST.getlist('duration')
+                medicine_relation_with_meal = request.POST.getlist('relation_with_meal')
+                medicine_instruction = request.POST.getlist('instruction')
+                extra_information = request.POST.get('extra_information')
+
+            
+                prescription.extra_information = extra_information
+                prescription.save()
+
+                for i in range(len(medicine_name)):
+                    medicine = Perscription_medicine(prescription=prescription)
+                    medicine.medicine_name = medicine_name[i]
+                    medicine.quantity = medicine_quantity[i]
+                    medicine.frequency = medecine_frequency[i]
+                    medicine.duration = medicine_duration[i]
+                    medicine.instruction = medicine_instruction[i]
+                    medicine.relation_with_meal = medicine_relation_with_meal[i]
+                    medicine.save()
+
+                for i in range(len(test_name)):
+                    tests = Perscription_test(prescription=prescription)
+                    tests.test_name = test_name[i]
+                    tests.test_description = test_description[i]
+                    tests.save()
+
+                return redirect('patient-profile', pk=patient.patient_id)
+             
+        context = {'doctor': doctor,'patient': patient}  
         return render(request, 'create-prescription.html',context)
 
        
@@ -488,8 +515,8 @@ def report_pdf(request, pk):
     report = Report.objects.get(report_id=pk)
     specimen = Specimen.objects.filter(report=report)
     test = Test.objects.filter(report=report)
-    current_date = datetime.date.today()
-    context={'patient':patient,'current_date' : current_date,'report':report,'test':test,'specimen':specimen}
+    # current_date = datetime.date.today()
+    context={'patient':patient,'report':report,'test':test,'specimen':specimen}
     pdf=render_to_pdf('report_pdf.html', context)
     if pdf:
         response=HttpResponse(pdf, content_type='application/pdf')
@@ -529,4 +556,10 @@ def patient_search(request, pk):
         logout(request)
         messages.info(request, 'Not Authorized')
         return render(request, 'doctor-login.html')
+
+
+
+
+
+
 

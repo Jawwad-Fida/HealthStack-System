@@ -365,3 +365,6 @@ def ssl_payment_fail(request):
 @csrf_exempt
 def ssl_payment_cancel(request):
     return render(request, 'cancel.html')
+
+def payment_testing(request):
+    return render(request, 'testing.html')

@@ -24,8 +24,6 @@ urlpatterns = [
     path('schedule-timings/', views.schedule_timings, name='schedule-timings'),
     path('patient-id/', views.patient_id, name='patient-id'),
     path('create-prescription/<int:pk>/', views.create_prescription, name='create-prescription'),
-    path('prescription-view/', views.prescription_view, name='prescription-view'),
-    # path('add-report/', views.add_report, name='add-report'),
     path('patient-profile/<int:pk>/',views.patient_profile, name='patient-profile'),
     path('delete-education/<int:pk>/',views.delete_education, name='delete-education'),
     path('delete-experience/<int:pk>/',views.delete_experience, name='delete-experience'),
@@ -33,7 +31,8 @@ urlpatterns = [
     path('accept-appointment/<int:pk>/',views.accept_appointment, name='accept-appointment'),
     path('reject-appointment/<int:pk>/',views.reject_appointment, name='reject-appointment'),
     path('patient-search/<int:pk>/', views.patient_search, name='patient-search'),
-    path('pdf/<int:pk>/',views.report_pdf, name='pdf')
+    path('pdf/<int:pk>/',views.report_pdf, name='pdf'),
+
     # path('testing/',views.testing, name='testing'),
    
 
