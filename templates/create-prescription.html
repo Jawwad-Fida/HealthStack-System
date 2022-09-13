@@ -145,6 +145,8 @@
 						<!-- Prescription Item -->
             <div class="card card-table">
               <div class="card-body">
+                <form action="#" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
                   <h4 class="card-title"><b>Medicine List</b></h4>
                   <div class="medicine-info">
                       <div class="row form-row medicine-cont">
@@ -189,59 +191,40 @@
                                   <input type="text" class="form-control" name="instruction" id="instruction">
                               </div> 
                             </div>
-								
-                  </div>
-              </div>
+                          
+                            </div>
+                        </div>
 
-              <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+                        <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
 
-          </div>
-          
-          
-      </div>
-      <div class="add-more">
-          <a href="javascript:void(0);" class="add-medicine"><i class="fa fa-plus-circle"></i> Add Medicine</a>
-      </div>
-  </div>
-  </div>
-						<!-- Prescription Item -->
-						<!-- tests Item -->
+                        </div>
+                        
+                        
+                            </div>
+                            <div class="add-more">
+                                <a href="javascript:void(0);" class="add-medicine"><i class="fa fa-plus-circle"></i> Add Medicine</a>
+                            </div>
+                        </div>
+                        </div>
+                <!-- Prescription Item -->
+                <!-- tests Item -->
+
 						<div class="card card-table">
 							<div class="card-body">
-                <h4 class="card-title"><b>Test List</b></h4>
-								<div class="test-info">
-                  <div class="row form-row test-cont">
-              
-                      <div class="col-12 col-md-10 col-lg-11">
-                          <div class="row form-row">
-
-                              <div class="col-12 col-md-6 col-lg-6">
-                                  <div class="form-group">
-                                      <label>Test Name</label>
-                                      <input type="text" class="form-control" name="test_name" id="test_name">
-                                  </div> 
-                              </div>
-
-
-                              <div class="col-12 col-md-6 col-lg-6">
-                                  <div class="form-group">
-                                      <label>Description</label>
-                                      <input type="text" class="form-control" name="description" id="description">
-                                  </div> 
-                              </div>
-
-                      </div>
-                  </div>
-
-                  <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
-
-                  </div>
+                   <h4 class="card-title"><b>Test List</b></h4>                  
+                   <label class="col-form-label" style="font-size: 20px;">Choose test</label>
+                   <div class="col-md-10">
+                        {% for test in test %}
+                          <div class="radio">
+                              <label>
+                                  <input type="radio" value="{{ test.test_id }}" name="test_radio"> {{ test.test_name }}
+                              </label>
+                          </div>
+                        {% endfor %}   
+                    </div>
                 </div>
-								<div class="add-more">
-									<a href="javascript:void(0);" class="add-test"><i class="fa fa-plus-circle"></i> Add Test</a>
-								</div>
 							</div>
-						</div>
+
 						<!-- /tests Item -->
 						<!-- /extra Item -->
             <div class="card card-table">
@@ -256,7 +239,7 @@
                     <tbody>
                       <tr>
                         <td>
-                          <input class="form-control" type="text" name="other_information" id="other_information" >
+                          <input class="form-control" type="text" name="extra_information" id="extra_information" >
                         </td>
 
                       </tr>
@@ -265,7 +248,6 @@
                 </div>
               </div>
             </div>
-						<!-- /extra Item -->
 						<div class="row">
 							<div class="col-md-12">
 							  <div class="submit-section">
@@ -278,6 +260,7 @@
 						</div>
 						
           </div>
+        </form>
         </div>
       </div>
       <!-- /Page Content -->
