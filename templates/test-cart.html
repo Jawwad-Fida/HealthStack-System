@@ -117,9 +117,9 @@
                                                     </tr>
                                                   </thead>
                                                   <tbody>
-                                                  {% for cart in carts %} 
+                                                  {% for cart in test_carts %} 
                                                       <tr class="text-center">
-                                                        <td class="product-remove"><a href="{% url 'remove-item' pk=cart.item.pk  %}"><span class="icon-close"></span></a></td>
+                                                        <td class="product-remove"><a href="{% url 'test-remove-cart' pk=cart.item.pk  %}"><span class="icon-close"></span></a></td>
                                                         
                                                         <td class="product-name">
                                                           <h3>{{ cart.item.name }}</h3>

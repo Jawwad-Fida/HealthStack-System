@@ -217,7 +217,7 @@ class Perscription_test(models.Model):
 # # test cart system
 class test_Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='test_cart')
-    item = models.ForeignKey(Test, on_delete=models.CASCADE)
+    item = models.ForeignKey(Perscription_test, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     purchased = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)

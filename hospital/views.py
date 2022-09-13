@@ -8,7 +8,7 @@ import doctor
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm
 from hospital.models import Hospital_Information, User, Patient 
-from doctor.models import Test, test_Cart, test_Order
+from doctor.models import Test, test_Cart, test_Order, Perscription_test
 
 from hospital_admin.models import hospital_department, specialization, service
 
@@ -649,7 +649,7 @@ def test_add_to_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
          
         patient = Patient.objects.get(user=request.user)
-        test = Test.objects.get(test_id=pk)
+        test = Perscription_test.objects.get(test_id=pk)
         
         item = get_object_or_404(test, pk=pk)
         order_item = test_Cart.objects.get_or_create(item=item, user=request.user, purchased=False)
@@ -686,13 +686,13 @@ def cart_view(request):
     if request.user.is_authenticated and request.user.is_patient:
          
         patient = Patient.objects.get(user=request.user)
-        test = Test.objects.all()
+        test = Perscription_test.objects.all()
         
-        carts = test_Cart.objects.filter(user=request.user, purchased=False)
-        orders = test_Order.objects.filter(user=request.user, ordered=False)
-        if carts.exists() and orders.exists():
-            order = orders[0]
-            context = {'carts': carts,'order': order}
+        test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
+        test_orders = test_Order.objects.filter(user=request.user, ordered=False)
+        if test_carts.exists() and test_orders.exists():
+            test_order = test_orders[0]
+            context = {'test_carts': test_carts,'test_order': test_order}
             return render(request, 'test-cart.html', context)
         else:
             messages.warning(request, "You don't have any test in your cart!")
@@ -708,19 +708,19 @@ def test_remove_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
          
         patient = Patient.objects.get(user=request.user)
-        test = Test.objects.all()
-        carts = test_Cart.objects.filter(user=request.user, purchased=False)
+        test = Perscription_test.objects.all()
+        test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
         
         item = get_object_or_404(test, pk=pk)
-        order_qs = test_Order.objects.filter(user=request.user, ordered=False)
-        if order_qs.exists():
-            order = order_qs[0]
-            if order.orderitems.filter(item=item).exists():
-                order_item = test_Cart.objects.filter(item=item, user=request.user, purchased=False)[0]
-                order.orderitems.remove(order_item)
-                order_item.delete()
+        test_order_qs = test_Order.objects.filter(user=request.user, ordered=False)
+        if test_order_qs.exists():
+            test_order = test_order_qs[0]
+            if test_order.orderitems.filter(item=item).exists():
+                test_order_item = test_Cart.objects.filter(item=item, user=request.user, purchased=False)[0]
+                test_order.orderitems.remove(test_order_item)
+                test_order_item.delete()
                 messages.warning(request, "This test was remove from your cart!")
-                context = {'carts': carts,'order': order}
+                context = {'test_carts': test_carts,'test_order': test_order}
                 return render(request, 'test-cart.html', context)
             else:
                 messages.info(request, "This test was not in your cart")
