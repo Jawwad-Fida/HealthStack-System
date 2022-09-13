@@ -52,7 +52,7 @@ urlpatterns = [
     
 
     path('test-cart/<int:pk>', views.test_cart, name='test-cart'),
-    path('prescription-view/', views.prescription_view, name='prescription-view'),
+    path('prescription-view/<int:pk>', views.prescription_view, name='prescription-view'),
     # path('pdf/<int:pk>/',views.prescription_pdf, name='pdf')
 
 ]
