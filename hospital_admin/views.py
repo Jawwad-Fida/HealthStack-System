@@ -712,7 +712,7 @@ def accept_doctor(request,pk):
     doctor_name = doctor.name
     doctor_email = doctor.email
     doctor_department = doctor.department_name.hospital_department_name
-    doctor_hospital = doctor.hospital_name.name
+
     doctor_specialization = doctor.specialization.specialization_name
 
     subject = "Acceptance of Doctor Registration"
@@ -721,7 +721,7 @@ def accept_doctor(request,pk):
             "doctor_name":doctor_name,
             "doctor_email":doctor_email,
             "doctor_department":doctor_department,
-            "doctor_hospital":doctor_hospital,
+
             "doctor_specialization":doctor_specialization,
         }
 
