@@ -207,12 +207,22 @@ class Perscription_medicine(models.Model):
 
 class Perscription_test(models.Model):
     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE, null=True, blank=True)
+    
     test_id = models.AutoField(primary_key=True)
     test_name = models.CharField(max_length=200, null=True, blank=True)
     test_description = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.prescription.prescription_id)
+        return str(self.test_id)
+
+class Test_Info(models.Model):
+    
+    test_id = models.AutoField(primary_key=True)
+    test_name = models.CharField(max_length=200, null=True, blank=True)
+    test_description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.test_name)
 
 # # test cart system
 class test_Cart(models.Model):
