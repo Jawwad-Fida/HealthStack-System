@@ -46,3 +46,16 @@ class PatientForm(forms.ModelForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
+
+
+class PasswordResetForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['email']
+
+    # create a style for model form
+    def __init__(self, *args, **kwargs):
+        super(PasswordResetForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-group form-focus'})

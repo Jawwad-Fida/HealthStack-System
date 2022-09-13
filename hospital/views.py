@@ -2,18 +2,12 @@ import email
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-
-import doctor
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm, PatientForm
+from .forms import CustomUserCreationForm, PatientForm, PasswordResetForm
 from hospital.models import Hospital_Information, User, Patient
-
 from hospital_admin.models import hospital_department, specialization, service
-
-
 from django.views.decorators.cache import cache_control
-
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -22,20 +16,13 @@ from datetime import datetime
 import datetime
 
 
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-from doctor.models import Prescription
-
+# from doctor.models import Prescription
 
 from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
-
-
-# from django.db.models.signals import post_save, post_delete
-# from django.dispatch import receiver
-
 from .models import Patient, User
-
 from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Perscription_medicine, Perscription_test
 
 from sslcommerz.models import Payment
@@ -44,14 +31,15 @@ import re
 
 from io import BytesIO
 from urllib import response
-from django.shortcuts import render
 
-from django.http import HttpResponse
+from django.core.mail import BadHeaderError, send_mail
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
-from doctor.models import  Prescription,Perscription_medicine,Perscription_test
-from hospital.models import Patient
-from datetime import datetime
 
 
 # Create your views here.
@@ -102,8 +90,43 @@ def edit_prescription(request):
     return render(request, 'edit-prescription.html')
 
 
+# def forgot_password(request):
+#     return render(request, 'forgot-password.html')
+
 def forgot_password(request):
-    return render(request, 'forgot-password.html')
+    form = PasswordResetForm()
+
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user_email = user.email
+       
+            subject = "Password Reset Requested"
+            # email_template_name = "password_reset_email.txt"
+            values = {
+				"email":user.email,
+				'domain':'127.0.0.1:8000',
+				'site_name': 'Website',
+				"uid": urlsafe_base64_encode(force_bytes(user.pk)),
+				"user": user,
+				'token': default_token_generator.make_token(user),
+				'protocol': 'http',
+			}
+
+            
+            html_message = render_to_string('mail_template.html', {'values': values})
+            plain_message = strip_tags(html_message)
+            
+            # email = render_to_string(email_template_name, values)
+            try:
+                send_mail(subject, plain_message, 'admin@example.com',  [user.email], html_message=html_message, fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect ("password_reset_done")
+
+    context = {'form': form}
+    return render(request, 'forgot-password.html', context)
 
 
 def privacy_policy(request):
