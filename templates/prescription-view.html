@@ -97,6 +97,7 @@
 										<div class="col-md-6">
 											{% for prescription in prescription %}
 											<p class="invoice-details">
+												<strong>Prescription ID:</strong> {{prescription.prescription_id}} <br>
 												<strong>Patient ID:</strong> {{prescription.patient.patient_id}} <br>
 												<strong>Date:</strong> 20/07/2019 
 											</p>
@@ -111,10 +112,10 @@
 											<div class="invoice-info">
 												<strong class="customer-text">Doctor Information</strong>
 												<p class="invoice-details invoice-details-two">
-													{{prescription.doctor.name}} <br>
-													{{prescription.doctor.department_name}}<br>
-													{{prescription.doctor.email}} <br>
-													{{prescription.doctor.phone_number}}
+													<b>Name: </b>{{prescription.doctor.name}} <br>
+													<b>Department: </b>{{prescription.doctor.department_name}}<br>
+													<b>Email: </b>{{prescription.doctor.email}} <br>
+													<b>Phone Number: </b>{{prescription.doctor.phone_number}}
 												</p>
 											</div>
 										</div>
@@ -122,10 +123,10 @@
 											<div class="invoice-info invoice-info2">
 												<strong class="customer-text">Prescription To</strong>
 												<p class="invoice-details">
-													{{prescription.patient.name}}<br>
-													{{prescription.patient.address}}
-													{{prescription.patient.email}}<br>
-													{{prescription.patient.phone_number}}
+													<b>Name: </b>{{prescription.patient.name}}<br>
+													<b>Addtress: </b>{{prescription.patient.address}}
+													<b>Email: </b>{{prescription.patient.email}}<br>
+													<b>Phone Number: </b>{{prescription.patient.phone_number}}
 													
 												</p>
 												
@@ -156,7 +157,7 @@
 															
 															
 														</tr>
-														{% for pm in perscription_medicine %}
+														{% for pm in prescription_medicine %}
 														<tr>
 															<th class="text-center">{{pm.medicine_name}}</td>
 															<td class="text-center">{{pm.quantity}}</td>
@@ -239,6 +240,7 @@
 										</div>
 										
 										<button class="btn btn-sm bg-primary-light"> <a target="_blank" href="{% url 'pres_pdf' pk=prescription.prescription_id %}" > Download Prescription </a></button>
+										{% endfor %}
 									</div>
 								</div>
 								<!-- /Invoice Information -->
@@ -250,7 +252,7 @@
 
 				</div>
 				
-				{% endfor %}
+				
 			</div>		
 			<!-- /Page Content -->
 			
