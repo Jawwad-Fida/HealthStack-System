@@ -28,8 +28,8 @@ def report_pdf(request,pk):
     report = Report.objects.get(report_id=pk)
     specimen = Specimen.objects.filter(report=report)
     test = Test.objects.filter(report=report)
-    current_date = datetime.date.today()
-    context={'patient':patient,'current_date' : current_date,'report':report,'test':test,'specimen':specimen}
+    # current_date = datetime.date.today()
+    context={'patient':patient,'report':report,'test':test,'specimen':specimen}
     pdf=render_to_pdf('report_pdf.html', context)
     if pdf:
         response=HttpResponse(pdf, content_type='application/pdf')
