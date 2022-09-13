@@ -226,12 +226,13 @@ def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
         report = Report.objects.filter(patient=patient)
+        prescription = Prescription.objects.filter(patient=patient)
         # patient = Patient.objects.get(user_id=pk)
         # appointments = Appointment.objects.filter(patient=patient)
         appointments = Appointment.objects.filter(patient=patient).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
         payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
 
-        context = {'patient': patient, 'appointments': appointments, 'payments': payments,'report':report}
+        context = {'patient': patient, 'appointments': appointments, 'payments': payments,'report':report,'prescription':prescription}
     else:
         return redirect('logout')
         
@@ -590,19 +591,17 @@ def test_cart(request):
 
 
 
-def prescription_view(request):
-    #  if request.user.is_patient:
-    #     patient = Patient.objects.get(user=request.user)
-    #     prescription = Prescription.objects.filter(prescription_id=pk)
-    #     perscription_medicine = Perscription_medicine.objects.filter(prescription__in=prescription)
-    #     prescription_test = Perscription_test.objects.filter(prescription__in=prescription)
+def prescription_view(request,pk):
+      if request.user.is_patient:
+        patient = Patient.objects.get(user=request.user)
+        prescription = Prescription.objects.filter(prescription_id=pk)
+        perscription_medicine = Perscription_medicine.objects.filter(prescription__in=prescription)
+        prescription_test = Perscription_test.objects.filter(prescription__in=prescription)
 
-    #     current_date = datetime.date.today()
-
-        # context = {'patient':patient, 'current_date' : current_date, 'prescription':prescription,'prescription_test':prescription_test,'perscription_medicine':perscription_medicine}
-    return render(request, 'prescription-view.html')
-    #  else:
-    #     redirect('logout') 
+        context = {'patient':patient,'prescription':prescription,'prescription_test':prescription_test,'perscription_medicine':perscription_medicine}
+        return render(request, 'prescription-view.html',context)
+      else:
+         redirect('logout') 
 
 
 # def render_to_pdf(template_src, context_dict={}):
