@@ -143,6 +143,8 @@
 
 						
 						<!-- Prescription Item -->
+            <form action="#" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
             <div class="card card-table">
               <div class="card-body">
                   <h4 class="card-title"><b>Medicine List</b></h4>
@@ -256,7 +258,7 @@
                     <tbody>
                       <tr>
                         <td>
-                          <input class="form-control" type="text" name="other_information" id="other_information" >
+                          <input class="form-control" type="text" name="extra_information" id="extra_information" >
                         </td>
 
                       </tr>
@@ -265,6 +267,7 @@
                 </div>
               </div>
             </div>
+
 						<!-- /extra Item -->
 						<div class="row">
 							<div class="col-md-12">
@@ -280,6 +283,7 @@
           </div>
         </div>
       </div>
+    </form>
       <!-- /Page Content -->
 
       <!-- Footer -->

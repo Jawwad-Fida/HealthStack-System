@@ -738,6 +738,7 @@ def test_remove_cart(request, pk):
 
 
 
+
 def prescription_view(request):
     #  if request.user.is_patient:
     #     patient = Patient.objects.get(user=request.user)

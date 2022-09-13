@@ -17,3 +17,4 @@ admin.site.register(Perscription_medicine)
 admin.site.register(Perscription_test)
 admin.site.register(test_Cart)
 admin.site.register(test_Order)
+
