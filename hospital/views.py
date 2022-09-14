@@ -1,11 +1,13 @@
 import email
 from multiprocessing import context
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm, PatientForm, PasswordResetForm
-from hospital.models import Hospital_Information, User, Patient
+from .forms import CustomUserCreationForm, PatientForm
+from hospital.models import Hospital_Information, User, Patient 
+from doctor.models import Test, test_Cart, test_Order, Prescription_test
+
 from hospital_admin.models import hospital_department, specialization, service
 from django.views.decorators.cache import cache_control
 
@@ -611,6 +613,167 @@ def view_report(request,pk):
 def test_cart(request):
     return render(request, 'test-cart.html')
 
+# test cart system
+
+@login_required(login_url="login")
+def test_single(request,pk):
+     if request.user.is_authenticated and request.user.is_patient:
+         
+        patient = Patient.objects.get(user=request.user)
+        Perscription_test = Perscription_test.objects.get(test_id=pk)
+        carts = test_Cart.objects.filter(user=request.user, purchased=False)
+        
+        context = {'patient': patient, 'carts': carts, 'Perscription_test': Perscription_test}
+        return render(request, 'test-cart.html',context)
+     else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')  
+
+
+# @login_required(login_url="login")
+# def test_shop(request):
+#     if request.user.is_authenticated and request.user.is_patient:
+         
+#         patient = Patient.objects.get(user=request.user)
+#         test = Perscription_test.objects.all()
+        
+#         context = {'patient': patient, 'Perscription_test': Perscription_test}
+#         return render(request, 'prescription-view.html', context)
+    
+#     else:
+#         logout(request)
+#         messages.info(request, 'Not Authorized')
+#         return render(request, 'patient-login.html')  
+    
+# @login_required(login_url="login")
+# def test_list(request):
+#     if request.user.is_authenticated and request.user.is_patient:
+         
+#         patient = Patient.objects.get(user=request.user)
+#         test = Test.objects.all()
+        
+#         context = {'patient': patient, 'test': test}
+#         return render(request, 'pharmacy/demo-medicine-list.html', context)
+    
+#     else:
+#         logout(request)
+#         messages.info(request, 'Not Authorized')
+#         return render(request, 'patient-login.html')  
+
+
+
+# @login_required(login_url="login")
+# def test_checkout(request):
+#     return render(request, 'pharmacy/checkout.html')
+
+
+@login_required(login_url="login")
+def test_add_to_cart(request, pk):
+    if request.user.is_authenticated and request.user.is_patient:
+         
+        patient = Patient.objects.get(user=request.user)
+        prescription = Prescription.objects.filter(prescription_id=pk)
+        test = Prescription_test.objects.filter(prescription__in=prescription)
+        # test = Perscription_test.objects.get(test_id=pk)
+        # test = Prescription_test.objects.all()
+        # prescription = Prescription.objects.get(prescription_id=pk)
+        # test = Prescription_test.objects.filter(prescription=prescription)
+        # test_id = test.test_id
+        # test = Perscription_test.objects.filter(prescription__in=prescription)
+        item = get_object_or_404(test, pk=pk)
+        # item = filter(test=test)
+        # item = test.objects.filter(test=test).exists()
+        # item = test
+        
+
+        order_item = test_Cart.objects.get_or_create(item=item, user=request.user, purchased=False)
+        # order_item = test_Cart.objects.create(item=order_item, user=request.user, purchased=False)
+
+        order_qs = test_Order.objects.filter(user=request.user, ordered=False)
+
+        if order_qs.exists():
+            order = order_qs[0]
+            order.orderitems.add(order_item[0])
+            messages.info(request, "This test is added to your cart!")
+            context = {'patient': patient,'test': test}
+            return render(request, 'test-cart.html', context)
+
+        else:
+            order = test_Order(user=request.user)
+            order.save()
+            order.orderitems.add(order_item[0])
+            # messages.info(request, "This item is added to your cart!")
+            context = {'patient': patient,'test': test}
+            return render(request, 'test-cart.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')  
+
+
+@login_required(login_url="login")
+def cart_view(request):
+    if request.user.is_authenticated and request.user.is_patient:
+        # prescription = Prescription.objects.filter(prescription_id=pk)
+        
+        patient = Patient.objects.get(user=request.user)
+        prescription_test = Prescription_test.objects.all()
+        
+        test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
+        test_orders = test_Order.objects.filter(user=request.user, ordered=False)
+        if test_carts.exists() and test_orders.exists():
+            test_order = test_orders[0]
+            context = {'test_carts': test_carts,'test_order': test_order}
+            return render(request, 'test-cart.html', context)
+        else:
+            messages.warning(request, "You don't have any test in your cart!")
+            context = {'patient': patient,'prescription_test':prescription_test}
+            return render(request, 'prescription-view.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html') 
+
+@login_required(login_url="login")
+def test_remove_cart(request, pk):
+    if request.user.is_authenticated and request.user.is_patient:
+
+        # prescription = Prescription.objects.get(prescription_id=pk)
+        # test = Prescription_test.objects.filter(prescription__in=prescription)
+        item = Prescription_test.objects.get(test_id=pk)
+
+        patient = Patient.objects.get(user=request.user)
+        # prescription_test = Perscription_test.objects.all()
+        test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
+        
+        # item = get_object_or_404(test, pk=pk)
+        # item = test
+        test_order_qs = test_Order.objects.filter(user=request.user, ordered=False)
+        if test_order_qs.exists():
+            test_order = test_order_qs[0]
+            if test_order.orderitems.filter(item=item).exists():
+                test_order_item = test_Cart.objects.filter(item=item, user=request.user, purchased=False)[0]
+                test_order.orderitems.remove(test_order_item)
+                test_order_item.delete()
+                # messages.warning(request, "This test was remove from your cart!")
+                context = {'test_carts': test_carts,'test_order': test_order}
+                return render(request, 'test-cart.html', context)
+            else:
+                messages.info(request, "This test was not in your cart")
+                context = {'patient': patient,'test': item}
+                return render(request, 'test-cart.html', context)
+        else:
+            messages.info(request, "You don't have an active order")
+            context = {'patient': patient,'test': item}
+            return render(request, 'test-cart.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html') 
+
+
+
 
 
 def prescription_view(request,pk):
@@ -638,6 +801,21 @@ def render_to_pdf(template_src, context_dict={}):
 
 
 
+# def prescription_pdf(request,pk):
+#  if request.user.is_patient:
+#     patient = Patient.objects.get(user=request.user)
+#     prescription = Prescription.objects.get(prescription_id=pk)
+#     perscription_medicine = Perscription_medicine.objects.filter(prescription=prescription)
+#     perscription_test = Perscription_test.objects.filter(prescription=prescription)
+#     current_date = datetime.date.today()
+#     context={'patient':patient,'current_date' : current_date,'prescription':prescription,'perscription_test':perscription_test,'perscription_medicine':perscription_medicine}
+#     pdf=render_to_pdf('prescription_pdf.html', context)
+#     if pdf:
+#         response=HttpResponse(pdf, content_type='application/pdf')
+#         content="inline; filename=report.pdf"
+#         # response['Content-Disposition']= content
+#         return response
+#     return HttpResponse("Not Found")
 def prescription_pdf(request,pk):
  if request.user.is_patient:
     patient = Patient.objects.get(user=request.user)

@@ -50,9 +50,17 @@ urlpatterns = [
     path('view-report/<int:pk>', views.view_report, name='view-report'),
     
 
-    path('test-cart/<int:pk>', views.test_cart, name='test-cart'),
+    path('test-cart/', views.test_cart, name='test-cart'),
     path('prescription-view/<int:pk>', views.prescription_view, name='prescription-view'),
-    path('pres_pdf/<int:pk>/',views.prescription_pdf, name='pres_pdf')
+    path('pres_pdf/<int:pk>/',views.prescription_pdf, name='pres_pdf'),
+
+    path('test-single/<int:pk>/', views.test_single, name='test-single'),
+    # path('shop/', views.pharmacy_shop, name='pharmacy_shop'),
+    # path('cart/', views.cart_view, name='cart'),
+    path('test-remove-cart/<int:pk>/', views.test_remove_cart, name='test-remove-cart'),
+    # path('test-checkout/', views.test_checkout, name='test-checkout'),
+    # path('test-list/', views.test_list, name='test-list'),
+    path('test-add-to-cart/<int:pk>', views.test_add_to_cart, name='test-add-to-cart'),
 
 ]
 

@@ -22,6 +22,7 @@
 		
 	<link rel="stylesheet"href="{% static 'HealthStack-System/css/Normal/hospital.css' %}">
 	<link rel="stylesheet"href="{% static 'HealthStack-System/css/Normal/search2.css' %}">
+	<link rel="stylesheet" href="{% static 'HealthStack-System\pharmacy_assets\css\icomoon.css'%}">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -63,7 +64,7 @@
 									{% if user.is_authenticated and user.is_doctor %}
 									<li class="breadcrumb-item"><a href="{% url 'doctor-dashboard' %}">Home</a></li>
 									{% endif %}
-									<li class="breadcrumb-item active" aria-current="page">Test Cart/li>
+									<li class="breadcrumb-item active" aria-current="page">Test Cart</li>
 								</ol>
 							</nav>
 							<h2 class="breadcrumb-title">Test Cart</h2>
@@ -110,39 +111,25 @@
                                                   <thead class="thead-primary">
                                                     <tr class="text-center">
                                                       <th>&nbsp;</th>
-                                                      <th>Product</th>
-                                                      <th>Price</th>
-                                                      <th>Quantity</th>
-                                                      <th>Total</th>
+                                                      <th>Test Name</th>
+                                                      <th>Price</th>        
+                                                      
                                                     </tr>
+
                                                   </thead>
                                                   <tbody>
-                                                  {% for cart in carts %} 
+													{% for t in test %}
                                                       <tr class="text-center">
-                                                        <td class="product-remove"><a href="{% url 'remove-item' pk=cart.item.pk  %}"><span class="icon-close"></span></a></td>
+                                                        <td class="product-remove"><a href="{% url 'test-remove-cart' pk=t.test_id %}"><span class="icon-close"></span></a></td>
                                                         
-                                                        <td class="product-name">
-                                                          <h3>{{ cart.item.name }}</h3>
-                                                          <p>{{ cart.item.description}}</p>
-                                                        </td>
-                                                        <td class="price">{{ cart.item.price }} BDT</td>
                                                         <td>
-                                                          <div class="input-group col-md-4 d-flex mb-3">
-                                                            <span class="input-group-btn mr-2">
-                                                              <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-                                                                <i class="icon-minus"></i>
-                                                              </button>
-                                                            </span>
-                                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1"
-                                                              min="1" max="100">
-                                                            <span class="input-group-btn ml-2">
-                                                              <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                                                                <i class="icon-plus"></i>
-                                                              </button>
-                                                            </span>
-                                                          </div>
+
+														  <h3>{{t.test_id}}</h3>
+														  <p>description</p>
                                                         </td>
-                                                        <td class="total">{{ cart.get_total }} BDT</td>
+                                                        
+														<td class="price">200</td>
+														
                                                       </tr>
                                                     {% endfor %}
                                                   </tbody>
@@ -156,7 +143,8 @@
                                                 <h3>Cart Totals</h3>
                                                 <p class="d-flex">
                                                   <span>Subtotal</span>
-                                                  <span>{{ order.get_totals | floatformat:2 }} BDT</span>
+                                                  <span></span>
+												  <!-- <span>total BDT</span> -->
                                                 </p>
                                                 <p class="d-flex">
                                                   <span>Delivery</span>
@@ -169,7 +157,8 @@
                                                 <hr>
                                                 <p class="d-flex total-price">
                                                   <span>Total</span>
-                                                  <span>{{ order.final_bill | floatformat:2 }} BDT</span>
+                                                  <!-- <span>{{ order.final_bill | floatformat:2 }} BDT</span> -->
+												  <span>total BDT</span>
                                                 </p>
                                               </div>
                                               <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to

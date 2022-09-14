@@ -1,5 +1,9 @@
 from django.db import models
 import uuid
+from django.conf import settings
+
+
+
 
 # import django user model
 from django.contrib.auth.models import AbstractUser
@@ -86,5 +90,7 @@ class Patient(models.Model):
 
     def __str__(self):
         return str(self.user.username)
+
+
     
 
