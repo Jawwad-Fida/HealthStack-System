@@ -95,7 +95,7 @@ def edit_prescription(request):
 # def forgot_password(request):
 #     return render(request, 'forgot-password.html')
 
-def forgot_password(request):
+def resetPassword(request):
     form = PasswordResetForm()
 
     if request.method == 'POST':
@@ -120,15 +120,18 @@ def forgot_password(request):
             html_message = render_to_string('mail_template.html', {'values': values})
             plain_message = strip_tags(html_message)
             
-            # email = render_to_string(email_template_name, values)
+       
             try:
                 send_mail(subject, plain_message, 'admin@example.com',  [user.email], html_message=html_message, fail_silently=False)
+                #send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect ("password_reset_done")
 
     context = {'form': form}
-    return render(request, 'forgot-password.html', context)
+    return render(request, 'reset_password.html', context)
+    
+    
 
 
 def privacy_policy(request):
