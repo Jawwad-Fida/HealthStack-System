@@ -31,7 +31,7 @@ from django.utils.html import strip_tags
 
 
 # Create your views here.
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def admin_dashboard(request):
     # admin = Admin_Information.objects.get(user_id=pk)
@@ -158,65 +158,65 @@ def admin_register(request):
     context = {'page': page, 'form': form}
     return render(request, 'hospital_admin/register.html', context)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def admin_forgot_password(request):
     return render(request, 'hospital_admin/forgot-password.html')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def invoice(request):
     return render(request, 'hospital_admin/invoice.html')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def invoice_report(request):
     return render(request, 'hospital_admin/invoice-report.html')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def lock_screen(request):
     return render(request, 'hospital_admin/lock-screen.html')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def patient_list(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
     patients = Patient.objects.all()
     return render(request, 'hospital_admin/patient-list.html', {'all': patients, 'admin': user})
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def specialitites(request):
     return render(request, 'hospital_admin/specialities.html')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def emergency_details(request):
     user = Admin_Information.objects.get(user=request.user)
     hospitals = Hospital_Information.objects.all()
     context = { 'admin': user, 'all': hospitals}
     return render(request, 'hospital_admin/emergency.html', context)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def hospital_list(request):
     user = Admin_Information.objects.get(user=request.user)
     hospitals = Hospital_Information.objects.all()
     context = { 'admin': user, 'hospitals': hospitals}
     return render(request, 'hospital_admin/hospital-list.html', context)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
 
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def hospital_admin_profile(request, pk):
 
     # profile = request.user.profile
@@ -236,8 +236,7 @@ def hospital_admin_profile(request, pk):
     context = {'admin': admin, 'form': form}
     return render(request, 'hospital_admin/hospital-admin-profile.html', context)
 
-
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def add_hospital(request):
     if  request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -299,7 +298,7 @@ def add_hospital(request):
 # def edit_hospital(request, pk):
 #     hospital = Hospital_Information.objects.get(hospital_id=pk)
 #     return render(request, 'hospital_admin/edit-hospital.html')
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def edit_hospital(request, pk):
     if  request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -363,19 +362,19 @@ def edit_hospital(request, pk):
 
             return redirect('hospital-list')
 
-@login_required(login_url="admin-login")
+@login_required(login_url='admin_login')
 def delete_specialization(request, pk, pk2):
     specializations = specialization.objects.get(specialization_id=pk)
     specializations.delete()
     return redirect('edit-hospital', pk2)
 
-@login_required(login_url="admin-login")
+@login_required(login_url='admin_login')
 def delete_service(request, pk, pk2):
     services = service.objects.get(service_id=pk)
     services.delete()
     return redirect('edit-hospital', pk2)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def edit_emergency_information(request, pk):
 
     hospital = Hospital_Information.objects.get(hospital_id=pk)
@@ -393,13 +392,13 @@ def edit_emergency_information(request, pk):
     context = {'hospital': hospital, 'form': form}
     return render(request, 'hospital_admin/edit-emergency-information.html', context)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def delete_hospital(request, pk):
 	hospital = Hospital_Information.objects.get(hospital_id=pk)
 	hospital.delete()
 	return redirect('hospital-list')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def generate_random_invoice():
     N = 4
     string_var = ""
@@ -408,7 +407,7 @@ def generate_random_invoice():
     return string_var
 
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def create_invoice(request, pk):
     if  request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -434,7 +433,7 @@ def create_invoice(request, pk):
     context = {'patient': patient,'admin': user}
     return render(request, 'hospital_admin/create-invoice.html', context)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def generate_random_specimen():
     N = 4
     string_var = ""
@@ -497,25 +496,25 @@ def create_report(request, pk):
         context = {'doctors': doctors,'lab_workers':lab_workers}
         return render(request, 'hospital_admin/create-report.html',context)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def add_pharmacist(request):
     if request.user.is_hospital_admin:
-     user = Admin_Information.objects.get(user=request.user)
-     form = PharmacistCreationForm()
+        user = Admin_Information.objects.get(user=request.user)
+        form = PharmacistCreationForm()
      
-     if request.method == 'POST':
-        form = PharmacistCreationForm(request.POST)
-        if form.is_valid():
+        if request.method == 'POST':
+            form = PharmacistCreationForm(request.POST)
+            if form.is_valid():
                 # form.save(), commit=False --> don't save to database yet (we have a chance to modify object)
-            user = form.save(commit=False)
-            user.is_pharmacist = True
-            user.save()
+                user = form.save(commit=False)
+                user.is_pharmacist = True
+                user.save()
 
-            messages.success(request, 'Pharmacist account was created!')
+                messages.success(request, 'Pharmacist account was created!')
 
                 # After user is created, we can log them in
                 #login(request, user)
-            return redirect('admin_login')
+                return redirect('admin_login')
         else:
             messages.error(request, 'An error has occurred during registration')
     
@@ -523,13 +522,13 @@ def add_pharmacist(request):
     return render(request, 'hospital_admin/add-pharmacist.html', context)
   
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def medicine_list(request):
     medicines = Medicine.objects.all()
     return render(request, 'hospital_admin/medicine-list.html',{'medicines': medicines})
 
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def generate_random_medicine_ID():
     N = 4
     string_var = ""
@@ -537,7 +536,7 @@ def generate_random_medicine_ID():
     string_var = "#M-" + string_var
     return string_var
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def add_medicine(request):
     if request.user.is_hospital_admin:
      user = Admin_Information.objects.get(user=request.user)
@@ -577,7 +576,7 @@ def add_medicine(request):
    
     return render(request, 'hospital_admin/add-medicine.html',{'admin': user})
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def edit_medicine(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -617,7 +616,7 @@ def edit_medicine(request, pk):
    
     return render(request, 'hospital_admin/edit-medicine.html',{'medicine': medicine,'admin': user})
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def delete_medicine(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -625,7 +624,7 @@ def delete_medicine(request, pk):
         medicine.delete()
         return redirect('medicine-list')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def add_lab_worker(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -651,7 +650,7 @@ def add_lab_worker(request):
     context = {'form': form, 'admin': user}
     return render(request, 'hospital_admin/add-lab-worker.html', context)  
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def view_lab_worker(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -659,7 +658,15 @@ def view_lab_worker(request):
         
     return render(request, 'hospital_admin/lab-worker-list.html', {'lab_workers': lab_workers, 'admin': user})
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
+def view_pharmacist(request):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        pharmcists = Pharmacist.objects.all()
+        
+    return render(request, 'hospital_admin/pharmacist-list.html', {'pharmacist': pharmcists, 'admin': user})
+
+@login_required(login_url='admin_login')
 def edit_lab_worker(request, pk):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
@@ -688,6 +695,38 @@ def edit_lab_worker(request, pk):
         
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
+
+
+
+@login_required(login_url='admin_login')
+def edit_pharmacist(request, pk):
+    if request.user.is_hospital_admin:
+        user = Admin_Information.objects.get(user=request.user)
+        pharmacist = Pharmacist.objects.get(pharmacist_id=pk)
+        
+        if request.method == 'POST':
+            if 'featured_image' in request.FILES:
+                featured_image = request.FILES['featured_image']
+            else:
+                featured_image = "technician/user-default.png"
+                
+            name = request.POST.get('name')
+            email = request.POST.get('email')     
+            phone_number = request.POST.get('phone_number')
+            age = request.POST.get('age')  
+    
+            pharmacist.name = name
+            pharmacist.email = email
+            pharmacist.phone_number = phone_number
+            pharmacist.age = age
+            pharmacist.featured_image = featured_image
+    
+            pharmacist.save()
+        
+            return redirect('pharmacist-list')
+        
+    return render(request, 'hospital_admin/edit-pharmacist.html', {'pharmacist': pharmacist, 'admin': user})
+
 def department_image_list(request,pk):
     departments = hospital_department.objects.filter(hospital_id=pk)
     #departments = hospital_department.objects.all()
@@ -695,21 +734,21 @@ def department_image_list(request,pk):
     return render(request, 'hospital_admin/department-image-list.html',context)
 
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def register_doctor_list(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
         doctors = Doctor_Information.objects.filter(register_status='Accepted')
     return render(request, 'hospital_admin/register-doctor-list.html', {'doctors': doctors, 'admin': user})
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def pending_doctor_list(request):
     if request.user.is_hospital_admin:
         user = Admin_Information.objects.get(user=request.user)
     doctors = Doctor_Information.objects.filter(register_status='Pending')
     return render(request, 'hospital_admin/Pending-doctor-list.html', {'all': doctors, 'admin': user})
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def admin_doctor_profile(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     admin = Admin_Information.objects.get(user=request.user)
@@ -719,7 +758,7 @@ def admin_doctor_profile(request,pk):
     context = {'doctor': doctor, 'admin': admin, 'experiences': experience, 'educations': education}
     return render(request, 'hospital_admin/doctor-profile.html',context)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def accept_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     doctor.register_status = 'Accepted'
@@ -756,7 +795,7 @@ def accept_doctor(request,pk):
     
     return redirect('admin-dashboard')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def reject_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
     doctor.register_status = 'Rejected'
@@ -790,7 +829,7 @@ def reject_doctor(request,pk):
     return redirect('admin-dashboard')
 
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def delete_department(request,pk):
     if request.user.is_authenticated:
         if request.user.is_hospital_admin:
@@ -798,7 +837,7 @@ def delete_department(request,pk):
             department.delete()
             return redirect('hospital-list')
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 @csrf_exempt
 def edit_department(request,pk):
     if request.user.is_authenticated:
@@ -822,7 +861,7 @@ def edit_department(request,pk):
             context = {'department': department}
             return render(request, 'hospital_admin/edit-hospital.html',context)
 
-@login_required(login_url='admin-login')
+@login_required(login_url='admin_login')
 def labworker_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:

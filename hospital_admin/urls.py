@@ -61,6 +61,8 @@ urlpatterns = [
     path('delete-specialization/<int:pk>/<int:pk2>/',views.delete_specialization,name='delete-specialization'),
     path('delete-service/<int:pk>/<int:pk2>/',views.delete_service,name='delete-service'),
     path('labworker-dashboard/', views.labworker_dashboard,name='labworker-dashboard'),
+    path('pharmacist-list/', views.view_pharmacist,name='pharmacist-list'),
+    path('edit-pharmacist/<int:pk>/', views.edit_pharmacist,name='edit-pharmacist'),
     
 ]
   
