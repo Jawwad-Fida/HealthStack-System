@@ -199,7 +199,7 @@
 															
 															<td class="text-center">{{pt.test_name}}</td>
 															<td class="text-center">{{pt.test_description}}</td>
-															<td class="text-center"><a href="{% url 'test-add-to-cart' pk=pt.test_id %}" class="btn btn-primary">Add to cart</a></td>
+															<td class="text-center"><a href="{% url 'test-add-to-cart' pk=pt.prescription.prescription_id %}" class="btn btn-primary">Add to cart</a></td>
 															
 														</tr>
 														{% endfor %}

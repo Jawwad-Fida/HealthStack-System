@@ -4,15 +4,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
-<<<<<<< HEAD
 from .forms import CustomUserCreationForm, PatientForm
 from hospital.models import Hospital_Information, User, Patient 
-from doctor.models import Test, test_Cart, test_Order, Perscription_test
+from doctor.models import Test, test_Cart, test_Order, Prescription_test
 
-=======
-from .forms import CustomUserCreationForm, PatientForm, PasswordResetForm
-from hospital.models import Hospital_Information, User, Patient
->>>>>>> 9a45722e9b61df14ed7aa6f16235cd6971086278
 from hospital_admin.models import hospital_department, specialization, service
 from django.views.decorators.cache import cache_control
 
@@ -635,20 +630,20 @@ def test_single(request,pk):
         return render(request, 'patient-login.html')  
 
 
-@login_required(login_url="login")
-def test_shop(request):
-    if request.user.is_authenticated and request.user.is_patient:
+# @login_required(login_url="login")
+# def test_shop(request):
+#     if request.user.is_authenticated and request.user.is_patient:
          
-        patient = Patient.objects.get(user=request.user)
-        test = Perscription_test.objects.all()
+#         patient = Patient.objects.get(user=request.user)
+#         test = Perscription_test.objects.all()
         
-        context = {'patient': patient, 'Perscription_test': Perscription_test}
-        return render(request, 'prescription-view.html', context)
+#         context = {'patient': patient, 'Perscription_test': Perscription_test}
+#         return render(request, 'prescription-view.html', context)
     
-    else:
-        logout(request)
-        messages.info(request, 'Not Authorized')
-        return render(request, 'patient-login.html')  
+#     else:
+#         logout(request)
+#         messages.info(request, 'Not Authorized')
+#         return render(request, 'patient-login.html')  
     
 # @login_required(login_url="login")
 # def test_list(request):
@@ -677,15 +672,23 @@ def test_add_to_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
          
         patient = Patient.objects.get(user=request.user)
+        prescription = Prescription.objects.filter(prescription_id=pk)
+        test = Prescription_test.objects.filter(prescription__in=prescription)
         # test = Perscription_test.objects.get(test_id=pk)
-        # test = Perscription_test.all()
-        # prescription = Prescription.objects.filter(prescription_id=pk)
-        test = Perscription_test.objects.filter(test_id=pk)
+        # test = Prescription_test.objects.all()
+        # prescription = Prescription.objects.get(prescription_id=pk)
+        # test = Prescription_test.objects.filter(prescription=prescription)
+        # test_id = test.test_id
         # test = Perscription_test.objects.filter(prescription__in=prescription)
         item = get_object_or_404(test, pk=pk)
+        # item = filter(test=test)
+        # item = test.objects.filter(test=test).exists()
+        # item = test
         
 
         order_item = test_Cart.objects.get_or_create(item=item, user=request.user, purchased=False)
+        # order_item = test_Cart.objects.create(item=order_item, user=request.user, purchased=False)
+
         order_qs = test_Order.objects.filter(user=request.user, ordered=False)
 
         if order_qs.exists():
@@ -693,7 +696,7 @@ def test_add_to_cart(request, pk):
             order.orderitems.add(order_item[0])
             messages.info(request, "This test is added to your cart!")
             context = {'patient': patient,'test': test}
-            return render(request, 'prescription-view.html', context)
+            return render(request, 'test-cart.html', context)
 
         else:
             order = test_Order(user=request.user)
@@ -712,8 +715,9 @@ def test_add_to_cart(request, pk):
 def cart_view(request):
     if request.user.is_authenticated and request.user.is_patient:
         # prescription = Prescription.objects.filter(prescription_id=pk)
+        
         patient = Patient.objects.get(user=request.user)
-        prescription_test = Perscription_test.objects.all()
+        prescription_test = Prescription_test.objects.all()
         
         test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
         test_orders = test_Order.objects.filter(user=request.user, ordered=False)
@@ -734,14 +738,16 @@ def cart_view(request):
 def test_remove_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
 
-        prescription = Prescription.objects.filter(prescription_id=pk)
-        test = Perscription_test.objects.filter(prescription__in=prescription)
-         
+        # prescription = Prescription.objects.get(prescription_id=pk)
+        # test = Prescription_test.objects.filter(prescription__in=prescription)
+        item = Prescription_test.objects.get(test_id=pk)
+
         patient = Patient.objects.get(user=request.user)
         # prescription_test = Perscription_test.objects.all()
         test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
         
-        item = get_object_or_404(test, pk=pk)
+        # item = get_object_or_404(test, pk=pk)
+        # item = test
         test_order_qs = test_Order.objects.filter(user=request.user, ordered=False)
         if test_order_qs.exists():
             test_order = test_order_qs[0]
@@ -754,11 +760,11 @@ def test_remove_cart(request, pk):
                 return render(request, 'test-cart.html', context)
             else:
                 messages.info(request, "This test was not in your cart")
-                context = {'patient': patient,'test': test}
+                context = {'patient': patient,'test': item}
                 return render(request, 'test-cart.html', context)
         else:
             messages.info(request, "You don't have an active order")
-            context = {'patient': patient,'test': test}
+            context = {'patient': patient,'test': item}
             return render(request, 'test-cart.html', context)
     else:
         logout(request)
