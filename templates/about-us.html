@@ -45,7 +45,7 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="index-2.html" class="navbar-brand logo">
+						<a href="{%url 'hospital_home'%}" class="navbar-brand logo">
 							<img src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
@@ -114,11 +114,9 @@
 								</ul>
 							</li> -->
 							<li>
-								<a href="index-2.html">Home</a>
+								<a href="{%url 'hospital_home'%}">Home</a>
 							</li>
-							<li>
-								<a href="admin/index.html" target="_blank">Admin</a>
-							</li>
+							
 							<li class="login-link">
 								<a href="#">Login / Signup</a>
 							</li>

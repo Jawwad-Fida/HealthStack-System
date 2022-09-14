@@ -25,11 +25,11 @@ def render_to_pdf(template_src, context_dict={}):
 def prescription_pdf(request,pk):
  if request.user.is_patient:
     patient = Patient.objects.get(user=request.user)
-    prescriptions = Prescription.objects.get(prescription_id=pk)
+    prescription = Prescription.objects.get(prescription_id=pk)
     prescription_medicine = Prescription_medicine.objects.filter(prescription=prescription)
     prescription_test = Prescription_test.objects.filter(prescription=prescription)
     # current_date = datetime.date.today()
-    context={'patient':patient,'prescriptions':prescriptions,'prescription_test':prescription_test,'prescription_medicine':prescription_medicine}
+    context={'patient':patient,'prescriptions':prescription,'prescription_test':prescription_test,'prescription_medicine':prescription_medicine}
     pres_pdf=render_to_pdf('prescription_pdf.html', context)
     if pres_pdf:
         response=HttpResponse(pres_pdf, content_type='application/pres_pdf')

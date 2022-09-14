@@ -1,15 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render 
 from django.http import HttpResponse
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import chatMessages
 from django.contrib.auth import get_user_model
-from  hospital.models import User as UserModel
+from  hospital.models import User 
 from hospital.models import Patient
 from doctor.models import Doctor_Information    
 from django.db.models import Q
-import json,datetime
-from django.core import serializers
+import json
+
 from django.views.decorators.cache import cache_control
 
 # Create your views here.
@@ -36,6 +35,21 @@ def home(request,pk):
                 "doctor":doctor,
                 "doc":doc,
                 "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
+            }
+            elif request.method == 'GET' and 'search' in request.GET:
+                query = request.GET.get('search')
+                doctor= Doctor_Information.objects.filter(Q(user__first_name__icontains=query) | Q(user__last_name__icontains=query))
+                #chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
+                #chats = chats.order_by('date_created')
+                #doc = Doctor_Information.objects.get(username=request.GET['search'])
+                context = {
+                "page":"home",
+                "users":users,
+                
+                "patient":patients,
+                
+                "doctor":doctor,
+                
             }
             else:
             
@@ -72,6 +86,23 @@ def home(request,pk):
                 "pat":pat,
                 "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             }
+            elif request.method == 'GET' and 'search' in request.GET:
+                query = request.GET.get('search')
+                patient= Patient.objects.filter(Q(user__first_name__icontains=query) | Q(user__last_name__icontains=query))
+                #chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
+                #chats = chats.order_by('date_created')
+                #doc = Doctor_Information.objects.get(username=request.GET['search'])
+                context = {
+                "page":"home",
+                "users":users,
+                
+                "patient":patient,
+                
+                "doctor":doctor,
+                
+            }
+            
+                
             
             else:
             
@@ -129,3 +160,8 @@ def send_chat(request):
         resp['status'] = 'failed'
 
     return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
+
+
+       
