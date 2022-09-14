@@ -12,7 +12,7 @@ from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
 from pharmacy.models import Medicine, Pharmacist
-from doctor.models import Doctor_Information, Prescription, Report, Appointment, Experience , Education,Specimen,Test
+from doctor.models import Doctor_Information, Prescription, Prescription_test, Report, Appointment, Experience , Education,Specimen,Test
 
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm , PharmacistCreationForm
@@ -446,13 +446,13 @@ def generate_random_specimen():
 def create_report(request, pk):
     if request.user.is_labworker:
         lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
-        doctors =Doctor_Information.objects.get(doctor_id=pk)
-        
-        
+        prescription =Prescription.objects.get(prescription_id=pk)
+        patient = Patient.objects.get(patient_id=prescription.patient_id)
+        doctor = Doctor_Information.objects.get(doctor_id=prescription.doctor_id)
+        tests = Prescription_test.objects.filter(prescription=prescription)
 
         if request.method == 'POST':
-            patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
-            report = Report(patient=patient, doctor=doctors)
+            report = Report(doctor=doctor, patient=patient)
             
             specimen_type = request.POST.getlist('specimen_type')
             collection_date  = request.POST.getlist('collection_date')
@@ -496,7 +496,7 @@ def create_report(request, pk):
 
             return redirect('labworker-dashboard')
 
-        context = {'doctors': doctors,'lab_workers':lab_workers}
+        context = {'prescription':prescription,'lab_workers':lab_workers,'tests':tests}
         return render(request, 'hospital_admin/create-report.html',context)
 
 @login_required(login_url='admin-login')
