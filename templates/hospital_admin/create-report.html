@@ -85,30 +85,6 @@
                                         <div class="form-group">
                                             <div class="change-avatar"></div>
                                         </div>
-                                        <div class="card card-table">
-                                          <div class="card-body">
-                                            <div class="table-responsive">
-                                              <table class="table table-hover table-center">
-                                                <thead>
-                                                  <tr>
-                                                    <th style="min-width: 300px">Patient Serial Number</th>
-													
-                                                    <th style="min-width: 50px;"></th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  <tr>
-                                                    <td>
-                                                      <input class="form-control" type="text" name="patient_serial_number" id="patient_serial_number">
-													  
-                                                    </td>
-													
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                          </div>
-                                        </div>
                                         
 							<!-- /specimen -->
 										<div class="card card-table">
@@ -164,14 +140,14 @@
                                                 <h4 class="card-title">Test Information</h4>
                                                 <div class="test-info">
                                                     <div class="row form-row test-cont">
-                                                
+                                                      {% for t in tests %}
                                                         <div class="col-12 col-md-10 col-lg-11">
                                                             <div class="row form-row">
 
                                                                 <div class="col-12 col-md-6 col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Test Name</label>
-                                                                        <input type="text" class="form-control" name="test_name" id="test_name">
+                                                                        <input type="text" class="form-control" value={{t.test_name}} name="test_name" id="test_name">
                                                                     </div> 
                                                                 </div>
 
@@ -198,8 +174,15 @@
             
                                                         </div>
                                                     </div>
+                                                    <div class="col-12 col-md-2 col-lg-1">
+                                                      <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                      <a href="#" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger">
+                                                        <i class="far fa-trash-alt"></i>
+                                                      </a>
+                                                    </div>
+                                                    {% endfor %}
 
-                                                    <div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>
+                                                   
 
                                                 </div>
                                             </div>
