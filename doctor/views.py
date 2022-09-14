@@ -465,6 +465,7 @@ def create_prescription(request,pk):
         if request.user.is_doctor:
             doctor = Doctor_Information.objects.get(user=request.user)
             patient = Patient.objects.get(patient_id=pk) 
+            create_date = datetime.date.today()
             
             if request.method == 'POST':
                 prescription = Prescription(doctor=doctor, patient=patient)
@@ -481,6 +482,7 @@ def create_prescription(request,pk):
 
             
                 prescription.extra_information = extra_information
+                prescription.create_date = create_date
                 prescription.save()
 
                 for i in range(len(medicine_name)):

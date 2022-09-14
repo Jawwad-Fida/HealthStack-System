@@ -446,6 +446,8 @@ def create_report(request, pk):
     if request.user.is_labworker:
         lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
         doctors =Doctor_Information.objects.get(doctor_id=pk)
+        
+        
 
         if request.method == 'POST':
             patient = Patient.objects.get(serial_number=request.POST['patient_serial_number'])
@@ -870,6 +872,27 @@ def labworker_dashboard(request):
             doctor = Doctor_Information.objects.all()
             context = {'doctor': doctor,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/labworker-dashboard.html',context)
+
+@login_required(login_url='admin-login')
+def mypatient_list(request):
+    if request.user.is_authenticated:
+        if request.user.is_labworker:
+            lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
+            patient = Patient.objects.all()
+            context = {'patient': patient,'lab_workers':lab_workers}
+            return render(request, 'hospital_admin/mypatient-list.html',context)
+
+@login_required(login_url='admin-login')
+def prescription_list(request,pk):
+    if request.user.is_authenticated:
+        if request.user.is_labworker:
+            lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
+            patient = Patient.objects.get(patient_id=pk)
+            prescription = Prescription.objects.filter(patient=patient)
+            context = {'prescription': prescription,'lab_workers':lab_workers,'patient':patient}
+            return render(request, 'hospital_admin/prescription-list.html',context)
+   
+
 
 
 
