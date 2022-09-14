@@ -80,6 +80,9 @@ class Patient(models.Model):
     dob = models.CharField(max_length=200, null=True, blank=True)
     nid = models.CharField(max_length=200, null=True, blank=True)
     serial_number = models.CharField(max_length=200, null=True, blank=True)
+    
+    # Chat
+    login_status = models.CharField(max_length=200, null=True, blank=True, default="offline")
 
     def __str__(self):
         return str(self.user.username)
