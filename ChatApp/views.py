@@ -1,14 +1,16 @@
-from django.shortcuts import render 
+from multiprocessing import context
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import chatMessages
 from django.contrib.auth import get_user_model
-from  hospital.models import User 
+from  hospital.models import User as UserModel
 from hospital.models import Patient
 from doctor.models import Doctor_Information    
 from django.db.models import Q
-import json
-
+import json,datetime
+from django.core import serializers
 from django.views.decorators.cache import cache_control
 
 # Create your views here.
@@ -96,7 +98,7 @@ def home(request,pk):
                 "page":"home",
                 "users":users,
                 
-                "patient":patient,
+                "patient":patients,
                 
                 "doctor":doctor,
                 

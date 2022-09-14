@@ -29,6 +29,18 @@ class LabWorkerCreationForm(UserCreationForm):
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
 
+class PharmacistCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+    # create a style for model form
+    def __init__(self, *args, **kwargs):
+        super(PharmacistCreationForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
 # class EditLabWorkerForm(forms.ModelForm):
 #     class Meta:
 #         model = Clinical_Laboratory_Technician
