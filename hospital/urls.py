@@ -22,7 +22,7 @@ urlpatterns = [
 
     path('edit-billing/', views.edit_billing, name='edit-billing'),
     path('edit-prescription/', views.edit_prescription, name='edit-prescription'),
-    path('forgot-password-patient/', views.forgot_password_patient,name='forgot-password-patient'),
+    # path('forgot-password/', views.forgot_password,name='forgot-password'),
     path('patient-dashboard/',views.patient_dashboard, name='patient-dashboard'),
     
     path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
@@ -32,7 +32,6 @@ urlpatterns = [
     path('about-us/', views.about_us, name='about-us'),
     path('patient-register/', views.patient_register, name='patient-register'),
     path('logout/', views.logoutUser, name='logout'),
-    path('forgot-password-doctor/', views.forgot_password_doctor,name='forgot-password-doctor'),
 
     path('multiple-hospital/', views.multiple_hospital, name='multiple-hospital'),
     path('chat/<int:pk>/', views.chat, name='chat'),

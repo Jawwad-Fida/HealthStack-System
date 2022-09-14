@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -37,6 +38,21 @@ def home(request,pk):
                 "doc":doc,
                 "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             }
+            elif request.method == 'GET' and 'search' in request.GET:
+                query = request.GET.get('search')
+                doctor= Doctor_Information.objects.filter(Q(user__first_name__icontains=query) | Q(user__last_name__icontains=query))
+                #chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
+                #chats = chats.order_by('date_created')
+                #doc = Doctor_Information.objects.get(username=request.GET['search'])
+                context = {
+                "page":"home",
+                "users":users,
+                
+                "patient":patients,
+                
+                "doctor":doctor,
+                
+            }
             else:
             
             
@@ -72,6 +88,23 @@ def home(request,pk):
                 "pat":pat,
                 "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             }
+            elif request.method == 'GET' and 'search' in request.GET:
+                query = request.GET.get('search')
+                patient= Patient.objects.filter(Q(user__first_name__icontains=query) | Q(user__last_name__icontains=query))
+                #chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
+                #chats = chats.order_by('date_created')
+                #doc = Doctor_Information.objects.get(username=request.GET['search'])
+                context = {
+                "page":"home",
+                "users":users,
+                
+                "patient":patients,
+                
+                "doctor":doctor,
+                
+            }
+            
+                
             
             else:
             
@@ -129,3 +162,8 @@ def send_chat(request):
         resp['status'] = 'failed'
 
     return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
+
+
+       

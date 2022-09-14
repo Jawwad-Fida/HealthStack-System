@@ -61,12 +61,12 @@
 											<i class="material-icons"></i>
 										</a>
 									</div>
-									<form class="chat-search">
+									<form class="chat-search" method="GET" action = "{% url 'chat-home' pk=user.id %}">
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<i class="fas fa-search"></i>
 											</div>
-											<input type="text" class="form-control" placeholder="Search">
+											<input type="text" class="form-control" placeholder="Search" name="search">
 										</div>
 									</form>
 									<div class="chat-users-list">

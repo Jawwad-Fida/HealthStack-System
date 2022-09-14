@@ -18,6 +18,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from hospital import views
 
+# For forgot password views and reset password views
+from django.contrib.auth import views as auth_views
 
 # ROOT url file
 
@@ -33,8 +35,13 @@ urlpatterns = [
     path('sslcommerz/', include('sslcommerz.urls')),
     path('pharmacy/', include('pharmacy.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
-  
-   
+    
+    # For forgot password views and reset password views
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="forgot-password.html"),name="forgot-password"),
+    # path('reset_password/', auth_views.PasswordResetView.as_view(),name="reset-password"),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"),name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="reset.html"),name="password_reset_confirm"),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"),name="password_reset_complete"),
     
 ]
 
@@ -47,19 +54,12 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 #         path('__debug__/', include(debug_toolbar.urls)),
 #     ] + urlpatterns
 
-# path('login/', include('hospital.urls'),name='login'),
-# path('doctor-dashboard/', include('hospital.urls')),
+"""
+Forgot password views
 
-# path('doctor-profile/', include('hospital.urls')),
+1 - User submits email for reset
+2 - email is sent to user
+3 - user clicks link in email
+4 - user is redirected to reset password page
 
-# path('doctor-change-password/', include('hospital.urls')),
-
-# path('change-password/', include('hospital.urls')),
-
-# path('search/', include('hospital.urls')),
-
-# path('doctor-register/', include('hospital.urls')),
-
-# path('doctor-profile-settings/', include('hospital.urls')),
-
-# path('my-patients/', include('hospital.urls')),
+"""

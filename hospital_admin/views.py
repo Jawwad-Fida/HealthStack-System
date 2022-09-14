@@ -15,7 +15,7 @@ from pharmacy.models import Medicine, Pharmacist
 from doctor.models import Doctor_Information, Prescription, Report, Appointment, Experience , Education,Specimen,Test
 
 from sslcommerz.models import Payment
-from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm
+from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm , PharmacistCreationForm
 from .models import Admin_Information,specialization,service,hospital_department, Clinical_Laboratory_Technician
 import random,re
 import string
@@ -501,7 +501,27 @@ def create_report(request, pk):
 def add_pharmacist(request):
     if request.user.is_hospital_admin:
      user = Admin_Information.objects.get(user=request.user)
-    return render(request, 'hospital_admin/add-pharmacist.html',{'admin': user})  
+     form = PharmacistCreationForm()
+     
+     if request.method == 'POST':
+        form = PharmacistCreationForm(request.POST)
+        if form.is_valid():
+                # form.save(), commit=False --> don't save to database yet (we have a chance to modify object)
+            user = form.save(commit=False)
+            user.is_pharmacist = True
+            user.save()
+
+            messages.success(request, 'Pharmacist account was created!')
+
+                # After user is created, we can log them in
+                #login(request, user)
+            return redirect('admin_login')
+        else:
+            messages.error(request, 'An error has occurred during registration')
+    
+    context = {'form': form, 'admin': user}
+    return render(request, 'hospital_admin/add-pharmacist.html', context)
+  
 
 @login_required(login_url='admin-login')
 def medicine_list(request):
@@ -712,7 +732,7 @@ def accept_doctor(request,pk):
     doctor_name = doctor.name
     doctor_email = doctor.email
     doctor_department = doctor.department_name.hospital_department_name
-    doctor_hospital = doctor.hospital_name.name
+
     doctor_specialization = doctor.specialization.specialization_name
 
     subject = "Acceptance of Doctor Registration"
@@ -721,7 +741,7 @@ def accept_doctor(request,pk):
             "doctor_name":doctor_name,
             "doctor_email":doctor_email,
             "doctor_department":doctor_department,
-            "doctor_hospital":doctor_hospital,
+
             "doctor_specialization":doctor_specialization,
         }
 

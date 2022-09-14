@@ -1,0 +1,14 @@
+{% load static %}
+
+<h2>Hello,</h2>
+
+<p>We received a request to reset the password for your account for this email address. To initiate the password reset process for your account, click the link below.</p>
+
+<p><a href="{{ values.protocol }}://{{ values.domain }}{% url 'password_reset_confirm' uidb64=values.uid token=values.token %}" target="_blank">{{ values.protocol }}://{{ values.domain }}{% url 'password_reset_confirm' uidb64=values.uid token=values.token %}</a></p>
+
+<p>This link can only be used once. If you need to reset your password again, please visit <a href="{{ values.protocol }}://{{values.domain}}" target="_blank">{{ values.protocol }}://{{values.domain}}</a> and request another reset.</p>
+
+<p>If you did not make this request, you can simply ignore this email.</p>
+
+<p>Sincerely,</p>
+<p>Jawwad</p>
