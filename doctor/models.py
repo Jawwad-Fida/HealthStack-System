@@ -180,6 +180,7 @@ class Prescription(models.Model):
     prescription_id = models.AutoField(primary_key=True)
     doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True, blank=True)
+    create_date = models.CharField(max_length=200, null=True, blank=True)
     
     medicine_name = models.CharField(max_length=200, null=True, blank=True)
     quantity = models.CharField(max_length=200, null=True, blank=True)
@@ -204,6 +205,7 @@ class Prescription_medicine(models.Model):
     frequency = models.CharField(max_length=200, null=True, blank=True)
     relation_with_meal = models.CharField(max_length=200, null=True, blank=True)
     instruction = models.TextField(null=True, blank=True)
+
 
     def __str__(self):
         return str(self.prescription.prescription_id)

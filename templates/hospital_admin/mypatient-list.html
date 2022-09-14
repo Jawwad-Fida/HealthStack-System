@@ -72,64 +72,55 @@
                 <div class="content container-fluid">
 					
 					<!-- Page Header -->
-					<div class="page-header">
-						<div class="row">
-							<div class="col-sm-12">
-								<h3 class="page-title">Welcome Admin!</h3>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item active">Dashboard</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+
 					<!-- /Page Header -->
 
                     <div class="row">
                         <div class="col-md-12 d-flex">
 						
 							<!-- Feed Activity -->
-							<!-- <div class="card  card-table flex-fill">
+							<div class="card  card-table flex-fill">
 								<div class="card-header">
-									<h4 class="card-title"></h4>
+									<h4 class="card-title">Patient List</h4> <br>
+                                    <p class="card-text">Click To See <b>Prescriptions</b> of patients</p>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-hover table-center mb-0">
 											<thead>
 												<tr>													
-													<th>Doctor Id</th>
-                          <th>Doctor Name</th>
+													<th>Patient Id</th>
+                                                    <th>Patient Name</th>
 													<th>Phone</th>
 													<th>Email</th>
-                          <th>Status</th>													
+                                                    												
 												</tr>
 											</thead>
 											<tbody>
-                     {% for doctor in doctor%}
+                                                 {% for p in patient %}
 												<tr>
-                          <td>{{doctor.doctor_id}}</td>
-
+                                                    <td>{{p.patient_id}}</td>
 													<td>
 														<h2 class="table-avatar">
-															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{doctor.featured_image.url}}" alt="User Image"></a>
-															<a href="#">{{doctor.name}}</a>
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{p.featured_image.url}}" alt="User Image"></a>
+															<a href="{% url 'prescription-list' pk=p.patient_id %}">{{p.name}}</a>
 														</h2>
 													</td>
                           
-													<td>{{doctor.phone_number}}</td>
-													<td>{{doctor.email}}</td>
+													<td>{{p.phone_number}}</td>
+													<td>{{p.email}}</td>
 													
-                          <td>
+                          <!-- <td>
                             <div class="table-action">
                               <a
-                                href="{% url 'create-report' pk=doctor.doctor_id %}"
+                                href="#"
                                 class="btn btn-outline-info btn-rounded" 
                                 >
                                 <i class="fas fa-file-alt"></i> Create Report 
                               </a>
                 
                               </div>
-                          </td>
+                          </td> -->
 												</tr>
                       {% endfor %}
 												
@@ -138,7 +129,7 @@
 										</table>
 									</div>
 								</div>
-							</div> -->
+							</div>
 							<!-- /Feed Activity -->
 							
 						</div>
