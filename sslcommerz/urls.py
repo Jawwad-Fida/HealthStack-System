@@ -13,7 +13,7 @@ urlpatterns = [
     path('ssl-payment-fail/', views.ssl_payment_fail, name='ssl-payment-fail'),
     path('ssl-payment-cancel/', views.ssl_payment_cancel, name='ssl-payment-cancel'),
     path('ssl-payment-request-medicine/<int:pk>/<int:id>/', views.ssl_payment_request_medicine,name='ssl-payment-request-medicine'),
-    path('payment-testing/', views.payment_testing, name='payment-testing'),
+    path('payment-testing/<int:pk>/', views.payment_testing, name='payment-testing'),
 
 ]
 
