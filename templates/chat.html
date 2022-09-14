@@ -71,15 +71,24 @@
 										{% if not d.id == 1 and not d.id == user.id %}
 											<a href="{% url 'chat-home' pk=user.id %}?u={{d.user.id}}" class="media">
 												<div class="media-img-wrap">
+													{%if d.user.login_status%}
+													<div class="avatar avatar-online">
+														<img src="{{ d.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
+													</div>
+													{%else%}
 													<div class="avatar avatar-away">
 														<img src="{{ d.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
+													{%endif%}
 												</div>
 												<div class="media-body">
 													<div>
 														<div class="user-name">{{d.name}}</div>
-														
-														<div class="user-last-chat">Hey, How are you?</div>
+														{%if d.user.login_status%}
+														<div class="user-last-chat">Online</div>
+														{%else%}
+														<div class="user-last-chat">Offline</div>
+														{%endif%}
 													</div>
 													<div>
 														<div class="last-chat-time block">2 min</div>
@@ -251,7 +260,7 @@
 							if (typeof resp == "object" && resp.status == 'success') {
 								location.reload()
 							} else {
-								consol.log(resp)
+								console.log(resp)
 								alert('an error occured')
 							}
 						}
@@ -310,7 +319,7 @@
 													'</div>'+
 												'</li>';
 								} else {
-									bubble = '<li class="media sent">'+
+									bubble = '<li class="media received">'+
 													'<div class="media-body">'+	
 														'<div class="msg-box">'+
 															'<div class="chat-bubble" data-id="' + resp[k].id + '">'+

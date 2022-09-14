@@ -14,7 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime
 import datetime
-
+from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.dispatch import receiver
 
 # from django.http import HttpResponse
 from django.template.loader import get_template
@@ -652,3 +653,15 @@ def prescription_pdf(request,pk):
         response['Content-Disposition']= content
         return response
     return HttpResponse("Not Found")
+
+
+
+@receiver(user_logged_in)
+def got_online(sender, user, request, **kwargs):    
+    user.login_status = True
+    user.save()
+
+@receiver(user_logged_out)
+def got_offline(sender, user, request, **kwargs):   
+    user.login_status = False
+    user.save()

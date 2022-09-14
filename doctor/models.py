@@ -74,7 +74,7 @@ class Doctor_Information(models.Model):
     hospital_name = models.ForeignKey(Hospital_Information, on_delete=models.SET_NULL, null=True, blank=True)
     
     # Chat
-    login_status = models.CharField(max_length=200, null=True, blank=True, default="offline")
+    
 
     def __str__(self):
         return str(self.user.username)
