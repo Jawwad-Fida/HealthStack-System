@@ -23,7 +23,7 @@ from xhtml2pdf import pisa
 
 from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
 from .models import Patient, User
-from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Perscription_medicine, Perscription_test
+from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Prescription_medicine, Prescription_test
 
 
 from sslcommerz.models import Payment
