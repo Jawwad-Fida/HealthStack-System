@@ -90,7 +90,7 @@ def home(request,pk):
             }
             elif request.method == 'GET' and 'search' in request.GET:
                 query = request.GET.get('search')
-                patient= Patient.objects.filter(Q(user__first_name__icontains=query) | Q(user__last_name__icontains=query))
+                patients= Patient.objects.filter(Q(user__first_name__icontains=query) | Q(user__last_name__icontains=query))
                 #chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
                 #chats = chats.order_by('date_created')
                 #doc = Doctor_Information.objects.get(username=request.GET['search'])

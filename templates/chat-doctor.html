@@ -74,15 +74,28 @@
 										{% for u in patient %} {% if not u.id == 1 and not u.id == user.id %}
 											<a href="{% url 'chat-home' pk=user.id %}?u={{u.user.id}}" class="media">
 												<div class="media-img-wrap">
+													{%if u.user.login_status%}
+													<div class="avatar avatar-online">
+														<img src="{{ u.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
+													</div>
+													{%else%}
 													<div class="avatar avatar-away">
 														<img src="{{ u.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
+													{%endif%}
 												</div>
 												<div class="media-body">
 													<div>
 														<div class="user-name">{{u.name}}</div>
 														
-														<div class="user-last-chat">Hey, How are you?</div>
+														<div>
+															<div class="user-name">{{d.name}}</div>
+															{%if u.user.login_status%}
+															<div class="user-last-chat">Online</div>
+															{%else%}
+															<div class="user-last-chat">Offline</div>
+															{%endif%}
+														</div>
 													</div>
 													<div>
 														<div class="last-chat-time block">2 min</div>
@@ -389,7 +402,7 @@
 													'</div>'+
 												'</li>';
 								} else {
-									bubble = '<li class="media sent">'+
+									bubble = '<li class="media received">'+
 													'<div class="media-body">'+	
 														'<div class="msg-box">'+
 															'<div class="chat-bubble" data-id="' + resp[k].id + '">'+

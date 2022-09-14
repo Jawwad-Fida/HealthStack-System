@@ -1,0 +1,189 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>HealthStack</title>
+		
+		<!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
+
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"> 
+		
+		<!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/font-awesome.min.css'%}">
+		
+		<!-- Feathericon CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
+		
+		<!-- Datatables CSS -->
+		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.css'%}"> 
+		
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
+		
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+    </head>
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+			<header class="header">{% include 'hospital_admin/hospital-admin-navbar.html' %}</header>
+				<!-- Logo -->
+
+            
+			<!-- /Header -->
+			
+			<!-- Sidebar -->
+			<aside class="sidebar" id="sidebar">
+				{% include 'hospital_admin/hospital-admin-sidebar.html' %}
+			</aside>
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+
+                <div class="content container-fluid">
+
+<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Edit Pharmacist</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Edit Pharmacist</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-7 col-lg-8 col-xl-12">
+							<div class="card">
+								<div class="card-header">
+									<!-- Profile Settings Form -->
+									<form action="{% url 'edit-pharmacist' pk=pharmacist.pharmacist_id %}" method="POST" enctype="multipart/form-data" >
+													{% csrf_token %}
+							
+													<div class="row form-row">
+														<div class="col-12 col-md-12">
+															<div class="form-group">
+															<div class="change-avatar"></div>
+													<div class="card card-table">
+														<div class="card-body">
+														  <div class="table-responsive">
+															<table class="table table-hover table-center">
+															  <thead>
+																<tr>
+																  <th style="min-width: 100px">Name</th>
+																  <th style="min-width: 100px">Email</th>
+																  <th style="min-width: 100px">Image</th>
+																</tr>
+															  </thead>
+															  <tbody>
+																<tr>
+																  <td>
+																	<input class="form-control" type="text" name="name" value="{{pharmacist.name}}">
+																  </td>
+																  <td>
+																	<input class="form-control" type="email" name="email" value="{{pharmacist.email}}">
+																  </td>
+																  <td>
+																	<input type="file" class="upload" name="featured_image">
+																  </td>
+																</tr>
+															  </tbody>
+															</table>
+														  </div>
+														</div>
+													  </div>
+													<div class="card card-table">
+														<div class="card-body">
+															<div class="table-responsive">
+																<table class="table table-hover table-center">
+																	<thead>
+																		<tr>
+																			<th style="min-width: 100px">Usename</th>
+																			<th style="min-width: 100px;">Phone number</th>
+																			<th style="min-width: 100px;">Age</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<input class="form-control" type="text" readonly value="{{pharmacist.username}}">
+																			</td>
+																			<td>
+																				<input class="form-control" type="text" name="phone_number" value="{{pharmacist.phone_number}}">
+																			</td>
+																			<td>
+																				<input class="form-control" type="text" name="age" value="{{pharmacist.age}}">
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+									
+												<div class="submit-section">
+													<button type="submit" class="btn btn-primary submit-btn" >
+														Save Changes
+													</button>
+												</div>
+												
+									</form>
+									        <!-- /Profile Settings Form -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- /Page Content -->
+
+			
+		   
+		</div>
+		<!-- /Main Wrapper -->
+	  
+		<!-- jQuery -->
+		<script src="{% static 'HealthStack-System/js/admin/jquery-3.2.1.min.js' %}"></script> 
+		
+		<!-- Bootstrap Core JS -->
+        <script src="{% static 'HealthStack-System/js/admin/popper.min.js' %}"></script> 
+        <script src="{% static 'HealthStack-System/js/admin/bootstrap.min.js' %}"></script> 
+		
+		<!-- Slimscroll JS -->
+        <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js' %}"></script>
+		
+		<!-- Datatables JS -->
+		<script src="{% static 'HealthStack-System/plugins/admin/datatables/jquery.dataTables.min.js'%}"></script> 
+		<script src="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.js'%}"></script>
+		
+		<!-- Custom JS -->
+		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+		
+	</body>
+
+</html>

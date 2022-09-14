@@ -14,7 +14,8 @@ from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technici
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription
 
 from django.db.models import Q, Count
-
+from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.dispatch import receiver
 import random
 import string
 from datetime import datetime, timedelta
@@ -77,9 +78,14 @@ def patient_id(request):
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutDoctor(request):
-    logout(request)
+    user = User.objects.get(id=request.user.id)
+    if user.is_doctor:
+        user.login_status == "offline"
+        user.save()
+        logout(request)
+    
     messages.info(request, 'User Logged out')
-    return redirect('doctor-login')
+    return render(request,'doctor-login.html')
 
 
 def doctor_register(request):
@@ -129,8 +135,11 @@ def doctor_login(request):
         user = authenticate(username=username, password=password)
         
         if user is not None:
+            
             login(request, user)
             if request.user.is_doctor:
+                # user.login_status = "online"
+                # user.save()
                 return redirect('doctor-dashboard')
             else:
                 messages.error(request, 'Invalid credentials. Not a Doctor')
@@ -564,4 +573,12 @@ def patient_search(request, pk):
 
 
 
+@receiver(user_logged_in)
+def got_online(sender, user, request, **kwargs):    
+    user.login_status = True
+    user.save()
 
+@receiver(user_logged_out)
+def got_offline(sender, user, request, **kwargs):   
+    user.login_status = False
+    user.save()
