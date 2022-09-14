@@ -218,10 +218,12 @@ class Perscription_test(models.Model):
 class test_Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='test_cart')
     item = models.ForeignKey(Perscription_test, on_delete=models.CASCADE)
+    name = models.CharField(default='test', max_length=200)
     quantity = models.IntegerField(default=1)
     purchased = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
     
     def __str__(self):
         return f'{self.quantity} X {self.item}'
@@ -242,7 +244,7 @@ class test_Order(models.Model):
 
     # Subtotal
     def get_totals(self):
-        total = 0 
+        total = 40 
         for order_item in self.orderitems.all():
             total += float(order_item.get_total())
         return total
