@@ -25,16 +25,11 @@
 		<!-- Fancybox CSS -->
 		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fancybox/jquery.fancybox.min.css'%}">
 		<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-    	{% comment %} <script src="{% static 'js/popper.min.js' %}"></script>
-    	<script src="{% static 'js/bootstrap.min.js' %}"></script> {% endcomment %}
+    	
    	 	<script src="{% static 'js/script.js' %}"></script>
     	 
 		
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-			<script src="assets/js/html5shiv.min.js"></script>
-			<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+		
 	
 	</head>
 	<body class="chat-page">
@@ -61,12 +56,12 @@
 											<i class="material-icons"></i>
 										</a>
 									</div>
-									<form class="chat-search">
+									<form class="chat-search" method="GET" action = "{% url 'chat-home' pk=user.id %}">
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<i class="fas fa-search"></i>
 											</div>
-											<input type="text" class="form-control" placeholder="Search">
+											<input type="text" class="form-control" placeholder="Search" name="search">
 										</div>
 									</form>
 									<div class="chat-users-list">
@@ -198,88 +193,10 @@
 											</form>
 										</div>
 									</div>
-									<!-- <div class="chat-footer">
-										<div class="input-group">
-											<form action="" id="chat-submit">
-											
-												<input type="hidden" name="user_from" value="{{ user.id }}">
-												<input type="hidden" name="user_to" value="{{ chat_id }}">	
-
-												<input type="text"  name="message" class="input-msg-send form-control" placeholder="Type something">
-											<div class="input-group-append">
-												<button class="btn msg-send-btn"><i class="fab fa-telegram-plane"></i></button>
-											</div>
-											</form>
-										</div>
-									</div> -->
+									
 									{% endif %}
 
-									<!-- <div class="col-md-8 h-100">
-										{% if not chat_id > 0 %}
-										<div class="h-100 d-flex flex-column justify-content-center align-items-center">
-											<h3>Start Chat now</h3>
-											<p><small class="text-muted">Please select a person to chat with.</small></p>
-										</div>
-										{% else%}
-										<div id="chat-box-field" class="h-100">
-											<div class="chat-box" style="height:80%">
-												{% for chat in chats %} 
-
-												{% if chat.user_from == user %}
-												<div class="p-2 w-100 d-flex justify-content-end">
-													<div class=" chat-bubble  ml-2 mb-2 bg-primary text-light rounded" data-id="{{chat.id}}">
-														<p>{{chat.message}}</p>
-														<div class="d-flex justify-content-between"><small>You</small> <small>{{chat.date_created|date:"M-d-Y H:i"}}</small></div>
-													</div>
-												</div>
-												{% else %}
-
-												<div class="p-2 w-100 d-flex justify-content-start">
-													<div class="chat-bubble mr-2 mb-2 bg-light text-dark rounded" data-id="{{chat.id}}">
-														<p>{{chat.message}}</p>
-														<div class=" d-flex justify-content-between"><small>Sender</small> <small>{{chat.date_created|date:"M-d-Y H:i"}}</small></div>
-													</div>
-												</div>
-												{% endif %}
-
-												{% endfor %}
-											</div>
-											<div class="chat-box-form border-top p-2" style="height:20%">
-												<div class="w-100 h-100">
-													<form action="" id="chat-submit" class="h-100 d-flex ">
-														<input type="hidden" name="user_from" value="{{ user.id }}">
-														<input type="hidden" name="user_to" value="{{ chat_id }}">
-														<div class="col-md-10 h-100">
-															<textarea name="message" id="" class="h-100 w-100 form-control" placeholder="Write your message here"></textarea>
-														</div>
-														<button class="button btn btn-primary h-100 w-100 justify-content-center align-items-center d-flex">SEND</button>
-													</form>
-												</div>
-											</div>
-										</div>
-										{% endif %}
-									</div> -->
 									
-									<!-- <div class="chat-footer">
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<div class="btn-file btn">
-													<i class="fa fa-paperclip"></i>
-													<input type="file">
-												</div>
-											</div>
-											<form action="" id="chat-submit" class="h-100 d-flex">
-											<input type="hidden" name="user_from" value="{{user.id}}">
-											<input type="hidden" name="user_from" value="{{chat_id}}">	
-											<input type="text" class="input-msg-send form-control" placeholder="Type something">
-											<div class="input-group-append">
-												<button name="message" type="button" class="btn msg-send-btn"><i class="fab fa-telegram-plane"></i></button>
-											</div>
-											</form>
-											
-											
-										</div>
-									</div> -->
 								</div> 
 								
 								<!-- /Chat Right -->
@@ -305,7 +222,7 @@
 		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		<script>
 			$(function() {
-				$('div.dataTables_length select').addClass('bg-dark')
+				$('div.dataTables_length select').addClass('text-dark')
 			})
 		</script>
 		<script>

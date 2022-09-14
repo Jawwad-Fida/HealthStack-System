@@ -13,4 +13,5 @@ urlpatterns = [
     path('profile/', views.profile, name='chat-profile'),
     path('send/', views.send_chat, name='chat-send'),
     path('renew/', views.get_messages, name='chat-renew'),
+    
 ]
