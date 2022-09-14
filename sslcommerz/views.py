@@ -7,7 +7,7 @@ import random
 import string
 from .models import Payment
 from hospital.models import Patient
-from pharmacy.models import Order
+from pharmacy.models import Order, Cart
 from doctor.models import Appointment
 from django.contrib.auth.decorators import login_required
 
@@ -339,6 +339,8 @@ def ssl_payment_success(request):
             order.payment_status = "VALID"
             order.save()
             
+            Cart.objects.all().delete()
+            
     
             if sslcz.hash_validate_ipn(payment_data):
                 response = sslcz.validationTransactionOrder(payment_data['val_id'])
@@ -366,5 +368,16 @@ def ssl_payment_fail(request):
 def ssl_payment_cancel(request):
     return render(request, 'cancel.html')
 
-def payment_testing(request):
-    return render(request, 'testing.html')
+def payment_testing(request, pk):
+    # order = Order.objects.get(id=pk)
+    ob = Cart.objects.filter(order__id=pk)
+    len_ob = len(ob)
+    
+    list_id = []
+    list_name = []
+    for i in range(len_ob):
+        list_id.append(ob[i].item.serial_number)
+        list_name.append(ob[i].item.name)
+    
+    context = {'order': ob, 'len_ob': len_ob, 'list_id': list_id, 'list_name': list_name}
+    return render(request, 'testing.html', context)

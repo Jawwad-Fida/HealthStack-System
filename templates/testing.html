@@ -1,54 +1,35 @@
 <h1>Testing</h1>
 
-{{ sat }}
+{{ order }}
 <br>
 
-{{ sat_count }}
+{{ order.0 }}
 <br>
+
+{{ order.1 }}
+<br>
+
 <hr>
 
-{{ sun }}
+{{ order.0.item }}
 <br>
 
-{{ sun_count }}
-<br>
-<hr>
-{{ mon }}
-<br>    
-
-{{ mon_count }}
-<br>
-<hr>
-{{ tues }} 
-<br>
+{{ order.0.item.name }}
 <br>
 
-{{ tues_count }} 
+{{ order.1.item.serial_number }}
+<br>
+
 <hr>
 
-{{ wed }}
+{{ len_ob }}
 <br>
 
-{{ wed_count }}
-<br>
-<hr>
-
-
-{{ thurs }}
+{{ list_id }}
 <br>
 
-{{ thurs_count }}
+{{ list_name }}
 <br>
-<hr>
-
-
-{{ fri }}
-<br>
-
-{{ fri_count }}
-<br>
-<hr>
-
 
 {% comment %} {{ department_list }}
 <br>
