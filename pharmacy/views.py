@@ -11,6 +11,7 @@ from django.contrib import messages
 
 from hospital.models import Patient
 from pharmacy.models import Medicine, Cart, Order
+from .utils import searchMedicines
 
 
 # from django.db.models.signals import post_save, post_delete
@@ -27,10 +28,15 @@ def pharmacy_single_product(request,pk):
          
         patient = Patient.objects.get(user=request.user)
         medicines = Medicine.objects.get(serial_number=pk)
+        orders = Order.objects.filter(user=request.user, ordered=False)
         carts = Cart.objects.filter(user=request.user, purchased=False)
-        
-        context = {'patient': patient, 'medicines': medicines, 'carts': carts}
-        return render(request, 'pharmacy/product-single.html',context)
+        if carts.exists() and orders.exists():
+            order = orders[0]
+            context = {'patient': patient, 'medicines': medicines,'carts': carts,'order': order, 'orders': orders}
+            return render(request, 'pharmacy/product-single.html',context)
+        else:
+            context = {'patient': patient, 'medicines': medicines,'carts': carts,'orders': orders}
+            return render(request, 'pharmacy/product-single.html',context)
      else:
         logout(request)
         messages.error(request, 'Not Authorized')
@@ -40,12 +46,21 @@ def pharmacy_single_product(request,pk):
 @login_required(login_url="login")
 def pharmacy_shop(request):
     if request.user.is_authenticated and request.user.is_patient:
-         
+        
         patient = Patient.objects.get(user=request.user)
         medicines = Medicine.objects.all()
+        orders = Order.objects.filter(user=request.user, ordered=False)
+        carts = Cart.objects.filter(user=request.user, purchased=False)
         
-        context = {'patient': patient, 'medicines': medicines}
-        return render(request, 'pharmacy/shop.html', context)
+        medicines, search_query = searchMedicines(request)
+        
+        if carts.exists() and orders.exists():
+            order = orders[0]
+            context = {'patient': patient, 'medicines': medicines,'carts': carts,'order': order, 'orders': orders, 'search_query': search_query}
+            return render(request, 'Pharmacy/shop.html', context)
+        else:
+            context = {'patient': patient, 'medicines': medicines,'carts': carts,'orders': orders, 'search_query': search_query}
+            return render(request, 'Pharmacy/shop.html', context)
     
     else:
         logout(request)
@@ -90,20 +105,20 @@ def add_to_cart(request, pk):
                 order_item[0].quantity += 1
                 order_item[0].save()
                 # messages.warning(request, "This item quantity was updated!")
-                context = {'patient': patient,'medicines': medicines}
+                context = {'patient': patient,'medicines': medicines, 'order': order}
                 return render(request, 'pharmacy/shop.html', context)
             
             else:
                 order.orderitems.add(order_item[0])
                 # messages.warning(request, "This item is added to your cart!")
-                context = {'patient': patient,'medicines': medicines}
+                context = {'patient': patient,'medicines': medicines,'order': order}
                 return render(request, 'pharmacy/shop.html', context)
         else:
             order = Order(user=request.user)
             order.save()
             order.orderitems.add(order_item[0])
             # messages.warning(request, "This item is added to your cart!")
-            context = {'patient': patient,'medicines': medicines}
+            context = {'patient': patient,'medicines': medicines,'order': order}
             return render(request, 'pharmacy/shop.html', context)
     else:
         logout(request)
