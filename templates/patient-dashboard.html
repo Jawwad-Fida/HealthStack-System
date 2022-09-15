@@ -73,7 +73,7 @@
         </div>
       </div>
       <!-- /Breadcrumb -->
-
+      
       <!-- Page Content -->
       <div class="content">
         <div class="container-fluid">
@@ -516,6 +516,19 @@
 
     <!-- Searchbar JS -->
     <script src="{% static 'HealthStack-System/js/Normal/sidebar.js' %}"></script>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        {% endfor %}
+    </script>
+  {% endif %}
+
+
+
   </body>
 
   <!-- doccure/patient-dashboard.html  30 Nov 2019 04:12:16 GMT -->

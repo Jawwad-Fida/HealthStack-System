@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm, PatientForm
+from .forms import CustomUserCreationForm, PatientForm, PasswordResetForm
 from hospital.models import Hospital_Information, User, Patient 
 from doctor.models import Test, test_Cart, test_Order, Prescription_test
 
@@ -201,7 +201,8 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            if request.user.is_patient:          
+            if request.user.is_patient:   
+                messages.success(request, 'User Logged in Successfully')    
                 return redirect('patient-dashboard')
             else:
                 messages.error(request, 'Invalid credentials. Not a Patient')
@@ -214,7 +215,7 @@ def login_user(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutUser(request):
     logout(request)
-    messages.info(request, 'User Logged out')
+    messages.success(request, 'User Logged out')
     return redirect('login')
 
 
@@ -232,15 +233,14 @@ def patient_register(request):
             # user.username = user.username.lower()  # lowercase username
             user.save()
 
-            messages.success(request, 'User account was created!')
+            messages.success(request, 'Patient account was created!')
 
             # After user is created, we can log them in
             #login(request, user)
             return redirect('login')
 
         else:
-            messages.error(
-                request, 'An error has occurred during registration')
+            messages.error(request, 'An error has occurred during registration')
     # else:
     #     form = CustomUserCreationForm()
 
@@ -323,6 +323,7 @@ def profile_settings(request):
             patient.featured_image = featured_image
             
             patient.save()
+            
             return redirect('patient-dashboard')
     else:
         redirect('logout')  
@@ -826,6 +827,8 @@ def render_to_pdf(template_src, context_dict={}):
 #         # response['Content-Disposition']= content
 #         return response
 #     return HttpResponse("Not Found")
+
+
 def prescription_pdf(request,pk):
  if request.user.is_patient:
     patient = Patient.objects.get(user=request.user)
