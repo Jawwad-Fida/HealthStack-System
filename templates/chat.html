@@ -301,7 +301,11 @@
 						if (Object.keys(resp).length > 0) {
 							Object.keys(resp).map(k => {
 								if (resp[k].id.user_from == '{{user.id}}') {
-									bubble = '<li class="media sent">'+
+									bubble = 
+									'<div class="chat-body">'+
+										'<div class="chat-scroll chat-box">'+
+									'<ul class="list-unstyled">'+
+									'<li class="media sent">'+
 													'<div class="media-body">'+	
 														'<div class="msg-box">'+
 															'<div class="chat-bubble" data-id="' + resp[k].id + '">'+
@@ -317,9 +321,15 @@
 														'</div>'+
 														
 													'</div>'+
-												'</li>';
+												'</li>';                       
 								} else {
-									bubble = '<li class="media received">'+
+									bubble =  '<div class="chat-body">'+
+										'<div class="chat-scroll chat-box">'+
+									'<ul class="list-unstyled">'+
+									'<li class="media received">'+
+													'<div class="avatar">'+
+														'<img src="{{ doc.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">'+
+													'</div>'+
 													'<div class="media-body">'+	
 														'<div class="msg-box">'+
 															'<div class="chat-bubble" data-id="' + resp[k].id + '">'+
@@ -336,6 +346,7 @@
 														
 													'</div>'+
 												'</li>';
+												
 								}
 								// console.log(bubble)
 								$('.chat-box').append(bubble)
