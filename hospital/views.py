@@ -773,7 +773,7 @@ def test_remove_cart(request, pk):
         else:
             messages.info(request, "You don't have an active order")
             context = {'patient': patient,'test': item,'prescription':prescription,'prescription_medicine':prescription_medicine,'prescription_test':prescription_test}
-            return render(request, 'prescription-view.html', context)
+            return redirect('prescription-view', pk=prescription.prescription_id)
     else:
         logout(request)
         messages.info(request, 'Not Authorized')
