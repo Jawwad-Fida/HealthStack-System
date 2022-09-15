@@ -683,6 +683,7 @@ def test_add_to_cart(request, pk, pk2):
         prescription = Prescription.objects.filter(prescription_id=pk)
         # prescription_medicine = Prescription_medicine.objects.filter(prescriptison__in=prescription)
         # prescription_tests = Prescription_test.objects.filter(prescription__in=prescription)
+        # test = Test_Information.objects.get(test_id=test_id)
 
 
         item = get_object_or_404(Prescription_test, test_info_id=pk2)
@@ -718,7 +719,8 @@ def test_cart(request):
         
         test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
         test_orders = test_Order.objects.filter(user=request.user, ordered=False)
-        
+        # prescription = Prescription.objects.filter(prescription_id=pk)
+        # prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
         # item.test_info_id
         
         if test_carts.exists() and test_orders.exists():
@@ -771,10 +773,6 @@ def test_remove_cart(request, pk):
         logout(request)
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
-
-
-
-
 
 def prescription_view(request,pk):
       if request.user.is_patient:

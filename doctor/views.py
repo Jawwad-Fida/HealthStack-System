@@ -467,6 +467,7 @@ def create_prescription(request,pk):
             patient = Patient.objects.get(patient_id=pk) 
             create_date = datetime.date.today()
             
+
             if request.method == 'POST':
                 prescription = Prescription(doctor=doctor, patient=patient)
                 
@@ -480,6 +481,8 @@ def create_prescription(request,pk):
                 medicine_instruction = request.POST.getlist('instruction')
                 extra_information = request.POST.get('extra_information')
                 test_info_id = request.POST.getlist('id')
+
+                
 
             
                 prescription.extra_information = extra_information
@@ -502,6 +505,9 @@ def create_prescription(request,pk):
                     tests.test_name = test_name[i]
                     tests.test_description = test_description[i]
                     tests.test_info_id = test_info_id[i]
+                    test_info = Test_Information.objects.get(test_id=test_info_id[i])
+                    tests.test_info_price = test_info.test_price
+                   
                     tests.save()
 
                 return redirect('patient-profile', pk=patient.patient_id)
