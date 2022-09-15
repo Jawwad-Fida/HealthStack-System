@@ -29,7 +29,7 @@ from django.core.mail import BadHeaderError, send_mail
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.utils.html import strip_tags
-
+from .utils import searchMedicines
 
 # Create your views here.
 @login_required(login_url='admin_login')
@@ -534,7 +534,10 @@ def medicine_list(request):
         if request.user.is_pharmacist:
             pharmacist = Pharmacist.objects.get(user=request.user)
             medicine = Medicine.objects.all()
-            context = {'medicine':medicine,'pharmacist':pharmacist}
+            
+            medicine, search_query = searchMedicines(request)
+            
+            context = {'medicine':medicine,'pharmacist':pharmacist,'search_query': search_query}
             return render(request, 'hospital_admin/medicine-list.html',context)
 
 @login_required(login_url='admin_login')

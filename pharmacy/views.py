@@ -68,23 +68,6 @@ def pharmacy_shop(request):
         return render(request, 'patient-login.html')  
     
 @login_required(login_url="login")
-def demo_medicine_list(request):
-    if request.user.is_authenticated and request.user.is_patient:
-         
-        patient = Patient.objects.get(user=request.user)
-        medicines = Medicine.objects.all()
-        
-        context = {'patient': patient, 'medicines': medicines}
-        return render(request, 'pharmacy/demo-medicine-list.html', context)
-    
-    else:
-        logout(request)
-        messages.info(request, 'Not Authorized')
-        return render(request, 'patient-login.html')  
-
-
-
-@login_required(login_url="login")
 def checkout(request):
     return render(request, 'pharmacy/checkout.html')
 
