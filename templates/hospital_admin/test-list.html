@@ -101,20 +101,20 @@
 											<thead>
 												<tr>													
 													<th>Test ID</th>
-                                                    <th>Test Name</th>
+                          <th>Test Name</th>
 													<th>Test Price</th>
-                                                    <th>Action</th>												
+                        <th>Action</th>												
 												</tr>
 											</thead>
 											<tbody>
-                                                    {% for t in test%}
+                       {% for t in test%}
 												<tr>
-                                                        <td>{{t.test_id}}</td>
-                                                        <td>{{t.test_name}}</td>
-                                                        <td>{{t.test_price}}</td>
-                                                        <td><a href="{% url 'delete-test' pk=t.test_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
+                          <td>{{t.test_id}}</td>
+                          <td>{{t.test_name}}</td>
+                          <td>{{t.test_price}}</td>
+                          <td><a href="{% url 'delete-test' pk=t.test_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
 												</tr>
-                                                             {% endfor %}
+                   {% endfor %}
 												
 												
 											</tbody>

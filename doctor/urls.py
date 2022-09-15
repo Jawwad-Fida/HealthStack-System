@@ -33,6 +33,8 @@ urlpatterns = [
     path('patient-search/<int:pk>/', views.patient_search, name='patient-search'),
     path('pdf/<int:pk>/',views.report_pdf, name='pdf'),
     path('doctor-test-list/', views.doctor_test_list, name='doctor-test-list'),
+    path('delete-prescription/<int:pk>/', views.delete_prescription, name='delete-prescription'),
+    path('edit-prescription/<int:pk>/', views.edit_prescription, name='edit-prescription'),
 
     # path('testing/',views.testing, name='testing'),
    

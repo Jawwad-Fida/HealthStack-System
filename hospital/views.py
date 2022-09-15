@@ -720,6 +720,10 @@ def test_cart(request):
         test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
         test_orders = test_Order.objects.filter(user=request.user, ordered=False)
 
+        # prescription = Prescription.objects.filter(prescription_id=pk)
+        # prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
+        # item.test_info_id
+
         
         if test_carts.exists() and test_orders.exists():
             test_order = test_orders[0]
