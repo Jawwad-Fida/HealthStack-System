@@ -496,7 +496,7 @@ def create_report(request, pk):
                 tests.save()
                 
 
-            return redirect('labworker-dashboard')
+            return redirect('mypatient-list')
 
         context = {'prescription':prescription,'lab_workers':lab_workers,'tests':tests}
         return render(request, 'hospital_admin/create-report.html',context)
