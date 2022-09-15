@@ -4,7 +4,6 @@ from django.http import HttpResponse
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
 
-
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,7 +11,6 @@ from django.contrib import messages
 from hospital.models import Patient
 from pharmacy.models import Medicine, Cart, Order
 from .utils import searchMedicines
-
 
 # from django.db.models.signals import post_save, post_delete
 # from django.dispatch import receiver

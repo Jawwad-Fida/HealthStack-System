@@ -9,4 +9,3 @@ admin.site.register(User)
 admin.site.register(Hospital_Information)
 admin.site.register(Patient)
 
-# admin.site.register(Tag)
