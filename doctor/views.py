@@ -1,5 +1,7 @@
 import email
+from email import message
 from multiprocessing import context
+from turtle import title
 from django.shortcuts import render, redirect
 # from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -12,8 +14,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
+
+from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
+from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription, Doctor_review
+
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician, Test_Information
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription
+
 
 from django.db.models import Q, Count
 from django.contrib.auth.signals import user_logged_in, user_logged_out
@@ -668,3 +675,41 @@ def got_online(sender, user, request, **kwargs):
 def got_offline(sender, user, request, **kwargs):   
     user.login_status = False
     user.save()
+
+
+def doctor_review(request, pk):
+    if request.user.is_doctor:
+        # doctor = Doctor_Information.objects.get(user_id=pk)
+        doctor = Doctor_Information.objects.get(user=request.user)
+        if request.method == 'GET':
+            
+            doctor_review = Doctor_review.objects.filter(doctor=doctor)
+            
+            context = {'doctor': doctor, 'doctor_review': doctor_review}  
+            return render(request, 'doctor-profile.html', context)
+
+    elif request.user.is_patient:
+        doctor = Doctor_Information.objects.get(doctor_id=pk)
+        patient = Patient.objects.get(user=request.user)
+        doctor_review = Doctor_review.objects.filter(doctor=doctor)
+
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            message = request.POST.get('message')
+
+
+            doctor_review.title = title
+            doctor_review.message = message
+            doctor.save()
+          
+
+            context = {'doctor': doctor, 'patient': patient, 'doctor_review': doctor_review}  
+            return render(request, 'doctor-profile.html', context)
+    else:
+        logout(request)
+ 
+ 
+   
+ 
+
+
