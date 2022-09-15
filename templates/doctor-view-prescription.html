@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- doccure/patient-profile.html  30 Nov 2019 04:12:09 GMT -->
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+	<title>HealthStack</title>
+
+	<!-- Favicons -->
+	<link type="image/x-icon" href="{% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon" />
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}" />
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet"
+		href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}" />
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}" />
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+		<!-- Header -->
+		<header class="header">{% include 'doctor-navbar.html' %}</header>
+		<!-- /Header -->
+
+
+		<!-- Breadcrumb -->
+		<div class="breadcrumb-bar">
+			<div class="container-fluid">
+				<div class="row align-items-center">
+					<div class="col-md-12 col-12">
+						<nav aria-label="breadcrumb" class="page-breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="{% url 'hospital_home'%}">Home</a>
+								</li>
+								<li class="breadcrumb-item active" aria-current="page">
+									Edit Prescription
+								</li>
+							</ol>
+						</nav>
+						<h2 class="breadcrumb-title">AEditPrescription</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Breadcrumb -->
+
+		<!-- Page Content -->
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<!-- Profile Sidebar -->
+					<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+						<div>{% include 'doctor-sidebar.html' %}</div>
+					</div>
+					<!-- / Profile Sidebar -->
+
+					<div class="col-md-7 col-lg-6 col-xl-9">
+
+
+						<div class="invoice-content">
+							<div class="invoice-item">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="invoice-logo">
+											<img src="{% static 'HealthStack-System/images/Normal/FullLogo_Transparent_NoBuffer.png'%}"
+												alt="logo">
+										</div>
+									</div>
+									<div class="col-md-6">
+										
+										<p class="invoice-details">
+											<strong>Prescription ID:</strong> {{prescription.prescription_id}} <br>
+											<strong>Patient ID:</strong> {{prescription.patient.patient_id}} <br>
+											<strong>Date:</strong> {{prescription.create_date }}
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Invoice Item -->
+							<div class="invoice-item">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="invoice-info">
+											<strong class="customer-text">Doctor Information</strong>
+											<p class="invoice-details invoice-details-two">
+												<b>Name: </b>{{prescription.doctor.name}} <br>
+												<b>Department: </b>{{prescription.doctor.department_name}}<br>
+												<b>Email: </b>{{prescription.doctor.email}} <br>
+												<b>Phone Number: </b>{{prescription.doctor.phone_number}}
+											</p>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="invoice-info invoice-info2">
+											<strong class="customer-text">Prescription To</strong>
+											<p class="invoice-details">
+												<b>Name: </b>{{prescription.patient.name}}<br>
+												<b>Addtress: </b>{{prescription.patient.address}}<br>
+												<b>Email: </b>{{prescription.patient.email}}<br>
+												<b>Phone Number: </b>{{prescription.prescription_id}}
+
+											</p>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Invoice Item -->
+
+
+
+							<!-- Invoice Item -->
+							<div class="invoice-item invoice-table-wrap">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="table-responsive">
+											<table class="invoice-table table table-bordered">
+												<thead>
+													<tr style="background-color: rgb(84, 147, 199);">
+
+													<tr>
+														<th>Medicine Name</th>
+														<th class="text-center">Quantity</th>
+														<th class="text-center">Frequency</th>
+														<th class="text-center">Duration</th>
+														<th class="text-center">Relation with meal</th>
+														<th class="text-center">Instruction</th>
+
+
+													</tr>
+													{% for pm in medicines %}
+													<tr>
+														<th class="text-center">{{pm.medicine_name}}</td>
+														<td class="text-center">{{pm.quantity}}</td>
+														<td class="text-center">{{pm.frequency}}</td>
+														<td class="text-center">{{pm.duration}}</td>
+														<td class="text-center">{{pm.relation_with_meal}}</td>
+														<td class="text-center">{{pm.instruction}}</td>
+
+
+													</tr>
+													{% endfor %}
+													</tbody>
+											</table>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+							<!-- Invoice Item -->
+							<div class="invoice-item invoice-table-wrap">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="table-responsive">
+											<table class="invoice-table table table-bordered">
+												<thead>
+													<tr>
+														<th class="text-center">Test Name</th>
+														<th class="text-center">Description</th>
+													</tr>
+												</thead>
+												<tbody>
+													{% for pt in tests %}
+													<tr>
+
+														<td class="text-center">{{pt.test_name}}</td>
+														<td class="text-center">{{pt.test_description}}</td>
+													</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<!-- /Invoice Item -->
+
+
+							<!-- Invoice Information -->
+							<!-- <div class="other-info">
+									<h4>Extra Notes</h4>
+									<p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
+								</div> -->
+							<div class="invoice-item invoice-table-wrap">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="table-responsive">
+											<table class="invoice-table table table-bordered">
+												<thead>
+													<tr>
+														<th>Advice/Recommendation</th>
+
+
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>{{prescription.extra_information}}</td>
+
+
+													</tr>
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+							</div>
+							<!-- /Invoice Information -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	</div>
+	<!-- /Page Content -->
+
+	<!-- Footer -->
+	{% include 'footer.html' %}
+	<!-- /Footer -->
+	</div>
+	<!-- /Main Wrapper -->
+
+	<!-- Add Medical Records Modal -->
+	<div class="modal fade custom-modal" id="add_medical_records">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Medical Records</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Date</label>
+							<input type="text" class="form-control datetimepicker" value="31-10-2019" />
+						</div>
+						<div class="form-group">
+							<label>Description ( Optional )</label>
+							<textarea class="form-control"></textarea>
+						</div>
+						<div class="form-group">
+							<label>Upload File</label>
+							<input type="file" class="form-control" />
+						</div>
+						<div class="submit-section text-center">
+							<button type="submit" class="btn btn-primary submit-btn">
+								Submit
+							</button>
+							<button type="button" class="btn btn-secondary submit-btn" data-dismiss="modal">
+								Cancel
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- /Add Medical Records Modal -->
+
+	<!-- jQuery -->
+	<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+	<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+	<!-- Datetimepicker JS -->
+	<!-- <script src="{% static 'HealthStack-System/js/Normal/moment.min.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/bootstrap-datetimepicker.min.js' %}"></script> -->
+
+	<!-- Prescription Settings JS -->
+	<script src="{% static 'HealthStack-System/js/Normal/prescription-settings.js' %}"></script>
+
+	<!-- Datatables JS -->
+	<script src="{% static 'HealthStack-System/plugins/admin/datatables/jquery.dataTables.min.js'%}"></script>
+	<script src="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.js'%}"></script>
+
+	<!-- Sticky Sidebar JS -->
+	<!-- <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+    <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script> -->
+
+	<!-- Custom JS -->
+	<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+
+</body>
+
+<!-- doccure/patient-profile.html  30 Nov 2019 04:12:13 GMT -->
+
+</html>

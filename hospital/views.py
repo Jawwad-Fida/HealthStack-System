@@ -4,36 +4,29 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
+
 from .forms import CustomUserCreationForm, PatientForm, PasswordResetForm
 from hospital.models import Hospital_Information, User, Patient 
 from doctor.models import Test, testCart, testOrder
-
-
 from hospital_admin.models import hospital_department, specialization, service, Test_Information
 from django.views.decorators.cache import cache_control
-
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime
 import datetime
+
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
-
-# from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-# from doctor.models import Prescription
-
 from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
+
 from .models import Patient, User
 from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Prescription_medicine, Prescription_test
-
-
 from sslcommerz.models import Payment
 from django.db.models import Q, Count
 import re
-
 from io import BytesIO
 from urllib import response
 
@@ -44,14 +37,8 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
-# from hospital.models import Patient
-
-
 
 # Create your views here.
-
-# function to return views for the urls
-
 
 def hospital_home(request):
     doctors = Doctor_Information.objects.filter(register_status='Accepted')
@@ -59,7 +46,6 @@ def hospital_home(request):
     return render(request, 'index-2.html', context)
 
 @login_required(login_url="login")
-
 def change_password(request,pk):
     patient = Patient.objects.get(user_id=pk)
     context={"patient":patient}
@@ -136,8 +122,6 @@ def resetPassword(request):
     return render(request, 'reset_password.html', context)
     
     
-
-
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
@@ -148,6 +132,7 @@ def about_us(request):
 
 # def multiple_hospital(request):
 #     return render(request, 'multiple-hospital.html')
+
 @login_required(login_url="login")
 def chat(request, pk):
     patient = Patient.objects.get(user_id=pk)
@@ -169,19 +154,6 @@ def chat_doctor(request):
 @login_required(login_url="login")
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
-
-
-# def login(request):
-#     return render(request, 'login.html')
-
-# def authenticate_user(email, password):
-#     try:
-#         user = User.objects.get(email=email)
-#     except User.DoesNotExist:
-#         return None
-#     else:
-#         if user.check_password(password):
-#             return user
 
 
 def login_user(request):
@@ -235,8 +207,7 @@ def patient_register(request):
 
             messages.success(request, 'Patient account was created!')
 
-            # After user is created, we can log them in
-            #login(request, user)
+            # After user is created, we can log them in --> login(request, user)
             return redirect('login')
 
         else:
@@ -401,7 +372,6 @@ def hospital_profile(request, pk):
             #     vald = vald.replace("]", "")
             #     vald = vald.replace(",", "")
             #     department_list = vald.split()
-                
             
             context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
             return render(request, 'hospital-profile.html', context)
@@ -532,72 +502,8 @@ def hospital_doctor_register(request, pk):
     
 def testing(request):
     # hospitals = Hospital_Information.objects.get(hospital_id=1)
-        
-    # departments = hospital_department.objects.filter(hospital=hospitals)
-    # specializations = specialization.objects.filter(hospital=hospitals)
-    # services = service.objects.filter(hospital=hospitals)
-    
-    # department_list = None
-    # for d in departments:
-    #     vald = d.hospital_department_name
-    #     vald = re.sub("'", "", vald)
-    #     vald = vald.replace("[", "")
-    #     vald = vald.replace("]", "")
-    #     vald = vald.replace(",", "")
-    #     department_list = vald.split()
-    #     # department_list.append(d.hospital_department_name)
-    
-    # # education = zip(degree_array, institute_array)
-
-    
-    # given_date = "09/08/2022"
-    # transformed_date = datetime.datetime.strptime(given_date, '%m/%d/%Y').strftime('%Y-%m-%d')
-    # transformed_date = str(transformed_date)
-    
-
-    sat_date = datetime.date.today()
-    sat_date_str = str(sat_date)
-    sat = sat_date.strftime("%A")
-
-    sun_date = sat_date + datetime.timedelta(days=1) 
-    sun_date_str = str(sun_date)
-    sun = sun_date.strftime("%A")
-    
-    mon_date = sat_date + datetime.timedelta(days=2) 
-    mon_date_str = str(mon_date)
-    mon = mon_date.strftime("%A")
-    
-    tues_date = sat_date + datetime.timedelta(days=3) 
-    tues_date_str = str(tues_date)
-    tues = tues_date.strftime("%A")
-    
-    wed_date = sat_date + datetime.timedelta(days=4) 
-    wed_date_str = str(wed_date)
-    wed = wed_date.strftime("%A")
-    
-    thurs_date = sat_date + datetime.timedelta(days=5) 
-    thurs_date_str = str(thurs_date)
-    thurs = thurs_date.strftime("%A")
-    
-    fri_date = sat_date + datetime.timedelta(days=6) 
-    fri_date_str = str(fri_date)
-    fri = fri_date.strftime("%A")
-    
-    
-    day = datetime.date.today().strftime("%A")  
-
-    sat_count = Appointment.objects.filter(date=sat_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
-    sun_count = Appointment.objects.filter(date=sun_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
-    mon_count = Appointment.objects.filter(date=mon_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
-    tues_count = Appointment.objects.filter(date=tues_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
-    wed_count = Appointment.objects.filter(date=wed_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
-    thurs_count = Appointment.objects.filter(date=thurs_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
-    fri_count = Appointment.objects.filter(date=fri_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
-    
-    
-    context = {'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
-    # test range, len, and loop to show variables before moving on to doctor profile
-    
+    test = "test"
+    context = {'test': test}
     return render(request, 'testing.html', context)
 
 def view_report(request,pk):
@@ -608,7 +514,6 @@ def view_report(request,pk):
         test = Test.objects.filter(report__in=report)
 
         # current_date = datetime.date.today()
-
         context = {'patient':patient,'report':report,'test':test,'specimen':specimen}
         return render(request, 'view-report.html',context)
     else:
@@ -618,7 +523,6 @@ def view_report(request,pk):
 def test_cart(request):
     return render(request, 'test-cart.html')
 
-# test cart system
 
 @login_required(login_url="login")
 def test_single(request,pk):
@@ -636,7 +540,6 @@ def test_single(request,pk):
         return render(request, 'patient-login.html')  
 
 
-# @login_required(login_url="login")
 # def test_shop(request):
 #     if request.user.is_authenticated and request.user.is_patient:
          
@@ -651,7 +554,7 @@ def test_single(request,pk):
 #         messages.info(request, 'Not Authorized')
 #         return render(request, 'patient-login.html')  
     
-# @login_required(login_url="login")
+
 # def test_list(request):
 #     if request.user.is_authenticated and request.user.is_patient:
          
@@ -667,12 +570,6 @@ def test_single(request,pk):
 #         return render(request, 'patient-login.html')  
 
 
-
-# @login_required(login_url="login")
-# def test_checkout(request):
-#     return render(request, 'pharmacy/checkout.html')
-
-
 @login_required(login_url="login")
 def test_add_to_cart(request, pk, pk2):
     if request.user.is_authenticated and request.user.is_patient:
@@ -685,7 +582,6 @@ def test_add_to_cart(request, pk, pk2):
         # prescription_tests = Prescription_test.objects.filter(prescription__in=prescription)
         # test = Test_Information.objects.get(test_id=test_id)
 
-
         item = get_object_or_404(Prescription_test, test_info_id=pk2)
         order_item = testCart.objects.get_or_create(item=item, user=request.user, purchased=False)
         order_qs = testOrder.objects.filter(user=request.user, ordered=False)
@@ -693,7 +589,7 @@ def test_add_to_cart(request, pk, pk2):
         if order_qs.exists():
             order = order_qs[0]
             order.orderitems.add(order_item[0])
-            messages.info(request, "This test is added to your cart!")
+            # messages.info(request, "This test is added to your cart!")
             return redirect("prescription-view", pk=pk)
         else:
             order = testOrder(user=request.user)
@@ -722,8 +618,6 @@ def test_cart(request):
 
         # prescription = Prescription.objects.filter(prescription_id=pk)
         # prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
-        # item.test_info_id
-
         
         if test_carts.exists() and test_orders.exists():
             test_order = test_orders[0]
@@ -731,7 +625,7 @@ def test_cart(request):
             context = {'test_carts': test_carts,'test_order': test_order, 'patient': patient}
             return render(request, 'test-cart.html', context)
         else:
-            messages.warning(request, "You don't have any test in your cart!")
+            # messages.warning(request, "You don't have any test in your cart!")
             context = {'patient': patient,'prescription_test':prescription_test}
             return render(request, 'prescription-view.html', context)
     else:
@@ -755,7 +649,6 @@ def test_remove_cart(request, pk):
         test_carts = testCart.objects.filter(user=request.user, purchased=False)
         
         # item = get_object_or_404(test, pk=pk)
-        # item = test
         test_order_qs = testOrder.objects.filter(user=request.user, ordered=False)
         if test_order_qs.exists():
             test_order = test_order_qs[0]
@@ -767,11 +660,11 @@ def test_remove_cart(request, pk):
                 context = {'test_carts': test_carts,'test_order': test_order,'patient': patient,}
                 return render(request, 'test-cart.html', context)
             else:
-                messages.info(request, "This test was not in your cart")
+                # messages.info(request, "This test was not in your cart")
                 context = {'patient': patient,'test': item,'prescription':prescription,'prescription_medicine':prescription_medicine,'prescription_test':prescription_test}
                 return render(request, 'prescription-view.html', context)
         else:
-            messages.info(request, "You don't have an active order")
+            # messages.info(request, "You don't have an active order")
             context = {'patient': patient,'test': item,'prescription':prescription,'prescription_medicine':prescription_medicine,'prescription_test':prescription_test}
             return redirect('prescription-view', pk=prescription.prescription_id)
     else:
@@ -800,8 +693,6 @@ def render_to_pdf(template_src, context_dict={}):
     if not pres_pdf.err:
         return HttpResponse(result.getvalue(),content_type="aplication/pres_pdf")
     return None
-
-
 
 
 # def prescription_pdf(request,pk):
@@ -838,7 +729,6 @@ def prescription_pdf(request,pk):
     return HttpResponse("Not Found")
 
 
-
 @receiver(user_logged_in)
 def got_online(sender, user, request, **kwargs):    
     user.login_status = True
@@ -848,3 +738,6 @@ def got_online(sender, user, request, **kwargs):
 def got_offline(sender, user, request, **kwargs):   
     user.login_status = False
     user.save()
+    
+
+

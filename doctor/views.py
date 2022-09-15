@@ -5,7 +5,6 @@ from turtle import title
 from django.shortcuts import render, redirect
 # from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
 from hospital_admin.views import prescription_list
 from .forms import DoctorUserCreationForm, DoctorForm
 
@@ -17,7 +16,6 @@ from hospital.models import User, Patient
 
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription, Doctor_review
-
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician, Test_Information
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription
 
@@ -273,7 +271,6 @@ def reject_appointment(request, pk):
     return redirect('doctor-dashboard')
 
 
-
 #         end_year = doctor.end_year
 #         end_year = re.sub("'", "", end_year)
 #         end_year = end_year.replace("[", "")
@@ -320,15 +317,8 @@ def delete_experience(request, pk):
         experiences.delete()
         return redirect('doctor-profile-settings')
       
-            
-#             if degree:
-#                 degree = re.sub("'", "", degree)
-#                 degree = degree.replace("[", "")
-#                 degree = degree.replace("]", "")
-#                 degree = degree.replace(",", "")
-#                 degree_array = degree.split()
-      
-        
+
+       
 @login_required(login_url="doctor-login")
 def doctor_profile_settings(request):
     # profile_Settings.js
@@ -460,14 +450,12 @@ def patient_profile(request, pk):
         doctor = Doctor_Information.objects.get(user=request.user)
         patient = Patient.objects.get(patient_id=pk)
         appointments = Appointment.objects.filter(doctor=doctor).filter(patient=patient)
-        prescription = Prescription.objects.filter(doctor=doctor).filter(patient=patient) 
+        prescription = Prescription.objects.filter(doctor=doctor).filter(patient=patient)
+        report = Report.objects.filter(doctor=doctor).filter(patient=patient) 
     else:
         redirect('doctor-logout')
-    context = {'doctor': doctor, 'appointments': appointments, 'patient': patient, 'prescription': prescription}  
+    context = {'doctor': doctor, 'appointments': appointments, 'patient': patient, 'prescription': prescription, 'report': report}  
     return render(request, 'patient-profile.html', context)
-
-
-
 
 
 
@@ -492,8 +480,6 @@ def create_prescription(request,pk):
                 medicine_instruction = request.POST.getlist('instruction')
                 extra_information = request.POST.get('extra_information')
                 test_info_id = request.POST.getlist('id')
-
-                
 
             
                 prescription.extra_information = extra_information
@@ -527,10 +513,7 @@ def create_prescription(request,pk):
         return render(request, 'create-prescription.html',context)
 
         
-
-
-       
-
+        
 def render_to_pdf(template_src, context_dict={}):
     template=get_template(template_src)
     html=template.render(context_dict)
@@ -539,8 +522,6 @@ def render_to_pdf(template_src, context_dict={}):
     if not pdf.err:
         return HttpResponse(result.getvalue(),content_type="aplication/pdf")
     return None
-
-
 
 
 def report_pdf(request, pk):
@@ -615,10 +596,11 @@ def delete_prescription(request, pk):
         return render(request, 'doctor-login.html')
 
 @login_required(login_url="login")
-def edit_prescription(request, pk):
+def doctor_view_prescription(request, pk):
     if request.user.is_authenticated and request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
         prescriptions = Prescription.objects.get(prescription_id=pk)
+
         if request.method == 'GET':
             medicines = Prescription_medicine.objects.filter(prescription=prescriptions)
             tests = Prescription_test.objects.filter(prescription=prescriptions)
@@ -660,10 +642,29 @@ def edit_prescription(request, pk):
             return redirect('patient-profile', pk=prescriptions.patient_id)
 
 
+        medicines = Prescription_medicine.objects.filter(prescription=prescriptions)
+        tests = Prescription_test.objects.filter(prescription=prescriptions)
 
+        context = {'prescription': prescriptions, 'medicines': medicines, 'tests': tests, 'doctor': doctor}
+        return render(request, 'doctor-view-prescription.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
 
-
-
+@login_required(login_url="login")
+def doctor_view_report(request, pk):
+    if request.user.is_authenticated and request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        report = Report.objects.get(report_id=pk)
+        specimen = Specimen.objects.filter(report=report)
+        test = Test.objects.filter(report=report)
+        context = {'report': report, 'test': test, 'specimen': specimen, 'doctor': doctor}
+        return render(request, 'doctor-view-report.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
 
 
 

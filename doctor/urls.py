@@ -36,7 +36,8 @@ urlpatterns = [
     path('doctor_review/<int:pk>/', views.doctor_review, name='doctor_review'),
     path('doctor-test-list/', views.doctor_test_list, name='doctor-test-list'),
     path('delete-prescription/<int:pk>/', views.delete_prescription, name='delete-prescription'),
-    path('edit-prescription/<int:pk>/', views.edit_prescription, name='edit-prescription'),
+    path('doctor-view-prescription/<int:pk>/', views.doctor_view_prescription, name='doctor-view-prescription'),
+    path('doctor-view-report/<int:pk>/', views.doctor_view_report, name='doctor-view-report'),
 
 
     # path('testing/',views.testing, name='testing'),
