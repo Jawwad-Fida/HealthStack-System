@@ -293,8 +293,9 @@ def doctor_profile(request, pk):
     
     educations = Education.objects.filter(doctor=doctor).order_by('-year_of_completion')
     experiences = Experience.objects.filter(doctor=doctor).order_by('-from_year','-to_year')
+    doctor_review = Doctor_review.objects.filter(doctor=doctor)
             
-    context = {'doctor': doctor, 'patient': patient, 'educations': educations, 'experiences': experiences}
+    context = {'doctor': doctor, 'patient': patient, 'educations': educations, 'experiences': experiences, 'doctor_review': doctor_review}
     return render(request, 'doctor-profile.html', context)
 
 @login_required(login_url="doctor-login")
@@ -449,10 +450,11 @@ def patient_profile(request, pk):
         doctor = Doctor_Information.objects.get(user=request.user)
         patient = Patient.objects.get(patient_id=pk)
         appointments = Appointment.objects.filter(doctor=doctor).filter(patient=patient)
-        prescription = Prescription.objects.filter(doctor=doctor).filter(patient=patient) 
+        prescription = Prescription.objects.filter(doctor=doctor).filter(patient=patient)
+        report = Report.objects.filter(doctor=doctor).filter(patient=patient) 
     else:
         redirect('doctor-logout')
-    context = {'doctor': doctor, 'appointments': appointments, 'patient': patient, 'prescription': prescription}  
+    context = {'doctor': doctor, 'appointments': appointments, 'patient': patient, 'prescription': prescription, 'report': report}  
     return render(request, 'patient-profile.html', context)
 
 
@@ -594,10 +596,11 @@ def delete_prescription(request, pk):
         return render(request, 'doctor-login.html')
 
 @login_required(login_url="login")
-def edit_prescription(request, pk):
+def doctor_view_prescription(request, pk):
     if request.user.is_authenticated and request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
         prescriptions = Prescription.objects.get(prescription_id=pk)
+
         if request.method == 'GET':
             medicines = Prescription_medicine.objects.filter(prescription=prescriptions)
             tests = Prescription_test.objects.filter(prescription=prescriptions)
@@ -639,6 +642,31 @@ def edit_prescription(request, pk):
             return redirect('patient-profile', pk=prescriptions.patient_id)
 
 
+        medicines = Prescription_medicine.objects.filter(prescription=prescriptions)
+        tests = Prescription_test.objects.filter(prescription=prescriptions)
+
+        context = {'prescription': prescriptions, 'medicines': medicines, 'tests': tests, 'doctor': doctor}
+        return render(request, 'doctor-view-prescription.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
+
+@login_required(login_url="login")
+def doctor_view_report(request, pk):
+    if request.user.is_authenticated and request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        report = Report.objects.get(report_id=pk)
+        specimen = Specimen.objects.filter(report=report)
+        test = Test.objects.filter(report=report)
+        context = {'report': report, 'test': test, 'specimen': specimen, 'doctor': doctor}
+        return render(request, 'doctor-view-report.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
+
+
 
 @receiver(user_logged_in)
 def got_online(sender, user, request, **kwargs):    
@@ -655,12 +683,11 @@ def doctor_review(request, pk):
     if request.user.is_doctor:
         # doctor = Doctor_Information.objects.get(user_id=pk)
         doctor = Doctor_Information.objects.get(user=request.user)
-        if request.method == 'GET':
             
-            doctor_review = Doctor_review.objects.filter(doctor=doctor)
-            
-            context = {'doctor': doctor, 'doctor_review': doctor_review}  
-            return render(request, 'doctor-profile.html', context)
+        doctor_review = Doctor_review.objects.filter(doctor=doctor)
+        
+        context = {'doctor': doctor, 'doctor_review': doctor_review}  
+        return render(request, 'doctor-profile.html', context)
 
     if request.user.is_patient:
         doctor = Doctor_Information.objects.get(doctor_id=pk)
