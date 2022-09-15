@@ -67,6 +67,10 @@ urlpatterns = [
 
     path('mypatient-list/', views.mypatient_list,name='mypatient-list'),
     path('prescription-list/<int:pk>', views.prescription_list,name='prescription-list'),
+    path('add-test/', views.add_test,name='add-test'),
+    path('test-list/', views.test_list,name='test-list'),
+    path('delete-test/<int:pk>/', views.delete_test,name='delete-test'),
+    
 
     
 ]

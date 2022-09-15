@@ -15,8 +15,9 @@ from pharmacy.models import Medicine, Pharmacist
 from doctor.models import Doctor_Information, Prescription, Prescription_test, Report, Appointment, Experience , Education,Specimen,Test
 
 from sslcommerz.models import Payment
-from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm , PharmacistCreationForm
-from .models import Admin_Information,specialization,service,hospital_department, Clinical_Laboratory_Technician
+from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm , PharmacistCreationForm 
+
+from .models import Admin_Information,specialization,service,hospital_department, Clinical_Laboratory_Technician, Test_Information
 import random,re
 import string
 from django.db.models import  Count
@@ -891,6 +892,49 @@ def prescription_list(request,pk):
             prescription = Prescription.objects.filter(patient=patient)
             context = {'prescription': prescription,'lab_workers':lab_workers,'patient':patient}
             return render(request, 'hospital_admin/prescription-list.html',context)
+
+@login_required(login_url='admin-login')
+def add_test(request):
+    if request.user.is_labworker:
+        lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        tests=Test_Information()
+        test_name = request.POST['test_name']
+        test_price = request.POST['test_price']
+        tests.test_name = test_name
+        tests.test_price = test_price
+
+        tests.save()
+
+        return redirect('test-list')
+        
+    context = {'lab_workers': lab_workers}
+    return render(request, 'hospital_admin/add-test.html', context)
+
+@login_required(login_url='admin-login')
+def test_list(request):
+    if request.user.is_labworker:
+        lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
+        test = Test_Information.objects.all()
+        context = {'test':test,'lab_workers':lab_workers}
+    return render(request, 'hospital_admin/test-list.html',context)
+
+
+
+@login_required(login_url='admin-login')
+def delete_test(request,pk):
+    if request.user.is_authenticated:
+        if request.user.is_labworker:
+            test = Test_Information.objects.get(test_id=pk)
+            test.delete()
+            return redirect('test-list')
+
+
+
+
+
+
    
 
 
