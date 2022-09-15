@@ -48,12 +48,12 @@
   <body>
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-      <!-- Header -->
-      <header class="header">{% include 'patient_navbar.html' %}</header>
-      <!-- /Header -->
+      	<!-- Header -->
+      	<header class="header">{% include 'patient_navbar.html' %}</header>
+      	<!-- /Header -->
 
-      <!-- Breadcrumb -->
-      <div class="breadcrumb-bar">
+     	<!-- Breadcrumb -->
+      	<div class="breadcrumb-bar">
         <div class="container-fluid">
           <div class="row align-items-center">
             <div class="col-md-12 col-12">
@@ -71,21 +71,22 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- /Breadcrumb -->
+      	</div>
+      	<!-- /Breadcrumb -->
 
-      <!-- Page Content -->
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- Profile Sidebar -->
-            <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+      	<!-- Page Content -->
+      	<div class="content">
+        	<div class="container-fluid">
+          		<div class="row">
+            		<!-- Profile Sidebar -->
+            		<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
               <div>{% include 'patient-sidebar.html' %}</div>
-            </div>
-            <!-- / Profile Sidebar -->
+            		</div>
+            		<!-- / Profile Sidebar -->
 
-					<div class="row">
-						<div class="col-lg-8 offset-lg-2">
+					<div class="col-md-7 col-lg-6 col-xl-9">
+
+
 							<div class="invoice-content">
 								<div class="invoice-item">
 									<div class="row">
@@ -99,7 +100,7 @@
 											<p class="invoice-details">
 												<strong>Prescription ID:</strong> {{prescription.prescription_id}} <br>
 												<strong>Patient ID:</strong> {{prescription.patient.patient_id}} <br>
-												<strong>Date:</strong> 20/07/2019 
+												<strong>Date:</strong> {{prescription.create_date }} 
 											</p>
 										</div>
 									</div>
@@ -186,11 +187,11 @@
 												<table class="invoice-table table table-bordered">
 													<thead>
 														<tr>
-															<th>Test Name</th>
+															<th class="text-center">Test Name</th>
 															<th class="text-center">Description</th>
 															<!-- <th class="text-center"> Test id </th> -->
 															<!-- <th class="text-center"> price</th> -->
-															<th>Cart</th>
+															<th class="text-center">Cart</th>
 															
 															
 														</tr>
@@ -245,31 +246,31 @@
 												</table>
 											</div>
 										</div>
-										<button class="btn btn-sm bg-primary-primary"> <a href="{% url 'test-cart' %}" > Go to Cart </a></button>
-										<button class="btn btn-sm bg-primary-light"> <a target="_blank" href="{% url 'pres_pdf' pk=prescription.prescription_id %}" > Download Prescription </a></button>
-										{% endfor %}
+										
+										
 									</div>
+									<br>
+									<button class="btn btn-md bg-info"> <a href="{% url 'test-cart' %}" > Go to Cart </a></button><br><br>
+									<button class="btn btn-md bg-info-light"> <a target="_blank" href="{% url 'pres_pdf' pk=prescription.prescription_id %}" > Download Prescription </a></button>
+									{% endfor %}
 								</div>
 								<!-- /Invoice Information -->
 								
 							</div>
 						</div>
+						</div>
 					</div>
 					
 
-				</div>
-				
-				
-			</div>		
-			<!-- /Page Content -->
-			
-		
-		   
+				</div>	
+			</div>		   
 		</div>
-		<!-- /Main Wrapper -->
+		<!-- /Page Content -->
+	<!-- /Main Wrapper -->
+	</div>
 	  
-		<!-- jQuery -->
-		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+	<!-- jQuery -->
+	<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
 
     <!-- Bootstrap Core JS -->
     <script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
