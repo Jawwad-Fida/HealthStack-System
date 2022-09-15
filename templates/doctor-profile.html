@@ -331,6 +331,7 @@
 										
 										<!-- Reviews Content -->
 										<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
+
 										
 											{% if user.is_authenticated and user.is_patient %}
 											<div class="write-review">
@@ -377,8 +378,64 @@
 											    </form>
 											</div>
 											{% endif %}
+
+											{% if user.is_authenticated and user.is_doctor %}
+											<!-- Review Listing -->
+									<div class="widget review-listing">
+										<ul class="comments-list">
+										
+										
+											<div class="invoice-item invoice-table-wrap">
+												<div class="widget education-widget">
+													<h4 class="widget-title">Review</h4>
+													<div class="experience-box">
+														<ul class="experience-list">
+
+
+															<div class="invoice-item">
+																<div class="row">
+																	<div class="col-md-6">
+																		<div class="invoice-info">
+																			<strong class="customer-text"></strong>
+													                        {% for review in doctor_review %}
+																				<!-- Comment List -->
+																				<li>
+																					<div class="comment">
+																						<img class="avatar avatar-sm rounded-circle" alt="User Image" src="{{review.patient.featured_image.url}}">
+																						<div class="comment-body">
+																							<div class="meta-data">
+																								<span class="comment-author">{{review.patient.name}}</span>
+																								
+																							</div>
+																							<p class="recommended"><i class="far fa-thumbs-up"></i> {{review.title}}</p>
+																							<p class="comment-content">{{review.message}}
+																							
+																							</p>
+																							
+																						</div>
+																					</div>	
+																				</li>
+																				<!-- /Comment List -->
+																			
+																			{% endfor %}
+													
+																		</div>
+																	</div>
+														
+																</div>
+															</div>
+															
+															
+														
+
+														</ul>
+													</div>
+												</div>
+											</div>
+											{% endif %}
 										</div>
 										<!-- /Reviews Content -->
+										
 										
 								
 										

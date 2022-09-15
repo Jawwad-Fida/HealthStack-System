@@ -296,8 +296,9 @@ def doctor_profile(request, pk):
     
     educations = Education.objects.filter(doctor=doctor).order_by('-year_of_completion')
     experiences = Experience.objects.filter(doctor=doctor).order_by('-from_year','-to_year')
+    doctor_review = Doctor_review.objects.filter(doctor=doctor)
             
-    context = {'doctor': doctor, 'patient': patient, 'educations': educations, 'experiences': experiences}
+    context = {'doctor': doctor, 'patient': patient, 'educations': educations, 'experiences': experiences, 'doctor_review': doctor_review}
     return render(request, 'doctor-profile.html', context)
 
 @login_required(login_url="doctor-login")
@@ -681,12 +682,11 @@ def doctor_review(request, pk):
     if request.user.is_doctor:
         # doctor = Doctor_Information.objects.get(user_id=pk)
         doctor = Doctor_Information.objects.get(user=request.user)
-        if request.method == 'GET':
             
-            doctor_review = Doctor_review.objects.filter(doctor=doctor)
-            
-            context = {'doctor': doctor, 'doctor_review': doctor_review}  
-            return render(request, 'doctor-profile.html', context)
+        doctor_review = Doctor_review.objects.filter(doctor=doctor)
+        
+        context = {'doctor': doctor, 'doctor_review': doctor_review}  
+        return render(request, 'doctor-profile.html', context)
 
     if request.user.is_patient:
         doctor = Doctor_Information.objects.get(doctor_id=pk)
