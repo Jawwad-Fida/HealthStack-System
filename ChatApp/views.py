@@ -3,11 +3,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+from doctor.views import appointments
 from .models import chatMessages
 from django.contrib.auth import get_user_model
 from  hospital.models import User as UserModel
 from hospital.models import Patient
-from doctor.models import Doctor_Information    
+from doctor.models import Doctor_Information  , Appointment  
 from django.db.models import Q
 import json,datetime
 from django.core import serializers
@@ -21,7 +23,9 @@ def home(request,pk):
             User = get_user_model()
             users = User.objects.all()
             patients = Patient.objects.get(user_id=pk)
-            doctor = Doctor_Information.objects.all()
+            #doctor = Doctor_Information.objects.all()
+            appointments = Appointment.objects.filter(patient=patients)
+            doctor= Doctor_Information.objects.filter(appointment__in=appointments)
             
             chats = {}
             if request.method == 'GET' and 'u' in request.GET:
@@ -70,8 +74,10 @@ def home(request,pk):
     elif request.user.is_doctor:
             User = get_user_model()
             users = User.objects.all()
-            patients = Patient.objects.all()
+            #patients = Patient.objects.all()
             doctor = Doctor_Information.objects.get(user_id=pk)
+            appointments = Appointment.objects.filter(doctor=doctor)
+            patients= Patient.objects.filter(appointment__in=appointments)
 
             chats = {}
             if request.method == 'GET' and 'u' in request.GET:
