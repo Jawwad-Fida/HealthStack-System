@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, PatientForm, PasswordResetForm
 from hospital.models import Hospital_Information, User, Patient 
-from doctor.models import Test, test_Cart, test_Order
+from doctor.models import Test, testCart, testOrder
 
 
 from hospital_admin.models import hospital_department, specialization, service, Test_Information
@@ -626,7 +626,7 @@ def test_single(request,pk):
          
         patient = Patient.objects.get(user=request.user)
         Perscription_test = Perscription_test.objects.get(test_id=pk)
-        carts = test_Cart.objects.filter(user=request.user, purchased=False)
+        carts = testCart.objects.filter(user=request.user, purchased=False)
         
         context = {'patient': patient, 'carts': carts, 'Perscription_test': Perscription_test}
         return render(request, 'test-cart.html',context)
@@ -687,8 +687,8 @@ def test_add_to_cart(request, pk, pk2):
 
 
         item = get_object_or_404(Prescription_test, test_info_id=pk2)
-        order_item = test_Cart.objects.get_or_create(item=item, user=request.user, purchased=False)
-        order_qs = test_Order.objects.filter(user=request.user, ordered=False)
+        order_item = testCart.objects.get_or_create(item=item, user=request.user, purchased=False)
+        order_qs = testOrder.objects.filter(user=request.user, ordered=False)
 
         if order_qs.exists():
             order = order_qs[0]
@@ -696,7 +696,7 @@ def test_add_to_cart(request, pk, pk2):
             messages.info(request, "This test is added to your cart!")
             return redirect("prescription-view", pk=pk)
         else:
-            order = test_Order(user=request.user)
+            order = testOrder(user=request.user)
             order.save()
             order.orderitems.add(order_item[0])
             return redirect("prescription-view", pk=pk)
@@ -717,8 +717,8 @@ def test_cart(request):
         patient = Patient.objects.get(user=request.user)
         prescription_test = Prescription_test.objects.all()
         
-        test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
-        test_orders = test_Order.objects.filter(user=request.user, ordered=False)
+        test_carts = testCart.objects.filter(user=request.user, purchased=False)
+        test_orders = testOrder.objects.filter(user=request.user, ordered=False)
 
         # prescription = Prescription.objects.filter(prescription_id=pk)
         # prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
@@ -752,15 +752,15 @@ def test_remove_cart(request, pk):
         prescription_medicine = Prescription_medicine.objects.filter(prescription__in=prescription)
         prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
         # prescription_test = Perscription_test.objects.all()
-        test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
+        test_carts = testCart.objects.filter(user=request.user, purchased=False)
         
         # item = get_object_or_404(test, pk=pk)
         # item = test
-        test_order_qs = test_Order.objects.filter(user=request.user, ordered=False)
+        test_order_qs = testOrder.objects.filter(user=request.user, ordered=False)
         if test_order_qs.exists():
             test_order = test_order_qs[0]
             if test_order.orderitems.filter(item=item).exists():
-                test_order_item = test_Cart.objects.filter(item=item, user=request.user, purchased=False)[0]
+                test_order_item = testCart.objects.filter(item=item, user=request.user, purchased=False)[0]
                 test_order.orderitems.remove(test_order_item)
                 test_order_item.delete()
                 # messages.warning(request, "This test was remove from your cart!")

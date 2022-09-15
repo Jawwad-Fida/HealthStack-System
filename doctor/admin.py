@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 # # we are in same file path --> .models
 
-from .models import Doctor_Information, Appointment, Report, Prescription, Education, Experience, Specimen, Test,Prescription_medicine,Prescription_test,test_Cart,test_Order
+from .models import Doctor_Information, Appointment, Report, Prescription, Education, Experience, Specimen, Test,Prescription_medicine,Prescription_test,testCart,testOrder
 
 admin.site.register(Doctor_Information)
 admin.site.register(Appointment)
@@ -15,6 +15,6 @@ admin.site.register(Test)
 admin.site.register(Specimen)
 admin.site.register(Prescription_medicine)
 admin.site.register(Prescription_test)
-admin.site.register(test_Cart)
-admin.site.register(test_Order)
+admin.site.register(testCart)
+admin.site.register(testOrder)
 

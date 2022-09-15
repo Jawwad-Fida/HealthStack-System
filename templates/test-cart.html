@@ -126,7 +126,7 @@
                                                       <tr class="text-center">
                                                         <td class="product-remove"><a href="{% url 'test-remove-cart' pk=test.item_id %}"><span class="icon-close"></span></a></td> 
                                                         
-														<td>{{test.item_id}}</td>
+														<td>{{test.item.test_info_id}}</td>
 														<td>{{test.item.test_name}}</td>
 														<td class="price">{{test.item.test_info_price}}</td>
                                                       </tr>
@@ -142,15 +142,12 @@
                                               <div class="cart-total mb-3">
                                                 <h3><b>Cart Totals: </b><span>{{ test_order.get_totals }}</span></h3>
                                                 
-                                                
-                                                
                                                 <hr>
                                                 
                                               </div>
-                                              <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to
+                                              <p class="text-center"><a href="{% url 'ssl-payment-request-test' pk=test_order.user.patient.patient_id id=test_order.id %}" class="btn btn-primary py-3 px-4">Proceed to
                                                   Checkout</a></p>
-											 <p class="text-center"><a href="#" class="btn btn-primary py-3 px-4">Payment Test</a></p>
-											 <p class="text-center"><a href="{% url 'payment-testing' pk=test_order.id %}" class="btn btn-primary py-3 px-4">Mail Test</a></p>
+											 
 											
                                             </div>
                                           </div>

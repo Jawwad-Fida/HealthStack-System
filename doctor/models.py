@@ -232,7 +232,7 @@ class Prescription_test(models.Model):
         return str(self.prescription.prescription_id)
     
 # # test cart system
-class test_Cart(models.Model):
+class testCart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='test_cart')
     item = models.ForeignKey(Prescription_test, on_delete=models.CASCADE)
     name = models.CharField(default='test', max_length=200)
@@ -250,9 +250,9 @@ class test_Cart(models.Model):
         
         return total
 
-class test_Order(models.Model):
+class testOrder(models.Model):
     # id
-    orderitems = models.ManyToManyField(test_Cart)
+    orderitems = models.ManyToManyField(testCart)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -268,7 +268,7 @@ class test_Order(models.Model):
     
     # TOTAL
     def final_bill(self):
-        delivery_price= 40.00
-        Bill = self.get_totals()+ delivery_price
+        vat= 20.00
+        Bill = self.get_totals()+ vat
         float_Bill = format(Bill, '0.2f')
         return float_Bill

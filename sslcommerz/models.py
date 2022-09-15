@@ -1,5 +1,5 @@
 from django.db import models
-from doctor.models import Appointment, test_Order
+from doctor.models import Appointment, testOrder
 from hospital.models import Patient
 from pharmacy.models import Order
 
@@ -14,7 +14,7 @@ class Payment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
     appointment = models.ForeignKey(Appointment, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
-    test_order = models.ForeignKey(test_Order, on_delete=models.SET_NULL, null=True, blank=True)
+    test_order = models.ForeignKey(testOrder, on_delete=models.SET_NULL, null=True, blank=True)
     
     payment_type = models.CharField(max_length=200, null=True, blank=True)
     

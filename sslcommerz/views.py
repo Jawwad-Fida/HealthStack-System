@@ -8,7 +8,7 @@ import string
 from .models import Payment
 from hospital.models import Patient
 from pharmacy.models import Order, Cart
-from doctor.models import Appointment
+from doctor.models import Appointment, Prescription, Prescription_test, testCart, testOrder 
 from django.contrib.auth.decorators import login_required
 
 
@@ -215,7 +215,73 @@ def ssl_payment_request_medicine(request, pk, id):
 
     return redirect(response['GatewayPageURL'])
 
-    # return render(request, 'checkout.html')
+
+@csrf_exempt
+def ssl_payment_request_test(request, pk, id):
+    # Payment Request for test payment
+    
+    patient = Patient.objects.get(patient_id=pk)
+    test_order = testOrder.objects.get(id=id)
+    
+    invoice_number = generate_random_invoice()
+    
+    post_body = {}
+    post_body['total_amount'] = test_order.final_bill()
+    post_body['currency'] = "BDT"
+    post_body['tran_id'] = generate_random_string()
+
+    post_body['success_url'] = request.build_absolute_uri(
+        reverse('ssl-payment-success'))
+    post_body['fail_url'] = request.build_absolute_uri(
+        reverse('ssl-payment-fail'))
+    post_body['cancel_url'] = request.build_absolute_uri(
+        reverse('ssl-payment-cancel'))
+
+    post_body['emi_option'] = 0
+  
+    post_body['cus_name'] = patient.username
+    post_body['cus_email'] = patient.email
+    post_body['cus_phone'] = patient.phone_number
+    post_body['cus_add1'] = patient.address
+    post_body['cus_city'] = "Dhaka"
+    post_body['cus_country'] = "Bangladesh"
+    post_body['shipping_method'] = "NO"
+    # post_body['multi_card_name'] = ""
+    post_body['num_of_item'] = 1
+    post_body['product_name'] = "Test"
+    post_body['product_category'] = "Test Category"
+    post_body['product_profile'] = "general"
+
+    # Save in database
+    test_order.trans_ID = post_body['tran_id']
+    test_order.save()
+    
+    payment = Payment()
+    # payment.patient_id = patient.patient_id
+    # payment.appointment_id = appointment.id
+    payment.patient = patient
+    # payment.appointment = appointment
+    payment.name = post_body['cus_name']
+    payment.email = post_body['cus_email']
+    payment.phone = post_body['cus_phone']
+    payment.address = post_body['cus_add1']
+    payment.city = post_body['cus_city']
+    payment.country = post_body['cus_country']
+    payment.transaction_id = post_body['tran_id']
+    
+    # payment.consulation_fee = appointment.doctor.consultation_fee
+    # payment.report_fee = appointment.doctor.report_fee
+    payment.invoice_number = invoice_number
+    
+    payment_type = "test"
+    payment.payment_type = payment_type
+    payment.save()
+    
+    
+    response = sslcz.createSession(post_body)  # API response
+    print(response)
+
+    return redirect(response['GatewayPageURL'])    
 
 @csrf_exempt
 def ssl_payment_success(request):
@@ -320,7 +386,84 @@ def ssl_payment_success(request):
             return redirect('patient-dashboard')
         
         elif payment_type == "test":
-            print("test")
+            
+            payment.val_transaction_id = payment_data['val_id']
+            payment.currency_amount = payment_data['currency_amount']
+            payment.card_type = payment_data['card_type']
+            payment.card_no = payment_data['card_no']
+            payment.bank_transaction_id = payment_data['bank_tran_id']
+            payment.status = payment_data['status']
+            payment.transaction_date = payment_data['tran_date']
+            payment.currency = payment_data['currency']
+            payment.card_issuer = payment_data['card_issuer']
+            payment.card_brand = payment_data['card_brand']
+            payment.save()
+            
+            test_order = testOrder.objects.get(trans_ID=tran_id)
+            test_order.payment_status = "VALID"
+            test_order.save()
+    
+            if sslcz.hash_validate_ipn(payment_data):
+                response = sslcz.validationTransactionOrder(payment_data['val_id'])
+                print(response)
+            else:
+                print("Hash validation failed")
+                
+            # # Mailtrap
+            patient_email = payment.patient.email
+            patient_name = payment.patient.name
+            patient_username = payment.patient.username
+            patient_phone_number = payment.patient.phone_number
+            
+            ob = testCart.objects.filter(testorder__trans_ID=tran_id)
+            len_ob = len(ob)
+            
+            # list_id = []
+            # list_name = []
+            # for i in range(len_ob):
+            #     list_id.append(ob[i].item.test_info_id)
+            #     list_name.append(ob[i].item.test_name)
+                
+            order_cart = []   
+            for i in range(len_ob):
+                order_cart.append(ob[i])
+                
+            for i in order_cart:
+                test_id = i.item.test_info_id
+                pres_test = Prescription_test.objects.get(test_info_id=test_id)
+                pres_test.test_info_pay_status = "Paid"
+                pres_test.save()
+            
+        
+            subject = "Payment Receipt for test"
+            
+            values = {
+                    "email":patient_email,
+                    "name":patient_name,
+                    "username":patient_username,
+                    "phone_number":patient_phone_number,
+                    "tran_id":payment_data['tran_id'],
+                    "currency_amount":payment_data['currency_amount'],
+                    "card_type":payment_data['card_type'],
+                    "bank_transaction_id":payment_data['bank_tran_id'],
+                    "transaction_date":payment_data['tran_date'],
+                    "card_issuer":payment_data['card_issuer'],
+                    "order_cart":order_cart,
+                }
+            
+            html_message = render_to_string('test_mail_payment_template.html', {'values': values})
+            plain_message = strip_tags(html_message)
+            
+            try:
+                send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found')
+            
+            # Reset cart
+            testCart.objects.all().delete()
+                
+            return redirect('patient-dashboard')
+            
             
         elif payment_type == "pharmacy":
             payment.val_transaction_id = payment_data['val_id']
@@ -398,7 +541,7 @@ def ssl_payment_success(request):
         redirect('ssl-payment-fail')
 
 
-# @login_required
+
 
 
 @csrf_exempt
@@ -416,19 +559,24 @@ def payment_testing(request, pk):
     # order = Order.objects.get(id=pk)
     # ob = Cart.objects.filter(order__id=pk)
     
-    tran_id = "SSLCZ_TEST_74D530YZ"
-    ob = Cart.objects.filter(order__trans_ID=tran_id)
+    tran_id = "SSLCZ_TEST_TGJOWR8G"
+    # tran_id = "SSLCZ_TEST_74D530YZ"
+    #ob = Cart.objects.filter(order__trans_ID=tran_id)
+    ob = testCart.objects.filter(testorder__trans_ID=tran_id)
+    
+
     len_ob = len(ob)
     
     list_id = []
     list_name = []
     for i in range(len_ob):
-        list_id.append(ob[i].item.serial_number)
-        list_name.append(ob[i].item.name)
+        list_id.append(ob[i].item.test_info_id)
+        list_name.append(ob[i].item.test_name)
     
     order_cart = []   
     for i in range(len_ob):
         order_cart.append(ob[i])
     
     context = {'order': ob, 'len_ob': len_ob, 'list_id': list_id, 'list_name': list_name, 'order_cart': order_cart}
+
     return render(request, 'testing.html', context)
