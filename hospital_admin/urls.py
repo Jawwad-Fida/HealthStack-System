@@ -70,6 +70,8 @@ urlpatterns = [
     path('add-test/', views.add_test,name='add-test'),
     path('test-list/', views.test_list,name='test-list'),
     path('delete-test/<int:pk>/', views.delete_test,name='delete-test'),
+    path('pharmacist-dashboard/', views.pharmacist_dashboard,name='pharmacist-dashboard'),
+    
     
 
     
