@@ -101,10 +101,10 @@
 										</div>
 										<div class="col-md-6">
 											<p class="invoice-details">
-                        {% for report in report %}
-                        <strong>Report ID:</strong>{{report.report_id}} <br>
+                       							 {% for report in report %}
+                                                <strong>Report ID:</strong>{{report.report_id}} <br>
 												<strong>Patient ID:</strong> {{patient.patient_id }} <br>
-												<strong>Date:</strong> {{current_date}}
+												<strong>Date:</strong> {{report.delivery_date}}
 											</p>
 										</div>
 									</div>
@@ -121,7 +121,7 @@
 													{{report.doctor.name}} <br>
 													{{report.doctor.address}}<br>
 													{{report.doctor.email}}<br>
-                          {{report.doctor.phone_number}}<br>
+                                                   {{report.doctor.phone_number}}<br>
 												</p>
                         
 											</div>
