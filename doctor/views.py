@@ -580,6 +580,21 @@ def patient_search(request, pk):
         messages.info(request, 'Not Authorized')
         return render(request, 'doctor-login.html')
 
+@login_required(login_url="login")
+def doctor_test_list(request):
+    if request.user.is_authenticated and request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        tests = Test_Information.objects.all
+        context = {'doctor': doctor, 'tests': tests}
+        return render(request, 'doctor-test-list.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
+
+@login_required(login_url="login")
+
+
 
 
 
