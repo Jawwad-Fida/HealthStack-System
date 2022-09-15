@@ -104,6 +104,10 @@ class Order(models.Model):
             total += float(order_item.get_total())
         return total
     
+    # Count Cart Items
+    def count_cart_items(self):
+        return self.orderitems.count()
+    
     # TOTAL
     def final_bill(self):
         delivery_price= 40.00
