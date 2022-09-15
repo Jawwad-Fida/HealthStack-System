@@ -83,7 +83,7 @@
                     <form method="POST" action="{% url 'login' %}">
                       {% csrf_token %}
 
-                      {% if messages %}
+                      {% comment %} {% if messages %}
                       
                           {% for message in messages %}
                           <div class="alert alert-danger alert-dismissible fade show" id="CredentialCheck" role="alert">
@@ -94,7 +94,9 @@
                           </div>
                           {% endfor %}
                       
-                      {% endif %}
+                      {% endif %} {% endcomment %}
+
+                      {% include 'message.html' %}
                       
 
 
@@ -181,13 +183,24 @@
 
 
     <!-- alert js -->
-    <script>
+    {% comment %} <script>
 			var x = document.getElementById('CredentialCheck');
 			if (x.style.display === "none") {
 				x.style.display = "block";
 			}
 			$('#CredentialCheck').delay(4000).fadeOut('slow');     
-		</script>
+		</script> {% endcomment %}
+
+    <!-- and at the end:-->
+    {% if messages %}
+      <script>
+          {% for message in messages %}
+              $(document).ready(function () {
+                  $('.toast').toast('show');
+              });
+          {% endfor %}
+      </script>
+    {% endif %}
 
     <!-- show password js -->
     <script>

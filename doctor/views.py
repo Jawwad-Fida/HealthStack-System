@@ -102,7 +102,7 @@ def doctor_register(request):
             # user.username = user.username.lower()  # lowercase username
             user.save()
 
-            messages.success(request, 'User account was created!')
+            messages.success(request, 'Doctor account was created!')
 
             # After user is created, we can log them in
             #login(request, user)
