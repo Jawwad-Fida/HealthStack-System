@@ -32,6 +32,7 @@ urlpatterns = [
     path('reject-appointment/<int:pk>/',views.reject_appointment, name='reject-appointment'),
     path('patient-search/<int:pk>/', views.patient_search, name='patient-search'),
     path('pdf/<int:pk>/',views.report_pdf, name='pdf'),
+    path('doctor_review/<int:pk>/', views.doctor_review, name='doctor_review'),
 
     # path('testing/',views.testing, name='testing'),
    

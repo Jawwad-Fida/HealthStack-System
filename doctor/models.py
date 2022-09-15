@@ -262,3 +262,13 @@ class test_Order(models.Model):
         Bill = self.get_totals()+ delivery_price
         float_Bill = format(Bill, '0.2f')
         return float_Bill
+
+class Doctor_review(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=200, null=True, blank=True)
+    message = models.CharField(max_length=1000, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.patient.username)
