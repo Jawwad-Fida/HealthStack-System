@@ -93,7 +93,7 @@ class Test_Information(models.Model):
 
 
     def __str__(self):
-        return str(self.test_name)
+        return str(self.test_id)
 
     
 

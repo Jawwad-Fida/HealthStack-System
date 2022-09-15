@@ -479,10 +479,12 @@ def create_prescription(request,pk):
                 medicine_relation_with_meal = request.POST.getlist('relation_with_meal')
                 medicine_instruction = request.POST.getlist('instruction')
                 extra_information = request.POST.get('extra_information')
+                test_info_id = request.POST.get('id')
 
             
                 prescription.extra_information = extra_information
                 prescription.create_date = create_date
+                
                 prescription.save()
 
                 for i in range(len(medicine_name)):
@@ -505,6 +507,9 @@ def create_prescription(request,pk):
              
         context = {'doctor': doctor,'patient': patient}  
         return render(request, 'create-prescription.html',context)
+
+        
+
 
        
 
