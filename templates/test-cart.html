@@ -110,7 +110,9 @@
                                                 <table class="table">
                                                   <thead class="thead-primary">
                                                     <tr class="text-center">
-                                                      <th>&nbsp;</th>
+													
+													  <th>Order ID</th>		
+													  <th>Test ID</th>
                                                       <th>Test Name</th>
                                                       <th>Price</th>        
                                                       
@@ -118,20 +120,17 @@
 
                                                   </thead>
                                                   <tbody>
-													{% for t in test %}
+													
+													{% for test in test_carts %}
                                                       <tr class="text-center">
-                                                        <td class="product-remove"><a href="{% url 'test-remove-cart' pk=t.test_id %}"><span class="icon-close"></span></a></td>
-                                                        
-                                                        <td>
-
-														  <h3>{{t.test_id}}</h3>
-														  <p>description</p>
-                                                        </td>
-                                                        
+                                                        {% comment %} <td class="product-remove"><a href="{% url 'test-remove-cart' pk=t.test_id %}"><span class="icon-close"></span></a></td> {% endcomment %}
+                                                        <td>{{test.id}}</td>
+														<td>{{test.item_id}}</td>
+														<td>{{test.item.test_name}}</td>
 														<td class="price">200</td>
-														
                                                       </tr>
-                                                    {% endfor %}
+													  {% endfor %}
+                                                   
                                                   </tbody>
                                                 </table>
                                               </div>

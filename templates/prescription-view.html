@@ -126,7 +126,7 @@
 													<b>Name: </b>{{prescription.patient.name}}<br>
 													<b>Addtress: </b>{{prescription.patient.address}}<br>
 													<b>Email: </b>{{prescription.patient.email}}<br>
-													<b>Phone Number: </b>{{prescription.patient.phone_number}}
+													<b>Phone Number: </b>{{prescription.prescription_id}}
 													
 												</p>
 												
@@ -201,7 +201,7 @@
 															<td class="text-center">{{pt.test_name}}</td>
 															<td class="text-center">{{pt.test_description}}</td>
 															<td class="text-center">{{pt.test_info_id}}</td>
-															<td class="text-center"><a href="{% url 'test-add-to-cart' pk=prescription.prescription_id pk2=pt.test_info_id%}" class="btn btn-primary">Add to cart</a></td>
+															<td class="text-center"><a href="{% url 'test-add-to-cart' pk=prescription.prescription_id pk2=pt.test_info_id %}" class="btn btn-primary">Add to cart</a></td>
 															
 														</tr>
 														{% endfor %}
