@@ -9,6 +9,52 @@
 {{ order.1 }}
 <br>
 
+{{ order.0.item.test_name }}
+<br>
+
+{{ order.0.item.test_info_id }}
+<br>
+
+<hr>
+
+{{ len_ob }}
+<br>
+
+{{ list_id }}
+<br>
+
+{{ list_name }}
+<br>
+
+<hr>
+
+<hr>
+
+{% for i in order_cart %}
+    {{i}}
+    <br>
+{% endfor %}
+<br>
+
+{% for i in order_cart %}
+    {{i.item.test_info_id}}
+    <br>
+    {{i.item.test_name}}
+    <br>
+    {{i.item.test_info_price}}
+    <br>
+{% endfor %}
+<br>
+
+{% comment %} {{ order }}
+<br>
+
+{{ order.0 }}
+<br>
+
+{{ order.1 }}
+<br>
+
 <hr>
 
 {{ order.0.item }}
@@ -49,46 +95,7 @@
 
 
 
-{% comment %} {{ department_list }}
-<br>
-
-{{ department_list.0 }}
-<br>
-
-{% for i in department_list %}
-    {{i}}
-    <br>
-{% endfor %}
-<br>
-
-<hr>
-{% for d in departments %}
-    {{d.hospital_department_name}}
-    <br>
-{% endfor %}
-<br> {% endcomment %}
-
-{% comment %} {{ degree }}
-<br>
-{{ degree_array }}
-<br>
-{{ degree_array.0 }}
-<br>
-<br>
-{% for i in degree_array %}
-    {{i}}
-    <br>
-{% endfor %}
-<br>
-<hr>
-{% for e in education %}
-    <tr>
-        <td>{{ e.0 }}</td>
-        <td>{{ e.1 }}</td>
-        <td>{{ e.2 }} </td>
-    </tr>
-{% endfor %} {% endcomment %}
-
+ {% endcomment %}
 
 
 

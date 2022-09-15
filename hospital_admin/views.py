@@ -451,7 +451,8 @@ def create_report(request, pk):
         prescription =Prescription.objects.get(prescription_id=pk)
         patient = Patient.objects.get(patient_id=prescription.patient_id)
         doctor = Doctor_Information.objects.get(doctor_id=prescription.doctor_id)
-        tests = Prescription_test.objects.filter(prescription=prescription)
+        tests = Prescription_test.objects.filter(prescription=prescription).filter(test_info_pay_status='Paid')
+        
 
         if request.method == 'POST':
             report = Report(doctor=doctor, patient=patient)
