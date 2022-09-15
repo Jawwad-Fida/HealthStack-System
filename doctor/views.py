@@ -688,23 +688,19 @@ def doctor_review(request, pk):
             context = {'doctor': doctor, 'doctor_review': doctor_review}  
             return render(request, 'doctor-profile.html', context)
 
-    elif request.user.is_patient:
+    if request.user.is_patient:
         doctor = Doctor_Information.objects.get(doctor_id=pk)
         patient = Patient.objects.get(user=request.user)
-        doctor_review = Doctor_review.objects.filter(doctor=doctor)
 
         if request.method == 'POST':
             title = request.POST.get('title')
             message = request.POST.get('message')
+            
+            doctor_review = Doctor_review(doctor=doctor, patient=patient, title=title, message=message)
+            doctor_review.save()
 
-
-            doctor_review.title = title
-            doctor_review.message = message
-            doctor.save()
-          
-
-            context = {'doctor': doctor, 'patient': patient, 'doctor_review': doctor_review}  
-            return render(request, 'doctor-profile.html', context)
+        context = {'doctor': doctor, 'patient': patient, 'doctor_review': doctor_review}  
+        return render(request, 'doctor-profile.html', context)
     else:
         logout(request)
  
