@@ -111,7 +111,7 @@
                                                   <thead class="thead-primary">
                                                     <tr class="text-center">
 													
-													  <th>Order ID</th>		
+													  <!-- <th>Order ID</th>		 -->
 													  <th>Test ID</th>
                                                       <th>Test Name</th>
                                                       <th>Price</th>        
@@ -124,7 +124,7 @@
 													{% for test in test_carts %}
                                                       <tr class="text-center">
                                                         {% comment %} <td class="product-remove"><a href="{% url 'test-remove-cart' pk=t.test_id %}"><span class="icon-close"></span></a></td> {% endcomment %}
-                                                        <td>{{test.id}}</td>
+                                                        <!-- <td>{{test.id}}</td> -->
 														<td>{{test.item_id}}</td>
 														<td>{{test.item.test_name}}</td>
 														<td class="price">{{test.item.test_info_price}}</td>
@@ -139,26 +139,12 @@
                                           <div class="row justify-content-end">
                                             <div class="col col-lg-3 col-md-6 mt-5 cart-wrap ftco-animate">
                                               <div class="cart-total mb-3">
-                                                <h3>Cart Totals</h3>
-                                                <p class="d-flex">
-                                                  <span>Subtotal</span>
-                                                  <span></span>
-												  <!-- <span>total BDT</span> -->
-                                                </p>
-                                                <p class="d-flex">
-                                                  <span>Delivery</span>
-                                                  <span> 40.00 BDT</span>
-                                                </p>
-                                                <p class="d-flex">
-                                                  <span>Discount</span>
-                                                  <span> 0.00  BDT</span>
-                                                </p>
+                                                <h3><b>Cart Totals: </b><span>{{ test_order.get_totals }}</span></h3>
+                                                
+                                                
+                                                
                                                 <hr>
-                                                <p class="d-flex total-price">
-                                                  <span>Total</span>
-                                                  <!-- <span>{{ order.final_bill | floatformat:2 }} BDT</span> -->
-												  <span>total BDT</span>
-                                                </p>
+                                                
                                               </div>
                                               <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to
                                                   Checkout</a></p>

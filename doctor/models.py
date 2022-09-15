@@ -245,10 +245,10 @@ class test_Cart(models.Model):
     def __str__(self):
         return f'{self.item.test_info_id} X {self.item.test_name}'
 
-    def get_total(self):
-        total = self.item.price * self.quantity
-        float_total = format(total, '0.2f')
-        return float_total
+    def get_total(self): 
+        total = self.item.test_info_price
+        
+        return total
 
 class test_Order(models.Model):
     # id
@@ -261,7 +261,7 @@ class test_Order(models.Model):
 
     # Subtotal
     def get_totals(self):
-        total = 40 
+        total = 0 
         for order_item in self.orderitems.all():
             total += float(order_item.get_total())
         return total
