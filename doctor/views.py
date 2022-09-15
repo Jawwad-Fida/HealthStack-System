@@ -479,7 +479,7 @@ def create_prescription(request,pk):
                 medicine_relation_with_meal = request.POST.getlist('relation_with_meal')
                 medicine_instruction = request.POST.getlist('instruction')
                 extra_information = request.POST.get('extra_information')
-                test_info_id = request.POST.get('id')
+                test_info_id = request.POST.getlist('id')
 
             
                 prescription.extra_information = extra_information
@@ -501,6 +501,7 @@ def create_prescription(request,pk):
                     tests = Prescription_test(prescription=prescription)
                     tests.test_name = test_name[i]
                     tests.test_description = test_description[i]
+                    tests.test_info_id = test_info_id[i]
                     tests.save()
 
                 return redirect('patient-profile', pk=patient.patient_id)

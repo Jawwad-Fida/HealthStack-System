@@ -679,10 +679,10 @@ def test_add_to_cart(request, pk, pk2):
          
         patient = Patient.objects.get(user=request.user)
 
-        prescription = Prescription.objects.filter(prescription_id=pk)
+        prescription = Prescription.objects.get(prescription_id=pk)
         test_information = Test_Information.objects.get(test_id=pk2)
-        prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
 
+        prescription_tests = Prescription_test.objects.filter(prescription=prescription)
 
         item = get_object_or_404(Prescription_test, pk=pk)
 
@@ -700,7 +700,7 @@ def test_add_to_cart(request, pk, pk2):
             order = order_qs[0]
             order.orderitems.add(order_item[0])
             messages.info(request, "This test is added to your cart!")
-            context = {'patient': patient,'prescription_test': prescription_test,'prescription':prescription,'prescription_medicine':prescription_medicine,'test_information':test_information}
+            context = {'patient': patient,'prescription_tests': prescription_tests,'prescription':prescription,'prescription_medicine':prescription_medicine,'test_information':test_information}
             return render(request, 'prescription-view.html', context)
 
         else:
@@ -708,7 +708,7 @@ def test_add_to_cart(request, pk, pk2):
             order.save()
             order.orderitems.add(order_item[0])
             # messages.info(request, "This item is added to your cart!")
-            context = {'patient': patient,'prescription_test': prescription_test,'prescription':prescription,'prescription_medicine':prescription_medicine,'test_information':test_information}
+            context = {'patient': patient,'prescription_tests': prescription_tests,'prescription':prescription,'prescription_medicine':prescription_medicine,'test_information':test_information}
             return render(request, 'prescription-view.html', context)
     else:
         logout(request)
