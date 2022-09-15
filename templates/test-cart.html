@@ -112,6 +112,7 @@
                                                     <tr class="text-center">
 													
 													  <!-- <th>Order ID</th>		 -->
+													  <th></th>
 													  <th>Test ID</th>
                                                       <th>Test Name</th>
                                                       <th>Price</th>        
@@ -123,8 +124,8 @@
 													
 													{% for test in test_carts %}
                                                       <tr class="text-center">
-                                                        {% comment %} <td class="product-remove"><a href="{% url 'test-remove-cart' pk=t.test_id %}"><span class="icon-close"></span></a></td> {% endcomment %}
-                                                        <!-- <td>{{test.id}}</td> -->
+                                                        <td class="product-remove"><a href="{% url 'test-remove-cart' pk=test.item_id %}"><span class="icon-close"></span></a></td> 
+                                                        
 														<td>{{test.item_id}}</td>
 														<td>{{test.item.test_name}}</td>
 														<td class="price">{{test.item.test_info_price}}</td>

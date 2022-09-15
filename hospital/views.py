@@ -748,6 +748,9 @@ def test_remove_cart(request, pk):
         item = Prescription_test.objects.get(test_id=pk)
 
         patient = Patient.objects.get(user=request.user)
+        prescription = Prescription.objects.filter(prescription_id=pk)
+        prescription_medicine = Prescription_medicine.objects.filter(prescription__in=prescription)
+        prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
         # prescription_test = Perscription_test.objects.all()
         test_carts = test_Cart.objects.filter(user=request.user, purchased=False)
         
@@ -761,16 +764,16 @@ def test_remove_cart(request, pk):
                 test_order.orderitems.remove(test_order_item)
                 test_order_item.delete()
                 # messages.warning(request, "This test was remove from your cart!")
-                context = {'test_carts': test_carts,'test_order': test_order}
+                context = {'test_carts': test_carts,'test_order': test_order,'patient': patient,}
                 return render(request, 'test-cart.html', context)
             else:
                 messages.info(request, "This test was not in your cart")
-                context = {'patient': patient,'test': item}
-                return render(request, 'test-cart.html', context)
+                context = {'patient': patient,'test': item,'prescription':prescription,'prescription_medicine':prescription_medicine,'prescription_test':prescription_test}
+                return render(request, 'prescription-view.html', context)
         else:
             messages.info(request, "You don't have an active order")
-            context = {'patient': patient,'test': item}
-            return render(request, 'test-cart.html', context)
+            context = {'patient': patient,'test': item,'prescription':prescription,'prescription_medicine':prescription_medicine,'prescription_test':prescription_test}
+            return render(request, 'prescription-view.html', context)
     else:
         logout(request)
         messages.info(request, 'Not Authorized')
