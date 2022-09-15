@@ -5,7 +5,6 @@ from turtle import title
 from django.shortcuts import render, redirect
 # from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
 from hospital_admin.views import prescription_list
 from .forms import DoctorUserCreationForm, DoctorForm
 
@@ -17,7 +16,6 @@ from hospital.models import User, Patient
 
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription, Doctor_review
-
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician, Test_Information
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription
 
@@ -273,7 +271,6 @@ def reject_appointment(request, pk):
     return redirect('doctor-dashboard')
 
 
-
 #         end_year = doctor.end_year
 #         end_year = re.sub("'", "", end_year)
 #         end_year = end_year.replace("[", "")
@@ -319,15 +316,8 @@ def delete_experience(request, pk):
         experiences.delete()
         return redirect('doctor-profile-settings')
       
-            
-#             if degree:
-#                 degree = re.sub("'", "", degree)
-#                 degree = degree.replace("[", "")
-#                 degree = degree.replace("]", "")
-#                 degree = degree.replace(",", "")
-#                 degree_array = degree.split()
-      
-        
+
+       
 @login_required(login_url="doctor-login")
 def doctor_profile_settings(request):
     # profile_Settings.js
@@ -467,9 +457,6 @@ def patient_profile(request, pk):
 
 
 
-
-
-
 @login_required(login_url="doctor-login")
 def create_prescription(request,pk):
         if request.user.is_doctor:
@@ -491,8 +478,6 @@ def create_prescription(request,pk):
                 medicine_instruction = request.POST.getlist('instruction')
                 extra_information = request.POST.get('extra_information')
                 test_info_id = request.POST.getlist('id')
-
-                
 
             
                 prescription.extra_information = extra_information
@@ -526,10 +511,7 @@ def create_prescription(request,pk):
         return render(request, 'create-prescription.html',context)
 
         
-
-
-       
-
+        
 def render_to_pdf(template_src, context_dict={}):
     template=get_template(template_src)
     html=template.render(context_dict)
@@ -538,8 +520,6 @@ def render_to_pdf(template_src, context_dict={}):
     if not pdf.err:
         return HttpResponse(result.getvalue(),content_type="aplication/pdf")
     return None
-
-
 
 
 def report_pdf(request, pk):
@@ -657,12 +637,6 @@ def edit_prescription(request, pk):
                 tests.save()
 
             return redirect('patient-profile', pk=prescriptions.patient_id)
-
-
-
-
-
-
 
 
 

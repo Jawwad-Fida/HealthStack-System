@@ -297,10 +297,10 @@ def add_hospital(request):
         return render(request, 'hospital_admin/add-hospital.html',context)
 
 
-
 # def edit_hospital(request, pk):
 #     hospital = Hospital_Information.objects.get(hospital_id=pk)
 #     return render(request, 'hospital_admin/edit-hospital.html')
+
 @login_required(login_url='admin_login')
 def edit_hospital(request, pk):
     if  request.user.is_hospital_admin:
@@ -705,8 +705,6 @@ def edit_lab_worker(request, pk):
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
 
-
-
 @login_required(login_url='admin_login')
 def edit_pharmacist(request, pk):
     if request.user.is_hospital_admin:
@@ -935,15 +933,6 @@ def delete_test(request,pk):
             test = Test_Information.objects.get(test_id=pk)
             test.delete()
             return redirect('test-list')
-
-
-
-
-
-
-   
-
-
 
 
 def pharmacist_dashboard(request):
