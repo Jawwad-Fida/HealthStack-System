@@ -295,52 +295,59 @@
                           <div class="table-responsive">
                             <table class="table table-hover table-center mb-0">
                               <thead>
+                                {% for p in prescription %}
                                 <tr>
                                   <th>Date</th>
-                                  <th>Name</th>
-                                  <th>Created by</th>
+                                  <th>Prescription ID</th>
+                                  <th>Patient</th>
+                                  <th>Contact</th>
+                                  
+                        
                                   <th></th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td>14 Nov 2019</td>
-                                  <td>Prescription 1</td>
+                                  <td>{{p.create_date}}</td>
+                                  <td>{{p.prescription_id}}</td>
                                   <td>
                                     <h2 class="table-avatar">
                                       <a
-                                        href="doctor-profile.html"
+                                        href="#"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="{% static 'HealthStack-System/images/Normal/doctors/doctor-thumb-01.jpg' %}"
+                                          src="{{p.patient.featured_image.url}}"
                                           alt="User Image"
                                         />
                                       </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Ruby Perrin <span>Dental</span></a
+                                      <a href="#"
+                                        >{{p.patient.name}} </a
                                       >
                                     </h2>
                                   </td>
+                                  <td>
+                                    {{p.patient.email}}
+                                    <span class="d-block text-info"
+                                      >Phone: {{p.patient.phone_number}}</span
+                                    >
+                                  </td>
                                   <td class="text-right">
                                     <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
+                                      <a href="{% url 'delete-prescription' pk=p.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
+                                        <i class="fas fa-trash"></i> Delete <td>
                                       </a>
                                       <a
-                                        href="javascript:void(0);"
+                                        href="{% url 'edit-prescription' pk=p.prescription_id %}"
                                         class="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> View
+                                        <i class="far fa-eye"></i> Edit
                                       </a>
                                     </div>
                                   </td>
                                 </tr>
-                       
+                                {% endfor %}
                                 </tr>
                               </tbody>
                             </table>

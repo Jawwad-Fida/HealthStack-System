@@ -5,6 +5,8 @@ from turtle import title
 from django.shortcuts import render, redirect
 # from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
+from hospital_admin.views import prescription_list
 from .forms import DoctorUserCreationForm, DoctorForm
 
 from django.contrib.auth import login, authenticate, logout
@@ -12,8 +14,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
+
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription, Doctor_review
+
+from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician, Test_Information
+from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription
+
 
 from django.db.models import Q, Count
 from django.contrib.auth.signals import user_logged_in, user_logged_out
@@ -451,10 +458,11 @@ def patient_profile(request, pk):
         # doctor = Doctor_Information.objects.get(user_id=pk)
         doctor = Doctor_Information.objects.get(user=request.user)
         patient = Patient.objects.get(patient_id=pk)
-        appointments = Appointment.objects.filter(doctor=doctor).filter(patient=patient) 
+        appointments = Appointment.objects.filter(doctor=doctor).filter(patient=patient)
+        prescription = Prescription.objects.filter(doctor=doctor).filter(patient=patient) 
     else:
         redirect('doctor-logout')
-    context = {'doctor': doctor, 'appointments': appointments, 'patient': patient}  
+    context = {'doctor': doctor, 'appointments': appointments, 'patient': patient, 'prescription': prescription}  
     return render(request, 'patient-profile.html', context)
 
 
@@ -469,6 +477,7 @@ def create_prescription(request,pk):
             patient = Patient.objects.get(patient_id=pk) 
             create_date = datetime.date.today()
             
+
             if request.method == 'POST':
                 prescription = Prescription(doctor=doctor, patient=patient)
                 
@@ -482,6 +491,8 @@ def create_prescription(request,pk):
                 medicine_instruction = request.POST.getlist('instruction')
                 extra_information = request.POST.get('extra_information')
                 test_info_id = request.POST.getlist('id')
+
+                
 
             
                 prescription.extra_information = extra_information
@@ -504,6 +515,9 @@ def create_prescription(request,pk):
                     tests.test_name = test_name[i]
                     tests.test_description = test_description[i]
                     tests.test_info_id = test_info_id[i]
+                    test_info = Test_Information.objects.get(test_id=test_info_id[i])
+                    tests.test_info_price = test_info.test_price
+                   
                     tests.save()
 
                 return redirect('patient-profile', pk=patient.patient_id)
@@ -575,6 +589,77 @@ def patient_search(request, pk):
         logout(request)
         messages.info(request, 'Not Authorized')
         return render(request, 'doctor-login.html')
+
+@login_required(login_url="login")
+def doctor_test_list(request):
+    if request.user.is_authenticated and request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        tests = Test_Information.objects.all
+        context = {'doctor': doctor, 'tests': tests}
+        return render(request, 'doctor-test-list.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
+
+@login_required(login_url="login")
+def delete_prescription(request, pk):
+    if request.user.is_authenticated and request.user.is_doctor:
+        prescription = Prescription.objects.get(prescription_id=pk)
+        prescription.delete()
+        return redirect('patient-profile', pk=prescription.patient.patient_id)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
+
+@login_required(login_url="login")
+def edit_prescription(request, pk):
+    if request.user.is_authenticated and request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        prescriptions = Prescription.objects.get(prescription_id=pk)
+        if request.method == 'GET':
+            medicines = Prescription_medicine.objects.filter(prescription=prescriptions)
+            tests = Prescription_test.objects.filter(prescription=prescriptions)
+            context = {'p': prescriptions, 'medicines': medicines, 'tests': tests, 'doctor': doctor}
+            return render(request, 'edit-prescription.html', context)
+
+        elif request.method == 'POST':
+            medicine_name = request.POST.getlist('medicine_name')
+            medicine_quantity = request.POST.getlist('quantity')
+            medecine_frequency = request.POST.getlist('frequency')
+            medicine_duration = request.POST.getlist('duration')
+            medicine_relation_with_meal = request.POST.getlist('relation_with_meal')
+            medicine_instruction = request.POST.getlist('instruction')
+            extra_information = request.POST.get('extra_information')
+            test_name = request.POST.getlist('test_name')
+            test_description = request.POST.getlist('test_description')
+            test_info_id = request.POST.getlist('id')
+
+            prescriptions.extra_information = extra_information
+            prescriptions.save()
+
+            for i in range(len(medicine_name)):
+                medicine = Prescription_medicine(prescription=prescriptions)
+                medicine.medicine_name = medicine_name[i]
+                medicine.quantity = medicine_quantity[i]
+                medicine.frequency = medecine_frequency[i]
+                medicine.duration = medicine_duration[i]
+                medicine.instruction = medicine_instruction[i]
+                medicine.relation_with_meal = medicine_relation_with_meal[i]
+                medicine.save()
+
+            for i in range(len(test_name)):
+                tests = Prescription_test(prescription=prescriptions)
+                tests.test_name = test_name[i]
+                tests.test_description = test_description[i]
+                tests.test_info_id = test_info_id[i]
+                tests.save()
+
+            return redirect('patient-profile', pk=prescriptions.patient_id)
+
+
+
 
 
 

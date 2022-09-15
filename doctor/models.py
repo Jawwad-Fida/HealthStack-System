@@ -218,27 +218,37 @@ class Prescription_test(models.Model):
     test_name = models.CharField(max_length=200, null=True, blank=True)
     test_description = models.TextField(null=True, blank=True)
     test_info_id = models.CharField(max_length=200, null=True, blank=True)
+    test_info_price = models.CharField(max_length=200, null=True, blank=True)
+    test_info_pay_status = models.CharField(max_length=200, null=True, blank=True)
+    
+    """
+    (create prescription)
+    doctor input --> test_id 
+    using test_id --> retrive price
+    store price in prescription_test column
+    """
 
     def __str__(self):
         return str(self.prescription.prescription_id)
+    
 # # test cart system
 class test_Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='test_cart')
     item = models.ForeignKey(Prescription_test, on_delete=models.CASCADE)
     name = models.CharField(default='test', max_length=200)
-    quantity = models.IntegerField(default=1)
+    # quantity = models.IntegerField(default=1)
     purchased = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     
     def __str__(self):
-        return f'{self.quantity} X {self.item}'
+        return f'{self.item.test_info_id} X {self.item.test_name}'
 
-    def get_total(self):
-        total = self.item.price * self.quantity
-        float_total = format(total, '0.2f')
-        return float_total
+    def get_total(self): 
+        total = self.item.test_info_price
+        
+        return total
 
 class test_Order(models.Model):
     # id
@@ -251,7 +261,7 @@ class test_Order(models.Model):
 
     # Subtotal
     def get_totals(self):
-        total = 40 
+        total = 0 
         for order_item in self.orderitems.all():
             total += float(order_item.get_total())
         return total
