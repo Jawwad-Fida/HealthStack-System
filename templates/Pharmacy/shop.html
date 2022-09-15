@@ -54,7 +54,6 @@
     </div>
   </nav>
 
-
   <section class="ftco-menu mb-5 pb-5">
     <div class="container">
       <div class="row d-md-flex">
@@ -251,6 +250,19 @@
 
     gtag('config', 'UA-23581568-13');
   </script>
+
+  {% if messages %}
+  <script>
+      {% for message in messages %}
+          $(document).ready(function () {
+              $('.toast').toast('show');
+          });
+      {% endfor %}
+  </script>
+  {% endif %}
+
+
+
 </body>
 
 
