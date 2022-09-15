@@ -31,6 +31,24 @@
 {{ list_name }}
 <br>
 
+<hr>
+
+{{ order_cart}}
+<br>
+
+{{ order_cart.0}}
+<br>
+
+<hr>
+
+{% for i in order_cart %}
+    {{i}}
+    <br>
+{% endfor %}
+<br>
+
+
+
 {% comment %} {{ department_list }}
 <br>
 

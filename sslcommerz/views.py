@@ -338,15 +338,59 @@ def ssl_payment_success(request):
             order = Order.objects.get(trans_ID=tran_id)
             order.payment_status = "VALID"
             order.save()
-            
-            Cart.objects.all().delete()
-            
     
             if sslcz.hash_validate_ipn(payment_data):
                 response = sslcz.validationTransactionOrder(payment_data['val_id'])
                 print(response)
             else:
                 print("Hash validation failed")
+                
+            # Mailtrap
+            patient_email = payment.patient.email
+            patient_name = payment.patient.name
+            patient_username = payment.patient.username
+            patient_phone_number = payment.patient.phone_number
+            
+            ob = Cart.objects.filter(order__trans_ID=tran_id)
+            len_ob = len(ob)
+            
+            # list_id = []
+            # list_name = []
+            # for i in range(len_ob):
+            #     list_id.append(ob[i].item.serial_number)
+            #     list_name.append(ob[i].item.name)
+                
+            order_cart = []   
+            for i in range(len_ob):
+                order_cart.append(ob[i])
+            
+        
+            subject = "Payment Receipt for pharmacy"
+            
+            values = {
+                    "email":patient_email,
+                    "name":patient_name,
+                    "username":patient_username,
+                    "phone_number":patient_phone_number,
+                    "tran_id":payment_data['tran_id'],
+                    "currency_amount":payment_data['currency_amount'],
+                    "card_type":payment_data['card_type'],
+                    "bank_transaction_id":payment_data['bank_tran_id'],
+                    "transaction_date":payment_data['tran_date'],
+                    "card_issuer":payment_data['card_issuer'],
+                    "order_cart":order_cart,
+                }
+            
+            html_message = render_to_string('pharmacy_mail_payment_template.html', {'values': values})
+            plain_message = strip_tags(html_message)
+            
+            try:
+                send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found')
+            
+            # Reset cart
+            Cart.objects.all().delete()
                 
             return redirect('patient-dashboard')
 
@@ -370,7 +414,10 @@ def ssl_payment_cancel(request):
 
 def payment_testing(request, pk):
     # order = Order.objects.get(id=pk)
-    ob = Cart.objects.filter(order__id=pk)
+    # ob = Cart.objects.filter(order__id=pk)
+    
+    tran_id = "SSLCZ_TEST_74D530YZ"
+    ob = Cart.objects.filter(order__trans_ID=tran_id)
     len_ob = len(ob)
     
     list_id = []
@@ -379,5 +426,9 @@ def payment_testing(request, pk):
         list_id.append(ob[i].item.serial_number)
         list_name.append(ob[i].item.name)
     
-    context = {'order': ob, 'len_ob': len_ob, 'list_id': list_id, 'list_name': list_name}
+    order_cart = []   
+    for i in range(len_ob):
+        order_cart.append(ob[i])
+    
+    context = {'order': ob, 'len_ob': len_ob, 'list_id': list_id, 'list_name': list_name, 'order_cart': order_cart}
     return render(request, 'testing.html', context)

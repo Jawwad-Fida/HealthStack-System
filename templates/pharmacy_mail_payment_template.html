@@ -1,0 +1,106 @@
+{% load static %}
+
+<h2>Hello {{ values.name }},</h2>
+
+<p>Here is a receipt containing the payment details of your purchase. </p>
+
+<h2>Pharmacy Receipt</h2>
+
+<h3 class="card-title">Payment Receipt</h3>
+
+    <table style="border: 1px solid black">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black">Title</th>
+                <th style="border: 1px solid black">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td style="border: 1px solid black">Patient Name</td>
+                <td style="border: 1px solid black">{{ values.name }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Email</td>
+                <td style="border: 1px solid black">{{ values.email }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Username</td>
+                <td style="border: 1px solid black">{{ values.username }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Phone number</td>
+                <td style="border: 1px solid black">{{ values.phone_number }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Transaction ID</td>
+                <td style="border: 1px solid black">{{ values.tran_id }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Bank Transaction ID</td>
+                <td style="border: 1px solid black">{{ values.bank_transaction_id }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Transaction Date</td>
+                <td style="border: 1px solid black">{{ values.transaction_date }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Amount</td>
+                <td style="border: 1px solid black">{{ values.currency_amount }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Card Type</td>
+                <td style="border: 1px solid black">{{ values.card_type }}</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid black">Card Issuer</td>
+                <td style="border: 1px solid black">{{ values.card_issuer }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <br>
+
+    <h3 class="card-title">Items Bought</h3>
+
+    <table style="border: 1px solid black">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black">Title</th>
+                <th style="border: 1px solid black">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for i in values.order_cart %}
+            <tr>
+                <td style="border: 1px solid black">Item</td>
+                <td style="border: 1px solid black">{{ i }}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+<p>Thank you for your purchase.</p>
+
+
+
+<p>Feel free to contact us for any inquiries.</p>
+
+<p>Regards,</p>
+<p>Admin</p>
+
