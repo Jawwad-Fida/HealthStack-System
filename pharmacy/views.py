@@ -33,7 +33,7 @@ def pharmacy_single_product(request,pk):
         return render(request, 'pharmacy/product-single.html',context)
      else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')  
 
 
@@ -49,7 +49,7 @@ def pharmacy_shop(request):
     
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')  
     
 @login_required(login_url="login")
@@ -89,25 +89,25 @@ def add_to_cart(request, pk):
             if order.orderitems.filter(item=item).exists():
                 order_item[0].quantity += 1
                 order_item[0].save()
-                messages.info(request, "This item quantity was updated!")
+                # messages.warning(request, "This item quantity was updated!")
                 context = {'patient': patient,'medicines': medicines}
                 return render(request, 'pharmacy/shop.html', context)
             
             else:
                 order.orderitems.add(order_item[0])
-                messages.info(request, "This item is added to your cart!")
+                # messages.warning(request, "This item is added to your cart!")
                 context = {'patient': patient,'medicines': medicines}
                 return render(request, 'pharmacy/shop.html', context)
         else:
             order = Order(user=request.user)
             order.save()
             order.orderitems.add(order_item[0])
-            messages.info(request, "This item is added to your cart!")
+            # messages.warning(request, "This item is added to your cart!")
             context = {'patient': patient,'medicines': medicines}
             return render(request, 'pharmacy/shop.html', context)
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')  
 
 
@@ -162,7 +162,7 @@ def remove_from_cart(request, pk):
             return render(request, 'pharmacy/shop.html', context)
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
 
 
@@ -183,20 +183,20 @@ def increase_cart(request, pk):
                 if order_item.quantity >= 1:
                     order_item.quantity += 1
                     order_item.save()
-                    messages.info(request, f"{item.name} quantity has been updated")
+                    messages.warning(request, f"{item.name} quantity has been updated")
                     context = {'carts': carts,'order': order}
                     return render(request, 'Pharmacy/cart.html', context)
             else:
-                messages.info(request, f"{item.name} is not in your cart")
+                messages.warning(request, f"{item.name} is not in your cart")
                 context = {'patient': patient,'medicines': medicines}
                 return render(request, 'pharmacy/shop.html', context)
         else:
-            messages.info(request, "You don't have an active order")
+            messages.warning(request, "You don't have an active order")
             context = {'patient': patient,'medicines': medicines}
             return render(request, 'pharmacy/shop.html', context)
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
 
 @login_required(login_url="login")
@@ -215,7 +215,7 @@ def decrease_cart(request, pk):
                 if order_item.quantity > 1:
                     order_item.quantity -= 1
                     order_item.save()
-                    messages.info(request, f"{item.name} quantity has been updated")
+                    messages.warning(request, f"{item.name} quantity has been updated")
                     context = {'carts': carts,'order': order}
                     return render(request, 'Pharmacy/cart.html', context)
                 else:
@@ -234,6 +234,6 @@ def decrease_cart(request, pk):
             return render(request, 'pharmacy/shop.html', context)
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
 # Create your views here.
