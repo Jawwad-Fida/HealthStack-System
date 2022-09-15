@@ -29,6 +29,7 @@
 		
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/style.css'%}"> 
+		<link rel="stylesheet"href="{% static 'HealthStack-System/css/Normal/search2.css' %}">
 		
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -48,15 +49,19 @@
 				{% include 'hospital_admin/pharmacist-sidebar.html' %} </aside>
 			<!-- /Sidebar -->
 			
-			<!-- Page Wrapper -->
-			
-			<!-- Page Wrapper -->
             <div class="page-wrapper">
 
                 <div class="content container-fluid">
-					<div class="">
-						<a href="{% url 'add-medicine' %}"  class="fe fe-plus btn btn-primary float-right mt-2 ">Add Medicine</a>
+					
+					<div class="col-md-6 col-6 text-right float-right">
+						<div class="top-nav-search">
+						  <form action="{% url 'medicine-list' %}" method="GET">
+							<input type="text" class="form-control" placeholder="Search medicine" name="search_query" value="{{search_query}}">
+							<button class="btn" type="submit"><i class="fe fe-search"></i></button>
+						  </form>
+						</div>
 					</div>
+					
 					<!-- Page Header -->
 					<div class="page-header">
 						<div class="row">
@@ -67,18 +72,16 @@
 									<li class="breadcrumb-item active">Medicine</li>
 								</ul>
 							</div>
+							
 						</div>
 					</div>
-					<!-- /Page Header -->
-					
+
 					<div class="row">
 						 <div class="col-sm-12">
 							 <div class="card">
 								 <div class="card-body">
 									 <div class="table-responsive">
 										<table class="datatable table table-hover table-center mb-0">
-										
-											 
 											 <thead>
 												<tr>
 													<th>Medicine Name</th>
@@ -89,7 +92,6 @@
 													<th>Each Quantity</th>
 													<th>Edit Medicine</th>
 													<th>Delete Medicine</th>
-													
 												</tr>
 											 </thead>
 											 {% for medicine in medicine %}
@@ -107,21 +109,15 @@
 													<td>{{medicine.quantity}}</td>
 													<td><a href="{% url 'edit-medicine' pk=medicine.serial_number %}" class="btn btn-primary">Edit</a></td>
 													<td><a href="{% url 'delete-medicine' pk=medicine.serial_number %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
-
 												</tr>
-													
-													</td>
-												</tr>
-												{% endfor %}
-											
+											  {% endfor %}
 										</table>
 									</div>
 								</div>
 							</div>	
+					    </div>
 					</div>
-					
-				</div>			
-			</div>
+				</div>
 			<!-- /Page Wrapper -->
 		
         </div>
@@ -143,8 +139,8 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+		<script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
 		
     </body>
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 </html>
