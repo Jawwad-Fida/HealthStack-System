@@ -86,5 +86,14 @@ class service(models.Model):
         val3 = val1 + ' - ' + val2
         return str(val3)
 
+class Test_Information(models.Model):
+    test_id = models.AutoField(primary_key=True)
+    test_name = models.CharField(max_length=200, null=True, blank=True)
+    test_price = models.CharField(max_length=200, null=True, blank=True)
+
+
+    def __str__(self):
+        return str(self.test_name)
+
     
 

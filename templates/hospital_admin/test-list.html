@@ -1,0 +1,206 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:20 GMT -->
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+    <title>HealthStack - Dashboard</title>
+
+    <!-- Favicon -->
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{% static 'HealthStack-System/images/Normal/favicon.png' %}"
+    />
+
+
+		
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+    </head>
+    <body>
+	
+	
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}"> 
+		
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
+    
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/admin_assets/css/feathericon.min.css'%}">
+
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
+
+
+    <!-- Main CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'HealthStack-System/css/admin/style.css'%}"
+    />
+
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- Main Wrapper -->
+        <div class="main-wrapper">
+      <!-- Header -->
+			<header class="header">{% include 'hospital_admin/labworker-navbar.html' %}</header>            
+			<!-- /Header -->
+			
+			<!-- Sidebar -->
+			<aside class="sidebar" id="sidebar">
+				{% include 'hospital_admin/labworker-sidebar.html' %} </aside>
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+			
+                <div class="content container-fluid">
+                    <div class="">
+						<a href="{% url 'add-test' %}"  class="fe fe-plus btn btn-primary float-right mt-2 ">Add Test</a>
+					</div>
+					
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3 class="page-title">Test List</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item active"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+
+                    <div class="row">
+                        <div class="col-md-12 d-flex">
+						
+							<!-- Feed Activity -->
+							<div class="card  card-table flex-fill">
+								<div class="card-header">
+									<h4 class="card-title"></h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>													
+													<th>Test ID</th>
+                                                    <th>Test Name</th>
+													<th>Test Price</th>
+                                                    <th>Action</th>												
+												</tr>
+											</thead>
+											<tbody>
+                                                    {% for t in test%}
+												<tr>
+                                                        <td>{{t.test_id}}</td>
+                                                        <td>{{t.test_name}}</td>
+                                                        <td>{{t.test_price}}</td>
+                                                        <td><a href="{% url 'delete-test' pk=t.test_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
+												</tr>
+                                                             {% endfor %}
+												
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Feed Activity -->
+							
+						</div>
+                    </div>
+
+
+          
+          
+                </div>
+            </div>
+      <!-- /Page Wrapper -->
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+
+    </body>
+
+    <!-- jQuery -->
+    <script src="{% static 'HealthStack-System/js/admin/jquery-3.2.1.min.js'%}"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{% static 'HealthStack-System/js/admin/popper.min.js'%}"></script>
+    <script src="{% static 'HealthStack-System/js/admin/bootstrap.min.js'%}"></script>
+
+    <!-- Slimscroll JS -->
+
+    <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js'%}"></script>
+
+    <script src="{% static 'HealthStack-System/plugins/admin/raphael/raphael.min.js'%}"></script>
+
+    <script src=" {% static 'HealthStack-System/plugins/admin/morris/morris.min.js'%}"></script>
+    <script src="{% static 'HealthStack-System/js/admin/chart.morris.js'%}"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'HealthStack-System/js/admin/script.js'%}"></script>
+
+    <!-- Chart JS -->
+
+    <script>
+      var total_patient_count = "{{total_patient_count.count}}";
+      var total_labworker_count= "{{total_labworker_count.count}}";
+      var total_hospital_count= "{{total_hospital_count.count}}";
+      var total_pharmacist_count= "{{total_pharmacist_count.count}}";
+
+      var sat= "{{sat}}";
+      var sat_count= "{{sat_count}}";
+
+      var sun= "{{sun}}";
+      var sun_count= "{{sun_count}}";
+
+      var mon= "{{mon}}";
+      var mon_count= "{{mon_count}}";
+
+      var tues= "{{tues}}";
+      var tues_count= "{{tues_count}}";
+
+      var wed= "{{wed}}";
+      var wed_count= "{{wed_count}}";
+
+      var thurs= "{{thurs}}";
+      var thurs_count= "{{thurs_count}}";
+
+      var fri= "{{fri}}";
+      var fri_count= "{{fri_count}}";
+    </script>
+
+    <script src="{% static 'HealthStack-System/js/admin/Chart.bundle.min.js'%}"></script>
+
+    <script src="{% static 'HealthStack-System/js/admin/raphael.min.js'%}"></script>
+
+    <script src="{% static 'HealthStack-System/js/admin/morris.min.js'%}"></script>
+
+    <script src="{% static 'HealthStack-System/js/admin/morris_init.js'%}"></script>
+
+    
+
+  </body>
+
+
+  <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:34 GMT -->
+</html>
