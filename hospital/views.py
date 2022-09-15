@@ -8,7 +8,8 @@ from .forms import CustomUserCreationForm, PatientForm
 from hospital.models import Hospital_Information, User, Patient 
 from doctor.models import Test, test_Cart, test_Order, Prescription_test
 
-from hospital_admin.models import hospital_department, specialization, service
+
+from hospital_admin.models import hospital_department, specialization, service, Test_Information
 from django.views.decorators.cache import cache_control
 
 from django.contrib.auth import login, authenticate, logout
@@ -676,18 +677,24 @@ def test_add_to_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
          
         patient = Patient.objects.get(user=request.user)
+        test_information = Test_Information.objects.all()
         prescription = Prescription.objects.filter(prescription_id=pk)
-        test = Prescription_test.objects.filter(prescription__in=prescription)
+        # prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
+        prescription_test = prescription.test_id.all()
+
         # test = Perscription_test.objects.get(test_id=pk)
         # test = Prescription_test.objects.all()
         # prescription = Prescription.objects.get(prescription_id=pk)
         # test = Prescription_test.objects.filter(prescription=prescription)
         # test_id = test.test_id
         # test = Perscription_test.objects.filter(prescription__in=prescription)
-        item = get_object_or_404(test, pk=pk)
+        item = get_object_or_404(prescription_test, pk=pk)
         # item = filter(test=test)
         # item = test.objects.filter(test=test).exists()
         # item = test
+
+        prescription_medicine = Prescription_medicine.objects.filter(prescription__in=prescription)
+
         
 
         order_item = test_Cart.objects.get_or_create(item=item, user=request.user, purchased=False)
@@ -699,16 +706,16 @@ def test_add_to_cart(request, pk):
             order = order_qs[0]
             order.orderitems.add(order_item[0])
             messages.info(request, "This test is added to your cart!")
-            context = {'patient': patient,'test': test}
-            return render(request, 'test-cart.html', context)
+            context = {'patient': patient,'prescription_test': prescription_test,'prescription':prescription,'prescription_medicine':prescription_medicine}
+            return render(request, 'prescription-view.html', context)
 
         else:
             order = test_Order(user=request.user)
             order.save()
             order.orderitems.add(order_item[0])
             # messages.info(request, "This item is added to your cart!")
-            context = {'patient': patient,'test': test}
-            return render(request, 'test-cart.html', context)
+            context = {'patient': patient,'prescription_test': prescription_test}
+            return render(request, 'prescription-view.html', context)
     else:
         logout(request)
         messages.info(request, 'Not Authorized')
