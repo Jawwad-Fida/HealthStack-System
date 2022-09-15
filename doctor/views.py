@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
-from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
+from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician, Test_Information
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription
 
 from django.db.models import Q, Count
@@ -573,6 +573,21 @@ def patient_search(request, pk):
         logout(request)
         messages.info(request, 'Not Authorized')
         return render(request, 'doctor-login.html')
+
+@login_required(login_url="login")
+def doctor_test_list(request):
+    if request.user.is_authenticated and request.user.is_doctor:
+        doctor = Doctor_Information.objects.get(user=request.user)
+        tests = Test_Information.objects.all
+        context = {'doctor': doctor, 'tests': tests}
+        return render(request, 'doctor-test-list.html', context)
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'doctor-login.html')
+
+@login_required(login_url="login")
+
 
 
 
