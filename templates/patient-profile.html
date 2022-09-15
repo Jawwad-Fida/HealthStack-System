@@ -184,17 +184,13 @@
                         <a class="nav-link" href="#pres" data-toggle="tab"
                           ><span>Prescription</span></a
                         >
-                      <!-- </li>
+                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#medical" data-toggle="tab"
-                          ><span class="med-records">Medical Records</span></a
+                        <a class="nav-link" href="#medical_records" data-toggle="tab"
+                          ><span> Medical Records</span></a
                         >
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#billing" data-toggle="tab"
-                          ><span>Billing</span></a
-                        >
-                      </li> -->
+                
                     </ul>
                   </div>
                   <div class="tab-content">
@@ -295,18 +291,16 @@
                           <div class="table-responsive">
                             <table class="table table-hover table-center mb-0">
                               <thead>
-                                {% for p in prescription %}
                                 <tr>
                                   <th>Date</th>
                                   <th>Prescription ID</th>
                                   <th>Patient</th>
                                   <th>Contact</th>
-                                  
-                        
                                   <th></th>
                                 </tr>
                               </thead>
                               <tbody>
+                                {% for p in prescription %}
                                 <tr>
                                   <td>{{p.create_date}}</td>
                                   <td>{{p.prescription_id}}</td>
@@ -335,14 +329,16 @@
                                   </td>
                                   <td class="text-right">
                                     <div class="table-action">
+                                      {% comment %}
                                       <a href="{% url 'delete-prescription' pk=p.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
                                         <i class="fas fa-trash"></i> Delete <td>
                                       </a>
+                                      {% endcomment %}
                                       <a
-                                        href="{% url 'edit-prescription' pk=p.prescription_id %}"
+                                        href="{% url 'doctor-view-prescription' pk=p.prescription_id %}"
                                         class="btn btn-sm bg-info-light"
                                       >
-                                        <i class="far fa-eye"></i> Edit
+                                        <i class="far fa-eye"></i> View
                                       </a>
                                     </div>
                                   </td>
@@ -356,6 +352,71 @@
                       </div>
                     </div>
                     <!-- /Prescription Tab -->
+                    <!-- Medical Records Tab -->
+                    <div class="tab-pane fade" id="medical_records">
+                      <div class="text-right">
+                      </div>
+                      <div class="card card-table mb-0">
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-hover table-center mb-0">
+                              <thead>
+                                <tr>
+                                  <th>Report Delivery Date</th>
+                                  <th>Report ID</th>
+                                  <th>Patient</th>
+                                  <th>Contact</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for report in report %}
+                                <tr>
+                                  <td>{{report.delivery_date}}</td>
+                                  <td>{{report.report_id}}</td>
+                                  <td>
+                                    <h2 class="table-avatar">
+                                      <a
+                                        href="#"
+                                        class="avatar avatar-sm mr-2"
+                                      >
+                                        <img
+                                          class="avatar-img rounded-circle"
+                                          src="{{patient.featured_image.url}}"
+                                          alt="User Image"
+                                        />
+                                      </a>
+                                      <a href="#"
+                                        >{{patient.name}} </a
+                                      >
+                                    </h2>
+                                  </td>
+                                  <td>
+                                    {{patient.email}}
+                                    <span class="d-block text-info"
+                                      >Phone: {{patient.phone_number}}</span
+                                    >
+                                  </td>
+                                  <td class="text-right">
+                                    <div class="table-action">
+                                      {% comment %}
+                                      <a href="{% url 'delete-medical-record' pk=m.medical_record_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
+                                        <i class="fas fa-trash"></i> Delete <td>
+                                      </a>
+                                      {% endcomment %}
+                                      <a
+                                        href="{% url 'doctor-view-report' pk=report.report_id %}"
+                                        class="btn btn-sm bg-info-light"
+                                      >
+                                        <i class="far fa-eye"></i> View
+                                      </a>
+                                    </div>
+                                  </td>
+                                </tr>
+                                {% endfor %}
+                                </tr>
+                              </tbody>
+                            </table>
 
                     
 

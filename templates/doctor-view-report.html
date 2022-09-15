@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- doccure/patient-profile.html  30 Nov 2019 04:12:09 GMT -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <title>HealthStack</title>
+
+    <!-- Favicons -->
+    <link type="image/x-icon" href="{% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/bootstrap.min.css' %}" />
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet"
+        href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Header -->
+        <header class="header">{% include 'doctor-navbar.html' %}</header>
+        <!-- /Header -->
+
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'hospital_home'%}">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Edit Prescription
+                                </li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">AEditPrescription</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <!-- Profile Sidebar -->
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                        <div>{% include 'doctor-sidebar.html' %}</div>
+                    </div>
+                    <!-- / Profile Sidebar -->
+                    <div class="col-md-7 col-lg-8 col-xl-9">
+                        <div class="invoice-content">
+                            <div class="invoice-item">
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="invoice-logo">
+                                            <img src="{% static 'HealthStack-System/images/Normal/FullLogo_Transparent_NoBuffer.png'%}"
+                                                alt="logo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="invoice-details">
+                                            
+                                            <strong>Report ID:</strong>{{report.report_id}} <br>
+                                            <strong>Patient ID:</strong> {{patient.patient_id }} <br>
+                                            <strong>Date:</strong> {{report.delivery_date}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Invoice Item -->
+                            <div class="invoice-item">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="invoice-info">
+                                            <strong class="customer-text">Doctor Information</strong>
+
+                                            <p class="invoice-details invoice-details-two">
+                                                {{report.doctor.name}} <br>
+                                                {{report.doctor.address}}<br>
+                                                {{report.doctor.email}}<br>
+                                                {{report.doctor.phone_number}}<br>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="invoice-info invoice-info2">
+                                            <strong class="customer-text">Patient Information</strong>
+                                            <p class="invoice-details">
+                                                {{report.patient.address}}<br>
+                                                {{report.patient.email}} <br>
+                                                {{report.patient.phone_number}}<br>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice-item invoice-table-wrap">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="invoice-table table table-bordered">
+                                                <thead>
+                                                    <tr style="background-color: rgb(84, 147, 199);">
+                                                        <th>Specimen Information</th>
+                                                        <th class="text-center">Specimen ID</th>
+                                                        <th class="text-center">Collection Date/Time</th>
+                                                        <th class="text-center">Receiving Date/Time</th>
+                                                    </tr>
+                                                    {% for s in specimen %}
+                                                    <tr>
+
+                                                        <th class="text-center">{{s.specimen_type}}</th>
+                                                        <th class="text-center">{{s.specimen_id}}</th>
+                                                        <th class="text-center">{{s.collection_date}}</th>
+                                                        <th class="text-center">{{s.receiving_date}}</th>
+
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br>
+                            <div class="invoice-item invoice-table-wrap">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="invoice-table table table-bordered">
+                                                <thead>
+                                                    <tr style="background-color: rgb(84, 147, 199);">
+                                                        <th>Test Name</th>
+                                                        <th class="text-center">Result</th>
+                                                        <th class="text-center">Unit</th>
+                                                        <th class="text-center">Referred value</th>
+
+                                                    </tr>
+                                                    {% for t in test %}
+                                                    <tr>
+                                                        <th class="text-center">{{t.test_name}}</th>
+                                                        <th class="text-center">{{t.result}}</th>
+                                                        <th class="text-center">{{t.unit}}</th>
+                                                        <th class="text-center">{{t.referred_value}}</th>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- /Invoice Item -->
+
+
+                            <!-- Invoice Information -->
+                            <div class="other-info">
+                                <h4 style="background-color: rgb(84, 147, 199);">Other information</h4>
+                                <p>{{report.other_information}}</p>
+
+                               {% comment %}
+                                <button class="btn btn-sm bg-primary-light"> <a target="_blank"
+                                        href="{% url 'pdf' pk=report.report_id %}"> Download Report </a></button>
+                                {% endcomment %}
+
+
+                            </div>
+                            <!-- /Invoice Information -->
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        {% include 'footer.html' %}
+        <!-- /Footer -->
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- Add Medical Records Modal -->
+    <div class="modal fade custom-modal" id="add_medical_records">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Medical Records</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="text" class="form-control datetimepicker" value="31-10-2019" />
+                        </div>
+                        <div class="form-group">
+                            <label>Description ( Optional )</label>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload File</label>
+                            <input type="file" class="form-control" />
+                        </div>
+                        <div class="submit-section text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">
+                                Submit
+                            </button>
+                            <button type="button" class="btn btn-secondary submit-btn" data-dismiss="modal">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /Add Medical Records Modal -->
+
+    <!-- jQuery -->
+    <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+
+    <!-- Slimscroll JS -->
+    <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+    <!-- Datetimepicker JS -->
+    <!-- <script src="{% static 'HealthStack-System/js/Normal/moment.min.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/bootstrap-datetimepicker.min.js' %}"></script> -->
+
+    <!-- Prescription Settings JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/prescription-settings.js' %}"></script>
+
+    <!-- Datatables JS -->
+    <script src="{% static 'HealthStack-System/plugins/admin/datatables/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'HealthStack-System/plugins/admin/datatables/datatables.min.js'%}"></script>
+
+    <!-- Sticky Sidebar JS -->
+    <!-- <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+    <script src="{% static 'HealthStack-System/plugins/Normal/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script> -->
+
+    <!-- Custom JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+
+</body>
+
+<!-- doccure/patient-profile.html  30 Nov 2019 04:12:13 GMT -->
+
+</html>
