@@ -46,16 +46,16 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a href="{% url 'patient-dashboard'%}" class="nav-link">Dashboard</a></li>
           <li class="nav-item"><a href="{% url 'pharmacy_shop' %}"class="nav-link">Shop</a></li>
-          <li class="nav-item"><a href="{% url 'cart' %}" class="nav-link">Cart</a></li>
-          <li class="nav-item"><a href="{% url 'checkout' %}" class="nav-link">Checkout</a></li>
+          <!-- <li class="nav-item"><a href="{% url 'cart' %}" class="nav-link">Cart</a></li> -->
+          <!-- <li class="nav-item"><a href="{% url 'checkout' %}" class="nav-link">Checkout</a></li> -->
           <li class="nav-item cart">
-            <a href="cart.html" class="nav-link">
-            <span class="icon icon-shopping_cart"></span>
-            <span class="bag d-flex justify-content-center align-items-center">
-              <small>1</small>
-            </span>
-          </a>
-        </li>
+            <a href="{% url 'cart' %}" class="nav-link">
+              <span class="icon icon-shopping_cart"></span>
+              <span class="bag d-flex justify-content-center align-items-center">
+                <small>{{order.count_cart_items}}</small>
+              </span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -136,6 +136,7 @@
               <span>Total</span>
               <span>{{ order.final_bill | floatformat:2 }} BDT</span>
             </p>
+          
           </div>
           <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to
               Checkout</a></p>

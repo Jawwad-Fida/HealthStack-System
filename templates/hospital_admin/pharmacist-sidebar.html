@@ -8,18 +8,10 @@
                 <li class=""> 
                     <a href="{%url 'pharmacist-dashboard' %}"><i class="fe fe-user"></i> <span>Dashboard</span></a>
                 </li>
-
             </ul>
-            <ul>
-                
-                <li class="submenu">
-                    <a href="#"><i class="fe fe-user"></i> <span> Medicine</span></a>
-                    <ul style="display:none;">
-                        
-                        
-                        <li><a href="{%url 'medicine-list'%}"><i class="fe fe-users"></i> <span>View Medicine</span></a></li>
-                    </ul>
-                </li>
+            <ul>        
+            <li><a href="{%url 'medicine-list'%}"><i class="fe fe-users"></i> <span>View Medicine</span></a></li>
+            <li><a href="{% url 'add-medicine' %}"><i class="fe fe-user"></i> <span> Add Medicine</span></a></li>
 
             </ul>
             <ul>

@@ -39,16 +39,24 @@
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a href="{% url 'patient-dashboard'%}" class="nav-link">Dashboard</a></li>
-          <li class="nav-item"><a href="{% url 'cart' %}" class="nav-link">Cart</a></li>
-          <li class="nav-item"><a href="{% url 'checkout' %}" class="nav-link">Checkout</a></li>
+          <!-- <li class="nav-item" ><a href="{% url 'cart' %}" class="nav-link" >Cart</a></li> -->
+          <!-- <li class="nav-item"><a href="{% url 'checkout' %}" class="nav-link">Checkout</a></li> -->
           <li class="nav-item cart">
-            <a href="cart.html" class="nav-link">
+            <a href="{% url 'cart' %}" class="nav-link">
               <span class="icon icon-shopping_cart"></span>
               <span class="bag d-flex justify-content-center align-items-center">
-                <small>1</small>
+                <small>{{order.count_cart_items}}</small>
               </span>
             </a>
           </li>
+          <div class="col-md-6 col-6 text-right">
+            <div class="top-nav-search">
+              <form action="{% url 'pharmacy_shop' %}" method="GET">
+                <input type="text" class="form-control" placeholder="Search medicine" name="search_query" value="{{search_query}}">
+                
+              </form>
+            </div>
+          </div>
         </ul>
       </div>
     </div>
@@ -64,14 +72,14 @@
                 aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-0-tab" data-toggle="pill" href="#v-pills-0" role="tab"
                   aria-controls="v-pills-0" aria-selected="true">All Medicine</a>
-                <a class="nav-link" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab"
+                <!-- <a class="nav-link" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab"
                   aria-controls="v-pills-1" aria-selected="false">Fever & Pain</a>
                 <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab"
                   aria-controls="v-pills-2" aria-selected="false">Digestive Health</a>
                 <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab"
                   aria-controls="v-pills-3" aria-selected="false">Blood Pressure & Heart Disease</a>
                 <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab"
-                aria-controls="v-pills-3" aria-selected="false">Cough, Flue & cold</a>
+                aria-controls="v-pills-3" aria-selected="false">Cough, Flue & cold</a> -->
               </div>
             </div>
             <div class="col-md-12 d-flex align-items-center">
