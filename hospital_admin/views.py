@@ -120,6 +120,8 @@ def admin_login(request):
                 return redirect('admin-dashboard')
             elif user.is_labworker:
                 return redirect('labworker-dashboard')
+            elif user.is_pharmacist:
+                return redirect('pharmacist-dashboard')
         else:
             messages.error(request, 'Invalid username or password')
         
@@ -527,9 +529,12 @@ def add_pharmacist(request):
 
 @login_required(login_url='admin_login')
 def medicine_list(request):
-    medicines = Medicine.objects.all()
-    return render(request, 'hospital_admin/medicine-list.html',{'medicines': medicines})
-
+    if request.user.is_authenticated:
+        if request.user.is_pharmacist:
+            pharmacist = Pharmacist.objects.get(user=request.user)
+            medicine = Medicine.objects.all()
+            context = {'medicine':medicine,'pharmacist':pharmacist}
+            return render(request, 'hospital_admin/medicine-list.html',context)
 
 @login_required(login_url='admin_login')
 def generate_random_medicine_ID():
@@ -541,8 +546,8 @@ def generate_random_medicine_ID():
 
 @login_required(login_url='admin_login')
 def add_medicine(request):
-    if request.user.is_hospital_admin:
-     user = Admin_Information.objects.get(user=request.user)
+    if request.user.is_pharmacist:
+     user = Pharmacist.objects.get(user=request.user)
      
     if request.method == 'POST':
        medicine = Medicine()
@@ -581,8 +586,8 @@ def add_medicine(request):
 
 @login_required(login_url='admin_login')
 def edit_medicine(request, pk):
-    if request.user.is_hospital_admin:
-        user = Admin_Information.objects.get(user=request.user)
+    if request.user.is_pharmacist:
+        user = Pharmacist.objects.get(user=request.user)
         
         medicine = Medicine.objects.get(serial_number=pk)
         old_medicine_image = medicine.featured_image
@@ -621,8 +626,8 @@ def edit_medicine(request, pk):
 
 @login_required(login_url='admin_login')
 def delete_medicine(request, pk):
-    if request.user.is_hospital_admin:
-        user = Admin_Information.objects.get(user=request.user)
+    if request.user.is_pharmacist:
+        user = Pharmacist.objects.get(user=request.user)
         medicine = Medicine.objects.get(serial_number=pk)
         medicine.delete()
         return redirect('medicine-list')
@@ -936,6 +941,17 @@ def delete_test(request,pk):
 
 
    
+
+
+
+
+def pharmacist_dashboard(request):
+    if request.user.is_authenticated:
+        if request.user.is_pharmacist:
+            pharmacist = Pharmacist.objects.get(user=request.user)
+            
+            context = {'pharmacist':pharmacist}
+            return render(request, 'hospital_admin/pharmacist-dashboard.html',context)
 
 
 
