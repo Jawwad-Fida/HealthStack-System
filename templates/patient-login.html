@@ -169,14 +169,20 @@
 
     <!-- jQuery -->
     <!-- jQuery -->
+    <!-- <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script> -->
+    <!-- <script src="{% static 'HealthStack-System/js/jquery.min.js' %}"></script> -->
     <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+
+
 
     <!-- Bootstrap Core JS -->
     <script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
     <script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
 
     <!-- Custom JS -->
-    <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+    <!-- <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script> -->
+    <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
+
 
     <script src="{% static 'HealthStack-System/js/Normal/Checkbox.js' %}"></script>
 
@@ -189,7 +195,7 @@
 				x.style.display = "block";
 			}
 			$('#CredentialCheck').delay(4000).fadeOut('slow');     
-		</script> {% endcomment %}
+		</script>
 
     <!-- and at the end:-->
     {% if messages %}
@@ -200,7 +206,7 @@
               });
           {% endfor %}
       </script>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
     <!-- show password js -->
     <script>
