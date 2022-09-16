@@ -46,21 +46,16 @@
                     </ul>
                 </li>
                 
-                <li class="submenu">
+                {% comment %} <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Reports</span></a>
                     <ul style="display: none;">
                         <li><a href="invoice-report.html">Invoice Reports</a></li>
                     </ul>
-                </li>
+                </li> {% endcomment %}
 
                 
 
-                <li class="submenu">
-                    <a href="#"><i class="fe fe-document"></i> <span> Medicines</span></a>
-                    <ul style="display: none;">
-                        <li><a href="{% url 'medicine-list' %}"><i class="fe fe-plus"></i> <span>Add Medicines</span></a></li>
-                    </ul>
-                </li>
+                
                 
                 <li> 
                     <a href="{%url 'hospital-admin-profile' pk=user.id %}"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
