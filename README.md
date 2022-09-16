@@ -58,17 +58,19 @@
       2)  CRUD Medicines
       3)  Search Medicine
 
-## APIs and PyPI packages used: -
-      Django Rest Framework 
-      Django Widget Tweaks
-      Django Pillow
-      Mailtrap API - smtp fake testing server
-      Django Environ - protecting credentials online (.env file)
-      SSLCommerz API - a payment gateway that provides various payment options in Bangladesh (debit card, credit card, mobile banking, etc.)
-      Django Debug Toolbar
-      xhtml pdf - to generate and download pdf documents.
 
-      
+## APIs and PyPI packages used:
+
+#### [Django Rest Framework](https://www.django-rest-framework.org/#installation) - toolkit for building web APIs
+#### [Django Widget Tweaks](https://pypi.org/project/django-widget-tweaks/) - tweak form field rendering in templates
+#### [Pillow](https://pillow.readthedocs.io/en/stable/index.html) - Python imaging library
+#### [Mailtrap API](https://mailtrap.io/blog/django-send-email/) - smtp fake testing server
+#### [Django Environ](https://django-environ.readthedocs.io/en/latest/) - protecting credentials online (.env file)
+#### [SSLCommerz API](https://github.com/sslcommerz/SSLCommerz-Python) - a payment gateway that provides various payment options in Bangladesh (debit card, credit card, mobile banking, etc.)
+#### [Django Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html) - configurable set of panels that display various debug information about the current request/response and when clicked
+#### [xhtml2pdf](https://xhtml2pdf.readthedocs.io/en/latest/usage.html) - to generate and download pdf documents.
+
+
 ## Project video link - [Youtube](#)
 
 
