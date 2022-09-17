@@ -171,20 +171,7 @@
 													<li><i class="far fa-money-bill-alt"></i>{{doctor.consultation_fee}} BDT</li>
 												</ul>
 											</div>
-											<div class="doctor-action">
-												<a href="javascript:void(0)" class="btn btn-white fav-btn">
-													<i class="far fa-bookmark"></i>
-												</a>
-												<a href="chat.html" class="btn btn-white msg-btn">
-													<i class="far fa-comment-alt"></i>
-												</a>
-												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
-													<i class="fas fa-phone"></i>
-												</a>
-												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-													<i class="fas fa-video"></i>
-												</a>
-											</div>
+											
 
 											{% if user.is_authenticated and user.is_patient %}
 											<div class="clinic-booking">
@@ -347,16 +334,16 @@
 																	<div class="row form-row">
 																		  
 																		  
-																  <div class="col-12 col-md-6 col-lg-6">
+																  <div class="col-12 col-md-6 col-lg-8">
 																	<div class="form-group">
 																		<label>Review Title</label>
 																		<input type="text" class="form-control" name="title" id="title">
 																	</div> 
 																  </div>
-																  <div class="col-12 col-md-6 col-lg-6">
+																  <div class="col-12 col-md-6 col-lg-8">
 																	<div class="form-group">
 																		<label>Message</label>
-																		<input type="text" class="form-control" name="message" id="message">
+																		<textarea type="text" class="form-control" name="message" id="message" rows="5"></textarea>
 																	</div> 
 																  </div>
 																  
