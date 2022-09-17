@@ -525,7 +525,7 @@ def add_pharmacist(request):
 
                 # After user is created, we can log them in
                 #login(request, user)
-                return redirect('admin_login')
+                return redirect('pharmacist-list')
         else:
             messages.error(request, 'An error has occurred during registration')
     
@@ -660,7 +660,7 @@ def add_lab_worker(request):
 
                 # After user is created, we can log them in
                 #login(request, user)
-                return redirect('admin_login')
+                return redirect('lab-worker-list')
             else:
                 messages.error(request, 'An error has occurred during registration')
     
@@ -707,7 +707,8 @@ def edit_lab_worker(request, pk):
             lab_worker.featured_image = featured_image
     
             lab_worker.save()
-        
+            
+            messages.success(request, 'Clinical Laboratory Technician account updated!')
             return redirect('lab-worker-list')
         
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
@@ -737,11 +738,12 @@ def edit_pharmacist(request, pk):
             pharmacist.featured_image = featured_image
     
             pharmacist.save()
-        
+            messages.success(request, 'Pharmacist updated!')
             return redirect('pharmacist-list')
         
     return render(request, 'hospital_admin/edit-pharmacist.html', {'pharmacist': pharmacist, 'admin': user})
 
+@login_required(login_url='admin_login')
 def department_image_list(request,pk):
     departments = hospital_department.objects.filter(hospital_id=pk)
     #departments = hospital_department.objects.all()
@@ -807,8 +809,8 @@ def accept_doctor(request,pk):
     except BadHeaderError:
         return HttpResponse('Invalid header found')
 
-    
-    return redirect('admin-dashboard')
+    messages.success(request, 'Doctor Accepted!')
+    return redirect('register-doctor-list')
 
 @login_required(login_url='admin_login')
 def reject_doctor(request,pk):
@@ -841,7 +843,8 @@ def reject_doctor(request,pk):
     except BadHeaderError:
         return HttpResponse('Invalid header found')
     
-    return redirect('admin-dashboard')
+    messages.success(request, 'Doctor Rejected!')
+    return redirect('register-doctor-list')
 
 
 @login_required(login_url='admin_login')
@@ -850,6 +853,7 @@ def delete_department(request,pk):
         if request.user.is_hospital_admin:
             department = hospital_department.objects.get(hospital_department_id=pk)
             department.delete()
+            messages.success(request, 'Department Deleted!')
             return redirect('hospital-list')
 
 @login_required(login_url='admin_login')
@@ -871,6 +875,7 @@ def edit_department(request,pk):
                 department.hospital_department_name = department_name
                 department.featured_image = featured_image
                 department.save()
+                messages.success(request, 'Department Updated!')
                 return redirect('hospital-list')
                 
             context = {'department': department}

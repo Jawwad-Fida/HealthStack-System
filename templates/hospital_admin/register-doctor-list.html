@@ -60,6 +60,7 @@
 									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
 									<li class="breadcrumb-item active">Doctor</li>
 								</ul>
+								{% include 'message.html' %}
 							</div>
 						</div>
 					</div>
@@ -142,6 +143,16 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+		
+		{% if messages %}
+		<script>
+			{% for message in messages %}
+				$(document).ready(function () {
+					$('.toast').toast('show');
+				});
+			{% endfor %}
+		</script>
+	  {% endif %}
 		
     </body>
 
