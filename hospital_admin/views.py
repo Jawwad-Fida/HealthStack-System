@@ -886,7 +886,8 @@ def mypatient_list(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
             lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
-            patient = Patient.objects.all()
+            report= Report.objects.all()
+            patient = Patient.objects.exclude(report__in=report)
             context = {'patient': patient,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/mypatient-list.html',context)
 
@@ -947,5 +948,11 @@ def pharmacist_dashboard(request):
             return render(request, 'hospital_admin/pharmacist-dashboard.html',context)
 
 
-
+def report_history(request):
+    if request.user.is_authenticated:
+        if request.user.is_labworker:
+            labworker = Clinical_Laboratory_Technician.objects.get(user=request.user)
+            report = Report.objects.all()
+            context = {'report':report,'labworker':labworker}
+            return render(request, 'hospital_admin/report-list.html',context)
 

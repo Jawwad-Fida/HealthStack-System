@@ -71,7 +71,7 @@ urlpatterns = [
     path('test-list/', views.test_list,name='test-list'),
     path('delete-test/<int:pk>/', views.delete_test,name='delete-test'),
     path('pharmacist-dashboard/', views.pharmacist_dashboard,name='pharmacist-dashboard'),
-    
+    path('report-history/', views.report_history,name='report-history'),
     
 
     
