@@ -11,9 +11,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
-from pharmacy.models import Medicine, Pharmacist
+from pharmacy.models import Medicine, Order, Pharmacist
 from doctor.models import Doctor_Information, Prescription, Prescription_test, Report, Appointment, Experience , Education,Specimen,Test
-
+from pharmacy.models import Order, Cart
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm , PharmacistCreationForm 
 
@@ -953,8 +953,18 @@ def pharmacist_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_pharmacist:
             pharmacist = Pharmacist.objects.get(user=request.user)
+            total_pharmacist_count = Pharmacist.objects.annotate(count=Count('pharmacist_id'))
+            total_medicine_count = Medicine.objects.annotate(count=Count('serial_number'))
+            total_order_count = Order.objects.annotate(count=Count('orderitems'))
+            total_cart_count = Cart.objects.annotate(count=Count('item'))
+
+            medicine = Medicine.objects.all()
             
-            context = {'pharmacist':pharmacist}
+            context = {'pharmacist':pharmacist, 'medicine':medicine,
+                       'total_pharmacist_count':total_pharmacist_count, 
+                       'total_medicine_count':total_medicine_count, 
+                       'total_order_count':total_order_count,
+                       'total_cart_count':total_cart_count}
             return render(request, 'hospital_admin/pharmacist-dashboard.html',context)
 
 

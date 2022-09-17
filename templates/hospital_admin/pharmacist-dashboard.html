@@ -62,10 +62,136 @@
             <div class="row">
               <div class="col-sm-12">
                 <h3 class="page-title">Welcome Pharmacist!</h3>
-                <ul class="breadcrumb">
-                  <li class="breadcrumb-item active">Dashboard</li>
-                </ul>
+                <div class="row">
+                  <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="dash-widget-header">
+                          <span class="dash-widget-icon text-primary border-primary">
+                            <i class="fe fe-users"></i>
+                          </span>
+                          <div class="dash-count">
+                            <h3>{{total_pharmacist_count.count}}</h3>
+                          </div>
+                        </div>
+                        <div class="dash-widget-info">
+                          <h6 class="text-muted">Total Pharmacist</h6>
+                          <div class="progress progress-sm">
+                            <div class="progress-bar bg-primary w-50"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="dash-widget-header">
+                          <span class="dash-widget-icon text-success">
+                            <i class="fe fe-credit-card"></i>
+                          </span>
+                          <div class="dash-count">
+                            <h3>{{total_medicine_count.count}}</h3>
+                          </div>
+                        </div>
+                        <div class="dash-widget-info">
+                          <h6 class="text-muted">Total Medicines</h6>
+                          <div class="progress progress-sm">
+                            <div class="progress-bar bg-success w-50"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="dash-widget-header">
+                          <span class="dash-widget-icon text-danger border-danger">
+                            <i class="fe fe-money"></i>
+                          </span>
+                          <div class="dash-count">
+                            <h3>{{total_order_count.count}}</h3>
+                          </div>
+                        </div>
+                        <div class="dash-widget-info">
+                          <h6 class="text-muted">Total Order</h6>
+                          <div class="progress progress-sm">
+                            <div class="progress-bar bg-danger w-50"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="dash-widget-header">
+                          <span class="dash-widget-icon text-warning border-warning">
+                            <i class="fe fe-folder"></i>
+                          </span>
+                          <div class="dash-count">
+                            <h3>{{total_cart_count.count}}</h3>
+                          </div>
+                        </div>
+                        <div class="dash-widget-info">
+                          <h6 class="text-muted">Number of Cart Item</h6>
+                          <div class="progress progress-sm">
+                            <div class="progress-bar bg-warning w-50"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="page-header">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h3 class="page-title">List of Medicine</h3>
+                      <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Medicine</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="table-responsive">
+                         <table class="datatable table table-hover table-center mb-0">
+                            <thead>
+                             <tr>
+                               <th>Medicine Name</th>
+                               <th>Stock Quantity</th>
+                               <th>Medicine Type</th>
+                               <th>Medicine Category</th>
+                               <th>Price</th>
+                             </tr>
+                            </thead>
+                            {% for medicine in medicine %}
+                             <tr>
+                               <td>
+                                 <h2 class="table-avatar">
+                                   <a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{medicine.featured_image.url}}" alt="Medicine Image"></a>															
+                                   <a href="">{{medicine.name}}</a>
+                                 </h2>
+                               </td>
+                               <td>{{medicine.stock_quantity}}</td>
+                               <td>{{medicine.medicine_type}}</td>
+                               <td>{{medicine.medicine_category}}</td>
+                               <td>{{medicine.price}}</td>
+                             </tr>
+                             {% endfor %}
+                         </table>
+                       </div>
+                     </div>
+                   </div>	
+                   </div>
+               </div>
               </div>
+              
             </div>
           </div>
           <!-- /Page Header -->
