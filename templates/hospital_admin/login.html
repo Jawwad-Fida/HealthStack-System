@@ -43,7 +43,12 @@
 								<!-- Form -->
 								<form action="{% url 'admin-login'%}" method="POST">
 									{% csrf_token %}
-									{% if messages %}
+
+									{% include 'message.html' %}
+
+
+
+									{% comment %} {% if messages %}
                       
                           				{% for message in messages %}
                           					<div class="alert alert-danger alert-dismissible fade show" id="CredentialCheck" role="alert">
@@ -54,7 +59,7 @@
                           					</div>
                           				{% endfor %}
                       
-                      				{% endif %}
+                      				{% endif %} {% endcomment %}
 
 									<div class="form-group">
 										<input class="form-control" type="text" placeholder="Username" name="username">
@@ -103,6 +108,16 @@
 			}
 			$('#CredentialCheck').delay(4000).fadeOut('slow');     
 		</script>
+
+		{% if messages %}
+		<script>
+			{% for message in messages %}
+				$(document).ready(function () {
+					$('.toast').toast('show');
+				});
+			{% endfor %}
+		</script>
+	  {% endif %}
 		
     </body>
 
