@@ -138,10 +138,7 @@
             </p>
           
           </div>
-          <p class="text-center"><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to
-              Checkout</a></p>
-          <p class="text-center"><a href="{% url 'ssl-payment-request-medicine' pk=order.user.patient.patient_id id=order.id %}" class="btn btn-primary py-3 px-4">SSLCOMMERZ Test</a></p>
-          <p class="text-center"><a href="{% url 'payment-testing' pk=order.id %}" class="btn btn-primary py-3 px-4">MAIL Test</a></p>
+          <p class="text-center"><a href="{% url 'ssl-payment-request-medicine' pk=order.user.patient.patient_id id=order.id %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
         </div>
       </div>
     </div>

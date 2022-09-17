@@ -41,6 +41,7 @@ from django.utils.html import strip_tags
 # Create your views here.
 
 def hospital_home(request):
+    # .order_by('-created_at')[:6]
     doctors = Doctor_Information.objects.filter(register_status='Accepted')
     hospitals = Hospital_Information.objects.all()
     context = {'doctors': doctors, 'hospitals': hospitals} 
@@ -226,7 +227,7 @@ def patient_dashboard(request):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
         report = Report.objects.filter(patient=patient)
-        prescription = Prescription.objects.filter(patient=patient)
+        prescription = Prescription.objects.filter(patient=patient).order_by('-prescription_id')
         # patient = Patient.objects.get(user_id=pk)
         # appointments = Appointment.objects.filter(patient=patient)
         appointments = Appointment.objects.filter(patient=patient).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
