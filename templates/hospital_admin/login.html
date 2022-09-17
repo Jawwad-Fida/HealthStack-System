@@ -64,9 +64,12 @@
 									<div class="form-group">
 										<input class="form-control" type="text" placeholder="Username" name="username">
 									</div>
+
 									<div class="form-group">
-										<input class="form-control" type="password" placeholder="Password" name= "password">
+										<input class="form-control" type="password" id="myInput" placeholder="Password" name= "password">
+										<input type="checkbox" class="mt-2" onclick="myFunction11()">Show Password
 									</div>
+
 									<div class="form-group">
 										<button class="btn btn-primary btn-block" type="submit">Login</button>
 									</div>
@@ -108,6 +111,19 @@
 			}
 			$('#CredentialCheck').delay(4000).fadeOut('slow');     
 		</script>
+
+		<!-- show password js -->
+		<script>
+			function myFunction11() {
+			var x = document.getElementById('myInput');
+			if (x.type === "password") {
+				x.type = "text";
+			} else {
+				x.type = "password";
+			}
+			}
+			</script>
+		  
 
 		{% if messages %}
 		<script>
