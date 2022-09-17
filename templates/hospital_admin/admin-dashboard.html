@@ -262,7 +262,7 @@
                           <td>
                             <h2 class="table-avatar">
                               <a
-                                href="profile.html"
+                                href="#"
                                 class="avatar avatar-sm mr-2"
                                 ><img
                                   class="avatar-img rounded-circle"
@@ -386,6 +386,57 @@
 							<!-- /Feed Activity -->
 							
 						</div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 d-flex">
+              <!-- Recent Orders -->
+              <div class="card card-table flex-fill">
+                <div class="card-header">
+                  <h4 class="card-title">Pharmacist List</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-center mb-0">
+                      <thead>
+                        <tr>
+                          <th>Pharmacist Name</th>
+                          <th>Email</th>
+                          <th>Phone Number</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for p in pharmacists %}
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="#"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="{{p.featured_image.url}}"
+                                  alt="User Image"
+                              /></a>
+                              <a href="#">{{p.username}}</a>
+                            </h2>
+                          </td>
+                          <td>{{p.email}}</td>
+                          <td>{{p.phone_number}}</td>
+                          
+
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- /Recent Orders -->
+            </div>
+
+          
           </div>
           
         </div>
