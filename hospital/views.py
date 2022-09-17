@@ -42,7 +42,8 @@ from django.utils.html import strip_tags
 
 def hospital_home(request):
     doctors = Doctor_Information.objects.filter(register_status='Accepted')
-    context = {'doctors': doctors} 
+    hospitals = Hospital_Information.objects.all()
+    context = {'doctors': doctors, 'hospitals': hospitals} 
     return render(request, 'index-2.html', context)
 
 @login_required(login_url="login")

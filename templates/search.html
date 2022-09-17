@@ -57,7 +57,9 @@
       href="{% static 'HealthStack-System/css/Normal/style.css' %}"
     />
 
-    <link rel="stylesheet"href="{% static 'HealthStack-System/css/Normal/search2.css' %}">
+    <!-- <link rel="stylesheet"href="{% static 'HealthStack-System/css/Normal/search2.css' %}"> -->
+    <link rel="stylesheet"href="{% static 'HealthStack-System/css/Normal/search3.css' %}">
+
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -87,7 +89,7 @@
 							<h2 class="breadcrumb-title">Search Doctor</h2>
 						</div>
 
-						<div class="col-md-6 col-6 text-right">
+						<div class="col-md-6 col-6">
 							<div class="top-nav-search">
 								<form action="{% url 'search' %}" method="GET">
 									<input type="text" class="form-control" placeholder="Search doctor" name="search_query" value="{{search_query}}">
@@ -258,7 +260,7 @@
     <script src="{% static 'HealthStack-System/plugins/Normal/fancybox/jquery.fancybox.min.js'%}"></script>
 
     <!-- Custom JS -->
-    <script src="{% static 'HealthStack-System/js/Normal/script.js' %}"></script>
+    <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
   </body>
 
   <!-- doccure/search.html  30 Nov 2019 04:12:16 GMT -->
