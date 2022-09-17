@@ -240,9 +240,6 @@
                                   <th>Doctor Name</th>
 
                                   <!-- <th>Attachment</th> -->
-
-                                 
-
                                   <th>Doctor</th>
                                   <th></th>
                                 </tr>
@@ -285,20 +282,31 @@
                                       >
                                         <i class="far fa-eye"></i> View
                                       </a>
-                                      <a href="{% url 'delete-prescription' pk=prescription.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
-                                        <i class="fas fa-trash"></i> Delete <td>
+                                      <a  data-toggle="modal" data-target="#delete_modal{{prescription.prescription_id}}" class="btn btn-sm bg-danger-light">
+                                        <i class="fe fe-trash"></i> Delete
                                       </a>
-                                      {% comment %}
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
-                                      {% endcomment %}
                                     </div>
                                   </td>
                                 </tr>
+                                <div class="modal fade" id="delete_modal{{prescription.prescription_id}}" aria-hidden="true" role="dialog">
+                                  <form method="POST" action="{% url 'delete-prescription' pk=prescription.prescription_id %}">
+                                  <div class="modal-dialog modal-dialog-centered" role="document" >
+                                    <div class="modal-content">
+                                      {% csrf_token %}
+                                        <div class="modal-body">
+                                        <div class="form-content p-2">
+                                          <h4 class="modal-title" style="display:flex;justify-content: center;align-items: center;">Delete</h4>
+                                          <p class="mb-4"  style="display:flex;justify-content: center;align-items: center;">Are you sure want to delete?</p>
+                                          <div style="display:flex;justify-content: center">
+                                            <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Save</button>
+                                            <button type="button" class="btn btn-danger" style="margin-left: 5px;" data-dismiss="modal">Close</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </form>
+                                </div>
                                 {% endfor %}
                               </tbody>
                             </table>
