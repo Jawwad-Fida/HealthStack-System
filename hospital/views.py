@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth.models import User
 # from django.contrib.auth.forms import UserCreationForm
-
 from .forms import CustomUserCreationForm, PatientForm, PasswordResetForm
 from hospital.models import Hospital_Information, User, Patient 
 from doctor.models import Test, testCart, testOrder
@@ -15,13 +14,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime
 import datetime
-
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
-
 from .models import Patient, User
 from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Prescription_medicine, Prescription_test
 from sslcommerz.models import Payment
@@ -29,7 +26,6 @@ from django.db.models import Q, Count
 import re
 from io import BytesIO
 from urllib import response
-
 from django.core.mail import BadHeaderError, send_mail
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -60,29 +56,23 @@ def change_password(request,pk):
             request.user.save()
             messages.success(request,"Password Changed Successfully")
             return redirect("patient-dashboard")
-            
         else:
             messages.error(request,"New Password and Confirm Password is not same")
             return redirect("change-password",pk)
     return render(request, 'change-password.html',context)
 
 
-
 def add_billing(request):
     return render(request, 'add-billing.html')
-
 
 def appointments(request):
     return render(request, 'appointments.html')
 
-
 def edit_billing(request):
     return render(request, 'edit-billing.html')
 
-
 def edit_prescription(request):
     return render(request, 'edit-prescription.html')
-
 
 # def forgot_password(request):
 #     return render(request, 'forgot-password.html')
@@ -108,14 +98,11 @@ def resetPassword(request):
 				'protocol': 'http',
 			}
 
-            
             html_message = render_to_string('mail_template.html', {'values': values})
             plain_message = strip_tags(html_message)
             
-       
             try:
                 send_mail(subject, plain_message, 'admin@example.com',  [user.email], html_message=html_message, fail_silently=False)
-                #send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect ("password_reset_done")
@@ -127,13 +114,9 @@ def resetPassword(request):
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
-
 def about_us(request):
     return render(request, 'about-us.html')
 
-
-# def multiple_hospital(request):
-#     return render(request, 'multiple-hospital.html')
 
 @login_required(login_url="login")
 def chat(request, pk):
@@ -156,7 +139,6 @@ def chat_doctor(request):
 @login_required(login_url="login")
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
-
 
 def login_user(request):
     page = 'patient_login'
@@ -201,12 +183,10 @@ def patient_register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             # form.save()
-            # commit=False --> don't save to database yet (we have a chance to modify object)
-            user = form.save(commit=False)
+            user = form.save(commit=False) # commit=False --> don't save to database yet (we have a chance to modify object)
             user.is_patient = True
             # user.username = user.username.lower()  # lowercase username
             user.save()
-
             messages.success(request, 'Patient account was created!')
 
             # After user is created, we can log them in --> login(request, user)
@@ -214,8 +194,6 @@ def patient_register(request):
 
         else:
             messages.error(request, 'An error has occurred during registration')
-    # else:
-    #     form = CustomUserCreationForm()
 
     context = {'page': page, 'form': form}
     return render(request, 'patient-register.html', context)
@@ -225,14 +203,12 @@ def patient_register(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def patient_dashboard(request):
     if request.user.is_patient:
+        # patient = Patient.objects.get(user_id=pk)
         patient = Patient.objects.get(user=request.user)
         report = Report.objects.filter(patient=patient)
         prescription = Prescription.objects.filter(patient=patient).order_by('-prescription_id')
-        # patient = Patient.objects.get(user_id=pk)
-        # appointments = Appointment.objects.filter(patient=patient)
         appointments = Appointment.objects.filter(patient=patient).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
-        payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment')
-
+        payments = Payment.objects.filter(patient=patient).filter(appointment__in=appointments).filter(payment_type='appointment').filter(status='VALID')
         context = {'patient': patient, 'appointments': appointments, 'payments': payments,'report':report,'prescription':prescription}
     else:
         return redirect('logout')
@@ -297,6 +273,8 @@ def profile_settings(request):
             
             patient.save()
             
+            messages.success(request, 'Profile Settings Changed!')
+            
             return redirect('patient-dashboard')
     else:
         redirect('logout')  
@@ -305,17 +283,15 @@ def profile_settings(request):
 def search(request):
     if request.user.is_authenticated and request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
-        
         patient = Patient.objects.get(user=request.user)
         doctors = Doctor_Information.objects.filter(register_status='Accepted')
         
         doctors, search_query = searchDoctors(request)
-        # context = {'patient': patient, 'doctors': doctors, 'profiles': profiles, 'search_query': search_query}
         context = {'patient': patient, 'doctors': doctors, 'search_query': search_query}
         return render(request, 'search.html', context)
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')    
     
 
@@ -348,7 +324,7 @@ def multiple_hospital(request):
             return render(request, 'multiple-hospital.html', context)
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
     
     
@@ -387,19 +363,18 @@ def hospital_profile(request, pk):
             specializations = specialization.objects.filter(hospital=hospitals)
             services = service.objects.filter(hospital=hospitals)
             
-            
             context = {'doctor': doctor, 'hospitals': hospitals, 'departments': departments, 'specializations': specializations, 'services': services}
             return render(request, 'hospital-profile.html', context)
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
     
     
 def data_table(request):
     return render(request, 'data-table.html')
 
-
+@login_required(login_url="login")
 def hospital_department_list(request, pk):
     if request.user.is_authenticated: 
         
@@ -410,8 +385,6 @@ def hospital_department_list(request, pk):
             
             hospitals = Hospital_Information.objects.get(hospital_id=pk)
             departments = hospital_department.objects.filter(hospital=hospitals)
-            
-            # hospitals, search_query = searchHospitals(request)
         
             context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'departments': departments}
             return render(request, 'hospital-department.html', context)
@@ -421,8 +394,6 @@ def hospital_department_list(request, pk):
             hospitals = Hospital_Information.objects.get(hospital_id=pk)
             departments = hospital_department.objects.filter(hospital=hospitals)
             
-            # hospitals, search_query = searchHospitals(request)
-            
             context = {'doctor': doctor, 'hospitals': hospitals, 'departments': departments}
             return render(request, 'hospital-department.html', context)
     else:
@@ -430,13 +401,11 @@ def hospital_department_list(request, pk):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html')
 
-
+@login_required(login_url="login")
 def hospital_doctor_list(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
         # patient = Patient.objects.get(user_id=pk)
-        
         patient = Patient.objects.get(user=request.user)
-              
         departments = hospital_department.objects.get(hospital_department_id=pk)
         doctors = Doctor_Information.objects.filter(department_name=departments)
         
@@ -454,14 +423,17 @@ def hospital_doctor_list(request, pk):
         doctors = Doctor_Information.objects.filter(department_name=departments)
         doctors, search_query = searchDepartmentDoctors(request, pk)
         
-
         context = {'doctor':doctor, 'department': departments, 'doctors': doctors, 'search_query': search_query, 'pk_id': pk}
         return render(request, 'hospital-doctor-list.html', context)
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')   
+    
 
+
+
+@login_required(login_url="login")
 def hospital_doctor_register(request, pk):
     if request.user.is_authenticated: 
         
@@ -491,6 +463,8 @@ def hospital_doctor_register(request, pk):
                 
                 doctor.save()
                 
+                messages.success(request, 'Hospital Registration Request Sent')
+                
                 return redirect('doctor-dashboard')
                 
                  
@@ -501,13 +475,14 @@ def hospital_doctor_register(request, pk):
         messages.info(request, 'Not Authorized')
         return render(request, 'doctor-login.html')
     
-    
+   
 def testing(request):
     # hospitals = Hospital_Information.objects.get(hospital_id=1)
     test = "test"
     context = {'test': test}
     return render(request, 'testing.html', context)
 
+@login_required(login_url="login")
 def view_report(request,pk):
     if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
@@ -542,47 +517,13 @@ def test_single(request,pk):
         return render(request, 'patient-login.html')  
 
 
-# def test_shop(request):
-#     if request.user.is_authenticated and request.user.is_patient:
-         
-#         patient = Patient.objects.get(user=request.user)
-#         test = Perscription_test.objects.all()
-        
-#         context = {'patient': patient, 'Perscription_test': Perscription_test}
-#         return render(request, 'prescription-view.html', context)
-    
-#     else:
-#         logout(request)
-#         messages.info(request, 'Not Authorized')
-#         return render(request, 'patient-login.html')  
-    
-
-# def test_list(request):
-#     if request.user.is_authenticated and request.user.is_patient:
-         
-#         patient = Patient.objects.get(user=request.user)
-#         test = Test.objects.all()
-        
-#         context = {'patient': patient, 'test': test}
-#         return render(request, 'pharmacy/demo-medicine-list.html', context)
-    
-#     else:
-#         logout(request)
-#         messages.info(request, 'Not Authorized')
-#         return render(request, 'patient-login.html')  
-
-
 @login_required(login_url="login")
 def test_add_to_cart(request, pk, pk2):
     if request.user.is_authenticated and request.user.is_patient:
          
         patient = Patient.objects.get(user=request.user)
         test_information = Test_Information.objects.get(test_id=pk2)
-        
         prescription = Prescription.objects.filter(prescription_id=pk)
-        # prescription_medicine = Prescription_medicine.objects.filter(prescriptison__in=prescription)
-        # prescription_tests = Prescription_test.objects.filter(prescription__in=prescription)
-        # test = Test_Information.objects.get(test_id=test_id)
 
         item = get_object_or_404(Prescription_test, test_info_id=pk2)
         order_item = testCart.objects.get_or_create(item=item, user=request.user, purchased=False)
@@ -614,12 +555,8 @@ def test_cart(request):
         
         patient = Patient.objects.get(user=request.user)
         prescription_test = Prescription_test.objects.all()
-        
         test_carts = testCart.objects.filter(user=request.user, purchased=False)
         test_orders = testOrder.objects.filter(user=request.user, ordered=False)
-
-        # prescription = Prescription.objects.filter(prescription_id=pk)
-        # prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
         
         if test_carts.exists() and test_orders.exists():
             test_order = test_orders[0]
@@ -638,16 +575,12 @@ def test_cart(request):
 @login_required(login_url="login")
 def test_remove_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
-
-        # prescription = Prescription.objects.get(prescription_id=pk)
-        # test = Prescription_test.objects.filter(prescription__in=prescription)
         item = Prescription_test.objects.get(test_id=pk)
 
         patient = Patient.objects.get(user=request.user)
         prescription = Prescription.objects.filter(prescription_id=pk)
         prescription_medicine = Prescription_medicine.objects.filter(prescription__in=prescription)
         prescription_test = Prescription_test.objects.filter(prescription__in=prescription)
-        # prescription_test = Perscription_test.objects.all()
         test_carts = testCart.objects.filter(user=request.user, purchased=False)
         
         # item = get_object_or_404(test, pk=pk)
@@ -735,11 +668,11 @@ def delete_prescription(request,pk):
     if request.user.is_authenticated and request.user.is_patient:
         prescription = Prescription.objects.get(prescription_id=pk)
         prescription.delete()
-        messages.info(request, 'Prescription Deleted')
+        messages.success(request, 'Prescription Deleted')
         return redirect('patient-dashboard')
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')
 
 @login_required(login_url="login")
@@ -747,13 +680,12 @@ def delete_report(request,pk):
     if request.user.is_authenticated and request.user.is_patient:
         report = Report.objects.get(report_id=pk)
         report.delete()
-        messages.info(request, 'Report Deleted')
+        messages.success(request, 'Report Deleted')
         return redirect('patient-dashboard')
     else:
         logout(request)
-        messages.info(request, 'Not Authorized')
+        messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')
-
 
 
 @receiver(user_logged_in)
