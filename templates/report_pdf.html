@@ -57,7 +57,7 @@
 			<div class="content">
 				<div class="container-fluid">
 
-					<div class="row">
+					<div class="row" style="font-size:14px ;">
 						
 						<div class="col-md-7 col-lg-8">
 							<div class="invoice-content">
@@ -95,7 +95,7 @@
 
 													<b>Department: </b>{{report.doctor.department_name}}<br>
 
-													<b>Hospital: </b>{{report.doctor.hospital_name}}<br>
+													
                                                     <!-- <b>Doctor Ph: </b>{{report.doctor.phone_number}}<br> -->
 												</p>
 											</div>
@@ -118,25 +118,26 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered" style="border: 1px dashed black">
+												<table class="invoice-table table table-bordered" style="text-align: center;border: 1px solid black">
 													
-														<tr style="background-color:rgb(84, 147, 199);vertical-align: center;height: 50px;">
+														<tr style="vertical-align: center;height: 50px;">
 															<th>Specimen Information</th>
-															<th class="text-center">Specimen ID</th>
-															<th class="text-center">Collection Date/Time</th>
-															<th class="text-center">Receiving Date/Time</th>
+															<th>Specimen ID</th>
+															<th>Collection Date/Time</th>
+															<th>Receiving Date/Time</th>
 														</tr>
-													
-                                          				 <tr style="height: 30px;">
-															{% for s in specimen %}
-															<th class="text-center">{{s.specimen_type}}</th>
-															<th class="text-center">{{s.specimen_id}}</th>
-															<th class="text-center">{{s.collection_date}}</th>
-															<th class="text-center">{{s.receiving_date}}</th>
+														{% for s in specimen %}
+                                          				 <tr style="vertical-align: center;height: 30px;">
+															
+															<td>{{s.specimen_type}}</td>
+															<td>{{s.specimen_id}}</td>
+															<td>{{s.collection_date}}</td>
+															<td>{{s.receiving_date}}</td>
+															
 	
 														</tr>
 														{% endfor %}
-													
+
 												</table>
 											</div>
 										</div>
@@ -145,30 +146,32 @@
 								</div>
 
            
-                  				<br>
+                  				
                   				<div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
+												<h2 class="text-center" style="margin-bottom: 4px;color:rgb(84, 147, 199);text-align: center;"><b>Test</b></h2>
 												<table class="invoice-table table table-bordered" style="border: 1px inset black">
 													
-														<tr style="background-color:skyblue;vertical-align: center;height: 50px;">
+														<tr style="background-color:rgb(84, 147, 199);vertical-align: center;height: 50px;">
 															<th>Test Name</th>
                                      						<th class="text-center">Result</th>
 															<th class="text-center">Unit</th>
                               								<th class="text-center">Referred value</th>
 	
 														</tr>
-														<tr style="height: 30px;">
+														<tr style="vertical-align: ;height: 30px;">
 															{% for t in test %}
 														
 															<th class="text-center">{{t.test_name}}</th>
 															<th class="text-center">{{t.result}}</th>
 															<th class="text-center">{{t.unit}}</th>
 															<th class="text-center">{{t.referred_value}}</th>
-	
+
+															{% endfor %}
 														</tr>
-														{% endfor %}
+														
 													
 												</table>
 											</div>
@@ -177,7 +180,7 @@
 									</div>
 								</div>
 								<div class="other-info">
-									<h1>Other information:</h1>
+									<h2 class="text-center" style="margin-bottom: 4px;color:rgb(84, 147, 199);text-align: center;"><b>Other Information</b></h2>
 									<p>{{report.other_information}}</p>
                                   
 								</div>
