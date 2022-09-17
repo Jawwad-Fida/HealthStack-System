@@ -147,7 +147,7 @@
                                   <th>Amount</th>
                                   <th>Status</th>
                                   <th>Payment Status</th>
-                                  <th></th>
+                                  <th>Action</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -197,7 +197,7 @@
                                     <span class="badge badge-pill bg-danger-light">Cancelled</span>
                                     {% endif %}
                                   </td>
-                                  <td>
+                                  <td class="text-center">
                                     {% if appointment.payment_status == 'pending' %}
                                     <span class="badge badge-pill bg-warning-light">Pending</span>
                                     {% endif %}
@@ -206,7 +206,7 @@
                                     {% endif %}
                                   </td>
 
-                                  <td class="text-right">
+                                  <td >
                                     <div class="table-action">
                                       <a
                                         href="{% url 'ssl-payment-request' pk=appointment.patient.patient_id id=appointment.id %}"
@@ -215,19 +215,7 @@
                                         <i class="fas fa-dollar-sign"></i> Pay
                                         Now
                                       </a>
-                                      <a
-                                        href="#"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
-
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
+                                      
                                     </div>
                                   </td>
                                 </tr>
@@ -289,7 +277,7 @@
                                       >
                                     </h2>
                                   </td>
-                                  <td class="text-right">
+                                  <td>
                                     <div class="table-action">
                                       <a
                                         href="{% url 'prescription-view' pk=prescription.prescription_id%}"

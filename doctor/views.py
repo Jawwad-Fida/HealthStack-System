@@ -590,58 +590,11 @@ def doctor_test_list(request):
 def doctor_view_prescription(request, pk):
     if request.user.is_authenticated and request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
-        prescription = Prescription.objects.get(prescription_id=pk)
-
-        if request.method == 'GET':
-            medicines = Prescription_medicine.objects.filter(prescription=prescription)
-            tests = Prescription_test.objects.filter(prescription=prescription)
-            context = {'prescription': prescription, 'medicines': medicines, 'tests': tests, 'doctor': doctor}
-            return render(request, 'doctor-view-prescription.html', context)
-
-        elif request.method == 'POST':
-            medicine_name = request.POST.getlist('medicine_name')
-            medicine_quantity = request.POST.getlist('quantity')
-            medecine_frequency = request.POST.getlist('frequency')
-            medicine_duration = request.POST.getlist('duration')
-            medicine_relation_with_meal = request.POST.getlist('relation_with_meal')
-            medicine_instruction = request.POST.getlist('instruction')
-            extra_information = request.POST.get('extra_information')
-            test_name = request.POST.getlist('test_name')
-            test_description = request.POST.getlist('test_description')
-            test_info_id = request.POST.getlist('id')
-
-            prescriptions.extra_information = extra_information
-            prescriptions.save()
-
-            for i in range(len(medicine_name)):
-                medicine = Prescription_medicine(prescription=prescriptions)
-                medicine.medicine_name = medicine_name[i]
-                medicine.quantity = medicine_quantity[i]
-                medicine.frequency = medecine_frequency[i]
-                medicine.duration = medicine_duration[i]
-                medicine.instruction = medicine_instruction[i]
-                medicine.relation_with_meal = medicine_relation_with_meal[i]
-                medicine.save()
-
-            for i in range(len(test_name)):
-                tests = Prescription_test(prescription=prescriptions)
-                tests.test_name = test_name[i]
-                tests.test_description = test_description[i]
-                tests.test_info_id = test_info_id[i]
-                tests.save()
-
-            return redirect('patient-profile', pk=prescriptions.patient_id)
-
-
+        prescriptions = Prescription.objects.get(prescription_id=pk)
         medicines = Prescription_medicine.objects.filter(prescription=prescriptions)
         tests = Prescription_test.objects.filter(prescription=prescriptions)
-
         context = {'prescription': prescriptions, 'medicines': medicines, 'tests': tests, 'doctor': doctor}
         return render(request, 'doctor-view-prescription.html', context)
-    else:
-        logout(request)
-        messages.info(request, 'Not Authorized')
-        return render(request, 'doctor-login.html')
 
 @login_required(login_url="login")
 def doctor_view_report(request, pk):

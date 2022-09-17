@@ -210,7 +210,7 @@
                                   <th>Purpose</th>
                                   <th>Contact</th>
                                   <th class="text-center">Payment Status</th>
-                                  <th></th>
+                                  <th class="text-center">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -243,7 +243,7 @@
                                       >Phone: {{appointment.patient.phone_number}}</span
                                     >
                                   </td>
-                                  <td>
+                                  <td  class="text-center">
                                     {% if appointment.payment_status == 'pending' %}
                                     <span class="badge badge-pill bg-warning-light">Pending</span>
                                     {% endif %}
@@ -254,11 +254,9 @@
                                     <span class="badge badge-pill bg-danger-light">Cancelled</span>
                                     {% endif %}
                                   </td>
-                                  <td class="text-right">
+                                  <td class="text-center">
                                     <div class="table-action">
-                                      <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                        <i class="far fa-eye"></i> View
-                                      </a>
+                                      
 
                                       <a href="javascript:void(0);" onclick="return confirm('Accept appointment?');" class="btn btn-sm bg-success-light">
                                         <i class="fas fa-check"></i> Accept
@@ -296,7 +294,7 @@
                                   <th>Prescription ID</th>
                                   <th>Patient</th>
                                   <th>Contact</th>
-                                  <th></th>
+                                  <th>Action</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -327,7 +325,7 @@
                                       >Phone: {{p.patient.phone_number}}</span
                                     >
                                   </td>
-                                  <td class="text-right">
+                                  <td class="text-left">
                                     <div class="table-action">
                                       {% comment %}
                                       <a href="{% url 'delete-prescription' pk=p.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
@@ -430,10 +428,16 @@
       </div>
       <!-- /Page Content -->
 
-     <!-- Footer -->
+     
+            </div>
+        </div>
+        </div>
+      </div>
+      <!-- Footer -->
      {% include 'footer.html' %}
      <!-- /Footer -->
     </div>
+
     <!-- /Main Wrapper -->
 
     <!-- Add Medical Records Modal -->
