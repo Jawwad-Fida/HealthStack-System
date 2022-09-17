@@ -86,13 +86,8 @@
                     <form action="{% url 'patient-register' %}" method="POST">
                       {% csrf_token %} 
 
-                {% comment %} {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                        {% endfor %}
-                </ul>
-                {% endif %} {% endcomment %}
+                      {% include 'message.html' %}
+
                       
                       {% for field in form %}
                       <div class="form-group form-focus">
@@ -156,5 +151,19 @@
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        {% endfor %}
+    </script>
+  {% endif %}
+
+
+
+
   </body>
 </html>

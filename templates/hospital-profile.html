@@ -131,16 +131,17 @@
 												<h4 class="doc-name">{{hospitals.name}}</h4>
 												<p class="doc-speciality">{{hospitals.hospital_type}} Hospital</p>
 												
-												<div class="rating">
+												{% comment %} <div class="rating">
 													<i class="fas fa-star filled"></i>
 													<i class="fas fa-star filled"></i>
 													<i class="fas fa-star filled"></i>
 													<i class="fas fa-star filled"></i>
 													<i class="fas fa-star"></i>
 													<span class="d-inline-block average-rating">(35)</span>
-												</div>
+												</div> {% endcomment %}
 												<div class="clinic-details">
-													<p class="doc-location"><i class="fas fa-map-marker-alt"></i>{{hospitals.address}}</p>
+													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{hospitals.address}}</p>
+
 													<ul class="clinic-gallery">
 														<li>
 															<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg'%}" data-fancybox="gallery">
@@ -162,21 +163,24 @@
 																<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg'%}" alt="Feature">
 															</a>
 														</li>
-													</ul>
+													</ul> 
+
 												</div>
+
 												<div class="clinic-services">
 													<span>childrens special</span>
 													<span>Always available emergency doctors</span>
 													
 												</div>
+												
 											</div>
 											</div>
 										</div>
 										<div class="doc-info-right col-md-6" >
 											<div class="clini-infos">
 												<ul>
-													<li><i class="far fa-thumbs-up"></i> 99%</li>
-													<li><i class="far fa-comment"></i> 35 Feedback</li>
+													{% comment %} <li><i class="far fa-thumbs-up"></i> 99%</li>
+													<li><i class="far fa-comment"></i> 35 Feedback</li> {% endcomment %}
 													<li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
 												
 												</ul>
@@ -319,7 +323,7 @@
 															<p class="doc-speciality">{{hospital.hospital_type}}</p>
 															
 															<div class="clinic-details mb-0">
-																<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i>{{hospitals.address}} <br><a href="javascript:void(0);">Get Directions</a></h5>
+																<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> {{hospitals.address}} <br><a href="javascript:void(0);">Get Directions</a></h5>
 																<ul>
 																	<li>
 																		<a href="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}" data-fancybox="gallery2">
@@ -341,7 +345,7 @@
 																			<img src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}" alt="Feature Image">
 																		</a>
 																	</li>
-																</ul>
+																</ul> 
 															</div>
 														</div>
 													</div>

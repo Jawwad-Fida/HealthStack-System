@@ -71,7 +71,7 @@
                   </li>
                 </ol>
               </nav>
-              <h2 class="breadcrumb-title">Dashboard</h2>
+              <h2 class="breadcrumb-title">Doctor Dashboard</h2>{% include 'message.html' %}
             </div>
           </div>
         </div>
@@ -378,6 +378,18 @@
 
     <!-- Searchbar JS -->
     <script src="{% static 'HealthStack-System/js/Normal/sidebar.js' %}"></script>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        {% endfor %}
+    </script>
+  {% endif %}
+
+
   </body>
 
   <!-- doccure/doctor-dashboard.html  30 Nov 2019 04:12:09 GMT -->
