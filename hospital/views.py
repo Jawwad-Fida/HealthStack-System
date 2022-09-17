@@ -730,6 +730,31 @@ def prescription_pdf(request,pk):
         return response
     return HttpResponse("Not Found")
 
+@login_required(login_url="login")
+def delete_prescription(request,pk):
+    if request.user.is_authenticated and request.user.is_patient:
+        prescription = Prescription.objects.get(prescription_id=pk)
+        prescription.delete()
+        messages.info(request, 'Prescription Deleted')
+        return redirect('patient-dashboard')
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')
+
+@login_required(login_url="login")
+def delete_report(request,pk):
+    if request.user.is_authenticated and request.user.is_patient:
+        report = Report.objects.get(report_id=pk)
+        report.delete()
+        messages.info(request, 'Report Deleted')
+        return redirect('patient-dashboard')
+    else:
+        logout(request)
+        messages.info(request, 'Not Authorized')
+        return render(request, 'patient-login.html')
+
+
 
 @receiver(user_logged_in)
 def got_online(sender, user, request, **kwargs):    
