@@ -19,7 +19,7 @@
   </div>
   <div class="main-menu-wrapper">
     <div class="menu-header">
-      <a href="{% url 'hospital_home'%}" class="menu-logo">
+      <a href="" class="menu-logo">
         <img
           src="{% static 'HealthStack-System/images/Normal/logo.jpg' %}"
           class="img-fluid"
@@ -35,15 +35,21 @@
         <a href="{% url 'hospital_home'%}">Home</a>
       </li>
 
+      <li>
+        <a href="{% url 'patient-dashboard' %}">Dashboard</a>
+      </li>
+
       <li class="has-submenu">
-        <a href="#">Appointments <i class="fas fa-chevron-down"></i></a>
+        <a href="#">Hospital <i class="fas fa-chevron-down"></i></a>
         <ul class="submenu">
+          <li><a href="{% url 'multiple-hospital' %}">Hospital Info</a></li>
           <li><a href="{% url 'search' %}">Search Doctor</a></li>
-          <li><a href="#">Booking</a></li>
+          
           <!-- <li><a href="#">Checkout</a></li> -->
-          <li>
-            <a href="{% url 'booking-success'%}">Booking Success</a>
-          </li>
+          <!-- <li>
+            <a href="">Booking Success</a>
+          </li> -->
+          
           <!-- <li><a href="#">Favourites</a></li> -->
           <!-- <li><a href="#">Chat</a></li> -->
         </ul>
@@ -56,7 +62,7 @@
       {% endif %}
 
       <li>
-        <a href="">Medical Shop</a>
+        <a href="{% url 'pharmacy_shop' %}">Medical Shop</a>
       </li>
       <!-- <li class="has-submenu">
                   <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
