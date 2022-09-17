@@ -309,78 +309,27 @@
             </div>
             <div class="col-md-7">
               <div class="section-header">
-                <h2 class="mt-2">Availabe Features in Our Clinic</h2>
+                <h2 class="mt-2">Availabe Hospitals</h2>
                 <p>
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
+                  Here You can access multiple hospitals. You can book your appointment from
+                  your doctor & can collect all hospital infromations from here.
                 </p>
               </div>
               <div class="features-slider slider">
                 <!-- Slider Item -->
+                {% for hospital in hospitals %}
                 <div class="feature-item text-center">
                   <img
-                    src="{% static 'HealthStack-System/images/Normal/features/feature-01.jpg' %}"
+                    src="{{ hospital.featured_image.url }}"
                     class="img-fluid"
                     alt="Feature"
                   />
-                  <p>Patient Ward</p>
+                  <p>{{hospital.name}}</p>
                 </div>
+                {% endfor %}
                 <!-- /Slider Item -->
 
-                <!-- Slider Item -->
-                <div class="feature-item text-center">
-                  <img
-                    src="{% static 'HealthStack-System/images/Normal/features/feature-02.jpg' %}"
-                    class="img-fluid"
-                    alt="Feature"
-                  />
-                  <p>Test Room</p>
-                </div>
-                <!-- /Slider Item -->
-
-                <!-- Slider Item -->
-                <div class="feature-item text-center">
-                  <img
-                    src="{% static 'HealthStack-System/images/Normal/features/feature-03.jpg' %}"
-                    class="img-fluid"
-                    alt="Feature"
-                  />
-                  <p>ICU</p>
-                </div>
-                <!-- /Slider Item -->
-
-                <!-- Slider Item -->
-                <div class="feature-item text-center">
-                  <img
-                    src="{% static 'HealthStack-System/images/Normal/features/feature-04.jpg' %}"
-                    class="img-fluid"
-                    alt="Feature"
-                  />
-                  <p>Laboratory</p>
-                </div>
-                <!-- /Slider Item -->
-
-                <!-- Slider Item -->
-                <div class="feature-item text-center">
-                  <img
-                    src="{% static 'HealthStack-System/images/Normal/features/feature-05.jpg' %}"
-                    class="img-fluid"
-                    alt="Feature"
-                  />
-                  <p>Operation</p>
-                </div>
-                <!-- /Slider Item -->
-
-                <!-- Slider Item -->
-                <div class="feature-item text-center">
-                  <img
-                    src="{% static 'HealthStack-System/images/Normal/features/feature-06.jpg' %}"
-                    class="img-fluid"
-                    alt="Feature"
-                  />
-                  <p>Medical</p>
-                </div>
-                <!-- /Slider Item -->
+                
               </div>
             </div>
           </div>
