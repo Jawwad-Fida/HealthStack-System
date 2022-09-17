@@ -6,10 +6,11 @@
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Doccure - Hospital List Page</title>
-		
-		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/admin/favicon.png'%}"> 
+        <title>HealthStack</title>
+
+    	<!-- Favicon -->
+
+    	<link rel="shortcut icon" type="image/x-icon" href="{% static 'HealthStack-System/images/Normal/favicon.png' %}"/>
 
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{% static 'HealthStack-System/css/admin/bootstrap.min.css'%}"> 
@@ -95,7 +96,7 @@
 															<a href="profile.html">{{hospital.name}}</a>
 														</h2>
 													</td>
-													<td>{{hospital.hospital_id_id}}</td>
+													<td>{{hospital.general_bed_no}}</td>
 													<td>{{hospital.available_icu_no}}</td>
                                                     <td>{{hospital.regular_cabin_no}}</td>
 												    <td>{{hospital.emergency_cabin_no}}</td>
