@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 from .pdf import report_pdf
 
 
-
 # from . --> same directory
 # Views functions and urls must be linked. # of views == # of urls
 # App URL file - urls related to hospital
@@ -32,16 +31,13 @@ urlpatterns = [
     path('reject-appointment/<int:pk>/',views.reject_appointment, name='reject-appointment'),
     path('patient-search/<int:pk>/', views.patient_search, name='patient-search'),
     path('pdf/<int:pk>/',views.report_pdf, name='pdf'),
-
     path('doctor_review/<int:pk>/', views.doctor_review, name='doctor_review'),
     path('doctor-test-list/', views.doctor_test_list, name='doctor-test-list'),
     path('doctor-view-prescription/<int:pk>/', views.doctor_view_prescription, name='doctor-view-prescription'),
     path('doctor-view-report/<int:pk>/', views.doctor_view_report, name='doctor-view-report'),
 
-
-    # path('testing/',views.testing, name='testing'),
-   
-
 ]
+
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

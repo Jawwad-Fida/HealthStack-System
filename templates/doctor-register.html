@@ -81,13 +81,14 @@
                     <form action="{% url 'doctor-register' %}" method="POST">
                       {% csrf_token %} 
                       
-                      {% if messages %}
+                      {% include 'message.html' %}
+                      {% comment %} {% if messages %}
                       <ul class="messages">
                           {% for message in messages %}
                           <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                               {% endfor %}
                       </ul>
-                      {% endif %}
+                      {% endif %} {% endcomment %}
                       
                       
                       {% for field in form %}
@@ -137,6 +138,17 @@
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        {% endfor %}
+    </script>
+  {% endif %}
+  
   </body>
 
   <!-- doccure/doctor-register.html  30 Nov 2019 04:12:16 GMT -->
