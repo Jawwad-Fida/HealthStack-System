@@ -133,23 +133,14 @@
                         <h4 class="doc-name">
                           <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">Dr. {{doctor.name}}</a>
                         </h4>
-                        <p class="doc-speciality">{{ doctor.department_name.hospital_department_name }}</p>
-                        <h5 class="doc-department">
+                        <p class="doc-speciality"><b>Department: </b>{{ doctor.department_name.hospital_department_name }}</p>
+                        <h5 class="doc-department"><b>Specialization: </b>
                           {{ doctor.specialization.specialization_name }}
                         </h5>
-                        <div class="rating">
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star"></i>
-                          <span class="d-inline-block average-rating"
-                            >(17)</span
-                          >
-                        </div>
+                        
                         <div class="clinic-details">
                           <p class="doc-location">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fas fa-map-marker-alt"></i><b>Hospital: </b>
                             {{doctor.hospital_name}}
                           </p>
                           <ul class="clinic-gallery">
@@ -187,20 +178,16 @@
                     <div class="doc-info-right">
                       <div class="clini-infos">
                         <ul>
-                          <li><i class="far fa-thumbs-up"></i> 98%</li>
-                          <li><i class="far fa-comment"></i> 17 Feedback</li>
+                          <li></li>
+                          <li></li>
                           <li>
-                            <i class="fas fa-map-marker-alt"></i> Dhaka,
-                            Bangladesh
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{doctor.hospital_name}}
                           </li>
                           <li>
                             <i class="far fa-money-bill-alt"></i>
                             {{doctor.consultation_fee}} BDT
-                            <i
-                              class="fas fa-info-circle"
-                              data-toggle="tooltip"
-                              title="Lorem Ipsum"
-                            ></i>
+                            
                           </li>
                         </ul>
                       </div>
