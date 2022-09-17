@@ -330,8 +330,9 @@
                                       {% comment %}
                                       <a href="{% url 'delete-prescription' pk=p.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
                                         <i class="fas fa-trash"></i> Delete <td>
-                                      </a>
-                                      {% endcomment %}
+                                      </a>{% endcomment %}
+                                      
+                                      
                                       <a
                                         href="{% url 'doctor-view-prescription' pk=p.prescription_id %}"
                                         class="btn btn-sm bg-info-light"
@@ -491,6 +492,8 @@
       </div>
     </div>
     <!-- /Add Medical Records Modal -->
+
+    
 
     <!-- jQuery -->
     <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
