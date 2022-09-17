@@ -31,7 +31,7 @@
     <!-- Header Right Menu -->
     <ul class="nav user-menu">
 
-        <!-- Notifications -->
+        {% comment %} <!-- Notifications -->
         <li class="nav-item dropdown noti-dropdown">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                 <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
@@ -62,9 +62,9 @@
                 <div class="topnav-dropdown-footer">
                     <a href="#">View all Notifications</a>
                 </div>
-            </div>
+            </div> 
         </li>
-        <!-- /Notifications -->
+        <!-- /Notifications --> {% endcomment %}
         
         <!-- User Menu -->
         <li class="nav-item dropdown has-arrow">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <a class="dropdown-item" href="{%url 'hospital-admin-profile' pk=user.id %}">My Profile</a>
-                <a class="dropdown-item" href="settings.html">Settings</a>
+                {% comment %} <a class="dropdown-item" href="settings.html">Settings</a> {% endcomment %}
                 <a class="dropdown-item" href="{% url 'admin-logout' %}">Logout</a>
             </div>
         </li>

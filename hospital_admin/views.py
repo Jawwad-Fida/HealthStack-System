@@ -95,7 +95,7 @@ def admin_dashboard(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutAdmin(request):
     logout(request)
-    messages.info(request, 'User Logged out')
+    messages.error(request, 'User Logged out')
     return redirect('admin_login')
             
 
@@ -117,19 +117,21 @@ def admin_login(request):
         if user is not None:
             login(request, user)
             if user.is_hospital_admin:
+                messages.success(request, 'User logged in')
                 return redirect('admin-dashboard')
             elif user.is_labworker:
+                messages.success(request, 'User logged in')
                 return redirect('labworker-dashboard')
             elif user.is_pharmacist:
+                messages.success(request, 'User logged in')
                 return redirect('pharmacist-dashboard')
+            else:
+                return redirect('admin-logout')
         else:
             messages.error(request, 'Invalid username or password')
         
 
-        
-
     return render(request, 'hospital_admin/login.html')
-
 
 
 
@@ -147,16 +149,13 @@ def admin_register(request):
             user.save()
 
             messages.success(request, 'User account was created!')
-
+            
             # After user is created, we can log them in
             #login(request, user)
             return redirect('admin_login')
 
         else:
-            messages.error(
-                request, 'An error has occurred during registration')
-    # else:
-    #     form = AdminUserCreationForm()
+            messages.error(request, 'An error has occurred during registration')
 
     context = {'page': page, 'form': form}
     return render(request, 'hospital_admin/register.html', context)
@@ -232,6 +231,7 @@ def hospital_admin_profile(request, pk):
                           instance=admin)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Profile Updated')
             return redirect('admin-dashboard', pk=pk)
         else:
             form = AdminForm()
@@ -291,6 +291,7 @@ def add_hospital(request):
                 services.service_name = service_name[i]
                 services.save()
             
+            messages.success(request, 'Hospital Added')
             return redirect('hospital-list')
 
         context = { 'admin': user}
@@ -363,18 +364,21 @@ def edit_hospital(request, pk):
                 departments.hospital_department_name = department_name[i]
                 departments.save()
 
+            messages.success(request, 'Hospital Updated')
             return redirect('hospital-list')
 
 @login_required(login_url='admin_login')
 def delete_specialization(request, pk, pk2):
     specializations = specialization.objects.get(specialization_id=pk)
     specializations.delete()
+    messages.success(request, 'Delete Specialization')
     return redirect('edit-hospital', pk2)
 
 @login_required(login_url='admin_login')
 def delete_service(request, pk, pk2):
     services = service.objects.get(service_id=pk)
     services.delete()
+    messages.success(request, 'Delete Service')
     return redirect('edit-hospital', pk2)
 
 @login_required(login_url='admin_login')
@@ -388,6 +392,7 @@ def edit_emergency_information(request, pk):
                            instance=hospital)  
         if form.is_valid():
             form.save()
+            messages.success(request, 'Emergency information added')
             return redirect('emergency')
         else:
             form = EditEmergencyForm()

@@ -64,11 +64,11 @@
 								<nav aria-label="breadcrumb" class="page-breadcrumb">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-										<li class="breadcrumb-item active" aria-current="page">Edit hopital information
+										<li class="breadcrumb-item active" aria-current="page">Edit Hospital information
 										</li>
 									</ol>
 								</nav>
-								<h2 class="breadcrumb-title">Edit Hospital Information</h2>
+								<h2 class="breadcrumb-title">Edit Hospital Information</h2>{% include 'message.html' %}
 							</div>
 						</div>
 					</div>
@@ -399,6 +399,17 @@
 	<!-- add js -->
 	<!-- <script src="{% static 'HealthStack-System/js/Normal/edit-hospital.js' %}"></script> -->
 	<script src="{% static 'HealthStack-System/js/Normal/edit_hospital.js' %}"></script>
+
+	{% if messages %}
+    <script>
+        {% for message in messages %}
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        {% endfor %}
+    </script>
+  {% endif %}
+
 
 </body>
 
