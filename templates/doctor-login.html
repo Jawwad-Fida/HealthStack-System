@@ -79,8 +79,9 @@
 
                     <form method="POST" action="{% url 'doctor-login' %}">
                       {% csrf_token %}
-                      {% if messages %}
-                      
+
+                      {% include 'message.html' %}
+                      {% comment %} {% if messages %}
                           {% for message in messages %}
                           <div class="alert alert-danger alert-dismissible fade show" id="CredentialCheck" role="alert">
                             <a href="#" class="alert-link"></a><a{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</a>
@@ -90,7 +91,7 @@
                           </div>
                           {% endfor %}
                       
-                      {% endif %}
+                      {% endif %} {% endcomment %}
 
                       <div class="form-floating mt-3 mb-3">
                         <input type="text" class="form-control" name='username' id="floatingInput" placeholder="User Name">
@@ -191,6 +192,20 @@
       }
       }
     </script>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        {% endfor %}
+    </script>
+  {% endif %}
+
+
+
+
   </body>
 
   <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->

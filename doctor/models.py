@@ -42,7 +42,6 @@ class Doctor_Information(models.Model):
     department = models.CharField(max_length=200, choices=DOCTOR_TYPE, null=True, blank=True)
     department_name = models.ForeignKey(hospital_department, on_delete=models.SET_NULL, null=True, blank=True)
     specialization = models.ForeignKey(specialization, on_delete=models.SET_NULL, null=True, blank=True)
-    # service = models.ForeignKey(service, on_delete=models.CASCADE, null=True, blank=True)
 
     featured_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
     certificate_image = models.ImageField(upload_to='doctors_certificate/', default='doctors_certificate/default.png', null=True, blank=True)
@@ -53,7 +52,6 @@ class Doctor_Information(models.Model):
     visiting_hour = models.CharField(max_length=200, null=True, blank=True)
     consultation_fee = models.IntegerField(null=True, blank=True)
     report_fee = models.IntegerField(null=True, blank=True)
-    #doctor_password = models.CharField(max_length=200, null=True, blank=True)
     dob = models.CharField(max_length=200, null=True, blank=True)
     
     # Education
@@ -72,13 +70,9 @@ class Doctor_Information(models.Model):
     
     # ForeignKey --> one to one relationship with Hospital_Information model.
     hospital_name = models.ForeignKey(Hospital_Information, on_delete=models.SET_NULL, null=True, blank=True)
-    
-    # Chat
-    
 
     def __str__(self):
         return str(self.user.username)
-
 
 
 class Appointment(models.Model):
@@ -96,8 +90,6 @@ class Appointment(models.Model):
     id = models.AutoField(primary_key=True)
     date = models.DateField(null=True, blank=True)
     time = models.CharField(max_length=200, null=True, blank=True)
-    # time = models.DateField(auto_now_add=True)
-    # date = models.TimeField(auto_now_add=True)
     doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
     appointment_type = models.CharField(max_length=200, choices=APPOINTMENT_TYPE)
@@ -132,7 +124,6 @@ class Experience(models.Model):
 
 
 class Report(models.Model):
-
     report_id = models.AutoField(primary_key=True)
     doctor = models.ForeignKey(Doctor_Information, on_delete=models.SET_NULL, null=True, blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
@@ -151,7 +142,6 @@ class Report(models.Model):
         return str(self.patient.username)
 
 class Specimen(models.Model):
-
     report = models.ForeignKey(Report, on_delete=models.CASCADE, null=True, blank=True)
     specimen_id = models.AutoField(primary_key=True)
     specimen_type = models.CharField(max_length=200, null=True, blank=True)
@@ -162,7 +152,6 @@ class Specimen(models.Model):
         return str(self.report.report_id)
 
 class Test(models.Model):
-
     report = models.ForeignKey(Report, on_delete=models.CASCADE, null=True, blank=True)
     test_id = models.AutoField(primary_key=True)
     test_name = models.CharField(max_length=200, null=True, blank=True)
@@ -175,25 +164,20 @@ class Test(models.Model):
 
         
 class Prescription(models.Model):
-
     # medicine name, quantity, days, time, description, test, test_descrip
     prescription_id = models.AutoField(primary_key=True)
     doctor = models.ForeignKey(Doctor_Information, on_delete=models.CASCADE, null=True, blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True, blank=True)
     create_date = models.CharField(max_length=200, null=True, blank=True)
-    
     medicine_name = models.CharField(max_length=200, null=True, blank=True)
     quantity = models.CharField(max_length=200, null=True, blank=True)
     days = models.CharField(max_length=200, null=True, blank=True)
     time = models.CharField(max_length=200, null=True, blank=True)
     relation_with_meal = models.CharField(max_length=200, null=True, blank=True)
     medicine_description = models.TextField(null=True, blank=True)
-
     test_name = models.CharField(max_length=200, null=True, blank=True)
     test_description = models.TextField(null=True, blank=True)
     extra_information = models.TextField(null=True, blank=True)
-    
-    
 
     def __str__(self):
         return str(self.patient.username)
@@ -207,7 +191,6 @@ class Prescription_medicine(models.Model):
     frequency = models.CharField(max_length=200, null=True, blank=True)
     relation_with_meal = models.CharField(max_length=200, null=True, blank=True)
     instruction = models.TextField(null=True, blank=True)
-
 
     def __str__(self):
         return str(self.prescription.prescription_id)
@@ -240,7 +223,6 @@ class testCart(models.Model):
     purchased = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
     
     def __str__(self):
         return f'{self.item.test_info_id} X {self.item.test_name}'

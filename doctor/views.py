@@ -7,19 +7,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from hospital_admin.views import prescription_list
 from .forms import DoctorUserCreationForm, DoctorForm
-
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.cache import cache_control
 from hospital.models import User, Patient
-
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription, Doctor_review
 from hospital_admin.models import Admin_Information,Clinical_Laboratory_Technician, Test_Information
 from .models import Doctor_Information, Appointment, Education, Experience, Prescription_medicine, Report,Specimen,Test, Prescription_test, Prescription
-
-
 from django.db.models import Q, Count
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
@@ -28,12 +24,10 @@ import string
 from datetime import datetime, timedelta
 import datetime
 import re
-
 from django.core.mail import BadHeaderError, send_mail
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.utils.html import strip_tags
-
 from io import BytesIO
 from urllib import response
 from django.shortcuts import render
@@ -91,7 +85,7 @@ def logoutDoctor(request):
         user.save()
         logout(request)
     
-    messages.info(request, 'User Logged out')
+    messages.success(request, 'User Logged out')
     return render(request,'doctor-login.html')
 
 
@@ -116,10 +110,7 @@ def doctor_register(request):
             return redirect('doctor-login')
 
         else:
-            messages.error(
-                request, 'An error has occurred during registration')
-    # else:
-    #     form = DoctorUserCreationForm()
+            messages.error(request, 'An error has occurred during registration')
 
     context = {'page': page, 'form': form}
     return render(request, 'doctor-register.html', context)
@@ -133,7 +124,6 @@ def doctor_login(request):
         username = request.POST['username']
         password = request.POST['password']
         
-        # 
         try:
             user = User.objects.get(username=username)
         except:
@@ -147,15 +137,13 @@ def doctor_login(request):
             if request.user.is_doctor:
                 # user.login_status = "online"
                 # user.save()
+                messages.success(request, 'Welcome Doctor!')
                 return redirect('doctor-dashboard')
             else:
                 messages.error(request, 'Invalid credentials. Not a Doctor')
                 return redirect('doctor-logout')   
         else:
-            messages.error(request, 'Invalid username or password')  
-        # else:
-        #     messages.error(request, 'Invalid credentials. Not a Doctor')
-        #     return redirect('doctor-login')
+            messages.error(request, 'Invalid username or password')
             
     return render(request, 'doctor-login.html')
 
@@ -167,7 +155,6 @@ def doctor_dashboard(request):
                 # doctor = Doctor_Information.objects.get(user_id=pk)
                 doctor = Doctor_Information.objects.get(user=request.user)
                 # appointments = Appointment.objects.filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed'))
-                
                 current_date = datetime.date.today()
                 current_date_str = str(current_date)  
                 today_appointments = Appointment.objects.filter(date=current_date_str).filter(doctor=doctor).filter(appointment_status='confirmed')
@@ -190,7 +177,6 @@ def doctor_dashboard(request):
 @login_required(login_url="doctor-login")
 def appointments(request):
     doctor = Doctor_Information.objects.get(user=request.user)
-
     appointments = Appointment.objects.filter(doctor=doctor).filter(appointment_status='pending').order_by('date')
     context = {'doctor': doctor, 'appointments': appointments}
     return render(request, 'appointments.html', context) 
@@ -237,6 +223,8 @@ def accept_appointment(request, pk):
     except BadHeaderError:
         return HttpResponse('Invalid header found')
     
+    messages.success(request, 'Appointment Accepted')
+    
     return redirect('doctor-dashboard')
 
 @login_required(login_url="doctor-login")
@@ -267,6 +255,7 @@ def reject_appointment(request, pk):
     except BadHeaderError:
         return HttpResponse('Invalid header found')
     
+    messages.error(request, 'Appointment Rejected')
     
     return redirect('doctor-dashboard')
 
@@ -305,6 +294,8 @@ def delete_education(request, pk):
         
         educations = Education.objects.get(education_id=pk)
         educations.delete()
+        
+        messages.success(request, 'Education Deleted')
         return redirect('doctor-profile-settings')
 
      
@@ -315,9 +306,10 @@ def delete_experience(request, pk):
         
         experiences = Experience.objects.get(experience_id=pk)
         experiences.delete()
+        
+        messages.success(request, 'Experience Deleted')
         return redirect('doctor-profile-settings')
       
-
        
 @login_required(login_url="doctor-login")
 def doctor_profile_settings(request):
@@ -326,13 +318,11 @@ def doctor_profile_settings(request):
         doctor = Doctor_Information.objects.get(user=request.user)
         old_featured_image = doctor.featured_image
         
-        #Education, Experience
 
         if request.method == 'GET':
             educations = Education.objects.filter(doctor=doctor)
             experiences = Experience.objects.filter(doctor=doctor)
-            
-                
+                    
             context = {'doctor': doctor, 'educations': educations, 'experiences': experiences}
             return render(request, 'doctor-profile-settings.html', context)
         elif request.method == 'POST':
@@ -391,6 +381,7 @@ def doctor_profile_settings(request):
                 experience.save()
       
             # context = {'degree': degree}
+            messages.success(request, 'Profile Updated')
             return redirect('doctor-dashboard')
     else:
         redirect('doctor-logout')
@@ -421,6 +412,8 @@ def booking(request, pk):
         appointment.serial_number = generate_random_string()
         appointment.appointment_type = appointment_type
         appointment.save()
+        
+        messages.success(request, 'Appointment Booked')
         return redirect('patient-dashboard')
 
     context = {'patient': patient, 'doctor': doctor}
@@ -443,6 +436,8 @@ def my_patients(request):
 
 # def patient_profile(request):
 #     return render(request, 'patient_profile.html')
+
+
 @login_required(login_url="doctor-login")
 def patient_profile(request, pk):
     if request.user.is_doctor:
@@ -507,6 +502,7 @@ def create_prescription(request,pk):
                    
                     tests.save()
 
+                messages.success(request, 'Prescription Created')
                 return redirect('patient-profile', pk=patient.patient_id)
              
         context = {'doctor': doctor,'patient': patient}  
@@ -622,7 +618,7 @@ def got_offline(sender, user, request, **kwargs):
     user.login_status = False
     user.save()
 
-
+@login_required(login_url="login")
 def doctor_review(request, pk):
     if request.user.is_doctor:
         # doctor = Doctor_Information.objects.get(user_id=pk)

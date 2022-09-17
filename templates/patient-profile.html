@@ -68,7 +68,7 @@
                   </li>
                 </ol>
               </nav>
-              <h2 class="breadcrumb-title">Patient Profile</h2>
+              <h2 class="breadcrumb-title">Patient Profile</h2>{% include 'message.html' %}
             </div>
           </div>
         </div>
@@ -509,6 +509,18 @@
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        {% endfor %}
+    </script>
+  {% endif %}
+
+
   </body>
 
   <!-- doccure/patient-profile.html  30 Nov 2019 04:12:13 GMT -->
