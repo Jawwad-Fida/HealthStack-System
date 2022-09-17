@@ -104,7 +104,6 @@
 
 												{% for report in report %}
 												<strong>Report ID:</strong>{{report.report_id}} <br>
-
 												<strong>Patient ID:</strong> {{patient.patient_id }} <br>
 												<strong>Date:</strong> {{report.delivery_date}}
 											</p>
@@ -117,7 +116,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
-												<strong class="customer-text">Doctor Information</strong>
+												<strong class="customer-text">Doctor Information:</strong>
                         
 												<p class="invoice-details invoice-details-two">
 
@@ -156,7 +155,7 @@
 														</tr>
 														{% for s in specimen %}
 														<tr>
-                              
+														
 															<th style="border: 2px dotted;">{{s.specimen_type}}</th>
 															<th style="border: 2px dotted;">{{s.specimen_id}}</th>
 															<th style="border: 2px dotted;">{{s.collection_date}}</th>
@@ -173,29 +172,26 @@
 								</div>
 
            
-                  <br>
-                  <div class="invoice-item invoice-table-wrap">
+                  				<br>
+                  				<div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
+												<table class="invoice-table table table-bordered text-center">
 													<thead>
 														<tr style="background-color: rgb(84, 147, 199);">
 															<th>Test Name</th>
-                              <th class="text-center">Result</th>
+                              								<th class="text-center">Result</th>
 															<th class="text-center">Unit</th>
-                             <th class="text-center">Referred value</th>
+                             								<th class="text-center">Referred value</th>
 	
 														</tr>
-                            {% for t in test %}
-                            <tr>
-                              <th class="text-center">{{t.test_name}}</th>
-                              <th class="text-center">{{t.result}}</th>
+                            							{% for t in test %}
+                            							<tr>
+                              								<th class="text-center">{{t.test_name}}</th>
+                              								<th class="text-center">{{t.result}}</th>
 															<th class="text-center">{{t.unit}}</th>
-                              <th class="text-center">{{t.referred_value}}</th>
-
-
-	
+                              								<th class="text-center">{{t.referred_value}}</th>
 														</tr>
 														{% endfor %}
 													</tbody>
