@@ -109,7 +109,7 @@
 													<td><a href="{% url 'edit-hospital' pk=hospital.hospital_id %}" class="btn btn-primary">Edit</a></td>
 													<td><a href="{% url 'department-image-list' pk=hospital.hospital_id%}" class="btn btn-primary">Edit</a></td>
 													<td><a href="{% url 'delete-hospital' pk=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
-
+													<td><a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light"><i class="fe fe-trash"></i> Delete</a></td>
 												</tr>
 													
 													</td>
@@ -125,6 +125,26 @@
 				</div>			
 			</div>
 			<!-- /Page Wrapper -->
+			<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+				<div class="modal-dialog modal-dialog-centered" role="document" >
+					<div class="modal-content">
+					<!--	<div class="modal-header">
+							<h5 class="modal-title">Delete</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>-->
+						<div class="modal-body">
+							<div class="form-content p-2">
+								<h4 class="modal-title">Delete</h4>
+								<p class="mb-4">Are you sure want to delete?</p>
+								<button type="button" class="btn btn-primary">Save </button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		
         </div>
 		<!-- /Main Wrapper -->
