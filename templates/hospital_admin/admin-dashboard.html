@@ -91,6 +91,7 @@
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item active">Dashboard</li>
 								</ul>
+                {% include 'message.html' %}
 							</div>
 						</div>
 					</div>
@@ -456,6 +457,16 @@
     <script src="{% static 'HealthStack-System/js/admin/morris.min.js'%}"></script>
 
     <script src="{% static 'HealthStack-System/js/admin/morris_init.js'%}"></script>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        {% endfor %}
+    </script>
+  {% endif %}
 
     
 
