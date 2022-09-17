@@ -48,11 +48,11 @@
 									<a href="{% url 'hospital_home'%}">Home</a>
 								</li>
 								<li class="breadcrumb-item active" aria-current="page">
-									Edit Prescription
+									View Prescription
 								</li>
 							</ol>
 						</nav>
-						<h2 class="breadcrumb-title">AEditPrescription</h2>
+						<h2 class="breadcrumb-title">View Prescription</h2>
 					</div>
 				</div>
 			</div>
@@ -113,7 +113,7 @@
 												<b>Name: </b>{{prescription.patient.name}}<br>
 												<b>Addtress: </b>{{prescription.patient.address}}<br>
 												<b>Email: </b>{{prescription.patient.email}}<br>
-												<b>Phone Number: </b>{{prescription.prescription_id}}
+												<b>Phone Number: </b>{{prescription.patient.phone_number}}
 
 											</p>
 

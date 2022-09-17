@@ -297,18 +297,17 @@
                                       >
                                         <i class="far fa-eye"></i> View
                                       </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-paypal"></i> Pay Now
+                                      <a href="{% url 'delete-prescription' pk=prescription.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
+                                        <i class="fas fa-trash"></i> Delete <td>
                                       </a>
+                                      {% comment %}
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-primary-light"
                                       >
                                         <i class="fas fa-print"></i> Print
                                       </a>
+                                      {% endcomment %}
                                     </div>
                                   </td>
                                 </tr>
@@ -378,11 +377,8 @@
                                       >
                                         <i class="far fa-eye"></i> View
                                       </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-paypal"></i> Pay Now
+                                      <a href="{% url 'delete-report' pk=report.report_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
+                                        <i class="fas fa-trash"></i> Delete <td>
                                       </a>
                                       <a
                                         href="javascript:void(0);"

@@ -584,28 +584,19 @@ def doctor_test_list(request):
         messages.info(request, 'Not Authorized')
         return render(request, 'doctor-login.html')
 
-@login_required(login_url="login")
-def delete_prescription(request, pk):
-    if request.user.is_authenticated and request.user.is_doctor:
-        prescription = Prescription.objects.get(prescription_id=pk)
-        prescription.delete()
-        return redirect('patient-profile', pk=prescription.patient.patient_id)
-    else:
-        logout(request)
-        messages.info(request, 'Not Authorized')
-        return render(request, 'doctor-login.html')
+
 
 @login_required(login_url="login")
 def doctor_view_prescription(request, pk):
     if request.user.is_authenticated and request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
-        prescriptions = Prescription.objects.get(prescription_id=pk)
+        prescription = Prescription.objects.get(prescription_id=pk)
 
         if request.method == 'GET':
-            medicines = Prescription_medicine.objects.filter(prescription=prescriptions)
-            tests = Prescription_test.objects.filter(prescription=prescriptions)
-            context = {'p': prescriptions, 'medicines': medicines, 'tests': tests, 'doctor': doctor}
-            return render(request, 'edit-prescription.html', context)
+            medicines = Prescription_medicine.objects.filter(prescription=prescription)
+            tests = Prescription_test.objects.filter(prescription=prescription)
+            context = {'prescription': prescription, 'medicines': medicines, 'tests': tests, 'doctor': doctor}
+            return render(request, 'doctor-view-prescription.html', context)
 
         elif request.method == 'POST':
             medicine_name = request.POST.getlist('medicine_name')
