@@ -65,7 +65,9 @@
 									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
 									<li class="breadcrumb-item active">Hospital</li>
 								</ul>
+								{% include 'message.html' %}
 							</div>
+							
 						</div>
 					</div>
 					<!-- /Page Header -->
@@ -95,8 +97,8 @@
 												<tr style="text-align: center;">
 													<td style="text-align: left;">
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospital.featured_image.url}}" alt="User Image"></a>															
-															<a href="profile.html">{{hospital.name}}</a>
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{hospital.featured_image.url}}" alt="User Image"></a>															
+															<a href="#">{{hospital.name}}</a>
 														</h2>
 													</td>
 													<td>{{hospital.address}}</td>
@@ -165,6 +167,16 @@
 		
 		<!-- Custom JS -->
 		<script src="{% static 'HealthStack-System/js/admin/script.js' %}"></script>
+
+		{% if messages %}
+		<script>
+			{% for message in messages %}
+				$(document).ready(function () {
+					$('.toast').toast('show');
+				});
+			{% endfor %}
+		</script>
+	  {% endif %}
 		
     </body>
 
