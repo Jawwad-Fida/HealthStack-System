@@ -14,8 +14,11 @@ from django.db.models import Q
 import json,datetime
 from django.core import serializers
 from django.views.decorators.cache import cache_control
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+
+@csrf_exempt
 @login_required(login_url='login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def home(request,pk):
@@ -125,12 +128,15 @@ def home(request,pk):
             print(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             return render(request,"chat-doctor.html",context)
 
+@csrf_exempt
 @login_required
 def profile(request):
     context = {
         "page":"profile",
     }
     return render(request,"chat/profile.html",context)
+
+@csrf_exempt
 @login_required(login_url='login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def get_messages(request):
@@ -147,6 +153,7 @@ def get_messages(request):
         new_msgs.append(data)
     return HttpResponse(json.dumps(new_msgs), content_type="application/json")
 
+@csrf_exempt
 @login_required(login_url='login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def send_chat(request):

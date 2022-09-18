@@ -555,6 +555,7 @@ def ssl_payment_fail(request):
 def ssl_payment_cancel(request):
     return render(request, 'cancel.html')
 
+@csrf_exempt
 def payment_testing(request, pk):
     # order = Order.objects.get(id=pk)
     # ob = Cart.objects.filter(order__id=pk)
