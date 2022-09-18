@@ -433,8 +433,8 @@ def ssl_payment_success(request):
             for i in order_cart:
                 test_id = i.item.test_info_id
                 pres_test = Prescription_test.objects.filter(prescription=prescription).filter(test_info_id=test_id)
-                pres_test.test_info_pay_status = "Paid"
-                pres_test.update(test_info_id=test_id)
+                #pres_test.test_info_pay_status = "Paid"
+                pres_test.update(test_info_id=test_id,test_info_pay_status = "Paid")
             
         
             subject = "Payment Receipt for test"
