@@ -217,11 +217,12 @@ def ssl_payment_request_medicine(request, pk, id):
 
 
 @csrf_exempt
-def ssl_payment_request_test(request, pk, id):
+def ssl_payment_request_test(request, pk, id, pk2):
     # Payment Request for test payment
     
     patient = Patient.objects.get(patient_id=pk)
     test_order = testOrder.objects.get(id=id)
+    prescription = Prescription.objects.get(prescription_id=pk2)
     
     invoice_number = generate_random_invoice()
     
@@ -268,6 +269,7 @@ def ssl_payment_request_test(request, pk, id):
     payment.city = post_body['cus_city']
     payment.country = post_body['cus_country']
     payment.transaction_id = post_body['tran_id']
+    payment.prescription = prescription
     
     # payment.consulation_fee = appointment.doctor.consultation_fee
     # payment.report_fee = appointment.doctor.report_fee
@@ -386,7 +388,7 @@ def ssl_payment_success(request):
             return redirect('patient-dashboard')
         
         elif payment_type == "test":
-            
+            prescription = payment.prescription
             payment.val_transaction_id = payment_data['val_id']
             payment.currency_amount = payment_data['currency_amount']
             payment.card_type = payment_data['card_type']
@@ -430,9 +432,9 @@ def ssl_payment_success(request):
                 
             for i in order_cart:
                 test_id = i.item.test_info_id
-                pres_test = Prescription_test.objects.get(test_info_id=test_id)
+                pres_test = Prescription_test.objects.filter(prescription=prescription).filter(test_info_id=test_id)
                 pres_test.test_info_pay_status = "Paid"
-                pres_test.save()
+                pres_test.update(test_info_id=test_id)
             
         
             subject = "Payment Receipt for test"
