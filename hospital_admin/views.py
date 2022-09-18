@@ -575,8 +575,8 @@ def add_pharmacist(request):
                 # After user is created, we can log them in
                 #login(request, user)
                 return redirect('pharmacist-list')
-        else:
-            messages.error(request, 'An error has occurred during registration')
+            else:
+                messages.error(request, 'An error has occurred during registration')
     
     context = {'form': form, 'admin': user}
     return render(request, 'hospital_admin/add-pharmacist.html', context)
