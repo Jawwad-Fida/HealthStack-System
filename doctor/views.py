@@ -409,6 +409,7 @@ def booking(request, pk):
         date = request.POST['appoint_date']
         time = request.POST['appoint_time']
         appointment_type = request.POST['appointment_type']
+        message = request.POST['message']
 
     
         transformed_date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
@@ -419,7 +420,11 @@ def booking(request, pk):
         appointment.appointment_status = 'pending'
         appointment.serial_number = generate_random_string()
         appointment.appointment_type = appointment_type
+        appointment.message = message
         appointment.save()
+        
+        # if message:
+        #     # then send mail to doctor
         
         messages.success(request, 'Appointment Booked')
         return redirect('patient-dashboard')
@@ -568,8 +573,8 @@ def patient_search(request, pk):
         doctor = Doctor_Information.objects.get(doctor_id=pk)
         id = int(request.GET['search_query'])
         patient = Patient.objects.get(patient_id=id)
-        appointments = Appointment.objects.filter(doctor=doctor).filter(patient=patient)
-        context = {'patient': patient, 'doctor': doctor, 'appointments': appointments}
+        prescription = Prescription.objects.filter(doctor=doctor).filter(patient=patient)
+        context = {'patient': patient, 'doctor': doctor, 'prescription': prescription}
         return render(request, 'patient-profile.html', context)
     else:
         logout(request)

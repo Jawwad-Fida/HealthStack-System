@@ -937,8 +937,8 @@ def mypatient_list(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
             lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
-            report= Report.objects.all()
-            patient = Patient.objects.exclude(report__in=report)
+            #report= Report.objects.all()
+            patient = Patient.objects.all()
             context = {'patient': patient,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/mypatient-list.html',context)
 
