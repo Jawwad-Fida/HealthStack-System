@@ -44,6 +44,7 @@
       <script src="assets/js/html5shiv.min.js"></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+	
   </head>
   <body>
     <!-- Main Wrapper -->
@@ -57,7 +58,7 @@
           <div class="row">
            
 
-					<div class="row">
+					<div class="row" style="font-size:14px ;">
 						<div class="col-lg-8 offset-lg-2">
 							<div class="invoice-content">
 								<div class="invoice-item">
@@ -73,7 +74,7 @@
 								
 											<p class="invoice-details">
 												<strong>Patient ID:</strong> {{prescription.patient.patient_id}} <br>
-												<strong>Date:</strong> 20/07/2019 
+												<strong>Date:</strong> {{prescription.create_date}}
 											</p>
 										</div>
 									</div>
@@ -82,9 +83,9 @@
 								<!-- Invoice Item -->
 								<div class="invoice-item">
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-6">
 											<div class="invoice-info">
-												<strong class="customer-text">Doctor Information</strong>
+												<strong class="customer-text">Doctor Information:</strong>
 												<p class="invoice-details invoice-details-two">
 													<b>Name: </b>{{prescription.doctor.name}} <br>
 													<b>Department: </b>{{prescription.doctor.department_name}}<br>
@@ -93,12 +94,14 @@
 												</p>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-6">
 											<div class="invoice-info invoice-info2">
-												<strong class="customer-text">Prescription To</strong>
+												<strong class="customer-text">Prescription To:</strong>
 												<p class="invoice-details">
 													<b>Name: </b>{{prescription.patient.name}}<br>
-													<b>Addtress: </b>{{prescription.patient.address}}<br>
+													<b>Age: </b>{{prescription.patient.age}}<br>
+													<b>Blood Group: </b>{{prescription.patient.blood_group}}<br>
+													<b>Address: </b>{{prescription.patient.address}}<br>
 													<b>Email: </b>{{prescription.patient.email}}<br>
 													<b>Phone Number: </b>{{prescription.patient.phone_number}}
 													
@@ -110,13 +113,16 @@
 								</div>
 								<!-- /Invoice Item -->
 								<!-- Invoice Item -->
-								<div class="invoice-item invoice-table-wrap">
+								<div class="invoice-item invoice-table-wrap" style="margin-top: 3px;">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered" style="border: 1px dashed black">
+												<hr>
+												<h2 class="text-center" style="color: rgb(84, 147, 199);margin-bottom: 4px;text-align: center;"><b>Medicine</b></h2>
+												
+												<table class="invoice-table table table-bordered" style="text-align:center;border: 1px dashed black">
 													
-														<tr style="background-color: rgb(84, 147, 199);">
+														<tr style="background-color: rgb(84, 147, 199);vertical-align: center;height: 50px;">
 														
 														
 															<th>Medicine Name</th>
@@ -129,7 +135,7 @@
 															
 														</tr>
 														{% for pm in prescription_medicine %}
-														<tr>
+														<tr style="vertical-align: center; height: 30px;">
 															<th class="text-center">{{pm.medicine_name}}</td>
 															<td class="text-center">{{pm.quantity}}</td>
 															<td class="text-center">{{pm.frequency}}</td>
@@ -150,18 +156,21 @@
 
 								
                                 <!-- Invoice Item -->
-								<div class="invoice-item invoice-table-wrap">
+								<div class="invoice-item invoice-table-wrap" style="margin-top: 3px;">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered" style="border: 1px dashed black">
+												
+												<h2 class="text-center" style="margin-bottom: 4px;color:rgb(84, 147, 199);text-align: center;"><b>Test</b></h2>
+												
+												<table class="invoice-table table table-bordered" style="text-align: center;border: 1px dashed black">
 													
-														<tr style="background-color: rgb(84, 147, 199);">
+														<tr style="background-color: rgb(84, 147, 199);vertical-align: center;height: 50px;">
 															<th>Test Name</th>
 															<th>Description</th>
 														</tr>
 														{% for pt in prescription_test %}
-														<tr>		
+														<tr style="vertical-align: center;height: 30px;">		
 															<td class="text-center">{{pt.test_name}}</td>
 															<td class="text-center">{{pt.test_description}}</td>		
 														</tr>
@@ -174,20 +183,21 @@
 									</div>
 								</div>
 
-								<div class="invoice-item invoice-table-wrap">
+								<div class="invoice-item invoice-table-wrap" style="margin-top: 40px;">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
 												<table class="invoice-table table table-bordered">
 													<thead>
-														<tr style="background-color: rgb(84, 147, 199);">
-															<th> Advice/Recommendation</th>
+														<tr>
+															<th><h2 class="text-center mb-4" style="color: rgb(84, 147, 199);text-align: center;margin-bottom: 4px;"><b>Advice/Recommendation</b></h2></th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
 															<td class="text-center">{{prescription.extra_information}}</td>
 														</tr>
+														
 														
 													</tbody>
 												</table>

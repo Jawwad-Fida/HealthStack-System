@@ -32,10 +32,11 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
-
+@csrf_exempt
 def hospital_home(request):
     # .order_by('-created_at')[:6]
     doctors = Doctor_Information.objects.filter(register_status='Accepted')
@@ -43,6 +44,7 @@ def hospital_home(request):
     context = {'doctors': doctors, 'hospitals': hospitals} 
     return render(request, 'index-2.html', context)
 
+@csrf_exempt
 @login_required(login_url="login")
 def change_password(request,pk):
     patient = Patient.objects.get(user_id=pk)
@@ -77,6 +79,7 @@ def edit_prescription(request):
 # def forgot_password(request):
 #     return render(request, 'forgot-password.html')
 
+@csrf_exempt
 def resetPassword(request):
     form = PasswordResetForm()
 
@@ -117,7 +120,7 @@ def privacy_policy(request):
 def about_us(request):
     return render(request, 'about-us.html')
 
-
+@csrf_exempt
 @login_required(login_url="login")
 def chat(request, pk):
     patient = Patient.objects.get(user_id=pk)
@@ -126,6 +129,7 @@ def chat(request, pk):
     context = {'patient': patient, 'doctors': doctors}
     return render(request, 'chat.html', context)
 
+@csrf_exempt
 @login_required(login_url="login")
 def chat_doctor(request):
     if request.user.is_doctor:
@@ -135,11 +139,12 @@ def chat_doctor(request):
     context = {'patients': patients, 'doctor': doctor}
     return render(request, 'chat-doctor.html', context)
 
-        
+@csrf_exempt     
 @login_required(login_url="login")
 def pharmacy_shop(request):
     return render(request, 'pharmacy/shop.html')
 
+@csrf_exempt
 def login_user(request):
     page = 'patient_login'
     if request.method == 'GET':
@@ -168,13 +173,14 @@ def login_user(request):
 
     return render(request, 'patient-login.html')
 
+@csrf_exempt
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutUser(request):
     logout(request)
     messages.success(request, 'User Logged out')
     return redirect('login')
 
-
+@csrf_exempt
 def patient_register(request):
     page = 'patient-register'
     form = CustomUserCreationForm()
@@ -198,7 +204,7 @@ def patient_register(request):
     context = {'page': page, 'form': form}
     return render(request, 'patient-register.html', context)
 
-
+@csrf_exempt
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def patient_dashboard(request):
@@ -235,7 +241,7 @@ def patient_dashboard(request):
 #     context = {'patient': patient, 'form': form}
 #     return render(request, 'profile-settings.html', context)
 
-
+@csrf_exempt
 @login_required(login_url="login")
 def profile_settings(request):
     if request.user.is_patient:
@@ -278,7 +284,8 @@ def profile_settings(request):
             return redirect('patient-dashboard')
     else:
         redirect('logout')  
-
+        
+@csrf_exempt
 @login_required(login_url="login")
 def search(request):
     if request.user.is_authenticated and request.user.is_patient:
@@ -298,6 +305,7 @@ def search(request):
 def checkout_payment(request):
     return render(request, 'checkout.html')
 
+@csrf_exempt
 @login_required(login_url="login")
 def multiple_hospital(request):
     
@@ -327,7 +335,7 @@ def multiple_hospital(request):
         messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
     
-    
+@csrf_exempt    
 @login_required(login_url="login")
 def hospital_profile(request, pk):
     
@@ -374,6 +382,7 @@ def hospital_profile(request, pk):
 def data_table(request):
     return render(request, 'data-table.html')
 
+@csrf_exempt
 @login_required(login_url="login")
 def hospital_department_list(request, pk):
     if request.user.is_authenticated: 
@@ -401,6 +410,7 @@ def hospital_department_list(request, pk):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html')
 
+@csrf_exempt
 @login_required(login_url="login")
 def hospital_doctor_list(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
@@ -432,7 +442,7 @@ def hospital_doctor_list(request, pk):
     
 
 
-
+@csrf_exempt
 @login_required(login_url="login")
 def hospital_doctor_register(request, pk):
     if request.user.is_authenticated: 
@@ -482,6 +492,7 @@ def testing(request):
     context = {'test': test}
     return render(request, 'testing.html', context)
 
+@csrf_exempt
 @login_required(login_url="login")
 def view_report(request,pk):
     if request.user.is_patient:
@@ -500,7 +511,7 @@ def view_report(request,pk):
 def test_cart(request):
     return render(request, 'test-cart.html')
 
-
+@csrf_exempt
 @login_required(login_url="login")
 def test_single(request,pk):
      if request.user.is_authenticated and request.user.is_patient:
@@ -516,7 +527,7 @@ def test_single(request,pk):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html')  
 
-
+@csrf_exempt
 @login_required(login_url="login")
 def test_add_to_cart(request, pk, pk2):
     if request.user.is_authenticated and request.user.is_patient:
@@ -547,11 +558,13 @@ def test_add_to_cart(request, pk, pk2):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html')  
 
-
+@csrf_exempt
 @login_required(login_url="login")
-def test_cart(request):
+def test_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
         # prescription = Prescription.objects.filter(prescription_id=pk)
+        
+        prescription = Prescription.objects.filter(prescription_id=pk)
         
         patient = Patient.objects.get(user=request.user)
         prescription_test = Prescription_test.objects.all()
@@ -561,7 +574,7 @@ def test_cart(request):
         if test_carts.exists() and test_orders.exists():
             test_order = test_orders[0]
             
-            context = {'test_carts': test_carts,'test_order': test_order, 'patient': patient}
+            context = {'test_carts': test_carts,'test_order': test_order, 'patient': patient, 'prescription_test':prescription_test, 'prescription_id':pk}
             return render(request, 'test-cart.html', context)
         else:
             # messages.warning(request, "You don't have any test in your cart!")
@@ -572,6 +585,7 @@ def test_cart(request):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
 
+@csrf_exempt
 @login_required(login_url="login")
 def test_remove_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
@@ -592,7 +606,7 @@ def test_remove_cart(request, pk):
                 test_order.orderitems.remove(test_order_item)
                 test_order_item.delete()
                 # messages.warning(request, "This test was remove from your cart!")
-                context = {'test_carts': test_carts,'test_order': test_order,'patient': patient,}
+                context = {'test_carts': test_carts,'test_order': test_order,'patient': patient,'prescription_id':pk}
                 return render(request, 'test-cart.html', context)
             else:
                 # messages.info(request, "This test was not in your cart")
@@ -607,6 +621,7 @@ def test_remove_cart(request, pk):
         messages.info(request, 'Not Authorized')
         return render(request, 'patient-login.html') 
 
+@csrf_exempt
 def prescription_view(request,pk):
       if request.user.is_patient:
         patient = Patient.objects.get(user=request.user)
@@ -619,7 +634,7 @@ def prescription_view(request,pk):
       else:
          redirect('logout') 
 
-
+@csrf_exempt
 def render_to_pdf(template_src, context_dict={}):
     template=get_template(template_src)
     html=template.render(context_dict)
@@ -646,7 +661,7 @@ def render_to_pdf(template_src, context_dict={}):
 #         return response
 #     return HttpResponse("Not Found")
 
-
+@csrf_exempt
 def prescription_pdf(request,pk):
  if request.user.is_patient:
     patient = Patient.objects.get(user=request.user)
@@ -663,6 +678,7 @@ def prescription_pdf(request,pk):
         return response
     return HttpResponse("Not Found")
 
+@csrf_exempt
 @login_required(login_url="login")
 def delete_prescription(request,pk):
     if request.user.is_authenticated and request.user.is_patient:
@@ -675,6 +691,7 @@ def delete_prescription(request,pk):
         messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')
 
+@csrf_exempt
 @login_required(login_url="login")
 def delete_report(request,pk):
     if request.user.is_authenticated and request.user.is_patient:
@@ -687,12 +704,13 @@ def delete_report(request,pk):
         messages.error(request, 'Not Authorized')
         return render(request, 'patient-login.html')
 
-
+@csrf_exempt
 @receiver(user_logged_in)
 def got_online(sender, user, request, **kwargs):    
     user.login_status = True
     user.save()
 
+@csrf_exempt
 @receiver(user_logged_out)
 def got_offline(sender, user, request, **kwargs):   
     user.login_status = False

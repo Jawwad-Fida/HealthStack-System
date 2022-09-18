@@ -11,9 +11,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
-from pharmacy.models import Medicine, Pharmacist
+from pharmacy.models import Medicine, Order, Pharmacist
 from doctor.models import Doctor_Information, Prescription, Prescription_test, Report, Appointment, Experience , Education,Specimen,Test
-
+from pharmacy.models import Order, Cart
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm , PharmacistCreationForm 
 
@@ -32,6 +32,8 @@ from django.utils.html import strip_tags
 from .utils import searchMedicines
 
 # Create your views here.
+
+@csrf_exempt
 @login_required(login_url='admin_login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def admin_dashboard(request):
@@ -48,6 +50,7 @@ def admin_dashboard(request):
         patients = Patient.objects.all()
         hospitals = Hospital_Information.objects.all()
         lab_workers = Clinical_Laboratory_Technician.objects.all()
+        pharmacists = Pharmacist.objects.all()
         
         sat_date = datetime.date.today()
         sat_date_str = str(sat_date)
@@ -85,20 +88,21 @@ def admin_dashboard(request):
         thurs_count = Appointment.objects.filter(date=thurs_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
         fri_count = Appointment.objects.filter(date=fri_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
 
-        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri, 'pharmacists': pharmacists}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     elif request.user.is_labworker:
         # messages.error(request, 'You are not authorized to access this page')
         return redirect('labworker-dashboard')
     # return render(request, 'hospital_admin/admin-dashboard.html', context)
 
+@csrf_exempt
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logoutAdmin(request):
     logout(request)
     messages.error(request, 'User Logged out')
     return redirect('admin_login')
             
-
+@csrf_exempt
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def admin_login(request):
     if request.method == 'GET':
@@ -134,7 +138,7 @@ def admin_login(request):
     return render(request, 'hospital_admin/login.html')
 
 
-
+@csrf_exempt
 def admin_register(request):
     page = 'hospital_admin/register'
     form = AdminUserCreationForm()
@@ -160,14 +164,17 @@ def admin_register(request):
     context = {'page': page, 'form': form}
     return render(request, 'hospital_admin/register.html', context)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def admin_forgot_password(request):
     return render(request, 'hospital_admin/forgot-password.html')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def invoice(request):
     return render(request, 'hospital_admin/invoice.html')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def invoice_report(request):
     return render(request, 'hospital_admin/invoice-report.html')
@@ -176,6 +183,7 @@ def invoice_report(request):
 def lock_screen(request):
     return render(request, 'hospital_admin/lock-screen.html')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def patient_list(request):
     if request.user.is_hospital_admin:
@@ -183,10 +191,12 @@ def patient_list(request):
     patients = Patient.objects.all()
     return render(request, 'hospital_admin/patient-list.html', {'all': patients, 'admin': user})
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def specialitites(request):
     return render(request, 'hospital_admin/specialities.html')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
@@ -195,6 +205,7 @@ def appointment_list(request):
 def transactions_list(request):
     return render(request, 'hospital_admin/transactions-list.html')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def emergency_details(request):
     user = Admin_Information.objects.get(user=request.user)
@@ -202,6 +213,7 @@ def emergency_details(request):
     context = { 'admin': user, 'all': hospitals}
     return render(request, 'hospital_admin/emergency.html', context)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def hospital_list(request):
     user = Admin_Information.objects.get(user=request.user)
@@ -209,15 +221,17 @@ def hospital_list(request):
     context = { 'admin': user, 'hospitals': hospitals}
     return render(request, 'hospital_admin/hospital-list.html', context)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def appointment_list(request):
     return render(request, 'hospital_admin/appointment-list.html')
 
-
+@csrf_exempt
 @login_required(login_url='admin_login')
 def hospital_profile(request):
     return render(request, 'hospital-profile.html')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def hospital_admin_profile(request, pk):
 
@@ -239,6 +253,7 @@ def hospital_admin_profile(request, pk):
     context = {'admin': admin, 'form': form}
     return render(request, 'hospital_admin/hospital-admin-profile.html', context)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def add_hospital(request):
     if  request.user.is_hospital_admin:
@@ -302,6 +317,7 @@ def add_hospital(request):
 #     hospital = Hospital_Information.objects.get(hospital_id=pk)
 #     return render(request, 'hospital_admin/edit-hospital.html')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def edit_hospital(request, pk):
     if  request.user.is_hospital_admin:
@@ -367,6 +383,7 @@ def edit_hospital(request, pk):
             messages.success(request, 'Hospital Updated')
             return redirect('hospital-list')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def delete_specialization(request, pk, pk2):
     specializations = specialization.objects.get(specialization_id=pk)
@@ -374,6 +391,7 @@ def delete_specialization(request, pk, pk2):
     messages.success(request, 'Delete Specialization')
     return redirect('edit-hospital', pk2)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def delete_service(request, pk, pk2):
     services = service.objects.get(service_id=pk)
@@ -381,6 +399,7 @@ def delete_service(request, pk, pk2):
     messages.success(request, 'Delete Service')
     return redirect('edit-hospital', pk2)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def edit_emergency_information(request, pk):
 
@@ -400,11 +419,13 @@ def edit_emergency_information(request, pk):
     context = {'hospital': hospital, 'form': form}
     return render(request, 'hospital_admin/edit-emergency-information.html', context)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def delete_hospital(request, pk):
 	hospital = Hospital_Information.objects.get(hospital_id=pk)
 	hospital.delete()
 	return redirect('hospital-list')
+
 
 @login_required(login_url='admin_login')
 def generate_random_invoice():
@@ -414,7 +435,7 @@ def generate_random_invoice():
     string_var = "#INV-" + string_var
     return string_var
 
-
+@csrf_exempt
 @login_required(login_url='admin_login')
 def create_invoice(request, pk):
     if  request.user.is_hospital_admin:
@@ -441,6 +462,7 @@ def create_invoice(request, pk):
     context = {'patient': patient,'admin': user}
     return render(request, 'hospital_admin/create-invoice.html', context)
 
+
 @login_required(login_url='admin_login')
 def generate_random_specimen():
     N = 4
@@ -449,7 +471,8 @@ def generate_random_specimen():
     string_var = "#INV-" + string_var
     return string_var
 
-# @login_required(login_url='admin-login')
+@login_required(login_url='admin-login')
+@csrf_exempt
 def create_report(request, pk):
     if request.user.is_labworker:
         lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
@@ -507,6 +530,7 @@ def create_report(request, pk):
         context = {'prescription':prescription,'lab_workers':lab_workers,'tests':tests}
         return render(request, 'hospital_admin/create-report.html',context)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def add_pharmacist(request):
     if request.user.is_hospital_admin:
@@ -532,7 +556,7 @@ def add_pharmacist(request):
     context = {'form': form, 'admin': user}
     return render(request, 'hospital_admin/add-pharmacist.html', context)
   
-
+@csrf_exempt
 @login_required(login_url='admin_login')
 def medicine_list(request):
     if request.user.is_authenticated:
@@ -553,6 +577,7 @@ def generate_random_medicine_ID():
     string_var = "#M-" + string_var
     return string_var
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def add_medicine(request):
     if request.user.is_pharmacist:
@@ -593,6 +618,7 @@ def add_medicine(request):
    
     return render(request, 'hospital_admin/add-medicine.html',{'admin': user})
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def edit_medicine(request, pk):
     if request.user.is_pharmacist:
@@ -633,6 +659,8 @@ def edit_medicine(request, pk):
    
     return render(request, 'hospital_admin/edit-medicine.html',{'medicine': medicine,'admin': user})
 
+
+@csrf_exempt
 @login_required(login_url='admin_login')
 def delete_medicine(request, pk):
     if request.user.is_pharmacist:
@@ -641,6 +669,7 @@ def delete_medicine(request, pk):
         medicine.delete()
         return redirect('medicine-list')
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def add_lab_worker(request):
     if request.user.is_hospital_admin:
@@ -667,6 +696,7 @@ def add_lab_worker(request):
     context = {'form': form, 'admin': user}
     return render(request, 'hospital_admin/add-lab-worker.html', context)  
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def view_lab_worker(request):
     if request.user.is_hospital_admin:
@@ -675,6 +705,7 @@ def view_lab_worker(request):
         
     return render(request, 'hospital_admin/lab-worker-list.html', {'lab_workers': lab_workers, 'admin': user})
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def view_pharmacist(request):
     if request.user.is_hospital_admin:
@@ -683,6 +714,7 @@ def view_pharmacist(request):
         
     return render(request, 'hospital_admin/pharmacist-list.html', {'pharmacist': pharmcists, 'admin': user})
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def edit_lab_worker(request, pk):
     if request.user.is_hospital_admin:
@@ -713,7 +745,7 @@ def edit_lab_worker(request, pk):
         
     return render(request, 'hospital_admin/edit-lab-worker.html', {'lab_worker': lab_worker, 'admin': user})
 
-
+@csrf_exempt
 @login_required(login_url='admin_login')
 def edit_pharmacist(request, pk):
     if request.user.is_hospital_admin:
@@ -743,6 +775,7 @@ def edit_pharmacist(request, pk):
         
     return render(request, 'hospital_admin/edit-pharmacist.html', {'pharmacist': pharmacist, 'admin': user})
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def department_image_list(request,pk):
     departments = hospital_department.objects.filter(hospital_id=pk)
@@ -750,7 +783,7 @@ def department_image_list(request,pk):
     context = {'departments': departments}
     return render(request, 'hospital_admin/department-image-list.html',context)
 
-
+@csrf_exempt
 @login_required(login_url='admin_login')
 def register_doctor_list(request):
     if request.user.is_hospital_admin:
@@ -758,6 +791,7 @@ def register_doctor_list(request):
         doctors = Doctor_Information.objects.filter(register_status='Accepted')
     return render(request, 'hospital_admin/register-doctor-list.html', {'doctors': doctors, 'admin': user})
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def pending_doctor_list(request):
     if request.user.is_hospital_admin:
@@ -765,6 +799,7 @@ def pending_doctor_list(request):
     doctors = Doctor_Information.objects.filter(register_status='Pending')
     return render(request, 'hospital_admin/Pending-doctor-list.html', {'all': doctors, 'admin': user})
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def admin_doctor_profile(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
@@ -775,6 +810,8 @@ def admin_doctor_profile(request,pk):
     context = {'doctor': doctor, 'admin': admin, 'experiences': experience, 'educations': education}
     return render(request, 'hospital_admin/doctor-profile.html',context)
 
+
+@csrf_exempt
 @login_required(login_url='admin_login')
 def accept_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
@@ -812,6 +849,8 @@ def accept_doctor(request,pk):
     messages.success(request, 'Doctor Accepted!')
     return redirect('register-doctor-list')
 
+
+@csrf_exempt
 @login_required(login_url='admin_login')
 def reject_doctor(request,pk):
     doctor = Doctor_Information.objects.get(doctor_id=pk)
@@ -846,7 +885,7 @@ def reject_doctor(request,pk):
     messages.success(request, 'Doctor Rejected!')
     return redirect('register-doctor-list')
 
-
+@csrf_exempt
 @login_required(login_url='admin_login')
 def delete_department(request,pk):
     if request.user.is_authenticated:
@@ -881,6 +920,7 @@ def edit_department(request,pk):
             context = {'department': department}
             return render(request, 'hospital_admin/edit-hospital.html',context)
 
+@csrf_exempt
 @login_required(login_url='admin_login')
 def labworker_dashboard(request):
     if request.user.is_authenticated:
@@ -891,16 +931,18 @@ def labworker_dashboard(request):
             context = {'doctor': doctor,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/labworker-dashboard.html',context)
 
+@csrf_exempt
 @login_required(login_url='admin-login')
 def mypatient_list(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
             lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
-            report= Report.objects.all()
-            patient = Patient.objects.exclude(report__in=report)
+            #report= Report.objects.all()
+            patient = Patient.objects.all()
             context = {'patient': patient,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/mypatient-list.html',context)
 
+@csrf_exempt
 @login_required(login_url='admin-login')
 def prescription_list(request,pk):
     if request.user.is_authenticated:
@@ -911,6 +953,7 @@ def prescription_list(request,pk):
             context = {'prescription': prescription,'lab_workers':lab_workers,'patient':patient}
             return render(request, 'hospital_admin/prescription-list.html',context)
 
+@csrf_exempt
 @login_required(login_url='admin-login')
 def add_test(request):
     if request.user.is_labworker:
@@ -930,6 +973,7 @@ def add_test(request):
     context = {'lab_workers': lab_workers}
     return render(request, 'hospital_admin/add-test.html', context)
 
+@csrf_exempt
 @login_required(login_url='admin-login')
 def test_list(request):
     if request.user.is_labworker:
@@ -939,7 +983,7 @@ def test_list(request):
     return render(request, 'hospital_admin/test-list.html',context)
 
 
-
+@csrf_exempt
 @login_required(login_url='admin-login')
 def delete_test(request,pk):
     if request.user.is_authenticated:
@@ -948,21 +992,32 @@ def delete_test(request,pk):
             test.delete()
             return redirect('test-list')
 
-
+@csrf_exempt
 def pharmacist_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_pharmacist:
             pharmacist = Pharmacist.objects.get(user=request.user)
+            total_pharmacist_count = Pharmacist.objects.annotate(count=Count('pharmacist_id'))
+            total_medicine_count = Medicine.objects.annotate(count=Count('serial_number'))
+            total_order_count = Order.objects.annotate(count=Count('orderitems'))
+            total_cart_count = Cart.objects.annotate(count=Count('item'))
+
+            medicine = Medicine.objects.all()
             
-            context = {'pharmacist':pharmacist}
+            context = {'pharmacist':pharmacist, 'medicine':medicine,
+                       'total_pharmacist_count':total_pharmacist_count, 
+                       'total_medicine_count':total_medicine_count, 
+                       'total_order_count':total_order_count,
+                       'total_cart_count':total_cart_count}
             return render(request, 'hospital_admin/pharmacist-dashboard.html',context)
 
-
+@csrf_exempt
 def report_history(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
-            labworker = Clinical_Laboratory_Technician.objects.get(user=request.user)
+
+            lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
             report = Report.objects.all()
-            context = {'report':report,'labworker':labworker}
+            context = {'report':report,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/report-list.html',context)
 

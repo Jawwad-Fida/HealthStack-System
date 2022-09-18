@@ -116,7 +116,7 @@
 													<b>Name: </b>{{prescription.doctor.name}} <br>
 													<b>Department: </b>{{prescription.doctor.department_name}}<br>
 													<b>Email: </b>{{prescription.doctor.email}} <br>
-													<b>Phone Number: </b>{{prescription.doctor.phone_number}}
+													
 												</p>
 											</div>
 										</div>
@@ -140,15 +140,18 @@
 								
 								
 								<!-- Invoice Item -->
-								<div class="invoice-item invoice-table-wrap">
+								<div class="invoice-item invoice-table-wrap mt-3">
 									<div class="row">
 										<div class="col-md-12">
+											<hr>
+											<h2 class="text-center mb-4" style="color: rgb(84, 147, 199)"><b>Medicine</b></h2>
+											<hr>
 											<div class="table-responsive">
 												<table class="invoice-table table table-bordered" >
 													<thead >
-														<tr style="background-color: rgb(84, 147, 199);">
 														
-														<tr>
+														
+														<tr style="background-color: rgb(84, 147, 199);">
 															<th>Medicine Name</th>
 															<th class="text-center">Quantity</th>
 															<th class="text-center">Frequency</th>
@@ -180,13 +183,16 @@
 
 								
                                 <!-- Invoice Item -->
-								<div class="invoice-item invoice-table-wrap">
+								<div class="invoice-item invoice-table-wrap mt-4">
 									<div class="row">
 										<div class="col-md-12">
+											<hr>
+											<h2 class="text-center mb-4" style="color:rgb(84, 147, 199)"><b>Test</b></h2>
+											<hr>
 											<div class="table-responsive">
 												<table class="invoice-table table table-bordered">
 													<thead>
-														<tr>
+														<tr style="background-color: rgb(84, 147, 199)">
 															<th class="text-center">Test Name</th>
 															<th class="text-center">Description</th>
 															<!-- <th class="text-center"> Test id </th> -->
@@ -223,15 +229,14 @@
 									<h4>Extra Notes</h4>
 									<p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
 								</div> -->
-								<div class="invoice-item invoice-table-wrap">
+								<div class="invoice-item invoice-table-wrap mt-4">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
 												<table class="invoice-table table table-bordered">
 													<thead>
 														<tr>
-															<th>Advice/Recommendation</th>
-						
+															<th><h2 class="text-center mb-4" style="color: rgb(84, 147, 199)"><b>Advice/Recommendation</b></h2></th>
 															
 														</tr>
 													</thead>
@@ -250,8 +255,8 @@
 										
 									</div>
 									<br>
-									<button class="btn btn-md bg-info"> <a href="{% url 'test-cart' %}" > Go to Cart </a></button><br><br>
-									<button class="btn btn-md bg-info-light"> <a target="_blank" href="{% url 'pres_pdf' pk=prescription.prescription_id %}" > Download Prescription </a></button>
+									<button class="btn btn-md bg-primary"> <a href="{% url 'test-cart' pk=prescription.prescription_id %}" > Go to Cart </a></button><br><br>
+									<button class="btn btn-md bg-info"> <a target="_blank" href="{% url 'pres_pdf' pk=prescription.prescription_id %}" > Download Prescription </a></button>
 									{% endfor %}
 								</div>
 								<!-- /Invoice Information -->

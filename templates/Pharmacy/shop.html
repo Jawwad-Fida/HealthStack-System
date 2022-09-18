@@ -4,6 +4,7 @@
 
 
 <head>
+  
   <title>HealthStack</title>
   <!-- Favicons -->
   <link type="image/x-icon" href="{% static 'HealthStack-System/images/Normal/favicon.png' %}" rel="icon" />
@@ -48,12 +49,12 @@
                 <small>{{order.count_cart_items}}</small>
               </span>
             </a>
+           
           </li>
           <div class="col-md-6 col-6 text-right">
             <div class="top-nav-search">
               <form action="{% url 'pharmacy_shop' %}" method="GET">
                 <input type="text" class="form-control" placeholder="Search medicine" name="search_query" value="{{search_query}}">
-                <button class="btn" type="submit"><i class="fe fe-search"></i></button>
               </form>
             </div>
           </div>
@@ -89,12 +90,12 @@
                 <div class="tab-pane fade show active" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-1-tab">
                   <div class="row">
                     {% for medicine in medicines %}
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-4 text-center" style="display: flex;justify-content:space-around;align-items: center;">
                       <div class="menu-wrap">
-                        <a href="#" class="menu-img img mb-4">
-                          <img src="{{ medicine.featured_image.url }}" Style="height:300px;" class="img-fluid" alt="User Image"/>
+                        <a href="#" class="menu-img img">
+                          <img src="{{ medicine.featured_image.url }}" Style="height:300px;width: 300px;" class="img-fluid" alt="User Image"/>
                         </a>
-                        <div class="text">
+                        <div class="text" style="text-align: center">
                           <h3><a href="{% url 'product-single' pk=medicine.serial_number %}">{{medicine.name}}</a></h3>
                           
                           <p class="price"><span>{{medicine.price}} BDT</span></p>
@@ -161,59 +162,25 @@
     <div class="overlay"></div>
     <div class="container">
       <div class="row mb-5">
-        <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
-          <div class="ftco-footer-widget mb-4">
+        <div class="col-lg-6 col-md-6 mb-5 mb-md-5">
+          <div class="ftco-footer-widget mb-8">
             <h2 class="ftco-heading-2">About Us</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-              blind texts.</p>
+            <p>Healthstack is an online based platform for multiple hospitals. 
+              It Provides immediate medical assistance to patients who require emergency treatment. 
+              Its Ability to track, monitor, and share a patient's health records between all hospitals
+              . Patients can also see information regarding multiple hospitals and doctors and make 
+              appointments online.
+            </p>
 
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mb-5 mb-md-5">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Recent Blog</h2>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
-          <div class="ftco-footer-widget mb-4 ml-md-4">
-            <h2 class="ftco-heading-2">Services</h2>
-            <ul class="list-unstyled">
-              <li><a href="#" class="py-2 d-block">Cooked</a></li>
-              <li><a href="#" class="py-2 d-block">Deliver</a></li>
-              <li><a href="#" class="py-2 d-block">Quality Foods</a></li>
-              <li><a href="#" class="py-2 d-block">Mixed</a></li>
-            </ul>
-          </div>
-        </div>
+        
         <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
           <div class="ftco-footer-widget mb-4">
             <h2 class="ftco-heading-2">Have a Questions?</h2>
             <div class="block-23 mb-3">
               <ul>
-                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San
-                    Francisco, California, USA</span></li>
+                <li><span class="icon icon-map-marker"></span><span class="text">Dhanmondi, Dhaka, Bangladesh.</span></li>
                 <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
                 <li><a href="#"><span class="icon icon-envelope"></span><span class="text"><span class="__cf_email__"
                         data-cfemail="bed7d0d8d1fec7d1cbccdad1d3dfd7d090ddd1d3">[email&#160;protected]</span></span></a>

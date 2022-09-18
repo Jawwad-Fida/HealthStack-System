@@ -86,7 +86,7 @@ html {
     height: 100%;
 }
 body {
-	background-color: #f8f9fa;
+	background-color: #e6f2ff;
 	color: #272b41;
     font-family: "Poppins",sans-serif;
 	font-size: 0.9375rem;
@@ -874,7 +874,7 @@ button.bg-danger:hover {
 }
 .bg-warning-light {
 	background-color: rgba(255, 152, 0,0.12) !important;
-	color: #f39c12 !important;
+	color: #dc3545 !important;
 }
 .bg-success-light {
 	background-color: rgba(15, 183, 107,0.12) !important;

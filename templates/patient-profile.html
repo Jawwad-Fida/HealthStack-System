@@ -180,7 +180,7 @@
                           >Appointments</a
                         >
                       </li> {% endcomment %}
-                      <li class="nav-item">
+                      <li class="nav-item active">
                         <a class="nav-link" href="#pres" data-toggle="tab"
                           ><span>Prescription</span></a
                         >
@@ -278,7 +278,7 @@
                     <!-- /Appointment Tab -->
 
                     <!-- Prescription Tab -->
-                    <div class="tab-pane fade" id="pres">
+                    <div class="tab-pane fade show active" id="pres">
                       <div class="text-right">
                         <a href="{% url 'create-prescription' pk=patient.patient_id %}" class="add-new-btn"
                           >Add Prescription</a
@@ -330,8 +330,9 @@
                                       {% comment %}
                                       <a href="{% url 'delete-prescription' pk=p.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger" >
                                         <i class="fas fa-trash"></i> Delete <td>
-                                      </a>
-                                      {% endcomment %}
+                                      </a>{% endcomment %}
+                                      
+                                      
                                       <a
                                         href="{% url 'doctor-view-prescription' pk=p.prescription_id %}"
                                         class="btn btn-sm bg-info-light"
@@ -491,6 +492,8 @@
       </div>
     </div>
     <!-- /Add Medical Records Modal -->
+
+    
 
     <!-- jQuery -->
     <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
