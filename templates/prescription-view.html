@@ -255,7 +255,7 @@
 										
 									</div>
 									<br>
-									<button class="btn btn-md bg-primary"> <a href="{% url 'test-cart' %}" > Go to Cart </a></button><br><br>
+									<button class="btn btn-md bg-primary"> <a href="{% url 'test-cart' pk=prescription.prescription_id %}" > Go to Cart </a></button><br><br>
 									<button class="btn btn-md bg-info"> <a target="_blank" href="{% url 'pres_pdf' pk=prescription.prescription_id %}" > Download Prescription </a></button>
 									{% endfor %}
 								</div>
