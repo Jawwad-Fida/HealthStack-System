@@ -86,23 +86,21 @@
 											<thead>
 												<tr>													
 													<th>Prescription Id</th>
-                                                    <th>Doctor Name</th>
-													<th>Report Payment Status</th>
+                          <th>Doctor Name</th>
 													<th>Add Report Results</th>
                                                     												
 												</tr>
 											</thead>
 											<tbody>
-                                                 {% for ps in prescription %}
+                         {% for ps in prescription %}
 												<tr>
-                                                    <td>{{ps.prescription_id}}</td>
+                          <td>{{ps.prescription_id}}</td>
 													<td>
 														<h2 class="table-avatar">
 															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ps.doctor.featured_image.url}}" alt="User Image"></a>
 															<a href="#">{{ps.doctor.name}}</a>
 														</h2>
 													</td>
-													<td></td>
 													
                                                     <td>
                                                         <div class="table-action">
