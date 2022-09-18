@@ -11,7 +11,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
-from pharmacy.models import Medicine, Order, Pharmacist
+from pharmacy.models import Medicine, Pharmacist
 from doctor.models import Doctor_Information, Prescription, Prescription_test, Report, Appointment, Experience , Education,Specimen,Test
 from pharmacy.models import Order, Cart
 from sslcommerz.models import Payment
@@ -563,11 +563,27 @@ def medicine_list(request):
         if request.user.is_pharmacist:
             pharmacist = Pharmacist.objects.get(user=request.user)
             medicine = Medicine.objects.all()
+            orders = Order.objects.filter(user=request.user, ordered=False)
+            carts = Cart.objects.filter(user=request.user, purchased=False)
             
             medicine, search_query = searchMedicines(request)
             
-            context = {'medicine':medicine,'pharmacist':pharmacist,'search_query': search_query}
-            return render(request, 'hospital_admin/medicine-list.html',context)
+            if carts.exists() and orders.exists():
+                order = orders[0]
+                context = {'medicine':medicine,
+                        'pharmacist':pharmacist,
+                        'search_query': search_query,
+                        'order': order,
+                        'carts': carts,}
+                return render(request, 'hospital_admin/medicine-list.html',context)
+            else:
+                context = {'medicine':medicine,
+                            'pharmacist':pharmacist,
+                            'search_query': search_query,
+                            'orders': orders,
+                            'carts': carts,}
+                return render(request, 'hospital_admin/medicine-list.html',context)
+                
 
 @login_required(login_url='admin_login')
 def generate_random_medicine_ID():
