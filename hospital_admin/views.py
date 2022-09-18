@@ -972,8 +972,9 @@ def pharmacist_dashboard(request):
 def report_history(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
-            labworker = Clinical_Laboratory_Technician.objects.get(user=request.user)
+
+            lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
             report = Report.objects.all()
-            context = {'report':report,'labworker':labworker}
+            context = {'report':report,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/report-list.html',context)
 

@@ -66,21 +66,9 @@
             <div class="page-wrapper">
 			
                 <div class="content container-fluid">
-                    <div class="">
-						<a href="{% url 'add-test' %}"  class="fe fe-plus btn btn-primary float-right mt-2 ">Add Test</a>
-					</div>
 					
 					<!-- Page Header -->
-					<div class="page-header">
-						<div class="row">
-							<div class="col-sm-12">
-								<h3 class="page-title">Test List</h3>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item active"></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+
 					<!-- /Page Header -->
 
                     <div class="row">
@@ -89,33 +77,40 @@
 							<!-- Feed Activity -->
 							<div class="card  card-table flex-fill">
 								<div class="card-header">
-									<h4 class="card-title"></h4>
+									<h4 class="card-title">Patient List</h4> <br>
+                                    <p class="card-text">Click To See <b>Prescriptions</b> of patients</p>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-hover table-center mb-0">
-											<thead>
-												<tr>													
-													<th>Test ID</th>
+                    <table class="table table-hover table-center mb-0">
+                      <thead>
+                        <tr>												
+                          <th>Report ID</th>   
+                          <th>Patient Name</th>
+                          <th>Doctor Name</th>	
                           <th>Test Name</th>
-													<th>Test Price</th>
-                        <th>Action</th>												
-												</tr>
-											</thead>
-											<tbody>
+                          <th>Result</th>
+                          <th>Referred Value</th>											
+                        </tr>
+                      </thead>
+                      <tbody>
                        {% for t in report%}
-												<tr>
+                        <tr>
                           <td>{{t.report_id}}</td>
-                          <td>{{t.report_name}}</td>
-                          <td>{{t.report_price}}</td>
+                          <td>{{t.test_name}}</td>
+                          <td>{{t.patient}}</td>
+                          <td>{{t.doctor}}</td>
+                          <td>{{t.result}}</td>
+                          <td>{{t.referred_value}}</td>
+              
                           
-												</tr>
+                        </tr>
                    {% endfor %}
-												
-												
-											</tbody>
-										</table>
-									</div>
+                        
+                        
+                      </tbody>
+                    </table>
+                  </div>
 								</div>
 							</div>
 							<!-- /Feed Activity -->
@@ -135,6 +130,7 @@
     <!-- jQuery -->
 
     </body>
+    
 
     <!-- jQuery -->
     <script src="{% static 'HealthStack-System/js/admin/jquery-3.2.1.min.js'%}"></script>
