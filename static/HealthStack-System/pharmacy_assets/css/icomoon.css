@@ -29,12 +29,14 @@
 }
 .icon-plus:before {
   content: "\f067";
+  color: black;
 }
 .icon-question:before {
   content: "\f128";
 }
 .icon-minus:before {
   content: "\f068";
+  color:black;
 }
 .icon-glass:before {
   content: "\f000";

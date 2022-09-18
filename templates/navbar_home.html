@@ -32,16 +32,17 @@
     </div>
     <ul class="main-nav">
       <li>
-        <a href="{% url 'hospital_home'%}">Home</a>
+        <a href="{% url 'hospital_home'%}" style="text-decoration: none;">Home</a>
       </li>
 
+      {% comment %}
       {% if user.is_authenticated and user.is_doctor %}
       <li class="has-submenu active">
-        <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
+        <a href="#" style="text-decoration: none;">Doctors <i class="fas fa-chevron-down"></i></a>
         <ul class="submenu">
          
           <li>
-            <a href="{% url 'doctor-dashboard' %}"
+            <a href="{% url 'doctor-dashboard' %}" style="text-decoration: none;"
               >Doctor Dashboard</a
             >
           </li>
@@ -54,7 +55,9 @@
         </ul>
       </li>
       {% endif %}
+      {% endcomment %}
 
+      {% comment %}
       {% if user.is_authenticated and user.is_patient %}
       <li class="has-submenu">
         <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
@@ -75,11 +78,32 @@
           </li>
         </ul>
       </li>
+      
+      {% endif %}
+      {% endcomment %}
+
+      {% if user.is_authenticated and user.is_patient %}
+      <li><a href="{% url 'patient-dashboard' %}"style="text-decoration: none;">Patient Dashboard</a></li>
+      {% endif %}
+
+      {% if user.is_authenticated and user.is_doctor %}
+      <li><a href="{% url 'doctor-dashboard' %}"style="text-decoration: none;">Doctor Dashboard</a></li>
       {% endif %}
 
       <li>
-        <a href="{% url 'about-us'%}">About Us</a>
+        <a href="{% url 'about-us'%}"style="text-decoration: none;">About Us</a>
       </li>
+
+      {% if user.is_authenticated and user.is_doctor or user.is_patient %}
+      <li><a href="{% url 'multiple-hospital' %}" style="text-decoration: none;">Hospital</a></li>
+      {% endif %}
+        
+      {% if user.is_authenticated and user.is_patient  %}
+      <li><a href="{% url 'search' %}" style="text-decoration: none;">Search Doctor</a></li>
+      {% endif %}
+
+
+        
 
 
       <li class="login-link">

@@ -104,7 +104,6 @@
 
 												{% for report in report %}
 												<strong>Report ID:</strong>{{report.report_id}} <br>
-
 												<strong>Patient ID:</strong> {{patient.patient_id }} <br>
 												<strong>Date:</strong> {{report.delivery_date}}
 											</p>
@@ -117,14 +116,13 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
-												<strong class="customer-text">Doctor Information</strong>
+												<strong class="customer-text">Doctor Information:</strong>
                         
 												<p class="invoice-details invoice-details-two">
-													{{report.doctor.name}} <br>
-													{{report.doctor.address}}<br>
-													{{report.doctor.email}}<br>
 
-                                                    {{report.doctor.phone_number}}<br>
+													<b>Name: </b>{{report.doctor.name}} <br>
+													<b>Department: </b>{{report.doctor.department_name}}<br>
+													<b>Email: </b>{{report.doctor.email}} <br>
 
 												</p>
                         
@@ -134,9 +132,10 @@
 											<div class="invoice-info invoice-info2">
 												<strong class="customer-text">Patient Information</strong>
 												<p class="invoice-details">
-													{{report.patient.address}}<br>
-													{{report.patient.email}} <br>
-													{{report.patient.phone_number}}<br>
+													<b>Name: </b>{{patient.name}} <br>
+													<b>Address: </b>{{report.patient.address}}<br>
+													<b>Email: </b>{{report.patient.email}} <br>
+													<b>Phone Number: </b>{{report.patient.phone_number}}<br>
 												</p>
 											</div>
 										</div>
@@ -146,21 +145,21 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered" >
+												<table class="table table-bordered text-center">
 													<thead >
-														<tr style="background-color: rgb(84, 147, 199);">
-															<th>Specimen Information</th>
-															<th class="text-center">Specimen ID</th>
-															<th class="text-center">Collection Date/Time</th>
-															<th class="text-center">Receiving Date/Time</th>
+														<tr>
+															<th style="border: 2px dotted;">Specimen Information</th>
+															<th style="border: 2px dotted;">Specimen ID</th>
+															<th style="border: 2px dotted;">Collection Date/Time</th>
+															<th style="border: 2px dotted;">Receiving Date/Time</th>
 														</tr>
 														{% for s in specimen %}
 														<tr>
-                              
-															<th class="text-center">{{s.specimen_type}}</th>
-															<th class="text-center">{{s.specimen_id}}</th>
-															<th class="text-center">{{s.collection_date}}</th>
-															<th class="text-center">{{s.receiving_date}}</th>
+														
+															<th style="border: 2px dotted;">{{s.specimen_type}}</th>
+															<th style="border: 2px dotted;">{{s.specimen_id}}</th>
+															<th style="border: 2px dotted;">{{s.collection_date}}</th>
+															<th style="border: 2px dotted;">{{s.receiving_date}}</th>
 	
 														</tr>
 														{% endfor %}
@@ -173,29 +172,26 @@
 								</div>
 
            
-                  <br>
-                  <div class="invoice-item invoice-table-wrap">
+                  				<br>
+                  				<div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
+												<table class="invoice-table table table-bordered text-center">
 													<thead>
 														<tr style="background-color: rgb(84, 147, 199);">
 															<th>Test Name</th>
-                              <th class="text-center">Result</th>
+                              								<th class="text-center">Result</th>
 															<th class="text-center">Unit</th>
-                             <th class="text-center">Referred value</th>
+                             								<th class="text-center">Referred value</th>
 	
 														</tr>
-                            {% for t in test %}
-                            <tr>
-                              <th class="text-center">{{t.test_name}}</th>
-                              <th class="text-center">{{t.result}}</th>
+                            							{% for t in test %}
+                            							<tr>
+                              								<th class="text-center">{{t.test_name}}</th>
+                              								<th class="text-center">{{t.result}}</th>
 															<th class="text-center">{{t.unit}}</th>
-                              <th class="text-center">{{t.referred_value}}</th>
-
-
-	
+                              								<th class="text-center">{{t.referred_value}}</th>
 														</tr>
 														{% endfor %}
 													</tbody>

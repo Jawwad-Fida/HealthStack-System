@@ -11,9 +11,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
-from pharmacy.models import Medicine, Pharmacist
+from pharmacy.models import Medicine, Order, Pharmacist
 from doctor.models import Doctor_Information, Prescription, Prescription_test, Report, Appointment, Experience , Education,Specimen,Test
-
+from pharmacy.models import Order, Cart
 from sslcommerz.models import Payment
 from .forms import AdminUserCreationForm, LabWorkerCreationForm, EditHospitalForm, EditEmergencyForm,AdminForm , PharmacistCreationForm 
 
@@ -48,6 +48,7 @@ def admin_dashboard(request):
         patients = Patient.objects.all()
         hospitals = Hospital_Information.objects.all()
         lab_workers = Clinical_Laboratory_Technician.objects.all()
+        pharmacists = Pharmacist.objects.all()
         
         sat_date = datetime.date.today()
         sat_date_str = str(sat_date)
@@ -85,7 +86,7 @@ def admin_dashboard(request):
         thurs_count = Appointment.objects.filter(date=thurs_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
         fri_count = Appointment.objects.filter(date=fri_date_str).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
 
-        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri}
+        context = {'admin': user,'total_patient_count': total_patient_count,'total_doctor_count':total_doctor_count,'pending_appointment':pending_appointment,'doctors':doctors,'patients':patients,'hospitals':hospitals,'lab_workers':lab_workers,'total_pharmacist_count':total_pharmacist_count,'total_hospital_count':total_hospital_count,'total_labworker_count':total_labworker_count,'sat_count': sat_count, 'sun_count': sun_count, 'mon_count': mon_count, 'tues_count': tues_count, 'wed_count': wed_count, 'thurs_count': thurs_count, 'fri_count': fri_count, 'sat': sat, 'sun': sun, 'mon': mon, 'tues': tues, 'wed': wed, 'thurs': thurs, 'fri': fri, 'pharmacists': pharmacists}
         return render(request, 'hospital_admin/admin-dashboard.html', context)
     elif request.user.is_labworker:
         # messages.error(request, 'You are not authorized to access this page')
@@ -953,16 +954,27 @@ def pharmacist_dashboard(request):
     if request.user.is_authenticated:
         if request.user.is_pharmacist:
             pharmacist = Pharmacist.objects.get(user=request.user)
+            total_pharmacist_count = Pharmacist.objects.annotate(count=Count('pharmacist_id'))
+            total_medicine_count = Medicine.objects.annotate(count=Count('serial_number'))
+            total_order_count = Order.objects.annotate(count=Count('orderitems'))
+            total_cart_count = Cart.objects.annotate(count=Count('item'))
+
+            medicine = Medicine.objects.all()
             
-            context = {'pharmacist':pharmacist}
+            context = {'pharmacist':pharmacist, 'medicine':medicine,
+                       'total_pharmacist_count':total_pharmacist_count, 
+                       'total_medicine_count':total_medicine_count, 
+                       'total_order_count':total_order_count,
+                       'total_cart_count':total_cart_count}
             return render(request, 'hospital_admin/pharmacist-dashboard.html',context)
 
 
 def report_history(request):
     if request.user.is_authenticated:
         if request.user.is_labworker:
-            labworker = Clinical_Laboratory_Technician.objects.get(user=request.user)
+
+            lab_workers = Clinical_Laboratory_Technician.objects.get(user=request.user)
             report = Report.objects.all()
-            context = {'report':report,'labworker':labworker}
+            context = {'report':report,'lab_workers':lab_workers}
             return render(request, 'hospital_admin/report-list.html',context)
 

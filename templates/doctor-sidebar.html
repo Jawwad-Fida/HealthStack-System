@@ -30,7 +30,7 @@
 
         <li>
         <a href="{% url 'doctor-profile' pk=doctor.doctor_id %}">
-          <i class="fas fa-columns"></i>
+          <i class="fas fa-user"></i>
           <span>Profile</span>
         </a>
       </li>
@@ -53,12 +53,7 @@
                 </ul>
           
         </li>
-        <li>
-          <a href="{% url 'appointments' %}">
-            <i class="fas fa-calendar-check"></i>
-            <span>Appointments</span>
-          </a>
-        </li>
+        
         <li>
           <a href="{% url 'multiple-hospital' %}">
             <i class="fas fa-hospital"></i>
@@ -72,7 +67,7 @@
           </a>
         </li>
         <li>
-          <a href="{% url 'doctor-test-list'%}">
+          <a href="{% url 'doctor-test-list'%}" target="_blank">
             <i class="fas fa-hourglass-start"></i>
             <span>Test Information</span>
           </a>
