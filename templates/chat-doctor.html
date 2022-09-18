@@ -71,22 +71,22 @@
 									</form>
 									<div class="chat-users-list">
 										<div class="chat-scroll">
-										{% for u in patient %} {% if not u.id == 1 and not u.id == user.id %}
-											<a href="{% url 'chat-home' pk=user.id %}?u={{u.user.id}}" class="media">
+										{% for u in app %} {% if not u.pateint.id == 1 and not u.patient.id == user.id %}
+											<a href="{% url 'chat-home' pk=user.id %}?u={{u.patient.user.id}}" class="media">
 												<div class="media-img-wrap">
 													{%if u.user.login_status%}
 													<div class="avatar avatar-online">
-														<img src="{{ u.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{{ u.patient.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
 													{%else%}
 													<div class="avatar avatar-away">
-														<img src="{{ u.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
+														<img src="{{ u.patient.featured_image.url }}" alt="User Image" class="avatar-img rounded-circle">
 													</div>
 													{%endif%}
 												</div>
 												<div class="media-body">
 													<div>
-														<div class="user-name">{{u.name}}</div>
+														<div class="user-name">{{u.patient.name}}</div>
 														
 														<div>
 															<div class="user-name">{{d.name}}</div>
@@ -98,8 +98,9 @@
 														</div>
 													</div>
 													<div>
-														<div class="last-chat-time block">2 min</div>
-														<div class="badge badge-success badge-pill">15</div>
+
+														<div class="last-chat-time block">{{u.serial_number}}</div>
+														<div class="badge badge-success badge-pill"></div>
 													</div>
 												</div>
 											</a>
