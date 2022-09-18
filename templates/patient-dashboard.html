@@ -290,16 +290,19 @@
                                       <a href="{% url 'delete-prescription' pk=prescription.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger-light" >
                                         <i class="fas fa-trash"></i> Delete <td>
                                       </a>
-                                      <a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light"><i class="fas fa-trash"></i> Delete</a>
-                                      {% comment %}
+                                      
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-primary-light"
                                       >
                                         <i class="fas fa-print"></i> Print
                                       </a>
+<<<<<<< HEAD
                                       {% endcomment %}
 >>>>>>> d581bd4c0afe57434014dfffb67db344d15e0300
+=======
+                                      
+>>>>>>> 833c7cdfcb35fe522142c7348bc955ce50e0d196
                                     </div>
                                   </td>
                                 </tr>
@@ -484,15 +487,15 @@
       <!-- /Footer -->
     </div>
     <!-- /Main Wrapper -->
-    <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+    <!-- <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
       <div class="modal-dialog modal-dialog-centered text-center" role="document" >
         <div class="modal-content">
-        <!--	<div class="modal-header">
+        	<div class="modal-header">
             <h5 class="modal-title">Delete</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-          </div>-->
+          </div>
           <div class="modal-body">
             <div class="form-content p-2">
               <h4 class="modal-title">Delete</h4>
@@ -503,7 +506,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- jQuery -->
     <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>

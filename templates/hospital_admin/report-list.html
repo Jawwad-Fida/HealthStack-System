@@ -87,23 +87,16 @@
                         <tr>												
                           <th>Report ID</th>   
                           <th>Patient Name</th>
-                          <th>Doctor Name</th>	
-                          <th>Test Name</th>
-                          <th>Result</th>
-                          <th>Referred Value</th>											
+                          <th>Doctor Name</th>									
                         </tr>
                       </thead>
                       <tbody>
                        {% for t in report%}
                         <tr>
                           <td>{{t.report_id}}</td>
-                          <td>{{t.test_name}}</td>
                           <td>{{t.patient}}</td>
                           <td>{{t.doctor}}</td>
-                          <td>{{t.result}}</td>
-                          <td>{{t.referred_value}}</td>
               
-                          
                         </tr>
                    {% endfor %}
                         

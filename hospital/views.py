@@ -560,9 +560,11 @@ def test_add_to_cart(request, pk, pk2):
 
 @csrf_exempt
 @login_required(login_url="login")
-def test_cart(request):
+def test_cart(request, pk):
     if request.user.is_authenticated and request.user.is_patient:
         # prescription = Prescription.objects.filter(prescription_id=pk)
+        
+        prescription = Prescription.objects.filter(prescription_id=pk)
         
         patient = Patient.objects.get(user=request.user)
         prescription_test = Prescription_test.objects.all()
@@ -572,7 +574,7 @@ def test_cart(request):
         if test_carts.exists() and test_orders.exists():
             test_order = test_orders[0]
             
-            context = {'test_carts': test_carts,'test_order': test_order, 'patient': patient}
+            context = {'test_carts': test_carts,'test_order': test_order, 'patient': patient, 'prescription_test':prescription_test, 'prescription_id':pk}
             return render(request, 'test-cart.html', context)
         else:
             # messages.warning(request, "You don't have any test in your cart!")
