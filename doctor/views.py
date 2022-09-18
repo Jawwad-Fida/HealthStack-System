@@ -568,8 +568,8 @@ def patient_search(request, pk):
         doctor = Doctor_Information.objects.get(doctor_id=pk)
         id = int(request.GET['search_query'])
         patient = Patient.objects.get(patient_id=id)
-        appointments = Appointment.objects.filter(doctor=doctor).filter(patient=patient)
-        context = {'patient': patient, 'doctor': doctor, 'appointments': appointments}
+        prescription = Prescription.objects.filter(doctor=doctor).filter(patient=patient)
+        context = {'patient': patient, 'doctor': doctor, 'prescription': prescription}
         return render(request, 'patient-profile.html', context)
     else:
         logout(request)

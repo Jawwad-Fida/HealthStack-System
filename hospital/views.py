@@ -606,7 +606,7 @@ def test_remove_cart(request, pk):
                 test_order.orderitems.remove(test_order_item)
                 test_order_item.delete()
                 # messages.warning(request, "This test was remove from your cart!")
-                context = {'test_carts': test_carts,'test_order': test_order,'patient': patient,}
+                context = {'test_carts': test_carts,'test_order': test_order,'patient': patient,'prescription_id':pk}
                 return render(request, 'test-cart.html', context)
             else:
                 # messages.info(request, "This test was not in your cart")
