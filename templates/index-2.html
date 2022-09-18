@@ -215,16 +215,16 @@
                       <i class="fas fa-check-circle verified"></i>
                     </h3>
                     <p class="speciality">
-                      {{ doctor.department }}
+                      {{ doctor.department_name.hospital_department_name }}
                     </p>
-                    <div class="rating">
+                    {% comment %} <div class="rating">
                       <i class="fas fa-star filled"></i>
                       <i class="fas fa-star filled"></i>
                       <i class="fas fa-star filled"></i>
                       <i class="fas fa-star filled"></i>
                       <i class="fas fa-star filled"></i>
                       <span class="d-inline-block average-rating">(17)</span>
-                    </div>
+                    </div> {% endcomment %}
                     <ul class="available-info">
                       <li>
                         <i class="fas fa-map-marker-alt"></i> {{doctor.hospital_name}}
@@ -233,7 +233,7 @@
                         <i class="far fa-clock"></i> {{ doctor.visiting_hour }}
                       </li>
                       <li>
-                        <i class="far fa-money-bill-alt"></i> {{ doctor.consultation_fee }} BDT
+                        <i class="far fa-money-bill-alt"></i> Consulation fee: {{ doctor.consultation_fee }} BDT
                         <i
                           class="fas fa-info-circle"
                           data-toggle="tooltip"
