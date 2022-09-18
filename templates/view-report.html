@@ -147,7 +147,7 @@
 											<div class="table-responsive">
 												<table class="table table-bordered text-center">
 													<thead >
-														<tr>
+														<tr style="background-color: rgb(84, 147, 199)">
 															<th style="border: 2px dotted;">Specimen Information</th>
 															<th style="border: 2px dotted;">Specimen ID</th>
 															<th style="border: 2px dotted;">Collection Date/Time</th>
@@ -180,18 +180,18 @@
 												<table class="invoice-table table table-bordered text-center">
 													<thead>
 														<tr style="background-color: rgb(84, 147, 199);">
-															<th>Test Name</th>
-                              								<th class="text-center">Result</th>
-															<th class="text-center">Unit</th>
-                             								<th class="text-center">Referred value</th>
+															<th style="border: 2px dotted;">Test Name</th>
+                              								<th style="border: 2px dotted;">Result</th>
+															<th style="border: 2px dotted;">Unit</th>
+                             								<th style="border: 2px dotted;">Referred value</th>
 	
 														</tr>
                             							{% for t in test %}
                             							<tr>
-                              								<th class="text-center">{{t.test_name}}</th>
-                              								<th class="text-center">{{t.result}}</th>
-															<th class="text-center">{{t.unit}}</th>
-                              								<th class="text-center">{{t.referred_value}}</th>
+                              								<th style="border: 2px dotted;">{{t.test_name}}</th>
+                              								<th style="border: 2px dotted;">{{t.result}}</th>
+															<th style="border: 2px dotted;">{{t.unit}}</th>
+                              								<th style="border: 2px dotted;">{{t.referred_value}}</th>
 														</tr>
 														{% endfor %}
 													</tbody>

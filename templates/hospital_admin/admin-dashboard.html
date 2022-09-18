@@ -119,7 +119,7 @@
                 <div class="card-body">
                   <div class="dash-widget-header">
                     <span class="dash-widget-icon text-success">
-                      <i class="fe fe-credit-card"></i>
+                      <i class="fe fe-users"></i>
                     </span>
                     <div class="dash-count">
                       <h3>{{total_patient_count.count}}</h3>
@@ -139,14 +139,14 @@
                 <div class="card-body">
                   <div class="dash-widget-header">
                     <span class="dash-widget-icon text-danger border-danger">
-                      <i class="fe fe-money"></i>
+                      <i class="fe fe-users"></i>
                     </span>
                     <div class="dash-count">
-                      <h3>{{pending_appointment}}</h3>
+                      <h3>{{total_hospital_count.count}}</h3>
                     </div>
                   </div>
                   <div class="dash-widget-info">
-                    <h6 class="text-muted">Pending Appointment</h6>
+                    <h6 class="text-muted">Total Hospital</h6>
                     <div class="progress progress-sm">
                       <div class="progress-bar bg-danger w-50"></div>
                     </div>
@@ -159,14 +159,14 @@
                 <div class="card-body">
                   <div class="dash-widget-header">
                     <span class="dash-widget-icon text-warning border-warning">
-                      <i class="fe fe-folder"></i>
+                      <i class="fe fe-users"></i>
                     </span>
                     <div class="dash-count">
                       <h3>{{total_labworker_count.count}}</h3>
                     </div>
                   </div>
                   <div class="dash-widget-info">
-                    <h6 class="text-muted">Invoice</h6>
+                    <h6 class="text-muted">Total Lab Worker</h6>
                     <div class="progress progress-sm">
                       <div class="progress-bar bg-warning w-50"></div>
                     </div>
@@ -174,6 +174,7 @@
                 </div>
               </div>
             </div>
+            
           </div>
           
           <div class="row">
@@ -227,14 +228,15 @@
             <div class="col-lg-6 col-sm-6">
               <div class="card">
                   <div class="card-header">
-                      <h4 class="card-title">Total User</h4>
+                      <h4 class="card-title">Appointment Bar Chart</h4>
                   </div>
                   <div class="card-body">
-                      
-                      <div id="morris_donught" class="morris_chart_height" style=" height: 240px !important;"></div>
+                      <canvas id="barChart_2"></canvas>
                   </div>
               </div>
             </div>
+
+            
             
           </div>
 
@@ -286,21 +288,6 @@
               <!-- /Recent Orders -->
             </div>
 
-            <div class="col-lg-6 col-sm-6">
-              <div class="card">
-                  <div class="card-header">
-                      <h4 class="card-title">Appointment Bar Chart</h4>
-                  </div>
-                  <div class="card-body">
-                      <canvas id="barChart_2"></canvas>
-                  </div>
-              </div>
-            </div>
-            
-          </div>
-
-          <div class="row">
-
             <div class="col-md-6 d-flex">
 						
 							<!-- Feed Activity -->
@@ -343,49 +330,7 @@
 							<!-- /Feed Activity -->
 							
 						</div>
-
-            <div class="col-md-6 d-flex">
-						
-							<!-- Feed Activity -->
-							<div class="card  card-table flex-fill">
-								<div class="card-header">
-									<h4 class="card-title">Lab-Worker List</h4>
-								</div>
-								<div class="card-body">
-									<div class="table-responsive">
-										<table class="table table-hover table-center mb-0">
-											<thead>
-												<tr>													
-													<th>Lab-Worker Name</th>
-													<th>Phone</th>
-													<th>Email</th>
-													<th>Age</th>													
-												</tr>
-											</thead>
-											<tbody>
-                        {% for lab_worker in lab_workers%}
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{lab_worker.featured_image.url}}" alt="User Image"></a>
-															<a href="#">{{lab_worker.name}}</a>
-														</h2>
-													</td>
-													<td>{{lab_worker.phone_number}}</td>
-													<td>{{lab_worker.email}}</td>
-													<td>{{lab_worker.age}}</td>
-												</tr>
-                        {% endfor %}
-												
-												
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							<!-- /Feed Activity -->
-							
-						</div>
+            
           </div>
 
           <div class="row">
@@ -435,6 +380,54 @@
               </div>
               <!-- /Recent Orders -->
             </div>
+            
+
+            <div class="col-md-6 d-flex">
+						
+							<!-- Feed Activity -->
+							<div class="card  card-table flex-fill">
+								<div class="card-header">
+									<h4 class="card-title">Lab-Worker List</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>													
+													<th>Lab-Worker Name</th>
+													<th>Phone</th>
+													<th>Email</th>
+													<th>Age</th>													
+												</tr>
+											</thead>
+											<tbody>
+                        {% for lab_worker in lab_workers%}
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{lab_worker.featured_image.url}}" alt="User Image"></a>
+															<a href="#">{{lab_worker.name}}</a>
+														</h2>
+													</td>
+													<td>{{lab_worker.phone_number}}</td>
+													<td>{{lab_worker.email}}</td>
+													<td>{{lab_worker.age}}</td>
+												</tr>
+                        {% endfor %}
+												
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Feed Activity -->
+							
+						</div>
+          </div>
+
+          <div class="row">
+            
 
           
           </div>
@@ -459,10 +452,10 @@
 
     <script src="{% static 'HealthStack-System/plugins/admin/slimscroll/jquery.slimscroll.min.js'%}"></script>
 
-    <script src="{% static 'HealthStack-System/plugins/admin/raphael/raphael.min.js'%}"></script>
+    <!-- <script src="{% static 'HealthStack-System/plugins/admin/raphael/raphael.min.js'%}"></script> -->
 
-    <script src=" {% static 'HealthStack-System/plugins/admin/morris/morris.min.js'%}"></script>
-    <script src="{% static 'HealthStack-System/js/admin/chart.morris.js'%}"></script>
+    <!-- <script src=" {% static 'HealthStack-System/plugins/admin/morris/morris.min.js'%}"></script> -->
+    <!-- <script src="{% static 'HealthStack-System/js/admin/chart.morris.js'%}"></script> -->
 
     <!-- Custom JS -->
     <script src="{% static 'HealthStack-System/js/admin/script.js'%}"></script>
@@ -503,7 +496,8 @@
 
     <script src="{% static 'HealthStack-System/js/admin/morris.min.js'%}"></script>
 
-    <script src="{% static 'HealthStack-System/js/admin/morris_init.js'%}"></script>
+    <script src="{% static 'HealthStack-System/js/admin/morris-init.js'%}"></script>
+
 
     {% if messages %}
     <script>

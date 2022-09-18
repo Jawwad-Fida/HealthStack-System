@@ -1,23 +1,23 @@
 (function($) {
     "use strict"
     
-    Morris.Donut({
-        element: 'morris_donught',
+    // Morris.Donut({
+    //     element: 'morris_donught',
 
-        data: [{
-            label: "\xa0 \xa0 Total Hospital \xa0 \xa0",
-            value: total_labworker_count
-        }, {
-            label: "\xa0 \xa0 Total Labworker \xa0 \xa0",
-            value: total_hospital_count
-        }, {
-            label: "\xa0 \xa0 Total Pharmacist \xa0 \xa0",
-            value: total_pharmacist_count
-        }
-    ],
-        resize: true,
-        colors: [ '#4400eb', '#ff0000', '#ABD7F6']
-    });
+    //     data: [{
+    //         label: "\xa0 \xa0 Total Hospital \xa0 \xa0",
+    //         value: total_labworker_count
+    //     }, {
+    //         label: "\xa0 \xa0 Total Labworker \xa0 \xa0",
+    //         value: total_hospital_count
+    //     }, {
+    //         label: "\xa0 \xa0 Total Pharmacist \xa0 \xa0",
+    //         value: total_pharmacist_count
+    //     }
+    // ],
+    //     resize: true,
+    //     colors: [ '#4400eb', '#ff0000', '#ABD7F6']
+    // });
     
 
     //gradient bar chart
@@ -36,7 +36,7 @@
             labels: [sat, sun, mon, tues, wed, thurs, fri],
             datasets: [
                 {
-                    label: "My First dataset",
+                    label: "Appoinment Count",
                     data: [sat_count, sun_count, mon_count, tues_count, wed_count, thurs_count, fri_count],
                     borderColor: barChart_2gradientStroke,
                     borderWidth: "0",
