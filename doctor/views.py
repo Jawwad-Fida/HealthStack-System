@@ -614,6 +614,13 @@ def doctor_test_list(request):
         tests = Test_Information.objects.all
         context = {'doctor': doctor, 'tests': tests}
         return render(request, 'doctor-test-list.html', context)
+    
+    elif request.user.is_authenticated and request.user.is_patient:
+        patient = Patient.objects.get(user=request.user)
+        tests = Test_Information.objects.all
+        context = {'patient': patient, 'tests': tests}
+        return render(request, 'doctor-test-list.html', context)
+        
     else:
         logout(request)
         messages.info(request, 'Not Authorized')
