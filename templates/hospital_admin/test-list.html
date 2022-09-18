@@ -99,7 +99,7 @@
 													<th>Test ID</th>
                           <th>Test Name</th>
 													<th>Test Price</th>
-                        <th>Action</th>												
+                          <th>Action</th>												
 												</tr>
 											</thead>
 											<tbody>
@@ -108,8 +108,34 @@
                           <td>{{t.test_id}}</td>
                           <td>{{t.test_name}}</td>
                           <td>{{t.test_price}}</td>
-                          <td><a href="{% url 'delete-test' pk=t.test_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
+                          <td>
+														<div class="actions">
+															<a  data-toggle="modal" data-target="#delete_modal{{t.test_id}}" class="btn btn-sm bg-danger-light">
+																<i class="fe fe-trash"></i> Delete
+															</a>
+															
+														</div>
+													</td>
 												</tr>
+                        <div class="modal fade" id="delete_modal{{t.test_id}}" aria-hidden="true" role="dialog">
+													<form method="POST" action="{% url 'delete-test' pk=t.test_id %}">
+													<div class="modal-dialog modal-dialog-centered" role="document" >
+														<div class="modal-content">
+															{% csrf_token %}
+																<div class="modal-body">
+																<div class="form-content p-2">
+																	<h4 class="modal-title" style="display:flex;justify-content: center;align-items: center;">Delete</h4>
+																	<p class="mb-4"  style="display:flex;justify-content: center;align-items: center;">Are you sure want to delete?</p>
+																	<div style="display:flex;justify-content: center">
+																		<button type="submit" class="btn btn-primary" style="margin-right: 5px;">Yes </button>
+																		<button type="button" class="btn btn-danger" style="margin-left: 5px;" data-dismiss="modal">Close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													</form>
+												</div>
                    {% endfor %}
 												
 												

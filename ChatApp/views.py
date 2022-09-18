@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q, Count
 from doctor.views import appointments
 from .models import chatMessages
 from django.contrib.auth import get_user_model
@@ -36,6 +36,7 @@ def home(request,pk):
                 chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
                 chats = chats.order_by('date_created')
                 doc = Doctor_Information.objects.get(user_id=request.GET['u'])
+                
                 context = {
                 "page":"home",
                 "users":users,
@@ -43,6 +44,8 @@ def home(request,pk):
                 "patient":patients,
                 "doctor":doctor,
                 "doc":doc,
+                "app":appointments,
+                
                 "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             }
             elif request.method == 'GET' and 'search' in request.GET:
@@ -69,7 +72,7 @@ def home(request,pk):
                     "chats":chats,
                     "patient":patients,
                     "doctor":doctor,
-                    
+                    "app":appointments,
                     "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
                 }
             print(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
@@ -88,6 +91,7 @@ def home(request,pk):
                 chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(user_from=request.GET['u'], user_to=request.user.id))
                 chats = chats.order_by('date_created')
                 pat = Patient.objects.get(user_id=request.GET['u'])
+                
                 context = {
                 "page":"home",
                 "users":users,
@@ -95,6 +99,8 @@ def home(request,pk):
                 "patient":patients,
                 "doctor":doctor,
                 "pat":pat,
+                "app":appointments,
+                
                 "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
             }
             elif request.method == 'GET' and 'search' in request.GET:
@@ -108,7 +114,7 @@ def home(request,pk):
                 "users":users,
                 
                 "patient":patients,
-                
+                "app":appointments,
                 "doctor":doctor,
                 
             }

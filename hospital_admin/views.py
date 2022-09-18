@@ -523,7 +523,32 @@ def create_report(request, pk):
                 tests.unit=unit[i]
                 tests.referred_value=referred_value[i]
                 tests.save()
-                
+            
+            # mail
+            doctor_name = doctor.name
+            doctor_email = doctor.email
+            patient_name = patient.name
+            patient_email = patient.email
+            report_id = report.report_id
+            delivery_date = report.delivery_date
+            
+            subject = "Report Delivery"
+
+            values = {
+                    "doctor_name":doctor_name,
+                    "doctor_email":doctor_email,
+                    "patient_name":patient_name,
+                    "report_id":report_id,
+                    "delivery_date":delivery_date,
+                }
+
+            html_message = render_to_string('hospital_admin/report-mail-delivery.html', {'values': values})
+            plain_message = strip_tags(html_message)
+
+            try:
+                send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found') 
 
             return redirect('mypatient-list')
 
