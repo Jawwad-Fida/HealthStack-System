@@ -536,7 +536,7 @@ def test_add_to_cart(request, pk, pk2):
         test_information = Test_Information.objects.get(test_id=pk2)
         prescription = Prescription.objects.filter(prescription_id=pk)
 
-        item = get_object_or_404(Prescription_test, test_info_id=pk2, prescription_id=pk)
+        item = get_object_or_404(Prescription_test, test_info_id=pk2,prescription_id=pk)
         order_item = testCart.objects.get_or_create(item=item, user=request.user, purchased=False)
         order_qs = testOrder.objects.filter(user=request.user, ordered=False)
 

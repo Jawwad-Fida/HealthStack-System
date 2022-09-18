@@ -5,6 +5,7 @@ from doctor.models import Prescription
 
 from hospital.models import User, Patient
 
+
 # Create your models here.
 
 class Pharmacist(models.Model):
@@ -107,6 +108,14 @@ class Order(models.Model):
     # Count Cart Items
     def count_cart_items(self):
         return self.orderitems.count()
+    
+    # Stock Calculation
+    def stock_quantity_decrease(self):
+        for order_item in self.orderitems.all():
+            decrease_stock= order_item.item.stock_quantity - order_item.quantity
+            order_item.item.stock_quantity = decrease_stock 
+            order_item.item.stock_quantity.save()
+            return decrease_stock
     
     # TOTAL
     def final_bill(self):

@@ -92,6 +92,7 @@
 													<th>Department List</th>
 													<th>Delete Hospital</th>
 													
+													
 												</tr>
 											 
 											 {% for hospital in hospitals %}
@@ -111,45 +112,49 @@
 													<td>{{hospital.hospital_type}}</td>
 													<td><a href="{% url 'edit-hospital' pk=hospital.hospital_id %}" class="btn btn-primary">Edit</a></td>
 													<td><a href="{% url 'department-image-list' pk=hospital.hospital_id%}" class="btn btn-primary">Edit</a></td>
-													<td><a href="{% url 'delete-hospital' pk=hospital.hospital_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-danger btn-m">Delete</a></td>
-													<td><a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light"><i class="fe fe-trash"></i> Delete</a></td>
-												</tr>
-													
+													<td class="text-center">
+														<div class="actions">
+															<a  data-toggle="modal" data-target="#delete_modal{{hospital.hospital_id}}" class="btn btn-sm bg-danger-light">
+																<i class="fe fe-trash"></i> Delete
+															</a>
+															
+														</div>
 													</td>
 												</tr>
-												{% endfor %}
-											
-										</table>
-									</div>
-								</div>
-							</div>	
-					</div>
-					
-				</div>			
-			</div>
-			<!-- /Page Wrapper -->
-			<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
-				<div class="modal-dialog modal-dialog-centered" role="document" >
-					<div class="modal-content">
-					<!--	<div class="modal-header">
-							<h5 class="modal-title">Delete</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>-->
-						<div class="modal-body">
-							<div class="form-content p-2">
-								<h4 class="modal-title">Delete</h4>
-								<p class="mb-4">Are you sure want to delete?</p>
-								<button type="button" class="btn btn-primary">Save </button>
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+												<div class="modal fade" id="delete_modal{{hospital.hospital_id}}" aria-hidden="true" role="dialog">
+													<form method="POST" action="{% url 'delete-hospital' pk=hospital.hospital_id %}">
+													<div class="modal-dialog modal-dialog-centered" role="document" >
+														<div class="modal-content">
+															{% csrf_token %}
+																<div class="modal-body">
+																<div class="form-content p-2">
+																	<h4 class="modal-title" style="display:flex;justify-content: center;align-items: center;">Delete</h4>
+																	<p class="mb-4"  style="display:flex;justify-content: center;align-items: center;">Are you sure want to delete?</p>
+																	<div style="display:flex;justify-content: center">
+																		<button type="submit" class="btn btn-primary" style="margin-right: 5px;">Save</button>
+																		<button type="button" class="btn btn-danger" style="margin-left: 5px;" data-dismiss="modal">Close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													</form>
+												</div>	
+		                                 {% endfor %}
+
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>			
+</div>
+</div>			
+</div>
+</div>
+
 		
-        </div>
+
 		<!-- /Main Wrapper -->
 		
 		<!-- jQuery -->

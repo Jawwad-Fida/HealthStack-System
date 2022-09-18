@@ -168,7 +168,7 @@
                                       <a href="doctor-profile.html"
                                         >{{ appointment.doctor.name }}
                                         <span
-                                          >{{appointment.doctor.department}}</span
+                                          >{{appointment.doctor.department_name}}</span
                                         ></a
                                       >
                                     </h2>
@@ -240,9 +240,6 @@
                                   <th>Doctor Name</th>
 
                                   <!-- <th>Attachment</th> -->
-
-                                 
-
                                   <th>Doctor</th>
                                   <th>Action</th>
                                 </tr>
@@ -285,17 +282,6 @@
                                       >
                                         <i class="far fa-eye"></i> View
                                       </a>
-                                      <a href="{% url 'delete-prescription' pk=prescription.prescription_id %}" onclick="return confirm('Are you sure you want to Delete?');" class="btn btn-sm bg-danger-light" >
-                                        <i class="fas fa-trash"></i> Delete <td>
-                                      </a>
-                                      
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
-                                      
                                     </div>
                                   </td>
                                 </tr>

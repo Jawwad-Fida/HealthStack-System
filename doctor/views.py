@@ -166,7 +166,7 @@ def doctor_dashboard(request):
                 
                 next_date = current_date + datetime.timedelta(days=1) # next days date 
                 next_date_str = str(next_date)  
-                next_days_appointment = Appointment.objects.filter(date=next_date_str).filter(doctor=doctor).filter(appointment_status='pending').count()
+                next_days_appointment = Appointment.objects.filter(date=next_date_str).filter(doctor=doctor).filter(Q(appointment_status='pending') | Q(appointment_status='confirmed')).count()
                 
                 today_patient_count = Appointment.objects.filter(date=current_date_str).filter(doctor=doctor).annotate(count=Count('patient'))
                 total_appointments_count = Appointment.objects.filter(doctor=doctor).annotate(count=Count('id'))
@@ -423,8 +423,33 @@ def booking(request, pk):
         appointment.message = message
         appointment.save()
         
-        # if message:
-        #     # then send mail to doctor
+        if message:
+            # Mailtrap
+            patient_email = appointment.patient.email
+            patient_name = appointment.patient.name
+            patient_username = appointment.patient.username
+            patient_phone_number = appointment.patient.phone_number
+            doctor_name = appointment.doctor.name
+        
+            subject = "Appointment Request"
+            
+            values = {
+                    "email":patient_email,
+                    "name":patient_name,
+                    "username":patient_username,
+                    "phone_number":patient_phone_number,
+                    "doctor_name":doctor_name,
+                    "message":message,
+                }
+            
+            html_message = render_to_string('appointment-request-mail.html', {'values': values})
+            plain_message = strip_tags(html_message)
+            
+            try:
+                send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found')
+        
         
         messages.success(request, 'Appointment Booked')
         return redirect('patient-dashboard')
@@ -589,6 +614,13 @@ def doctor_test_list(request):
         tests = Test_Information.objects.all
         context = {'doctor': doctor, 'tests': tests}
         return render(request, 'doctor-test-list.html', context)
+    
+    elif request.user.is_authenticated and request.user.is_patient:
+        patient = Patient.objects.get(user=request.user)
+        tests = Test_Information.objects.all
+        context = {'patient': patient, 'tests': tests}
+        return render(request, 'doctor-test-list.html', context)
+        
     else:
         logout(request)
         messages.info(request, 'Not Authorized')

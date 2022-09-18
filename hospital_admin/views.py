@@ -11,7 +11,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from hospital.models import Hospital_Information, User, Patient
 from django.db.models import Q
-from pharmacy.models import Medicine, Order, Pharmacist
+from pharmacy.models import Medicine, Pharmacist
 from doctor.models import Doctor_Information, Prescription, Prescription_test, Report, Appointment, Experience , Education,Specimen,Test
 from pharmacy.models import Order, Cart
 from sslcommerz.models import Payment
@@ -523,7 +523,32 @@ def create_report(request, pk):
                 tests.unit=unit[i]
                 tests.referred_value=referred_value[i]
                 tests.save()
-                
+            
+            # mail
+            doctor_name = doctor.name
+            doctor_email = doctor.email
+            patient_name = patient.name
+            patient_email = patient.email
+            report_id = report.report_id
+            delivery_date = report.delivery_date
+            
+            subject = "Report Delivery"
+
+            values = {
+                    "doctor_name":doctor_name,
+                    "doctor_email":doctor_email,
+                    "patient_name":patient_name,
+                    "report_id":report_id,
+                    "delivery_date":delivery_date,
+                }
+
+            html_message = render_to_string('hospital_admin/report-mail-delivery.html', {'values': values})
+            plain_message = strip_tags(html_message)
+
+            try:
+                send_mail(subject, plain_message, 'hospital_admin@gmail.com',  [patient_email], html_message=html_message, fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found') 
 
             return redirect('mypatient-list')
 
@@ -563,11 +588,27 @@ def medicine_list(request):
         if request.user.is_pharmacist:
             pharmacist = Pharmacist.objects.get(user=request.user)
             medicine = Medicine.objects.all()
+            orders = Order.objects.filter(user=request.user, ordered=False)
+            carts = Cart.objects.filter(user=request.user, purchased=False)
             
             medicine, search_query = searchMedicines(request)
             
-            context = {'medicine':medicine,'pharmacist':pharmacist,'search_query': search_query}
-            return render(request, 'hospital_admin/medicine-list.html',context)
+            if carts.exists() and orders.exists():
+                order = orders[0]
+                context = {'medicine':medicine,
+                        'pharmacist':pharmacist,
+                        'search_query': search_query,
+                        'order': order,
+                        'carts': carts,}
+                return render(request, 'hospital_admin/medicine-list.html',context)
+            else:
+                context = {'medicine':medicine,
+                            'pharmacist':pharmacist,
+                            'search_query': search_query,
+                            'orders': orders,
+                            'carts': carts,}
+                return render(request, 'hospital_admin/medicine-list.html',context)
+                
 
 @login_required(login_url='admin_login')
 def generate_random_medicine_ID():
