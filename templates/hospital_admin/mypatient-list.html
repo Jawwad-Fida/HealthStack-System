@@ -89,6 +89,7 @@
                                                     <th>Patient Name</th>
 													<th>Phone</th>
 													<th>Email</th>
+                          <th>View</th>
                                                     												
 												</tr>
 											</thead>
@@ -105,6 +106,7 @@
                           
 													<td>{{p.phone_number}}</td>
 													<td>{{p.email}}</td>
+                          <td><a href="{% url 'prescription-list' pk=p.patient_id %}" class="btn btn-primary">View Prescriptions</a></td>
 													
                           <!-- <td>
                             <div class="table-action">
