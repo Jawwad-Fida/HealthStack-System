@@ -462,7 +462,7 @@ def booking(request, pk):
 def my_patients(request):
     if request.user.is_doctor:
         doctor = Doctor_Information.objects.get(user=request.user)
-        appointments = Appointment.objects.filter(doctor=doctor)
+        appointments = Appointment.objects.filter(doctor=doctor).filter(appointment_status='confirmed')
         # patients = Patient.objects.all()
     else:
         redirect('doctor-logout')

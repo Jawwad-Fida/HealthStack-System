@@ -27,7 +27,7 @@ def home(request,pk):
             users = User.objects.all()
             patients = Patient.objects.get(user_id=pk)
             #doctor = Doctor_Information.objects.all()
-            appointments = Appointment.objects.filter(patient=patients)
+            appointments = Appointment.objects.filter(patient=patients).filter(appointment_status='confirmed')
             doctor= Doctor_Information.objects.filter(appointment__in=appointments)
             
             chats = {}
@@ -82,7 +82,7 @@ def home(request,pk):
             users = User.objects.all()
             #patients = Patient.objects.all()
             doctor = Doctor_Information.objects.get(user_id=pk)
-            appointments = Appointment.objects.filter(doctor=doctor)
+            appointments = Appointment.objects.filter(doctor=doctor).filter(appointment_status='confirmed')
             patients= Patient.objects.filter(appointment__in=appointments)
 
             chats = {}
