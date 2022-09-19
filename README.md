@@ -76,7 +76,7 @@
 
 ## Screenshots 
 
-# Champion in UIU CSE Project Show Summer 22 - Software Engineering Laboratory
+# Champion in UIU CSE Project Show Summer 22
 
 <img src="https://user-images.githubusercontent.com/64092765/191054866-189bb76f-3377-440a-84be-d07578a26c35.jpg" width="50%">
 
