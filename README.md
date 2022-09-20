@@ -71,11 +71,9 @@
 #### [xhtml2pdf](https://xhtml2pdf.readthedocs.io/en/latest/usage.html) - to generate and download pdf documents.
 
 
-## Project video link - [Youtube](#)
+## MKDocs Documentation - [HealthStack](https://jawwad-fida.github.io/HealthStack-System/)
 
-## MKDocs Documentation
-
-- Checkout out the [MKdocs documentation](https://jawwad-fida.github.io/HealthStack-System/) to see screenshots of our project.
+- Checkout out the **MKdocs documentation** to see screenshots of our project.
 
 # Champion in UIU CSE Project Show Summer 22
 
