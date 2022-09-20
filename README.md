@@ -71,7 +71,7 @@
 #### [xhtml2pdf](https://xhtml2pdf.readthedocs.io/en/latest/usage.html) - to generate and download pdf documents.
 
 
-## MKDocs Documentation - [HealthStack](https://jawwad-fida.github.io/HealthStack-System/)
+# MKDocs Documentation - [HealthStack](https://jawwad-fida.github.io/HealthStack-System/)
 
 - Checkout out the **MKdocs documentation** to see screenshots of our project.
 
