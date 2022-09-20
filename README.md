@@ -73,8 +73,9 @@
 
 ## Project video link - [Youtube](#)
 
+## MKDocs Documentation
 
-## Screenshots 
+- Checkout out the [MKdocs documentation](https://jawwad-fida.github.io/HealthStack-System/) to see screenshots of our project.
 
 # Champion in UIU CSE Project Show Summer 22
 
