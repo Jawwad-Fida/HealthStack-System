@@ -70,6 +70,13 @@
 #### [Django Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html) - configurable set of panels that display various debug information about the current request/response and when clicked
 #### [xhtml2pdf](https://xhtml2pdf.readthedocs.io/en/latest/usage.html) - to generate and download pdf documents.
 
+## Installation Details
+      1) Create an environment to run django project  
+      2) Migrate to create dbsqlite database 
+      3) Look for .env.example and settings.py files to see what credentials to set up, and then create .env files
+      
+      The credentials that you need to set up are: Mailtrap credentials, SSLCommerz Credentials. 
+
 
 # MKDocs Documentation and Youtube Video
 - [Youtube](https://youtu.be/TSR00OKBSCY) video link of MKDocs documentation on our Healthstack project.
