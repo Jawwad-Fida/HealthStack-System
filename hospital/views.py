@@ -318,6 +318,8 @@ def multiple_hospital(request):
             hospitals = Hospital_Information.objects.all()
             
             hospitals, search_query = searchHospitals(request)
+            
+            # PAGINATION ADDED TO MULTIPLE HOSPITALS
             custom_range, hospitals = paginateHospitals(request, hospitals, 3)
         
             context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query, 'custom_range': custom_range}
