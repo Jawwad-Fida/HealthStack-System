@@ -1,0 +1,52 @@
+{% if queryset.has_other_pages %}
+<div class="pagination">
+    <ul class="container">
+
+        {% if queryset.has_previous %}
+        <li><a href="?page={{queryset.previous_page_number}}" class="btn page-link"
+                data-page="{{queryset.previous_page_number}}">&#10094; Prev</a></li>
+        {% endif %}
+
+        {% for page in custom_range %}
+        {% if page == queryset.number%}
+        <li><a href="?page={{page}}" class="btn page-link btn--sub" data-page="{{page}}">{{page}}</a></li>
+        {% else %}
+        <li><a href="?page={{page}}" class="btn page-link" data-page="{{page}}">{{page}}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if queryset.has_next %}
+        <li><a href="?page={{queryset.next_page_number}}" class="btn page-link"
+                data-page="{{queryset.next_page_number}}">Next &#10095;</a></li>
+        {% endif %}
+
+    </ul>
+</div>
+{% endif %}
+
+
+<!-- Search + pagination together (using JS)  -->
+<script type="text/javascript">
+
+    //GET SEARCH FORM AND PAGE LINKS
+    let searchForm = document.getElementById('searchForm')
+    let pageLinks = document.getElementsByClassName('page-link')
+
+    //ENSURE SEARCH FORM EXISTS
+    if (searchForm) {
+        for (let i = 0; pageLinks.length > i; i++) {
+            //add eventhandler to each pagination button (page link)
+            pageLinks[i].addEventListener('click', function (e) {
+                e.preventDefault() //prevent default action from occuring
+
+                //data-page is a custom data attribute to html elements (data-page will hold the page no.)
+                let page = this.dataset.page  //GET THE DATA ATTRIBUTE from the clicked element (call page in data-page)
+                
+                //ADD HIDDEN SEARCH INPUT FIELD TO FORM
+                searchForm.innerHTML += `<input value=${page} name="page" hidden/>`
+                searchForm.submit() //SUBMIT FORM
+            })
+        }
+    }
+
+</script>

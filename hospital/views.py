@@ -18,7 +18,7 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors
+from .utils import searchDoctors, searchHospitals, searchDepartmentDoctors, paginateHospitals
 from .models import Patient, User
 from doctor.models import Doctor_Information, Appointment,Report, Specimen, Test, Prescription, Prescription_medicine, Prescription_test
 from sslcommerz.models import Payment
@@ -318,8 +318,9 @@ def multiple_hospital(request):
             hospitals = Hospital_Information.objects.all()
             
             hospitals, search_query = searchHospitals(request)
+            custom_range, hospitals = paginateHospitals(request, hospitals, 3)
         
-            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query}
+            context = {'patient': patient, 'doctors': doctors, 'hospitals': hospitals, 'search_query': search_query, 'custom_range': custom_range}
             return render(request, 'multiple-hospital.html', context)
         
         elif request.user.is_doctor:

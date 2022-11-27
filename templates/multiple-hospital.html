@@ -136,18 +136,24 @@
 												</div>
 												{% endfor %}
 
-						
+												
 											</div>
 										</div>
+										
 									</div>
 								</div>
+								
 							</section>
+							{% include 'pagination.html' with queryset=hospitals custom_range=custom_range %}
 						</div>
+						
 					</div>
 				</div>
-
+				
 			</div>		
 			<!-- /Page Content -->
+
+			
    
 			<!-- Footer -->
 			{% include 'footer.html' %}
