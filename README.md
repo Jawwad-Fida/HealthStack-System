@@ -11,10 +11,10 @@
 
 
 ## Tools used:
-      1) **Front-end:** HTML, CSS, Boostrap, Javascript
-      2) **Back-end:** Django (Python web framework)
-      3) **Database:** SQLite
-      4) **Others:** Various APIs, PyPI packages, Ajax 
+      1) Front-end: HTML, CSS, Boostrap, Javascript
+      2) Back-end: Django (Python web framework)
+      3) Database: SQLite
+      4) Others: Various APIs, PyPI packages, Ajax 
 
 ## Features
 
