@@ -140,7 +140,7 @@
 <img src="https://user-images.githubusercontent.com/64092765/191188138-2dd284c8-a815-4060-87f3-61ffd7c2300d.png" width="50%">
 
 
-# [Champion in UIU CSE Project Show Summer 2022 - Software Engineering Laboratory](https://www.facebook.com/100080783675315/posts/pfbid0TuQyeVT9LHJx4zCnCpaDsAGFnCGxSTMKa8Fd1XCNcpf3n1yXf6ceQQTYQ1DeahSZl/)
+# [Champion in UIU CSE Project Show Summer 2022 - Software Engineering Laboratory]()
 
 <img src="https://user-images.githubusercontent.com/64092765/192018455-de998881-ac7e-4082-a8c6-3a36a59aef94.jpg" width="75%">
 
