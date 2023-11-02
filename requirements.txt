@@ -1,6 +1,6 @@
 certifi==2023.7.22
 charset-normalizer==2.0.11
-Django==4.1.10
+Django==4.1.13
 django-debug-toolbar==3.6.0
 django-environ==0.9.0
 django-widget-tweaks==1.4.12
