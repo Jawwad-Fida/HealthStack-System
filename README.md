@@ -1,6 +1,6 @@
 # HealthStack-System
 
-- An online based platform for multiple hospitals. Ability to track, monitor, and share a patient's health records between all hospitals. Patients can also see information regarding multiple hospitals and doctors, as well as take appointments via online. Pay laboratory tests via online as well as chat with appointed doctors.
+- An online platform that caters to multiple hospitals, enabling efficient tracking, monitoring, and sharing of patient health records between themselves. Patients can access information on various hospitals and doctors, book appointments online, purchase medicines from an online pharmacy, pay for laboratory tests via an integrated payment gateway, and even chat with their appointed doctors.
 - Software Engineering Project - B.Sc. in Computer Science and Engineering (CSE)
 - Django Application
 
