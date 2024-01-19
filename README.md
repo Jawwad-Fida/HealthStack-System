@@ -74,6 +74,22 @@
       
       The credentials that you need to set up are: Mailtrap credentials, SSLCommerz Credentials. 
 
+## Steps to start the app
+      1) Start python virtual env
+            python -m venv venv
+      2) Activate the virtual environment venv
+            source venv/bin/activate
+      3) Install python pip paclages
+            pip install -r requirements
+      4) Create .env from  .env.example and add secret key
+            cp .env.example .env
+      5) Upgrade django framework
+            pip install --upgrade djangorestframework-simplejwt
+      6) Migrate DB 
+            python manage.py migrate
+      7) Start the application
+            python manage.py runserver
+            
 
 # MKDocs Documentation, Youtube Video and Presentation
 - [Youtube](https://youtu.be/TSR00OKBSCY) video link of MKDocs documentation on our Healthstack project.
