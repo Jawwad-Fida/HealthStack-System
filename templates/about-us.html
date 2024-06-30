@@ -1,10 +1,7 @@
 {% load static %}
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-	
-<!-- doccure/blank-page.html  30 Nov 2019 04:12:20 GMT -->
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>HealthStack</title>
@@ -27,77 +24,107 @@
         <script src="assets/js/html5shiv.min.js"></script>
         <script src="assets/js/respond.min.js"></script>
     <![endif]-->
-
 </head>
-	<body>
+<body>
 
-		<!-- Main Wrapper -->
-		<div class="main-wrapper">
-		
-			<!-- Header -->
-			<header class="header">{% include 'navbar_home.html' %}</header>
-			<!-- /Header -->
-			
-			<!-- Breadcrumb -->
-			<div class="breadcrumb-bar">
-				<div class="container-fluid">
-					<div class="row align-items-center">
-						<div class="col-md-12 col-12">
-							<nav aria-label="breadcrumb" class="page-breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">About Us</li>
-								</ol>
-							</nav>
-							<h2 class="breadcrumb-title">About Us</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /Breadcrumb -->
-			
-			<!-- Page Content -->
-			<div class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h5>About Us</h5>
-							<p>
-								Healthstack is an internet platform that supports numerous hospitals. It offers urgent medical aid to those in need of emergency care. Its capability of tracking, monitoring, and sharing a patient's health records across all hospitals. Patients can also view information about various hospitals and providers and schedule appointments online.
-							</p>
-						</div>
-					</div>
-				</div>
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+    
+        <!-- Header -->
+        <header class="header">{% include 'navbar_home.html' %}</header>
+        <!-- /Header -->
+        
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">About Us</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+        
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h5>About Us</h5>
+                        <p>
+                            HealthStack is an innovative internet platform supporting numerous hospitals. We offer urgent medical aid for those in need of emergency care, with capabilities to track, monitor, and share patient health records across all hospitals. Patients can also access information about various hospitals and providers, and schedule appointments online.
+                        </p>
+                    </div>
+                </div>
 
-			</div>		
-			<!-- /Page Content -->
+                <div class="row">
+                    <!-- Mission Statement -->
+                    <div class="col-12">
+                        <div class="about-section">
+                            <h3>Our Mission</h3>
+                            <p>
+                                Our mission is to revolutionize healthcare by providing seamless access to urgent medical services, enhancing patient care through integrated health records, and ensuring convenience for patients and healthcare providers alike.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Our Values -->
+                    <div class="col-12">
+                        <div class="about-section">
+                            <h3>Our Values</h3>
+                            <ul>
+                                <li>Compassion</li>
+                                <li>Integrity</li>
+                                <li>Innovation</li>
+                                <li>Excellence</li>
+                                <li>Collaboration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Contact Section -->
+                    <div class="col-12">
+                        <div class="about-section">
+                            <h3>Contact Us</h3>
+                            <p>If you have any questions or need further information, feel free to <a href="{% url 'contact' %}">contact us</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+        <!-- /Page Content -->
    
-			
-			<!-- Footer -->
-			{% include 'footer.html' %}
-			<!-- /Footer -->
-			
-		   
-		</div>
-		<!-- /Main Wrapper -->
-	  
-		<!-- jQuery -->
-		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
-		
-		<!-- Bootstrap Core JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
-		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
-
-		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
-		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
-		
-		<!-- Slick JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/slick.js' %}"></script>
-		
-		<!-- Custom JS -->
-		<script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
-		
-	</body>
-
+        <!-- Footer -->
+        {% include 'footer.html' %}
+        <!-- /Footer -->
+       
+    </div>
+    <!-- /Main Wrapper -->
+  
+    <!-- jQuery -->
+    <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+    
+    <!-- Bootstrap Core JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+    
+    <!-- Slick JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/slick.js' %}"></script>
+    
+    <!-- Custom JS -->
+    <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
+    
+</body>
 <!-- doccure/blank-page.html  30 Nov 2019 04:12:20 GMT -->
 </html>
