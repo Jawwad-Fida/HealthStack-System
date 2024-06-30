@@ -1,10 +1,7 @@
 {% load static %}
 <!DOCTYPE html> 
 <html lang="en">
-	
-<!-- doccure/blank-page.html  30 Nov 2019 04:12:20 GMT -->
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>HealthStack</title>
@@ -19,6 +16,9 @@
     <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
 
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/animate.css' %}">
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'HealthStack-System/css/Normal/style.css' %}">
     
@@ -28,76 +28,219 @@
         <script src="assets/js/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Custom CSS -->
+    <style>
+        .team-member {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        .team-member h6 {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .team-member p {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .team-member-box {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 30px;
+        }
+        .testimonial {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .breadcrumb-bar {
+            background: #007bff;
+            color: #fff;
+        }
+        .breadcrumb-title {
+            color: #fff;
+        }
+        .main-wrapper {
+            background: #f1f2f6;
+        }
+        .content {
+            padding: 40px 20px;
+        }
+    </style>
+
 </head>
-	<body>
+<body>
 
-		<!-- Main Wrapper -->
-		<div class="main-wrapper">
-		
-			<!-- Header -->
-			<header class="header">{% include 'navbar_home.html' %}</header>
-			<!-- /Header -->
-			
-			<!-- Breadcrumb -->
-			<div class="breadcrumb-bar">
-				<div class="container-fluid">
-					<div class="row align-items-center">
-						<div class="col-md-12 col-12">
-							<nav aria-label="breadcrumb" class="page-breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">About Us</li>
-								</ol>
-							</nav>
-							<h2 class="breadcrumb-title">About Us</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /Breadcrumb -->
-			
-			<!-- Page Content -->
-			<div class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-12">
-							<h5>About Us</h5>
-							<p>
-								Healthstack is an internet platform that supports numerous hospitals. It offers urgent medical aid to those in need of emergency care. Its capability of tracking, monitoring, and sharing a patient's health records across all hospitals. Patients can also view information about various hospitals and providers and schedule appointments online.
-							</p>
-						</div>
-					</div>
-				</div>
+    <!-- Main Wrapper -->
+    <div class="main-wrapper animated fadeIn">
+    
+        <!-- Header -->
+        <header class="header">{% include 'navbar_home.html' %}</header>
+        <!-- /Header -->
+        
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">About Us</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+        
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h5>About Us</h5>
+                        <p>
+                            HealthStack is an innovative internet platform that supports numerous hospitals, providing urgent medical aid to those in need of emergency care. Our platform enables the tracking, monitoring, and sharing of patients' health records across all hospitals. Patients can also view information about various hospitals and providers and schedule appointments online.
+                        </p>
+                    </div>
+                </div>
 
-			</div>		
-			<!-- /Page Content -->
-   
-			
-			<!-- Footer -->
-			{% include 'footer.html' %}
-			<!-- /Footer -->
-			
-		   
-		</div>
-		<!-- /Main Wrapper -->
-	  
-		<!-- jQuery -->
-		<script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
-		
-		<!-- Bootstrap Core JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
-		<script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+                <!-- Additional Sections -->
+                <div class="row mt-5">
+                    <!-- Our Mission -->
+                    <div class="col-md-6">
+                        <h5>Our Mission</h5>
+                        <p>
+                            Our mission is to enhance healthcare accessibility and efficiency through seamless integration of technology and medical services. We strive to empower patients and healthcare providers with real-time information and tools to improve health outcomes.
+                        </p>
+                    </div>
 
-		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}">
-		<link rel="stylesheet" href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}">
-		
-		<!-- Slick JS -->
-		<script src="{% static 'HealthStack-System/js/Normal/slick.js' %}"></script>
-		
-		<!-- Custom JS -->
-		<script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
-		
-	</body>
+                    <!-- Our Vision -->
+                    <div class="col-md-6">
+                        <h5>Our Vision</h5>
+                        <p>
+                            Our vision is to create a connected healthcare ecosystem where patients receive timely, personalized care, and healthcare providers have the resources to deliver exceptional service. We aim to be the leading platform in healthcare innovation and patient care management.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team Members -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h5>Our Team</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-member">
+                            <div class="team-member-box">
+                                JD
+                            </div>
+                            <h6>Dr. John Doe</h6>
+                            <p>CEO & Founder</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-member">
+                            <div class="team-member-box">
+                                JS
+                            </div>
+                            <h6>Jane Smith</h6>
+                            <p>Chief Operating Officer</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-member">
+                            <div class="team-member-box">
+                                MJ
+                            </div>
+                            <h6>Mike Johnson</h6>
+                            <p>Chief Technology Officer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h5>What Our Users Say</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="testimonial">
+                            <p> The seamless integration and real-time access to information have greatly improved our efficiency.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="testimonial">
+                            <p> HealthStack's user-friendly platform ensures that I receive the care I need without any hassle.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h5>Contact Us</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Email</h6>
+                        <p>info@healthstack.com</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Phone</h6>
+                        <p>9087776655</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>      
+        <!-- /Page Content -->
+       
+        <!-- Footer -->
+        {% include 'footer.html' %}
+        <!-- /Footer -->
+       
+    </div>
+    <!-- /Main Wrapper -->
+  
+    <!-- jQuery -->
+    <script src="{% static 'HealthStack-System/js/Normal/jquery.min.js' %}"></script>
+    
+    <!-- Bootstrap Core JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
+    <script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
+
+    <!-- Slick JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/slick.js' %}"></script>
+    
+    <!-- Custom JS -->
+    <script src="{% static 'HealthStack-System/Outside_assets/js/script.js' %}"></script>
+
+    <!-- Animate JS -->
+    <script src="{% static 'HealthStack-System/js/Normal/animate.js' %}"></script>
+    
+</body>
 
 <!-- doccure/blank-page.html  30 Nov 2019 04:12:20 GMT -->
 </html>
+
+
