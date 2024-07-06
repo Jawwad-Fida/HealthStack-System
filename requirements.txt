@@ -1,4 +1,4 @@
-certifi==2023.7.22
+certifi==2024.7.4
 charset-normalizer==2.0.11
 Django==4.1.13
 django-debug-toolbar==3.6.0
