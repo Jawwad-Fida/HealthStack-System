@@ -3,15 +3,15 @@
 - An online platform that caters to multiple hospitals, enabling efficient tracking, monitoring, and sharing of patient health records between themselves. Patients can access information on various hospitals and doctors, book appointments online, purchase medicines from an online pharmacy, pay for laboratory tests via an integrated payment gateway, and even chat with their appointed doctors.
 - Software Engineering Project - B.Sc. in Computer Science and Engineering (CSE)
 
+## Tech Stack and Tools used:
+      1) Programming Language and Libraries: Django (Python web framework), Bootstrap, JavaScript, Ajax, Django REST framework.
+      2) Database: SQLite
+      3) APIs used: MailTrap, SSLCommerz Payment Gateway, Django PDF library, Django channels for chat, ngrok HTTP, PyPI packages.
+
 ## Contributors
 
 - **Team Members:** [Mohammed Jawwadul Islam](https://www.linkedin.com/in/jawwadfida/), [Mohammad Fahad Al Rafi](https://www.linkedin.com/in/md-fahad-al-al-rafi-14b968111/), [Moumy Kabir](https://www.linkedin.com/in/pranto-podder-b78b97162/), [Pranto Podder](https://www.linkedin.com/in/aysha-siddika-577ba5224/), [Aysha Siddika](https://www.linkedin.com/in/moumy-kabir-156a0a232/), Nafisa Akhter
 - **Project Duration:** August 2022 - September 2022
-
-## Tools used:
-      1) Programming Language and Libraries: Django (Python web framework), Bootstrap, JavaScript, Ajax, Django REST framework.
-      2) Database: SQLite
-      3) APIs used: MailTrap, SSLCommerz Payment Gateway, , Django PDF library, Django channels for chat, ngrok HTTP, PyPI packages.
 
 ## Features
 
