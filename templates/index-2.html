@@ -8,6 +8,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
     />
+    <meta name="csrf-token" content="{{csrf_token}}">
     <title>HealthStack</title>
 
     <!-- Favicons -->
@@ -32,7 +33,10 @@
       rel="stylesheet"
       href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/all.min.css' %}"
     />
-
+    <!--chatbot CSS -->
+    <link rel="stylesheet" 
+    href="{% static 'HealthStack-System/css/chatbot/styles.css'%}"
+    /> 
     <!-- Main CSS -->
     <link
       rel="stylesheet"
@@ -295,7 +299,39 @@
         </div>
       </section>
       <!-- Availabe Features -->
-
+      <!-- Chatbot Popup -->
+        <!-- Popup container -->
+        <div class="container">
+    <div  class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+                </div>
+                <div class="chatbox__content--header">
+                    <h4 class="chatbox__heading--header">Chat support</h4>
+                    <p class="chatbox__description--header">Hi. My name is Sam. How can I help you?</p>
+                </div>
+                </div>
+                <div class="chatbox__messages">
+                    <div></div>
+                </div>
+                <div class="chatbox__footer">
+                    <input type="text" id="user-message" placeholder="Write a message...">
+                    <button class="chatbox__send--footer send__button">Send</button>
+                </div>
+            </div>
+            <div class="chatbox__button">
+                <button><img src="static/HealthStack-System/images/chatbot.png" /></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const $ROOTURL = "{{ root_url }}";
+        // Now you can use rootUrl in your JavaScript code
+    </script>
+      <!-- /Chatbot Popup -->
+      
       <!-- Footer -->
       {% include 'footer.html' %}
       <!-- /Footer -->
@@ -308,7 +344,10 @@
     <!-- Bootstrap Core JS -->
     <script src="{% static 'HealthStack-System/js/Normal/popper.min.js' %}"></script>
     <script src="{% static 'HealthStack-System/js/Normal/bootstrap.min.js' %}"></script>
-
+    
+    <!-- chatbot JS -->
+    <script src="{% static 'HealthStack-System/js/chatbot/scripts.js' %}"></script>
+    
     <link
       rel="stylesheet"
       href="{% static 'HealthStack-System/plugins/Normal/fontawesome/css/fontawesome.min.css' %}"

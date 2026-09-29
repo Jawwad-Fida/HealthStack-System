@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ChatApp.apps.ChatappConfig',
     'debug_toolbar',
- 
+    'chatbot.apps.ChatbotConfig', # for the chatbot
 
 ]
 

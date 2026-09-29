@@ -1,0 +1,316 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day"
+      ],
+      "responses": [
+        "Hey :-)",
+        "Hello, thanks for visiting",
+        "Hi there, what can I do for you?",
+        "Hi there, how can I help?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": [
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    },
+    {
+      "tag": "items",
+      "patterns": [
+        "Which items do you have?",
+        "What kinds of items are there?",
+        "What do you sell?"
+      ],
+      "responses": [
+        "We sell coffee and tea",
+        "We have coffee and tea"
+      ]
+    },
+    {
+      "tag": "payments",
+      "patterns": [
+        "Do you take credit cards?",
+        "Do you accept Mastercard?",
+        "Can I pay with Paypal?",
+        "Are you cash only?"
+      ],
+      "responses": [
+        "We accept VISA, Mastercard and Paypal",
+        "We accept most major credit cards, and Paypal"
+      ]
+    },
+    {
+      "tag": "delivery",
+      "patterns": [
+        "How long does delivery take?",
+        "How long does shipping take?",
+        "When do I get my delivery?"
+      ],
+      "responses": [
+        "Delivery takes 2-4 days",
+        "Shipping takes 2-4 days"
+      ]
+    },
+    {
+      "tag": "funny",
+      "patterns": [
+        "Tell me a joke!",
+        "Tell me something funny!",
+        "Do you know a joke?"
+      ],
+      "responses": [
+        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
+        "What did the buffalo say when his son left for college? Bison."
+      ]
+    },
+    {
+      "tag": "about_website",
+      "patterns": [
+        "Tell me about the website",
+        "What can I do on the website?",
+        "What services does the website offer?",
+        "What is this website about?"
+      ],
+      "responses": [
+        "Our website offers a wide range of medical services. You can book appointments with various specialists, find information about different treatments, even book radiology tests and buy medicine.",
+        "This website is a one-stop solution for all your medical needs. From booking appointments with doctors to getting lab tests done, you can do it all here.",
+        "The website offers a plethora of services. You can book appointments with doctors, find hospitals in your area, get information about various medical conditions and treatments, and much more.",
+        "Our website can provide you direct access to hospitals mentioned"
+      ]
+    },
+    {
+      "tag": "doctor",
+      "patterns": [
+        "I need a doctor",
+        "Can you find me a doctor?",
+        "I'm feeling sick",
+        "I need medical help",
+        "I need to book a doctor's appointment"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're not feeling well. I can help you find a doctor.",
+        "Sure, I can help you book a doctor's appointment. Please tell me more about your symptoms.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right doctor for you?",
+        "Sure, I can help you book a dermatologist's appointment. Please check our platform for more infos !!"
+      ]
+    },
+    {
+      "tag": "medicine",
+      "patterns": [
+        "I need medicine",
+        "Can you find me a pharmacy?",
+        "I need to refill my prescription",
+        "Where can I buy medicine?"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're not feeling well. I can help you find a pharmacy.",
+        "Sure, I can help you find a place to refill your prescription. Please tell me more about your medicine.",
+        "I'm here to help. Can you tell me more about the medicine you need so I can find the right pharmacy for you?",
+        "Sure, I can help you book a dermatologist's appointment. Please check our platform for more infos !!"
+      ]
+    },
+    {
+      "tag": "pediatrician",
+      "patterns": [
+        "I need a pediatrician",
+        "Can you find me a pediatrician?",
+        "My child is feeling sick",
+        "I need to book a pediatrician's appointment"
+      ],
+      "responses": [
+        "I'm sorry to hear that your child is not feeling well. I can help you find a pediatrician.",
+        "Sure, I can help you book a pediatrician's appointment. Please tell me more about your child's symptoms.",
+        "I'm here to help. Can you tell me more about your child's condition so I can find the right pediatrician for you?",
+        "Sure, I can help you book a dermatologist's appointment. Please check our platform for more infos !!"
+      ]
+    },
+    {
+      "tag": "orthopedist",
+      "patterns": [
+        "I need an orthopedist",
+        "Can you find me an orthopedist?",
+        "I need to book an appointment with an orthopedist",
+        "I need help with my back pain"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're experiencing back pain. I can help you find an orthopedist.",
+        "Sure, I can help you book an appointment with an orthopedist. Please tell me more about your symptoms.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right orthopedist for you?",
+        "Sure, I can help you book an appointment with an orthopedist. Please check our platform for more information!"
+      ]
+    },
+    {
+      "tag": "cardiologist",
+      "patterns": [
+        "I need a cardiologist",
+        "Can you find me a cardiologist?",
+        "I'm having heart problems",
+        "I need to book a cardiologist's appointment"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're having heart problems. I can help you find a cardiologist.",
+        "Sure, I can help you book a cardiologist's appointment. Please tell me more about your symptoms.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right cardiologist for you?",
+        "Sure, I can help you book a dermatologist's appointment. Please check our platform for more infos !!"
+      ]
+    },
+    {
+      "tag": "dentist",
+      "patterns": [
+        "I need a dentist",
+        "Can you find me a dentist?",
+        "I have a toothache",
+        "I need to book a dentist's appointment"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're having a toothache. I can help you find a dentist.",
+        "Sure, I can help you book a dentist's appointment. Please tell me more about your symptoms.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right dentist for you?",
+        "Sure, I can help you book a dermatologist's appointment. Please check our platform for more infos !!"
+      ]
+    },
+    {
+      "tag": "dermatologist",
+      "patterns": [
+        "I need a dermatologist",
+        "Can you find me a dermatologist?",
+        "I have a skin problem",
+        "I need to book a dermatologist's appointment"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're having a skin problem. I can help you find a dermatologist.",
+        "Sure, I can help you book a dermatologist's appointment. Please tell me more about your symptoms.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right dermatologist for you?",
+        "Sure, I can help you book a dermatologist's appointment. Please check our platform for more infos !!"
+      ]
+    },
+    {
+      "tag": "psychiatrist",
+      "patterns": [
+        "I need a psychiatrist",
+        "Can you find me a psychiatrist?",
+        "I'm feeling stressed",
+        "I need to book a psychiatrist's appointment"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're feeling stressed. I can help you find a psychiatrist.",
+        "Sure, I can help you book a psychiatrist's appointment. Please tell me more about your feelings.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right psychiatrist for you?",
+        "Sure, I can help you book a dermatologist's appointment. Please check our platform for more infos !!"
+      ]
+    },
+    {
+      "tag": "orthopedic",
+      "patterns": [
+        "I need an orthopedic doctor",
+        "Can you find me an orthopedic doctor?",
+        "I have a bone problem",
+        "I need to book an orthopedic doctor's appointment"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're having a bone problem. I can help you find an orthopedic doctor.",
+        "Sure, I can help you book an orthopedic doctor's appointment. Please tell me more about your symptoms.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right orthopedic doctor for you?",
+        "Sure, I can help you book a dermatologist's appointment. Please check our platform for more infos !!"
+      ]
+    },
+    {
+      "tag": "neurologist",
+      "patterns": [
+        "I need a neurologist",
+        "Can you find me a neurologist on the website?",
+        "I have a headache",
+        "I need to book a neurologist's appointment on the website"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're having a headache. I can help you find a neurologist on our website.",
+        "Sure, I can help you book a neurologist's appointment on our website. Please tell me more about your symptoms.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right neurologist on our website for you?"
+      ]
+    },
+    {
+      "tag": "gastroenterologist",
+      "patterns": [
+        "I need a gastroenterologist",
+        "Can you find me a gastroenterologist on the website?",
+        "I have stomach issues",
+        "I need to book a gastroenterologist's appointment on the website"
+      ],
+      "responses": [
+        "I'm sorry to hear that you're having stomach issues. I can help you find a gastroenterologist on our website.",
+        "Sure, I can help you book a gastroenterologist's appointment on our website. Please tell me more about your symptoms.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right gastroenterologist on our website for you?"
+      ]
+    },
+    {
+      "tag": "radiology",
+      "patterns": [
+        "I need to book a radiology test",
+        "Can you help me book a radiology test on the website?",
+        "I need to get an X-ray done",
+        "Where can I book a radiology test on the website?"
+      ],
+      "responses": [
+        "Sure, I can help you book a radiology test on our website. Please tell me more about the test you need.",
+        "You can book a radiology test on our website. Please provide more details so I can assist you better.",
+        "I'm here to help. Can you tell me more about the radiology test you need so I can assist you better?"
+      ]
+    },
+    {
+      "tag": "gynecologist",
+      "patterns": [
+        "I need a gynecologist",
+        "Can you find me a gynecologist on the website?",
+        "I need to book a gynecologist's appointment on the website"
+      ],
+      "responses": [
+        "I can help you find a gynecologist on our website.",
+        "Sure, I can help you book a gynecologist's appointment on our website. Please tell me more about your condition.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right gynecologist on our website for you?"
+      ]
+    },
+    {
+      "tag": "cancer_treatments",
+      "patterns": [
+        "I need information about cancer treatments",
+        "Can you provide details on cancer treatments available on the website?",
+        "I need to book a consultation for cancer treatment on the website"
+      ],
+      "responses": [
+        "I can help you find information about cancer treatments on our website.",
+        "Sure, I can help you book a consultation for cancer treatment on our website. Please tell me more about your condition.",
+        "I'm here to help. Can you tell me more about your condition so I can find the right information for you on our website?"
+      ]
+    },
+    {
+      "tag": "hospitals_in_website",
+      "patterns": [
+        "I need to find a hospital",
+        "Can you suggest hospitals on the website?",
+        "Where can I find hospitals on the website?"
+      ],
+      "responses": [
+        "Sure, I can help you find hospitals on our website. Please tell me more about the kind of hospital or service you are looking for.",
+        "You can find a list of hospitals on our website. Please provide more details so I can assist you better.",
+        "I'm here to help. Can you tell me more about what you're looking for so I can assist you better?"
+      ]
+    }
+  ]
+}
